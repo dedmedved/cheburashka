@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF142FCD-E8E0-4841-BDB9-C9974F09068D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CheburashkaTests</RootNamespace>
+    <AssemblyName>CheburashkaTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Utilities, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.Data.Tools.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Dac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="BaselinedRuleTest.cs" />
+    <Compile Include="DisposableList.cs" />
+    <Compile Include="RuleTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleTestCases.cs" />
+    <Compile Include="RuleTestUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestScripts\AvoidBareReturnRule\AvoidBareReturnRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidBareReturnRule\ProcWithBareReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\AvoidDirectUseOfRowcountRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\DatabaseTriggerWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\DatabaseTriggerWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithInDirectUseOfRowcountViaInitialisation.sql" />
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ScalarFunctionWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ScalarFunctionWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ServerTriggerWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ServerTriggerWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\TableTriggerWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\TableTriggerWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\TableValuedFunctionWithDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\TableValuedFunctionWithInDirectUseOfRowcount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\AvoidGotoRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\DatabaseScalarFunction1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\InlineFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\ProcWithGoto.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\ServerTrigger1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidGotoRule\TableValuedFunctionWithGoto.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\AvoidOnePartNamesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\DatabaseTriggerWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\FileWhichTestsAllExcludedContexts.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\fn_chk.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcThatUsesObjectIdEtcWithOnePartObjectName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcThatUsesObjectIdEtcWithOnePartTempTableName.sql" />
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcThatUsesObjectIdEtcWithTwoPartObjectName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcThatUsesSystemSPCallWithOnePartObjectName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcThatUsesSystemSPCallWithTwoPartObjectName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcWithOnePartProcedureNameInDefinition.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcWithOnePartTempTableNameInSelect.sql" />
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ProcWithTwoPartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ScalarFunctionWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ServerDdlTriggerWithOnePartNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\Table2WithFunctionChecks.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\Table3WithOnePartNameFunctionChecks.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\Table4WithOnePartNameBasedIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\Table4WithTwoPartNameBasedIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\TableTriggerWithOnePartNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\TableTriggerWithOnePartTriggerNameAndTableName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\TableValuedFunctionWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ViewWithCTEInSelect.sql" />
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ViewWithOnePartTableNameInDefinition.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidOnePartNamesRule\ViewWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\AvoidUninitialisedVariablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\DatabaseTriggerWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithUserDefinedDataTypeThatMayOrMayNotBeATableType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToAndNotUsed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByInsertExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByExecuteParameterAndNotUsed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToBySp_ExecuteSQLParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToBySelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByReceive.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByFetchFromCursor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByExecuteParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByBeginDialog.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByAssignmentSet.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenTo.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithExplicitlyInitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ScalarValuedFunctionWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ServerDdlTriggerWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\TableTriggerWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\TableValuedFunctionWithUninitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\Assembly.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\AvoidUnusedParameterRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\fn_CLR_ShouldntTriggerUnusedParameterWarnings.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\ProcWithUnusedParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\ProcWithUsedParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\ScalarValuedFunctionWithUnusedParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\TableValuedFunctionWithUnusedParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\AvoidUnusedTableVariableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\DatabaseTriggerWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\ProcWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\ProcWithUsedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\ScalarValuedFunctionWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\ServerDdlTriggerWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\TableTriggerWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTableVariableRule\TableValuedFunctionWithUnusedTableVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\AvoidUnusedVariablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\DatabaseTriggerWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\ProcWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\ScalarValuedFunctionWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\ServerDdlTriggerWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\TableTriggerWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\TableValuedFunctionWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\AvoidWriteOnlyVariablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\OP_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\LChain_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithCircularlyReferencedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByInsertExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ServerDdlTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\DatabaseTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ScalarValuedFunctionWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableValuedFunctionWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariablesReversed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByBeginDialog.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByAssignmentSet.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByFetchFromCursor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByReceive.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithoutCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\EnforceCaptureSPReturnStatusRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\ProcWithCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\ProcWithoutCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\ServerTriggerWithCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\ServerTriggerWithoutCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\TableTriggerWithCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\TableTriggerWithoutCaptureOfSPReturnStatus.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\EnforceReturnRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithoutReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\DatabaseTriggerWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\DatabaseTriggerWithTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\EnforceTryCatchRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcWithTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ServerTriggerWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ServerTriggerWithTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\TableTriggerWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\TableTriggerWithTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\README.txt" />
+    <Content Include="TestScripts\_startup\_startup.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\_startup\_startup-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rules\Cheburashka.csproj">
+      <Project>{18e096e9-6a3d-4124-b908-9c39a425f7be}</Project>
+      <Name>Cheburashka</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

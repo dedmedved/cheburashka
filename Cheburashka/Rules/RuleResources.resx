@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AvoidBareReturn_ProblemDescription" xml:space="preserve">
+    <value>RETURN statement without return value was found in {0}.</value>
+  </data>
+  <data name="AvoidBareReturn_RuleName" xml:space="preserve">
+    <value>Avoid using Return statements with no explicit return value in Stored Procedures.</value>
+  </data>
+  <data name="AvoidDirectUseOfRowcount_ProblemDescription" xml:space="preserve">
+    <value>@@rowcount and/or @@error was used directly in {0}.  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.</value>
+  </data>
+  <data name="AvoidDirectUseOfRowcount_RuleName" xml:space="preserve">
+    <value>@@rowcount and/or @@error should never be used directly.</value>
+  </data>
+  <data name="AvoidGoto_ProblemDescription" xml:space="preserve">
+    <value>GOTO statement was found in {0}.</value>
+  </data>
+  <data name="AvoidGoto_RuleName" xml:space="preserve">
+    <value>Avoid using Goto statements.</value>
+  </data>
+  <data name="AvoidOnePartNames_ProblemDescription" xml:space="preserve">
+    <value>Schema object with no schema name found in {0}.</value>
+  </data>
+  <data name="AvoidOnePartNames_RuleName" xml:space="preserve">
+    <value>Always include the schema name when referencing an object.</value>
+  </data>
+  <data name="AvoidUninitialisedVariables_ProblemDescription" xml:space="preserve">
+    <value>Uninitialised variable found in {0}.</value>
+  </data>
+  <data name="AvoidUninitialisedVariables_RuleName" xml:space="preserve">
+    <value>Variables whose value is never set will be null.</value>
+  </data>
+  <data name="AvoidUnusedParameter_ProblemDescription" xml:space="preserve">
+    <value>Unused Parameter found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedParameter_RuleName" xml:space="preserve">
+    <value>Unused Parameters point to potential coding errors.</value>
+  </data>
+  <data name="AvoidUnusedTableVariable_ProblemDescription" xml:space="preserve">
+    <value>Unused Table Variable found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedTableVariable_RuleName" xml:space="preserve">
+    <value>Unused Table Variables point to potential coding errors.</value>
+  </data>
+  <data name="AvoidUnusedVariables_ProblemDescription" xml:space="preserve">
+    <value>Unused Variable found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedVariables_RuleName" xml:space="preserve">
+    <value>Unused Variables point to potential coding errors.</value>
+  </data>
+  <data name="AvoidWriteOnlyVariables_ProblemDescription" xml:space="preserve">
+    <value>Write-only Variable found in {0}.</value>
+  </data>
+  <data name="AvoidWriteOnlyVariables_RuleName" xml:space="preserve">
+    <value>Variables whose values are set, but never used point to potential coding errors.</value>
+  </data>
+  <data name="CannotCreateResourceManager" xml:space="preserve">
+    <value>Can't create ResourceManager for {0} from {1}.</value>
+  </data>
+  <data name="CategorySamples" xml:space="preserve">
+    <value>SamplesCategory</value>
+  </data>
+  <data name="CheckUniqueConstraintHasNoNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable.</value>
+  </data>
+  <data name="CheckUniqueConstraintHasNoNullColumns_RuleName" xml:space="preserve">
+    <value>Unique constraints generally should not have nullable columns.</value>
+  </data>
+  <data name="CheckUniqueIndexHasNoNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Unique, non-filtered index found with nullable columns in {0}.  You should probably make the columns non-nullable, or make the index filtered to exclude nulls.</value>
+  </data>
+  <data name="CheckUniqueIndexHasNoNullColumns_RuleName" xml:space="preserve">
+    <value>Unique indexes generally should not have nullable columns unless the index is filtered to remove them.</value>
+  </data>
+  <data name="EnforceCaptureSPReturnStatus_ProblemDescription" xml:space="preserve">
+    <value>Non-core SP is called without checking the return status in {0}.</value>
+  </data>
+  <data name="EnforceCaptureSPReturnStatus_RuleName" xml:space="preserve">
+    <value>Return status should always be retrieved.</value>
+  </data>
+  <data name="EnforceClusteredIndex_ProblemDescription" xml:space="preserve">
+    <value>Table with heap structure was found in {0}.</value>
+  </data>
+  <data name="EnforceClusteredIndex_RuleName" xml:space="preserve">
+    <value>Tables should normally be clustered and not heap.</value>
+  </data>
+  <data name="EnforceNamedConstraint_ProblemDescription" xml:space="preserve">
+    <value>Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.</value>
+  </data>
+  <data name="EnforceNamedConstraint_RuleName" xml:space="preserve">
+    <value>Avoid unnamed constraints.  These are assigned meaningless system-generated names at time of deployment.</value>
+  </data>
+  <data name="EnforcePrimaryKey_ProblemDescription" xml:space="preserve">
+    <value>Table with no Primary Key was found in {0}.</value>
+  </data>
+  <data name="EnforcePrimaryKey_RuleName" xml:space="preserve">
+    <value>Tables should normally have a Primary Key constraint defined.</value>
+  </data>
+  <data name="EnforceReturn_ProblemDescription" xml:space="preserve">
+    <value>Stored Procedure found without Return in {0}.</value>
+  </data>
+  <data name="EnforceReturn_RuleName" xml:space="preserve">
+    <value>Stored Procedures need at least one Return statement.</value>
+  </data>
+  <data name="EnforceTryCatch_ProblemDescription" xml:space="preserve">
+    <value>Code found without Try/Catch in {0}.</value>
+  </data>
+  <data name="EnforceTryCatch_RuleName" xml:space="preserve">
+    <value>Stored Procedures and Triggers need at least one Try/Catch block.</value>
+  </data>
+</root>
