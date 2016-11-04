@@ -9,3 +9,6 @@
 /DacFxStronglyTypedModel/obj
 /DacFxStronglyTypedModel/bin
 /packages/Microsoft.SqlServer.DacFx.x64.130.3370.2
+.vs
+obj
+bin
