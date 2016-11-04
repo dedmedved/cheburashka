@@ -5,8 +5,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files %28x86%29\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe</StartProgram>
-    <StartArguments>"C:\Users\bucklem\Documents\Visual Studio 2012\Projects\TestThrow\TestThrow.sln"</StartArguments>
+    <StartProgram>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe</StartProgram>
+    <StartArguments>"C:\Users\Mark.Buckle\Documents\SpecCheck-MarkB\CAP_SpecCheck_Analysis\CAP_SpecCheck_Analysis\CAP_SpecCheck_Analysis.sln"</StartArguments>
     <StartWorkingDirectory>
     </StartWorkingDirectory>
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>

@@ -1,7 +1,11 @@
 /*.suo
+/.vs
 /TestResults
 /Cheburashka/Rules/bin/Debug
 /Cheburashka/Rules/obj/Debug
 /Cheburashka/Tests/bin/Debug
 /Cheburashka/Tests/obj/Debug
 /Cheburashka.sln.ide
+/DacFxStronglyTypedModel/obj
+/DacFxStronglyTypedModel/bin
+/packages/Microsoft.SqlServer.DacFx.x64.130.3370.2

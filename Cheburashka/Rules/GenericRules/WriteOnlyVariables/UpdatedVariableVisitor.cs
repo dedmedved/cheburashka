@@ -22,6 +22,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka {
 
+    //TODO handle XML functions
     internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor
     {
         public UpdatedVariableVisitor()
@@ -34,7 +35,7 @@ namespace Cheburashka {
         public override void ExplicitVisit(SetVariableStatement node)
         {
 
-            if (node.Variable == null) return;
+            if (node.Variable == null  || node.Expression == null) return;
             SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable,node,node.ToString());
 
             //Get variable references in the expression.
@@ -47,7 +48,7 @@ namespace Cheburashka {
         }
         public override void ExplicitVisit(SelectSetVariable node)
         {
-            if (node.Variable == null ) return ;
+            if (node.Variable == null || node.Expression == null) return ;
             SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.

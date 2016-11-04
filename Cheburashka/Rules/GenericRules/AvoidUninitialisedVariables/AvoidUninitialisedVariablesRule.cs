@@ -83,106 +83,105 @@ namespace Cheburashka
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
         {
-            // Get Model collation 
-            SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
+                // Get Model collation 
+                SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+                List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            try {
+                TSqlModel model;
+                TSqlObject modelElement;
+                TSqlFragment sqlFragment;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            // The rule execution context has all the objects we'll need, including the fragment representing the object,
-            // and a descriptor that lets us access rule metadata
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
-
-            // visitor to get the declarations of uninitialised variables
-            var declarationVisitor = new UninitialisedVariableDeclarationVisitor();
-            sqlFragment.Accept(declarationVisitor);
-            IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
-
-            // visitor to get parameter names - these look like variables and need removing
-            // from variable references before we use them
-            NamedParameterUsageVisitor namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-            // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
-            // visitor to get the occurrences of variables
-            VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
-            // remove all named parameters from the list of referenced variables
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            List<VariableReference> variableReferences = tmpVr.ToList();
-
-            // get all assignments to variables
-            var updatedVariableVisitor = new UpdatedVariableVisitor();
-            sqlFragment.Accept(updatedVariableVisitor);
-            List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
-
-            //// get all assignments to variables
-            //VariableAssignmentVisitor usageWriteVisitor = new VariableAssignmentVisitor();
-            //sqlFragment.Accept(usageWriteVisitor);
-            //IList<VariableReference> variableWriteOccurrences = usageWriteVisitor.VariableAssignments;
-
-            Dictionary<string, object> objects = new Dictionary<string, object>(SqlComparer.Comparer);
-            Dictionary<string, int> counts = new Dictionary<string, int>(SqlComparer.Comparer);
-            Dictionary<string, int> writeCounts = new Dictionary<string, int>(SqlComparer.Comparer);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
 
 
-            foreach (Identifier variableDeclaration in variableDeclarations)
-            {
-                objects.Add(variableDeclaration.Value, variableDeclaration);
-            }
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            foreach (VariableReference variableReference in variableReferences)
-            {
-                //counts.AddAndIncrement(variableReference.Name);
-                if (!counts.ContainsKey(variableReference.Name))
-                {
-                    counts.Add(variableReference.Name, 1);
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+
+                // visitor to get the declarations of uninitialised variables
+                var declarationVisitor = new UninitialisedVariableDeclarationVisitor();
+                sqlFragment.Accept(declarationVisitor);
+                IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
+
+                // visitor to get parameter names - these look like variables and need removing
+                // from variable references before we use them
+                NamedParameterUsageVisitor namedParameterUsageVisitor = new NamedParameterUsageVisitor();
+                sqlFragment.Accept(namedParameterUsageVisitor);
+                IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+                // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
+                // visitor to get the occurrences of variables
+                VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
+                sqlFragment.Accept(usageVisitor);
+                IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+                // remove all named parameters from the list of referenced variables
+                IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
+                List<VariableReference> variableReferences = tmpVr.ToList();
+
+                // get all assignments to variables
+                var updatedVariableVisitor = new UpdatedVariableVisitor();
+                sqlFragment.Accept(updatedVariableVisitor);
+                List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
+
+                //// get all assignments to variables
+                //VariableAssignmentVisitor usageWriteVisitor = new VariableAssignmentVisitor();
+                //sqlFragment.Accept(usageWriteVisitor);
+                //IList<VariableReference> variableWriteOccurrences = usageWriteVisitor.VariableAssignments;
+
+                Dictionary<string, object> objects = new Dictionary<string, object>(SqlComparer.Comparer);
+                Dictionary<string, int> counts = new Dictionary<string, int>(SqlComparer.Comparer);
+                Dictionary<string, int> writeCounts = new Dictionary<string, int>(SqlComparer.Comparer);
+
+
+                foreach (Identifier variableDeclaration in variableDeclarations) {
+                    objects.Add(variableDeclaration.Value, variableDeclaration);
                 }
-                else
-                {
-                    counts[variableReference.Name]++;
-                }
-            }
-            foreach (var setVariable in setVariables)
-            {
-                var variable = setVariable.Variable;
-                //writeCounts.AddAndIncrement(variableWriteOccurrence.Name);
-                if (!writeCounts.ContainsKey(variable.Name))
-                {
-                    writeCounts.Add(variable.Name, 1);
-                }
-                else
-                {
-                    writeCounts[variable.Name]++;
-                }
-            }
-            foreach (var key in objects.Keys)
-            {
 
-                if ((counts.ContainsKey(key)) && ((counts[key]) >= 1) && (!(writeCounts.ContainsKey(key))))
-//                if (!(writeCounts.ContainsKey(key)))
-                    {
-                    SqlRuleProblem problem =
-                        new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
+                foreach (VariableReference variableReference in variableReferences) {
+                    //counts.AddAndIncrement(variableReference.Name);
+                    if (!counts.ContainsKey(variableReference.Name)) {
+                        counts.Add(variableReference.Name, 1);
+                    }
+                    else {
+                        counts[variableReference.Name]++;
+                    }
+                }
+                foreach (var setVariable in setVariables) {
+                    var variable = setVariable.Variable;
+                    //writeCounts.AddAndIncrement(variableWriteOccurrence.Name);
+                    if (!writeCounts.ContainsKey(variable.Name)) {
+                        writeCounts.Add(variable.Name, 1);
+                    }
+                    else {
+                        writeCounts[variable.Name]++;
+                    }
+                }
+                foreach (var key in objects.Keys) {
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
-                    problems.Add(problem);
+                    if ((counts.ContainsKey(key)) && ((counts[key]) >= 1) && (!(writeCounts.ContainsKey(key))))
+                        //                if (!(writeCounts.ContainsKey(key)))
+                        {
+                        SqlRuleProblem problem =
+                            new SqlRuleProblem(
+                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                                , modelElement
+                                , sqlFragment);
+
+                        RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
+                        problems.Add(problem);
+                    }
                 }
             }
-
+            catch (Exception e) {
+                SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
+            }
             return problems;
+
         }
     }
 }

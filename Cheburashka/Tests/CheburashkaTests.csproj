@@ -255,6 +255,12 @@
     <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToByExecuteParameterAndNotUsed.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToBySetXMLQuery.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToBySelectXMLQuery.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithVariableThatIsWrittenToBySp_ExecuteSQLParameter.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
