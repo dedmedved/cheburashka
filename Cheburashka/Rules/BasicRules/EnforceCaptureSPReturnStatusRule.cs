@@ -21,7 +21,6 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Cheburashka;
 
 namespace Cheburashka
 {

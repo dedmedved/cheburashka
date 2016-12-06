@@ -15,13 +15,12 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.SqlServer.Dac.CodeAnalysis;
-using Microsoft.SqlServer.Dac.Model;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Cheburashka;
+using Microsoft.SqlServer.Dac.CodeAnalysis;
+using Microsoft.SqlServer.Dac.Model;
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
@@ -49,8 +48,7 @@ namespace Cheburashka
         /// </summary>
         public const string RuleId = RuleConstants.EnforceTryCatch_RuleId;
 
-        public EnforceTryCatchRule()
-        {
+        public EnforceTryCatchRule() {
             // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
             {
@@ -73,8 +71,7 @@ namespace Cheburashka
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
-        {
+        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext) {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
@@ -97,9 +94,8 @@ namespace Cheburashka
             List<TryCatchStatement> tryCatchStatements = visitor.TryCatchStatements;
 
             // Create problems for each try/catch not found 
-            if (tryCatchStatements.Count == 0)
-            {
-                var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+            if (tryCatchStatements.Count == 0) {
+                var problem = new SqlRuleProblem(String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , sqlFragment
                                                 );

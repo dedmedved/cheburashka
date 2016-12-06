@@ -17,7 +17,6 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.IO;
 
 namespace Cheburashka
 {
