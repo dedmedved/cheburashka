@@ -91,7 +91,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the ocurrences of goto statements
+            // visitor to get the occurrences of goto statements
             var visitor = new GotoVisitor();
             sqlFragment.Accept(visitor);
             IList<GoToStatement> goToStatements = visitor.GoToStatements;

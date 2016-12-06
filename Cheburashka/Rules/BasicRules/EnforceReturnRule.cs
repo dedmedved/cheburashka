@@ -93,7 +93,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the ocurrences of return statements
+            // visitor to get the occurrences of return statements
             var visitor = new ReturnVisitor();
             sqlFragment.Accept(visitor);
             IList<ReturnStatement> returnStatements = visitor.ReturnStatements;

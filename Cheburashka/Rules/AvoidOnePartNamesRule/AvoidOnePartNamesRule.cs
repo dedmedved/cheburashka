@@ -106,13 +106,13 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the ocurrences of single part table names
+            // visitor to get the occurrences of single part table names
             var visitor = new AvoidOnePartNameVisitor();
             sqlFragment.Accept(visitor);
             IList<SchemaObjectName> onePartNames = visitor.OnePartNames;
 
 
-            // visitor to get the ocurrences of data declarations names
+            // visitor to get the occurrences of data declarations names
             // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
 
             UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new UpdateStatementForTargetVisitor();

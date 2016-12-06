@@ -91,7 +91,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the ocurrences of execute statements
+            // visitor to get the occurrences of execute statements
             EnforceCaptureSPReturnStatusVisitor visitor = new EnforceCaptureSPReturnStatusVisitor();
             sqlFragment.Accept(visitor);
             IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;

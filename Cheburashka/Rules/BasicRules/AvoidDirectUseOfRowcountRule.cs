@@ -92,7 +92,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the ocurrences of @@rowcount
+            // visitor to get the occurrences of @@rowcount
             var directUseOfRowcountVisitor = new AvoidDirectUseOfRowcountVisitor();
             sqlFragment.Accept(directUseOfRowcountVisitor);
             IList<GlobalVariableExpression> expressions = directUseOfRowcountVisitor.GlobalVariableExpressions;
