@@ -36,7 +36,6 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </summary>
 
-
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.AvoidOnePartNames_RuleName,                           // ID used to look up the display name inside the resources file
