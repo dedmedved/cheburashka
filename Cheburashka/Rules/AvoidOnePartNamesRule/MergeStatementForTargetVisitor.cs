@@ -1,4 +1,8 @@
-﻿//------------------------------------------------------------------------------
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+//------------------------------------------------------------------------------
 // <copyright company="DMV">
 //   Copyright 2014 Ded Medved
 //
@@ -16,7 +20,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-    
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;

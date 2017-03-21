@@ -1,4 +1,8 @@
-﻿//------------------------------------------------------------------------------
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+//------------------------------------------------------------------------------
 // <copyright company="DMV">
 //   Copyright 2014 Ded Medved
 //
@@ -100,7 +104,7 @@ namespace Cheburashka
             {
                 foreach (var thing in allIndexes)
                 {
-                    if (!bFoundClusteredIndex)
+                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
                     {
                         TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
                         if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
@@ -119,7 +123,7 @@ namespace Cheburashka
                 var allPKs     = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
                 foreach (var thing in allPKs)
                 {
-                    if (!bFoundClusteredIndex)
+                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
                     {
                         TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
                         if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
@@ -138,7 +142,7 @@ namespace Cheburashka
                 var allUNs     = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
                 foreach (var thing in allUNs)
                 {
-                    if (!bFoundClusteredIndex)
+                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
                     {
                         TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
                         if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)

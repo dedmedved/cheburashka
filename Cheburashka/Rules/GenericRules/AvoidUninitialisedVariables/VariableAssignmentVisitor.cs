@@ -34,10 +34,16 @@ namespace Cheburashka
 
         public override void ExplicitVisit(SetVariableStatement node)
         {
+            node.SQLModel_DebugPrint(@"C:\temp\node.out");
             Debug.Assert(node != null, "node != null");
             if (node.Variable != null )
             {
                 VariableAssignments.Add(node.Variable);
+            }
+            if (node.FunctionCallExists) {
+                foreach ( var p in node.Parameters) {
+                    p.SQLModel_DebugPrint(@"C:\temp\p.out");
+                }
             }
         }
 
@@ -101,6 +107,14 @@ namespace Cheburashka
                 VariableAssignments.Add(node.Variable);
             }
         }
+
+        public override void ExplicitVisit(FunctionCallSetClause node) {
+            Debug.Assert(node != null, "node != null");
+            if (node.MutatorFunction != null ) { 
+                node.MutatorFunction.SQLModel_DebugPrint(@"C:\temp\p.out");
+            }
+        }
+
 
         public override void ExplicitVisit(FetchCursorStatement node)
         {

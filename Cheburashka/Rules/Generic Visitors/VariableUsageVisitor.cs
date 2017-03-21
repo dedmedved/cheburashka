@@ -1,4 +1,8 @@
-﻿//------------------------------------------------------------------------------
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+//------------------------------------------------------------------------------
 // <copyright company="DMV">
 //   Copyright 2014 Ded Medved
 //
@@ -18,6 +22,7 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Cheburashka
 {
@@ -35,5 +40,22 @@ namespace Cheburashka
         {
             VariableReferences.Add(node);
         }
+        public override void ExplicitVisit(FunctionCall node) {
+            if (node.CallTarget != null) {
+                foreach (var p in node.Parameters) {
+                    p.SQLModel_DebugPrint(@"C:\temp\p.out");
+                    var matches = new List<VariableReference>();
+                    if (p.ScriptTokenStream[0].TokenType == TSqlTokenType.AsciiStringLiteral) {
+                        Regex regex = new Regex("(sql:variable(\"@\\w*?\"))");
+
+                        foreach (Match match in regex.Matches(
+                            "this is a test for <<bob>> who like <<books>>")) {
+                            Console.WriteLine(match.Value);
+                        }
+                    } 
+                }
+            }
+        }
+
     }
 }
