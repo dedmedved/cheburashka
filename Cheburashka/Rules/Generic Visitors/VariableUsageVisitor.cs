@@ -29,6 +29,11 @@ namespace Cheburashka
 
     internal class VariableUsageVisitor : TSqlConcreteFragmentVisitor
     {
+//        static Regex sqlVariableRegex = new Regex("(sql:variable(\"@\\w*?\"))");
+        //        static Regex sqlVariableRegex = new Regex("variable");
+
+        static Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
+
         public VariableUsageVisitor()
         {
             VariableReferences = new List<VariableReference>();
@@ -40,22 +45,27 @@ namespace Cheburashka
         {
             VariableReferences.Add(node);
         }
-        public override void ExplicitVisit(FunctionCall node) {
-            if (node.CallTarget != null) {
-                foreach (var p in node.Parameters) {
-                    p.SQLModel_DebugPrint(@"C:\temp\p.out");
-                    var matches = new List<VariableReference>();
-                    if (p.ScriptTokenStream[0].TokenType == TSqlTokenType.AsciiStringLiteral) {
-                        Regex regex = new Regex("(sql:variable(\"@\\w*?\"))");
 
-                        foreach (Match match in regex.Matches(
-                            "this is a test for <<bob>> who like <<books>>")) {
-                            Console.WriteLine(match.Value);
-                        }
-                    } 
-                }
-            }
-        }
+//TODO Implement this with a new class to handle variable references in code.
+//        public override void ExplicitVisit(FunctionCall node) {
+//            //node.SQLModel_DebugPrint(@"C:\temp\p.out");
+//            if (node.CallTarget != null) {
+//                foreach (var p in node.Parameters) {
+////                    p.SQLModel_DebugPrint(@"C:\temp\p.out");
+//                    var matches = new List<VariableReference>();
+//                    if (p.ScriptTokenStream[p.FirstTokenIndex].TokenType == TSqlTokenType.AsciiStringLiteral) {
+//                        foreach (Match match in sqlVariableRegex.Matches(p.ScriptTokenStream[p.FirstTokenIndex].Text)) {
+//                            //                            match.Value.SQLModel_DebugPrint(@"C:\temp\p.out");
+//                            //                            match.Groups[1].Captures[0].Value.SQLModel_DebugPrint(@"C:\temp\p.out");
+//                            var variableName = match.Groups[1].Captures[0].Value;
+//                            var x = new VariableReference();
+//                            x.Name = variableName;
+//                            matches.Add(x);
+//                        }
+//                    } 
+//                }
+//            }
+//        }
 
     }
 }

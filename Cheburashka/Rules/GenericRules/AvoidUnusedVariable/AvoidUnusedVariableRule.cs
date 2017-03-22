@@ -123,7 +123,11 @@ namespace Cheburashka
             IEnumerable<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
 
             // remove all named parameters from the list of referenced variables
+
+//TODO - work out how to eliminate based solely on name.
+
             IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
+
             List<VariableReference> variableReferences = tmpVr.ToList();
 
             var objects = new Dictionary<string, object>(SqlComparer.Comparer);
