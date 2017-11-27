@@ -318,6 +318,9 @@
     <Content Include="TestScripts\AvoidUnusedParameterRule\fn_CLR_ShouldntTriggerUnusedParameterWarnings.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidUnusedParameterRule\ProcWithParameterOnlyUsedInMethod.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidUnusedParameterRule\ProcWithUnusedParameter.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -363,7 +366,7 @@
     <Content Include="TestScripts\AvoidUnusedVariablesRule\DatabaseTriggerWithUnusedVariable.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidUnusedVariablesRule\ProcWithUnusedMainCodeVariableWithVariableUsedInMethod.sql">
+    <Content Include="TestScripts\AvoidUnusedVariablesRule\ProcWithVariableOnlyUsedInMethod.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidUnusedVariablesRule\ProcWithUnusedVariable.sql">
