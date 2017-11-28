@@ -177,6 +177,12 @@
   <data name="CategorySamples" xml:space="preserve">
     <value>SamplesCategory</value>
   </data>
+  <data name="CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription" xml:space="preserve">
+    <value>Duplicated column found in index or constraint in {0}.</value>
+  </data>
+  <data name="CheckForDuplicatedColumnsInIndexOrConstraint_RuleName" xml:space="preserve">
+    <value>Avoid duplicating columns in the key of any index or constraint.</value>
+  </data>
   <data name="CheckUniqueConstraintHasNoNullColumns_ProblemDescription" xml:space="preserve">
     <value>Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable.</value>
   </data>
