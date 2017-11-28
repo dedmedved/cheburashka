@@ -1,9 +1,0 @@
-Problem description: Stored Procedure found without Return in [dbo].[ProcWithOutReturn].
-FullID: Cheburashka.DM0027
-Severity: Warning
-Model element: dbo.ProcWithOutReturn
-Script file: ProcWithoutReturn.sql
-Start line: 2
-Start column: 1
-========end of problem========
-

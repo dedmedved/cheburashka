@@ -65,11 +65,7 @@ namespace Cheburashka
             SupportedElementTypes = new[]
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table,
-                ModelSchema.Procedure,
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
+                ModelSchema.Table
             };
         }
 
@@ -88,8 +84,6 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-return problems;
-
             TSqlModel           model;
             TSqlObject          modelElement;
             TSqlFragment        sqlFragment;
@@ -107,7 +101,6 @@ return problems;
             //DMVSettings.RefreshColumnCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
             // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
@@ -120,7 +113,7 @@ return problems;
             sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
             List<ColumnWithSortOrder> indexColumns      = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
 
-            List<TSqlFragment> issues = new List<TSqlFragment>();
+            var issues = new List<TSqlFragment>();
 
             foreach (var ps in parentSources)
             {
@@ -145,30 +138,12 @@ return problems;
                                                         ;
                         TSqlObject table = tables.SingleOrDefault();
 
-                                            //.Where( tab =>  tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                        //&& tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
-                        //IEnumerable<TSqlObject> tableColumns = new List<TSqlObject>();
-//                        try
+                        try
                         {
-                            //tableColumns = DMVSettings.tableColumns(schemaName + @"." + parentName).ToList();
 
                             var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                                .Where(n => n.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable) == true)
+                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
                                 .Select(n => n.ObjectName).ToList();
-
-                            /*
-                                    private static void ShowColumnsDataType(TSqlObject table)
-                                    {
-                                        foreach (var child in table.GetReferencedRelationshipInstances(Table.Columns))
-                                        {
-                                            var type = child.Object.GetReferenced(Column.DataType).FirstOrDefault();
-                                            var isNullable = type.GetProperty<bool?> (DataType.UddtNullable);
-                                            var length = type.GetProperty<int?>(DataType.UddtLength);
-
-                                            //do something useful with this information!
-                                        }
-                                    }
-                              */
 
                             if (tableColumns.Count != 0)
                             {
@@ -185,7 +160,7 @@ return problems;
                                 }
                             }
                         }
-//                        catch { }
+                        catch { }
                     }
                 }
             }
@@ -217,128 +192,3 @@ return problems;
 
 
 
-//using System;
-//using System.Collections.Generic;
-//using System.Diagnostics;
-//using System.Globalization;
-//using Microsoft.Data.Schema.Extensibility;
-//using Microsoft.Data.Schema.SchemaModel;
-//using Microsoft.Data.Schema.ScriptDom.Sql;
-//using Microsoft.Data.Schema.Sql.SchemaModel;
-//using Microsoft.Data.Schema.Sql;
-//using Microsoft.Data.Schema.StaticCodeAnalysis;
-//using System.Text.RegularExpressions;
-//using Microsoft.Data.Schema.SchemaModel.Abstract;
-
-//using System.Linq;
-
-//namespace Neznayka
-//{
-//    /// <summary>
-//    /// This is a SQL rule which returns a warning message 
-//    /// whenever there is a ........................................
-//    /// This rule only applies to .................................
-//    /// </summary>
-
-//    [DatabaseSchemaProviderCompatibility(typeof(SqlDatabaseSchemaProvider))]
-//    [DataRuleAttribute(
-//        NeznaykaConstants.NameSpace,
-//        NeznaykaConstants.CheckUniqueConstraintHasNoNullColumnsRuleId,
-//        NeznaykaConstants.ResourceBaseName,
-//        NeznaykaConstants.CheckUniqueConstraintHasNoNullColumns_RuleName,
-//        NeznaykaConstants.CategoryDatabaseStructures,
-//        DescriptionResourceId = NeznaykaConstants.CheckUniqueConstraintHasNoNullColumns_ProblemDescription)]
-//    [SupportedElementType(typeof(ISqlProcedure))]
-//    [SupportedElementType(typeof(ISqlTrigger))]
-//    [SupportedElementType(typeof(ISqlTable))]
-//    public class CheckUniqueConstraintHasNoNullColumnsRule : StaticCodeAnalysisRule
-//    {
-//        #region Overrides
-//        /// <summary>
-//        /// Analyze the model element
-//        /// </summary>
-//        public override IList<DataRuleProblem> Analyze(DataRuleSetting ruleSetting, DataRuleExecutionContext context)
-//        {
-//            // (Re)-Load Environment settings
-//            // (Re)-Load Environment settings
-//            List<DataRuleProblem> problems;
-//            SqlSchemaModel sqlSchemaModel;
-//            ISqlModelElement sqlElement;
-//            TSqlFragment sqlFragment;
-//            DMVRuleSetup.RuleSetup(context, out problems, out sqlSchemaModel, out sqlElement, out sqlFragment);
-
-//// we probably need to alter all this if we decide to cover indexes created by code.
-
-//            // Refresh cached index/constraints/tables lists from Model
-//            DMVSettings.RefreshColumnCache(sqlSchemaModel);
-//            DMVSettings.RefreshConstraintsAndIndexesCache(sqlSchemaModel);
-            
-//            // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-//            CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new CheckUniqueConstraintParentObjectVisitor();
-//            sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-//            List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
-
-//            // visitor to get the columns
-//            CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor = new CheckUniqueConstraintHasNoNullColumnsVisitor();
-//            sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
-//            List<ColumnWithSortOrder> indexColumns = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
-
-//            List<TSqlFragment> issues = new List<TSqlFragment>();
-
-//            foreach (var ps in parentSources)
-//            {
-//                dynamic parent = ps as CreateTableStatement;
-//                if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
-//                if (parent != null)
-//                {
-//                    if ( parent.SchemaObjectName != null ) 
-//                    {
-//                        String parentName = parent.SchemaObjectName.BaseIdentifier.Value;
-//                        String schemaName = "";
-//                        if (parent.SchemaObjectName.SchemaIdentifier != null)
-//                        {
-//                            schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
-//                        }
-//                        // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-//                        // this will happen for dynamically created objects and missing objects.
-//                        List<ISqlSimpleColumn> tableColumns = new List<ISqlSimpleColumn>();
-////                        try
-//                        {
-//                            tableColumns = DMVSettings.tableColumns(schemaName + @"." + parentName).ToList();
-//                            if (tableColumns.Count != 0)
-//                            {
-//                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-//                                                                                        from tCol in tableColumns
-//                                                                                        where SqlComparer.CompareEqual(iCOl.ColumnIdentifier.Value, tCol.Name.Parts[2])
-//                                                                                        where tCol.IsNullable
-//                                                                                        select iCOl;
-
-//                                foreach (var c in nullableIndexColumns.ToList())
-//                                {
-//                                    issues.Add(c);
-//                                }
-//                            }
-//                        }
-////                        catch { }
-//                    }
-//                }
-//            }
-//            // Create problems for each object
-//            foreach (TSqlFragment issue in issues)
-//            {
-//                DataRuleProblem problem = new DataRuleProblem(this,
-//                                            String.Format(CultureInfo.CurrentCulture, this.RuleProperties.Description, SqlRuleUtils.GetElementName(sqlSchemaModel, sqlElement)),
-//                                            sqlElement);
-
-//                SqlRuleUtils.UpdateProblemPosition(problem, issue.StartOffset, issue.FragmentLength);
-//                problems.Add(problem);
-//            }
-
-
-//            return problems;
-//        }
-
-//        #endregion
-
-//    }
-//}

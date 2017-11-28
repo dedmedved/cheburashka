@@ -13,7 +13,7 @@ using Microsoft.Data.Schema.SchemaModel.Abstract;
 
 using System.Linq;
 
-namespace Neznayka
+namespace Cheburashka
 {
     /// <summary>
     /// This is a SQL rule which returns a warning message 

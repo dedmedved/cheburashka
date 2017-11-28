@@ -1,9 +1,9 @@
-Problem description: Stored Procedure found without Return in [dbo].[ProcWithOutReturn].
-FullID: Cheburashka.DM0027
+Problem description: Table with heap structure was found in [dbo].[EnforceClusteredIndexRule_Table_Without_ClusteredIndex].
+FullID: Cheburashka.DM0012
 Severity: Warning
-Model element: dbo.ProcWithOutReturn
-Script file: ProcWithoutReturn.sql
-Start line: 2
+Model element: dbo.EnforceClusteredIndexRule_Table_Without_ClusteredIndex
+Script file: EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql
+Start line: 1
 Start column: 1
 ========end of problem========
 
