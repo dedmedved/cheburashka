@@ -471,6 +471,15 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule_Table_Without_Null Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumnsRule\CheckUniqueConstraintHasNoNullColumnsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

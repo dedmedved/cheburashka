@@ -182,7 +182,7 @@ namespace Cheburashka
                 }
             }
             catch (Exception e) {
-                SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
+//                SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
             }
             return problems;
 
