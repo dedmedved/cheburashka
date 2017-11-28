@@ -510,10 +510,18 @@
     <Content Include="TestScripts\EnforceNamedConstraintRule\EnforceNamedConstraintRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceNamedConstraintRule\EnforceNamedConstraintRule_Table_With_Constraint_Names.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceNamedConstraintRule\EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_Without_PK.sql" />
+    <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_Without_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

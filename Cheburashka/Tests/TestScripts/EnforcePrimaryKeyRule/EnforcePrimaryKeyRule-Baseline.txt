@@ -1,0 +1,36 @@
+Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRule_Table_Without_Constraint_Names].  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.
+FullID: Cheburashka.DM0022
+Severity: Warning
+Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Start line: 2
+Start column: 15
+========end of problem========
+
+Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRule_Table_Without_Constraint_Names].  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.
+FullID: Cheburashka.DM0022
+Severity: Warning
+Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Start line: 3
+Start column: 15
+========end of problem========
+
+Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRule_Table_Without_Constraint_Names].  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.
+FullID: Cheburashka.DM0022
+Severity: Warning
+Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Start line: 4
+Start column: 15
+========end of problem========
+
+Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRule_Table_Without_Constraint_Names].  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.
+FullID: Cheburashka.DM0022
+Severity: Warning
+Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Start line: 5
+Start column: 15
+========end of problem========
+
