@@ -96,10 +96,8 @@ namespace Cheburashka
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
             // Get Database Schema and name of this model element.
-            string selfSchema = modelElement.Name.Parts[0];
-            string selfTable = modelElement.Name.Parts[1];
-            string owningObjectSchema = null;
-            string owningObjectTable = null;
+            //string selfSchema = modelElement.Name.Parts[0];
+            //string selfTable = modelElement.Name.Parts[1];
 
 
             //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
@@ -112,156 +110,202 @@ namespace Cheburashka
             sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
             List<ColumnWithSortOrder> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
 
-            // if we're a unique index, then this check doesn't apply - we need all the columns in the index to be in the index.!
-            // if we're a clustered index then this rule definitely doesn't apply !!!!!!
-            if (thisIX != null && !thisIX.IsUnique && !thisIX.IsClustered)
-            {
-                owningObjectSchema = thisIX.IndexedObject.Name.Parts[0];
-                owningObjectTable = thisIX.IndexedObject.Name.Parts[1];
-                List<String> ClusterColumns =
-                    ModelIndexAndKeysUtils.getClusteredKeyColumns(owningObjectSchema, owningObjectTable);
+            CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
+            sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
+            var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
+
+            string owningObjectSchema = parentTable.SchemaIdentifier.Value;
+            string owningObjectTable = parentTable.BaseIdentifier.Value;
+
+            
+            owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
+            owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
 
-                // We need to create a problem where the leading n (n>0) columns in the index are not in the clustered columns
-                // And the remainder all are.
-                // It's questionable as to whether indexes that then have trailing elements not in the cluster should be in our list
-                // of problems.
-
-                Boolean leadingEdgeNotInCluster = true;
-                Boolean trailingEdgeInCluster = false;
-                Boolean checkingLeadingEdge = true;
-                Boolean checkingTrailingEdge = false;
-                Boolean first = true;
-                //List<String> LeadingEdgeIndexColumns = new List<String>();
-                foreach (var c in thisIX.ColumnSpecifications) // in the right order we hope
-                {
-                    // get column name - looks to be an on-demand structure so we need this rigmarole to access it.
-                    String ixColumnName = "";
-                    foreach (var n in c.Column.Name.Parts)
-                    {
-                        ixColumnName = n;
-                    }
-
-                    if (checkingLeadingEdge)
-                    {
-                        if (first)
-                        {
-                            if (ClusterColumns.Contains(ixColumnName))
-                            {
-                                leadingEdgeNotInCluster = false;
-                                checkingTrailingEdge = true;
-                            }
-                            first = false;
-                        }
-                        else
-                        {
-                            if (ClusterColumns.Contains(ixColumnName))
-                            {
-                                checkingLeadingEdge = false;
-                                checkingTrailingEdge = true;
-                            }
-                        }
-                    }
-                    if (checkingTrailingEdge)
-                    {
-                        if (ClusterColumns.Contains(ixColumnName))
-                        {
-                            trailingEdgeInCluster = true;
-                        }
-                    }
-                }
-
-
-                if (leadingEdgeNotInCluster && trailingEdgeInCluster)
-                {
-                    issues.Add(sqlFragment);
-                }
-                else
-                {
-                    // if it's a 2005+ index, also check the included columns
-                    ISql90Index this90IX = sqlElement as ISql90Index;
-                    if (this90IX != null)
-                    {
-                        List<String> IncludedIndexColumns = new List<String>();
-                        foreach (var c in this90IX.IncludedColumns)
-                        {
-
-                            String ixColumnName = "";
-                            foreach (var n in c.Name.Parts)
-                            {
-                                ixColumnName = n;
-                            }
-                            IncludedIndexColumns.Add(ixColumnName);
-                        }
-                        List<String> CommonList = IncludedIndexColumns.Intersect(ClusterColumns, SqlComparer.Comparer)
-                            .ToList();
-                        //lazy collection - needs iterating to find if it has anything
-                        bool clusteredKeyColumnFoundInIncludedColumns = false;
-                        foreach (var x in CommonList)
-                        {
-                            clusteredKeyColumnFoundInIncludedColumns = true;
-                            break;
-                        }
-
-
-                        if (clusteredKeyColumnFoundInIncludedColumns)
-                        {
-                            issues.Add(sqlFragment);
-                        }
-                    }
-                }
-            }
-
-
-            // visitor to get the columns
-            CheckClusteredKeyColumnsNotIncludedInIndexVisitor CheckClusteredKeyColumnsNotIncludedInIndexVisitor = new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
-            sqlFragment.Accept(CheckClusteredKeyColumnsNotIncludedInIndexVisitor);
-            List<ColumnWithSortOrder> indexColumns = CheckClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+            IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
+                    .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
+                    .Where(n => n.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable))
+                ;
+            TSqlObject table = tables.SingleOrDefault();
 
             var issues = new List<TSqlFragment>();
 
-            foreach (var ps in parentSources) {
-                dynamic parent = ps as CreateTableStatement;
-                if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
-                if (parent != null) {
-                    if (parent.SchemaObjectName != null) {
-                        String parentName = parent.SchemaObjectName.BaseIdentifier.Value;
-                        String schemaName = "";
-                        if (parent.SchemaObjectName.SchemaIdentifier != null) {
-                            schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
-                        }
-                        // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-                        // this will happen for dynamically created objects and missing objects.
-                        //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
-                        IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                                                        .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName))
-                                                        .Where(n => n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
-                                                        ;
-                        TSqlObject table = tables.SingleOrDefault();
 
-                        try {
+            try
+            {
 
-                            var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                                .Select(n => n.ObjectName).ToList();
+                var tableColumns = table.GetReferencedRelationshipInstances(Table.
+                    .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                    .Select(n => n.ObjectName).ToList();
 
-                            if (tableColumns.Count != 0) {
-                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                                                                                        from tCol in tableColumns
-                                                                                        where SqlComparer.SQLModel_StringCompareEqual(iCOl.Column.MultiPartIdentifier.Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value, tCol.Parts[2])
-                                                                                        //where tCol.IsNullable
-                                                                                        //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
-                                                                                        select iCOl;
+                if (tableColumns.Count != 0)
+                {
+                    IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                        from tCol in tableColumns
+                        where SqlComparer.SQLModel_StringCompareEqual(iCOl.Column.MultiPartIdentifier.Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value, tCol.Parts[2])
+                        //where tCol.IsNullable
+                        //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
+                        select iCOl;
 
-                                foreach (var c in nullableIndexColumns.ToList()) {
-                                    issues.Add(c);
-                                }
-                            }
-                        }
-                        catch { }
+                    foreach (var c in nullableIndexColumns.ToList())
+                    {
+                        issues.Add(c);
                     }
                 }
             }
+            catch { }
+
+
+
+            //// if we're a unique index, then this check doesn't apply - we need all the columns in the index to be in the index.!
+            //// if we're a clustered index then this rule definitely doesn't apply !!!!!!
+            //if (thisIX != null && !thisIX.IsUnique && !thisIX.IsClustered)
+            //{
+            //    owningObjectSchema = thisIX.IndexedObject.Name.Parts[0];
+            //    owningObjectTable = thisIX.IndexedObject.Name.Parts[1];
+            //    List<String> ClusterColumns =
+            //        ModelIndexAndKeysUtils.getClusteredKeyColumns(owningObjectSchema, owningObjectTable);
+
+
+            //    // We need to create a problem where the leading n (n>0) columns in the index are not in the clustered columns
+            //    // And the remainder all are.
+            //    // It's questionable as to whether indexes that then have trailing elements not in the cluster should be in our list
+            //    // of problems.
+
+            //    Boolean leadingEdgeNotInCluster = true;
+            //    Boolean trailingEdgeInCluster = false;
+            //    Boolean checkingLeadingEdge = true;
+            //    Boolean checkingTrailingEdge = false;
+            //    Boolean first = true;
+            //    //List<String> LeadingEdgeIndexColumns = new List<String>();
+            //    foreach (var c in thisIX.ColumnSpecifications) // in the right order we hope
+            //    {
+            //        // get column name - looks to be an on-demand structure so we need this rigmarole to access it.
+            //        String ixColumnName = "";
+            //        foreach (var n in c.Column.Name.Parts)
+            //        {
+            //            ixColumnName = n;
+            //        }
+
+            //        if (checkingLeadingEdge)
+            //        {
+            //            if (first)
+            //            {
+            //                if (ClusterColumns.Contains(ixColumnName))
+            //                {
+            //                    leadingEdgeNotInCluster = false;
+            //                    checkingTrailingEdge = true;
+            //                }
+            //                first = false;
+            //            }
+            //            else
+            //            {
+            //                if (ClusterColumns.Contains(ixColumnName))
+            //                {
+            //                    checkingLeadingEdge = false;
+            //                    checkingTrailingEdge = true;
+            //                }
+            //            }
+            //        }
+            //        if (checkingTrailingEdge)
+            //        {
+            //            if (ClusterColumns.Contains(ixColumnName))
+            //            {
+            //                trailingEdgeInCluster = true;
+            //            }
+            //        }
+            //    }
+
+
+            //    if (leadingEdgeNotInCluster && trailingEdgeInCluster)
+            //    {
+            //        issues.Add(sqlFragment);
+            //    }
+            //    else
+            //    {
+            //        // if it's a 2005+ index, also check the included columns
+            //        ISql90Index this90IX = sqlElement as ISql90Index;
+            //        if (this90IX != null)
+            //        {
+            //            List<String> IncludedIndexColumns = new List<String>();
+            //            foreach (var c in this90IX.IncludedColumns)
+            //            {
+
+            //                String ixColumnName = "";
+            //                foreach (var n in c.Name.Parts)
+            //                {
+            //                    ixColumnName = n;
+            //                }
+            //                IncludedIndexColumns.Add(ixColumnName);
+            //            }
+            //            List<String> CommonList = IncludedIndexColumns.Intersect(ClusterColumns, SqlComparer.Comparer)
+            //                .ToList();
+            //            //lazy collection - needs iterating to find if it has anything
+            //            bool clusteredKeyColumnFoundInIncludedColumns = false;
+            //            foreach (var x in CommonList)
+            //            {
+            //                clusteredKeyColumnFoundInIncludedColumns = true;
+            //                break;
+            //            }
+
+
+            //            if (clusteredKeyColumnFoundInIncludedColumns)
+            //            {
+            //                issues.Add(sqlFragment);
+            //            }
+            //        }
+            //    }
+            //}
+
+
+            //// visitor to get the columns
+            //CheckClusteredKeyColumnsNotIncludedInIndexVisitor CheckClusteredKeyColumnsNotIncludedInIndexVisitor = new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
+            //sqlFragment.Accept(CheckClusteredKeyColumnsNotIncludedInIndexVisitor);
+            //List<ColumnWithSortOrder> indexColumns = CheckClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+
+
+            //foreach (var ps in parentSources) {
+            //    dynamic parent = ps as CreateTableStatement;
+            //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
+            //    if (parent != null) {
+            //        if (parent.SchemaObjectName != null) {
+            //            String parentName = parent.SchemaObjectName.BaseIdentifier.Value;
+            //            String schemaName = "";
+            //            if (parent.SchemaObjectName.SchemaIdentifier != null) {
+            //                schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
+            //            }
+            //            // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
+            //            // this will happen for dynamically created objects and missing objects.
+            //            //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+            //            IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
+            //                                            .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName))
+            //                                            .Where(n => n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
+            //                                            ;
+            //            TSqlObject table = tables.SingleOrDefault();
+
+            //            try {
+
+            //                var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+            //                    .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+            //                    .Select(n => n.ObjectName).ToList();
+
+            //                if (tableColumns.Count != 0) {
+            //                    IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+            //                                                                            from tCol in tableColumns
+            //                                                                            where SqlComparer.SQLModel_StringCompareEqual(iCOl.Column.MultiPartIdentifier.Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value, tCol.Parts[2])
+            //                                                                            //where tCol.IsNullable
+            //                                                                            //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
+            //                                                                            select iCOl;
+
+            //                    foreach (var c in nullableIndexColumns.ToList()) {
+            //                        issues.Add(c);
+            //                    }
+            //                }
+            //            }
+            //            catch { }
+            //        }
+            //    }
+            //}
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
