@@ -29,12 +29,12 @@ using System.Text.RegularExpressions;
 namespace Cheburashka
 {
 
-    internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor : TSqlConcreteFragmentVisitor
     {
         private List<ColumnWithSortOrder> _objects;
 
         #region ctor
-        public CheckUniqueConstraintHasNoNullColumnsVisitor()
+        public CheckClusteredKeyColumnsNotIncludedInIndexVisitor()
         {
             _objects = new List<ColumnWithSortOrder>();
         }
@@ -45,15 +45,11 @@ namespace Cheburashka
         #endregion
 
         #region overrides
-        public override void ExplicitVisit(UniqueConstraintDefinition node)
+        public override void ExplicitVisit(CreateIndexStatement node)
         {
-            // primary key unique constraints by definition have no nullable columns
-            if (!node.IsPrimaryKey)
+            foreach (var v in node.Columns)
             {
-                foreach (var v in node.Columns)
-                {
-                    _objects.Add(v);
-                }
+                _objects.Add(v);
             }
         }
 

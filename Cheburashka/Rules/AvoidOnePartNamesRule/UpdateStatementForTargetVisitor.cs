@@ -36,10 +36,7 @@ namespace Cheburashka
             _dataModificationTargets = new List<TableReference>();
         }
 
-        public IList<TableReference> DataModificationTargets
-        {
-            get { return _dataModificationTargets; }
-        }
+        public IList<TableReference> DataModificationTargets => _dataModificationTargets;
 
         public override void ExplicitVisit(UpdateSpecification node)
         {

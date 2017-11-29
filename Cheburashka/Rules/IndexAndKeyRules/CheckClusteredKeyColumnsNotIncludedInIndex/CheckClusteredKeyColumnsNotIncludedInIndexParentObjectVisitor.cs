@@ -1,4 +1,4 @@
-// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
@@ -29,34 +29,30 @@ using System.Text.RegularExpressions;
 namespace Cheburashka
 {
 
-    internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<ColumnWithSortOrder> _objects;
+        private SchemaObjectName _objects;
 
         #region ctor
-        public CheckUniqueConstraintHasNoNullColumnsVisitor()
+        public CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor()
         {
-            _objects = new List<ColumnWithSortOrder>();
+            _objects = new SchemaObjectName();
         }
         #endregion
 
         #region properties
-        public List<ColumnWithSortOrder> Objects => _objects;
+        public SchemaObjectName Objects
+        {
+            get { return _objects; }
+        }
         #endregion
 
         #region overrides
-        public override void ExplicitVisit(UniqueConstraintDefinition node)
+        public override void ExplicitVisit(CreateIndexStatement node)
         {
-            // primary key unique constraints by definition have no nullable columns
-            if (!node.IsPrimaryKey)
-            {
-                foreach (var v in node.Columns)
-                {
-                    _objects.Add(v);
-                }
-            }
+            // has SchemaObjectName
+            _objects = node.OnName;
         }
-
         #endregion
 
     }

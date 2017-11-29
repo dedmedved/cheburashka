@@ -241,6 +241,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustered Key Column found in non-unique Index on a Clustered Table in {0}..
+        /// </summary>
+        internal static string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustered Key Columns need not be explicitly included in a non-unique Index on a Clustered Table.  The clustering columns are already added to the end of the index leaf entry..
+        /// </summary>
+        internal static string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName {
+            get {
+                return ResourceManager.GetString("CheckClusteredKeyColumnsNotIncludedInIndex_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicated column found in index or constraint in {0}..
         /// </summary>
         internal static string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription {

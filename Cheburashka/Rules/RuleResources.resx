@@ -177,6 +177,12 @@
   <data name="CategorySamples" xml:space="preserve">
     <value>SamplesCategory</value>
   </data>
+  <data name="CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription" xml:space="preserve">
+    <value>Clustered Key Column found in non-unique Index on a Clustered Table in {0}.</value>
+  </data>
+  <data name="CheckClusteredKeyColumnsNotIncludedInIndex_RuleName" xml:space="preserve">
+    <value>Clustered Key Columns need not be explicitly included in a non-unique Index on a Clustered Table.  The clustering columns are already added to the end of the index leaf entry.</value>
+  </data>
   <data name="CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription" xml:space="preserve">
     <value>Duplicated column found in index or constraint in {0}.</value>
   </data>
