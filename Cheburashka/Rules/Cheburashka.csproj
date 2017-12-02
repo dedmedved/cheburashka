@@ -109,6 +109,8 @@
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedParameterRule.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedTableVariableRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndex.cs" />
+    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />

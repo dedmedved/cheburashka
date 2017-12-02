@@ -461,6 +461,31 @@ namespace Cheburashka
 
     }
 
+    class ColumnWithSortOrderNameOnlyComparer : IEqualityComparer<ColumnWithSortOrder>
+    {
+        // sql fragments are equal if their token ranges are equal.
+        public bool Equals(ColumnWithSortOrder x, ColumnWithSortOrder y)
+        {
+            //Check whether the compared objects reference the same data.
+            if (ReferenceEquals(x, y)) return true;
+            //Check whether any of the compared objects is null.
+            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+                return false;
+            //Check whether the sql token ranges are equal.
+            return (SqlComparisonUtils.SQLModel_Equals(x.Column.MultiPartIdentifier[0], y.Column.MultiPartIdentifier[0]));
+        }
+
+        // If SQLModel_Equals() returns true for a pair of objects 
+        // then GetHashCode() must return the same value for these objects.
+
+        public int GetHashCode(ColumnWithSortOrder sql)
+        {
+            //Check whether the object is null
+            if (ReferenceEquals(sql, null)) return 0;
+            //Calculate the hash code for the product.
+            return sql.FirstTokenIndex;
+        }
+    }
 
 
 }
