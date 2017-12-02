@@ -77,7 +77,8 @@ namespace Cheburashka
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext) {
+        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
@@ -106,58 +107,51 @@ namespace Cheburashka
 
 
             // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-            CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor = new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
+            CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor =
+                new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
             sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
             List<ColumnWithSortOrder> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
 
-            CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
+            CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
+                checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
+                    new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
             sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
             var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
 
             string owningObjectSchema = parentTable.SchemaIdentifier.Value;
             string owningObjectTable = parentTable.BaseIdentifier.Value;
 
-            
+
             owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
             owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
-
-            IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                    .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
-                    .Where(n => n.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable))
-                ;
-            TSqlObject table = tables.SingleOrDefault();
-
+            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             var issues = new List<TSqlFragment>();
 
 
-            try
+            TSqlObject clusteredIndex = null;
+            bool bFoundClusteredIndex =
+                RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex);
+            if (bFoundClusteredIndex)
             {
-
-                var tableColumns = table.GetReferencedRelationshipInstances(Table.
-                    .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                    .Select(n => n.ObjectName).ToList();
-
-                if (tableColumns.Count != 0)
+                try
                 {
-                    IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                        from tCol in tableColumns
-                        where SqlComparer.SQLModel_StringCompareEqual(iCOl.Column.MultiPartIdentifier.Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value, tCol.Parts[2])
-                        //where tCol.IsNullable
-                        //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
-                        select iCOl;
+                    
 
-                    foreach (var c in nullableIndexColumns.ToList())
-                    {
-                        issues.Add(c);
+                        foreach (var c in nullableIndexColumns.ToList())
+                        {
+                            issues.Add(c);
+                        }
                     }
+
                 }
-            }
-            catch { }
+            
+            catch {}
+        }
 
 
 
-            //// if we're a unique index, then this check doesn't apply - we need all the columns in the index to be in the index.!
+        //// if we're a unique index, then this check doesn't apply - we need all the columns in the index to be in the index.!
             //// if we're a clustered index then this rule definitely doesn't apply !!!!!!
             //if (thisIX != null && !thisIX.IsUnique && !thisIX.IsClustered)
             //{

@@ -83,9 +83,9 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
+            TSqlModel model;
+            TSqlObject modelElement;
+            TSqlFragment sqlFragment;
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
@@ -97,65 +97,8 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(model);
 
-            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-
-            bool bFoundClusteredIndex = false;
-            if (!bFoundClusteredIndex)
-            {
-                foreach (var thing in allIndexes)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                        && thing.GetProperty<bool>(Index.Clustered)
-                           )
-                        {
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (!bFoundClusteredIndex)
-            {
-                var allPKs     = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-                foreach (var thing in allPKs)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                        && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
-                           )
-                        {
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (!bFoundClusteredIndex)
-            {
-                var allUNs     = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-                foreach (var thing in allUNs)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                        && thing.GetProperty<bool>(UniqueConstraint.Clustered)
-                           )
-                        {
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
-            }
+            TSqlObject clusteredIndex = null;
+            bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
