@@ -261,11 +261,11 @@ namespace Cheburashka
         }
     
 
-    public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex , out IEnumerable<ColumnWithSortOrder> columns)
+    public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex , out IList<ObjectIdentifier> columns)
         {
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             clusteredIndex = null;
-            columns = null;
+            columns = new List<ObjectIdentifier>();
             bool bFoundClusteredIndex = false;
             if (!bFoundClusteredIndex)
             {
@@ -277,9 +277,16 @@ namespace Cheburashka
                         if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
                             && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                             && thing.GetProperty<bool>(Index.Clustered)
-                        )
+                        ) 
+
                         {
-                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+                            var c = thing.GetReferencedRelationshipInstances(
+                                Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                            foreach (var v in c.ToList())
+                            {
+                                columns.Add(v.ObjectName);
+                            }
+                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
 
                             clusteredIndex = thing;
                             bFoundClusteredIndex = true;
@@ -301,7 +308,14 @@ namespace Cheburashka
                             && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
                         )
                         {
-                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+                            var c = thing.GetReferencedRelationshipInstances(
+                                PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                            foreach (var v in c.ToList())
+                            {
+                                columns.Add(v.ObjectName);
+                            }
+
+                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
                             clusteredIndex = thing;
                             bFoundClusteredIndex = true;
                             break;
@@ -322,7 +336,13 @@ namespace Cheburashka
                             && thing.GetProperty<bool>(UniqueConstraint.Clustered)
                         )
                         {
-                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+                            var c = thing.GetReferencedRelationshipInstances(
+                                UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                            foreach (var v in c.ToList())
+                            {
+                                columns.Add(v.ObjectName);
+                            }
+                            //columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
                             clusteredIndex = thing;
                             bFoundClusteredIndex = true;
                             break;

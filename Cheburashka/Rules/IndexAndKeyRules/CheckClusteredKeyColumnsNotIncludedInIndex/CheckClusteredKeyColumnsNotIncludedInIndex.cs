@@ -122,7 +122,7 @@ namespace Cheburashka
             var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
 
 
-            var issues = new List<TSqlFragment>();
+            var issues = new List<String>();
 
             if (!isClustered && !isUnique)
             {
@@ -130,7 +130,7 @@ namespace Cheburashka
                 CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor =
                     new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
                 sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
-                List<ColumnWithSortOrder> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+                List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
 
                 CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
                     checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
@@ -146,7 +146,7 @@ namespace Cheburashka
                 owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
                 TSqlObject clusteredIndex = null;
-                IEnumerable<ColumnWithSortOrder> columns = null;
+                IList<ObjectIdentifier> columns = null;
                 bool bFoundClusteredIndex =
                     RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex,
                         out columns);
@@ -154,8 +154,9 @@ namespace Cheburashka
                 {
                     try
                     {
-
-                        var common = columns.Intersect(indexColumns, new ColumnWithSortOrderNameOnlyComparer());
+                        IEnumerable<String> c1 = columns.AsEnumerable().Select(n => n.Parts[2]).AsEnumerable();
+                        IEnumerable<String> c2 = indexColumns.Select(n => n.Value).AsEnumerable();
+                        IEnumerable<String> common = c1.Intersect(c2, new SqlStringComparer());
                         foreach (var c in common.ToList())
                         {
                             issues.Add(c);

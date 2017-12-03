@@ -487,5 +487,32 @@ namespace Cheburashka
         }
     }
 
+    class SqlStringComparer : IEqualityComparer<String>
+    {
+        // sql fragments are equal if their token ranges are equal.
+        public bool Equals(String x, String y)
+        {
+            //Check whether the compared objects reference the same data.
+            if (ReferenceEquals(x, y)) return true;
+            //Check whether any of the compared objects is null.
+            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+                return false;
+            //Check whether the sql token ranges are equal.
+            return (x.SQLModel_StringCompareEqual(y));
+        }
+
+        // If SQLModel_Equals() returns true for a pair of objects 
+        // then GetHashCode() must return the same value for these objects.
+
+        public int GetHashCode(String sql)
+        {
+            //Check whether the object is null
+            if (ReferenceEquals(sql, null)) return 0;
+            //Calculate the hash code for the product.
+            return sql.GetHashCode();
+        }
+
+    }
+
 
 }

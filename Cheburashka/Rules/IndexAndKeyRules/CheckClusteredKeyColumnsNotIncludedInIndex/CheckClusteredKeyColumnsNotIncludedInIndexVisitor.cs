@@ -19,10 +19,14 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-
-using System.Collections.Generic;
+using Microsoft.SqlServer.Dac.CodeAnalysis;
+using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -31,17 +35,17 @@ namespace Cheburashka
 
     internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<ColumnWithSortOrder> _objects;
+        private List<Identifier> _objects;
 
         #region ctor
         public CheckClusteredKeyColumnsNotIncludedInIndexVisitor()
         {
-            _objects = new List<ColumnWithSortOrder>();
+            _objects = new List<Identifier>();
         }
         #endregion
 
         #region properties
-        public List<ColumnWithSortOrder> Objects => _objects;
+        public List<Identifier> Objects => _objects;
         #endregion
 
         #region overrides
@@ -49,7 +53,7 @@ namespace Cheburashka
         {
             foreach (var v in node.Columns)
             {
-                _objects.Add(v);
+                _objects.Add(v.Column.MultiPartIdentifier.Identifiers[0]);
             }
         }
 
