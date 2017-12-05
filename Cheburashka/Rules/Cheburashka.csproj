@@ -119,6 +119,8 @@
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceClusteredIndexRule\EnforceClusteredIndexRule.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintDeclareTableVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintVisitor.cs" />
