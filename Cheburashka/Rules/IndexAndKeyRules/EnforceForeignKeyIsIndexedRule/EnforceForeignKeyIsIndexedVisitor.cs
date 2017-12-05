@@ -44,10 +44,9 @@ namespace Cheburashka
         #endregion
 
         #region overrides
-        public override void ExplicitVisit(TSqlFragment node) {
-            if (node.FirstTokenIndex != null) {
-                _objects.Add(node);
-            }
+        public override void ExplicitVisit(TSqlFragment node)
+        {
+            _objects.Add(node);
         }
 
         #endregion

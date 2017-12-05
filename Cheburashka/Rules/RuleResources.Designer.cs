@@ -349,6 +349,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Foreign Key with no supporting index found in {0}..
+        /// </summary>
+        internal static string EnforceForeignKeyIsIndexed_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceForeignKeyIsIndexed_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken..
+        /// </summary>
+        internal static string EnforceForeignKeyIsIndexed_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceForeignKeyIsIndexed_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments..
         /// </summary>
         internal static string EnforceNamedConstraint_ProblemDescription {

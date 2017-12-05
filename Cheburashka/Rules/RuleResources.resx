@@ -213,6 +213,12 @@
   <data name="EnforceClusteredIndex_RuleName" xml:space="preserve">
     <value>Tables should normally be clustered and not heap.</value>
   </data>
+  <data name="EnforceForeignKeyIsIndexed_ProblemDescription" xml:space="preserve">
+    <value>Foreign Key with no supporting index found in {0}.</value>
+  </data>
+  <data name="EnforceForeignKeyIsIndexed_RuleName" xml:space="preserve">
+    <value>Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken.</value>
+  </data>
   <data name="EnforceNamedConstraint_ProblemDescription" xml:space="preserve">
     <value>Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.</value>
   </data>

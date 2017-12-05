@@ -35,7 +35,7 @@ namespace Cheburashka
 
     internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<Identifier> _objects;
+        private readonly List<Identifier> _objects;
 
         #region ctor
         public CheckClusteredKeyColumnsNotIncludedInIndexVisitor()
