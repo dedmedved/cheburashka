@@ -142,8 +142,8 @@ namespace Cheburashka
                 string owningObjectTable = parentTable.BaseIdentifier.Value;
 
 
-                owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
-                owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
+                //owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
+                //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
                 TSqlObject clusteredIndex = null;
                 IList<ObjectIdentifier> columns = null;
