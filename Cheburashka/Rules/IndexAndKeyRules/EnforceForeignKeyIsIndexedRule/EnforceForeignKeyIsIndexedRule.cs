@@ -99,10 +99,10 @@ namespace Cheburashka
             sqlFragment.Accept(enforceForeignKeyIsIndexedColumnsVisitor);
             IList<Identifier> columns = enforceForeignKeyIsIndexedColumnsVisitor.Objects;
 
-            var allIndexes =
-                model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass)
-                    .ToList(); //.Where( n => n.GetReferenced(Index.IndexedObject).ToList()[0].Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable))
+            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
             var theseIndexes = new List<TSqlObject>();
+
+            bool foundIndexThatMatchesAKey = false;
 
             foreach (var thing in allIndexes)
             {
@@ -138,11 +138,41 @@ namespace Cheburashka
                     && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                 )
                 {
-                    thesePK.Add(tab);
+                    theseUN.Add(tab);
                 }
             }
+            foreach (var index in theseIndexes)
+            {
+                List<String> LeadingEdgeIndexColumns = new List<String>();
+                var c = index.GetReferencedRelationshipInstances(
+                    Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+
+                foreach (var v in c.ToList()) {
+                    columns.Add(v.ObjectName);
+                }
 
 
+                foreach (var c in index.ColumnSpecifications) {
+                    String lastElement = "";
+                    foreach (var n in c.Column.Name.Parts) {
+                        lastElement = n;
+                    }
+                    LeadingEdgeIndexColumns.Add(lastElement);
+                }
+                foundIndexThatMatchesAKey = checkThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, LeadingEdgeIndexColumns);
+                if (foundIndexThatMatchesAKey) {
+                    break;
+                }
+            }
+            if (!foundIndexThatMatchesAKey)
+            {
+                foreach (var pk in thesePK) {
+                }
+            }
+            if (!foundIndexThatMatchesAKey) {
+                foreach (var un in theseUN) {
+                }
+            }
         }
 
 
