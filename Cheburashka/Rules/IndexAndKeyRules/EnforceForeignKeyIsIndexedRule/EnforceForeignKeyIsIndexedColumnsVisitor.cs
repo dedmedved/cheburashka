@@ -29,12 +29,12 @@ using System.Text.RegularExpressions;
 namespace Cheburashka
 {
 
-    internal class EnforceForeignKeyIsIndexedParentObjectColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceForeignKeyIsIndexedColumnsVisitor : TSqlConcreteFragmentVisitor
     {
         private IList<Identifier> _objects;
 
         #region ctor
-        public EnforceForeignKeyIsIndexedParentObjectColumnsVisitor()
+        public EnforceForeignKeyIsIndexedColumnsVisitor()
         {
             _objects = new List<Identifier>();
         }

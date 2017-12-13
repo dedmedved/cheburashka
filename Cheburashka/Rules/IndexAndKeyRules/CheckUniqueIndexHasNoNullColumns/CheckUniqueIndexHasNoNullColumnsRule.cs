@@ -112,9 +112,9 @@ namespace Cheburashka
             //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
 
             // visitor to get the columns
-            CheckUniqueIndexHasNoNullColumnsVisitor CheckUniqueIndexHasNoNullColumnsVisitor = new CheckUniqueIndexHasNoNullColumnsVisitor();
-            sqlFragment.Accept(CheckUniqueIndexHasNoNullColumnsVisitor);
-            List<ColumnWithSortOrder> indexColumns = CheckUniqueIndexHasNoNullColumnsVisitor.Objects;
+            CheckUniqueIndexHasNoNullColumnsVisitor checkUniqueIndexHasNoNullColumnsVisitor = new CheckUniqueIndexHasNoNullColumnsVisitor();
+            sqlFragment.Accept(checkUniqueIndexHasNoNullColumnsVisitor);
+            List<ColumnWithSortOrder> indexColumns = checkUniqueIndexHasNoNullColumnsVisitor.Objects;
 
             var issues = new List<TSqlFragment>();
 

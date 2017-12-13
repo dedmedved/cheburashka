@@ -108,7 +108,7 @@
     <Compile Include="Generic Visitors\VariableTableReferenceVisitor.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedParameterRule.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedTableVariableRule.cs" />
-    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndex.cs" />
+    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceClusteredIndexRule\EnforceClusteredIndexRule.cs" />
-    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedParentObjectColumnsVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedParentObjectVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedVisitor.cs" />
@@ -151,6 +151,7 @@
     <Compile Include="Utility Classes\GraphCode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility Classes\ModelIndexAndKeysUtils.cs" />
     <Compile Include="Utility Classes\SqlCheck.cs" />
     <Compile Include="Utility Classes\SQLObjectFragment.cs" />
     <Compile Include="Generic Visitors\UpdateWithCTEVisitor.cs" />

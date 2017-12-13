@@ -94,13 +94,107 @@ namespace Cheburashka
             string owningObjectTable = parentTable.BaseIdentifier.Value;
             string owningObjectSchema = parentTable.SchemaIdentifier.Value;
 
-            EnforceForeignKeyIsIndexedParentObjectColumnsVisitor enforceForeignKeyIsIndexedParentObjectColumnsVisitor =
-                new EnforceForeignKeyIsIndexedParentObjectColumnsVisitor();
-            sqlFragment.Accept(enforceForeignKeyIsIndexedParentObjectColumnsVisitor);
-            IList<Identifier> columns = enforceForeignKeyIsIndexedParentObjectColumnsVisitor.Objects;
+            EnforceForeignKeyIsIndexedColumnsVisitor enforceForeignKeyIsIndexedColumnsVisitor =
+                new EnforceForeignKeyIsIndexedColumnsVisitor();
+            sqlFragment.Accept(enforceForeignKeyIsIndexedColumnsVisitor);
+            IList<Identifier> columns = enforceForeignKeyIsIndexedColumnsVisitor.Objects;
+
+            var allIndexes =
+                model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass)
+                    .ToList(); //.Where( n => n.GetReferenced(Index.IndexedObject).ToList()[0].Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable))
+            var theseIndexes = new List<TSqlObject>();
+
+            foreach (var thing in allIndexes)
+            {
+                TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                )
+                {
+                    theseIndexes.Add(tab);
+                }
+            }
+
+            var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+            var thesePK = new List<TSqlObject>();
+            foreach (var thing in allPKs)
+            {
+                TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                )
+                {
+                    thesePK.Add(tab);
+                    break;
+                }
+            }
+
+            var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+            var theseUN = new List<TSqlObject>();
+            foreach (var thing in allUNs)
+            {
+                TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                )
+                {
+                    thesePK.Add(tab);
+                }
+            }
 
 
         }
+
+
+        private static bool checkThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ForeignKeyIsIndexed, List<String> LeadingEdgeIndexColumns) {
+            bool foundIndexThatMatchesAKey = false;
+
+            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
+            List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
+
+            // if every fk column was found in the index
+            // and found within the leading n columns, we're ok.
+            // we assume no duplicate columns in the fk or index.
+            // adjusted for 0-based arrays
+            if (matchedPos.Count == allPos.Count
+                && matchedPos.Count > 0
+                && matchedPos.Count - 1 == matchedPos.Max()
+                ) {
+                foundIndexThatMatchesAKey = true;
+            }
+            // else if *this* particular index is not clustered and there *are* clustered columns 
+            // check that any remaining unmatched keys can be found in the included columns.
+            // whilst ensuring all columns we have found live in the first n columns in the index.
+            else if (!ForeignKeyIsIndexed && ClusterColumns.Count > 0) {
+                // the leading edge columns must still have been found in the first n columns of the index
+                // and there must be no other trailing elements in the actual key of the index.
+                // and I'm still making these rules up on the fly.
+                // adjusted for 0-based arrays
+                if (matchedPos.Count == LeadingEdgeIndexColumns.Count()
+                    && matchedPos.Count > 0
+                    && matchedPos.Count - 1 == matchedPos.Max()
+                    ) {
+                    String[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
+                    List<String> unMatchedForeignKeyColumns = new List<String>();
+                    for (int i = 0; i < allPos.Count; i++) {
+                        if (allPos[i] == -1) {
+                            unMatchedForeignKeyColumns.Add(arForeignKeyColumns[i]);
+                        }
+                    }
+
+                    List<Int32> remainingPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
+                    List<Int32> remainingAndMatchedToClusteringKeyPos = remainingPos.Where(n => n != -1).Select(n => n).ToList();
+
+                    // if we found all the unmatched columns in the cluster key we're home and dry !
+                    if (remainingAndMatchedToClusteringKeyPos.Count == remainingPos.Count) {
+                        foundIndexThatMatchesAKey = true;
+                    }
+                }
+            }
+
+            return foundIndexThatMatchesAKey;
+        }
+
         //public override IList<DataRuleProblem> Analyze(DataRuleSetting ruleSetting, DataRuleExecutionContext context) {
         //    // (Re)-Load Environment settings
 
@@ -261,4 +355,4 @@ namespace Cheburashka
         //#endregion
 
     }
-    }
+}
