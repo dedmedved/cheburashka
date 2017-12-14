@@ -143,23 +143,24 @@ namespace Cheburashka
             }
             foreach (var index in theseIndexes)
             {
-                List<String> LeadingEdgeIndexColumns = new List<String>();
-                var c = index.GetReferencedRelationshipInstances(
+                List<String> leadingEdgeIndexColumns = new List<String>();
+                var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
 
-                foreach (var v in c.ToList()) {
-                    columns.Add(v.ObjectName);
+                foreach (var v in cols.ToList())
+                {
+                    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
                 }
 
 
-                foreach (var c in index.ColumnSpecifications) {
-                    String lastElement = "";
-                    foreach (var n in c.Column.Name.Parts) {
-                        lastElement = n;
-                    }
-                    LeadingEdgeIndexColumns.Add(lastElement);
-                }
-                foundIndexThatMatchesAKey = checkThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, LeadingEdgeIndexColumns);
+                //foreach (var c in cols) {
+                //    String lastElement = "";
+                //    foreach (var n in c.Column.Name.Parts) {
+                //        lastElement = n;
+                //    }
+                //    LeadingEdgeIndexColumns.Add(lastElement);
+                //}
+                foundIndexThatMatchesAKey = checkThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, leadingEdgeIndexColumns);
                 if (foundIndexThatMatchesAKey) {
                     break;
                 }
