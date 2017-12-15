@@ -81,9 +81,20 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
 
-            ForeignKeyConstraint self = modelElement as ForeignKeyConstraint;
+//            ForeignKeyConstraint self = modelElement as ForeignKeyConstraint;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.ForeignColumns);
+            //if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+            //    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+            //    && thing.GetProperty<bool>(Index.Clustered)
+            //) {
+            //    var c = thing.GetReferencedRelationshipInstances(
+            //        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+            var ForeignKeyColumns = new List<String>();
+            foreach (var v in fkColumns.ToList()) {
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                ForeignKeyColumns.Add(elementName);
+            }
 
             DMVSettings.RefreshModelBuiltInCache(model);
 
@@ -105,7 +116,6 @@ namespace Cheburashka
             var theseIndexes = new List<TSqlObject>();
 
 
-            List<String> ForeignKeyColumns = self.Columns.Select(n => n.Name.Parts[2]).ToList();
 
             bool foundIndexThatMatchesAKey = false;
 
