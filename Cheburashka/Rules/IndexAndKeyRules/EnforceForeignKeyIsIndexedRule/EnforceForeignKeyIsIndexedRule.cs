@@ -81,6 +81,8 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
 
+            ForeignKeyConstraint self = modelElement as ForeignKeyConstraint;
+
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             DMVSettings.RefreshModelBuiltInCache(model);
@@ -101,6 +103,9 @@ namespace Cheburashka
 
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
             var theseIndexes = new List<TSqlObject>();
+
+
+            List<String> ForeignKeyColumns = self.Columns.Select(n => n.Name.Parts[2]).ToList();
 
             bool foundIndexThatMatchesAKey = false;
 
@@ -201,7 +206,7 @@ namespace Cheburashka
                 // and there must be no other trailing elements in the actual key of the index.
                 // and I'm still making these rules up on the fly.
                 // adjusted for 0-based arrays
-                if (matchedPos.Count == LeadingEdgeIndexColumns.Count()
+                if (matchedPos.Count == LeadingEdgeIndexColumns.Count
                     && matchedPos.Count > 0
                     && matchedPos.Count - 1 == matchedPos.Max()
                     ) {
