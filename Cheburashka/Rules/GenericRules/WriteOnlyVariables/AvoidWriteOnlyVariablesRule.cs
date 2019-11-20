@@ -152,20 +152,52 @@ namespace Cheburashka
 
             // remove all named parameters from the list of referenced variables
             // broken see replacement below
-            IEnumerable<VariableReference> tmpVr = 
-                        from varReference in allVariableLikeReferences 
+            // also equality doesn't honour sql server  collation
+            IEnumerable<VariableReference> tmpVr =
+                        from varReference in allVariableLikeReferences
                         join varDeclaration in variableDeclarations
-                        on varReference.Name equals varDeclaration.Value
+                            on 1 equals 1 // fake out the on clause
+                        where SqlComparer.SQLModel_StringCompareEqual(varReference.Name, varDeclaration.Value) // real condition
                         select varReference;
+
+
+            //// rewritten as method chain to allow use of collations
+            //IEnumerable<VariableReference> tmpVr = 
+            //    allVariableLikeReferences.Join( variableDeclarations
+            //                                  , varReference => varReference.Name
+            //                                  , varDeclaration => varDeclaration.Value
+            //                                  , (varReference, varDeclaration) => varReference
+            //                                  , SqlComparer.Comparer
+            //                                  );
+
             List<VariableReference> variableReferences = tmpVr.ToList();
+
+            //var query = allVariableLikeReferences.Join
+            //(variableDeclarations
+            //, varReference => varReference.Name
+            //, varDeclaration => varDeclaration.Value
+            //, (varReference) => new { x = varReference  } 
+            //, SqlComparer.Comparer.Compare
+            //);
 
 
             // remove all named parameters from the list of set variables
-            IEnumerable<SQLExpressionDependency> tmpSetVr = 
-                        from varSetVar in allSetVariables 
+            IEnumerable<SQLExpressionDependency> tmpSetVr =
+                        from varSetVar in allSetVariables
                         join varDeclaration in variableDeclarations
-                        on varSetVar.Variable.Name equals varDeclaration.Value
+                        on 1 equals 1  // fake out the on clause
+                        where SqlComparer.SQLModel_StringCompareEqual(varSetVar.Variable.Name, varDeclaration.Value) // real condition
                         select varSetVar;
+
+            //// rewritten as method chain to allow use of collations
+            //IEnumerable<SQLExpressionDependency> tmpSetVr = 
+            //    allSetVariables.Join( variableDeclarations
+            //                        , varSetVar => varSetVar.Variable.Name
+            //                        , varDeclaration => varDeclaration.Value
+            //                        , (varSetVar, varDeclaration) => varSetVar
+            //                        , SqlComparer.Comparer
+            //                        );
+
             List<SQLExpressionDependency> setVariables = tmpSetVr.ToList();
 
             // find all non-assignment contexts of variable usage.  These OUGHT to be ALL the evidence we need to 
@@ -193,7 +225,9 @@ namespace Cheburashka
             }
 
 
-            var writeDependencies = new BidirectionalGraph<string,Edge<string>>();
+            var graphComparer = ruleExecutionContext.SchemaModel.CollationComparer;
+
+            var writeDependencies = new BidirectionalGraph<string,Edge<string>>(false,-1,-1, SqlComparer.Comparer);
 
             writeDependencies.AddVertex("TERMINATE");
             writeDependencies.AddVertexRange(variableDeclarations.Select(n => n.Value));
@@ -229,8 +263,14 @@ namespace Cheburashka
 
             // now need to find all variable references that aren't directly in a variable assignment of any kind.
 
+
             var consumedVariables = (from edge in writeDependencies.Edges where edge.Target == "TERMINATE" select edge.Source).ToList().Distinct();
-            var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name)).Select(n => n.Variable.Name).Distinct().ToList();
+            
+            var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name))
+                                                  .Select(n => n.Variable.Name)
+                                                  .Distinct()
+                                                  .ToList();
+
 //            var usedVariables = (from edge in writeDependencies.Edges where edge.Source == "WRITTENTO" select edge.Target).ToList().Distinct();
 //            var unUsedVariables = setVariables.Where(n => ! usedVariables.Contains(n.Variable.Name));
 //            var unConsumedButSetVariables = unConsumedVariables.Where( n => ! );

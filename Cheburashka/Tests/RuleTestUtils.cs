@@ -25,31 +25,39 @@ namespace Cheburashka.Tests
 
         public static void SaveStringToFile(string contents, string filename)
         {
-            FileStream fileStream = null;
-            StreamWriter streamWriter = null;
             try
             {
+                FileStream fileStream = null;
+                StreamWriter streamWriter = null;
                 string directory = Path.GetDirectoryName(filename);
                 if (!Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);
                 }
 
-                fileStream = new FileStream(filename, FileMode.Create);
-                streamWriter = new StreamWriter(fileStream);
-                streamWriter.Write(contents);
-            }
-            finally
-            {
-                if (streamWriter != null)
+//                fileStream = new FileStream(filename, FileMode.Create);
+                using (fileStream = new FileStream(filename, FileMode.Create))
+                using (streamWriter = new StreamWriter(fileStream))
                 {
+                    streamWriter.Write(contents);
                     streamWriter.Close();
-                }
-                if (fileStream != null)
-                {
                     fileStream.Close();
                 }
             }
+            finally
+            {
+            }
+
+            //{
+            //    if (streamWriter != null)
+            //    {
+            //        streamWriter.Close();
+            //    }
+            //    if (fileStream != null)
+            //    {
+            //        fileStream.Close();
+            //    }
+            //}
         }
 
         public static string ReadFileToString(string filePath)

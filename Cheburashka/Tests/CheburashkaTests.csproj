@@ -390,87 +390,36 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\AvoidWriteOnlyVariablesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql">
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\OP_ProcWithChainedParameterWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\LChain_ProcWithChainedParameterWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithCircularlyReferencedWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByInsertExecute.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ScalarValuedFunctionShowsThatReturnIsTreatedAsAValueConsumer.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\OP_ProcWithChainedParameterWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\LChain_ProcWithChainedParameterWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithCircularlyReferencedWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByInsertExecute.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\Table1.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ServerDdlTriggerWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\DatabaseTriggerWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableTriggerWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ScalarValuedFunctionWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableValuedFunctionWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariable.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedWriteOnlyVariables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariablesReversed.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByBeginDialog.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByAssignmentSet.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecute.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameter.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByFetchFromCursor.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByReceive.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\Table1.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ServerDdlTriggerWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\DatabaseTriggerWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableTriggerWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ScalarValuedFunctionWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\TableValuedFunctionWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedWriteOnlyVariables.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithChainedParameterWriteOnlyVariablesReversed.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByBeginDialog.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByAssignmentSet.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecute.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByExecuteParameter.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByFetchFromCursor.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetByReceive.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql" />
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
