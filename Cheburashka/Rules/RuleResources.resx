@@ -135,6 +135,12 @@
   <data name="AvoidGoto_RuleName" xml:space="preserve">
     <value>Avoid using Goto statements.</value>
   </data>
+  <data name="AvoidNullLiteral_ProblemDescription" xml:space="preserve">
+    <value>Null Literal was found in a comparison in {0}.</value>
+  </data>
+  <data name="AvoidNullLiteral_RuleName" xml:space="preserve">
+    <value>Null is not a valid value to compare to.</value>
+  </data>
   <data name="AvoidOnePartNames_ProblemDescription" xml:space="preserve">
     <value>Schema object with no schema name found in {0}.</value>
   </data>

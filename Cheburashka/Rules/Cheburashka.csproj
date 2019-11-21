@@ -101,6 +101,8 @@
     <Compile Include="AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
     <Compile Include="AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
     <Compile Include="AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="BasicRules\AvoidNullLiteralRule.cs" />
+    <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="Generic Visitors\ClrWrapperVisitor.cs" />
     <Compile Include="Generic Visitors\InitialisationContextVisitor.cs" />
     <Compile Include="Generic Visitors\ParameterDeclarationVisitor.cs" />
@@ -188,6 +190,7 @@
     <EmbeddedResource Include="RuleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

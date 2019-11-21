@@ -60,6 +60,8 @@ namespace Cheburashka
 
         public const string AvoidOnePartNames_RuleId = "Cheburashka.DM0029";
 
+        public const string AvoidNullLiteral_RuleId = "Cheburashka.DM0030";
+
 
         public const string AvoidUnusedVariables_RuleName = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription = "AvoidUnusedVariables_ProblemDescription";
@@ -111,6 +113,9 @@ namespace Cheburashka
 
         public const string AvoidGoto_RuleName                              = "AvoidGoto_RuleName";
         public const string AvoidGoto_ProblemDescription                    = "AvoidGoto_ProblemDescription";
+
+        public const string AvoidNullLiteral_RuleName                       = "AvoidNullLiteral_RuleName";
+        public const string AvoidNullLiteral_ProblemDescription             = "AvoidNullLiteral_ProblemDescription";
 
         public const string EnforceTryCatch_RuleName                        = "EnforceTryCatch_RuleName";
         public const string EnforceTryCatch_ProblemDescription              = "EnforceTryCatch_ProblemDescription";
