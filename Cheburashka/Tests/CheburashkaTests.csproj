@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130</SSDTPath>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DF142FCD-E8E0-4841-BDB9-C9974F09068D}</ProjectGuid>
@@ -110,7 +116,9 @@
     <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithInDirectUseOfRowcount.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithInDirectUseOfRowcountViaInitialisation.sql" />
+    <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ProcWithInDirectUseOfRowcountViaInitialisation.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\ScalarFunctionWithDirectUseOfRowcount.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -546,36 +554,90 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\DatabaseTriggerWithWriteOnlyVariable.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\LChain_ProcWithChainedParameterWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\OP_ProcWithChainedParameterWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedParameterWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedParameterWriteOnlyVariablesReversed.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithCircularlyReferencedWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariable.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByAssignmentSet.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByBeginDialog.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecute.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecuteParameter.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByFetchFromCursor.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByInsertExecute.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByReceive.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetBySelect.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\DatabaseTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\LChain_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\OP_ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedParameterWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedParameterWriteOnlyVariablesReversed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithChainedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithCircularlyReferencedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByAssignmentSet.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByBeginDialog.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecuteParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByFetchFromCursor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByInsertExecute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetByReceive.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ScalarValuedFunctionShowsThatReturnIsTreatedAsAValueConsumer.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ScalarValuedFunctionWithWriteOnlyVariable.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ServerDdlTriggerWithWriteOnlyVariable.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\Table1.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\TableTriggerWithWriteOnlyVariable.sql" />
-    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\TableValuedFunctionWithWriteOnlyVariable.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ScalarValuedFunctionWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\ServerDdlTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\TableTriggerWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\TableValuedFunctionWithWriteOnlyVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\AvoidWriteOnlyVariablesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -815,6 +877,21 @@
     <Analyzer Include="..\..\packages\codecracker.CSharp.1.0.1\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup />
+  <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -835,6 +912,11 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
+  </PropertyGroup>
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

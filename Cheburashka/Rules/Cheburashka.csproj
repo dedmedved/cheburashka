@@ -105,6 +105,7 @@
     <Compile Include="Generic Visitors\InitialisationContextVisitor.cs" />
     <Compile Include="Generic Visitors\ParameterDeclarationVisitor.cs" />
     <Compile Include="Generic Visitors\TableVariableDeclarationVisitor.cs" />
+    <Compile Include="Generic Visitors\VariableDeclarationElementVisitor.cs" />
     <Compile Include="Generic Visitors\VariableTableReferenceVisitor.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedParameterRule.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedTableVariableRule.cs" />

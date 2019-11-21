@@ -109,6 +109,10 @@ namespace Cheburashka
             sqlFragment.Accept(selectSetVariableStatementVisitor);
             IList<SelectSetVariable> selectSetVariableStatements = selectSetVariableStatementVisitor.SetVariableStatements;
 
+            var variableDeclarationElementVisitor = new VariableDeclarationElementVisitor();
+            sqlFragment.Accept(variableDeclarationElementVisitor);
+            IList<DeclareVariableElement> variableDeclarationElements =variableDeclarationElementVisitor.variableDeclarationElements;
+
             // Create problems for each @@rowcount expression found outside of a set statement
             foreach (var expression in expressions)
             {
@@ -116,6 +120,10 @@ namespace Cheburashka
                 if (!foundSurroundingSetStatement)
                 {
                     foundSurroundingSetStatement = selectSetVariableStatements.Any(svs => svs.SQLModel_Contains(expression));
+                }
+                if (!foundSurroundingSetStatement)
+                {
+                    foundSurroundingSetStatement = variableDeclarationElements.Any(svs => svs.SQLModel_Contains(expression));
                 }
                 if (!foundSurroundingSetStatement)
                 {
