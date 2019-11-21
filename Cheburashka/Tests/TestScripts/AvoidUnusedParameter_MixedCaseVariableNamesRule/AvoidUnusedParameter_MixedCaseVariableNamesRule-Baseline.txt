@@ -1,0 +1,27 @@
+﻿Problem description: Unused Parameter found in [dbo].[ProcWithUnusedParameter].
+FullID: Cheburashka.DM0005
+Severity: Warning
+Model element: dbo.ProcWithUnusedParameter
+Script file: ProcWithUnusedParameter.sql
+Start line: 1
+Start column: 42
+========end of problem========
+
+Problem description: Unused Parameter found in [dbo].[ScalarValuedFunctionWithUnusedParameter].
+FullID: Cheburashka.DM0005
+Severity: Warning
+Model element: dbo.ScalarValuedFunctionWithUnusedParameter
+Script file: ScalarValuedFunctionWithUnusedParameter.sql
+Start line: 1
+Start column: 57
+========end of problem========
+
+Problem description: Unused Parameter found in [dbo].[TableValuedFunctionWithUnusedParameter].
+FullID: Cheburashka.DM0005
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithUnusedParameter
+Script file: TableValuedFunctionWithUnusedParameter.sql
+Start line: 1
+Start column: 56
+========end of problem========
+

@@ -405,6 +405,7 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidUnusedTableVariableRule.RuleId);
             }
         }
+
         /// <summary>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTableVariableRule" folder and compares the
         /// results to the "AvoidUnusedTableVariableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
@@ -421,6 +422,29 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidUnusedTableVariableRule),
                 new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql100))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(AvoidUnusedTableVariableRule.RuleId);
+            }
+        }
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTableVariable_MixedCaseVariableNamesRule" folder and compares the
+        /// results to the "AvoidUnusedTableVariable_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void AvoidUnusedTableVariable_MixedCaseVariableNames_CI_AI()     // As this is unused variables a mixed case scenario make little sense anyway
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUnusedTableVariableRule),
+                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" }, // no BIN case for obvious reasons
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -475,6 +499,29 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\AvoidUnusedParameter_MixedCaseVariableNamesRule" folder and compares the
+        /// results to the "AvoidUnusedParameter_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void AvoidUnusedParameter_MixedCaseVariableNames_CI_AI()     // As this is unused variables a mixed case scenario make little sense anyway
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUnusedParameterRule),
+                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },  // no BIN test cases for obvious reasons
+                SqlServerVersion.Sql100))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(AvoidUnusedParameterRule.RuleId);
+            }
+        }
+
+        /// <summary>
         /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariablesRule" folder and compares the
         /// results to the "AvoidWriteOnlyVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
@@ -496,6 +543,7 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidWriteOnlyVariablesRule.RuleId);
             }
         }
+
         /// <summary>
         /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariablesRule" folder and compares the
         /// results to the "AvoidWriteOnlyVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
@@ -512,6 +560,29 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidWriteOnlyVariablesRule),
                 new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql100))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(AvoidWriteOnlyVariablesRule.RuleId);
+            }
+        }
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule" folder and compares the
+        /// results to the "AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void AvoidWriteOnlyVariables_MixedCaseVariableNames_CI_AI()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidWriteOnlyVariablesRule),
+                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },  // obviously can't test the BIN case
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -566,6 +637,29 @@ namespace Cheburashka.Tests
             }
         }
 
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\AvoidUninitialisedVariables_MixedCaseVariableNamesRule" folder and compares the
+        /// results to the "AvoidUninitialisedVariables_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void AvoidUnitialisedVariables_MixedCaseVariableNames_CI_AI()        // NO _BIN test cases for obvious reasons
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUninitialisedVariablesRule),
+                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql100
+            ))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(AvoidUninitialisedVariablesRule.RuleId);
+            }
+        }
 
         /// <summary>
         /// This test uses input scripts saved in the "TestScripts\AvoidOnePartNamesRule" folder and compares the

@@ -266,7 +266,7 @@ namespace Cheburashka
 
             var consumedVariables = (from edge in writeDependencies.Edges where edge.Target == "TERMINATE" select edge.Source).ToList().Distinct();
             
-            var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name))
+            var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)
                                                   .Distinct()
                                                   .ToList();
