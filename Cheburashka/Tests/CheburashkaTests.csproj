@@ -167,6 +167,46 @@
     <Content Include="TestScripts\AvoidGotoRule\TableValuedFunctionWithGoto.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\AvoidNullLiteralRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteralInIfClause_Equality_LHS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteralInIfClause_Equality_RHS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteralInIfClause_InEquality_LHS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteralInIfClause_InEquality_RHS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteral_SimpleCase.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteral_SimpleCaseWithNestedCondition.sql" />
+    <Content Include="TestScripts\AvoidNullLiteralRule\ServerTriggerWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\DatabaseTriggerWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ProcWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\TableTriggerWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\ScalarFunctionWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidNullLiteralRule\TableValuedFunctionWithNullLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidOnePartNamesRule\AvoidOnePartNamesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -239,6 +279,7 @@
     <Content Include="TestScripts\AvoidOnePartNamesRule\ViewWithOnePartTableNameInSelect.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidUninitialisedVariablesRule\ProcWithNullLiteral.sql" />
     <Content Include="TestScripts\AvoidUninitialisedVariables_MixedCaseVariableNamesRule\AvoidUninitialisedVariables_MixedCaseVariableNamesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -98,7 +98,7 @@ namespace Cheburashka
             // visitor to get the occurrences of bare return statements
             var visitor = new NullLiteralVisitor();
             sqlFragment.Accept(visitor);
-            IList<BooleanComparisonExpression> nullLiteralExpressions = visitor.NullLiteralExpressions;
+            IList<ScalarExpression> nullLiteralExpressions = visitor.NullLiteralExpressions;
 
             // Create problems for each Return statement found 
             foreach (var nullLiteralExpression in nullLiteralExpressions)

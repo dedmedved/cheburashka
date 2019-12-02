@@ -28,20 +28,35 @@ namespace Cheburashka
     {
         public NullLiteralVisitor()
         {
-            NullLiteralExpressions = new List<BooleanComparisonExpression>();
+            NullLiteralExpressions = new List<ScalarExpression>();
         }
 
-        public IList<BooleanComparisonExpression> NullLiteralExpressions { get; private set; }
+        public IList<ScalarExpression> NullLiteralExpressions { get; private set; }
 
 
         public override void ExplicitVisit(BooleanComparisonExpression node)
         {
             if (  node.FirstExpression is NullLiteral
-               || node.SecondExpression is NullLiteral
                )
             {
-                NullLiteralExpressions.Add(node);
+                NullLiteralExpressions.Add(node.FirstExpression);
             }
+            if (node.SecondExpression is NullLiteral
+               )
+            {
+                NullLiteralExpressions.Add(node.SecondExpression);
+            }
+            node.AcceptChildren(this);
+        }
+
+        public override void ExplicitVisit(SimpleWhenClause node)
+        {
+            if (node.WhenExpression is NullLiteral
+               )
+            {
+                NullLiteralExpressions.Add(node.WhenExpression);
+            }
+            node.AcceptChildren(this);
         }
 
     }
