@@ -367,6 +367,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table in {0} has a clustered index or Unique Constraint that is not the Primary Key or a Foreign Key..
+        /// </summary>
+        internal static string EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tables should normally be clustered on the Primary Key, or a Foreign Key..
+        /// </summary>
+        internal static string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Foreign Key with no supporting index found in {0}..
         /// </summary>
         internal static string EnforceForeignKeyIsIndexed_ProblemDescription {

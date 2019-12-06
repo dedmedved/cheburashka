@@ -213,6 +213,12 @@
   <data name="EnforceCaptureSPReturnStatus_RuleName" xml:space="preserve">
     <value>Return status should always be retrieved.</value>
   </data>
+  <data name="EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription" xml:space="preserve">
+    <value>Table in {0} has a clustered index or Unique Constraint that is not the Primary Key or a Foreign Key.</value>
+  </data>
+  <data name="EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName" xml:space="preserve">
+    <value>Tables should normally be clustered on the Primary Key, or a Foreign Key.</value>
+  </data>
   <data name="EnforceClusteredIndex_ProblemDescription" xml:space="preserve">
     <value>Table with heap structure was found in {0}.</value>
   </data>
