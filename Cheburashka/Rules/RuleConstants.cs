@@ -32,35 +32,35 @@ namespace Cheburashka
         public const string ResourceBaseName = "Cheburashka.RuleResources";
 
 
-        public const string AvoidUninitialisedVariables_RuleId = "Cheburashka.DM0001";
-        public const string AvoidUnusedVariables_RuleId = "Cheburashka.DM0002";
-        public const string AvoidWriteOnlyVariables_RuleId = "Cheburashka.DM0003";
-        public const string AvoidUnusedTableVariable_RuleId = "Cheburashka.DM0004";
-        public const string AvoidUnusedParameter_RuleId = "Cheburashka.DM0005";
+        public const string AvoidUninitialisedVariables_RuleId                  = "Cheburashka.DM0001";
+        public const string AvoidUnusedVariables_RuleId                         = "Cheburashka.DM0002";
+        public const string AvoidWriteOnlyVariables_RuleId                      = "Cheburashka.DM0003";
+        public const string AvoidUnusedTableVariable_RuleId                     = "Cheburashka.DM0004";
+        public const string AvoidUnusedParameter_RuleId                         = "Cheburashka.DM0005";
 
-        public const string EnforcePrimaryKey_RuleId                    = "Cheburashka.DM0011";
-        public const string EnforceClusteredIndex_RuleId                = "Cheburashka.DM0012";
+        public const string EnforcePrimaryKey_RuleId                            = "Cheburashka.DM0011";
+        public const string EnforceClusteredIndex_RuleId                        = "Cheburashka.DM0012";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId    = "Cheburashka.DM0013";
+        public const string EnforceForeignKeyIsIndexedRuleId                    = "Cheburashka.DM0014";
 
-        public const string EnforceForeignKeyIsIndexedRuleId = "Cheburashka.DM0014";
+        public const string CheckUniqueIndexHasNoNullColumnsRuleId              = "Cheburashka.DM0017";
+        public const string CheckUniqueConstraintHasNoNullColumnsRuleId         = "Cheburashka.DM0018";
 
-        public const string CheckUniqueIndexHasNoNullColumnsRuleId      = "Cheburashka.DM0017";
-        public const string CheckUniqueConstraintHasNoNullColumnsRuleId = "Cheburashka.DM0018";
+        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId    = "Cheburashka.DM0020";
 
-        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId = "Cheburashka.DM0020";
-
-        public const string EnforceNamedConstraintRuleId                = "Cheburashka.DM0022";
+        public const string EnforceNamedConstraintRuleId                        = "Cheburashka.DM0022";
 
         
-        public const string AvoidBareReturn_RuleId = "Cheburashka.DM0023";
-        public const string AvoidDirectUseOfRowcount_RuleId = "Cheburashka.DM0024";
-        public const string AvoidGoto_RuleId = "Cheburashka.DM0025";
-        public const string EnforceCaptureSPReturnStatus_RuleId = "Cheburashka.DM0026";
-        public const string EnforceReturn_RuleId = "Cheburashka.DM0027";
-        public const string EnforceTryCatch_RuleId = "Cheburashka.DM0028";
+        public const string AvoidBareReturn_RuleId                              = "Cheburashka.DM0023";
+        public const string AvoidDirectUseOfRowcount_RuleId                     = "Cheburashka.DM0024";
+        public const string AvoidGoto_RuleId                                    = "Cheburashka.DM0025";
+        public const string EnforceCaptureSPReturnStatus_RuleId                 = "Cheburashka.DM0026";
+        public const string EnforceReturn_RuleId                                = "Cheburashka.DM0027";
+        public const string EnforceTryCatch_RuleId                              = "Cheburashka.DM0028";
 
-        public const string AvoidOnePartNames_RuleId = "Cheburashka.DM0029";
+        public const string AvoidOnePartNames_RuleId                            = "Cheburashka.DM0029";
 
-        public const string AvoidNullLiteral_RuleId = "Cheburashka.DM0030";
+        public const string AvoidNullLiteral_RuleId                             = "Cheburashka.DM0030";
 
 
         public const string AvoidUnusedVariables_RuleName = "AvoidUnusedVariables_RuleName";
@@ -87,11 +87,13 @@ namespace Cheburashka
         public const string EnforceClusteredIndex_RuleName                              = "EnforceClusteredIndex_RuleName";
         public const string EnforceClusteredIndex_ProblemDescription                    = "EnforceClusteredIndex_ProblemDescription";
 
-        public const string EnforceForeignKeyIsIndexed_RuleName = "EnforceForeignKeyIsIndexed_RuleName";
-        public const string EnforceForeignKeyIsIndexed_ProblemDescription = "EnforceForeignKeyIsIndexed_ProblemDescription";
+        public const string EnforceForeignKeyIsIndexed_RuleName                         = "EnforceForeignKeyIsIndexed_RuleName";
+        public const string EnforceForeignKeyIsIndexed_ProblemDescription               = "EnforceForeignKeyIsIndexed_ProblemDescription";
 
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName         = "EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription = "EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription";
 
-        public const string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
+        public const string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName         = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
         public const string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
 
         public const string EnforceNamedConstraint_RuleName                             = "EnforceNamedConstraint_RuleName";
