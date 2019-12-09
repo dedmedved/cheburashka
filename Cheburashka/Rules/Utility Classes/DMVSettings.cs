@@ -110,7 +110,22 @@ namespace Cheburashka
             }
         }
 
-
+        public static IList<TSqlObject> getIndexes
+        {
+            get { return _IndexesCache.ToList().AsReadOnly(); }
+        }
+        public static IList<TSqlObject> getPrimaryKeys
+        {
+            get { return _PrimaryKeyConstraints.ToList().AsReadOnly(); }
+        }
+        public static IList<TSqlObject> getForeignKeys
+        {
+            get { return _ForeignKeyConstraints.ToList().AsReadOnly(); }
+        }
+        public static IList<TSqlObject> getUniqueConstraints
+        {
+            get { return _UniqueConstraints.ToList().AsReadOnly(); }
+        }
 
     }
 }

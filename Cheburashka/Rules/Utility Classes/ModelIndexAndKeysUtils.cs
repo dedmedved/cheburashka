@@ -52,48 +52,71 @@ namespace Cheburashka
         }
 
 
-        //public static List<ISqlForeignKeyConstraint> getForeignKeys(string owningObjectSchema, string owningObjectTable)
-        //{
-        //    return DMVSettings.getForeignKeys
-        //                                    .Where(n => (     n.Name                        == null
-        //                                                || (  n.Name.ExternalParts          == null
-        //                                                   || n.Name.ExternalParts.Count    == 0
-        //                                                   )
-        //                                                )
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
-        //                                        ).Select(n => n).ToList();
+        public static List<TSqlObject> getForeignKeys(string owningObjectSchema, string owningObjectTable)
+        {
+            //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+            //clusteredIndex = null;
+            //bool bFoundClusteredIndex = false;
+            //if (!bFoundClusteredIndex)
+            //{
+            //    foreach (var thing in allIndexes)
+            //    {
+            //        if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
+            //        {
+            //            TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
+            //            if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+            //                && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+            //                && thing.GetProperty<bool>(Index.Clustered)
+            //            )
+            //            {
+            //                clusteredIndex = thing;
+            //                bFoundClusteredIndex = true;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
 
-        //}
+            return DMVSettings.getForeignKeys
+                                            .Where(n => (     n.Name                        == null
+                                                        || (  n.Name.ExternalParts          == null
+                                                           || n.Name.ExternalParts.Count    == 0
+                                                           )
+                                                        )
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n. .DefiningTable.Name.Parts[0], owningObjectSchema)
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
+                                                ).Select(n => n).ToList();
+
+        }
 
         
-        //public static List<ISqlPrimaryKeyConstraint> getPrimaryKeys(string owningObjectSchema, string owningObjectTable)
-        //{
-        //    return DMVSettings.getPrimaryKeys
-        //                                    .Where(n => (     n.Name                        == null
-        //                                                || (  n.Name.ExternalParts          == null
-        //                                                   || n.Name.ExternalParts.Count    == 0
-        //                                                   )
-        //                                                )
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
-        //                                      ).Select(n => n).ToList();
+        public static List<TSqlObject> getPrimaryKeys(string owningObjectSchema, string owningObjectTable)
+        {
+            return DMVSettings.getPrimaryKeys
+                                            .Where(n => (     n.Name                        == null
+                                                        || (  n.Name.ExternalParts          == null
+                                                           || n.Name.ExternalParts.Count    == 0
+                                                           )
+                                                        )
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
+                                              ).Select(n => n).ToList();
 
-        //}
-        //public static List<ISqlPrimaryKeyConstraint> getClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
-        //{
-        //    return DMVSettings.getPrimaryKeys
-        //                                    .Where(n => (     n.Name                        == null
-        //                                                || (  n.Name.ExternalParts          == null
-        //                                                   || n.Name.ExternalParts.Count    == 0
-        //                                                   )
-        //                                                )
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
-        //                                                && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
-        //                                                && n.IsClustered
-        //                                      ).Select(n => n).ToList();
+        }
+        public static List<TSqlObject> getClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
+        {
+            return DMVSettings.getPrimaryKeys
+                                            .Where(n => (n.Name == null
+                                                        || (n.Name.ExternalParts == null
+                                                           || n.Name.ExternalParts.Count == 0
+                                                           )
+                                                        )
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
+                                                        //&& SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
+                                                        //&& n.IsClustered
+                                              ).Select(n => n).ToList();
 
-        //}
+        }
 
         //public static List<ISqlIndex> getIndexes(string owningObjectSchema, string owningObjectTable)
         //{
@@ -117,7 +140,7 @@ namespace Cheburashka
         //                                           && n.IsClustered
         //                                       ).Select(n => n).ToList();
 
-        }
+    }
 
         //public static List<ISqlUniqueConstraint> getUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         //{

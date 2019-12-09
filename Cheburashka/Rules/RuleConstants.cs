@@ -81,31 +81,31 @@ namespace Cheburashka
 
 
 
-        public const string EnforcePrimaryKey_RuleName                                  = "EnforcePrimaryKey_RuleName";
-        public const string EnforcePrimaryKey_ProblemDescription                        = "EnforcePrimaryKey_ProblemDescription";
+        public const string EnforcePrimaryKey_RuleName                                      = "EnforcePrimaryKey_RuleName";
+        public const string EnforcePrimaryKey_ProblemDescription                            = "EnforcePrimaryKey_ProblemDescription";
 
-        public const string EnforceClusteredIndex_RuleName                              = "EnforceClusteredIndex_RuleName";
-        public const string EnforceClusteredIndex_ProblemDescription                    = "EnforceClusteredIndex_ProblemDescription";
+        public const string EnforceClusteredIndex_RuleName                                  = "EnforceClusteredIndex_RuleName";
+        public const string EnforceClusteredIndex_ProblemDescription                        = "EnforceClusteredIndex_ProblemDescription";
 
-        public const string EnforceForeignKeyIsIndexed_RuleName                         = "EnforceForeignKeyIsIndexed_RuleName";
-        public const string EnforceForeignKeyIsIndexed_ProblemDescription               = "EnforceForeignKeyIsIndexed_ProblemDescription";
+        public const string EnforceForeignKeyIsIndexed_RuleName                             = "EnforceForeignKeyIsIndexed_RuleName";
+        public const string EnforceForeignKeyIsIndexed_ProblemDescription                   = "EnforceForeignKeyIsIndexed_ProblemDescription";
 
-        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName         = "EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName";
-        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription = "EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName             = "EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription   = "EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription";
 
-        public const string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName         = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
-        public const string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
+        public const string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName             = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
+        public const string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription   = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
 
-        public const string EnforceNamedConstraint_RuleName                             = "EnforceNamedConstraint_RuleName";
-        public const string EnforceNamedConstraint_ProblemDescription                   = "EnforceNamedConstraint_ProblemDescription";
+        public const string EnforceNamedConstraint_RuleName                                 = "EnforceNamedConstraint_RuleName";
+        public const string EnforceNamedConstraint_ProblemDescription                       = "EnforceNamedConstraint_ProblemDescription";
 
 
 
-        public const string CheckUniqueIndexHasNoNullColumns_RuleName                   = "CheckUniqueIndexHasNoNullColumns_RuleName";
-        public const string CheckUniqueIndexHasNoNullColumns_ProblemDescription         = "CheckUniqueIndexHasNoNullColumns_ProblemDescription";
+        public const string CheckUniqueIndexHasNoNullColumns_RuleName                       = "CheckUniqueIndexHasNoNullColumns_RuleName";
+        public const string CheckUniqueIndexHasNoNullColumns_ProblemDescription             = "CheckUniqueIndexHasNoNullColumns_ProblemDescription";
 
-        public const string CheckUniqueConstraintHasNoNullColumns_RuleName              = "CheckUniqueConstraintHasNoNullColumns_RuleName";
-        public const string CheckUniqueConstraintHasNoNullColumns_ProblemDescription    = "CheckUniqueConstraintHasNoNullColumns_ProblemDescription";
+        public const string CheckUniqueConstraintHasNoNullColumns_RuleName                  = "CheckUniqueConstraintHasNoNullColumns_RuleName";
+        public const string CheckUniqueConstraintHasNoNullColumns_ProblemDescription        = "CheckUniqueConstraintHasNoNullColumns_ProblemDescription";
 
         public const string CheckForDuplicatedColumnsInIndexOrConstraint_RuleName           = "CheckForDuplicatedColumnsInIndexOrConstraint_RuleName";
         public const string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription = "CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription";
