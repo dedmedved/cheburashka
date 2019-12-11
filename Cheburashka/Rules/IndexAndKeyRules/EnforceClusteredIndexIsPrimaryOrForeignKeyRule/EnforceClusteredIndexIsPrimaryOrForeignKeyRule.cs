@@ -89,17 +89,18 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(model);
 
             // Refresh cached index/constraints/tables lists from Model
+            DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
 
             List<TSqlObject>  pks                      = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject>  clusteredpks             = ModelIndexAndKeysUtils.getClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject>  foreignkeyconstraints    = ModelIndexAndKeysUtils.getForeignKeys(owningObjectSchema, owningObjectTable);
-//            List<ISqlIndex>                 clusteredindexes         = ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable) ;
-//            List<ISqlUniqueConstraint>      uniqueClusterConstraints = ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable) ;
+            List<TSqlObject>  clusteredindexes         = ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable) ;
+            List<TSqlObject>  uniqueClusterConstraints = ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable) ;
 
 
-            //bool clusteredindexExists                   = (clusteredindexes.Count > 0);
-            //bool clusteredUniqueConstraintExists        = (uniqueClusterConstraints.Count > 0);
+            bool clusteredindexExists                   = (clusteredindexes.Count > 0);
+            bool clusteredUniqueConstraintExists        = (uniqueClusterConstraints.Count > 0);
             bool clusteredPrimaryKeyExists              = (clusteredpks.Count > 0);
 
             bool primaryKeyExists                       = (pks.Count > 0);
@@ -108,123 +109,123 @@ namespace Cheburashka
             List<TSqlFragment> issues                   = new List<TSqlFragment>();
             bool foundKeyThatMatchesACluster            = false;
 
-            //// only if all these conditions are true do we need to check for rule violations.
-            //if (   (DMVSettings.AllowClusterOnPrimaryKey || DMVSettings.AllowClusterOnForeignKey)
-            //    && (primaryKeyExists                            || foreignKeyExists)
-            //    && (clusteredPrimaryKeyExists                   || clusteredindexExists     || clusteredUniqueConstraintExists)
-            //    )
-            //{
-            //    if (DMVSettings.AllowClusterOnPrimaryKey)
-            //    {
-            //        if (clusteredpks.Count > 0)
-            //        {
-            //            foundKeyThatMatchesACluster = true;
-            //        }
-            //    }
-            //    if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
-            //    {
-            //        // try to find a foreign key that we might be clustering on, to tick it off as OK.
-            //        if (foreignkeyconstraints.Count > 0)
-            //        {
+            // only if all these conditions are true do we need to check for rule violations.
+            if ((DMVSettings.AllowClusterOnPrimaryKey || DMVSettings.AllowClusterOnForeignKey)
+                && (primaryKeyExists || foreignKeyExists)
+                && (clusteredPrimaryKeyExists || clusteredindexExists || clusteredUniqueConstraintExists)
+                )
+            {
+                if (DMVSettings.AllowClusterOnPrimaryKey)
+                {
+                    if (clusteredpks.Count > 0)
+                    {
+                        foundKeyThatMatchesACluster = true;
+                    }
+                }
+                if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
+                {
+                    // try to find a foreign key that we might be clustering on, to tick it off as OK.
+                    if (foreignkeyconstraints.Count > 0)
+                    {
 
-            //            bool match = false;
-            //            if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
-            //            {
-            //                ISqlIndex clusteredindex = null;
-            //                ISqlUniqueConstraint uniqueConstraint = null;
-            //                ISqlPrimaryKeyConstraint primaryKeyConstraint = null;
+                        bool match = false;
+                        if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
+                        {
+                            TSqlObject    clusteredindex = null;
+                            TSqlObject    uniqueConstraint = null;
+                            TSqlObject    primaryKeyConstraint = null;
 
-            //                List<String> LeadingEdgeIndexColumns = new List<String>();
-            //                List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+                            List<String> LeadingEdgeIndexColumns = new List<String>();
+                            List<String> SortedLeadingEdgeIndexColumns = new List<String>();
 
-            //                if (clusteredindexExists)
-            //                {
-            //                    clusteredindex = clusteredindexes[0];
-            //                    foreach (var c in clusteredindex.ColumnSpecifications)
-            //                    {
-            //                        /* so why won't this work
-            //                        List<String> names = EnumerateColumnSpecificationNameParts.getColumnNameParts(c);
-            //                        String lastElement = names[names.Count - 1];
-            //                        LeadingEdgeIndexColumns.Add(lastElement);
-            //                        */
-            //                        String lastElement = "";
-            //                        foreach (var n in c.Column.Name.Parts)
-            //                        {
-            //                            lastElement = n;
-            //                        }
-            //                        LeadingEdgeIndexColumns.Add(lastElement);
-            //                    }
+                            if (clusteredindexExists)
+                            {
+                                clusteredindex = clusteredindexes[0];
+                                foreach (var c in clusteredindex.ColumnSpecifications)
+                                {
+                                    /* so why won't this work
+                                    List<String> names = EnumerateColumnSpecificationNameParts.getColumnNameParts(c);
+                                    String lastElement = names[names.Count - 1];
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                    */
+                                    String lastElement = "";
+                                    foreach (var n in c.Column.Name.Parts)
+                                    {
+                                        lastElement = n;
+                                    }
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                }
 
-            //                    SortedLeadingEdgeIndexColumns =
-            //                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-            //                }
-            //                else if (clusteredUniqueConstraintExists)
-            //                {
-            //                    uniqueConstraint = uniqueClusterConstraints[0];
-            //                    foreach (var c in uniqueConstraint.ColumnSpecifications)
-            //                    {
-            //                        String lastElement = "";
-            //                        foreach (var n in c.Column.Name.Parts)
-            //                        {
-            //                            lastElement = n;
-            //                        }
-            //                        LeadingEdgeIndexColumns.Add(lastElement);
-            //                    }
+                                SortedLeadingEdgeIndexColumns =
+                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
+                            }
+                            else if (clusteredUniqueConstraintExists)
+                            {
+                                uniqueConstraint = uniqueClusterConstraints[0];
+                                foreach (var c in uniqueConstraint.ColumnSpecifications)
+                                {
+                                    String lastElement = "";
+                                    foreach (var n in c.Column.Name.Parts)
+                                    {
+                                        lastElement = n;
+                                    }
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                }
 
-            //                    SortedLeadingEdgeIndexColumns =
-            //                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-            //                }
-            //                else if (clusteredPrimaryKeyExists)
-            //                {
-            //                    primaryKeyConstraint = clusteredpks[0];
-            //                    foreach (var c in primaryKeyConstraint.ColumnSpecifications)
-            //                    {
-            //                        String lastElement = "";
-            //                        foreach (var n in c.Column.Name.Parts)
-            //                        {
-            //                            lastElement = n;
-            //                        }
-            //                        LeadingEdgeIndexColumns.Add(lastElement);
-            //                    }
+                                SortedLeadingEdgeIndexColumns =
+                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
+                            }
+                            else if (clusteredPrimaryKeyExists)
+                            {
+                                primaryKeyConstraint = clusteredpks[0];
+                                foreach (var c in primaryKeyConstraint.ColumnSpecifications)
+                                {
+                                    String lastElement = "";
+                                    foreach (var n in c.Column.Name.Parts)
+                                    {
+                                        lastElement = n;
+                                    }
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                }
 
-            //                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-            //                }
-
-
-            //                // now check the foreign key columns againt the relevant clustered 'index''s columns
-            //                foreach (var fc in foreignkeyconstraints)
-            //                {
-            //                    // consider a foreign key to be clustered if all its columns appear as the first n columns in a
-            //                    // clustered index, clustered unique constraint or clustered primary key constraint.
-            //                    // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-            //                    List<String> SortedForeignKeyColumns = fc.Columns.OrderBy(col => col.Name.Parts[2], SqlComparer.Comparer).Select(n => n.Name.Parts[2]).ToList();
-            //                    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
-            //                    {
-            //                        List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
-            //                        if ( Enumerable.SequenceEqual( leadingCols, SortedForeignKeyColumns, SqlComparer.Comparer))
-            //                        {
-            //                            match = true;
-            //                            break;
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //            foundKeyThatMatchesACluster = match;
-            //        }
-            //    }
-            //}
-            //// only if all these conditions are true do we need to check for rule violations.
-            //// otherwise by default it's a trivial success
-            //else
-            //{
-            //    foundKeyThatMatchesACluster = true;
-            //}
+                                LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
+                            }
 
 
-            //if (!foundKeyThatMatchesACluster)
-            //{
-            //    issues.Add(sqlFragment);
-            //}
+                            // now check the foreign key columns againt the relevant clustered 'index''s columns
+                            foreach (var fc in foreignkeyconstraints)
+                            {
+                                // consider a foreign key to be clustered if all its columns appear as the first n columns in a
+                                // clustered index, clustered unique constraint or clustered primary key constraint.
+                                // nb a primary key can be a foreign key too when modelling 1:1 relationships.
+                                List<String> SortedForeignKeyColumns = fc.Columns.OrderBy(col => col.Name.Parts[2], SqlComparer.Comparer).Select(n => n.Name.Parts[2]).ToList();
+                                if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                {
+                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
+                                    if (Enumerable.SequenceEqual(leadingCols, SortedForeignKeyColumns, SqlComparer.Comparer))
+                                    {
+                                        match = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        foundKeyThatMatchesACluster = match;
+                    }
+                }
+            }
+            // only if all these conditions are true do we need to check for rule violations.
+            // otherwise by default it's a trivial success
+            else
+            {
+                foundKeyThatMatchesACluster = true;
+            }
+
+
+            if (!foundKeyThatMatchesACluster)
+            {
+                issues.Add(sqlFragment);
+            }
 
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,

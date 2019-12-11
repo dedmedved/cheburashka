@@ -5,8 +5,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe</StartProgram>
-    <StartArguments>"C:\Users\Mark.Buckle\Documents\SpecCheck-MarkB\CAP_SpecCheck_Analysis\CAP_SpecCheck_Analysis\CAP_SpecCheck_Analysis.sln"</StartArguments>
+    <StartProgram>T:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\devenv.exe</StartProgram>
+    <StartArguments>"T:\Repos\HOSQLTP\Databases\SYSTEM\CAP.Internal.SYSTEM.sln"</StartArguments>
     <StartWorkingDirectory>
     </StartWorkingDirectory>
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>

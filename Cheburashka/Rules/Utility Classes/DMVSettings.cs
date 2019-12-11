@@ -40,6 +40,11 @@ namespace Cheburashka
         private static DateTime                 _LastConstraintsAndIndexesCacheRefresh;
         private static DateTime                 _LastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _ModelVersion ;
+
+
+        public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
+        public static bool AllowClusterOnForeignKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
+
         //private static IEnumerable<TSqlObject>  _builtinDataTypes;
 
         private static IEnumerable<TSqlObject>              ts;
@@ -76,10 +81,10 @@ namespace Cheburashka
                  DateTime.Compare(_LastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
-                IEnumerable<TSqlObject> idxs = model.GetObjects(DacQueryScopes.SameDatabase, Index.TypeClass); //model.GetElements(typeof(ISqlIndex), 0);
-                IEnumerable<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.SameDatabase, PrimaryKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlPrimaryKeyConstraint), 0);
-                IEnumerable<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.SameDatabase, ForeignKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlForeignKeyConstraint), 0);
-                IEnumerable<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.SameDatabase, UniqueConstraint.TypeClass); //model.GetElements(typeof(ISqlUniqueConstraint), 0);
+                IEnumerable<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass); //model.GetElements(typeof(ISqlIndex), 0);
+                IEnumerable<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlPrimaryKeyConstraint), 0);
+                IEnumerable<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlForeignKeyConstraint), 0);
+                IEnumerable<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass); //model.GetElements(typeof(ISqlUniqueConstraint), 0);
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
