@@ -131,25 +131,21 @@ namespace Cheburashka
                         bool match = false;
                         if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                         {
-                            TSqlObject    clusteredindex = null;
-                            TSqlObject    uniqueConstraint = null;
-                            TSqlObject    primaryKeyConstraint = null;
+                            TSqlObject    clusteredindex            = null;
+                            TSqlObject    uniqueConstraint          = null;
+                            TSqlObject    primaryKeyConstraint      = null;
 
-                            List<String> LeadingEdgeIndexColumns = new List<String>();
-                            List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+                            List<String> LeadingEdgeIndexColumns        = new List<String>();
+                            List<String> SortedLeadingEdgeIndexColumns  = new List<String>();
 
                             if (clusteredindexExists)
                             {
                                 clusteredindex = clusteredindexes[0];
-                                foreach (var c in clusteredindex.ColumnSpecifications)
+                                var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                foreach (var c in columnSpecifications)
                                 {
-                                    /* so why won't this work
-                                    List<String> names = EnumerateColumnSpecificationNameParts.getColumnNameParts(c);
-                                    String lastElement = names[names.Count - 1];
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                    */
                                     String lastElement = "";
-                                    foreach (var n in c.Column.Name.Parts)
+                                    foreach (var n in c.ObjectName.Parts)
                                     {
                                         lastElement = n;
                                     }
@@ -162,10 +158,11 @@ namespace Cheburashka
                             else if (clusteredUniqueConstraintExists)
                             {
                                 uniqueConstraint = uniqueClusterConstraints[0];
-                                foreach (var c in uniqueConstraint.ColumnSpecifications)
+                                var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                foreach (var c in columnSpecifications)
                                 {
                                     String lastElement = "";
-                                    foreach (var n in c.Column.Name.Parts)
+                                    foreach (var n in c.ObjectName.Parts)
                                     {
                                         lastElement = n;
                                     }
@@ -178,10 +175,11 @@ namespace Cheburashka
                             else if (clusteredPrimaryKeyExists)
                             {
                                 primaryKeyConstraint = clusteredpks[0];
-                                foreach (var c in primaryKeyConstraint.ColumnSpecifications)
+                                var columnSpecifications = primaryKeyConstraint.GetReferencedRelationshipInstances(PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                foreach (var c in columnSpecifications)
                                 {
                                     String lastElement = "";
-                                    foreach (var n in c.Column.Name.Parts)
+                                    foreach (var n in c.ObjectName.Parts)
                                     {
                                         lastElement = n;
                                     }
@@ -191,14 +189,14 @@ namespace Cheburashka
                                 LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
                             }
 
-
                             // now check the foreign key columns againt the relevant clustered 'index''s columns
                             foreach (var fc in foreignkeyconstraints)
                             {
+                                var columnSpecifications = fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns, DacQueryScopes.UserDefined);
                                 // consider a foreign key to be clustered if all its columns appear as the first n columns in a
                                 // clustered index, clustered unique constraint or clustered primary key constraint.
                                 // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                List<String> SortedForeignKeyColumns = fc.Columns.OrderBy(col => col.Name.Parts[2], SqlComparer.Comparer).Select(n => n.Name.Parts[2]).ToList();
+                                List<String> SortedForeignKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
                                 if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                 {
                                     List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
