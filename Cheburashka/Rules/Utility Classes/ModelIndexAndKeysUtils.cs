@@ -59,7 +59,8 @@ namespace Cheburashka
             { 
                 if ( fk.Name == null || (fk.Name.ExternalParts == null || fk.Name.ExternalParts.Count == 0))
                 {
-                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.ForeignTable).FirstOrDefault();
+//                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.ForeignTable).FirstOrDefault();
+                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.Host).FirstOrDefault();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
                     ) {
@@ -121,7 +122,6 @@ namespace Cheburashka
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    //&& (Boolean?)index.GetProperty(PrimaryKeyConstraint.Clustered) == true
                     )
                     {
                         indexes.Add(index);
@@ -140,7 +140,7 @@ namespace Cheburashka
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    && (Boolean?)index.GetProperty(PrimaryKeyConstraint.Clustered) == true
+                    && (Boolean?)index.GetProperty(Index.Clustered) == true
                     )
                     {
                         indexes.Add(index);
@@ -160,7 +160,6 @@ namespace Cheburashka
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    //&& (Boolean?)unique_constraint.GetProperty(PrimaryKeyConstraint.Clustered) == true
                     )
                     {
                         unique_constraints.Add(unique_constraint);
@@ -179,7 +178,7 @@ namespace Cheburashka
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    && (Boolean?)unique_constraint.GetProperty(PrimaryKeyConstraint.Clustered) == true
+                    && (Boolean?)unique_constraint.GetProperty(UniqueConstraint.Clustered) == true
                     )
                     {
                         unique_constraints.Add(unique_constraint);

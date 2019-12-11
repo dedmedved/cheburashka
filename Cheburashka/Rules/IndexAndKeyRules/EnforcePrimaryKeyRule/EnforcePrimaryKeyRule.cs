@@ -108,7 +108,7 @@ namespace Cheburashka
                         && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
                     {
                         bFoundPrimaryKey = true;
-                        break;
+                        //break;
                     }
                 }
             }       

@@ -117,11 +117,77 @@ namespace Cheburashka
             {
                 if (DMVSettings.AllowClusterOnPrimaryKey)
                 {
-                    if (clusteredpks.Count > 0)
+                    if (clusteredPrimaryKeyExists)
                     {
                         foundKeyThatMatchesACluster = true;
                     }
+                    // no clustered pk but a pk does exist and a clustered something exists check it
+                    else if (primaryKeyExists && (clusteredindexExists || clusteredUniqueConstraintExists) ) {
+                        bool match = false;
+                        {
+                            TSqlObject clusteredindex = null;
+                            TSqlObject uniqueConstraint = null;
+
+                            List<String> LeadingEdgeIndexColumns = new List<String>();
+                            List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+
+                            if (clusteredindexExists)
+                            {
+                                clusteredindex = clusteredindexes[0];
+                                var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                foreach (var c in columnSpecifications)
+                                {
+                                    String lastElement = "";
+                                    foreach (var n in c.ObjectName.Parts)
+                                    {
+                                        lastElement = n;
+                                    }
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                }
+
+                                SortedLeadingEdgeIndexColumns =
+                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
+                            }
+                            else if (clusteredUniqueConstraintExists)
+                            {
+                                uniqueConstraint = uniqueClusterConstraints[0];
+                                var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                foreach (var c in columnSpecifications)
+                                {
+                                    String lastElement = "";
+                                    foreach (var n in c.ObjectName.Parts)
+                                    {
+                                        lastElement = n;
+                                    }
+                                    LeadingEdgeIndexColumns.Add(lastElement);
+                                }
+
+                                SortedLeadingEdgeIndexColumns =
+                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
+                            }
+
+                            //We might have a clustered index etc on the same columns as a primary key.
+                            // now check the foreign key columns againt the relevant clustered 'index''s columns
+                            foreach (var pk in pks)
+                            {
+                                var columnSpecifications = pk.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
+                                List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
+                                if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
+                                {
+                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(sortedPrimaryKeyColumns.Count).ToList();
+                                    if (Enumerable.SequenceEqual(leadingCols, sortedPrimaryKeyColumns, SqlComparer.Comparer))
+                                    {
+                                        match = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        foundKeyThatMatchesACluster = match;
+                    }
                 }
+
+
                 if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
                 {
                     // try to find a foreign key that we might be clustering on, to tick it off as OK.
@@ -188,6 +254,29 @@ namespace Cheburashka
 
                                 LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
                             }
+
+                            //We might have a clustered index etc on the same columns as a primary key.
+                            // now check the foreign key columns againt the relevant clustered 'index''s columns
+                            foreach (var fc in foreignkeyconstraints)
+                            {
+                                var columnSpecifications = fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns, DacQueryScopes.UserDefined);
+                                // consider a foreign key to be clustered if all its columns appear as the first n columns in a
+                                // clustered index, clustered unique constraint or clustered primary key constraint.
+                                // nb a primary key can be a foreign key too when modelling 1:1 relationships.
+                                List<String> SortedForeignKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
+                                if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                {
+                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
+                                    if (Enumerable.SequenceEqual(leadingCols, SortedForeignKeyColumns, SqlComparer.Comparer))
+                                    {
+                                        match = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+
+
 
                             // now check the foreign key columns againt the relevant clustered 'index''s columns
                             foreach (var fc in foreignkeyconstraints)
