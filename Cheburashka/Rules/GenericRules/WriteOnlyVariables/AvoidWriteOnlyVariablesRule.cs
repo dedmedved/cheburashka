@@ -229,8 +229,11 @@ namespace Cheburashka
 
             var writeDependencies = new BidirectionalGraph<string,Edge<string>>(false,-1,-1, SqlComparer.Comparer);
 
-            writeDependencies.AddVertex("TERMINATE");
             writeDependencies.AddVertexRange(variableDeclarations.Select(n => n.Value));
+            //Grab original vertices
+            var vertices = writeDependencies.Vertices;
+
+            writeDependencies.AddVertex("TERMINATE");
             writeDependencies.AddEdgeRange(
                 nonAssignmentContextVariableReferences.Select((n => new Edge<string>(n.Key, "TERMINATE"))));
 
@@ -250,12 +253,19 @@ namespace Cheburashka
             }
             // compute transitive dependencies
 
-            writeDependencies = writeDependencies.ComputeTransitiveClosure();
+            writeDependencies = writeDependencies.ComputeTransitiveClosure(SqlComparer.Comparer);
 
             // mark the variables that are assigned by assigning a path from a dummy node.
             writeDependencies.AddVertex("WRITTENTO");
-            writeDependencies.AddEdgeRange(
-                setVariables.Select((n => new Edge<string>("WRITTENTO",n.Variable.Name))));
+            // because of bugs in the graph module we need to lookup the the vertex name in the graph before 
+            // adding in the edge range - otherwise run-time exceptions abound.
+            //writeDependencies.AddEdgeRange(                                                       // THIS BREAK IN THE PRESENCE OF MIXED-CASE REFERENCES
+            //    setVariables.Select((n => new Edge<string>("WRITTENTO",n.Variable.Name))));       // THIS BREAK IN THE PRESENCE OF MIXED-CASE REFERENCES
+            foreach (var setVariable in setVariables) {
+                var name = setVariable.Variable.Name;
+                var lookedUpAdditionalVertex = vertices.Where(n => SqlComparer.Comparer.Equals(n, name)).Select(n => n).First();
+                writeDependencies.AddEdge(new Edge<string>("WRITTENTO", lookedUpAdditionalVertex));
+            }
 
             //IVertexAndEdgeListGraph<string, Edge<string>> g = writeDendencies;
             //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);

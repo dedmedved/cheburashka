@@ -63,7 +63,7 @@ namespace UtilityTests
         {
             var g1 = new BidirectionalGraph<String, Edge<String>>();
             g1.AddVertex("A");
-            g1.AddEdge(new Edge<string>("A","A"));
+            g1.AddEdge(new Edge<string>("A", "A"));
             var g2 = GraphCode.ComputeTransitiveClosure(g1);
             Assert.AreEqual(g1.VertexCount, 1);
             Assert.AreEqual(g2.VertexCount, 1);
@@ -173,11 +173,11 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_No_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCulture);
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
-            var g2 = GraphCode.ComputeTransitiveClosure(g1);
+            var g2 = GraphCode.ComputeTransitiveClosure(g1, StringComparer.InvariantCulture);
             Assert.AreEqual(g1.VertexCount, 3);
             Assert.AreEqual(g2.VertexCount, 3);
             Assert.AreEqual(g1.EdgeCount, 0);
@@ -186,6 +186,97 @@ namespace UtilityTests
             //IVertexAndEdgeListGraph<string, Edge<string>> g = g2;
             //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
             //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\mb3_0");
+
+        }
+        [TestMethod]
+        public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_Graph()
+        {
+            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            g1.AddVertex("A");
+            g1.AddVertex("B");
+            g1.AddVertex("C");
+            g1.AddEdge(new Edge<string>("a", "B"));
+            g1.AddEdge(new Edge<string>("B", "C"));
+            g1.AddEdge(new Edge<string>("C", "a"));
+            var g2 = GraphCode.ComputeTransitiveClosure(g1, StringComparer.InvariantCultureIgnoreCase);
+            Assert.AreEqual(g1.VertexCount, 3);
+            Assert.AreEqual(g2.VertexCount, 3);
+            Assert.AreEqual(g1.EdgeCount, 3);
+            Assert.AreEqual(g2.EdgeCount, 9);
+
+            //IVertexAndEdgeListGraph<string, Edge<string>> g = g2;
+            //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
+            //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\mb3_9");
+
+
+        }
+
+        [TestMethod]
+        public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_2_Graph()
+        {
+            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            g1.AddVertex("A");
+            g1.AddVertex("B");
+            g1.AddVertex("C");
+            g1.AddEdge(new Edge<string>("a", "b"));
+            g1.AddEdge(new Edge<string>("b", "c"));
+            g1.AddEdge(new Edge<string>("c", "a"));
+            var g2 = GraphCode.ComputeTransitiveClosure(g1, StringComparer.InvariantCultureIgnoreCase);
+            Assert.AreEqual(g1.VertexCount, 3);
+            Assert.AreEqual(g2.VertexCount, 3);
+            Assert.AreEqual(g1.EdgeCount, 3);
+            Assert.AreEqual(g2.EdgeCount, 9);
+
+            //IVertexAndEdgeListGraph<string, Edge<string>> g = g2;
+            //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
+            //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\mb3_9");
+
+
+        }
+
+        [TestMethod]
+        public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_3_Graph()
+        {
+            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            g1.AddVertex("A");
+            g1.AddVertex("b");
+            g1.AddVertex("C");
+            g1.AddEdge(new Edge<string>("A", "b"));
+            g1.AddEdge(new Edge<string>("B", "C"));
+            g1.AddEdge(new Edge<string>("c", "a"));
+            var g2 = GraphCode.ComputeTransitiveClosure(g1, StringComparer.InvariantCultureIgnoreCase);
+            Assert.AreEqual(g1.VertexCount, 3);
+            Assert.AreEqual(g2.VertexCount, 3);
+            Assert.AreEqual(g1.EdgeCount, 3);
+            Assert.AreEqual(g2.EdgeCount, 9);
+
+            //IVertexAndEdgeListGraph<string, Edge<string>> g = g2;
+            //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
+            //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\mb3_9");
+
+
+        }
+
+        [TestMethod]
+        public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_4_Graph()
+        {
+            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            g1.AddVertex("A one");
+            g1.AddVertex("b TWO");
+            g1.AddVertex("C three");
+            g1.AddEdge(new Edge<string>("A ONE", "b two"));
+            g1.AddEdge(new Edge<string>("B two", "c THREE"));
+            g1.AddEdge(new Edge<string>("c three", "a ONE"));
+            var g2 = GraphCode.ComputeTransitiveClosure(g1, StringComparer.InvariantCultureIgnoreCase);
+            Assert.AreEqual(g1.VertexCount, 3);
+            Assert.AreEqual(g2.VertexCount, 3);
+            Assert.AreEqual(g1.EdgeCount, 3);
+            Assert.AreEqual(g2.EdgeCount, 9);
+
+            //IVertexAndEdgeListGraph<string, Edge<string>> g = g2;
+            //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
+            //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\mb3_9");
+
 
         }
 

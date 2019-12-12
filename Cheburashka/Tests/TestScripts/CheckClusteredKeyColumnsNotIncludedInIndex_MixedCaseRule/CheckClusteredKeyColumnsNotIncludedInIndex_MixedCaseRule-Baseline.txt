@@ -1,0 +1,27 @@
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX].[ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX.ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX.sql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_PK].[ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_PK].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_PK.ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_PK
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_PK.sql
+Start line: 10
+Start column: 1
+========end of problem========
+
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN].[ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN.ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN.sql
+Start line: 10
+Start column: 1
+========end of problem========
+
