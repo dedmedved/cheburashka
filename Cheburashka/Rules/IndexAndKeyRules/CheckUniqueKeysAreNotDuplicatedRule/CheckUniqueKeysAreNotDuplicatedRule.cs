@@ -102,13 +102,13 @@ namespace Cheburashka
 
             List<ColumnDefinition> colSpec = null;
             String SourceName = null;
-            int SourceOffSet = 0;
-            int SourceLength = 0;
+            int StartColumn = 0;
+            int StartLine = 0;
 
             bool unique = true;
             SourceName = modelElement.GetSourceInformation().SourceName;
-            SourceOffSet = modelElement.GetSourceInformation().StartColumn;
-            SourceLength = modelElement.GetSourceInformation().StartLine;
+            StartColumn = modelElement.GetSourceInformation().StartColumn;
+            StartLine = modelElement.GetSourceInformation().StartLine;
             owningObjectSchema = modelElement.GetParent().Name.Parts[0];
             owningObjectTable = modelElement.GetParent().Name.Parts[1];
 
@@ -149,26 +149,22 @@ namespace Cheburashka
                 //List<ISqlIndex> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
                 //List<ISqlUniqueConstraint> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> uniqueConstraints          = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
 
 
                 bool foundMoreConciseUniqueCondition = false;
                 foreach (var v in pks)
                 {
-                    if (v.PrimarySource.SourceName != SourceName || ( v.PrimarySource.Offset != SourceOffSet || v.PrimarySource.Length != SourceLength ) )  /// shit but it's all we have !!!
+                    if (v.GetSourceInformation().SourceName != SourceName || ( v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine) )  /// shit but it's all we have !!!
                     {
+                        var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
+                        List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
+
                         List<String> PKLeadingEdgeIndexColumns = new List<String>();
-                        foreach (var c in v.ColumnSpecifications)
-                        {
-                            String lastElement = "";
-                            foreach (var n in c.Column.Name.Parts)
-                            {
-                                lastElement = n;
-                            }
-                            PKLeadingEdgeIndexColumns.Add(lastElement);
-                        }
+                        PKLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
+
                         foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, PKLeadingEdgeIndexColumns);
                         if (foundMoreConciseUniqueCondition)
                         {
@@ -178,20 +174,16 @@ namespace Cheburashka
                 }
                 if (!foundMoreConciseUniqueCondition)
                 {
-                    foreach (var v in indexes.Where( n => n.IsUnique).Select(n=>n) )
+                    //loop over unique indexes
+                    foreach (var v in indexes.Where( n => (bool?) n.GetProperty(Index.Unique) == true).Select(n=>n) )
                     {
-                        if (v.PrimarySource.SourceName != SourceName || (v.PrimarySource.Offset != SourceOffSet || v.PrimarySource.Length != SourceLength) )  /// shit but it's all we have !!!
+                        if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
                         {
+                            var columnSpecifications = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
+                            List<String> sortedUniqueIndexColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
                             List<String> OtherLeadingEdgeIndexColumns = new List<String>();
-                            foreach (var c in v.ColumnSpecifications)
-                            {
-                                String lastElement = "";
-                                foreach (var n in c.Column.Name.Parts)
-                                {
-                                    lastElement = n;
-                                }
-                                OtherLeadingEdgeIndexColumns.Add(lastElement);
-                            }
+                            OtherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
+
                             foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, OtherLeadingEdgeIndexColumns);
                             if (foundMoreConciseUniqueCondition)
                             {
@@ -206,18 +198,13 @@ namespace Cheburashka
                     foreach (var v in uniqueConstraints)
                     {
                         // if this 'index' isn't the index we're checking - check it.
-                        if (v.PrimarySource.SourceName != SourceName || (v.PrimarySource.Offset != SourceOffSet || v.PrimarySource.Length != SourceLength))  /// shit but it's all we have !!!
+                        if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
                         {
+                            var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
+                            List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
                             List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
-                            foreach (var c in v.ColumnSpecifications)
-                            {
-                                String lastElement = "";
-                                foreach (var n in c.Column.Name.Parts)
-                                {
-                                    lastElement = n;
-                                }
-                                ConstraintLeadingEdgeIndexColumns.Add(lastElement);
-                            }
+                            ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
+
                             foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
                             if (foundMoreConciseUniqueCondition)
                             {
