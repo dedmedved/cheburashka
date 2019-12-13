@@ -116,6 +116,7 @@
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintParentObjectVisitor.cs" />

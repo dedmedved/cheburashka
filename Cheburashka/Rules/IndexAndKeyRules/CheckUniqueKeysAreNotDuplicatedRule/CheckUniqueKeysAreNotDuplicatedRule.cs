@@ -95,71 +95,64 @@ namespace Cheburashka
 
             DMVRuleSetup.getOwningObject(modelElement, out owningObjectSchema, out owningObjectTable);
 
-            ISqlIndex idx = sqlElement as ISqlIndex;
-            ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
-            ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
+            //ISqlIndex idx = sqlElement as ISqlIndex;
+            //ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
+            //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
 
 
-            List<ISqlIndexedColumnSpecification> colSpec = null;
+            List<ColumnDefinition> colSpec = null;
             String SourceName = null;
             int SourceOffSet = 0;
             int SourceLength = 0;
 
             bool unique = true;
-            if (idx != null)
-            {
-                unique = idx.IsUnique;
-                SourceName = idx.PrimarySource.SourceName;
-                SourceOffSet = idx.PrimarySource.Offset;
-                SourceLength = idx.PrimarySource.Length;
+            SourceName = modelElement.GetSourceInformation().SourceName;
+            SourceOffSet = modelElement.GetSourceInformation().StartColumn;
+            SourceLength = modelElement.GetSourceInformation().StartLine;
+            owningObjectSchema = modelElement.GetParent().Name.Parts[0];
+            owningObjectTable = modelElement.GetParent().Name.Parts[1];
 
-                
-                owningObjectSchema = idx.IndexedObject.Name.Parts[0];
-                owningObjectTable = idx.IndexedObject.Name.Parts[1];
-                colSpec = idx.ColumnSpecifications.ToList();
+            var structureColumnsVisitor = new StructureColumnsVisitor();
+            sqlFragment.Accept(structureColumnsVisitor);
+            List<Identifier> indexColumns = structureColumnsVisitor.Objects;
+
+            if (modelElement.ObjectType == Index.TypeClass)
+            {
+                unique = (Boolean?)modelElement.GetProperty(Index.Clustered) == true;
             }
-            else if (pk != null)
+            else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
             {
-                SourceName = pk.PrimarySource.SourceName;
-                SourceOffSet = pk.PrimarySource.Offset;
-                SourceLength = pk.PrimarySource.Length;
-
-                owningObjectSchema = pk.DefiningTable.Name.Parts[0];
-                owningObjectTable = pk.DefiningTable.Name.Parts[1];
-                colSpec = pk.ColumnSpecifications.ToList();
             }
-            else if (uk != null)
+            else if (modelElement.ObjectType == UniqueConstraint.TypeClass)
             {
-                SourceName = uk.PrimarySource.SourceName;
-                SourceOffSet = uk.PrimarySource.Offset;
-                SourceLength = uk.PrimarySource.Length;
+                //SourceName = uk.PrimarySource.SourceName;
+                //SourceOffSet = uk.PrimarySource.Offset;
+                //SourceLength = uk.PrimarySource.Length;
 
-                owningObjectSchema = uk.DefiningTable.Name.Parts[0];
-                owningObjectTable = uk.DefiningTable.Name.Parts[1];
-                colSpec = uk.ColumnSpecifications.ToList();
+                //owningObjectSchema = uk.DefiningTable.Name.Parts[0];
+                //owningObjectTable = uk.DefiningTable.Name.Parts[1];
+                //colSpec = uk.ColumnSpecifications.ToList();
             }
 
 
-            if (unique && colSpec != null)
+            if (unique) // && colSpec != null)
             {
                 List<String> LeadingEdgeIndexColumns = new List<String>();
 
+                foreach (var c in indexColumns)
                 {
-                    String lastElement = "";
-                    foreach (var c in colSpec)
-                    {
-                        foreach (var n in c.Column.Name.Parts)
-                        {
-                            lastElement = n;
-                        }
-                        LeadingEdgeIndexColumns.Add(lastElement);
-                    }
+                    LeadingEdgeIndexColumns.Add(c.Value);
                 }
 
 
-                List<ISqlPrimaryKeyConstraint> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-                List<ISqlIndex> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
-                List<ISqlUniqueConstraint> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+                //List<ISqlPrimaryKeyConstraint> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                //List<ISqlIndex> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
+                //List<ISqlUniqueConstraint> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+
+                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+
 
                 bool foundMoreConciseUniqueCondition = false;
                 foreach (var v in pks)
