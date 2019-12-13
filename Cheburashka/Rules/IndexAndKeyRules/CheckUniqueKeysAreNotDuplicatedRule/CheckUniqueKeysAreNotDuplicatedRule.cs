@@ -137,6 +137,8 @@ namespace Cheburashka
 
             if (unique) // && colSpec != null)
             {
+                var issues = new List<TSqlFragment>();
+
                 List<String> LeadingEdgeIndexColumns = new List<String>();
 
                 foreach (var c in indexColumns)
@@ -217,17 +219,23 @@ namespace Cheburashka
                 {
                     issues.Add(sqlFragment);
                 }
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
                 // Create problems for each object
                 foreach (TSqlFragment issue in issues)
                 {
-                    DataRuleProblem problem = new DataRuleProblem(this,
-                                                String.Format(CultureInfo.CurrentCulture, this.RuleProperties.Description, SqlRuleUtils.GetElementName(sqlSchemaModel, sqlElement)),
-                                                sqlElement);
+                    SqlRuleProblem problem =
+                    new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , sqlFragment);
 
-                    SqlRuleUtils.UpdateProblemPosition(problem, issue.StartOffset, issue.FragmentLength);
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);
                 }
+
             }
             return problems;
         }
