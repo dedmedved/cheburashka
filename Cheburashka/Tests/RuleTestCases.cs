@@ -897,6 +897,31 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule" folder and compares the
+        /// results to the "CheckUniqueIndexHasNoNullColumnsRule_MixedCase-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void CheckUniqueConstraintHasNoNullColumns_MixedCase_CI_AI()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                "CheckUniqueConstraintHasNoNullColumns_MixedCaseRule",
+                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                SqlServerVersion.Sql110
+                ))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(CheckUniqueConstraintHasNoNullColumnsRule.RuleId);
+            }
+        }
+
+
+        /// <summary>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumnsRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
@@ -935,6 +960,30 @@ namespace Cheburashka.Tests
                 new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(CheckUniqueIndexHasNoNullColumnsRule.RuleId);
+            }
+        }
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule" folder and compares the
+        /// results to the "CheckUniqueIndexHasNoNullColumns_MixedCaseRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void CheckUniqueIndexHasNoNullColumns_MixedCase_CI_AI()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                "CheckUniqueIndexHasNoNullColumns_MixedCaseRule",
+                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                SqlServerVersion.Sql110
+                ))
+            {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
                 test.RunTest(CheckUniqueIndexHasNoNullColumnsRule.RuleId);
             }

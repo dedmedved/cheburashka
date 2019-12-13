@@ -154,15 +154,12 @@ namespace Cheburashka
                     {
                         IEnumerable<String> c1 = columns.AsEnumerable().Select(n => n.Parts[2]).AsEnumerable();
                         IEnumerable<String> c2 = indexColumns.Select(n => n.Value).AsEnumerable();
-                        IEnumerable<String> common = c1.Intersect(c2, new SqlStringComparer());
+                        IEnumerable<String> common = c1.Intersect(c2, SqlComparer.Comparer);
                         foreach (var c in common.ToList())
                         {
                             issues.Add(c);
                         }
                     }
-
-
-
                     catch
                     {
                     }

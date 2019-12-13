@@ -832,6 +832,24 @@
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumnsRule_Table_Without_Null Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule\CheckUniqueIndexHasNoNullColumns_MixedCaseRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule\CheckUniqueIndexHasNoNullColumnsRule_Table_Without_Null Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule\CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
