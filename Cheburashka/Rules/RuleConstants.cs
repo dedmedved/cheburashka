@@ -42,6 +42,7 @@ namespace Cheburashka
         public const string EnforceClusteredIndex_RuleId                        = "Cheburashka.DM0012";
         public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId    = "Cheburashka.DM0013";
         public const string EnforceForeignKeyIsIndexedRuleId                    = "Cheburashka.DM0014";
+        public const string CheckForDuplicatedColumnsInIndexOrConstraintRuleId  = "Cheburashka.DM0015";
 
         public const string CheckUniqueIndexHasNoNullColumnsRuleId              = "Cheburashka.DM0017";
         public const string CheckUniqueConstraintHasNoNullColumnsRuleId         = "Cheburashka.DM0018";
@@ -93,6 +94,10 @@ namespace Cheburashka
         public const string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName             = "EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName";
         public const string EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription   = "EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription";
 
+        public const string CheckForDuplicatedColumnsInIndexOrConstraint_RuleName           = "CheckForDuplicatedColumnsInIndexOrConstraint_RuleName";
+        public const string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription = "CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription";
+
+
         public const string CheckClusteredKeyColumnsNotIncludedInIndex_RuleName             = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
         public const string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription   = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
 
@@ -106,9 +111,6 @@ namespace Cheburashka
 
         public const string CheckUniqueConstraintHasNoNullColumns_RuleName                  = "CheckUniqueConstraintHasNoNullColumns_RuleName";
         public const string CheckUniqueConstraintHasNoNullColumns_ProblemDescription        = "CheckUniqueConstraintHasNoNullColumns_ProblemDescription";
-
-        public const string CheckForDuplicatedColumnsInIndexOrConstraint_RuleName           = "CheckForDuplicatedColumnsInIndexOrConstraint_RuleName";
-        public const string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription = "CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription";
 
         public const string AvoidBareReturn_RuleName                        = "AvoidBareReturn_RuleName";
         public const string AvoidBareReturn_ProblemDescription              = "AvoidBareReturn_ProblemDescription";

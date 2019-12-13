@@ -331,6 +331,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in {0}..
+        /// </summary>
+        internal static string CheckUniqueKeysAreNotDuplicated_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckUniqueKeysAreNotDuplicated_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unique constraints and indexes shouldn&apos;t be over-constrained..
+        /// </summary>
+        internal static string CheckUniqueKeysAreNotDuplicated_RuleName {
+            get {
+                return ResourceManager.GetString("CheckUniqueKeysAreNotDuplicated_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-core SP is called without checking the return status in {0}..
         /// </summary>
         internal static string EnforceCaptureSPReturnStatus_ProblemDescription {

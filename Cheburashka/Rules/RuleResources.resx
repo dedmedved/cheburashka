@@ -207,6 +207,12 @@
   <data name="CheckUniqueIndexHasNoNullColumns_RuleName" xml:space="preserve">
     <value>Unique indexes generally should not have nullable columns unless the index is filtered to remove them.</value>
   </data>
+  <data name="CheckUniqueKeysAreNotDuplicated_ProblemDescription" xml:space="preserve">
+    <value>Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in {0}.</value>
+  </data>
+  <data name="CheckUniqueKeysAreNotDuplicated_RuleName" xml:space="preserve">
+    <value>Unique constraints and indexes shouldn't be over-constrained.</value>
+  </data>
   <data name="EnforceCaptureSPReturnStatus_ProblemDescription" xml:space="preserve">
     <value>Non-core SP is called without checking the return status in {0}.</value>
   </data>
