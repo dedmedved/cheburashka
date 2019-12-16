@@ -868,6 +868,17 @@
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumnsRule\CheckUniqueConstraintHasNoNullColumnsRule_Table_Without_Null Column.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex.sql" />
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.sql" />
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql" />
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoOverlappingUniqueIndexes.sql" />
+    <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql" />
     <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

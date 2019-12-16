@@ -137,11 +137,7 @@ namespace Cheburashka
                                 var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                 foreach (var c in columnSpecifications)
                                 {
-                                    String lastElement = "";
-                                    foreach (var n in c.ObjectName.Parts)
-                                    {
-                                        lastElement = n;
-                                    }
+                                    String lastElement = c.ObjectName.Parts.Last();
                                     LeadingEdgeIndexColumns.Add(lastElement);
                                 }
 
@@ -154,11 +150,7 @@ namespace Cheburashka
                                 var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                 foreach (var c in columnSpecifications)
                                 {
-                                    String lastElement = "";
-                                    foreach (var n in c.ObjectName.Parts)
-                                    {
-                                        lastElement = n;
-                                    }
+                                    String lastElement = c.ObjectName.Parts.Last();
                                     LeadingEdgeIndexColumns.Add(lastElement);
                                 }
 
@@ -210,11 +202,7 @@ namespace Cheburashka
                                 var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                 foreach (var c in columnSpecifications)
                                 {
-                                    String lastElement = "";
-                                    foreach (var n in c.ObjectName.Parts)
-                                    {
-                                        lastElement = n;
-                                    }
+                                    String lastElement = c.ObjectName.Parts.Last();
                                     LeadingEdgeIndexColumns.Add(lastElement);
                                 }
 
@@ -227,11 +215,7 @@ namespace Cheburashka
                                 var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                 foreach (var c in columnSpecifications)
                                 {
-                                    String lastElement = "";
-                                    foreach (var n in c.ObjectName.Parts)
-                                    {
-                                        lastElement = n;
-                                    }
+                                    String lastElement = c.ObjectName.Parts.Last();
                                     LeadingEdgeIndexColumns.Add(lastElement);
                                 }
 
@@ -244,11 +228,7 @@ namespace Cheburashka
                                 var columnSpecifications = primaryKeyConstraint.GetReferencedRelationshipInstances(PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                 foreach (var c in columnSpecifications)
                                 {
-                                    String lastElement = "";
-                                    foreach (var n in c.ObjectName.Parts)
-                                    {
-                                        lastElement = n;
-                                    }
+                                    String lastElement = c.ObjectName.Parts.Last();
                                     LeadingEdgeIndexColumns.Add(lastElement);
                                 }
 

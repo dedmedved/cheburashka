@@ -35,8 +35,8 @@ namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(CheckUniqueKeysAreNotDuplicatedRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckUniqueIndexHasNoNullColumns_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.CheckUniqueIndexHasNoNullColumns_ProblemDescription,         // ID used to look up the description inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicated_RuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicated_ProblemDescription,         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueKeysAreNotDuplicatedRule : SqlCodeAnalysisRule
@@ -45,9 +45,9 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0018: Tables should normally be clustered and not heap."
+        /// shown as "DM0019. Unique constraints and indexes shouldn't be over-constrained."
         /// </summary>
-        public const string RuleId = RuleConstants.CheckUniqueIndexHasNoNullColumnsRuleId;
+        public const string RuleId = RuleConstants.CheckUniqueKeysAreNotDuplicatedRuleId;
 
         public CheckUniqueKeysAreNotDuplicatedRule()
         {
@@ -58,6 +58,7 @@ namespace Cheburashka
                  ModelSchema.PrimaryKeyConstraint
                 ,ModelSchema.Index
                 ,ModelSchema.UniqueConstraint
+                ,ModelSchema.Table
             };
         }
 
@@ -100,7 +101,7 @@ namespace Cheburashka
             //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
 
 
-            List<ColumnDefinition> colSpec = null;
+            //List<ColumnDefinition> colSpec = null;
             String SourceName = null;
             int StartColumn = 0;
             int StartLine = 0;
@@ -113,29 +114,28 @@ namespace Cheburashka
             owningObjectTable = modelElement.GetParent().Name.Parts[1];
 
             var structureColumnsVisitor = new StructureColumnsVisitor();
-            sqlFragment.Accept(structureColumnsVisitor);
-            List<Identifier> indexColumns = structureColumnsVisitor.Objects;
+
+            List<string> indexColumns = new List<string>(); 
+            if (sqlFragment != null) { 
+                sqlFragment.Accept(structureColumnsVisitor);
+                indexColumns = structureColumnsVisitor.Objects;
+            }
+            else {
+                if (modelElement.ObjectType == UniqueConstraint.TypeClass ) {
+                    indexColumns = modelElement.GetReferencedRelationshipInstances(UniqueConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                }
+                else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
+                {
+                    indexColumns = modelElement.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                }
+            }
 
             if (modelElement.ObjectType == Index.TypeClass)
             {
-                unique = (Boolean?)modelElement.GetProperty(Index.Clustered) == true;
-            }
-            else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
-            {
-            }
-            else if (modelElement.ObjectType == UniqueConstraint.TypeClass)
-            {
-                //SourceName = uk.PrimarySource.SourceName;
-                //SourceOffSet = uk.PrimarySource.Offset;
-                //SourceLength = uk.PrimarySource.Length;
-
-                //owningObjectSchema = uk.DefiningTable.Name.Parts[0];
-                //owningObjectTable = uk.DefiningTable.Name.Parts[1];
-                //colSpec = uk.ColumnSpecifications.ToList();
+                unique = (Boolean?)modelElement.GetProperty(Index.Unique) == true;
             }
 
-
-            if (unique) // && colSpec != null)
+            if (unique)
             {
                 var issues = new List<TSqlFragment>();
 
@@ -143,13 +143,9 @@ namespace Cheburashka
 
                 foreach (var c in indexColumns)
                 {
-                    LeadingEdgeIndexColumns.Add(c.Value);
+                    LeadingEdgeIndexColumns.Add(c);//.Value);
                 }
 
-
-                //List<ISqlPrimaryKeyConstraint> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-                //List<ISqlIndex> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
-                //List<ISqlUniqueConstraint> uniqueConstraints = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
 
                 List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
@@ -157,13 +153,13 @@ namespace Cheburashka
 
 
                 bool foundMoreConciseUniqueCondition = false;
-                foreach (var v in pks)
+                foreach (var v in pks)  // dummy loop - could only execute once.
                 {
+                    // if this 'index' isn't the index we're checking - check it.
                     if (v.GetSourceInformation().SourceName != SourceName || ( v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine) )  /// shit but it's all we have !!!
                     {
                         var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                         List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-
                         List<String> PKLeadingEdgeIndexColumns = new List<String>();
                         PKLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
 
@@ -179,6 +175,7 @@ namespace Cheburashka
                     //loop over unique indexes
                     foreach (var v in indexes.Where( n => (bool?) n.GetProperty(Index.Unique) == true).Select(n=>n) )
                     {
+                        // if this 'index' isn't the index we're checking - check it.
                         if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
                         {
                             var columnSpecifications = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
@@ -202,7 +199,7 @@ namespace Cheburashka
                         // if this 'index' isn't the index we're checking - check it.
                         if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
                         {
-                            var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
+                            var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                             List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
                             List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
                             ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
@@ -217,8 +214,12 @@ namespace Cheburashka
                 }
                 if (foundMoreConciseUniqueCondition)
                 {
+                    if (sqlFragment == null ){
+                        sqlFragment = new UniqueConstraintDefinition();
+                    }
                     issues.Add(sqlFragment);
                 }
+
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
@@ -232,7 +233,6 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);
                 }
 

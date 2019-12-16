@@ -1,0 +1,27 @@
+Problem description: Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in [dbo].[CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex].[ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex_b_a].
+FullID: Cheburashka.DM0019
+Severity: Warning
+Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex_b_a
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.sql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in [dbo].[CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b].
+FullID: Cheburashka.DM0019
+Severity: Warning
+Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Start line: 9
+Start column: 1
+========end of problem========
+
+Problem description: Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in [dbo].[CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a].
+FullID: Cheburashka.DM0019
+Severity: Warning
+Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Start line: 11
+Start column: 1
+========end of problem========
+

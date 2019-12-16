@@ -1,4 +1,8 @@
-﻿//------------------------------------------------------------------------------
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+//------------------------------------------------------------------------------
 // <copyright company="Microsoft">
 //   Copyright 2013 Microsoft
 //
@@ -1037,6 +1041,85 @@ namespace Cheburashka.Tests
                 test.RunTest(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId);
             }
         }
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
+        /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void CheckUniqueKeysAreNotDuplicatedRule_BIN()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(CheckUniqueKeysAreNotDuplicatedRule),
+                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                SqlServerVersion.Sql110
+                ))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(CheckUniqueKeysAreNotDuplicatedRule.RuleId);
+            }
+        }
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
+        /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void CheckUniqueKeysAreNotDuplicatedRule_CI_AI()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(CheckUniqueKeysAreNotDuplicatedRule),
+                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                SqlServerVersion.Sql110
+                ))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(CheckUniqueKeysAreNotDuplicatedRule.RuleId);
+            }
+        }
+
+
+        /// <summary>
+        /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule_MixedCase" folder and compares the
+        /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// 
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </summary>
+        [TestMethod]
+        public void CheckUniqueKeysAreNotDuplicatedRule_MixedCase_CI_AI()
+        {
+            using (BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                "CheckUniqueKeysAreNotDuplicated_MixedCaseRule",
+                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                SqlServerVersion.Sql110
+                ))
+            {
+                // Since this test verifies results against a baseline file, we don't need to do any extra verification
+                test.RunTest(CheckUniqueKeysAreNotDuplicatedRule.RuleId);
+            }
+        }
+
+
+
+
+
+
 
         /// <summary>
         /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule" folder and compares the
