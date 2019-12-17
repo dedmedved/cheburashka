@@ -1,8 +1,8 @@
 ﻿CREATE TABLE dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes
-(       a int not null
-,       b int     null
-,       c int     null
-,       d int     null
+(       A int not null
+,       B int     null
+,       C int     null
+,       D int     null
 ) ;
 go
 

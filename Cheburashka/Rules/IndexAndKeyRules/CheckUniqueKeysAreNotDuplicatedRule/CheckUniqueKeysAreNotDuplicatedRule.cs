@@ -58,7 +58,7 @@ namespace Cheburashka
                  ModelSchema.PrimaryKeyConstraint
                 ,ModelSchema.Index
                 ,ModelSchema.UniqueConstraint
-                ,ModelSchema.Table
+                //,ModelSchema.Table
             };
         }
 
