@@ -35,7 +35,8 @@ namespace Cheburashka
 {
     /// <summary>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is a clustered key column in a trailing position in another index.
+    /// whenever the tail of an index is the head of the clustered index
+    /// or there are clustered index columns in the included columns of the index
     /// This rule only applies to Indexes
     /// </summary>
 
@@ -53,7 +54,7 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0018: Tables should normally be clustered and not heap."
+        /// shown as "DM0020: Clustered Key Columns need not be explicitly included in a non-unique Index on a Clustered Table.  The clustering columns are already added to the end of the index leaf entry."
         /// </summary>
         public const string RuleId = RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndexRuleId;
 
@@ -66,7 +67,6 @@ namespace Cheburashka
                 ModelSchema.Index
                 // if the clustering keys are in a pk or unique constraint, there's not much we can recommend
                 //presumably they need to be there
-
             };
         }
 
@@ -144,17 +144,27 @@ namespace Cheburashka
                 //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
                 TSqlObject clusteredIndex = null;
-                IList<ObjectIdentifier> columns = null;
+                IList<ObjectIdentifier> clusteredIndexColumns = null;
                 bool bFoundClusteredIndex =
                     RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex,
-                        out columns);
+                        out clusteredIndexColumns);
                 if (bFoundClusteredIndex)
                 {
+                    //var c1_head = "";
+                    //var c1_tail = new List<string>();
                     try
                     {
-                        IEnumerable<String> c1 = columns.AsEnumerable().Select(n => n.Parts[2]).AsEnumerable();
-                        IEnumerable<String> c2 = indexColumns.Select(n => n.Value).AsEnumerable();
-                        IEnumerable<String> common = c1.Intersect(c2, SqlComparer.Comparer);
+                        //IEnumerable<String> c1 = columns.AsEnumerable().Select(n => n.Parts[2]).AsEnumerable();
+                        List<String> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
+                        //IEnumerable<String> c2 = indexColumns.Select(n => n.Value).AsEnumerable();
+                        List<String> c2 = indexColumns.Select(n => n.Value).ToList();
+
+                        //allow the lead column to be a clustered index member, as we need to be able to have
+                        //different indexes key on different leading edges
+                        //but then check the tail columns
+//                        ListUtil.Deconstruct(c1, out c1_head, out c1_tail);
+                        var(c2_head, c2_tail) = c2;         // uses ListUtil.Deconstruct
+                        IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
                         foreach (var c in common.ToList())
                         {
                             issues.Add(c);

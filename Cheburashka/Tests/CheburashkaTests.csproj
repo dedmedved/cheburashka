@@ -802,6 +802,12 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_multi_columns.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_multi_columns.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

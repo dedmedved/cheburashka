@@ -150,6 +150,7 @@
     <Compile Include="Generic Visitors\InsertWithCTEVisitor.cs" />
     <Compile Include="Generic Visitors\MergeWithCTEVisitor.cs" />
     <Compile Include="Plugins\Initialisers.cs" />
+    <Compile Include="Utility Classes\ListUtil.cs" />
     <Compile Include="Utility Classes\CteUtil.cs" />
     <Compile Include="Generic Visitors\SelectWithCTEVisitor.cs" />
     <Compile Include="Utility Classes\DMVRuleSetup.cs" />
