@@ -119,6 +119,9 @@ namespace Cheburashka
             sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor);
             var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
 
+            CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns = new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns();
+            sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
+            var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
 
             var issues = new List<String>();
 
@@ -150,25 +153,24 @@ namespace Cheburashka
                         out clusteredIndexColumns);
                 if (bFoundClusteredIndex)
                 {
-                    //var c1_head = "";
-                    //var c1_tail = new List<string>();
                     try
                     {
-                        //IEnumerable<String> c1 = columns.AsEnumerable().Select(n => n.Parts[2]).AsEnumerable();
                         List<String> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
-                        //IEnumerable<String> c2 = indexColumns.Select(n => n.Value).AsEnumerable();
                         List<String> c2 = indexColumns.Select(n => n.Value).ToList();
+                        List<String> c2_include = includeColumns.Select(n => n.Value).ToList();
 
                         //allow the lead column to be a clustered index member, as we need to be able to have
                         //different indexes key on different leading edges
                         //but then check the tail columns
-//                        ListUtil.Deconstruct(c1, out c1_head, out c1_tail);
-                        var(c2_head, c2_tail) = c2;         // uses ListUtil.Deconstruct
+                        var (c2_head, c2_tail) = c2;         // uses ListUtil.Deconstruct - magic !
                         IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
-                        foreach (var c in common.ToList())
-                        {
-                            issues.Add(c);
-                        }
+                        IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
+                        issues.AddRange(common);
+                        issues.AddRange(common2);
+                        //foreach (var c in common.ToList())
+                        //{
+                        //    issues.Add(c);
+                        //}
                     }
                     catch
                     {

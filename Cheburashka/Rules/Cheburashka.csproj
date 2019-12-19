@@ -111,9 +111,10 @@
     <Compile Include="Generic Visitors\VariableTableReferenceVisitor.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedParameterRule.cs" />
     <Compile Include="GenericRules\AvoidUnusedVariable\AvoidUnusedTableVariableRule.cs" />
-    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
     <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />

@@ -7,6 +7,33 @@ Start line: 12
 Start column: 1
 ========end of problem========
 
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].[ixCheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.ixCheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.sql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].[ixd_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.ixd_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.sql
+Start line: 16
+Start column: 1
+========end of problem========
+
+Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].[ixcd_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.ixcd_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns
+Script file: CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.sql
+Start line: 20
+Start column: 1
+========end of problem========
+
 Problem description: Clustered Key Column found in non-unique Index on a Clustered Table in [dbo].[CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_multi_columns].[ix_CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_multi_columns].
 FullID: Cheburashka.DM0020
 Severity: Warning
