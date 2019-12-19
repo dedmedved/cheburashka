@@ -421,6 +421,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index with a key that is just a subset or permutation of another key  found in {0}..
+        /// </summary>
+        internal static string EnforceIndexKeyColumnSeparation_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceIndexKeyColumnSeparation_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid indexes with keys that are just a permutation of another key, or form the leading edge of another key..
+        /// </summary>
+        internal static string EnforceIndexKeyColumnSeparation_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceIndexKeyColumnSeparation_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments..
         /// </summary>
         internal static string EnforceNamedConstraint_ProblemDescription {

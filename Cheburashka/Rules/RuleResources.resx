@@ -237,6 +237,12 @@
   <data name="EnforceForeignKeyIsIndexed_RuleName" xml:space="preserve">
     <value>Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken.</value>
   </data>
+  <data name="EnforceIndexKeyColumnSeparation_ProblemDescription" xml:space="preserve">
+    <value>Index with a key that is just a subset or permutation of another key  found in {0}.</value>
+  </data>
+  <data name="EnforceIndexKeyColumnSeparation_RuleName" xml:space="preserve">
+    <value>Avoid indexes with keys that are just a permutation of another key, or form the leading edge of another key.</value>
+  </data>
   <data name="EnforceNamedConstraint_ProblemDescription" xml:space="preserve">
     <value>Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.</value>
   </data>

@@ -42,7 +42,8 @@ namespace Cheburashka
         public const string EnforceClusteredIndex_RuleId                        = "Cheburashka.DM0012";
         public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId    = "Cheburashka.DM0013";
         public const string EnforceForeignKeyIsIndexedRuleId                    = "Cheburashka.DM0014";
-//        public const string CheckForDuplicatedColumnsInIndexOrConstraintRuleId  = "Cheburashka.DM0015";
+        //        public const string CheckForDuplicatedColumnsInIndexOrConstraintRuleId  = "Cheburashka.DM0015";
+        public const string EnforceIndexKeyColumnSeparationRuleId               = "Cheburashka.DM0016";
 
         public const string CheckUniqueIndexHasNoNullColumnsRuleId              = "Cheburashka.DM0017";
         public const string CheckUniqueConstraintHasNoNullColumnsRuleId         = "Cheburashka.DM0018";
@@ -106,6 +107,8 @@ namespace Cheburashka
         public const string EnforceNamedConstraint_RuleName                                 = "EnforceNamedConstraint_RuleName";
         public const string EnforceNamedConstraint_ProblemDescription                       = "EnforceNamedConstraint_ProblemDescription";
 
+        public const string EnforceIndexKeyColumnSeparation_RuleName                        = "EnforceIndexKeyColumnSeparation_RuleName";
+        public const string EnforceIndexKeyColumnSeparation_ProblemDescription              = "EnforceIndexKeyColumnSeparation_ProblemDescription";
 
 
         public const string CheckUniqueIndexHasNoNullColumns_RuleName                       = "CheckUniqueIndexHasNoNullColumns_RuleName";
