@@ -81,6 +81,11 @@ namespace Cheburashka
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
+            DMVSettings.RefreshModelBuiltInCache(model);
+            // Refresh cached index/constraints/tables lists from Model
+            //DMVSettings.RefreshColumnCache(model);
+            DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
             string selfSchema = modelElement.Name.Parts[0];
             string selfName   = modelElement.Name.Parts[2];
 
