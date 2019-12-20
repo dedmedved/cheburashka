@@ -110,7 +110,7 @@ namespace Cheburashka
             {
                 // if this 'index' isn't the index underlying the pk, check it.
                 // is this right/needed/wasted effort ?
-                if (v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
+                if ( ! v.Name.HasName  || v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
                                             && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
                                             )
                     )
@@ -169,7 +169,7 @@ namespace Cheburashka
                 foreach (var v in uniqueConstraints)
                 {
                     // if this 'index' isn't the index we're checking - check it.
-                    if (v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
+                    if (!v.Name.HasName || v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
                                                 && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
                                                 )
                         )
