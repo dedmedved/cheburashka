@@ -1,5 +1,5 @@
 ﻿CREATE TABLE dbo.EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes 
-(       a int not null
+(       a int not null primary key
 ,       b int     null
 ,       c int     null
 ,       d int     null
