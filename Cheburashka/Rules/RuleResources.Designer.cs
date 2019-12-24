@@ -349,6 +349,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permanent, statically defined constraint or index is altered by code in {0}..
+        /// </summary>
+        internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription {
+            get {
+                return ResourceManager.GetString("DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permanent, statically defined objects should not be altered by code..
+        /// </summary>
+        internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName {
+            get {
+                return ResourceManager.GetString("DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-core SP is called without checking the return status in {0}..
         /// </summary>
         internal static string EnforceCaptureSPReturnStatus_ProblemDescription {

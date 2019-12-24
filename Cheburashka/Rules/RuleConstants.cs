@@ -63,7 +63,7 @@ namespace Cheburashka
         public const string AvoidOnePartNames_RuleId                            = "Cheburashka.DM0029";
 
         public const string AvoidNullLiteral_RuleId                             = "Cheburashka.DM0030";
-
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleId = "Cheburashka.DM0031";
 
         public const string AvoidUnusedVariables_RuleName = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription = "AvoidUnusedVariables_ProblemDescription";
@@ -141,6 +141,9 @@ namespace Cheburashka
         public const string AvoidOnePartNames_RuleName                      = "AvoidOnePartNames_RuleName";
         public const string AvoidOnePartNames_ProblemDescription            = "AvoidOnePartNames_ProblemDescription";
 
+
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName             = "DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName";
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription   = "DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)
