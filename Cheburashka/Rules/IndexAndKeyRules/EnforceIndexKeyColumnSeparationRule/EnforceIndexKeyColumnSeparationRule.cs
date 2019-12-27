@@ -87,11 +87,8 @@ namespace Cheburashka
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
             string selfSchema = modelElement.Name.Parts[0];
-            string selfName   = modelElement.Name.Parts[2];
+            string selfName   = modelElement.Name.Parts[2];     //  is this right ?
 
-            var SourceName = modelElement.GetSourceInformation().SourceName;
-            var StartColumn = modelElement.GetSourceInformation().StartColumn;
-            var StartLine = modelElement.GetSourceInformation().StartLine;
             var owningObjectSchema = modelElement.GetParent().Name.Parts[0];
             var owningObjectTable = modelElement.GetParent().Name.Parts[1];
 

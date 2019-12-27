@@ -96,37 +96,36 @@ namespace Cheburashka
 
             DMVRuleSetup.getOwningObject(modelElement, out owningObjectSchema, out owningObjectTable);
 
-            //ISqlIndex idx = sqlElement as ISqlIndex;
-            //ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
-            //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
-
-
             //List<ColumnDefinition> colSpec = null;
-            String SourceName = null;
-            int StartColumn = 0;
-            int StartLine = 0;
+            //String SourceName = null;
+            //int StartColumn = 0;
+            //int StartLine = 0;
 
             bool unique = true;
-            SourceName = modelElement.GetSourceInformation().SourceName;
-            StartColumn = modelElement.GetSourceInformation().StartColumn;
-            StartLine = modelElement.GetSourceInformation().StartLine;
+
+
+            // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
+            if ((modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName){ 
+                if (modelElement.GetSourceInformation() == null) { return problems; }
+            }
+
             owningObjectSchema = modelElement.GetParent().Name.Parts[0];
             owningObjectTable = modelElement.GetParent().Name.Parts[1];
 
             var structureColumnsVisitor = new StructureColumnsVisitor();
 
-            List<string> indexColumns = new List<string>(); 
+            List<string> thisIndexOrConstraintColumns = new List<string>(); 
             if (sqlFragment != null) { 
                 sqlFragment.Accept(structureColumnsVisitor);
-                indexColumns = structureColumnsVisitor.Objects;
+                thisIndexOrConstraintColumns = structureColumnsVisitor.Objects;
             }
             else {
                 if (modelElement.ObjectType == UniqueConstraint.TypeClass ) {
-                    indexColumns = modelElement.GetReferencedRelationshipInstances(UniqueConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                    thisIndexOrConstraintColumns = modelElement.GetReferencedRelationshipInstances(UniqueConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
                 }
                 else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
                 {
-                    indexColumns = modelElement.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                    thisIndexOrConstraintColumns = modelElement.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
                 }
             }
 
@@ -141,9 +140,9 @@ namespace Cheburashka
 
                 List<String> LeadingEdgeIndexColumns = new List<String>();
 
-                foreach (var c in indexColumns)
+                foreach (var c in thisIndexOrConstraintColumns)
                 {
-                    LeadingEdgeIndexColumns.Add(c);//.Value);
+                    LeadingEdgeIndexColumns.Add(c);
                 }
 
 
@@ -155,8 +154,8 @@ namespace Cheburashka
                 bool foundMoreConciseUniqueCondition = false;
                 foreach (var v in pks)  // dummy loop - could only execute once.
                 {
-                    // if this 'index' isn't the index we're checking - check it.
-                    if (v.GetSourceInformation().SourceName != SourceName || ( v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine) )  /// shit but it's all we have !!!
+                    //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
+                    if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass ) 
                     {
                         var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                         List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
@@ -175,8 +174,12 @@ namespace Cheburashka
                     //loop over unique indexes
                     foreach (var v in indexes.Where( n => (bool?) n.GetProperty(Index.Unique) == true).Select(n=>n) )
                     {
-                        // if this 'index' isn't the index we're checking - check it.
-                        if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
+                        //if this object is a pk or uk it isn't an index  and cant be this object we currently checking
+                        //if this object is index then if it don't have the same name it isn't this were currently checking
+                        //so do  the columns checks.
+                        if (   modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass
+                           || ( ! modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString()) )
+                           )
                         {
                             var columnSpecifications = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
                             List<String> sortedUniqueIndexColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
@@ -190,14 +193,17 @@ namespace Cheburashka
                             }
                         }
                     }
-
                 }
                 if (!foundMoreConciseUniqueCondition)
                 {
                     foreach (var v in uniqueConstraints)
                     {
-                        // if this 'index' isn't the index we're checking - check it.
-                        if (v.GetSourceInformation().SourceName != SourceName || (v.GetSourceInformation().StartColumn != StartColumn || v.GetSourceInformation().StartLine != StartLine))  /// shit but it's all we have !!!
+                        //if this object is a pk or index it isn't an uk and cant be this object we currently checking
+                        //if this object is uk then if it don't have the same name it isn't this were currently checking
+                        //so do  the columns checks.
+                        if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass
+                           || (!modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString()))
+                           )
                         {
                             var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                             List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
