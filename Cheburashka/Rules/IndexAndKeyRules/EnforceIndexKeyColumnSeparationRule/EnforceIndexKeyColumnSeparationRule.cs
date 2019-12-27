@@ -89,8 +89,8 @@ namespace Cheburashka
             string selfSchema = modelElement.Name.Parts[0];
             string selfName   = modelElement.Name.Parts[2];     //  is this right ?
 
-            var owningObjectSchema = modelElement.GetParent().Name.Parts[0];
-            var owningObjectTable = modelElement.GetParent().Name.Parts[1];
+            var owningObjectSchema = modelElement.Name.Parts[0]; // modelElement.GetParent().Name.Parts[0];
+            var owningObjectTable  = modelElement.Name.Parts[1]; // modelElement.GetParent().Name.Parts[1];
 
             List<TSqlObject> pks                = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject> indexes            = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
