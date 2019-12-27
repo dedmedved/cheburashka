@@ -90,17 +90,6 @@ namespace Cheburashka
             //DMVSettings.RefreshColumnCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-            // Get Database Schema and name of this model element.
-            string owningObjectSchema;
-            string owningObjectTable;
-
-            DMVRuleSetup.getOwningObject(modelElement, out owningObjectSchema, out owningObjectTable);
-
-            //List<ColumnDefinition> colSpec = null;
-            //String SourceName = null;
-            //int StartColumn = 0;
-            //int StartLine = 0;
-
             bool unique = true;
 
 
@@ -109,8 +98,8 @@ namespace Cheburashka
                 if (modelElement.GetSourceInformation() == null) { return problems; }
             }
 
-            owningObjectSchema = modelElement.GetParent().Name.Parts[0];
-            owningObjectTable = modelElement.GetParent().Name.Parts[1];
+            var parentObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
+            var parentObjectName   = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
 
             var structureColumnsVisitor = new StructureColumnsVisitor();
 
@@ -146,9 +135,9 @@ namespace Cheburashka
                 }
 
 
-                List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> uniqueConstraints          = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(parentObjectSchema, parentObjectName);
+                List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(parentObjectSchema, parentObjectName);
+                List<TSqlObject> uniqueConstraints          = ModelIndexAndKeysUtils.getUniqueConstraints(parentObjectSchema, parentObjectName);
 
 
                 bool foundMoreConciseUniqueCondition = false;
@@ -201,8 +190,11 @@ namespace Cheburashka
                         //if this object is a pk or index it isn't an uk and cant be this object we currently checking
                         //if this object is uk then if it don't have the same name it isn't this were currently checking
                         //so do  the columns checks.
-                        if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass
-                           || (!modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString()))
+                        if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass
+                           || (    ( modelElement.ObjectType == UniqueConstraint.TypeClass && v.ObjectType == UniqueConstraint.TypeClass ) 
+                                && (  ! modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString())
+                                   )
+                              )
                            )
                         {
                             var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(UniqueConstraint.Columns, DacQueryScopes.UserDefined);

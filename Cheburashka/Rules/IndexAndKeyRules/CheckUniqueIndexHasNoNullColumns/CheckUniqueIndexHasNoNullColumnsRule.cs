@@ -89,20 +89,16 @@ namespace Cheburashka
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            // Get Database Schema and name of this model element.
-            //string owningObjectSchema = modelElement.Name.Parts[0];
-            //string owningObjectTable = modelElement.Name.Parts[1];
-
             DMVSettings.RefreshModelBuiltInCache(model);
             // Refresh cached index/constraints/tables lists from Model
             //DMVSettings.RefreshColumnCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
             // Get Database Schema and name of this model element.
-            string owningObjectSchema;
-            string owningObjectTable;
+            string objectSchema;
+            string objectName;
 
-            DMVRuleSetup.getOwningObject(modelElement, out owningObjectSchema, out owningObjectTable);
+            DMVRuleSetup.getLocalObjectNameParts(modelElement, out objectSchema, out objectName);
 
             //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
@@ -123,8 +119,8 @@ namespace Cheburashka
             //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
             //    if (parent != null) {
             //        if (parent.SchemaObjectName != null) {
-            String parentName = owningObjectTable; ; // parent.SchemaObjectName.BaseIdentifier.Value;
-            String schemaName = owningObjectSchema;// "";
+            String parentName = objectName; ; // parent.SchemaObjectName.BaseIdentifier.Value;
+            String schemaName = objectSchema;// "";
                         //if (parent.SchemaObjectName.SchemaIdentifier != null) {
                         //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
                         //}

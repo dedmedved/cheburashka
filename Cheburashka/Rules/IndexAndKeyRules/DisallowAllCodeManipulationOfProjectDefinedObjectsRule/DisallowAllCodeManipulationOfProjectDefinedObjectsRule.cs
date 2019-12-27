@@ -83,12 +83,6 @@ namespace Cheburashka
             //DMVSettings.RefreshColumnCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-            // Get Database Schema and name of this model element.
-            string owningObjectSchema;
-            string owningObjectTable;
-
-            DMVRuleSetup.getOwningObject(modelElement, out owningObjectSchema, out owningObjectTable);
-
             //ISqlIndex idx = sqlElement as ISqlIndex;
             //ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
             //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
