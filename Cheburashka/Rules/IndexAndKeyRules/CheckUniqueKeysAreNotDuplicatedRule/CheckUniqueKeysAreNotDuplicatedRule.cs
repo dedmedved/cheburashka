@@ -58,7 +58,6 @@ namespace Cheburashka
                  ModelSchema.PrimaryKeyConstraint
                 ,ModelSchema.Index
                 ,ModelSchema.UniqueConstraint
-                //,ModelSchema.Table
             };
         }
 
@@ -127,11 +126,11 @@ namespace Cheburashka
             {
                 var issues = new List<TSqlFragment>();
 
-                List<String> LeadingEdgeIndexColumns = new List<String>();
+                List<String> leadingEdgeIndexColumns = new List<String>();
 
                 foreach (var c in thisIndexOrConstraintColumns)
                 {
-                    LeadingEdgeIndexColumns.Add(c);
+                    leadingEdgeIndexColumns.Add(c);
                 }
 
 
@@ -148,10 +147,10 @@ namespace Cheburashka
                     {
                         var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                         List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                        List<String> PKLeadingEdgeIndexColumns = new List<String>();
-                        PKLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
+                        List<String> pkLeadingEdgeIndexColumns = new List<String>();
+                        pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
 
-                        foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, PKLeadingEdgeIndexColumns);
+                        foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, pkLeadingEdgeIndexColumns);
                         if (foundMoreConciseUniqueCondition)
                         {
                             break;
@@ -172,10 +171,10 @@ namespace Cheburashka
                         {
                             var columnSpecifications = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
                             List<String> sortedUniqueIndexColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<String> OtherLeadingEdgeIndexColumns = new List<String>();
-                            OtherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
+                            List<String> otherLeadingEdgeIndexColumns = new List<String>();
+                            otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
 
-                            foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, OtherLeadingEdgeIndexColumns);
+                            foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, otherLeadingEdgeIndexColumns);
                             if (foundMoreConciseUniqueCondition)
                             {
                                 break;
@@ -202,7 +201,7 @@ namespace Cheburashka
                             List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
                             ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
 
-                            foundMoreConciseUniqueCondition = determineIfThisConstraintIsImpliedByTheOtherConstraint(LeadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
+                            foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
                             if (foundMoreConciseUniqueCondition)
                             {
                                 break;
@@ -238,14 +237,14 @@ namespace Cheburashka
             return problems;
         }
 
-        private static bool determineIfThisConstraintIsImpliedByTheOtherConstraint(List<String> TheseKeysColumns, List<String> TheOtherKeysColumns)
+        private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<String> theseKeysColumns, List<String> theOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(TheOtherKeysColumns, TheseKeysColumns);
+            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(theOtherKeysColumns, theseKeysColumns);
             List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
-            if (TheseKeysColumns.Count >= TheOtherKeysColumns.Count
+            if (theseKeysColumns.Count >= theOtherKeysColumns.Count
                 && allPos.Count == matchedPos.Count
                 && matchedPos.Count > 0
                 )

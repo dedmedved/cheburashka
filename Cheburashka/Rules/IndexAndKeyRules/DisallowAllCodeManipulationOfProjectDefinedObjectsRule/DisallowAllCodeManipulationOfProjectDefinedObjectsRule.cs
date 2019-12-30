@@ -31,6 +31,7 @@ using System.Linq;
 using System.IO;
 
 using Cheburashka;
+using static System.String;
 
 namespace Cheburashka
 {
@@ -43,6 +44,7 @@ namespace Cheburashka
     public sealed class DisallowAllCodeManipulationOfProjectDefinedObjectsRule : SqlCodeAnalysisRule
     {
 
+        /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
@@ -59,7 +61,6 @@ namespace Cheburashka
                  ModelSchema.Procedure
                 ,ModelSchema.DmlTrigger
                 ,ModelSchema.DatabaseDdlTrigger
-                //,ModelSchema.Table
             };
         }
 
@@ -68,7 +69,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>() ;
 
             TSqlModel model;
             TSqlObject modelElement;
@@ -114,7 +115,7 @@ namespace Cheburashka
 
 
             // some of this logic should be migrated into the visitors
-            // particularlay the stuff re external names.
+            // particularly the stuff re external names.
             // as this is how we do it elsewhere
             List<TSqlFragment> issues = new List<TSqlFragment>();
             var allIndexes              = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
@@ -131,22 +132,22 @@ namespace Cheburashka
                     String schemaName = null;
                     String tableName = null;
                     String indexName = null;
-                    bool SkipExternalName = false;
+                    bool skipExternalName = false;
                     if (dic != null)
                     {
                         if (((dic.Object.DatabaseIdentifier != null
-                                && String.IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
+                                && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
                                 )
                              || dic.Object.DatabaseIdentifier == null
                              )
                            && ((dic.Object.ServerIdentifier != null
-                                 && String.IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
+                                 && IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
                                 )
                               || dic.Object.ServerIdentifier == null
                              )
                            )
                         {
-                            SkipExternalName = true;
+                            skipExternalName = true;
                         }
 
                         schemaName = dic.Object.SchemaIdentifier.Value;
@@ -157,25 +158,25 @@ namespace Cheburashka
                     else if (olddic != null)
                     {
                         if (((olddic.Index.DatabaseIdentifier != null
-                                && String.IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
+                                && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
                                 )
                              || olddic.Index.DatabaseIdentifier == null
                              )
                            && ((olddic.Index.ServerIdentifier != null
-                                 && String.IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
+                                 && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
                                 )
                               || olddic.Index.ServerIdentifier == null
                              )
                            )
                         {
-                            SkipExternalName = true;
+                            skipExternalName = true;
                         }
 
                         schemaName = olddic.Index.SchemaIdentifier.Value;
                         tableName = olddic.Index.BaseIdentifier.Value;
                         indexName = olddic.Index.ChildIdentifier.Value;
                     }
-                    if (!SkipExternalName)
+                    if (!skipExternalName)
                     {
                         List<TSqlObject> ixs = allIndexes
                                 .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], indexName)
@@ -195,12 +196,12 @@ namespace Cheburashka
                 if (ais.Name.Value != null
                     // internal objects only
                     && ((ais.OnName.DatabaseIdentifier != null
-                          && String.IsNullOrEmpty(ais.OnName.DatabaseIdentifier.Value)
+                          && IsNullOrEmpty(ais.OnName.DatabaseIdentifier.Value)
                          )
                        || ais.OnName.DatabaseIdentifier == null
                        )
                     && ((ais.OnName.ServerIdentifier != null
-                          && String.IsNullOrEmpty(ais.OnName.ServerIdentifier.Value)
+                          && IsNullOrEmpty(ais.OnName.ServerIdentifier.Value)
                         )
                        || ais.OnName.ServerIdentifier == null
                        )
@@ -222,12 +223,12 @@ namespace Cheburashka
             {
                 // internal objects only
                 if (((atcms.SchemaObjectName.DatabaseIdentifier != null
-                        && String.IsNullOrEmpty(atcms.SchemaObjectName.DatabaseIdentifier.Value)
+                        && IsNullOrEmpty(atcms.SchemaObjectName.DatabaseIdentifier.Value)
                         )
                      || atcms.SchemaObjectName.DatabaseIdentifier == null
                      )
                    && ((atcms.SchemaObjectName.ServerIdentifier != null
-                         && String.IsNullOrEmpty(atcms.SchemaObjectName.ServerIdentifier.Value)
+                         && IsNullOrEmpty(atcms.SchemaObjectName.ServerIdentifier.Value)
                         )
                       || atcms.SchemaObjectName.ServerIdentifier == null
                      )
@@ -278,12 +279,12 @@ namespace Cheburashka
             {
                 // internal objects only
                 if (((atdtes.SchemaObjectName.DatabaseIdentifier != null
-                        && String.IsNullOrEmpty(atdtes.SchemaObjectName.DatabaseIdentifier.Value)
+                        && IsNullOrEmpty(atdtes.SchemaObjectName.DatabaseIdentifier.Value)
                         )
                      || atdtes.SchemaObjectName.DatabaseIdentifier == null
                      )
                    && ((atdtes.SchemaObjectName.ServerIdentifier != null
-                         && String.IsNullOrEmpty(atdtes.SchemaObjectName.ServerIdentifier.Value)
+                         && IsNullOrEmpty(atdtes.SchemaObjectName.ServerIdentifier.Value)
                         )
                       || atdtes.SchemaObjectName.ServerIdentifier == null
                      )
@@ -331,23 +332,23 @@ namespace Cheburashka
                     }
                 }
 
-                // The rule execution context has all the objects we'll need, including the fragment representing the object,
-                // and a descriptor that lets us access rule metadata
-                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-                // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                    new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((TSqlFragment)issue));
-                    problems.Add(problem);
-                }
 
             }
+            // The rule execution context has all the objects we'll need, including the fragment representing the object,
+            // and a descriptor that lets us access rule metadata
+            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+            // Create problems for each object
+            foreach (TSqlFragment issue in issues)
+            {
+                SqlRuleProblem problem =
+                    new SqlRuleProblem(
+                        Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , sqlFragment);
+                RuleUtils.UpdateProblemPosition(modelElement, problem, ((TSqlFragment)issue));
+                problems.Add(problem);
+            }
+
             return problems;
         }
 
