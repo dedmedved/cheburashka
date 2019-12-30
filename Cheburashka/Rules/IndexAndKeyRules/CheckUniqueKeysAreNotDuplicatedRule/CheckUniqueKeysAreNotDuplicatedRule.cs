@@ -230,7 +230,7 @@ namespace Cheburashka
                             String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
-
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((TSqlFragment)issue));
                     problems.Add(problem);
                 }
 
