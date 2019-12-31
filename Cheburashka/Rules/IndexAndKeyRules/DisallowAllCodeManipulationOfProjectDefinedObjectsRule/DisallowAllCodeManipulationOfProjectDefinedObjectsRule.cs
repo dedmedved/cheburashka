@@ -118,14 +118,15 @@ namespace Cheburashka
             // particularly the stuff re external names.
             // as this is how we do it elsewhere
             List<TSqlFragment> issues = new List<TSqlFragment>();
-            var allIndexes              = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-            var allPrimaryKeys          = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-            var allUniqueConstraints    = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-            var allForeignKeys          = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
+            // try to speed things up, by not retrieving element where we don't have an alter.
+            var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                       ) ? model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList() : new List<TSqlObject>()  ;
+            var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
+            var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList() : new List<TSqlObject>();
+            var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
 
-            foreach (var dis in dropIndexStatements)
+            foreach (var dropIndexStatement in dropIndexStatements)
             {
-                foreach (var dropIndexClause in dis.DropIndexClauses)
+                foreach (var dropIndexClause in dropIndexStatement.DropIndexClauses)
                 {
                     DropIndexClause dic = dropIndexClause as DropIndexClause;
                     BackwardsCompatibleDropIndexClause olddic = dropIndexClause as BackwardsCompatibleDropIndexClause;
@@ -191,141 +192,140 @@ namespace Cheburashka
                     }
                 }
             }
-            foreach (var ais in alterIndexStatements)
+            foreach (var alterIndexStatement in alterIndexStatements)
             {
-                if (ais.Name.Value != null
+                if (alterIndexStatement.Name.Value != null
                     // internal objects only
-                    && ((ais.OnName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(ais.OnName.DatabaseIdentifier.Value)
+                    && ((alterIndexStatement.OnName.DatabaseIdentifier != null
+                          && IsNullOrEmpty(alterIndexStatement.OnName.DatabaseIdentifier.Value)
                          )
-                       || ais.OnName.DatabaseIdentifier == null
+                       || alterIndexStatement.OnName.DatabaseIdentifier == null
                        )
-                    && ((ais.OnName.ServerIdentifier != null
-                          && IsNullOrEmpty(ais.OnName.ServerIdentifier.Value)
+                    && ((alterIndexStatement.OnName.ServerIdentifier != null
+                          && IsNullOrEmpty(alterIndexStatement.OnName.ServerIdentifier.Value)
                         )
-                       || ais.OnName.ServerIdentifier == null
+                       || alterIndexStatement.OnName.ServerIdentifier == null
                        )
                     )
                 {
                     List<TSqlObject> ixs = allIndexes
-                            .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], ais.Name.Value)
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], ais.OnName.BaseIdentifier.Value)
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], ais.OnName.SchemaIdentifier.Value)
+                            .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], alterIndexStatement.Name.Value)
+                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], alterIndexStatement.OnName.BaseIdentifier.Value)
+                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterIndexStatement.OnName.SchemaIdentifier.Value)
                                   )
                             .Select(n => n).ToList();
                     if (ixs.Count > 0)
                     {
-                        issues.Add(ais);
+                        issues.Add(alterIndexStatement);
                     }
                 }
             }
-            foreach (var atcms in alterTableConstraintModificationStatements)
+            foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements)
             {
                 // internal objects only
-                if (((atcms.SchemaObjectName.DatabaseIdentifier != null
-                        && IsNullOrEmpty(atcms.SchemaObjectName.DatabaseIdentifier.Value)
+                if (((alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier != null
+                        && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier.Value)
                         )
-                     || atcms.SchemaObjectName.DatabaseIdentifier == null
+                     || alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier == null
                      )
-                   && ((atcms.SchemaObjectName.ServerIdentifier != null
-                         && IsNullOrEmpty(atcms.SchemaObjectName.ServerIdentifier.Value)
+                   && ((alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier != null
+                         && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier.Value)
                         )
-                      || atcms.SchemaObjectName.ServerIdentifier == null
+                      || alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier == null
                      )
                    )
                 {
-                    foreach (var consName in atcms.ConstraintNames)
+                    foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
                     {
                         List<TSqlObject> pkcs = allPrimaryKeys
                             .Where(n => n.Name != null && n.Name.HasName 
-                                     && ( atcms.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atcms.SchemaObjectName.SchemaIdentifier.Value))
+                                     && ( alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                      && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value)
                                   )
                             .Select(n => n).ToList();
 
                         if (pkcs.Count > 0)
                         {
-                            issues.Add(atcms);
+                            issues.Add(alterTableConstraintModificationStatement);
                         }
                         else
                         {
                             List<TSqlObject> fkcs = allForeignKeys
                                 .Where(n => n.Name != null && n.Name.HasName
-                                      && (atcms.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atcms.SchemaObjectName.SchemaIdentifier.Value))
+                                      && (alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                       && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
                                 .Select(n => n).ToList();
                             if (fkcs.Count > 0)
                             {
-                                issues.Add(atcms);
+                                issues.Add(alterTableConstraintModificationStatement);
                             }
                             else
                             {
                                 List<TSqlObject> ukcs = allUniqueConstraints
                                     .Where(n => n.Name != null && n.Name.HasName
-                                        && (atcms.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atcms.SchemaObjectName.SchemaIdentifier.Value))
+                                        && (alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
                                     .Select(n => n).ToList();
                                 if (ukcs.Count > 0)
                                 {
-                                    issues.Add(atcms);
+                                    issues.Add(alterTableConstraintModificationStatement);
                                 }
                             }
                         }
                     }
                 }
             }
-
-            foreach (var atdtes in alterTableDropTableElementStatements)
+            foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
             {
                 // internal objects only
-                if (((atdtes.SchemaObjectName.DatabaseIdentifier != null
-                        && IsNullOrEmpty(atdtes.SchemaObjectName.DatabaseIdentifier.Value)
+                if (((alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
+                        && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
                         )
-                     || atdtes.SchemaObjectName.DatabaseIdentifier == null
+                     || alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
                      )
-                   && ((atdtes.SchemaObjectName.ServerIdentifier != null
-                         && IsNullOrEmpty(atdtes.SchemaObjectName.ServerIdentifier.Value)
+                   && ((alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier != null
+                         && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier.Value)
                         )
-                      || atdtes.SchemaObjectName.ServerIdentifier == null
+                      || alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier == null
                      )
                    )
                 {
-                    foreach (var dropElement in atdtes.AlterTableDropTableElements
+                    foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
                                     .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
                             )
                     {
                         List<TSqlObject> pkcs = allPrimaryKeys
                             .Where(n => n.Name != null && n.Name.HasName
-                                      && (atdtes.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atdtes.SchemaObjectName.SchemaIdentifier.Value))
+                                      && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier.Value))
                                       && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], dropElement.Name.Value)
                                   )
                             .Select(n => n).ToList();
 
                         if (pkcs.Count > 0)
                         {
-                            issues.Add(atdtes);
+                            issues.Add(alterTableDropTableElementStatement);
                         }
                         else
                         {
                             List<TSqlObject> fkcs = allForeignKeys
                                 .Where(n => n.Name != null && n.Name.HasName
-                                      && (atdtes.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atdtes.SchemaObjectName.SchemaIdentifier.Value))
+                                      && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier.Value))
                                       && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], dropElement.Name.Value))
                                 .Select(n => n).ToList();
                             if (fkcs.Count > 0)
                             {
-                                issues.Add(atdtes);
+                                issues.Add(alterTableDropTableElementStatement);
                             }
                             else
                             {
                                 List<TSqlObject> ukcs = allUniqueConstraints
                                     .Where(n => n.Name != null && n.Name.HasName
-                                        && (atdtes.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], atdtes.SchemaObjectName.SchemaIdentifier.Value))
+                                        && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier.Value))
                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], dropElement.Name.Value))
                                     .Select(n => n).ToList();
                                 if (ukcs.Count > 0)
                                 {
-                                    issues.Add(atdtes);
+                                    issues.Add(alterTableDropTableElementStatement);
                                 }
                             }
                         }

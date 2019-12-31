@@ -946,6 +946,9 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
