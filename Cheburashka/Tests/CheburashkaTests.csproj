@@ -946,6 +946,21 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithDropConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\TableTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DatabaseTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

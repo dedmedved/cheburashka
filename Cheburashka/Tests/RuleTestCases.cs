@@ -1276,12 +1276,12 @@ namespace Cheburashka.Tests
         {
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(AvoidNullLiteralRule),
+                nameof(DisallowAllCodeManipulationOfProjectDefinedObjectsRule),
                 new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
-                test.RunTest(AvoidNullLiteralRule.RuleId);
+                test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
             }
         }
         /// <summary>

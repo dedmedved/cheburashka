@@ -119,10 +119,16 @@ namespace Cheburashka
             // as this is how we do it elsewhere
             List<TSqlFragment> issues = new List<TSqlFragment>();
             // try to speed things up, by not retrieving element where we don't have an alter.
-            var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                       ) ? model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList() : new List<TSqlObject>()  ;
-            var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
-            var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList() : new List<TSqlObject>();
-            var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
+
+            //var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                       ) ? model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList() : new List<TSqlObject>()  ;
+            //var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
+            //var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList() : new List<TSqlObject>();
+            //var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableConstraintModificationStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
+
+            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+            var allPrimaryKeys = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+            var allUniqueConstraints = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+            var allForeignKeys = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
 
             foreach (var dropIndexStatement in dropIndexStatements)
             {
@@ -177,7 +183,7 @@ namespace Cheburashka
                         tableName = olddic.Index.BaseIdentifier.Value;
                         indexName = olddic.Index.ChildIdentifier.Value;
                     }
-                    if (!skipExternalName)
+                    if (skipExternalName)
                     {
                         List<TSqlObject> ixs = allIndexes
                                 .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], indexName)
