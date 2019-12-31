@@ -949,6 +949,9 @@
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithDropConstraints.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
