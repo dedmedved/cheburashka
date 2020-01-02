@@ -35,11 +35,11 @@ namespace Cheburashka
 {
     class DMVSettings
     {
-        private static int                      _CacheRefreshIntervalSeconds = 5;
+        private static int                      _CacheRefreshIntervalSeconds = 15;
 
-        private static DateTime                 _LastConstraintsAndIndexesCacheRefresh;
-        private static DateTime                 _LastInsertColumnCacheRefresh;
-        private static SqlServerVersion?        _ModelVersion ;
+        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh;
+        private static DateTime                 _lastInsertColumnCacheRefresh;
+        private static SqlServerVersion?        _modelVersion ;
 
 
         public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
@@ -56,18 +56,19 @@ namespace Cheburashka
 
         private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
-        private static IEnumerable<TSqlObject>              _IndexesCache;
-        private static IEnumerable<TSqlObject>              _PrimaryKeyConstraints;
-        private static IEnumerable<TSqlObject>              _ForeignKeyConstraints;
-        private static IEnumerable<TSqlObject>              _UniqueConstraints;
+        private static IEnumerable<TSqlObject>              _indexesCache;
+        private static IEnumerable<TSqlObject>              _primaryKeyConstraints;
+        private static IEnumerable<TSqlObject>              _foreignKeyConstraints;
+        private static IEnumerable<TSqlObject>              _uniqueConstraints;
+        private static IEnumerable<TSqlObject>              _checkConstraints;
 
 
 
         public static void RefreshModelBuiltInCache(TSqlModel model)
         {
-            if (_ModelVersion == null || _ModelVersion != model.Version)
+            if (_modelVersion == null || _modelVersion != model.Version)
             {
-                _ModelVersion = model.Version;
+                _modelVersion = model.Version;
                 SqlRuleUtils.SetBuiltinDataTypes(model);
                 SqlRuleUtils.SetSS2008R2_SystemDatabaseObject(model);
             }
@@ -77,27 +78,29 @@ namespace Cheburashka
         {
 
             // in case initialiser doesn't work.
-            if (_LastConstraintsAndIndexesCacheRefresh == null ||
-                 DateTime.Compare(_LastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
+            if (_lastConstraintsAndIndexesCacheRefresh == null ||
+                 DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
-                IEnumerable<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass); //model.GetElements(typeof(ISqlIndex), 0);
-                IEnumerable<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlPrimaryKeyConstraint), 0);
-                IEnumerable<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass); //model.GetElements(typeof(ISqlForeignKeyConstraint), 0);
-                IEnumerable<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass); //model.GetElements(typeof(ISqlUniqueConstraint), 0);
+                IEnumerable<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass); 
+                IEnumerable<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass); 
+                IEnumerable<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass); 
+                IEnumerable<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass); 
+                IEnumerable<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass); 
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
-                _IndexesCache           = idxs; //.Cast<ISqlIndex>().Where(n => n.Name != null && (n.Name.ExternalParts == null || n.Name.ExternalParts.Count == 0)).Select(n => n);
-                _PrimaryKeyConstraints  = pkcs; //.Cast<ISqlPrimaryKeyConstraint>().Where(n => (n.DefiningTable.Name.ExternalParts == null || n.DefiningTable.Name.ExternalParts.Count == 0)).Select(n => n);
-                _ForeignKeyConstraints  = fkcs; //.Cast<ISqlForeignKeyConstraint>().Where(n => (n.DefiningTable.Name.ExternalParts == null || n.DefiningTable.Name.ExternalParts.Count == 0)).Select(n => n);
-                _UniqueConstraints      = ukcs; //.Cast<ISqlUniqueConstraint>().Where(n => (n.DefiningTable.Name.ExternalParts == null || n.DefiningTable.Name.ExternalParts.Count == 0)).Select(n => n);
+                _indexesCache           = idxs; 
+                _primaryKeyConstraints  = pkcs; 
+                _foreignKeyConstraints  = fkcs; 
+                _uniqueConstraints      = ukcs; 
+                _checkConstraints       = chks; 
 
             }
             else
             {
                 // bump value - until we have clear elapsed window of xx secs don't refresh
-                _LastConstraintsAndIndexesCacheRefresh = DateTime.Now;
+                _lastConstraintsAndIndexesCacheRefresh = DateTime.Now;
             }
 
         }
@@ -115,22 +118,10 @@ namespace Cheburashka
             }
         }
 
-        public static IList<TSqlObject> getIndexes
-        {
-            get { return _IndexesCache.ToList().AsReadOnly(); }
-        }
-        public static IList<TSqlObject> getPrimaryKeys
-        {
-            get { return _PrimaryKeyConstraints.ToList().AsReadOnly(); }
-        }
-        public static IList<TSqlObject> getForeignKeys
-        {
-            get { return _ForeignKeyConstraints.ToList().AsReadOnly(); }
-        }
-        public static IList<TSqlObject> getUniqueConstraints
-        {
-            get { return _UniqueConstraints.ToList().AsReadOnly(); }
-        }
-
+        public static IEnumerable<TSqlObject> getIndexes => _indexesCache;
+        public static IEnumerable<TSqlObject> getPrimaryKeys => _primaryKeyConstraints;
+        public static IEnumerable<TSqlObject> getForeignKeys => _foreignKeyConstraints;
+        public static IEnumerable<TSqlObject> getUniqueConstraints => _uniqueConstraints;
+        public static IEnumerable<TSqlObject> getCheckConstraints => _checkConstraints;
     }
 }

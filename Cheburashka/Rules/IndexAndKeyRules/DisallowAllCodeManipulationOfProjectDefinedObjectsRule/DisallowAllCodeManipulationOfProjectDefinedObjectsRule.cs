@@ -69,7 +69,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>() ;
+            List<SqlRuleProblem> problems ;
 
             TSqlModel model;
             TSqlObject modelElement;
@@ -113,22 +113,19 @@ namespace Cheburashka
             sqlFragment.Accept(dropIndexStatementVisitor);
             List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
 
-//?            DropIndexStatementVisitor dropIndexStatementVisitor = new DropIndexStatementVisitor();
-            sqlFragment.Accept(dropIndexStatementVisitor);
-            List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
-
             // some of this logic should be migrated into the visitors
             // particularly the stuff re external names.
             // as this is how we do it elsewhere
             List<TSqlFragment> issues = new List<TSqlFragment>();
             // try to speed things up, by not retrieving element where we don't have an alter.
 
-            var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList() : new List<TSqlObject>()  ;
-            var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
-            var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList() : new List<TSqlObject>();
-            var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList() : new List<TSqlObject>();
 
-            var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList() : new List<TSqlObject>();
+
+            var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? DMVSettings.getIndexes.ToList()           : new List<TSqlObject>();
+            var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.getPrimaryKeys.ToList()       : new List<TSqlObject>();
+            var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.getUniqueConstraints.ToList() : new List<TSqlObject>();
+            var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.getForeignKeys.ToList()       : new List<TSqlObject>();
+            var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.getCheckConstraints.ToList()  : new List<TSqlObject>();
 
             //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             //var allPrimaryKeys = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
@@ -280,6 +277,19 @@ namespace Cheburashka
                                 if (ukcs.Count > 0)
                                 {
                                     issues.Add(alterTableConstraintModificationStatement);
+                                }
+                                else
+                                {
+                                    List<TSqlObject> chks = allCheckConstraints
+                                        .Where(n => n.Name != null && n.Name.HasName
+                                                                   && (alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier == null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
+                                                                   && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
+                                        .Select(n => n).ToList();
+                                    if (chks.Count > 0)
+                                    {
+                                        issues.Add(alterTableConstraintModificationStatement);
+                                    }
+
                                 }
                             }
                         }
