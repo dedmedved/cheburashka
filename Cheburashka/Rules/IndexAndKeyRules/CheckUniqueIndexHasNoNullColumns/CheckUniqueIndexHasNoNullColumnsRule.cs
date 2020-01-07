@@ -98,7 +98,7 @@ namespace Cheburashka
             string objectSchema;
             string objectName;
 
-            DMVRuleSetup.getLocalObjectNameParts(modelElement, out objectSchema, out objectName);
+            DMVRuleSetup.GetLocalObjectNameParts(modelElement, out objectSchema, out objectName);
 
             //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
@@ -147,7 +147,7 @@ namespace Cheburashka
                                                                                         //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
                                                                                         select iCOl;
 
-                                foreach (var c in nullableIndexColumns.ToList()) {
+                                foreach (var c in nullableIndexColumns) {
                                     issues.Add(c);
                                 }
                             }

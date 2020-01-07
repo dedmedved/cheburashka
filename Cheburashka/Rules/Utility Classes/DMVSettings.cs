@@ -56,11 +56,11 @@ namespace Cheburashka
 
         private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
-        private static IEnumerable<TSqlObject>              _indexesCache;
-        private static IEnumerable<TSqlObject>              _primaryKeyConstraints;
-        private static IEnumerable<TSqlObject>              _foreignKeyConstraints;
-        private static IEnumerable<TSqlObject>              _uniqueConstraints;
-        private static IEnumerable<TSqlObject>              _checkConstraints;
+        private static IList<TSqlObject>              _indexesCache;
+        private static IList<TSqlObject>              _primaryKeyConstraints;
+        private static IList<TSqlObject>              _foreignKeyConstraints;
+        private static IList<TSqlObject>              _uniqueConstraints;
+        private static IList<TSqlObject>              _checkConstraints;
 
 
 
@@ -82,11 +82,11 @@ namespace Cheburashka
                  DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
-                IEnumerable<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass); 
-                IEnumerable<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass); 
-                IEnumerable<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass); 
-                IEnumerable<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass); 
-                IEnumerable<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass); 
+                IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
+                IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList(); 
+                IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList(); 
+                IList<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList(); 
+                IList<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList(); 
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
@@ -105,11 +105,11 @@ namespace Cheburashka
 
         }
 
-        public static IList<TSqlObject> tableColumns(string SchemaAndTableName)
+        public static IList<TSqlObject> TableColumns(string schemaAndTableName)
         {
-            if (_tablesColumnsCache.ContainsKey(SchemaAndTableName))
+            if (_tablesColumnsCache.ContainsKey(schemaAndTableName))
             {
-                return _tablesColumnsCache[SchemaAndTableName].AsReadOnly();
+                return _tablesColumnsCache[schemaAndTableName].AsReadOnly();
             }
             else
             {
@@ -118,10 +118,10 @@ namespace Cheburashka
             }
         }
 
-        public static IEnumerable<TSqlObject> getIndexes => _indexesCache;
-        public static IEnumerable<TSqlObject> getPrimaryKeys => _primaryKeyConstraints;
-        public static IEnumerable<TSqlObject> getForeignKeys => _foreignKeyConstraints;
-        public static IEnumerable<TSqlObject> getUniqueConstraints => _uniqueConstraints;
-        public static IEnumerable<TSqlObject> getCheckConstraints => _checkConstraints;
+        public static IList<TSqlObject> GetIndexes => _indexesCache;
+        public static IList<TSqlObject> GetPrimaryKeys => _primaryKeyConstraints;
+        public static IList<TSqlObject> GetForeignKeys => _foreignKeyConstraints;
+        public static IList<TSqlObject> GetUniqueConstraints => _uniqueConstraints;
+        public static IList<TSqlObject> GetCheckConstraints => _checkConstraints;
     }
 }

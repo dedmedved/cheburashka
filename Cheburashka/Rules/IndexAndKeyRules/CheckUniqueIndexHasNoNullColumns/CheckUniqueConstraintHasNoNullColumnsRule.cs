@@ -150,7 +150,7 @@ namespace Cheburashka
                                                                                         //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
                                                                                         select iCOl;
 
-                                foreach (var c in nullableIndexColumns.ToList())
+                                foreach (var c in nullableIndexColumns)
                                 {
                                     issues.Add(c);
                                 }

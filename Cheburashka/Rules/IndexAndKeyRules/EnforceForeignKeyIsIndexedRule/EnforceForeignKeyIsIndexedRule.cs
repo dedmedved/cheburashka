@@ -81,22 +81,13 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
 
-//            ForeignKeyConstraint self = modelElement as ForeignKeyConstraint;
-
-            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.ForeignColumns);
-            //if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-            //    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-            //    && thing.GetProperty<bool>(Index.Clustered)
-            //) {
-            //    var c = thing.GetReferencedRelationshipInstances(
-            //        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-            var ForeignKeyColumns = new List<String>();
-            foreach (var v in fkColumns.ToList()) {
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-                ForeignKeyColumns.Add(elementName);
-            }
-
             DMVSettings.RefreshModelBuiltInCache(model);
+            DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.Columns);
+            List<String> x = fkColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
+            var ForeignKeyColumns = new List<String>();
+            ForeignKeyColumns.AddRange(x);
 
             EnforceForeignKeyIsIndexedParentObjectVisitor enforceForeignKeyIsIndexedParentObjectVisitor =
                 new EnforceForeignKeyIsIndexedParentObjectVisitor();
@@ -162,7 +153,7 @@ namespace Cheburashka
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
 
-                foreach (var v in cols.ToList())
+                foreach (var v in cols)//.ToList())
                 {
                     leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
                 }

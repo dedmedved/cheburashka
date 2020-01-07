@@ -55,7 +55,7 @@ namespace Cheburashka
         //    //DMVSettings.RefreshConstraintsAndIndexesCache(sqlSchemaModel);
         //}
 
-        public static void getLocalObjectNameParts(TSqlObject sqlElement, out string objectSchema, out string objectTable)
+        public static void GetLocalObjectNameParts(TSqlObject sqlElement, out string objectSchema, out string objectTable)
         {
             objectSchema = sqlElement.Name.HasName ? sqlElement.Name.Parts[0] : "";
             objectTable  = sqlElement.Name.HasName ? sqlElement.Name.Parts[1] : "";

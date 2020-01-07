@@ -41,8 +41,8 @@ namespace Cheburashka
     /// </summary>
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
-        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidOnePartNames_RuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up display name and description in
+        RuleConstants.AvoidOnePartNames_RuleName,           // ID used to look up the display name inside the resources file
         RuleConstants.AvoidOnePartNames_ProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNaming,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
@@ -143,6 +143,8 @@ namespace Cheburashka
             // Create problems for each one part object name source found 
             foreach (SchemaObjectName tableSource in onePartNames)
             {
+                String tableSourceIdentifier =
+                    tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
                 // Check the name isn't a builtin sql type
                 bool foundSurroundingDeclaration = dataTypes.Any(v => v.SQLModel_Contains(tableSource));
                 // Check the name isn't an update or delete or merge statement target
@@ -177,7 +179,7 @@ namespace Cheburashka
                 // Check it isn't a built-in system object
                 if (!foundSurroundingDeclaration)
                 {
-                    foundSurroundingDeclaration = SqlRuleUtils.Is_SS2008R2_SystemDatabaseObject(tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text);
+                    foundSurroundingDeclaration = SqlRuleUtils.Is_SS2008R2_SystemDatabaseObject(tableSourceIdentifier);
                 }
                 // Check it isn't Deleted or Inserted
                 if (!foundSurroundingDeclaration)
@@ -189,8 +191,6 @@ namespace Cheburashka
                 if (!foundSurroundingDeclaration)
                 {
                     {
-                        String tableSourceIdentifier =
-                            tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
                         if (tableSourceIdentifier == null) throw new Exception(" null tableSourceIdentifier");
 
                         tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();

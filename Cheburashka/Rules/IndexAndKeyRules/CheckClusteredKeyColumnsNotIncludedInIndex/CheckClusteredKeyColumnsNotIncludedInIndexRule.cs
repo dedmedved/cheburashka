@@ -167,10 +167,7 @@ namespace Cheburashka
                         IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
                         issues.AddRange(common);
                         issues.AddRange(common2);
-                        //foreach (var c in common.ToList())
-                        //{
-                        //    issues.Add(c);
-                        //}
+
                     }
                     catch
                     {

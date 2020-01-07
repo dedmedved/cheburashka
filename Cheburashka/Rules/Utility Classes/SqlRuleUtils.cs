@@ -29,6 +29,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
+using static System.String;
 
 
 namespace Cheburashka
@@ -52,7 +53,7 @@ namespace Cheburashka
         ,"Deleted"
         };
 
-        private static List<String> BuiltinDataTypes = new List<String>();
+        private static List<String> _builtinDataTypes = new List<String>();
 
         private static readonly List<String> BuiltinAggregateFunctions = new List<String>()
         {"avg"
@@ -102,10 +103,10 @@ namespace Cheburashka
         ,"ms"
         };
 
-        private static HashSet<String> _HashSS2008R2_SystemObjectNames; //= new HashSet<String>(SqlComparer.Comparer);
+        private static HashSet<String> _hashSs2008R2SystemObjectNames; //= new HashSet<String>(SqlComparer.Comparer);
 
         //need to double-check these and pick them up dynamically if possible from master/msdb dacpacs
-        private static List<String> SS2008R2_SystemObjectNames = new List<String>();
+        private static List<String> _ss2008R2SystemObjectNames = new List<String>();
         /// <summary>
         /// Determine if an sp needs to have its return value checked.
         /// </summary>
@@ -130,11 +131,11 @@ namespace Cheburashka
         /// <summary>
         /// Set Builtin datatypes
         /// </summary>
-        /// <param name="objectName">object name to check</param>
+        /// <param name="model">model to extract objects from</param>
         public static void SetBuiltinDataTypes(TSqlModel model)
         {
-            IEnumerable<TSqlObject> allSysObjs = model.GetObjects(DacQueryScopes.BuiltIn, DataType.TypeClass);
-            SqlRuleUtils.BuiltinDataTypes = allSysObjs.Select(n => n.Name.Parts[0]).ToList();
+            IEnumerable<TSqlObject> allSysObjects = model.GetObjects(DacQueryScopes.BuiltIn, DataType.TypeClass);
+            SqlRuleUtils._builtinDataTypes = allSysObjects.Select(n => n.Name.Parts[0]).ToList();
             return;
         }
 
@@ -145,7 +146,7 @@ namespace Cheburashka
         /// <param name="objectName">object name to check</param>
         public static bool IsBuiltinDataTypes(string objectName)
         {
-            return BuiltinDataTypes.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
+            return _builtinDataTypes.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
         }
 
         /// <summary>
@@ -162,12 +163,12 @@ namespace Cheburashka
         /// <summary>
         /// Sets the current sysprocs to ignore for schema name presence checking
         /// </summary>
-        /// <param name="objectName">object name to check</param>
+        /// <param name="model">model to extract objects from</param>
         public static void SetSS2008R2_SystemDatabaseObject(TSqlModel model)
         {
-            IEnumerable<TSqlObject> allSysObjs          = model.GetObjects(DacQueryScopes.System, Procedure.TypeClass);
-            SqlRuleUtils.SS2008R2_SystemObjectNames     = allSysObjs.Select(n => n.Name.Parts[1]).ToList();
-            _HashSS2008R2_SystemObjectNames             = new HashSet<String>(SS2008R2_SystemObjectNames, SqlComparer.Comparer);
+            IEnumerable<TSqlObject> allSysObjects      = model.GetObjects(DacQueryScopes.System, Procedure.TypeClass);
+            SqlRuleUtils._ss2008R2SystemObjectNames    = allSysObjects.Select(n => n.Name.Parts[1]).ToList();
+            _hashSs2008R2SystemObjectNames             = new HashSet<String>(_ss2008R2SystemObjectNames, SqlComparer.Comparer);
             return;
         }
 
@@ -185,7 +186,7 @@ namespace Cheburashka
             //{
             //    _HashSS2008R2_SystemObjectNames = new HashSet<String>(SS2008R2_SystemObjectNames, SqlComparer.Comparer);
             //}
-            return _HashSS2008R2_SystemObjectNames.Contains(GetNormalisedName(objectName));
+            return _hashSs2008R2SystemObjectNames.Contains(GetNormalisedName(objectName));
         }
 
         /// <summary>
@@ -222,9 +223,9 @@ namespace Cheburashka
 
 
         /// <summary>
-        /// Gather all the occurences of CTEs.
+        /// Gather all the occurrences of CTEs.
         /// </summary>
-        /// <param name="sqlFragment">object to check</param>
+        /// <param name="sqlFragment">sql to analyse</param>
         public static ReadOnlyCollection<CteUtil> CteStatements(TSqlFragment sqlFragment)
         {
             List<CteUtil> bits = new List<CteUtil>();
@@ -276,7 +277,7 @@ namespace Cheburashka
             MatchCollection m = ObjectNameRegex.Matches(sLit);
 
             var schema = m.Count >= 2 ? m[m.Count - 2].Groups[0].Value : "";
-            if (!String.IsNullOrEmpty(schema))
+            if (!IsNullOrEmpty(schema))
             {
                 schema = schema.TrimEnd(new char['.']);
             }
