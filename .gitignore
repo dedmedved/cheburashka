@@ -14,3 +14,4 @@ Microsoft.SqlServer.DacFx.x64.130.3450.1
 *.vspx
 /devenv191223_ModuleSummary.csv
 *.vsp
+/Cheburashka/Tests/TestScripts/BigTestDb/script.sql
