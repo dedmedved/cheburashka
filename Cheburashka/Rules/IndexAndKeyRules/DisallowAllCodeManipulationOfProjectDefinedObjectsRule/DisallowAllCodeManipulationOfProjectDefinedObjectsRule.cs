@@ -71,7 +71,7 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems ;
 
-            TSqlModel model;
+            TSqlModel model ;
             TSqlObject modelElement;
             TSqlFragment sqlFragment;
 
@@ -126,11 +126,6 @@ namespace Cheburashka
             var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetUniqueConstraints : new List<TSqlObject>();
             var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetForeignKeys       : new List<TSqlObject>();
             var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetCheckConstraints  : new List<TSqlObject>();
-
-            //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-            //var allPrimaryKeys = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-            //var allUniqueConstraints = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-            //var allForeignKeys = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
 
             foreach (var dropIndexStatement in dropIndexStatements)
             {

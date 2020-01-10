@@ -37,7 +37,7 @@ namespace Cheburashka
     {
         private static int                      _CacheRefreshIntervalSeconds = 15;
 
-        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh;
+        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now;
         private static DateTime                 _lastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
@@ -77,9 +77,7 @@ namespace Cheburashka
         public static void RefreshConstraintsAndIndexesCache(TSqlModel model)
         {
 
-            // in case initialiser doesn't work.
-            if (_lastConstraintsAndIndexesCacheRefresh == null ||
-                 DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
+            if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
                 IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
