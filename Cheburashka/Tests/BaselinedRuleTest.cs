@@ -41,14 +41,14 @@ namespace Cheburashka.Tests
     /// </summary>
     public class BaselinedRuleTest : RuleTest
     {
-        private const string TestScriptsFolder = "TestScripts";
+        private const string TestScriptsFolder = nameof(TestScripts);
         private const string Output = "Output";
         private const string Baseline = "Baseline";
         private const string DacpacBaseline = "DacpacBaseline";
         private const string SqlExt = ".sql";
 
         /// <summary>
-        /// Creates a new baselined test. The input files and baseline file will be loaded from 
+        /// Creates a new base-lined test. The input files and baseline file will be loaded from 
         /// the 
         /// </summary>
         public BaselinedRuleTest(
