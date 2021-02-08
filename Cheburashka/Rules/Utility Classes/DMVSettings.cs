@@ -35,9 +35,9 @@ namespace Cheburashka
 {
     class DMVSettings
     {
-        private static int                      _CacheRefreshIntervalSeconds = 15;
+        private static int                      _CacheRefreshIntervalSeconds = 5;
 
-        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now;
+        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
         private static DateTime                 _lastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
@@ -56,7 +56,7 @@ namespace Cheburashka
 
         private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
-        private static IList<TSqlObject>              _indexesCache;
+        private static IList<TSqlObject>              _indexesCache;            
         private static IList<TSqlObject>              _primaryKeyConstraints;
         private static IList<TSqlObject>              _foreignKeyConstraints;
         private static IList<TSqlObject>              _uniqueConstraints;
@@ -76,7 +76,6 @@ namespace Cheburashka
 
         public static void RefreshConstraintsAndIndexesCache(TSqlModel model)
         {
-
             if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
@@ -88,11 +87,11 @@ namespace Cheburashka
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
-                _indexesCache           = idxs; 
-                _primaryKeyConstraints  = pkcs; 
-                _foreignKeyConstraints  = fkcs; 
-                _uniqueConstraints      = ukcs; 
-                _checkConstraints       = chks; 
+                _indexesCache           = idxs ; 
+                _primaryKeyConstraints  = pkcs ; 
+                _foreignKeyConstraints  = fkcs ; 
+                _uniqueConstraints      = ukcs ; 
+                _checkConstraints       = chks ; 
 
             }
             else
