@@ -349,7 +349,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permanent, statically defined constraint or index is altered by code in {0}..
+        ///   Looks up a localized string similar to Permanent, statically defined table, constraint or index is altered by code in {0}..
         /// </summary>
         internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription {
             get {
