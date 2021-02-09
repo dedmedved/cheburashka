@@ -950,10 +950,16 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAddColumn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\DatabaseTriggerWithDropIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAddColumn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAlterConstraints.sql">

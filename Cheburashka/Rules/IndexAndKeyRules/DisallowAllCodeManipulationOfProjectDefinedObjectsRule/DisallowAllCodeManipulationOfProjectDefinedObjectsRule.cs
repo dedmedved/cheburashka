@@ -97,6 +97,10 @@ namespace Cheburashka
             sqlFragment.Accept(alterTableConstraintModificationStatementVisitor);
             List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements = alterTableConstraintModificationStatementVisitor.Objects;
 
+            AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor = new AlterTableAddTableElementStatementVisitor();
+            sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
+            List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements = alterTableAddTableElementStatementVisitor.Objects;
+
             AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor = new AlterTableDropTableElementStatementVisitor();
             sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
             List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
@@ -120,6 +124,7 @@ namespace Cheburashka
             // try to speed things up, by not retrieving element where we don't have an alter.
 
 
+            var allTables               = DMVSettings.GetTables ;
 
             var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? DMVSettings.GetIndexes           : new List<TSqlObject>();
             var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetPrimaryKeys       : new List<TSqlObject>();
@@ -296,6 +301,36 @@ namespace Cheburashka
                     }
                 }
             }
+            foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements)
+            {
+                // internal objects only
+                if (((alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
+                        && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
+                        )
+                     || alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
+                     )
+                   && ((alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier != null
+                         && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier.Value)
+                        )
+                      || alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier == null
+                     )
+                   )
+                {
+                    var schema = alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier != null ? alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier.Value : "dbo";
+                    var table  = alterTableAddTableElementStatement.SchemaObjectName.BaseIdentifier.Value;
+                    List<TSqlObject> tbls = allTables.Where(n => n.Name != null && n.Name.HasName
+                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],schema)
+                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
+                    ).Select(n => n).ToList();
+
+                    if (tbls.Count > 0) {
+                        issues.Add(alterTableAddTableElementStatement);
+                    }
+                }
+
+
+            }
+
             foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
             {
                 // internal objects only

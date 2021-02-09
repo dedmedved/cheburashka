@@ -113,6 +113,7 @@
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableConstraintModificationStatementVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAddTableElementStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableDropTableElementStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />

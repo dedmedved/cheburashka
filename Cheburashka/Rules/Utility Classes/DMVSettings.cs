@@ -35,7 +35,7 @@ namespace Cheburashka
 {
     class DMVSettings
     {
-        private static int                      _CacheRefreshIntervalSeconds = 5;
+        private static int                      _CacheRefreshIntervalSeconds = 15;
 
         private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
         private static DateTime                 _lastInsertColumnCacheRefresh;
@@ -56,6 +56,7 @@ namespace Cheburashka
 
         private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
+        private static IList<TSqlObject>              _tablesCache;
         private static IList<TSqlObject>              _indexesCache;            
         private static IList<TSqlObject>              _primaryKeyConstraints;
         private static IList<TSqlObject>              _foreignKeyConstraints;
@@ -79,14 +80,16 @@ namespace Cheburashka
             if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
+                IList<TSqlObject> tbls = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
                 IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
                 IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList(); 
                 IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList(); 
                 IList<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList(); 
-                IList<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList(); 
+                IList<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList();
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
+                _tablesCache            = tbls; 
                 _indexesCache           = idxs ; 
                 _primaryKeyConstraints  = pkcs ; 
                 _foreignKeyConstraints  = fkcs ; 
@@ -115,6 +118,7 @@ namespace Cheburashka
             }
         }
 
+        public static IList<TSqlObject> GetTables => _tablesCache;
         public static IList<TSqlObject> GetIndexes => _indexesCache;
         public static IList<TSqlObject> GetPrimaryKeys => _primaryKeyConstraints;
         public static IList<TSqlObject> GetForeignKeys => _foreignKeyConstraints;
