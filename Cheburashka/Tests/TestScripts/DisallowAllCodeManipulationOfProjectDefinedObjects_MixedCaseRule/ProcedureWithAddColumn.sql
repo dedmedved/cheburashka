@@ -12,5 +12,7 @@ alter table  PROCEDUREWITHADDCOLUMN_TABLE ADD d INT;            --error no schem
 
 alter table  dbo.non_declared_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
 
+alter table  #temp_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
+
 end;
 go
