@@ -137,49 +137,54 @@ namespace Cheburashka
                     String tableName = null;
                     String indexName = null;
                     bool skipExternalName = false;
-                    if (dic != null)
+                    if (!(dic is null))
                     {
                         if (((dic.Object.DatabaseIdentifier != null
-                                && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
-                                )
-                             || dic.Object.DatabaseIdentifier == null
+                              && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
                              )
-                           && ((dic.Object.ServerIdentifier != null
+                             || dic.Object.DatabaseIdentifier == null
+                            )
+                            && ((dic.Object.ServerIdentifier != null
                                  && IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
                                 )
-                              || dic.Object.ServerIdentifier == null
-                             )
-                           )
+                                || dic.Object.ServerIdentifier == null
+                            )
+                        )
                         {
                             skipExternalName = true;
                         }
 
-                        schemaName = dic.Object.SchemaIdentifier.Value;
+                        schemaName = dic.Object.SchemaIdentifier != null ? dic.Object.SchemaIdentifier.Value : "dbo" ;
                         tableName = dic.Object.BaseIdentifier.Value;
                         indexName = dic.Index.Value;
 
                     }
-                    else if (olddic != null)
+                    else
                     {
-                        if (((olddic.Index.DatabaseIdentifier != null
-                                && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
-                                )
-                             || olddic.Index.DatabaseIdentifier == null
-                             )
-                           && ((olddic.Index.ServerIdentifier != null
-                                 && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
-                                )
-                              || olddic.Index.ServerIdentifier == null
-                             )
-                           )
+                        if (!(olddic is null))
                         {
-                            skipExternalName = true;
-                        }
+                            if (((olddic.Index.DatabaseIdentifier != null
+                                  && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
+                                 )
+                                 || olddic.Index.DatabaseIdentifier == null
+                                )
+                                && ((olddic.Index.ServerIdentifier != null
+                                     && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
+                                    )
+                                    || olddic.Index.ServerIdentifier == null
+                                )
+                            )
+                            {
+                                skipExternalName = true;
+                            }
 
-                        schemaName = olddic.Index.SchemaIdentifier.Value;
-                        tableName = olddic.Index.BaseIdentifier.Value;
-                        indexName = olddic.Index.ChildIdentifier.Value;
+                            schemaName = olddic.Index.SchemaIdentifier != null ? olddic.Index.SchemaIdentifier.Value : "dbo";
+                            tableName = olddic.Index.BaseIdentifier.Value;
+                            indexName = olddic.Index.ChildIdentifier.Value;
+                        }
                     }
+                
+
                     if (skipExternalName)
                     {
                         List<TSqlObject> ixs = allIndexes
