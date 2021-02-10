@@ -129,7 +129,7 @@ namespace Cheburashka
 
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
-            // !!! THIS DOESNT SEEM TO WORK - did it ever - even in the old codebase ?!!!! 
+            // !!! THIS DOESN'T SEEM TO WORK - did it ever - even in the old codebase ?!!!! 
             var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
             sqlFragment.Accept(namedParameterUsageVisitor);
             IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
@@ -225,17 +225,20 @@ namespace Cheburashka
             }
 
 
-            var graphComparer = ruleExecutionContext.SchemaModel.CollationComparer;
+            //var graphComparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             var writeDependencies = new BidirectionalGraph<string,Edge<string>>(false,-1,-1, SqlComparer.Comparer);
 
             writeDependencies.AddVertexRange(variableDeclarations.Select(n => n.Value));
             //Grab original vertices
-            var vertices = writeDependencies.Vertices;
+            IList<string> vertices = writeDependencies.Vertices.ToList();
 
-            writeDependencies.AddVertex("TERMINATE");
+            const String writtenTo = "WRITTEN-TO";
+            const String terminate = "TERMINATE";
+
+            writeDependencies.AddVertex(terminate);
             writeDependencies.AddEdgeRange(
-                nonAssignmentContextVariableReferences.Select((n => new Edge<string>(n.Key, "TERMINATE"))));
+                nonAssignmentContextVariableReferences.Select((n => new Edge<string>(n.Key, terminate))));
 
 
             foreach (var setVariable in setVariables)
@@ -256,32 +259,32 @@ namespace Cheburashka
             writeDependencies = writeDependencies.ComputeTransitiveClosure(SqlComparer.Comparer);
 
             // mark the variables that are assigned by assigning a path from a dummy node.
-            writeDependencies.AddVertex("WRITTENTO");
+            writeDependencies.AddVertex(writtenTo);
             // because of bugs in the graph module we need to lookup the the vertex name in the graph before 
             // adding in the edge range - otherwise run-time exceptions abound.
             //writeDependencies.AddEdgeRange(                                                       // THIS BREAK IN THE PRESENCE OF MIXED-CASE REFERENCES
-            //    setVariables.Select((n => new Edge<string>("WRITTENTO",n.Variable.Name))));       // THIS BREAK IN THE PRESENCE OF MIXED-CASE REFERENCES
+            //    setVariables.Select((n => new Edge<string>(writtenTo,n.Variable.Name))));       // THIS BREAK IN THE PRESENCE OF MIXED-CASE REFERENCES
             foreach (var setVariable in setVariables) {
                 var name = setVariable.Variable.Name;
                 var lookedUpAdditionalVertex = vertices.Where(n => SqlComparer.Comparer.Equals(n, name)).Select(n => n).First();
-                writeDependencies.AddEdge(new Edge<string>("WRITTENTO", lookedUpAdditionalVertex));
+                writeDependencies.AddEdge(new Edge<string>(writtenTo, lookedUpAdditionalVertex));
             }
 
-            //IVertexAndEdgeListGraph<string, Edge<string>> g = writeDendencies;
+            //IVertexAndEdgeListGraph<string, Edge<string>> g = writeDependencies;
             //var gviz = new GraphvizAlgorithm<string, Edge<string>>(g);
             //string s = gviz.Generate(new FileDotEngine(), @"C:\temp\" + elementName);
 
             // now need to find all variable references that aren't directly in a variable assignment of any kind.
 
 
-            var consumedVariables = (from edge in writeDependencies.Edges where edge.Target == "TERMINATE" select edge.Source).ToList().Distinct();
+            List<String> consumedVariables = (from edge in writeDependencies.Edges where edge.Target == terminate select edge.Source).ToList().Distinct().ToList();
             
             var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)
-                                                  .Distinct()
-                                                  .ToList();
+                                                  .Distinct();
+                                                  //.ToList();
 
-//            var usedVariables = (from edge in writeDependencies.Edges where edge.Source == "WRITTENTO" select edge.Target).ToList().Distinct();
+//            var usedVariables = (from edge in writeDependencies.Edges where edge.Source == "WRITTEN-TO" select edge.Target).ToList().Distinct();
 //            var unUsedVariables = setVariables.Where(n => ! usedVariables.Contains(n.Variable.Name));
 //            var unConsumedButSetVariables = unConsumedVariables.Where( n => ! );
 

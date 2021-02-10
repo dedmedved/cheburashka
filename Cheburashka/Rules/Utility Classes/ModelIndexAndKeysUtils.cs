@@ -55,7 +55,7 @@ namespace Cheburashka
         public static List<TSqlObject> getForeignKeys(string owningObjectSchema, string owningObjectTable)
         {
             var fks = new List<TSqlObject>();
-            foreach (var fk in DMVSettings.getForeignKeys)
+            foreach (var fk in DMVSettings.GetForeignKeys)
             { 
                 if ( fk.Name == null || (fk.Name.ExternalParts == null || fk.Name.ExternalParts.Count == 0))
                 {
@@ -75,7 +75,7 @@ namespace Cheburashka
         public static List<TSqlObject> getPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
-            foreach (var pk in DMVSettings.getPrimaryKeys)
+            foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
                 if (pk.Name == null || (pk.Name.ExternalParts == null || pk.Name.ExternalParts.Count == 0))
                 {
@@ -94,7 +94,7 @@ namespace Cheburashka
         public static List<TSqlObject> getClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
-            foreach (var pk in DMVSettings.getPrimaryKeys)
+            foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
                 if (pk.Name == null || (pk.Name.ExternalParts == null || pk.Name.ExternalParts.Count == 0))
                 {
@@ -115,7 +115,7 @@ namespace Cheburashka
         public static List<TSqlObject> getIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
-            foreach (var index in DMVSettings.getIndexes)
+            foreach (var index in DMVSettings.GetIndexes)
             {
                 if (index.Name == null || (index.Name.ExternalParts == null || index.Name.ExternalParts.Count == 0))
                 {
@@ -133,7 +133,7 @@ namespace Cheburashka
         public static List<TSqlObject> getClusteredIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
-            foreach (var index in DMVSettings.getIndexes)
+            foreach (var index in DMVSettings.GetIndexes)
             {
                 if (index.Name == null || (index.Name.ExternalParts == null || index.Name.ExternalParts.Count == 0))
                 {
@@ -153,7 +153,7 @@ namespace Cheburashka
         public static List<TSqlObject> getUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
             var unique_constraints = new List<TSqlObject>();
-            foreach (var unique_constraint in DMVSettings.getUniqueConstraints)
+            foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
                 if (unique_constraint.Name == null || (unique_constraint.Name.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0))
                 {
@@ -171,7 +171,7 @@ namespace Cheburashka
         public static List<TSqlObject> getClusteredUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
             var unique_constraints = new List<TSqlObject>();
-            foreach (var unique_constraint in DMVSettings.getUniqueConstraints)
+            foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
                 if (unique_constraint.Name == null || (unique_constraint.Name.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0))
                 {

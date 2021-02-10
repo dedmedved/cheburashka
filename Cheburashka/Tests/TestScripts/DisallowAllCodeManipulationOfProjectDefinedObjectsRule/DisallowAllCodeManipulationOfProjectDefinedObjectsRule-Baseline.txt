@@ -1,0 +1,153 @@
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [DatabaseTriggerWithDropIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: DatabaseTriggerWithDropIndex
+Script file: DatabaseTriggerWithDropIndex.sql
+Start line: 14
+Start column: 20
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAddColumn_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAddColumn_proc
+Script file: ProcedureWithAddColumn.sql
+Start line: 10
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAddColumn_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAddColumn_proc
+Script file: ProcedureWithAddColumn.sql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterColumn_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterColumn_proc
+Script file: ProcedureWithAlterColumn.sql
+Start line: 10
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterColumn_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterColumn_proc
+Script file: ProcedureWithAlterColumn.sql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterConstraints_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterConstraints_proc
+Script file: ProcedureWithAlterConstraints.sql
+Start line: 19
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterIndex
+Script file: ProcedureWithAlterIndex.sql
+Start line: 11
+Start column: 9
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterIndex
+Script file: ProcedureWithAlterIndex.sql
+Start line: 12
+Start column: 9
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithAlterIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithAlterIndex
+Script file: ProcedureWithAlterIndex.sql
+Start line: 13
+Start column: 9
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithCreateIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithCreateIndex
+Script file: ProcedureWithCreateIndex.sql
+Start line: 10
+Start column: 9
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithCreateIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithCreateIndex
+Script file: ProcedureWithCreateIndex.sql
+Start line: 11
+Start column: 9
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithDropConstraints_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithDropConstraints_proc
+Script file: ProcedureWithDropConstraints.sql
+Start line: 19
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithDropConstraints_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithDropConstraints_proc
+Script file: ProcedureWithDropConstraints.sql
+Start line: 20
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithDropConstraints_proc].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithDropConstraints_proc
+Script file: ProcedureWithDropConstraints.sql
+Start line: 21
+Start column: 1
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithDropIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithDropIndex
+Script file: ProcedureWithDropIndex.sql
+Start line: 13
+Start column: 20
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[ProcedureWithDropIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.ProcedureWithDropIndex
+Script file: ProcedureWithDropIndex.sql
+Start line: 14
+Start column: 20
+========end of problem========
+
+Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[TableTriggerWithDropIndex].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.TableTriggerWithDropIndex
+Script file: TableTriggerWithDropIndex.sql
+Start line: 14
+Start column: 20
+========end of problem========
+

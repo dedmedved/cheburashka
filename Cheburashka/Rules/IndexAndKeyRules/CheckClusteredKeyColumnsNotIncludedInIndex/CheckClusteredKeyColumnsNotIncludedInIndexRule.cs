@@ -123,7 +123,8 @@ namespace Cheburashka
             sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
             var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
 
-            var issues = new List<String>();
+            //var issues = new List<String>();
+            var issueFound = false;
 
             if (!isClustered && !isUnique)
             {
@@ -153,28 +154,28 @@ namespace Cheburashka
                         out clusteredIndexColumns);
                 if (bFoundClusteredIndex)
                 {
-                    try
-                    {
+                    //try
+                    //{
                         List<String> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
                         List<String> c2 = indexColumns.Select(n => n.Value).ToList();
-                        List<String> c2_include = includeColumns.Select(n => n.Value).ToList();
+                        List<String> c2Include = includeColumns.Select(n => n.Value).ToList();
 
                         //allow the lead column to be a clustered index member, as we need to be able to have
                         //different indexes key on different leading edges
                         //but then check the tail columns
-                        var (c2_head, c2_tail) = c2;         // uses ListUtil.Deconstruct - magic !
-                        IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
-                        IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
-                        issues.AddRange(common);
-                        issues.AddRange(common2);
-                        //foreach (var c in common.ToList())
-                        //{
-                        //    issues.Add(c);
-                        //}
-                    }
-                    catch
-                    {
-                    }
+                        var (c2Head, c2Tail) = c2;         // uses ListUtil.Deconstruct - magic !
+                        //IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
+                        //IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
+                        //issues.AddRange(common);
+                        //issues.AddRange(common2);
+                        if (c1.Intersect(c2Tail, SqlComparer.Comparer).Any() || c1.Intersect(c2Include, SqlComparer.Comparer).Any())
+                        {
+                            issueFound = true;
+                        }
+                    //}
+                    //catch
+                    //{
+                    //}
                 }
 
 
@@ -186,7 +187,7 @@ namespace Cheburashka
 
                 // Create problems for each object
                 //foreach (TSqlFragment issue in issues) {
-                if (issues.Count > 0)
+                if (issueFound)
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(

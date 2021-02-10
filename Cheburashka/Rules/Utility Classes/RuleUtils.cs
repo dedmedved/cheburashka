@@ -68,30 +68,37 @@ namespace Cheburashka
             {
                 String fileName = null;
 
-                fileName = modelElement.GetSourceInformation().SourceName;
-                if (!String.IsNullOrEmpty(fileName))
+                if (modelElement.GetSourceInformation() != null)
                 {
-                    string fullScript = ReadFileContent(fileName);
-
-                    if (fullScript != null)
+                    fileName = modelElement.GetSourceInformation().SourceName;
+                    if (!String.IsNullOrEmpty(fileName))
                     {
-                        int startLine = 0;
-                        int startColumn = 0;
-                        int endLine = 0;
-                        int endColumn = 0;
+                        string fullScript = ReadFileContent(fileName);
 
-                        if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out startLine, out startColumn, out endLine, out endColumn))
+                        if (fullScript != null)
                         {
-                            problem.SetSourceInformation(new SourceInformation(fileName, startLine + 1, startColumn + 1));
+                            int startLine = 0;
+                            int startColumn = 0;
+                            int endLine = 0;
+                            int endColumn = 0;
+
+                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out startLine, out startColumn, out endLine, out endColumn))
+                            {
+                                problem.SetSourceInformation(new SourceInformation(fileName, startLine + 1, startColumn + 1));
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Could not compute line and column");
+                            }
                         }
                         else
                         {
-                            Debug.WriteLine("Could not compute line and column");
+                            Debug.WriteLine("Could not obtain filename");
                         }
                     }
                     else
                     {
-                        Debug.WriteLine("Could not obtain filename");
+                        Debug.WriteLine("Could not compute line and column");
                     }
                 }
             }

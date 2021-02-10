@@ -213,6 +213,12 @@
   <data name="CheckUniqueKeysAreNotDuplicated_RuleName" xml:space="preserve">
     <value>Unique constraints and indexes shouldn't be over-constrained.</value>
   </data>
+  <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription" xml:space="preserve">
+    <value>Permanent, statically defined table, constraint or index is altered by code in {0}.</value>
+  </data>
+  <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName" xml:space="preserve">
+    <value>Permanent, statically defined objects should not be altered by code.</value>
+  </data>
   <data name="EnforceCaptureSPReturnStatus_ProblemDescription" xml:space="preserve">
     <value>Non-core SP is called without checking the return status in {0}.</value>
   </data>

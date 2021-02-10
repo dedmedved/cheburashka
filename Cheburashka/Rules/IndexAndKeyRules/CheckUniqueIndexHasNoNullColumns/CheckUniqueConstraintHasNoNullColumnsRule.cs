@@ -91,9 +91,6 @@ namespace Cheburashka
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            // Get Database Schema and name of this model element.
-            //string owningObjectSchema = modelElement.Name.Parts[0];
-            //string owningObjectTable = modelElement.Name.Parts[1];
 
             DMVSettings.RefreshModelBuiltInCache(model);
             // Refresh cached index/constraints/tables lists from Model
@@ -153,7 +150,7 @@ namespace Cheburashka
                                                                                         //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
                                                                                         select iCOl;
 
-                                foreach (var c in nullableIndexColumns.ToList())
+                                foreach (var c in nullableIndexColumns)
                                 {
                                     issues.Add(c);
                                 }

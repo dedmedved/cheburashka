@@ -49,16 +49,17 @@ namespace Cheburashka
 
         }
 
+
         //public static void RefreshDDLCache(ModelStore sqlSchemaModel)
         //{
         //    //DMVSettings.RefreshColumnCache(sqlSchemaModel);
         //    //DMVSettings.RefreshConstraintsAndIndexesCache(sqlSchemaModel);
         //}
 
-        public static void getOwningObject(TSqlObject sqlElement, out string owningObjectSchema, out string owningObjectTable)
+        public static void GetLocalObjectNameParts(TSqlObject sqlElement, out string objectSchema, out string objectTable)
         {
-            owningObjectSchema = sqlElement.Name.Parts[0];
-            owningObjectTable = sqlElement.Name.Parts[1];
+            objectSchema = sqlElement.Name.HasName ? sqlElement.Name.Parts[0] : "";
+            objectTable  = sqlElement.Name.HasName ? sqlElement.Name.Parts[1] : "";
         }
 
     }

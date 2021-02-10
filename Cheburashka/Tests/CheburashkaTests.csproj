@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130</SSDTPath>
@@ -14,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CheburashkaTests</RootNamespace>
     <AssemblyName>CheburashkaTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -41,45 +42,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotParser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DotParser.1.0.6\lib\net45\DotParser.dll</HintPath>
+    <Reference Include="DotParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DotParser.1.1.0\lib\net461\DotParser.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharp.Core.3.0.2\lib\net40\FSharp.Core.dll</HintPath>
+    <Reference Include="FSharp.Core, Version=4.7.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FSharp.Core.4.7.0\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FSharpx.Collections.Experimental, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharpx.Collections.Experimental.1.7.3\lib\40\FSharpx.Collections.Experimental.dll</HintPath>
+    <Reference Include="FSharpx.Collections.Experimental, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FSharpx.Collections.Experimental.2.1.2\lib\net45\FSharpx.Collections.Experimental.dll</HintPath>
     </Reference>
-    <Reference Include="FSharpx.Core, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharpx.Core.1.7.3\lib\40\FSharpx.Core.dll</HintPath>
+    <Reference Include="FSharpx.Core, Version=1.8.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FSharpx.Core.1.8.32\lib\40\FSharpx.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Tools.Utilities, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.Data.Tools.Utilities.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.Tools.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Dac, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Dac.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.SqlServer.Dac, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.130.3450.1\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4573.2\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -802,6 +800,12 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariableSetBySelect.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\BigTestDb\BigTestDb-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\BigTestDb\script.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -946,6 +950,66 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterColumn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAddColumn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithCreateIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\DatabaseTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAddColumn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAlterColumn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAlterConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithAlterIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithDropConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithCreateIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\TableTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithDropConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\TableTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DatabaseTriggerWithDropIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -983,6 +1047,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql">
@@ -1073,24 +1140,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\codecracker.CSharp.1.0.1\analyzers\dotnet\cs\CodeCracker.Common.dll" />
-    <Analyzer Include="..\..\packages\codecracker.CSharp.1.0.1\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
-  <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Analyzer Include="..\..\packages\codecracker.CSharp.1.1.0\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -1117,6 +1167,36 @@
   </PropertyGroup>
   <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
+  <Choose>
+    <When Condition="$(VisualStudioVersion) == '15.0'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(VisualStudioVersion) == '16.0'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

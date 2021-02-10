@@ -1,0 +1,9 @@
+﻿Problem description: Permanent, statically defined table, constraint or index is altered by code in [dbo].[add_a_column].
+FullID: Cheburashka.DM0031
+Severity: Warning
+Model element: dbo.add_a_column
+Script file: script.sql
+Start line: 10337
+Start column: 1
+========end of problem========
+
