@@ -101,6 +101,10 @@ namespace Cheburashka
             sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
             List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements = alterTableAddTableElementStatementVisitor.Objects;
 
+            AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor = new AlterTableAlterColumnStatementVisitor();
+            sqlFragment.Accept(alterTableAlterColumnStatementVisitor);
+            List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements = alterTableAlterColumnStatementVisitor.Objects;
+
             AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor = new AlterTableDropTableElementStatementVisitor();
             sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
             List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
@@ -126,11 +130,18 @@ namespace Cheburashka
 
             var allTables               = DMVSettings.GetTables ;
 
-            var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? DMVSettings.GetIndexes           : new List<TSqlObject>();
-            var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetPrimaryKeys       : new List<TSqlObject>();
-            var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetUniqueConstraints : new List<TSqlObject>();
-            var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetForeignKeys       : new List<TSqlObject>();
-            var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetCheckConstraints  : new List<TSqlObject>();
+            //var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? DMVSettings.GetIndexes           : new List<TSqlObject>();
+            //var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetPrimaryKeys       : new List<TSqlObject>();
+            //var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetUniqueConstraints : new List<TSqlObject>();
+            //var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetForeignKeys       : new List<TSqlObject>();
+            //var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetCheckConstraints  : new List<TSqlObject>();
+
+            var allIndexes = DMVSettings.GetIndexes ;
+            var allPrimaryKeys = DMVSettings.GetPrimaryKeys ;
+            var allUniqueConstraints = DMVSettings.GetUniqueConstraints ;
+            var allForeignKeys = DMVSettings.GetForeignKeys ;
+            var allCheckConstraints = DMVSettings.GetCheckConstraints ;
+
 
             foreach (var dropIndexStatement in dropIndexStatements)
             {
@@ -331,6 +342,37 @@ namespace Cheburashka
 
             }
 
+            foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements)
+            {
+                // internal objects only
+                if (((alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier != null
+                        && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier.Value)
+                        )
+                     || alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier == null
+                     )
+                   && ((alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier != null
+                         && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier.Value)
+                        )
+                      || alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier == null
+                     )
+                   )
+                {
+                    var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier != null ? alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier.Value : "dbo";
+                    var table = alterTableAlterColumnStatement.SchemaObjectName.BaseIdentifier.Value;
+                    List<TSqlObject> tbls = allTables.Where(n => n.Name != null && n.Name.HasName
+                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
+                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
+                    ).Select(n => n).ToList();
+
+                    if (tbls.Count > 0)
+                    {
+                        issues.Add(alterTableAlterColumnStatement);
+                    }
+                }
+
+
+            }
+
             foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
             {
                 // internal objects only
@@ -390,6 +432,8 @@ namespace Cheburashka
 
 
             }
+
+
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
