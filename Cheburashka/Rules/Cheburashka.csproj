@@ -111,6 +111,7 @@
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\CreateIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAlterColumnStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableConstraintModificationStatementVisitor.cs" />

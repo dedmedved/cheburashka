@@ -956,6 +956,9 @@
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAddColumn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithCreateIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\DatabaseTriggerWithDropIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -975,6 +978,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithDropConstraints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithCreateIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule\ProcedureWithDropIndex.sql">

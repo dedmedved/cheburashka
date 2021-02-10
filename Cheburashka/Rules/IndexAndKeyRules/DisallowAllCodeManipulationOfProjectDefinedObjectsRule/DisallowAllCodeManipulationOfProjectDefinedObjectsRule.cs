@@ -117,6 +117,9 @@ namespace Cheburashka
             //sqlFragment.Accept(dropClusteredConstraintStateOptionVisitor);
             //List<DropClusteredConstraintStateOption> dropClusteredConstraintStateOptions = dropClusteredConstraintStateOptionVisitor.Objects;
 
+            CreateIndexStatementVisitor createIndexStatementVisitor = new CreateIndexStatementVisitor();
+            sqlFragment.Accept(createIndexStatementVisitor);
+            List<CreateIndexStatement> createIndexStatements = createIndexStatementVisitor.Objects;
             DropIndexStatementVisitor dropIndexStatementVisitor = new DropIndexStatementVisitor();
             sqlFragment.Accept(dropIndexStatementVisitor);
             List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
@@ -142,6 +145,20 @@ namespace Cheburashka
             var allForeignKeys = DMVSettings.GetForeignKeys ;
             var allCheckConstraints = DMVSettings.GetCheckConstraints ;
 
+            foreach (var createIndexStatement in createIndexStatements)
+            {
+                var schema = createIndexStatement.OnName.SchemaIdentifier != null ? createIndexStatement.OnName.SchemaIdentifier.Value : "dbo";
+                var table = createIndexStatement.OnName.BaseIdentifier.Value;
+                List<TSqlObject> tbls = allTables.Where(n => n.Name != null && n.Name.HasName
+                                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
+                                                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
+                ).Select(n => n).ToList();
+
+                if (tbls.Count > 0)
+                {
+                    issues.Add(createIndexStatement);
+                }
+            }
 
             foreach (var dropIndexStatement in dropIndexStatements)
             {

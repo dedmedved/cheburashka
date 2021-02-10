@@ -16,6 +16,6 @@ go
 create procedure  dbo.[ProcedureWithAlterConstraints_proc]
 as
 begin
-alter table  dbo.ProcedureWithAlterConstraints_Table nocheck constraint chk_b
+alter table  DBO.PROCEDUREWITHALTERCONSTRAINTS_TABLE nocheck constraint chk_b
 end;
 go
