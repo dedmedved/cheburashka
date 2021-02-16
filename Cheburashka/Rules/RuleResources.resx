@@ -214,10 +214,16 @@
     <value>Unique constraints and indexes shouldn't be over-constrained.</value>
   </data>
   <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription" xml:space="preserve">
-    <value>Permanent, statically defined table, constraint or index is altered by code in {0}.</value>
+    <value>Permanent, statically defined table, constraint or index is altered by code in {0}.This may make the database inconsistent with the project.</value>
   </data>
   <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName" xml:space="preserve">
     <value>Permanent, statically defined objects should not be altered by code.</value>
+  </data>
+  <data name="DisallowUseOfSp_ReName_ProblemDescription" xml:space="preserve">
+    <value>An object is being renamed in {0}.  This may make the database inconsistent with the project.</value>
+  </data>
+  <data name="DisallowUseOfSp_ReName_RuleName" xml:space="preserve">
+    <value>Database objects should not be renamed by code at runtime.</value>
   </data>
   <data name="EnforceCaptureSPReturnStatus_ProblemDescription" xml:space="preserve">
     <value>Non-core SP is called without checking the return status in {0}.</value>
