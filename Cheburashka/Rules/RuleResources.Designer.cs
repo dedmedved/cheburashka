@@ -349,7 +349,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permanent, statically defined table, constraint or index is altered by code in {0}..
+        ///   Looks up a localized string similar to Permanent, statically defined table, constraint or index is altered by code in {0}.This may make the database inconsistent with the project..
         /// </summary>
         internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription {
             get {
@@ -363,6 +363,24 @@ namespace Cheburashka {
         internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName {
             get {
                 return ResourceManager.GetString("DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An object is being renamed in {0}.  This may make the database inconsistent with the project..
+        /// </summary>
+        internal static string DisallowUseOfSp_ReName_ProblemDescription {
+            get {
+                return ResourceManager.GetString("DisallowUseOfSp_ReName_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database objects should not be renamed by code at runtime..
+        /// </summary>
+        internal static string DisallowUseOfSp_ReName_RuleName {
+            get {
+                return ResourceManager.GetString("DisallowUseOfSp_ReName_RuleName", resourceCulture);
             }
         }
         
