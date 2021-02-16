@@ -1006,6 +1006,34 @@
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\DatabaseTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\DisallowUseOfSp_ReName_MixedCaseRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\ProcWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\ServerTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\TableTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\DatabaseTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\ProcWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\ServerTriggerWithSp_ReName.sql" />
+    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\TableTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1138,9 +1166,7 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\codecracker.CSharp.1.1.0\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestScripts\DisallowUseOfSp_ReNameRule\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

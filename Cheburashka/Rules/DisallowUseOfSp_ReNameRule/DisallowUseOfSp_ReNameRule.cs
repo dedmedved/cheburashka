@@ -95,7 +95,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of bare return statements
+            // visitor to get the occurrences of sp_rename call statements
             var visitor = new DisallowUseOfSp_ReNameVisitor();
             sqlFragment.Accept(visitor);
             IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
