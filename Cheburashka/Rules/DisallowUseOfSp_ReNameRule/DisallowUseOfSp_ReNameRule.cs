@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     /// <summary>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
+    /// whenever a call to sp_rename is made. 
     /// This rule only applies to SQL stored procedures.
     /// 
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -96,16 +96,16 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of bare return statements
-            var visitor = new BareReturnVisitor();
+            var visitor = new DisallowUseOfSp_ReNameVisitor();
             sqlFragment.Accept(visitor);
-            IList<ReturnStatement> bareReturnStatements = visitor.BareReturnStatements;
+            IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
 
-            // Create problems for each Return statement found 
-            foreach (var returnStatement in bareReturnStatements)
+            // Create problems for each sp_rename call statement found 
+            foreach (var executeSpecification in executeSpecifications)
             {
                 var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
-                                                , returnStatement
+                                                , executeSpecification
                                                 );
 
                 problems.Add(problem);

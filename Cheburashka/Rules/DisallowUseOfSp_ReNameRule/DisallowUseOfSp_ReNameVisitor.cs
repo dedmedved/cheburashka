@@ -45,7 +45,7 @@ namespace Cheburashka
                 TSqlFragment pr = ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference;
                 string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
                 //TSqlParserToken name = pr.ScriptTokenStream[pr.LastTokenIndex];
-                if (SqlComparer.SQLModel_StringCompareEqual(spName,"sp_rename"))
+                if (SqlComparer.SQLModel_StringCompareEqual(spName,"sp_rename")) // this has to be in all lowercase in sensitive collations
                 {
                     ExecuteSpecifications.Add(node);
                 }
