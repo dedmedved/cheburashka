@@ -34,13 +34,15 @@ using Cheburashka;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an table in a model without a Foreign key.
-    ///  
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(EnforceForeignKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
@@ -50,7 +52,6 @@ namespace Cheburashka
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforceForeignKeyRule: SqlCodeAnalysisRule
     {
-
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
@@ -65,7 +66,7 @@ namespace Cheburashka
             SupportedElementTypes = new[]
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table   
+                ModelSchema.Table
             };
         }
 
@@ -89,7 +90,6 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
 
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
@@ -116,8 +116,7 @@ namespace Cheburashka
                         //break;
                     }
                 }
-            }       
-
+            }
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -136,10 +135,8 @@ namespace Cheburashka
             }
 
             return problems;
-
         }
     }
-
 
     //    #endregion
 }

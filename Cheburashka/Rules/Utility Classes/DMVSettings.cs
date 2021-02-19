@@ -30,17 +30,15 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
-    class DMVSettings
+    static class DMVSettings
     {
-        private static int                      _CacheRefreshIntervalSeconds = 15;
+        private static readonly int                      _CacheRefreshIntervalSeconds = 15;
 
         private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
         private static DateTime                 _lastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
-
 
         public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
         public static bool AllowClusterOnForeignKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
@@ -53,17 +51,14 @@ namespace Cheburashka
         private static IEnumerable<TSqlObject>              tables;
         private static IEnumerable<TSqlObject>              views;
 
-
         private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
         private static IList<TSqlObject>              _tablesCache;
-        private static IList<TSqlObject>              _indexesCache;            
+        private static IList<TSqlObject>              _indexesCache;
         private static IList<TSqlObject>              _primaryKeyConstraints;
         private static IList<TSqlObject>              _foreignKeyConstraints;
         private static IList<TSqlObject>              _uniqueConstraints;
         private static IList<TSqlObject>              _checkConstraints;
-
-
 
         public static void RefreshModelBuiltInCache(TSqlModel model)
         {
@@ -81,28 +76,26 @@ namespace Cheburashka
                )
             {
                 IList<TSqlObject> tbls = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
-                IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
-                IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList(); 
-                IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList(); 
-                IList<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList(); 
+                IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+                IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+                IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
+                IList<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
                 IList<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList();
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
-                _tablesCache            = tbls; 
-                _indexesCache           = idxs ; 
-                _primaryKeyConstraints  = pkcs ; 
-                _foreignKeyConstraints  = fkcs ; 
-                _uniqueConstraints      = ukcs ; 
-                _checkConstraints       = chks ; 
-
+                _tablesCache            = tbls;
+                _indexesCache           = idxs ;
+                _primaryKeyConstraints  = pkcs ;
+                _foreignKeyConstraints  = fkcs ;
+                _uniqueConstraints      = ukcs ;
+                _checkConstraints       = chks ;
             }
             else
             {
                 // bump value - until we have clear elapsed window of xx secs don't refresh
                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now;
             }
-
         }
 
         public static IList<TSqlObject> TableColumns(string schemaAndTableName)

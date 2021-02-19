@@ -22,7 +22,6 @@ namespace Cheburashka.Tests
 {
     internal sealed class RuleTestUtils
     {
-
         public static void SaveStringToFile(string contents, string filename)
         {
             try
@@ -34,8 +33,6 @@ namespace Cheburashka.Tests
                 {
                     Directory.CreateDirectory(directory);
                 }
-
-//                fileStream = new FileStream(filename, FileMode.Create);
                 using (fileStream = new FileStream(filename, FileMode.Create))
                 using (streamWriter = new StreamWriter(fileStream))
                 {
@@ -47,17 +44,6 @@ namespace Cheburashka.Tests
             finally
             {
             }
-
-            //{
-            //    if (streamWriter != null)
-            //    {
-            //        streamWriter.Close();
-            //    }
-            //    if (fileStream != null)
-            //    {
-            //        fileStream.Close();
-            //    }
-            //}
         }
 
         public static string ReadFileToString(string filePath)

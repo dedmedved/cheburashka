@@ -46,16 +46,18 @@ namespace Cheburashka.Tests
             set;
         }
 
-
         /// <summary>
+        /// <para>
         /// This test exists to 'warm-up' the system and to prevent any one real set of tests from appearing to run slowly.
         /// This test uses input scripts saved in the "TestScripts\_startup" folder and compares the
         /// results to the "_startup-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void _startup()
@@ -71,15 +73,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidBareReturnRule" folder and compares the
         /// results to the "AvoidBareReturnRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void TestAvoidBareReturn_BIN()
@@ -94,14 +98,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidBareReturnRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidBareReturnRule" folder and compares the
         /// results to the "AvoidBareReturnRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void TestAvoidBareReturn_CI_AI()
@@ -118,13 +126,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidGotoRule" folder and compares the
         /// results to the "AvoidGotoRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidGoto_BIN()
@@ -139,14 +150,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidGotoRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidGotoRule" folder and compares the
         /// results to the "AvoidGotoRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidGoto_CI_AI()
@@ -163,13 +178,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidDirectUseOfRowcountRule" folder and compares the
         /// results to the "AvoidDirectUseOfRowcountRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidDirectUseOfRowcount_BIN()
@@ -184,14 +202,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidDirectUseOfRowcountRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidDirectUseOfRowcountRule" folder and compares the
         /// results to the "AvoidDirectUseOfRowcountRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidDirectUseOfRowcount_CI_AI()
@@ -208,13 +230,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceCaptureSPReturnStatusRule" folder and compares the
         /// results to the "EnforceCaptureSPReturnStatusRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceCaptureSPReturnStatus_BIN()
@@ -229,14 +254,18 @@ namespace Cheburashka.Tests
                 test.RunTest(EnforceCaptureSPReturnStatusRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceCaptureSPReturnStatusRule" folder and compares the
         /// results to the "EnforceCaptureSPReturnStatusRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceCaptureSPReturnStatus_CI_AI()
@@ -253,13 +282,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceTryCatchRule" folder and compares the
         /// results to the "EnforceTryCatchRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceUseTRY_CATCH_BIN()
@@ -274,14 +306,18 @@ namespace Cheburashka.Tests
                 test.RunTest(EnforceTryCatchRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceTryCatchRule" folder and compares the
         /// results to the "EnforceTryCatchRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceUseTRY_CATCH_CI_AI()
@@ -298,13 +334,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceReturnRule" folder and compares the
         /// results to the "EnforceReturnRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceReturn_BIN()
@@ -319,14 +358,18 @@ namespace Cheburashka.Tests
                 test.RunTest(EnforceReturnRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceReturnRule" folder and compares the
         /// results to the "EnforceReturnRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceReturn_CI_AI()
@@ -343,13 +386,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedVariables" folder and compares the
         /// results to the "AvoidUnusedVariables-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedVariables_BIN()
@@ -364,14 +410,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidUnusedVariablesRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedVariables" folder and compares the
         /// results to the "AvoidUnusedVariables-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedVariables_CI_AI()
@@ -388,13 +438,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTableVariableRule" folder and compares the
         /// results to the "AvoidUnusedTableVariableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedTableVariable_BIN()
@@ -411,13 +464,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTableVariableRule" folder and compares the
         /// results to the "AvoidUnusedTableVariableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedTableVariable_CI_AI()
@@ -434,13 +490,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTableVariable_MixedCaseVariableNamesRule" folder and compares the
         /// results to the "AvoidUnusedTableVariable_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedTableVariable_MixedCaseVariableNames_CI_AI()     // As this is unused variables a mixed case scenario make little sense anyway
@@ -457,15 +516,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedParameterRule" folder and compares the
         /// results to the "AvoidUnusedParameterRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedParameter_BIN()
@@ -480,14 +541,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidUnusedParameterRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedParameterRule" folder and compares the
         /// results to the "AvoidUnusedParameterRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedParameter_CI_AI()
@@ -504,13 +569,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUnusedParameter_MixedCaseVariableNamesRule" folder and compares the
         /// results to the "AvoidUnusedParameter_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnusedParameter_MixedCaseVariableNames_CI_AI()     // As this is unused variables a mixed case scenario make little sense anyway
@@ -528,13 +596,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariablesRule" folder and compares the
         /// results to the "AvoidWriteOnlyVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidWriteOnlyVariables_BIN()
@@ -551,13 +622,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariablesRule" folder and compares the
         /// results to the "AvoidWriteOnlyVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidWriteOnlyVariables_CI_AI()
@@ -574,13 +648,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule" folder and compares the
         /// results to the "AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidWriteOnlyVariables_MixedCaseVariableNames_CI_AI()
@@ -598,13 +675,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUninitialisedVariablesRule" folder and compares the
         /// results to the "AvoidUninitialisedVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnitialisedVariables_BIN()
@@ -620,14 +700,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidUninitialisedVariablesRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUninitialisedVariablesRule" folder and compares the
         /// results to the "AvoidUninitialisedVariablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnitialisedVariables_CI_AI()
@@ -645,13 +729,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidUninitialisedVariables_MixedCaseVariableNamesRule" folder and compares the
         /// results to the "AvoidUninitialisedVariables_MixedCaseVariableNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidUnitialisedVariables_MixedCaseVariableNames_CI_AI()        // NO _BIN test cases for obvious reasons
@@ -670,13 +757,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidOnePartNamesRule" folder and compares the
         /// results to the "AvoidOnePartNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidOnePartNames_BIN()
@@ -694,13 +784,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidOnePartNamesRule" folder and compares the
         /// results to the "AvoidOnePartNamesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidOnePartNames_CI_AI()
@@ -717,15 +810,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforcePrimaryKeyRule" folder and compares the
         /// results to the "EnforcePrimaryKeyRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforcePrimaryKey_BIN()
@@ -743,13 +838,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforcePrimaryKeyRule" folder and compares the
         /// results to the "EnforcePrimaryKeyRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforcePrimaryKey_CI_AI()
@@ -767,13 +865,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceNamedConstraintRule" folder and compares the
         /// results to the "EnforceNamedConstraintRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceNamedConstraint_BIN() {
@@ -789,13 +890,16 @@ namespace Cheburashka.Tests
         }
 
             /// <summary>
+            /// <para>
             /// This test uses input scripts saved in the "TestScripts\EnforceNamedConstraintRule" folder and compares the
             /// results to the "EnforceNamedConstraintRule-Baseline.txt file in that directory. If you wanted to add extra test cases
             /// just add in new sql files and run the test. The failure message will include links to the output file - if all
             /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-            /// 
+            /// </para>
+            /// <para>
             /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
             /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+            /// </para>
             /// </summary>
             [TestMethod]
             public void EnforceNamedConstraint_CI_AI() {
@@ -809,16 +913,18 @@ namespace Cheburashka.Tests
                     test.RunTest(EnforceNamedConstraintRule.RuleId);
                 }
             }
-        
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceClusteredIndexRule" folder and compares the
         /// results to the "EnforceClusteredIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceClusteredIndex_BIN() {
@@ -834,13 +940,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceClusteredIndexRule" folder and compares the
         /// results to the "EnforceClusteredIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceClusteredIndex_CI_AI() {
@@ -855,15 +964,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueConstraintHasNoNullColumnsRule" folder and compares the
         /// results to the "CheckUniqueConstraintHasNoNullColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueConstraintHasNoNullColumns_BIN() {
@@ -879,13 +990,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumnsRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueConstraintHasNoNullColumns_CI_AI() {
@@ -901,13 +1015,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumnsRule_MixedCase-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueConstraintHasNoNullColumns_MixedCase_CI_AI()
@@ -924,15 +1041,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumnsRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueIndexHasNoNullColumns_BIN() {
@@ -948,13 +1067,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumnsRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueIndexHasNoNullColumns_CI_AI() {
@@ -970,13 +1092,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule" folder and compares the
         /// results to the "CheckUniqueIndexHasNoNullColumns_MixedCaseRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueIndexHasNoNullColumns_MixedCase_CI_AI()
@@ -993,15 +1118,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule" folder and compares the
         /// results to the "CheckClusteredKeyColumnsNotIncludedInIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckClusteredKeyColumnsNotIncludedInIndex_BIN()
@@ -1019,13 +1146,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule" folder and compares the
         /// results to the "CheckClusteredKeyColumnsNotIncludedInIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckClusteredKeyColumnsNotIncludedInIndex_CI_AI()
@@ -1043,13 +1173,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
         /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueKeysAreNotDuplicatedRule_BIN()
@@ -1067,13 +1200,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
         /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueKeysAreNotDuplicatedRule_CI_AI()
@@ -1090,15 +1226,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule_MixedCase" folder and compares the
         /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckUniqueKeysAreNotDuplicatedRule_MixedCase_CI_AI()
@@ -1115,16 +1253,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
         /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceIndexKeyColumnSeparationRule_BIN()
@@ -1142,13 +1281,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceIndexKeyColumnSeparationRule" folder and compares the
         /// results to the "EnforceIndexKeyColumnSeparationRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceIndexKeyColumnSeparationRule_CI_AI()
@@ -1165,15 +1307,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\EnforceIndexKeyColumnSeparationRule_MixedCase" folder and compares the
         /// results to the "EnforceIndexKeyColumnSeparationRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void EnforceIndexKeyColumnSeparationRule_MixedCase_CI_AI()
@@ -1190,16 +1334,17 @@ namespace Cheburashka.Tests
             }
         }
 
-
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule" folder and compares the
         /// results to the "CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void CheckClusteredKeyColumnsNotIncludedInIndex_MixedCase_CI_AI()
@@ -1218,13 +1363,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidNullLiteralRule" folder and compares the
         /// results to the "AvoidNullLiteralRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidNullLiteral_BIN()
@@ -1239,14 +1387,18 @@ namespace Cheburashka.Tests
                 test.RunTest(AvoidNullLiteralRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\AvoidNullLiteralRule" folder and compares the
         /// results to the "AvoidNullLiteralRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void AvoidNullLiteral_CI_AI()
@@ -1263,13 +1415,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule" folder and compares the
         /// results to the "DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowAllCodeManipulationOfProjectDefinedObjects_BIN()
@@ -1284,14 +1439,18 @@ namespace Cheburashka.Tests
                 test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule" folder and compares the
         /// results to the "DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowAllCodeManipulationOfProjectDefinedObjects_CI_AI()
@@ -1306,14 +1465,18 @@ namespace Cheburashka.Tests
                 test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule" folder and compares the
         /// results to the "DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCase_CI_AI()
@@ -1328,14 +1491,18 @@ namespace Cheburashka.Tests
                 test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
             }
         }
+
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\BigTestDb" folder and compares the
         /// results to the "BigTestDb-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         //[TestMethod]
         //public void BigTestDb_CI_AI()
@@ -1358,15 +1525,17 @@ namespace Cheburashka.Tests
         //    }
         //}
 
-
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowUseOfSp_ReNameRule" folder and compares the
         /// results to the "DisallowUseOfSp_ReNameRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowUseOfSp_ReNameRule_CI_AI()
@@ -1383,13 +1552,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowUseOfSp_ReNameRule" folder and compares the
         /// results to the "DisallowUseOfSp_ReNameRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowUseOfSp_ReNameRule_BIN()
@@ -1406,13 +1578,16 @@ namespace Cheburashka.Tests
         }
 
         /// <summary>
+        /// <para>
         /// This test uses input scripts saved in the "TestScripts\DisallowUseOfSp_ReNameRule_MixedCaseRule" folder and compares the
         /// results to the "DisallowUseOfSp_ReNameRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// 
+        /// </para>
+        /// <para>
         /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
         /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
         /// </summary>
         [TestMethod]
         public void DisallowUseOfSp_ReNameRule_MixedCaseRule_CI_AI()
@@ -1427,8 +1602,6 @@ namespace Cheburashka.Tests
                 test.RunTest(DisallowUseOfSp_ReNameRule.RuleId);
             }
         }
-
-
     }
 }
 
