@@ -68,6 +68,8 @@ namespace Cheburashka.Tests
                 _trash.Dispose();
                 _trash = null;
             }
+
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -158,6 +160,7 @@ namespace Cheburashka.Tests
         /// Builds a dacpac and returns the path to that dacpac.
         /// If the file already exists it will be deleted
         /// </summary>
+        /// <param name="model">TSQLModel built elsewhere</param>
         private string BuildDacpacFromModel(TSqlModel model)
         {
             string path = DacpacPath;
@@ -183,6 +186,7 @@ namespace Cheburashka.Tests
         /// 
         /// The generated model will be automatically disposed when the ModelManager is disposed
         /// </summary>
+        /// <param name="model">TSQLModel built elsewhere</param>
         private TSqlModel CreateDacpacModel(TSqlModel model)
         {
             string dacpacPath = BuildDacpacFromModel(model);
@@ -213,11 +217,11 @@ namespace Cheburashka.Tests
         {
             if (fullId == null)
             {
-                throw new ArgumentNullException("fullId");
+                throw new ArgumentNullException(nameof(fullId));
             }
             if (fullId == null)
             {
-                throw new ArgumentNullException("verify");
+                throw new ArgumentNullException(nameof(verify));
             }
 
             CreateModelUsingTestScripts();
@@ -240,15 +244,16 @@ namespace Cheburashka.Tests
         /// <see cref="CodeAnalysisService.ApplyRuleSettings"/> method to apply whatever rule settings you wish
         /// 
         /// </summary>
+        /// <param name="ruleIdToRun">The ruleid of the static code analysis rule to run</param>
         private CodeAnalysisService CreateCodeAnalysisService(string ruleIdToRun)
         {
             CodeAnalysisServiceFactory factory = new CodeAnalysisServiceFactory();
-            var ruleSettings = new CodeAnalysisRuleSettings()
+            var ruleSettings = new CodeAnalysisRuleSettings
                     {
                         new RuleConfiguration(ruleIdToRun)
                     };
             ruleSettings.DisableRulesNotInSettings = true;
-            CodeAnalysisService service = factory.CreateAnalysisService(this.ModelForAnalysis.Version, new CodeAnalysisServiceSettings()
+            CodeAnalysisService service = factory.CreateAnalysisService(this.ModelForAnalysis.Version, new CodeAnalysisServiceSettings
             {
                 RuleSettings = ruleSettings
             });
@@ -270,10 +275,10 @@ namespace Cheburashka.Tests
             string problemsString = DumpProblemsToString(analysisResult.Problems);
 
 
-            verify(analysisResult, problemsString);
+            verify?.Invoke(analysisResult, problemsString);
         }
 
-        private void DumpErrors(IList<ExtensibilityError> errors)
+        private static void DumpErrors(IList<ExtensibilityError> errors)
         {
             if (errors.Count > 0)
             {
@@ -334,7 +339,7 @@ namespace Cheburashka.Tests
             return sb.ToString();
         }
 
-        private void AppendOneProblemItem(StringBuilder sb, string name, string content)
+        private static void AppendOneProblemItem(StringBuilder sb, string name, string content)
         {
             sb.AppendLine(string.Format(CultureInfo.CurrentCulture, "{0}: {1}", name, content));
         }

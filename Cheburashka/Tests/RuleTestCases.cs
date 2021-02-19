@@ -63,7 +63,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidBareReturnRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -87,7 +87,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidBareReturnRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -109,7 +109,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidBareReturnRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -132,7 +132,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidGotoRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -154,7 +154,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidGotoRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -177,7 +177,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidDirectUseOfRowcountRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -199,7 +199,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidDirectUseOfRowcountRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -222,7 +222,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceCaptureSPReturnStatusRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -244,7 +244,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceCaptureSPReturnStatusRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -267,7 +267,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceTryCatchRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -289,7 +289,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceTryCatchRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -312,7 +312,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceReturnRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -334,7 +334,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceReturnRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -357,7 +357,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -379,7 +379,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -402,7 +402,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedTableVariableRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -425,7 +425,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedTableVariableRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -449,7 +449,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //                nameof(AvoidUnusedTableVariableRule),
                 "AvoidUnusedTableVariable_MixedCaseVariableNamesRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" }, // no BIN case for obvious reasons
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" }, // no BIN case for obvious reasons
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -473,7 +473,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedParameterRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -495,7 +495,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUnusedParameterRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -519,7 +519,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //                nameof(AvoidUnusedParameterRule),
                 "AvoidUnusedParameter_MixedCaseVariableNamesRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },  // no BIN test cases for obvious reasons
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },  // no BIN test cases for obvious reasons
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -542,7 +542,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidWriteOnlyVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -565,7 +565,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidWriteOnlyVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -589,7 +589,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //nameof(AvoidWriteOnlyVariablesRule),
                 "AvoidWriteOnlyVariables_MixedCaseVariableNamesRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },  // obviously can't test the BIN case
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },  // obviously can't test the BIN case
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -612,7 +612,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUninitialisedVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100
                 ))
             {
@@ -635,7 +635,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidUninitialisedVariablesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100
                 ))
             {
@@ -660,7 +660,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //nameof(AvoidUninitialisedVariablesRule),
                 "AvoidUninitialisedVariables_MixedCaseVariableNamesRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100
             ))
             {
@@ -684,7 +684,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidOnePartNamesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -708,7 +708,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidOnePartNamesRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -733,7 +733,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforcePrimaryKeyRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -757,7 +757,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforcePrimaryKeyRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -780,7 +780,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceNamedConstraintRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -802,7 +802,7 @@ namespace Cheburashka.Tests
                 using (BaselinedRuleTest test = new BaselinedRuleTest(
                     TestContext,
                     nameof(EnforceNamedConstraintRule),
-                    new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                    new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                     SqlServerVersion.Sql110
                     )) {
                     // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -825,7 +825,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceClusteredIndexRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -847,7 +847,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceClusteredIndexRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -870,7 +870,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueConstraintHasNoNullColumnsRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -892,7 +892,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueConstraintHasNoNullColumnsRule),
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -915,7 +915,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueConstraintHasNoNullColumns_MixedCaseRule",
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -939,7 +939,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueIndexHasNoNullColumnsRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -961,7 +961,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueIndexHasNoNullColumnsRule),
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -984,7 +984,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueIndexHasNoNullColumns_MixedCaseRule",
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1009,7 +1009,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1033,7 +1033,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1057,7 +1057,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueKeysAreNotDuplicatedRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1081,7 +1081,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueKeysAreNotDuplicatedRule),
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1106,7 +1106,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueKeysAreNotDuplicated_MixedCaseRule",
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1132,7 +1132,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceIndexKeyColumnSeparationRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1156,7 +1156,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceIndexKeyColumnSeparationRule),
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1181,7 +1181,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "EnforceIndexKeyColumnSeparation_MixedCaseRule",
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1208,7 +1208,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
                 "CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule",
-                new TSqlModelOptions() { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1232,7 +1232,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidNullLiteralRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1254,7 +1254,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidNullLiteralRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1277,7 +1277,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(DisallowAllCodeManipulationOfProjectDefinedObjectsRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1299,7 +1299,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(DisallowAllCodeManipulationOfProjectDefinedObjectsRule),
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1321,7 +1321,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1343,7 +1343,7 @@ namespace Cheburashka.Tests
         //    using (BaselinedRuleTest test = new BaselinedRuleTest(
         //        TestContext,
         //        "BigTestDb",
-        //        new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+        //        new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
         //        SqlServerVersion.Sql150))
         //    {
         //        // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1373,8 +1373,8 @@ namespace Cheburashka.Tests
         {
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                "DisallowUseOfSp_ReNameRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                nameof(DisallowUseOfSp_ReNameRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1396,8 +1396,8 @@ namespace Cheburashka.Tests
         {
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                "DisallowUseOfSp_ReNameRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_BIN" },
+                nameof(DisallowUseOfSp_ReNameRule),
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1420,7 +1420,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "DisallowUseOfSp_ReName_MixedCaseRule",
-                new TSqlModelOptions() { Collation = "Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100))
             {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification

@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="BaselinedRuleTest.cs" />
     <Compile Include="DisposableList.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RuleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleTestCases.cs" />
