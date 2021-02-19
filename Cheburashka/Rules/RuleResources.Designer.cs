@@ -448,7 +448,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tables should normally have a Foreign Key to at least one other table..
+        ///   Looks up a localized string similar to Tables should normally have a Foreign Key relationship with at least one other table..
         /// </summary>
         internal static string EnforceForeignKey_RuleName {
             get {

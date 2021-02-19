@@ -253,7 +253,7 @@
     <value>Table with no Foreign Key relationships was found in {0}.</value>
   </data>
   <data name="EnforceForeignKey_RuleName" xml:space="preserve">
-    <value>Tables should normally have a Foreign Key to at least one other table.</value>
+    <value>Tables should normally have a Foreign Key relationship with at least one other table.</value>
   </data>
   <data name="EnforceIndexKeyColumnSeparation_ProblemDescription" xml:space="preserve">
     <value>Index with a key that is just a subset or permutation of another key  found in {0}.</value>

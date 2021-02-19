@@ -152,8 +152,8 @@ namespace Cheburashka
         public const string DisallowUseOfSp_ReName_ProblemDescription                               = "DisallowUseOfSp_ReName_ProblemDescription";
 
 
-        public const string EnforceForeignKey_RuleName                      = "EnforceForeignKey_RuleName";
-        public const string EnforceForeignKey_RuleProblemDescription        = "EnforceForeignKey_RuleProblemDescription";
+        public const string EnforceForeignKey_RuleName                  = "EnforceForeignKey_RuleName";
+        public const string EnforceForeignKey_ProblemDescription        = "EnforceForeignKey_RuleProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

@@ -122,6 +122,7 @@
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
     <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />
