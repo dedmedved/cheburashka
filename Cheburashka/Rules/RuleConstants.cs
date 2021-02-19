@@ -65,6 +65,8 @@ namespace Cheburashka
         public const string AvoidNullLiteral_RuleId                             = "Cheburashka.DM0030";
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleId   = "Cheburashka.DM0031";
         public const string DisallowUseOfSp_ReName_RuleId                               = "Cheburashka.DM0032";
+        public const string EnforceForeignKey_RuleId                                    = "Cheburashka.DM0033";
+
 
         public const string AvoidUnusedVariables_RuleName = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription = "AvoidUnusedVariables_ProblemDescription";
@@ -150,6 +152,8 @@ namespace Cheburashka
         public const string DisallowUseOfSp_ReName_ProblemDescription                               = "DisallowUseOfSp_ReName_ProblemDescription";
 
 
+        public const string EnforceForeignKey_RuleName                      = "EnforceForeignKey_RuleName";
+        public const string EnforceForeignKey_RuleProblemDescription        = "EnforceForeignKey_RuleProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)
