@@ -34,10 +34,11 @@ using System.Text;
 namespace Cheburashka.Tests
 {
     /// <summary>
-    /// A baselined rule test reads input scripts from a folder, and verifies the output of the test against
-    /// 
+    /// <para>A baselined rule test reads input scripts from a folder, and verifies the output of the test against</para>
+    /// <para>
     /// An interesting learning challenge would be to add support for running the baselined test against a dacpac model
     /// rather than a scripted model - this is left as a suggested exercise for now.
+    /// </para>
     /// </summary>
     public class BaselinedRuleTest : RuleTest
     {
@@ -48,12 +49,12 @@ namespace Cheburashka.Tests
         private const string SqlExt = ".sql";
 
         /// <summary>
-        /// Creates a new base-lined test. The input files and baseline file will be loaded from 
-        /// the 
+        /// Creates a new base-lined test. The input files and baseline file will be loaded from
+        /// the
         /// </summary>
         public BaselinedRuleTest(
-            TestContext testContext, 
-            string testName, 
+            TestContext testContext,
+            string testName,
             TSqlModelOptions databaseOptions,
             SqlServerVersion sqlVersion)
             : base(new List<Tuple<string, string>>(), databaseOptions, sqlVersion)
@@ -114,23 +115,20 @@ namespace Cheburashka.Tests
             DirectoryInfo di = new DirectoryInfo(ScriptsFolder);
             var scriptFilepaths = from file in di.GetFiles("*" + SqlExt)
                                   where SqlExt.Equals(file.Extension, StringComparison.OrdinalIgnoreCase)
-                                  select file.FullName;               
-                
+                                  select file.FullName;
+
             foreach(string scriptFile in scriptFilepaths)
             {
                 try
                 {
                     string contents = RuleTestUtils.ReadFileToString(scriptFile);
                     TestScripts.Add(Tuple.Create(contents, scriptFile));
-                    Console.WriteLine("Test script file '{0}' loaded", scriptFile);
+                    Console.WriteLine($"Test script file '{scriptFile}' loaded");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(
-                        "Error reading from file '{0}', message is '{1}'. Continuing processing since missing files treated as warning for test",
-                        scriptFile, 
-                        ex.Message);
-                }                
+                    Console.WriteLine($"Error reading from file '{scriptFile}', message is '{ex.Message}'. Continuing processing since missing files treated as warning for test");
+                }
             }
         }
 
@@ -177,6 +175,5 @@ namespace Cheburashka.Tests
             }
             return loadedTestScriptFilesStringBuilder.ToString();
         }
-
     }
 }

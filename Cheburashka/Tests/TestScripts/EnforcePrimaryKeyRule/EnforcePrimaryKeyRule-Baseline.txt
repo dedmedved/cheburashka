@@ -7,3 +7,12 @@ Start line: 1
 Start column: 1
 ========end of problem========
 
+Problem description: Table with no Primary Key was found in [dbo].[EnforcePrimaryKeyRule_Table_Without_PK_No_Schema].
+FullID: Cheburashka.DM0011
+Severity: Warning
+Model element: dbo.EnforcePrimaryKeyRule_Table_Without_PK_No_Schema
+Script file: EnforcePrimaryKeyRule_Table_Without_PK_No_Schema.sql
+Start line: 1
+Start column: 1
+========end of problem========
+

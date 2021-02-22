@@ -249,6 +249,12 @@
   <data name="EnforceForeignKeyIsIndexed_RuleName" xml:space="preserve">
     <value>Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken.</value>
   </data>
+  <data name="EnforceForeignKey_ProblemDescription" xml:space="preserve">
+    <value>Table with no Foreign Key relationships was found in {0}.</value>
+  </data>
+  <data name="EnforceForeignKey_RuleName" xml:space="preserve">
+    <value>Tables should normally have a Foreign Key relationship with at least one other table.</value>
+  </data>
   <data name="EnforceIndexKeyColumnSeparation_ProblemDescription" xml:space="preserve">
     <value>Index with a key that is just a subset or permutation of another key  found in {0}.</value>
   </data>

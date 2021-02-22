@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -122,6 +123,7 @@
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
     <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
     <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />

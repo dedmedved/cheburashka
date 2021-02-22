@@ -439,6 +439,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table with no Foreign Key relationships was found in {0}..
+        /// </summary>
+        internal static string EnforceForeignKey_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceForeignKey_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tables should normally have a Foreign Key relationship with at least one other table..
+        /// </summary>
+        internal static string EnforceForeignKey_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceForeignKey_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Foreign Key with no supporting index found in {0}..
         /// </summary>
         internal static string EnforceForeignKeyIsIndexed_ProblemDescription {

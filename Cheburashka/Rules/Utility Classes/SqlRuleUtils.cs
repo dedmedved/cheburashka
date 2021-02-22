@@ -31,7 +31,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using static System.String;
 
-
 namespace Cheburashka
 {
     public static class SqlRuleUtils
@@ -107,6 +106,7 @@ namespace Cheburashka
 
         //need to double-check these and pick them up dynamically if possible from master/msdb dacpacs
         private static List<String> _ss2008R2SystemObjectNames = new List<String>();
+
         /// <summary>
         /// Determine if an sp needs to have its return value checked.
         /// </summary>
@@ -115,7 +115,6 @@ namespace Cheburashka
         {
             return StoredProceduresOfWhichWeIgnoreTheReturnStatus.Contains(GetNormalisedName(objectName), SqlComparer.Comparer);
         }
-
 
         /// <summary>
         /// Determine if a database name is a builtin system object that needs no schema qualification when 
@@ -127,7 +126,6 @@ namespace Cheburashka
             return SystemTablesThatNeedNoSchemaQualification.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
         }
 
-
         /// <summary>
         /// Set Builtin datatypes
         /// </summary>
@@ -138,7 +136,6 @@ namespace Cheburashka
             SqlRuleUtils._builtinDataTypes = allSysObjects.Select(n => n.Name.Parts[0]).ToList();
             return;
         }
-
 
         /// <summary>
         /// Determine if a datatype name is a builtin datatype.
@@ -157,7 +154,6 @@ namespace Cheburashka
         public static bool IsSystemDatabaseThatNeedNoSchemaQualification(string objectName)
         {
             return SystemDatabasesThatNeedNoSchemaQualification.Contains(GetNormalisedName(objectName), SqlComparer.Comparer);
-
         }
 
         /// <summary>
@@ -198,7 +194,6 @@ namespace Cheburashka
             return BuiltinDataTypesThatParseAsIdentifiers.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
         }
 
-
         /// <summary>
         /// Determine if 'something' is a builtin aggregate function.
         /// This ought to include user-defined functions too.  But that's too hard. way too hard.
@@ -209,7 +204,6 @@ namespace Cheburashka
             return BuiltinAggregateFunctions.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
         }
 
-
         /// <summary>
         /// Determine if an unquoted literal name-like object is a datepart name
         /// This really ought to be a context dependent check.  But that's too hard.
@@ -219,8 +213,6 @@ namespace Cheburashka
         {
             return DateParts.Contains(GetNormalisedName(objectName), StringComparer.InvariantCultureIgnoreCase);
         }
-
-
 
         /// <summary>
         /// Gather all the occurrences of CTEs.
@@ -255,7 +247,6 @@ namespace Cheburashka
             List<CteUtil> mCteUtilFragments = mvisitor.CteUtilFragments;
             bits.AddRange(mCteUtilFragments);
 
-
             return bits.ToList().AsReadOnly();
         }
 
@@ -284,13 +275,12 @@ namespace Cheburashka
 
             return schema;
         }
+
         public static bool EmptySchemaNameInLiteral(this string sLit)
         {
             var schema = sLit.ExtractSchemaNameFromLiteralString();
             bool emptySchema = schema == "" || schema == "[]" || schema == @"""";
             return emptySchema;
         }
-
-
     }
 }
