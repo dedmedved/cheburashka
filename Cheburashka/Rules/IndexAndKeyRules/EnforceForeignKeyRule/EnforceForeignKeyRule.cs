@@ -103,18 +103,39 @@ namespace Cheburashka
             bool bFoundForeignKey = false;
 
             foreach (var thing in allFKs)   {
-                if (!bFoundForeignKey) {
-                    TSqlObject tab = thing.GetReferenced(ForeignKeyConstraint.Host).ToList()[0];
-                    TSqlObject tab2 = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList()[0];
+                if (!bFoundForeignKey)
+                {
+                    TSqlObject tab;
 
-                    if (    (   tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                        &&      tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
-                        ||  (   tab2.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                        &&      tab2.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
-                        )
+                    TSqlObject tab2;
+
+                    try
                     {
-                        bFoundForeignKey = true;
-                        //break;
+                        tab = thing.GetReferenced(ForeignKeyConstraint.Host).ToList()[0];
+                    }
+                    finally
+                    {
+                    }
+
+                    try
+                    {
+                        tab2 = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList()[0];
+                    }
+                    finally
+                    {
+                    }
+
+                    if (!(tab is null ) && !(tab2 is null))
+                    {
+                        if ((tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                             && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
+                            || (tab2.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                                && tab2.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
+                        )
+                        {
+                            bFoundForeignKey = true;
+                            //break;
+                        }
                     }
                 }
             }
