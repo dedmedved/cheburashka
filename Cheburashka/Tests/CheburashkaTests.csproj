@@ -1098,10 +1098,31 @@
     <Content Include="TestScripts\EnforceNamedConstraintRule\EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule_Table_Without_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule_Table_Without_FK_No_Schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule_Table_With_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule_Table_With_FK_No_Schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_Without_PK_No_Schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_Without_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK_No_Schema.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK.sql">

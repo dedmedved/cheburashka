@@ -96,6 +96,7 @@ namespace Cheburashka
             string owningObjectTable = modelElement.Name.Parts[1];
 
             DMVSettings.RefreshModelBuiltInCache(model);
+            DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
             var allFKs = DMVSettings.GetForeignKeys;// model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
 

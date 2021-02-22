@@ -1,0 +1,36 @@
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_Table_Without_FK].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_Table_Without_FK
+Script file: EnforceForeignKeyRule_Table_Without_FK.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_Table_Without_FK_Child].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_Child
+Script file: EnforceForeignKeyRule_Table_Without_FK.sql
+Start line: 5
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_Table_Without_FK_No_Schema].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_No_Schema
+Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_Table_Without_FK_No_Schema_Child].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_No_Schema_Child
+Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.sql
+Start line: 5
+Start column: 1
+========end of problem========
+

@@ -153,7 +153,7 @@ namespace Cheburashka
 
 
         public const string EnforceForeignKey_RuleName                  = "EnforceForeignKey_RuleName";
-        public const string EnforceForeignKey_ProblemDescription        = "EnforceForeignKey_RuleProblemDescription";
+        public const string EnforceForeignKey_ProblemDescription        = "EnforceForeignKey_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)
