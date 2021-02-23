@@ -5,6 +5,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1b1e030e_002Defc1_002D4cd5_002D963d_002Df394d1359ca7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EnforceForeignKey_BIN" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKey_BIN&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.AvoidUnusedVariables_CI_AI&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

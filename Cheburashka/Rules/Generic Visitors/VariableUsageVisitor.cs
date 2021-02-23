@@ -53,7 +53,7 @@ namespace Cheburashka
                 foreach (var p in node.Parameters) {
 //                                        p.SQLModel_DebugPrint(@"C:\temp\p.out");
                     var matches = new List<VariableReference>();
-                    if (p.ScriptTokenStream[p.FirstTokenIndex].TokenType == TSqlTokenType.AsciiStringLiteral) {
+//                    if (p.ScriptTokenStream[p.FirstTokenIndex].TokenType == TSqlTokenType.AsciiStringLiteral) { //stopped working on upgrade to DAcFx.150.4897.1
                         foreach (Match match in sqlVariableRegex.Matches(p.ScriptTokenStream[p.FirstTokenIndex].Text)) {
                                                         //match.Value.SQLModel_DebugPrint(@"C:\temp\p.out");
                                                         //match.Groups[1].Captures[0].Value.SQLModel_DebugPrint(@"C:\temp\p.out");
@@ -63,7 +63,7 @@ namespace Cheburashka
                             matches.Add(x);
                             VariableReferences.Add(x);
                         }
-                    }
+//                    }
                 }
             }
             node.AcceptChildren(this);
