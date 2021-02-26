@@ -32,7 +32,7 @@ namespace Cheburashka
 //        static Regex sqlVariableRegex = new Regex("(sql:variable(\"@\\w*?\"))");
         //        static Regex sqlVariableRegex = new Regex("variable");
 
-        static Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
+        static readonly Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
 
         public VariableUsageVisitor()
         {
@@ -58,8 +58,7 @@ namespace Cheburashka
                                                         //match.Value.SQLModel_DebugPrint(@"C:\temp\p.out");
                                                         //match.Groups[1].Captures[0].Value.SQLModel_DebugPrint(@"C:\temp\p.out");
                             var variableName = match.Groups[1].Captures[0].Value;
-                            var x = new VariableReference();
-                            x.Name = variableName;
+                            var x = new VariableReference { Name = variableName };
                             matches.Add(x);
                             VariableReferences.Add(x);
                         }

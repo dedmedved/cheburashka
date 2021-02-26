@@ -38,7 +38,7 @@ namespace Cheburashka
         }
         public SQLExpressionDependency(VariableReference variable, TSqlFragment context = null, String contextClass = null)
         {
-            if (variable == null) throw new ArgumentNullException("variable");
+            if (variable is null) throw new ArgumentNullException(nameof(variable));
             Variable = variable;
             _dependencies = new List<VariableReference>();
             Context = context;
@@ -61,7 +61,7 @@ namespace Cheburashka
 
         public void AddDependency(VariableReference variable)
         {
-            if (variable == null) throw new ArgumentNullException("variable");
+            if (variable == null) throw new ArgumentNullException(nameof(variable));
             _dependencies.Add(variable);
         }
         public void AddDependencies(IList<VariableReference> variables)

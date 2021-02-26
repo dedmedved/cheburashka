@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class CheckUniqueIndexHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<ColumnWithSortOrder> _objects;
+        private readonly List<ColumnWithSortOrder> _objects;
 
         #region ctor
         public CheckUniqueIndexHasNoNullColumnsVisitor()

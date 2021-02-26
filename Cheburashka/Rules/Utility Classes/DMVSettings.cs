@@ -37,7 +37,7 @@ namespace Cheburashka
         private static readonly int                      _CacheRefreshIntervalSeconds = 15;
 
         private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
-        private static DateTime                 _lastInsertColumnCacheRefresh;
+        private static readonly DateTime                 _lastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
         public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
@@ -45,13 +45,13 @@ namespace Cheburashka
 
         //private static IEnumerable<TSqlObject>  _builtinDataTypes;
 
-        private static IEnumerable<TSqlObject>              ts;
-        private static IEnumerable<TSqlObject>              vs;
+        private static readonly IEnumerable<TSqlObject>              ts;
+        private static readonly IEnumerable<TSqlObject>              vs;
 
-        private static IEnumerable<TSqlObject>              tables;
-        private static IEnumerable<TSqlObject>              views;
+        private static readonly IEnumerable<TSqlObject>              tables;
+        private static readonly IEnumerable<TSqlObject> views;
 
-        private static Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
+        private static readonly Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
 
         private static IList<TSqlObject>              _tablesCache;
         private static IList<TSqlObject>              _indexesCache;

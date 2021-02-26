@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class AlterTableConstraintModificationStatementVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<AlterTableConstraintModificationStatement> _objects;
+        private readonly List<AlterTableConstraintModificationStatement> _objects;
 
         #region ctor
         public AlterTableConstraintModificationStatementVisitor()

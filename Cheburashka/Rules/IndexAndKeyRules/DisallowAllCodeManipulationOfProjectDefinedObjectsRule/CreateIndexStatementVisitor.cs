@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class CreateIndexStatementVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<CreateIndexStatement> _objects;
+        private readonly List<CreateIndexStatement> _objects;
 
         #region ctor
         public CreateIndexStatementVisitor()

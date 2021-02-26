@@ -31,7 +31,7 @@ namespace Cheburashka
 
     internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<ColumnWithSortOrder> _objects;
+        private readonly List<ColumnWithSortOrder> _objects;
 
         #region ctor
         public CheckUniqueConstraintHasNoNullColumnsVisitor()

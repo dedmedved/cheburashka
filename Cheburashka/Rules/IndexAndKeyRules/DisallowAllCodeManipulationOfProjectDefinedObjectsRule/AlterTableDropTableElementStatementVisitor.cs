@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class AlterTableDropTableElementStatementVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<AlterTableDropTableElementStatement> _objects;
+        private readonly List<AlterTableDropTableElementStatement> _objects;
 
         #region ctor
         public AlterTableDropTableElementStatementVisitor()

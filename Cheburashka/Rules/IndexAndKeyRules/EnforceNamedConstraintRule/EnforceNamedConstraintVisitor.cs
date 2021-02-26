@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class EnforceNamedConstraintVisitor: TSqlConcreteFragmentVisitor
     {
-        private List<ConstraintDefinition > _constraints;
+        private readonly List<ConstraintDefinition > _constraints;
         public EnforceNamedConstraintVisitor()
         {
             _constraints = new List<ConstraintDefinition>();

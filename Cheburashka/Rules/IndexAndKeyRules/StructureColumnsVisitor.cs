@@ -33,7 +33,7 @@ namespace Cheburashka
 
     internal class StructureColumnsVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<String> _objects;
+        private readonly List<String> _objects;
 
         public StructureColumnsVisitor()
         {

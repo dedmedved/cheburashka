@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class EnforceNamedConstraintDeclareTableVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _objects;
+        private readonly List<TSqlFragment> _objects;
         
         public EnforceNamedConstraintDeclareTableVisitor()
         {

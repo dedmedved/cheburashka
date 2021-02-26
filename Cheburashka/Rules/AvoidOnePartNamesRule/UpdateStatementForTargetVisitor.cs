@@ -29,7 +29,7 @@ namespace Cheburashka
 
     internal class UpdateStatementForTargetVisitor : TSqlConcreteFragmentVisitor
     {
-        private IList<TableReference> _dataModificationTargets;
+        private readonly IList<TableReference> _dataModificationTargets;
 
         public UpdateStatementForTargetVisitor()
         {
