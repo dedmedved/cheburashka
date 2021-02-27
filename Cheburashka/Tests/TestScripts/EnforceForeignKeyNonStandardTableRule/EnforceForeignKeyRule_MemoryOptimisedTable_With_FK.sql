@@ -9,6 +9,3 @@ create table dbo.EnforceForeignKeyRule_MemoryOptimisedTable_With_FK_Child (a int
 )
 WITH (MEMORY_OPTIMIZED = ON, DURABILITY = SCHEMA_AND_DATA)
 go
-
--- as of today 23/02/2021 SSDT doesn't support temp/generic system_versioing history tables - ie 
--- a name needs to be given for HISTORY_TABLE

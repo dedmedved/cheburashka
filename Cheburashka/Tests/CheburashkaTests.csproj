@@ -1045,6 +1045,7 @@
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyNonStandardTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_GraphTable_WithOut_FK.sql" />
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_FileTable_WithOut_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
