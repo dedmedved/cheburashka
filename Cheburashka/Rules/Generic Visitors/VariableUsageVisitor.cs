@@ -32,7 +32,7 @@ namespace Cheburashka
 //        static Regex sqlVariableRegex = new Regex("(sql:variable(\"@\\w*?\"))");
         //        static Regex sqlVariableRegex = new Regex("variable");
 
-        static Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
+        static readonly Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
 
         public VariableUsageVisitor()
         {
@@ -53,13 +53,12 @@ namespace Cheburashka
                 foreach (var p in node.Parameters) {
 //                                        p.SQLModel_DebugPrint(@"C:\temp\p.out");
                     var matches = new List<VariableReference>();
-                    if (p.ScriptTokenStream[p.FirstTokenIndex].TokenType == TSqlTokenType.AsciiStringLiteral) {
+                    if (p.ScriptTokenStream[p.FirstTokenIndex].TokenType == TSqlTokenType.AsciiStringLiteral) { //stopped working on upgrade to DAcFx.150.4897.1
                         foreach (Match match in sqlVariableRegex.Matches(p.ScriptTokenStream[p.FirstTokenIndex].Text)) {
                                                         //match.Value.SQLModel_DebugPrint(@"C:\temp\p.out");
                                                         //match.Groups[1].Captures[0].Value.SQLModel_DebugPrint(@"C:\temp\p.out");
                             var variableName = match.Groups[1].Captures[0].Value;
-                            var x = new VariableReference();
-                            x.Name = variableName;
+                            var x = new VariableReference { Name = variableName };
                             matches.Add(x);
                             VariableReferences.Add(x);
                         }

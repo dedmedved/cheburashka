@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class AlterIndexStatementVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<AlterIndexStatement> _objects;
+        private readonly List<AlterIndexStatement> _objects;
 
         #region ctor
         public AlterIndexStatementVisitor()

@@ -28,7 +28,7 @@ namespace Cheburashka
 
     internal class DeleteWithCTEVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<CteUtil> _targets;
+        private readonly List<CteUtil> _targets;
 
         #region ctor
         public DeleteWithCTEVisitor()

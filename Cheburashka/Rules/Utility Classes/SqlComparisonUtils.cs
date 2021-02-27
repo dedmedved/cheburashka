@@ -416,7 +416,7 @@ namespace Cheburashka
             //Check whether the compared objects reference the same data.
             if (ReferenceEquals(x, y)) return true;
             //Check whether any of the compared objects is null.
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
             //Check whether the sql token ranges are equal.
             return (SqlComparisonUtils.SQLModel_Equals(x, y));
@@ -428,7 +428,7 @@ namespace Cheburashka
         public int GetHashCode(VariableReference sql)
         {
             //Check whether the object is null
-            if (ReferenceEquals(sql, null)) return 0;
+            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.FirstTokenIndex;
         }
@@ -442,7 +442,7 @@ namespace Cheburashka
             //Check whether the compared objects reference the same data.
             if (ReferenceEquals(x, y)) return true;
             //Check whether any of the compared objects is null.
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
             //Check whether the sql token ranges are equal.
             return (SqlComparisonUtils.SQLModel_Equals(x, y));
@@ -454,7 +454,7 @@ namespace Cheburashka
         public int GetHashCode(Literal sql)
         {
             //Check whether the object is null
-            if (ReferenceEquals(sql, null)) return 0;
+            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.FirstTokenIndex;
         }
@@ -469,7 +469,7 @@ namespace Cheburashka
             //Check whether the compared objects reference the same data.
             if (ReferenceEquals(x, y)) return true;
             //Check whether any of the compared objects is null.
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
             //Check whether the sql token ranges are equal.
             return (SqlComparisonUtils.SQLModel_Equals(x.Column.MultiPartIdentifier[0], y.Column.MultiPartIdentifier[0]));
@@ -481,7 +481,7 @@ namespace Cheburashka
         public int GetHashCode(ColumnWithSortOrder sql)
         {
             //Check whether the object is null
-            if (ReferenceEquals(sql, null)) return 0;
+            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.FirstTokenIndex;
         }
@@ -495,7 +495,7 @@ namespace Cheburashka
             //Check whether the compared objects reference the same data.
             if (ReferenceEquals(x, y)) return true;
             //Check whether any of the compared objects is null.
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
             //Check whether the sql token ranges are equal.
             return (x.SQLModel_StringCompareEqual(y));
@@ -507,7 +507,7 @@ namespace Cheburashka
         public int GetHashCode(String sql)
         {
             //Check whether the object is null
-            if (ReferenceEquals(sql, null)) return 0;
+            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.GetHashCode();
         }

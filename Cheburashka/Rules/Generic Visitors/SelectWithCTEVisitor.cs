@@ -29,7 +29,7 @@ namespace Cheburashka
 
     internal class SelectWithCTEVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<CteUtil> _targets;
+        private readonly List<CteUtil> _targets;
 
         public SelectWithCTEVisitor()
         {

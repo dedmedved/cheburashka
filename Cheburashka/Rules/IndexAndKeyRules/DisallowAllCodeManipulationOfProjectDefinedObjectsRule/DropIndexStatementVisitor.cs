@@ -30,7 +30,7 @@ namespace Cheburashka
 {
     internal class DropIndexStatementVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<DropIndexStatement> _objects;
+        private readonly List<DropIndexStatement> _objects;
 
         #region ctor
         public DropIndexStatementVisitor()

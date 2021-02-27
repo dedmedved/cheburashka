@@ -28,7 +28,7 @@ namespace Cheburashka
 {
     internal class ParameterDeclarationVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<ProcedureParameter> _targets;
+        private readonly List<ProcedureParameter> _targets;
 
         #region ctor
         public ParameterDeclarationVisitor()

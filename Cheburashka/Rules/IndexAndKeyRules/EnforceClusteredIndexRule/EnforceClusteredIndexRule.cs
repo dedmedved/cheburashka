@@ -97,8 +97,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(model);
 
-            TSqlObject clusteredIndex = null;
-           
+            TSqlObject clusteredIndex;
             bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
