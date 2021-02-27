@@ -45,68 +45,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DotParser.1.1.0\lib\net461\DotParser.dll</HintPath>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharp.Core.5.0.1\lib\netstandard2.0\FSharp.Core.dll</HintPath>
+    <Reference Include="Microsoft.Data.Tools.Utilities">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="FSharpx.Collections.Experimental, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharpx.Collections.Experimental.2.1.3\lib\net45\FSharpx.Collections.Experimental.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Dac">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
     </Reference>
-    <Reference Include="FSharpx.Core, Version=1.8.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FSharpx.Core.1.8.32\lib\40\FSharpx.Core.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Tools.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4897.1\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Dac, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4897.1\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4897.1\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4897.1\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.x64.150.4897.1\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.4897.1\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YC.QuickGraph, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.Data, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.FSA, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.FSA.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.FST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.FST.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.Glee, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.Glee.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.Graphviz, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.Graphviz.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraph.Petri, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraph.Petri.dll</HintPath>
-    </Reference>
-    <Reference Include="YC.QuickGraphFS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YC.QuickGraph.3.7.4\lib\net45\YC.QuickGraphFS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -1080,9 +1045,10 @@
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyNonStandardTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_With_FK.sql">
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_MemoryOptimisedTable_With_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_With_FK.sql" />
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1192,7 +1158,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\codecracker.CSharp.1.1.0\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
   </ItemGroup>
@@ -1237,14 +1202,6 @@
     </When>
     <When Condition="$(VisualStudioVersion) == '16.0'">
       <ItemGroup>
-        <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
           <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
           <Private>True</Private>
