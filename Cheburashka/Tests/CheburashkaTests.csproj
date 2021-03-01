@@ -1114,7 +1114,9 @@
     <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_MemoryOptimisedTable_With_PK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_TemporalTable_WithOut_PK.sql" />
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_TemporalTable_WithOut_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_TemporalTable_With_PK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1125,6 +1127,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_Without_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK_Added.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK_No_Schema.sql">

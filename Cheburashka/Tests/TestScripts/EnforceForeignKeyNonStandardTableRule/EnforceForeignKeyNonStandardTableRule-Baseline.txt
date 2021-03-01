@@ -16,3 +16,57 @@ Start line: 6
 Start column: 1
 ========end of problem========
 
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_WithOut_FK].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK
+Script file: EnforceForeignKeyRule_TemporalTable_WithOut_FK.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_WithOut_FK_Child].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK_Child
+Script file: EnforceForeignKeyRule_TemporalTable_WithOut_FK.sql
+Start line: 9
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_With_FK_Child_History].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_With_FK_Child_History
+Script file: dbo.EnforceForeignKeyRule_TemporalTable_With_FK_Child_History
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_With_FK_History].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_With_FK_History
+Script file: dbo.EnforceForeignKeyRule_TemporalTable_With_FK_History
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_WithOut_FK_Child_History].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK_Child_History
+Script file: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK_Child_History
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_TemporalTable_WithOut_FK_History].
+FullID: Cheburashka.DM0033
+Severity: Warning
+Model element: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK_History
+Script file: dbo.EnforceForeignKeyRule_TemporalTable_WithOut_FK_History
+Start line: 1
+Start column: 1
+========end of problem========
+

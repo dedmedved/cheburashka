@@ -89,10 +89,17 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-            if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode == true || createTableStatement.AsEdge == true || createTableStatement.AsFileTable == true))
+            bool bFoundPrimaryKey = false;
+
+            if (sqlFragment is CreateTableStatement createTableStatement)
             {
-                return problems;
+                if (createTableStatement.AsNode == true || createTableStatement.AsEdge == true ||
+                    createTableStatement.AsFileTable == true)
+                {
+                    return problems;
+                }
             }
+
 
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
@@ -102,7 +109,7 @@ namespace Cheburashka
 
             var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
 
-            bool bFoundPrimaryKey = false;
+
 
             foreach (var thing in allPKs)   {
                 if (!bFoundPrimaryKey) {
