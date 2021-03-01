@@ -1057,8 +1057,12 @@
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_MemoryOptimisedTable_With_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_WithOut_FK.sql" />
-    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_With_FK.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_WithOut_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_With_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1093,6 +1097,25 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceForeignKeyRule\EnforceForeignKeyRule_Table_With_FK_No_Schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyNonStandardTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_FileTable_WithOut_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_GraphTable_WithOut_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_MemoryOptimisedTable_WithOut_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_MemoryOptimisedTable_With_PK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_TemporalTable_WithOut_PK.sql" />
+    <Content Include="TestScripts\EnforcePrimaryKeyNonStandardTableRule\EnforcePrimaryKeyRule_TemporalTable_With_PK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule-Baseline.txt">

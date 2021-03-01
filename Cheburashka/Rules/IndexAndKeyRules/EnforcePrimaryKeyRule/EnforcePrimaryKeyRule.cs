@@ -89,7 +89,10 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
+            if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode == true || createTableStatement.AsEdge == true || createTableStatement.AsFileTable == true))
+            {
+                return problems;
+            }
 
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
