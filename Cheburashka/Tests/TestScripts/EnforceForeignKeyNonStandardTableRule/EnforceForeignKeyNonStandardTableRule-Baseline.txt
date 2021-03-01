@@ -1,18 +1,18 @@
-Problem description: Table with no Foreign Key relationships was found in [dbo].[sample_nodetable].
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK].
 FullID: Cheburashka.DM0033
 Severity: Warning
-Model element: dbo.sample_nodetable
-Script file: EnforceForeignKeyRule_GraphTable_WithOut_FK.sql
+Model element: dbo.EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK
+Script file: EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK.sql
 Start line: 1
 Start column: 1
 ========end of problem========
 
-Problem description: Table with no Foreign Key relationships was found in [dbo].[sample_edgetable].
+Problem description: Table with no Foreign Key relationships was found in [dbo].[EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK_Child].
 FullID: Cheburashka.DM0033
 Severity: Warning
-Model element: dbo.sample_edgetable
-Script file: EnforceForeignKeyRule_GraphTable_WithOut_FK.sql
-Start line: 7
+Model element: dbo.EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK_Child
+Script file: EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK.sql
+Start line: 6
 Start column: 1
 ========end of problem========
 

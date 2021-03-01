@@ -1051,9 +1051,13 @@
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_FileTable_WithOut_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_MemoryOptimisedTable_WithOut_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_MemoryOptimisedTable_With_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_WithOut_FK.sql" />
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyRule_TemporalTable_With_FK.sql" />
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
