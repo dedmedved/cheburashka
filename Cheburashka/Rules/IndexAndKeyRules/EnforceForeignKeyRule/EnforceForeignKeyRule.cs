@@ -135,25 +135,25 @@ namespace Cheburashka
                     var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
                     var foreignTable = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
 
-                    var tables = thing.GetReferencedRelationshipInstances().ToList()
-                        .Where(n => n.Object.ObjectType.Name == "Table").ToList();
-                    var tab = tables[0];
-                    var tab2 = tables[1];
+                    //var tables = thing.GetReferencedRelationshipInstances().ToList()
+                    //    .Where(n => n.Object.ObjectType.Name == "Table").ToList();
+                    //var tab = tables[0];
+                    //var tab2 = tables[1];
 
- //                 if (host.Count > 0 && foreignTable.Count > 0 )
+                  if (host.Count > 0 && foreignTable.Count > 0 )
                     {
 
-                        //var hostschema = host[0].Name.Parts[0];
-                        //var hostname = host[0].Name.Parts[1];
+                        var hostschema = host[0].Name.Parts[0];
+                        var hostname = host[0].Name.Parts[1];
 
-                        //var foreignTableschema = foreignTable[0].Name.Parts[0];
-                        //var foreignTablename = foreignTable[0].Name.Parts[1];
+                        var foreignTableschema = foreignTable[0].Name.Parts[0];
+                        var foreignTablename = foreignTable[0].Name.Parts[1];
 
-                        var hostschema = tab.ObjectName.Parts[0];
-                        var hostname = tab.ObjectName.Parts[1];
+                        //var hostschema = tab.ObjectName.Parts[0];
+                        //var hostname = tab.ObjectName.Parts[1];
 
-                        var foreignTableschema = tab2.ObjectName.Parts[0];
-                        var foreignTablename = tab2.ObjectName.Parts[1];
+                        //var foreignTableschema = tab2.ObjectName.Parts[0];
+                        //var foreignTablename = tab2.ObjectName.Parts[1];
 
 
                         if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
