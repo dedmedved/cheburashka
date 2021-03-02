@@ -22,7 +22,6 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
     internal class ReturnVisitor : TSqlConcreteFragmentVisitor
@@ -32,7 +31,7 @@ namespace Cheburashka
             ReturnStatements = new List<ReturnStatement>();
         }
 
-        public IList<ReturnStatement> ReturnStatements { get; private set; }
+        public IList<ReturnStatement> ReturnStatements { get; }
 
         public override void ExplicitVisit(ReturnStatement node)
         {
@@ -40,4 +39,3 @@ namespace Cheburashka
         }
     }
 }
- 

@@ -98,6 +98,7 @@
     <Compile Include="AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
     <Compile Include="BasicRules\AvoidNullLiteralRule.cs" />
     <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
+    <Compile Include="BasicRuleVisitors\OuterBlockVisitor.cs" />
     <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
     <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
     <Compile Include="Generic Visitors\ClrWrapperVisitor.cs" />

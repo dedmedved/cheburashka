@@ -31,7 +31,6 @@ namespace Cheburashka
         /// </summary>
         public const string ResourceBaseName = "Cheburashka.RuleResources";
 
-
         public const string AvoidUninitialisedVariables_RuleId                  = "Cheburashka.DM0001";
         public const string AvoidUnusedVariables_RuleId                         = "Cheburashka.DM0002";
         public const string AvoidWriteOnlyVariables_RuleId                      = "Cheburashka.DM0003";
@@ -52,7 +51,6 @@ namespace Cheburashka
 
         public const string EnforceNamedConstraintRuleId                        = "Cheburashka.DM0022";
 
-        
         public const string AvoidBareReturn_RuleId                              = "Cheburashka.DM0023";
         public const string AvoidDirectUseOfRowcount_RuleId                     = "Cheburashka.DM0024";
         public const string AvoidGoto_RuleId                                    = "Cheburashka.DM0025";
@@ -67,24 +65,20 @@ namespace Cheburashka
         public const string DisallowUseOfSp_ReName_RuleId                               = "Cheburashka.DM0032";
         public const string EnforceForeignKey_RuleId                                    = "Cheburashka.DM0033";
 
+        public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
+        public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
 
-        public const string AvoidUnusedVariables_RuleName = "AvoidUnusedVariables_RuleName";
-        public const string AvoidUnusedVariables_ProblemDescription = "AvoidUnusedVariables_ProblemDescription";
+        public const string AvoidWriteOnlyVariables_RuleName                            = "AvoidWriteOnlyVariables_RuleName";
+        public const string AvoidWriteOnlyVariables_ProblemDescription                  = "AvoidWriteOnlyVariables_ProblemDescription";
 
-        public const string AvoidWriteOnlyVariables_RuleName = "AvoidWriteOnlyVariables_RuleName";
-        public const string AvoidWriteOnlyVariables_ProblemDescription = "AvoidWriteOnlyVariables_ProblemDescription";
+        public const string AvoidUnusedTableVariable_RuleName                           = "AvoidUnusedTableVariable_RuleName";
+        public const string AvoidUnusedTableVariable_ProblemDescription                 = "AvoidUnusedTableVariable_ProblemDescription";
 
-        public const string AvoidUnusedTableVariable_RuleName = "AvoidUnusedTableVariable_RuleName";
-        public const string AvoidUnusedTableVariable_ProblemDescription = "AvoidUnusedTableVariable_ProblemDescription";
+        public const string AvoidUninitialisedVariables_RuleName                        = "AvoidUninitialisedVariables_RuleName";
+        public const string AvoidUninitialisedVariables_ProblemDescription              = "AvoidUninitialisedVariables_ProblemDescription";
 
-        public const string AvoidUninitialisedVariables_RuleName = "AvoidUninitialisedVariables_RuleName";
-        public const string AvoidUninitialisedVariables_ProblemDescription = "AvoidUninitialisedVariables_ProblemDescription";
-
-        public const string AvoidUnusedParameter_RuleName = "AvoidUnusedParameter_RuleName";
-        public const string AvoidUnusedParameter_ProblemDescription = "AvoidUnusedParameter_ProblemDescription";
-
-
-
+        public const string AvoidUnusedParameter_RuleName                               = "AvoidUnusedParameter_RuleName";
+        public const string AvoidUnusedParameter_ProblemDescription                     = "AvoidUnusedParameter_ProblemDescription";
 
         public const string EnforcePrimaryKey_RuleName                                      = "EnforcePrimaryKey_RuleName";
         public const string EnforcePrimaryKey_ProblemDescription                            = "EnforcePrimaryKey_ProblemDescription";
@@ -112,7 +106,6 @@ namespace Cheburashka
 
         public const string EnforceIndexKeyColumnSeparation_RuleName                        = "EnforceIndexKeyColumnSeparation_RuleName";
         public const string EnforceIndexKeyColumnSeparation_ProblemDescription              = "EnforceIndexKeyColumnSeparation_ProblemDescription";
-
 
         public const string CheckUniqueIndexHasNoNullColumns_RuleName                       = "CheckUniqueIndexHasNoNullColumns_RuleName";
         public const string CheckUniqueIndexHasNoNullColumns_ProblemDescription             = "CheckUniqueIndexHasNoNullColumns_ProblemDescription";
@@ -144,13 +137,11 @@ namespace Cheburashka
         public const string AvoidOnePartNames_RuleName                      = "AvoidOnePartNames_RuleName";
         public const string AvoidOnePartNames_ProblemDescription            = "AvoidOnePartNames_ProblemDescription";
 
-
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName             = "DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName";
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription   = "DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription";
 
         public const string DisallowUseOfSp_ReName_RuleName                                         = "DisallowUseOfSp_ReName_RuleName";
         public const string DisallowUseOfSp_ReName_ProblemDescription                               = "DisallowUseOfSp_ReName_ProblemDescription";
-
 
         public const string EnforceForeignKey_RuleName                  = "EnforceForeignKey_RuleName";
         public const string EnforceForeignKey_ProblemDescription        = "EnforceForeignKey_ProblemDescription";
@@ -179,6 +170,5 @@ namespace Cheburashka
         public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";
 
         public const string CategoryDatabaseStructures          = "CategoryDatabaseStructures";
-
     }
 }
