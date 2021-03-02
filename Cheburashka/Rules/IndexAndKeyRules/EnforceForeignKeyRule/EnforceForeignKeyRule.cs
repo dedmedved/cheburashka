@@ -108,6 +108,40 @@ namespace Cheburashka
 
             bool bFoundForeignKey = false;
 
+            Type myType = modelElement.GetType();
+            // Get the public static members for the class myString starting with the letter C.
+            MemberInfo[] myMembers = myType.GetMember("Cont*",
+                BindingFlags.Public | BindingFlags.Static);
+
+            TSqlObject table = modelElement;
+
+            // Code initializing the variable
+
+            // Get the type of retention. This can be either -1 (if Infinite)
+            // or one of the value in the TemporalRetentionPeriodUnit enum
+            var retentionUnit = table.GetProperty<int>(Table.RetentionUnit);
+
+            // Get the retention value. If retention is Infinite this will be -1
+            var retentionValue = table.GetProperty<int>(Table.RetentionValue);
+
+            // Get a reference to the main temporal table. 
+            var mainTables = table.GetReferencing(Table.TemporalSystemVersioningHistoryTable).ToList();
+            //TSqlObject mainTable;
+            //string mainTableschema ;
+            //string mainTablename ;
+            // if there is a main table
+            // this is a history table and can be ignored 'ish
+            // for the purpose of fk rules
+            if (mainTables.Count > 0)
+            {
+                return problems;
+
+                //mainTable = mainTables[0];
+                //mainTableschema = mainTable.Name.Parts[0];
+                //mainTablename = mainTable.Name.Parts[1];
+            }
+
+            //object myObject = modelElement.GetType().GetField("ContextObject.TemporalSystemVersioningCurrentTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(modelElement);
             foreach (var thing in allFKs)
             {
                 if (!bFoundForeignKey)

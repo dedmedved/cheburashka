@@ -89,6 +89,16 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            bool bFoundPrimaryKey = false;
+
+            if (sqlFragment is CreateTableStatement createTableStatement)
+            {
+                if (createTableStatement.AsNode == true || createTableStatement.AsEdge == true ||
+                    createTableStatement.AsFileTable == true)
+                {
+                    return problems;
+                }
+            }
 
 
             // Get Database Schema and name of this model element.
@@ -99,7 +109,7 @@ namespace Cheburashka
 
             var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
 
-            bool bFoundPrimaryKey = false;
+
 
             foreach (var thing in allPKs)   {
                 if (!bFoundPrimaryKey) {

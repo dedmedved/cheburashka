@@ -1,0 +1,18 @@
+Problem description: Table with no Primary Key was found in [dbo].[EnforcePrimaryKeyRule_TemporalTable_With_PK_Child_History].
+FullID: Cheburashka.DM0011
+Severity: Warning
+Model element: dbo.EnforcePrimaryKeyRule_TemporalTable_With_PK_Child_History
+Script file: dbo.EnforcePrimaryKeyRule_TemporalTable_With_PK_Child_History
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Table with no Primary Key was found in [dbo].[EnforcePrimaryKeyRule_TemporalTable_With_PK_History].
+FullID: Cheburashka.DM0011
+Severity: Warning
+Model element: dbo.EnforcePrimaryKeyRule_TemporalTable_With_PK_History
+Script file: dbo.EnforcePrimaryKeyRule_TemporalTable_With_PK_History
+Start line: 1
+Start column: 1
+========end of problem========
+
