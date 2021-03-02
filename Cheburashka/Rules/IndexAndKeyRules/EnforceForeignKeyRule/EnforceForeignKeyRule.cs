@@ -108,21 +108,7 @@ namespace Cheburashka
 
             bool bFoundForeignKey = false;
 
-            Type myType = modelElement.GetType();
-            // Get the public static members for the class myString starting with the letter C.
-            MemberInfo[] myMembers = myType.GetMember("Cont*",
-                BindingFlags.Public | BindingFlags.Static);
-
             TSqlObject table = modelElement;
-
-            // Code initializing the variable
-
-            // Get the type of retention. This can be either -1 (if Infinite)
-            // or one of the value in the TemporalRetentionPeriodUnit enum
-            var retentionUnit = table.GetProperty<int>(Table.RetentionUnit);
-
-            // Get the retention value. If retention is Infinite this will be -1
-            var retentionValue = table.GetProperty<int>(Table.RetentionValue);
 
             // Get a reference to the main temporal table. 
             var mainTables = table.GetReferencing(Table.TemporalSystemVersioningHistoryTable).ToList();
@@ -147,25 +133,38 @@ namespace Cheburashka
                 if (!bFoundForeignKey)
                 {
                     var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
-                    var hostschema = host[0].Name.Parts[0];
-                    var hostname = host[0].Name.Parts[1];
                     var foreignTable = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
-                    var foreignTableschema = foreignTable[0].Name.Parts[0];
-                    var foreignTablename = foreignTable[0].Name.Parts[1];
 
-                    //var tables = thing.GetReferencedRelationshipInstances().ToList()
-                    //    .Where(n => n.Object.ObjectType.Name == "Table").ToList();
-                    //var tab = tables[0];
-                    //var tab2 = tables[1];
+                    var tables = thing.GetReferencedRelationshipInstances().ToList()
+                        .Where(n => n.Object.ObjectType.Name == "Table").ToList();
+                    var tab = tables[0];
+                    var tab2 = tables[1];
 
-                    if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
-                         && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
-                        || (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
-                            && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
-                    )
+ //                 if (host.Count > 0 && foreignTable.Count > 0 )
                     {
-                        bFoundForeignKey = true;
-                        //break;
+
+                        //var hostschema = host[0].Name.Parts[0];
+                        //var hostname = host[0].Name.Parts[1];
+
+                        //var foreignTableschema = foreignTable[0].Name.Parts[0];
+                        //var foreignTablename = foreignTable[0].Name.Parts[1];
+
+                        var hostschema = tab.ObjectName.Parts[0];
+                        var hostname = tab.ObjectName.Parts[1];
+
+                        var foreignTableschema = tab2.ObjectName.Parts[0];
+                        var foreignTablename = tab2.ObjectName.Parts[1];
+
+
+                        if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
+                             && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                            || (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
+                                && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                        )
+                        {
+                            bFoundForeignKey = true;
+                            //break;
+                        }
                     }
                 }
             }
