@@ -34,7 +34,7 @@ namespace Cheburashka
             OnePartNames = new List<SchemaObjectName>();
         }
 
-        public IList<SchemaObjectName> OnePartNames { get; private set; }
+        public IList<SchemaObjectName> OnePartNames { get; }
 
         public override void ExplicitVisit(SchemaObjectName node)
         {

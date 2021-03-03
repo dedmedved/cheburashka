@@ -25,7 +25,6 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-
     internal class DisallowUseOfSp_ReNameVisitor : TSqlConcreteFragmentVisitor
     {
         public DisallowUseOfSp_ReNameVisitor()
@@ -33,7 +32,7 @@ namespace Cheburashka
             ExecuteSpecifications = new List<ExecuteSpecification>();
         }
 
-        public IList<ExecuteSpecification> ExecuteSpecifications { get; private set; }
+        public IList<ExecuteSpecification> ExecuteSpecifications { get; }
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
@@ -51,8 +50,5 @@ namespace Cheburashka
                 }
             }
         }
-
     }
-
-
 }

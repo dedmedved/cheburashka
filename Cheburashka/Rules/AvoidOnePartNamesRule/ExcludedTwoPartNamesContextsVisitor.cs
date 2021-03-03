@@ -27,7 +27,6 @@ using System;
 
 using System.Collections.ObjectModel;
 
-
 namespace Cheburashka
 {
     internal class ExcludedTwoPartNamesContextsVisitor : TSqlConcreteFragmentVisitor
@@ -37,7 +36,7 @@ namespace Cheburashka
             ExcludedTwoPartNamesContexts = new List<TSqlFragment>();
         }
 
-        public IList<TSqlFragment> ExcludedTwoPartNamesContexts { get; private set; }
+        public IList<TSqlFragment> ExcludedTwoPartNamesContexts { get; }
 
         //OK
         //CREATE APPLICATION ROLE 
@@ -218,7 +217,6 @@ namespace Cheburashka
         }
         ///////////////////////////////////////////
 
-
         ///////////////////////////////////////////
         public override void ExplicitVisit(DropSchemaStatement node)
         {
@@ -250,7 +248,5 @@ namespace Cheburashka
                 }
             }
         }
-
-
     }
 }

@@ -40,7 +40,6 @@ namespace Cheburashka
     /// This rule only applies to Indexes
     /// </summary>
 
-
     [LocalizedExportCodeAnalysisRule(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId,
         RuleConstants.ResourceBaseName, // Name of the resource file to look up displayname and description in
         RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndex_RuleName, // ID used to look up the display name inside the resources file
@@ -49,7 +48,6 @@ namespace Cheburashka
         RuleScope = SqlRuleScope.Element)] // This rule targets specific elements rather than the whole model
     public sealed class CheckClusteredKeyColumnsNotIncludedInIndexRule : SqlCodeAnalysisRule
     {
-
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
@@ -85,11 +83,7 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             DMVSettings.RefreshModelBuiltInCache(model);
@@ -101,11 +95,8 @@ namespace Cheburashka
             //string selfSchema = modelElement.Name.Parts[0];
             //string selfTable = modelElement.Name.Parts[1];
 
-
             //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             //var thisIndex = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where(( n => n.Name.Parts[0] == selfSchema && n.Name.Parts[1] == selfTable)).Take(1);
-
-
 
             CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor
                 checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor =
@@ -143,15 +134,12 @@ namespace Cheburashka
                 string owningObjectSchema = parentTable.SchemaIdentifier.Value;
                 string owningObjectTable = parentTable.BaseIdentifier.Value;
 
-
                 //owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
                 //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
 
-                TSqlObject clusteredIndex = null;
-                IList<ObjectIdentifier> clusteredIndexColumns = null;
                 bool bFoundClusteredIndex =
-                    RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex,
-                        out clusteredIndexColumns);
+                    RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out TSqlObject clusteredIndex,
+                        out IList<ObjectIdentifier> clusteredIndexColumns);
                 if (bFoundClusteredIndex)
                 {
                     //try
@@ -178,9 +166,6 @@ namespace Cheburashka
                     //}
                 }
 
-
-
-
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
@@ -198,14 +183,10 @@ namespace Cheburashka
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);
                 }
-
-
             }
             return problems;
         }
     }
-
-
 }
 
 

@@ -34,13 +34,15 @@ using Cheburashka;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an clustered index which is not a primary or foreign key
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(EnforceClusteredIndexIsPrimaryOrForeignKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
@@ -74,13 +76,9 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
 
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
@@ -91,13 +89,11 @@ namespace Cheburashka
             // Refresh cached index/constraints/tables lists from Model
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-
             List<TSqlObject>  pks                      = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject>  clusteredpks             = ModelIndexAndKeysUtils.getClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject>  foreignkeyconstraints    = ModelIndexAndKeysUtils.getForeignKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject>  clusteredindexes         = ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable) ;
             List<TSqlObject>  uniqueClusterConstraints = ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable) ;
-
 
             bool clusteredindexExists                   = (clusteredindexes.Count > 0);
             bool clusteredUniqueConstraintExists        = (uniqueClusterConstraints.Count > 0);
@@ -167,7 +163,7 @@ namespace Cheburashka
                                 if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
                                 {
                                     List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(sortedPrimaryKeyColumns.Count).ToList();
-                                    if (Enumerable.SequenceEqual(leadingCols, sortedPrimaryKeyColumns, SqlComparer.Comparer))
+                                    if (leadingCols.SequenceEqual(sortedPrimaryKeyColumns, SqlComparer.Comparer))
                                     {
                                         match = true;
                                         break;
@@ -179,13 +175,11 @@ namespace Cheburashka
                     }
                 }
 
-
                 if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
                 {
                     // try to find a foreign key that we might be clustering on, to tick it off as OK.
                     if (foreignkeyconstraints.Count > 0)
                     {
-
                         bool match = false;
                         if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                         {
@@ -247,16 +241,13 @@ namespace Cheburashka
                                 if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                 {
                                     List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
-                                    if (Enumerable.SequenceEqual(leadingCols, SortedForeignKeyColumns, SqlComparer.Comparer))
+                                    if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
                                     {
                                         match = true;
                                         break;
                                     }
                                 }
                             }
-
-
-
 
                             // now check the foreign key columns againt the relevant clustered 'index''s columns
                             foreach (var fc in foreignkeyconstraints)
@@ -269,7 +260,7 @@ namespace Cheburashka
                                 if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                 {
                                     List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
-                                    if (Enumerable.SequenceEqual(leadingCols, SortedForeignKeyColumns, SqlComparer.Comparer))
+                                    if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
                                     {
                                         match = true;
                                         break;
@@ -288,12 +279,10 @@ namespace Cheburashka
                 foundKeyThatMatchesACluster = true;
             }
 
-
             if (!foundKeyThatMatchesACluster)
             {
                 issues.Add(sqlFragment);
             }
-
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -310,10 +299,7 @@ namespace Cheburashka
 
                 //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                 problems.Add(problem);
-
-
             }
-
 
             return problems;
         }

@@ -31,8 +31,7 @@ namespace Cheburashka
             NullLiteralExpressions = new List<ScalarExpression>();
         }
 
-        public IList<ScalarExpression> NullLiteralExpressions { get; private set; }
-
+        public IList<ScalarExpression> NullLiteralExpressions { get; }
 
         public override void ExplicitVisit(BooleanComparisonExpression node)
         {
@@ -58,6 +57,5 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
-
     }
 }

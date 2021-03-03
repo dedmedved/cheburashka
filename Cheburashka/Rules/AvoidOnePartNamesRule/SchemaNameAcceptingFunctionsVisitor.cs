@@ -35,7 +35,7 @@ namespace Cheburashka
             OnePartNames = new List<FunctionCall>();
         }
 
-        public IList<FunctionCall> OnePartNames { get; private set; }
+        public IList<FunctionCall> OnePartNames { get; }
 
         public override void ExplicitVisit(FunctionCall node)
         {
@@ -45,16 +45,15 @@ namespace Cheburashka
                )
             {
                 //node.SQLModel_DebugPrint(@"c:\temp\object_id.txt");
-                var objName = node.Parameters[0] as StringLiteral;
-                if (objName != null)
+                if (node.Parameters[0] is StringLiteral objName)
                 {
                     //objName.SQLModel_DebugPrint(@"c:\temp\object_id.txt");
                     var sLit = objName.Value;
                     // only continue with this check if we're not calling type_id against a built-in datatype
-                    if ( ( node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
-                         && ! SqlRuleUtils.IsBuiltinDataTypes(sLit) 
+                    if ((node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
+                         && !SqlRuleUtils.IsBuiltinDataTypes(sLit)
                          )
-                         || ! node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
+                         || !node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
                         )
                     {
                         if (objName.Value.EmptySchemaNameInLiteral()) { OnePartNames.Add(node); }

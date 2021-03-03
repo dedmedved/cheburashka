@@ -31,13 +31,15 @@ using System.Linq;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an unused table variable in a routine.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(AvoidUnusedTableVariableRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
@@ -86,11 +88,8 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
@@ -99,7 +98,6 @@ namespace Cheburashka
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
-
 
             // visitor to get the declarations of table variables
             var tableDeclarationVisitor = new TableVariableDeclarationVisitor();
@@ -152,7 +150,7 @@ namespace Cheburashka
                                 , modelElement
                                 , sqlFragment);
 
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
+                        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
                         problems.Add(problem);
                     }
                 }
@@ -165,14 +163,12 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
                     problems.Add(problem);
                 }
             }
 
-
             return problems;
-
         }
     }
 }

@@ -1060,7 +1060,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueConstraintHasNoNullColumnsRule),
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1086,7 +1086,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueConstraintHasNoNullColumns_MixedCaseRule",
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1137,7 +1137,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueIndexHasNoNullColumnsRule),
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 )) {
                 // Since this test verifies results against a baseline file, we don't need to do any extra verification
@@ -1163,7 +1163,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueIndexHasNoNullColumns_MixedCaseRule",
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1217,7 +1217,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1271,7 +1271,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(CheckUniqueKeysAreNotDuplicatedRule),
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1298,7 +1298,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "CheckUniqueKeysAreNotDuplicated_MixedCaseRule",
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1352,7 +1352,7 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(EnforceIndexKeyColumnSeparationRule),
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1379,7 +1379,10 @@ namespace Cheburashka.Tests
             using (BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 "EnforceIndexKeyColumnSeparation_MixedCaseRule",
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions
+                {
+                    Collation = "Latin1_General_CI_AI"
+                },
                 SqlServerVersion.Sql110
                 ))
             {
@@ -1407,7 +1410,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 //nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
                 "CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule",
-                new TSqlModelOptions { Collation = @"Latin1_General_CI_AI" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql110
                 ))
             {

@@ -34,13 +34,15 @@ using Cheburashka;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an un-clustered table in a model.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(CheckUniqueConstraintHasNoNullColumnsRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
@@ -50,7 +52,6 @@ namespace Cheburashka
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueConstraintHasNoNullColumnsRule: SqlCodeAnalysisRule
     {
-
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
@@ -84,13 +85,8 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
 
             DMVSettings.RefreshModelBuiltInCache(model);
             // Refresh cached index/constraints/tables lists from Model
@@ -117,7 +113,7 @@ namespace Cheburashka
                 if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
                 if (parent != null)
                 {
-                    if ( parent.SchemaObjectName != null ) 
+                    if ( parent.SchemaObjectName != null )
                     {
                         String parentName = parent.SchemaObjectName.BaseIdentifier.Value;
                         String schemaName = "";
@@ -129,14 +125,12 @@ namespace Cheburashka
                         // this will happen for dynamically created objects and missing objects.
                         //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
                         IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                                                        .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName))
-                                                        .Where(n => n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
+                                                        .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) && n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
                                                         ;
                         TSqlObject table = tables.SingleOrDefault();
 
                         try
                         {
-
                             var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
                                 .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
                                 .Select(n => n.ObjectName).ToList();
@@ -179,11 +173,8 @@ namespace Cheburashka
             }
 
             return problems;
-
         }
     }
-
-
 }
 
 

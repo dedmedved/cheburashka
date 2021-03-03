@@ -34,13 +34,15 @@ using Cheburashka;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an un-clustered table in a model.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(EnforceIndexKeyColumnSeparationRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
@@ -74,11 +76,8 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             DMVSettings.RefreshModelBuiltInCache(model);
@@ -95,15 +94,13 @@ namespace Cheburashka
             var owningObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
             var owningObjectTable  = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
 
-
             List<TSqlObject> pks                = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
             List<TSqlObject> indexes            = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
             List<TSqlObject> uniqueConstraints  = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-
             List<String> LeadingEdgeIndexColumns = new List<String>();
             var columns = modelElement.GetReferenced(Index.Columns);
-            List<String> x = columns.Select(n => n.Name.Parts.Last().ToString()).ToList();
+            List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
             LeadingEdgeIndexColumns.AddRange(x);
 
             bool foundMoreInclusiveIndex = false;
@@ -127,7 +124,7 @@ namespace Cheburashka
                         }
                         PKLeadingEdgeIndexColumns.Add(lastElement);
                     }
-                    foundMoreInclusiveIndex = determineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, PKLeadingEdgeIndexColumns);
+                    foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, PKLeadingEdgeIndexColumns);
                     if (foundMoreInclusiveIndex)
                     {
                         break;
@@ -156,14 +153,13 @@ namespace Cheburashka
                             }
                             OtherLeadingEdgeIndexColumns.Add(lastElement);
                         }
-                        foundMoreInclusiveIndex = determineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, OtherLeadingEdgeIndexColumns);
+                        foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, OtherLeadingEdgeIndexColumns);
                         if (foundMoreInclusiveIndex)
                         {
                             break;
                         }
                     }
                 }
-
             }
             if (!foundMoreInclusiveIndex)
             {
@@ -186,7 +182,7 @@ namespace Cheburashka
                             }
                             ConstraintLeadingEdgeIndexColumns.Add(lastElement);
                         }
-                        foundMoreInclusiveIndex = determineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
+                        foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
                         if (foundMoreInclusiveIndex)
                         {
                             break;
@@ -217,7 +213,8 @@ namespace Cheburashka
             }
             return problems;
         }
-        private static bool determineIfThisIndexIsSubsumedByTheOtherIndex(List<String> TheseKeysColumns, List<String> TheOtherKeysColumns)
+
+        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<String> TheseKeysColumns, List<String> TheOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
@@ -249,7 +246,7 @@ namespace Cheburashka
                 && matchedPos.Count - 1 == matchedPos.Max()
                 )
             {
-                bool matchedOneForOne = true;
+                const bool matchedOneForOne = true;
                 //for (int i = 0; i < allPos.Count; i++)
                 //{
                 //    if ( allPos[i] != i) {

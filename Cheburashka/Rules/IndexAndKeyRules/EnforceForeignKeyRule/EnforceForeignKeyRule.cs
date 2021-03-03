@@ -85,14 +85,10 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
 
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-            if (sqlFragment is CreateTableStatement createTableStatement && ( createTableStatement.AsNode == true || createTableStatement.AsEdge == true || createTableStatement.AsFileTable == true ) )
+            if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode || createTableStatement.AsEdge || createTableStatement.AsFileTable) )
             {
                 return problems;
             }
@@ -142,7 +138,6 @@ namespace Cheburashka
 
                   if (host.Count > 0 && foreignTable.Count > 0 )
                     {
-
                         var hostschema = host[0].Name.Parts[0];
                         var hostname = host[0].Name.Parts[1];
 
@@ -154,7 +149,6 @@ namespace Cheburashka
 
                         //var foreignTableschema = tab2.ObjectName.Parts[0];
                         //var foreignTablename = tab2.ObjectName.Parts[1];
-
 
                         if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
                              && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))

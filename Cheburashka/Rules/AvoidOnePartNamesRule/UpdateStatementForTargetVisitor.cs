@@ -26,27 +26,21 @@ using System;
 
 namespace Cheburashka
 {
-
     internal class UpdateStatementForTargetVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly IList<TableReference> _dataModificationTargets;
-
         public UpdateStatementForTargetVisitor()
         {
-            _dataModificationTargets = new List<TableReference>();
+            DataModificationTargets = new List<TableReference>();
         }
 
-        public IList<TableReference> DataModificationTargets => _dataModificationTargets;
+        public IList<TableReference> DataModificationTargets { get; }
 
         public override void ExplicitVisit(UpdateSpecification node)
         {
             if (SqlCheck.HasFromClause(node))
             {
-                _dataModificationTargets.Add(node.Target);
+                DataModificationTargets.Add(node.Target);
             }
         }
-
     }
-
-
 }

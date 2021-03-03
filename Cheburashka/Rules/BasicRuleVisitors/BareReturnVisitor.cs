@@ -31,7 +31,7 @@ namespace Cheburashka
             BareReturnStatements = new List<ReturnStatement>();
         }
 
-        public IList<ReturnStatement> BareReturnStatements { get; private set; }
+        public IList<ReturnStatement> BareReturnStatements { get; }
 
         public override void ExplicitVisit(ReturnStatement node)
         {

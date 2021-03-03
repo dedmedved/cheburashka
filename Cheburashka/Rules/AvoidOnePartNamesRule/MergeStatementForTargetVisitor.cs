@@ -20,7 +20,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -28,7 +27,6 @@ using System;
 
 namespace Cheburashka
 {
-
     internal class MergeStatementForTargetVisitor : TSqlConcreteFragmentVisitor
     {
         public MergeStatementForTargetVisitor()
@@ -36,7 +34,7 @@ namespace Cheburashka
             DataModificationTargets = new List<TableReference>();
         }
 
-        public List<TableReference> DataModificationTargets { get; private set; }
+        public List<TableReference> DataModificationTargets { get; }
 
         public override void ExplicitVisit(MergeSpecification node)
         {

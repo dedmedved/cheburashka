@@ -27,7 +27,6 @@ using System;
 
 namespace Cheburashka
 {
-
     internal class DeleteStatementForTargetVisitor : TSqlConcreteFragmentVisitor
     {
         public DeleteStatementForTargetVisitor()
@@ -35,7 +34,7 @@ namespace Cheburashka
             DataModificationTargets = new List<TableReference>();
         }
 
-        public List<TableReference> DataModificationTargets { get; private set; }
+        public List<TableReference> DataModificationTargets { get; }
 
         public override void ExplicitVisit(DeleteSpecification node)
         {

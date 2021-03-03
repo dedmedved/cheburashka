@@ -34,13 +34,15 @@ using Cheburashka;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an table in a model without a primary key.
-    ///  
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(EnforcePrimaryKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
@@ -50,7 +52,6 @@ namespace Cheburashka
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforcePrimaryKeyRule: SqlCodeAnalysisRule
     {
-
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
@@ -65,7 +66,7 @@ namespace Cheburashka
             SupportedElementTypes = new[]
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table   
+                ModelSchema.Table
             };
         }
 
@@ -83,23 +84,18 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
             bool bFoundPrimaryKey = false;
 
             if (sqlFragment is CreateTableStatement createTableStatement)
             {
-                if (createTableStatement.AsNode == true || createTableStatement.AsEdge == true ||
-                    createTableStatement.AsFileTable == true)
+                if (createTableStatement.AsNode || createTableStatement.AsEdge || createTableStatement.AsFileTable)
                 {
                     return problems;
                 }
             }
-
 
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
@@ -108,8 +104,6 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(model);
 
             var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-
-
 
             foreach (var thing in allPKs)   {
                 if (!bFoundPrimaryKey) {
@@ -121,8 +115,7 @@ namespace Cheburashka
                         //break;
                     }
                 }
-            }       
-
+            }
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -141,10 +134,8 @@ namespace Cheburashka
             }
 
             return problems;
-
         }
     }
-
 
     //    #endregion
 }

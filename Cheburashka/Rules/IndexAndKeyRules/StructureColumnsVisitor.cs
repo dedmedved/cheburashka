@@ -27,37 +27,34 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-
 namespace Cheburashka
 {
-
     internal class StructureColumnsVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<String> _objects;
-
         public StructureColumnsVisitor()
         {
-            _objects = new List<String>();
+            Objects = new List<String>();
         }
 
-//        public List<ColumnWithSortOrder> Objects => _objects;
-        public List<String> Objects => _objects;
+        //        public List<ColumnWithSortOrder> Objects => _objects;
+        public List<String> Objects { get; }
 
         // This covers PrimaryKeys as well as normal uniqueConstraints
         public override void ExplicitVisit(UniqueConstraintDefinition node)
         {
-            _objects.AddRange(node.Columns.Select( n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
-        }
-        public override void ExplicitVisit(IndexDefinition node)
-        {
-            _objects.AddRange(node.Columns.Select(n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
-//            _objects.AddRange(node.Columns);
-        }
-        public override void ExplicitVisit(CreateIndexStatement node)
-        {
-            _objects.AddRange(node.Columns.Select(n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
-            //            _objects.AddRange(node.Columns);
+            Objects.AddRange(node.Columns.Select( n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
         }
 
+        public override void ExplicitVisit(IndexDefinition node)
+        {
+            Objects.AddRange(node.Columns.Select(n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
+//            _objects.AddRange(node.Columns);
+        }
+
+        public override void ExplicitVisit(CreateIndexStatement node)
+        {
+            Objects.AddRange(node.Columns.Select(n => n.Column.MultiPartIdentifier.Identifiers.Last().Value));
+            //            _objects.AddRange(node.Columns);
+        }
     }
 }

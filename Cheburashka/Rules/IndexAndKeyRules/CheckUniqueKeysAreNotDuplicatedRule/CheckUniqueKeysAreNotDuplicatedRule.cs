@@ -76,13 +76,8 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
 
             DMVSettings.RefreshModelBuiltInCache(model);
             // Refresh cached index/constraints/tables lists from Model
@@ -91,9 +86,8 @@ namespace Cheburashka
 
             bool unique = true;
 
-
             // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
-            if ((modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName){ 
+            if ((modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName){
                 if (modelElement.GetSourceInformation() == null) { return problems; }
             }
 
@@ -102,8 +96,8 @@ namespace Cheburashka
 
             var structureColumnsVisitor = new StructureColumnsVisitor();
 
-            List<string> thisIndexOrConstraintColumns = new List<string>(); 
-            if (sqlFragment != null) { 
+            List<string> thisIndexOrConstraintColumns = new List<string>();
+            if (sqlFragment != null) {
                 sqlFragment.Accept(structureColumnsVisitor);
                 thisIndexOrConstraintColumns = structureColumnsVisitor.Objects;
             }
@@ -133,17 +127,15 @@ namespace Cheburashka
                     leadingEdgeIndexColumns.Add(c);
                 }
 
-
                 List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(parentObjectSchema, parentObjectName);
                 List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(parentObjectSchema, parentObjectName);
                 List<TSqlObject> uniqueConstraints          = ModelIndexAndKeysUtils.getUniqueConstraints(parentObjectSchema, parentObjectName);
-
 
                 bool foundMoreConciseUniqueCondition = false;
                 foreach (var v in pks)  // dummy loop - could only execute once.
                 {
                     //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
-                    if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass ) 
+                    if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass )
                     {
                         var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                         List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
@@ -190,7 +182,7 @@ namespace Cheburashka
                         //if this object is uk then if it don't have the same name it isn't this were currently checking
                         //so do  the columns checks.
                         if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass
-                           || (    ( modelElement.ObjectType == UniqueConstraint.TypeClass && v.ObjectType == UniqueConstraint.TypeClass ) 
+                           || (    ( modelElement.ObjectType == UniqueConstraint.TypeClass && v.ObjectType == UniqueConstraint.TypeClass )
                                 && (  ! modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString())
                                    )
                               )
@@ -229,10 +221,9 @@ namespace Cheburashka
                             String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((TSqlFragment)issue));
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment)issue);
                     problems.Add(problem);
                 }
-
             }
             return problems;
         }

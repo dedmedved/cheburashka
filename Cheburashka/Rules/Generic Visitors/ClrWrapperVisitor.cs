@@ -32,8 +32,7 @@ namespace Cheburashka
             ClrWrappers = new List<ProcedureStatementBodyBase>();
         }
 
-        public List<ProcedureStatementBodyBase> ClrWrappers { get; private set; }
-
+        public List<ProcedureStatementBodyBase> ClrWrappers { get; }
 
         public override void ExplicitVisit(AlterFunctionStatement node)
         {

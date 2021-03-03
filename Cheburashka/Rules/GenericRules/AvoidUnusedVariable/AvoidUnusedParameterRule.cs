@@ -31,13 +31,15 @@ using System.Linq;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is an unused parameter in a routine.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
-
 
     [LocalizedExportCodeAnalysisRule(AvoidUnusedParameterRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up displayname and description in
@@ -82,11 +84,8 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
@@ -109,15 +108,13 @@ namespace Cheburashka
                                                                 select t.VariableName;
             // Remove parameter declarations that occur in CLR wrappers
             //            parameterDeclarations.RemoveAll(pd => clrWrappers.Any(clr => SqlComparisonUtils.Contains(clr, pd)));
-            List<Identifier> parameterDeclarations = tmpParameterDeclarations2.ToList().FindAll(pd => !clrWrappers.Any(clr => clr.SQLModel_Contains(pd))); ;
-
+            List<Identifier> parameterDeclarations = tmpParameterDeclarations2.ToList().FindAll(pd => !clrWrappers.Any(clr => clr.SQLModel_Contains(pd)));
 
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
             var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
             sqlFragment.Accept(namedParameterUsageVisitor);
             IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-
 
             // visitor to get the occurrences of variables
             var usageVisitor = new VariableUsageVisitor();
@@ -164,7 +161,7 @@ namespace Cheburashka
                                 , modelElement
                                 , sqlFragment);
 
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
+                        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
                         problems.Add(problem);
                     }
                 }
@@ -176,13 +173,12 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[key]));
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
                     problems.Add(problem);
                 }
             }
 
             return problems;
-
         }
     }
 }

@@ -25,7 +25,6 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-
     internal class EnforceCaptureSPReturnStatusVisitor : TSqlConcreteFragmentVisitor
     {
         public EnforceCaptureSPReturnStatusVisitor()
@@ -33,7 +32,7 @@ namespace Cheburashka
             ExecuteSpecifications = new List<ExecuteSpecification>();
         }
 
-        public IList<ExecuteSpecification> ExecuteSpecifications { get; private set; }
+        public IList<ExecuteSpecification> ExecuteSpecifications { get; }
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
@@ -59,6 +58,4 @@ namespace Cheburashka
             }
         }
     }
-
-
 }

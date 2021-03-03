@@ -28,16 +28,17 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
-
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is au unused variable in a routine.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
@@ -55,7 +56,6 @@ namespace Cheburashka
         /// shown as "DM0029: Always include the schema name when referencing an object."
         /// </summary>
         public const string RuleId = RuleConstants.AvoidOnePartNames_RuleId;
-
 
         public AvoidOnePartNamesRule()
         {
@@ -110,7 +110,6 @@ namespace Cheburashka
             sqlFragment.Accept(visitor);
             IList<SchemaObjectName> onePartNames = visitor.OnePartNames;
 
-
             // visitor to get the occurrences of data declarations names
             // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
 
@@ -133,7 +132,6 @@ namespace Cheburashka
             IList<DataTypeReference> dataTypes = dataTypeVisitor.DataTypes;
 
             IList<CteUtil> cteUtilFragments = SqlRuleUtils.CteStatements(sqlFragment).ToList();
-
 
             var excludedOnePartNamesContextsVisitor = new ExcludedTwoPartNamesContextsVisitor();
             sqlFragment.Accept(excludedOnePartNamesContextsVisitor);
@@ -194,7 +192,7 @@ namespace Cheburashka
                         if (tableSourceIdentifier == null) throw new Exception(" null tableSourceIdentifier");
 
                         tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();
-                        foundSurroundingDeclaration = 
+                        foundSurroundingDeclaration =
                             cteUtilFragments.Any(v =>   SqlComparisonUtils.SQLModel_Contains(v, tableSource)
                                                      && v.ExpressionNamesAsStrings.Contains(tableSourceIdentifier, SqlComparer.Comparer)
                                                 );
@@ -241,9 +239,8 @@ namespace Cheburashka
 
                 //RuleUtils.UpdateProblemPosition(modelElement, problem, functionCall);
                 problems.Add(problem);
-
             }
-            
+
             // now to look inside literal arguments to system procedures.
             // this is totally independent of the above search.
             var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
@@ -262,12 +259,9 @@ namespace Cheburashka
 
                 //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
                 problems.Add(problem);
-
             }
 
             return problems;
         }
-
     }
-    
 }

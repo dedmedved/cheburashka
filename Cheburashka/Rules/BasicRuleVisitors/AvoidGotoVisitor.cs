@@ -31,13 +31,11 @@ namespace Cheburashka
             GoToStatements = new List<GoToStatement>();
         }
 
-        public IList<GoToStatement> GoToStatements { get; private set; }
-
+        public IList<GoToStatement> GoToStatements { get; }
 
         public override void ExplicitVisit(GoToStatement node)
         {
             GoToStatements.Add(node);
         }
-
     }
 }

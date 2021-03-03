@@ -31,7 +31,7 @@ namespace Cheburashka
             InitialisationExpressions = new List<ScalarExpression>();
         }
 
-        public IList<ScalarExpression> InitialisationExpressions { get; private set; }
+        public IList<ScalarExpression> InitialisationExpressions { get; }
 
         public override void ExplicitVisit(DeclareVariableElement node) // probably safe enough
         {
@@ -44,7 +44,5 @@ namespace Cheburashka
                 InitialisationExpressions.Add(node.Value);
             }
         }
-
     }
-
 }
