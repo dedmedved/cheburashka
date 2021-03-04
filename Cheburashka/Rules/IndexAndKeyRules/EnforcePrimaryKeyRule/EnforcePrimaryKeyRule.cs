@@ -97,6 +97,14 @@ namespace Cheburashka
                 }
             }
 
+            // If we can't find the file then asssume we're in a composite model
+            // and the elements are defined there and
+            // should be analysed there
+            if (modelElement.GetSourceInformation() is null)
+            {
+                return problems;
+            }
+
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
             string owningObjectTable = modelElement.Name.Parts[1];

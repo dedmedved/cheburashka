@@ -93,6 +93,13 @@ namespace Cheburashka
                 return problems;
             }
 
+            // If we can't find the file then asssume we're in a composite model
+            // and the elements are defined there and
+            // should be analysed there
+            if ( modelElement.GetSourceInformation() is null ) {
+                return problems;
+            }
+
             // Get Database Schema and name of this model element.
             string owningObjectSchema = modelElement.Name.Parts[0];
             string owningObjectTable = modelElement.Name.Parts[1];
@@ -137,7 +144,7 @@ namespace Cheburashka
                     //var tab2 = tables[1];
 
                   if (host.Count > 0 && foreignTable.Count > 0 )
-                    {
+                  {
                         var hostschema = host[0].Name.Parts[0];
                         var hostname = host[0].Name.Parts[1];
 
