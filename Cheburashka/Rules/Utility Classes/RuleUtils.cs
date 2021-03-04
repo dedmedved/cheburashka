@@ -77,12 +77,7 @@ namespace Cheburashka
 
                         if (fullScript != null)
                         {
-                            int startLine = 0;
-                            int startColumn = 0;
-                            int endLine = 0;
-                            int endColumn = 0;
-
-                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out startLine, out startColumn, out endLine, out endColumn))
+                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out int endLine, out int endColumn))
                             {
                                 problem.SetSourceInformation(new SourceInformation(fileName, startLine + 1, startColumn + 1));
                             }
@@ -127,10 +122,7 @@ namespace Cheburashka
             }
             finally
             {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
+                reader?.Close();
             }
 
             return content;
@@ -358,7 +350,7 @@ namespace Cheburashka
                     }
                 }
             }
-  
+
             return bFoundClusteredIndex;
         }
     }

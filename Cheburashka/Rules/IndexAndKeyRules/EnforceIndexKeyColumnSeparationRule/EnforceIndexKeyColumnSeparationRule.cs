@@ -79,7 +79,6 @@ namespace Cheburashka
 
             try
             {
-
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);

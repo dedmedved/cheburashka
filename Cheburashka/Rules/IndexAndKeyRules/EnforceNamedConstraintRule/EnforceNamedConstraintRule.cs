@@ -98,7 +98,6 @@ namespace Cheburashka
 
             try
             {
-
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
@@ -146,7 +145,6 @@ namespace Cheburashka
                     RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment) issue);
                     problems.Add(problem);
                 }
-
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
