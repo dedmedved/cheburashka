@@ -85,32 +85,46 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            // Get Database Schema and name of this model element.
-            string owningObjectSchema = modelElement.Name.Parts[0];
-            string owningObjectTable = modelElement.Name.Parts[1];
-
-            DMVSettings.RefreshModelBuiltInCache(model);
-
-            bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out TSqlObject clusteredIndex);
-
-            // The rule execution context has all the objects we'll need, including the fragment representing the object,
-            // and a descriptor that lets us access rule metadata
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            if (!bFoundClusteredIndex)
+            try
             {
-                SqlRuleProblem problem =
-                new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                problems.Add(problem);
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
+
+                // Get Database Schema and name of this model element.
+                string owningObjectSchema = modelElement.Name.Parts[0];
+                string owningObjectTable = modelElement.Name.Parts[1];
+
+                DMVSettings.RefreshModelBuiltInCache(model);
+
+                bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
+                    out TSqlObject clusteredIndex);
+
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                if (!bFoundClusteredIndex)
+                {
+                    SqlRuleProblem problem =
+                        new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , sqlFragment);
+
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                    problems.Add(problem);
+                }
             }
+            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }

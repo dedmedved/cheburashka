@@ -77,140 +77,172 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            DMVSettings.RefreshModelBuiltInCache(model);
-            // Refresh cached index/constraints/tables lists from Model
-            //DMVSettings.RefreshColumnCache(model);
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-            string selfSchema = modelElement.Name.Parts[0];
-            string selfName   = modelElement.Name.Parts[2];     //  is this right ?
-
-            //var owningObjectSchema = modelElement.Name.Parts[0]; // modelElement.GetParent().Name.Parts[0];
-            //var owningObjectTable  = modelElement.Name.Parts[1]; // modelElement.GetParent().Name.Parts[1];
-
-            var owningObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
-            var owningObjectTable  = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
-
-            List<TSqlObject> pks                = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-            List<TSqlObject> indexes            = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
-            List<TSqlObject> uniqueConstraints  = ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
-
-            List<String> LeadingEdgeIndexColumns = new List<String>();
-            var columns = modelElement.GetReferenced(Index.Columns);
-            List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
-            LeadingEdgeIndexColumns.AddRange(x);
-
-            bool foundMoreInclusiveIndex = false;
-            foreach (var v in pks)
+            try
             {
-                // if this 'index' isn't the index underlying the pk, check it.
-                // is this right/needed/wasted effort ?
-                if ( ! v.Name.HasName  || v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                                            && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
-                                            )
+
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
+
+                DMVSettings.RefreshModelBuiltInCache(model);
+                // Refresh cached index/constraints/tables lists from Model
+                //DMVSettings.RefreshColumnCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+                string selfSchema = modelElement.Name.Parts[0];
+                string selfName = modelElement.Name.Parts[2]; //  is this right ?
+
+                //var owningObjectSchema = modelElement.Name.Parts[0]; // modelElement.GetParent().Name.Parts[0];
+                //var owningObjectTable  = modelElement.Name.Parts[1]; // modelElement.GetParent().Name.Parts[1];
+
+                var owningObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
+                var owningObjectTable = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
+
+                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> uniqueConstraints =
+                    ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+
+                List<String> LeadingEdgeIndexColumns = new List<String>();
+                var columns = modelElement.GetReferenced(Index.Columns);
+                List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
+                LeadingEdgeIndexColumns.AddRange(x);
+
+                bool foundMoreInclusiveIndex = false;
+                foreach (var v in pks)
+                {
+                    // if this 'index' isn't the index underlying the pk, check it.
+                    // is this right/needed/wasted effort ?
+                    if (!v.Name.HasName || v.Name == null ||
+                        !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
+                          && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
+                            )
                     )
-                {
-                    var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                    List<String> PKLeadingEdgeIndexColumns = new List<String>();
-                    foreach (var c in pk_columns)
                     {
-                        String lastElement = "";
-                        foreach (var n in c.Name.Parts)
-                        {
-                            lastElement = n;
-                        }
-                        PKLeadingEdgeIndexColumns.Add(lastElement);
-                    }
-                    foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, PKLeadingEdgeIndexColumns);
-                    if (foundMoreInclusiveIndex)
-                    {
-                        break;
-                    }
-                }
-            }
-            if (!foundMoreInclusiveIndex)
-            {
-                foreach (var v in indexes)
-                {
-                    // if this 'index' isn't the index we're checking - check it.
-                    if (!(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                           && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], owningObjectTable)
-                           && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[2], selfName)
-                           )
-                        )
-                    {
-                        var idx_columns = v.GetReferenced(Index.Columns);
-                        List<String> OtherLeadingEdgeIndexColumns = new List<String>();
-                        foreach (var c in idx_columns)
+                        var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
+                        List<String> PKLeadingEdgeIndexColumns = new List<String>();
+                        foreach (var c in pk_columns)
                         {
                             String lastElement = "";
                             foreach (var n in c.Name.Parts)
                             {
                                 lastElement = n;
                             }
-                            OtherLeadingEdgeIndexColumns.Add(lastElement);
+
+                            PKLeadingEdgeIndexColumns.Add(lastElement);
                         }
-                        foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, OtherLeadingEdgeIndexColumns);
+
+                        foundMoreInclusiveIndex =
+                            DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
+                                PKLeadingEdgeIndexColumns);
                         if (foundMoreInclusiveIndex)
                         {
                             break;
                         }
                     }
                 }
-            }
-            if (!foundMoreInclusiveIndex)
-            {
-                foreach (var v in uniqueConstraints)
+
+                if (!foundMoreInclusiveIndex)
                 {
-                    // if this 'index' isn't the index we're checking - check it.
-                    if (!v.Name.HasName || v.Name == null || !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                                                && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
-                                                )
-                        )
+                    foreach (var v in indexes)
                     {
-                        var un_columns = v.GetReferenced(UniqueConstraint.Columns);
-                        List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
-                        foreach (var c in un_columns)
+                        // if this 'index' isn't the index we're checking - check it.
+                        if (!(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
+                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], owningObjectTable)
+                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[2], selfName)
+                            )
+                        )
                         {
-                            String lastElement = "";
-                            foreach (var n in c.Name.Parts)
+                            var idx_columns = v.GetReferenced(Index.Columns);
+                            List<String> OtherLeadingEdgeIndexColumns = new List<String>();
+                            foreach (var c in idx_columns)
                             {
-                                lastElement = n;
+                                String lastElement = "";
+                                foreach (var n in c.Name.Parts)
+                                {
+                                    lastElement = n;
+                                }
+
+                                OtherLeadingEdgeIndexColumns.Add(lastElement);
                             }
-                            ConstraintLeadingEdgeIndexColumns.Add(lastElement);
-                        }
-                        foundMoreInclusiveIndex = DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
-                        if (foundMoreInclusiveIndex)
-                        {
-                            break;
+
+                            foundMoreInclusiveIndex =
+                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
+                                    OtherLeadingEdgeIndexColumns);
+                            if (foundMoreInclusiveIndex)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
+
+                if (!foundMoreInclusiveIndex)
+                {
+                    foreach (var v in uniqueConstraints)
+                    {
+                        // if this 'index' isn't the index we're checking - check it.
+                        if (!v.Name.HasName || v.Name == null ||
+                            !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
+                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
+                                )
+                        )
+                        {
+                            var un_columns = v.GetReferenced(UniqueConstraint.Columns);
+                            List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
+                            foreach (var c in un_columns)
+                            {
+                                String lastElement = "";
+                                foreach (var n in c.Name.Parts)
+                                {
+                                    lastElement = n;
+                                }
+
+                                ConstraintLeadingEdgeIndexColumns.Add(lastElement);
+                            }
+
+                            foundMoreInclusiveIndex =
+                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
+                                    ConstraintLeadingEdgeIndexColumns);
+                            if (foundMoreInclusiveIndex)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                var issues = new List<TSqlFragment>();
+
+                if (foundMoreInclusiveIndex)
+                {
+                    issues.Add(sqlFragment);
+                }
+
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                // Create problems for each object
+                foreach (TSqlFragment issue in issues)
+                {
+                    SqlRuleProblem problem =
+                        new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , sqlFragment);
+
+                    problems.Add(problem);
+                }
             }
+            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
-            var issues = new List<TSqlFragment>();
-
-            if (foundMoreInclusiveIndex)
-            {
-                issues.Add(sqlFragment);
-            }
-
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Create problems for each object
-            foreach (TSqlFragment issue in issues)
-            {
-                SqlRuleProblem problem =
-                new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
-
-                problems.Add(problem);
-            }
             return problems;
         }
 

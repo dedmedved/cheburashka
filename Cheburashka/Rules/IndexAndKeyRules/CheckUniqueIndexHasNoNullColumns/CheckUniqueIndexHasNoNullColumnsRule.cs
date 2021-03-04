@@ -82,93 +82,120 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            try
+            {
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
 
-            DMVSettings.RefreshModelBuiltInCache(model);
-            // Refresh cached index/constraints/tables lists from Model
-            //DMVSettings.RefreshColumnCache(model);
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DMVSettings.RefreshModelBuiltInCache(model);
+                // Refresh cached index/constraints/tables lists from Model
+                //DMVSettings.RefreshColumnCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-            // Get Database Schema and name of this model element.
+                // Get Database Schema and name of this model element.
 
-            DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
+                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
 
-            //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+                //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
-            //// visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-            //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new CheckUniqueConstraintParentObjectVisitor();
-            //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-            //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
+                //// visitor to get the occurrences of statements that create constraints etc where we need the parent object name
+                //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new CheckUniqueConstraintParentObjectVisitor();
+                //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
+                //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
 
-            // visitor to get the columns
-            CheckUniqueIndexHasNoNullColumnsVisitor checkUniqueIndexHasNoNullColumnsVisitor = new CheckUniqueIndexHasNoNullColumnsVisitor();
-            sqlFragment.Accept(checkUniqueIndexHasNoNullColumnsVisitor);
-            List<ColumnWithSortOrder> indexColumns = checkUniqueIndexHasNoNullColumnsVisitor.Objects;
+                // visitor to get the columns
+                CheckUniqueIndexHasNoNullColumnsVisitor checkUniqueIndexHasNoNullColumnsVisitor =
+                    new CheckUniqueIndexHasNoNullColumnsVisitor();
+                sqlFragment.Accept(checkUniqueIndexHasNoNullColumnsVisitor);
+                List<ColumnWithSortOrder> indexColumns = checkUniqueIndexHasNoNullColumnsVisitor.Objects;
 
-            var issues = new List<TSqlFragment>();
+                var issues = new List<TSqlFragment>();
 
-            //foreach (var ps in parentSources) {
-            //    dynamic parent = ps as CreateTableStatement;
-            //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
-            //    if (parent != null) {
-            //        if (parent.SchemaObjectName != null) {
-            String parentName = objectName;  // parent.SchemaObjectName.BaseIdentifier.Value;
-            String schemaName = objectSchema;// "";
-                        //if (parent.SchemaObjectName.SchemaIdentifier != null) {
-                        //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
-                        //}
-                        // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-                        // this will happen for dynamically created objects and missing objects.
-                        //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
-                        IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                                                        .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) && n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
-                                                        ;
-                        TSqlObject table = tables.SingleOrDefault();
+                //foreach (var ps in parentSources) {
+                //    dynamic parent = ps as CreateTableStatement;
+                //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
+                //    if (parent != null) {
+                //        if (parent.SchemaObjectName != null) {
+                String parentName = objectName; // parent.SchemaObjectName.BaseIdentifier.Value;
+                String schemaName = objectSchema; // "";
+                //if (parent.SchemaObjectName.SchemaIdentifier != null) {
+                //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
+                //}
+                // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
+                // this will happen for dynamically created objects and missing objects.
+                //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+                IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
+                        .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
+                                    n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
+                    ;
+                TSqlObject table = tables.SingleOrDefault();
 
-                        try {
-                            var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                                .Select(n => n.ObjectName).ToList();
+                try
+                {
+                    var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+                        .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                        .Select(n => n.ObjectName).ToList();
 
-                            if (tableColumns.Count != 0) {
-                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                                                                                        from tCol in tableColumns
-                                                                                        where SqlComparer.SQLModel_StringCompareEqual(iCOl.Column.MultiPartIdentifier.Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value, tCol.Parts[2])
-                                                                                        //where tCol.IsNullable
-                                                                                        //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
-                                                                                        select iCOl;
+                    if (tableColumns.Count != 0)
+                    {
+                        IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                            from tCol in tableColumns
+                            where SqlComparer.SQLModel_StringCompareEqual(
+                                iCOl.Column.MultiPartIdentifier
+                                    .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value,
+                                tCol.Parts[2])
+                            //where tCol.IsNullable
+                            //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
+                            select iCOl;
 
-                                foreach (var c in nullableIndexColumns) {
-                                    issues.Add(c);
-                                }
-                            }
+                        foreach (var c in nullableIndexColumns)
+                        {
+                            issues.Add(c);
                         }
-                        catch { }
-            //        }
-            //    }
-            //}
+                    }
+                }
+                catch
+                {
+                }
+                //        }
+                //    }
+                //}
 
-            // The rule execution context has all the objects we'll need, including the fragment representing the object,
-            // and a descriptor that lets us access rule metadata
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            // Create problems for each object
-            foreach (TSqlFragment issue in issues) {
-                SqlRuleProblem problem =
-                new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
+                // Create problems for each object
+                foreach (TSqlFragment issue in issues)
+                {
+                    SqlRuleProblem problem =
+                        new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , sqlFragment);
 
-                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                problems.Add(problem);
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                    problems.Add(problem);
+                }
             }
+            catch
+            {
+            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
+            }
         }
     }
-}
+
+
 
 

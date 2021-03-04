@@ -55,6 +55,7 @@ namespace Cheburashka
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        ///
         /// For this rule, it will be 
         /// shown as "DM0018: Tables should normally be clustered and not heap."
         /// </summary>
@@ -77,229 +78,282 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            try
+            {
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            // Get Database Schema and name of this model element.
-            string owningObjectSchema = modelElement.Name.Parts[0];
-            string owningObjectTable = modelElement.Name.Parts[1];
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
 
-            DMVSettings.RefreshModelBuiltInCache(model);
+                // Get Database Schema and name of this model element.
+                string owningObjectSchema = modelElement.Name.Parts[0];
+                string owningObjectTable = modelElement.Name.Parts[1];
 
-            // Refresh cached index/constraints/tables lists from Model
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DMVSettings.RefreshModelBuiltInCache(model);
 
-            List<TSqlObject>  pks                      = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-            List<TSqlObject>  clusteredpks             = ModelIndexAndKeysUtils.getClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
-            List<TSqlObject>  foreignkeyconstraints    = ModelIndexAndKeysUtils.getForeignKeys(owningObjectSchema, owningObjectTable);
-            List<TSqlObject>  clusteredindexes         = ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable) ;
-            List<TSqlObject>  uniqueClusterConstraints = ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable) ;
+                // Refresh cached index/constraints/tables lists from Model
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-            bool clusteredindexExists                   = (clusteredindexes.Count > 0);
-            bool clusteredUniqueConstraintExists        = (uniqueClusterConstraints.Count > 0);
-            bool clusteredPrimaryKeyExists              = (clusteredpks.Count > 0);
+                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> clusteredpks =
+                    ModelIndexAndKeysUtils.getClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> foreignkeyconstraints =
+                    ModelIndexAndKeysUtils.getForeignKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> clusteredindexes =
+                    ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> uniqueClusterConstraints =
+                    ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-            bool primaryKeyExists                       = (pks.Count > 0);
-            bool foreignKeyExists                       = (foreignkeyconstraints.Count > 0);
+                bool clusteredindexExists = (clusteredindexes.Count > 0);
+                bool clusteredUniqueConstraintExists = (uniqueClusterConstraints.Count > 0);
+                bool clusteredPrimaryKeyExists = (clusteredpks.Count > 0);
 
-            List<TSqlFragment> issues                   = new List<TSqlFragment>();
-            bool foundKeyThatMatchesACluster            = false;
+                bool primaryKeyExists = (pks.Count > 0);
+                bool foreignKeyExists = (foreignkeyconstraints.Count > 0);
 
-            // only if all these conditions are true do we need to check for rule violations.
-            if ((DMVSettings.AllowClusterOnPrimaryKey || DMVSettings.AllowClusterOnForeignKey)
-                && (primaryKeyExists || foreignKeyExists)
-                && (clusteredPrimaryKeyExists || clusteredindexExists || clusteredUniqueConstraintExists)
+                List<TSqlFragment> issues = new List<TSqlFragment>();
+                bool foundKeyThatMatchesACluster = false;
+
+                // only if all these conditions are true do we need to check for rule violations.
+                if ((DMVSettings.AllowClusterOnPrimaryKey || DMVSettings.AllowClusterOnForeignKey)
+                    && (primaryKeyExists || foreignKeyExists)
+                    && (clusteredPrimaryKeyExists || clusteredindexExists || clusteredUniqueConstraintExists)
                 )
-            {
-                if (DMVSettings.AllowClusterOnPrimaryKey)
                 {
-                    if (clusteredPrimaryKeyExists)
+                    if (DMVSettings.AllowClusterOnPrimaryKey)
                     {
-                        foundKeyThatMatchesACluster = true;
-                    }
-                    // no clustered pk but a pk does exist and a clustered something exists check it
-                    else if (primaryKeyExists && (clusteredindexExists || clusteredUniqueConstraintExists) ) {
-                        bool match = false;
+                        if (clusteredPrimaryKeyExists)
                         {
-                            TSqlObject clusteredindex = null;
-                            TSqlObject uniqueConstraint = null;
-
-                            List<String> LeadingEdgeIndexColumns = new List<String>();
-                            List<String> SortedLeadingEdgeIndexColumns = new List<String>();
-
-                            if (clusteredindexExists)
+                            foundKeyThatMatchesACluster = true;
+                        }
+                        // no clustered pk but a pk does exist and a clustered something exists check it
+                        else if (primaryKeyExists && (clusteredindexExists || clusteredUniqueConstraintExists))
+                        {
+                            bool match = false;
                             {
-                                clusteredindex = clusteredindexes[0];
-                                var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                foreach (var c in columnSpecifications)
-                                {
-                                    String lastElement = c.ObjectName.Parts.Last();
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                }
+                                TSqlObject clusteredindex = null;
+                                TSqlObject uniqueConstraint = null;
 
-                                SortedLeadingEdgeIndexColumns =
-                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-                            }
-                            else if (clusteredUniqueConstraintExists)
-                            {
-                                uniqueConstraint = uniqueClusterConstraints[0];
-                                var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                foreach (var c in columnSpecifications)
-                                {
-                                    String lastElement = c.ObjectName.Parts.Last();
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                }
+                                List<String> LeadingEdgeIndexColumns = new List<String>();
+                                List<String> SortedLeadingEdgeIndexColumns = new List<String>();
 
-                                SortedLeadingEdgeIndexColumns =
-                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-                            }
-
-                            //We might have a clustered index etc on the same columns as a primary key.
-                            // now check the foreign key columns againt the relevant clustered 'index''s columns
-                            foreach (var pk in pks)
-                            {
-                                var columnSpecifications = pk.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
-                                List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                                if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
+                                if (clusteredindexExists)
                                 {
-                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(sortedPrimaryKeyColumns.Count).ToList();
-                                    if (leadingCols.SequenceEqual(sortedPrimaryKeyColumns, SqlComparer.Comparer))
+                                    clusteredindex = clusteredindexes[0];
+                                    var columnSpecifications =
+                                        clusteredindex.GetReferencedRelationshipInstances(
+                                            Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                    foreach (var c in columnSpecifications)
                                     {
-                                        match = true;
-                                        break;
+                                        String lastElement = c.ObjectName.Parts.Last();
+                                        LeadingEdgeIndexColumns.Add(lastElement);
+                                    }
+
+                                    SortedLeadingEdgeIndexColumns =
+                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                                            .ToList();
+                                }
+                                else if (clusteredUniqueConstraintExists)
+                                {
+                                    uniqueConstraint = uniqueClusterConstraints[0];
+                                    var columnSpecifications =
+                                        uniqueConstraint.GetReferencedRelationshipInstances(
+                                            UniqueConstraint.ColumnsRelationship.RelationshipClass,
+                                            DacQueryScopes.UserDefined);
+                                    foreach (var c in columnSpecifications)
+                                    {
+                                        String lastElement = c.ObjectName.Parts.Last();
+                                        LeadingEdgeIndexColumns.Add(lastElement);
+                                    }
+
+                                    SortedLeadingEdgeIndexColumns =
+                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                                            .ToList();
+                                }
+
+                                //We might have a clustered index etc on the same columns as a primary key.
+                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                foreach (var pk in pks)
+                                {
+                                    var columnSpecifications =
+                                        pk.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns,
+                                            DacQueryScopes.UserDefined);
+                                    List<String> sortedPrimaryKeyColumns = columnSpecifications
+                                        .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                        .Select(n => n.ObjectName.Parts[2]).ToList();
+                                    if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
+                                    {
+                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                            .Take(sortedPrimaryKeyColumns.Count).ToList();
+                                        if (leadingCols.SequenceEqual(sortedPrimaryKeyColumns, SqlComparer.Comparer))
+                                        {
+                                            match = true;
+                                            break;
+                                        }
                                     }
                                 }
                             }
+                            foundKeyThatMatchesACluster = match;
                         }
-                        foundKeyThatMatchesACluster = match;
+                    }
+
+                    if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
+                    {
+                        // try to find a foreign key that we might be clustering on, to tick it off as OK.
+                        if (foreignkeyconstraints.Count > 0)
+                        {
+                            bool match = false;
+                            if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
+                            {
+                                TSqlObject clusteredindex = null;
+                                TSqlObject uniqueConstraint = null;
+                                TSqlObject primaryKeyConstraint = null;
+
+                                List<String> LeadingEdgeIndexColumns = new List<String>();
+                                List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+
+                                if (clusteredindexExists)
+                                {
+                                    clusteredindex = clusteredindexes[0];
+                                    var columnSpecifications =
+                                        clusteredindex.GetReferencedRelationshipInstances(
+                                            Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                                    foreach (var c in columnSpecifications)
+                                    {
+                                        String lastElement = c.ObjectName.Parts.Last();
+                                        LeadingEdgeIndexColumns.Add(lastElement);
+                                    }
+
+                                    SortedLeadingEdgeIndexColumns =
+                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                                            .ToList();
+                                }
+                                else if (clusteredUniqueConstraintExists)
+                                {
+                                    uniqueConstraint = uniqueClusterConstraints[0];
+                                    var columnSpecifications =
+                                        uniqueConstraint.GetReferencedRelationshipInstances(
+                                            UniqueConstraint.ColumnsRelationship.RelationshipClass,
+                                            DacQueryScopes.UserDefined);
+                                    foreach (var c in columnSpecifications)
+                                    {
+                                        String lastElement = c.ObjectName.Parts.Last();
+                                        LeadingEdgeIndexColumns.Add(lastElement);
+                                    }
+
+                                    SortedLeadingEdgeIndexColumns =
+                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                                            .ToList();
+                                }
+                                else if (clusteredPrimaryKeyExists)
+                                {
+                                    primaryKeyConstraint = clusteredpks[0];
+                                    var columnSpecifications =
+                                        primaryKeyConstraint.GetReferencedRelationshipInstances(
+                                            PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass,
+                                            DacQueryScopes.UserDefined);
+                                    foreach (var c in columnSpecifications)
+                                    {
+                                        String lastElement = c.ObjectName.Parts.Last();
+                                        LeadingEdgeIndexColumns.Add(lastElement);
+                                    }
+
+                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                                        .ToList();
+                                }
+
+                                //We might have a clustered index etc on the same columns as a primary key.
+                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                foreach (var fc in foreignkeyconstraints)
+                                {
+                                    var columnSpecifications =
+                                        fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns,
+                                            DacQueryScopes.UserDefined);
+                                    // consider a foreign key to be clustered if all its columns appear as the first n columns in a
+                                    // clustered index, clustered unique constraint or clustered primary key constraint.
+                                    // nb a primary key can be a foreign key too when modelling 1:1 relationships.
+                                    List<String> SortedForeignKeyColumns = columnSpecifications
+                                        .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                        .Select(n => n.ObjectName.Parts[2]).ToList();
+                                    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                    {
+                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                            .Take(SortedForeignKeyColumns.Count).ToList();
+                                        if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
+                                        {
+                                            match = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                foreach (var fc in foreignkeyconstraints)
+                                {
+                                    var columnSpecifications =
+                                        fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns,
+                                            DacQueryScopes.UserDefined);
+                                    // consider a foreign key to be clustered if all its columns appear as the first n columns in a
+                                    // clustered index, clustered unique constraint or clustered primary key constraint.
+                                    // nb a primary key can be a foreign key too when modelling 1:1 relationships.
+                                    List<String> SortedForeignKeyColumns = columnSpecifications
+                                        .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                        .Select(n => n.ObjectName.Parts[2]).ToList();
+                                    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                    {
+                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                            .Take(SortedForeignKeyColumns.Count).ToList();
+                                        if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
+                                        {
+                                            match = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            foundKeyThatMatchesACluster = match;
+                        }
                     }
                 }
-
-                if (DMVSettings.AllowClusterOnForeignKey && !foundKeyThatMatchesACluster)
+                // only if all these conditions are true do we need to check for rule violations.
+                // otherwise by default it's a trivial success
+                else
                 {
-                    // try to find a foreign key that we might be clustering on, to tick it off as OK.
-                    if (foreignkeyconstraints.Count > 0)
-                    {
-                        bool match = false;
-                        if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
-                        {
-                            TSqlObject    clusteredindex            = null;
-                            TSqlObject    uniqueConstraint          = null;
-                            TSqlObject    primaryKeyConstraint      = null;
-
-                            List<String> LeadingEdgeIndexColumns        = new List<String>();
-                            List<String> SortedLeadingEdgeIndexColumns  = new List<String>();
-
-                            if (clusteredindexExists)
-                            {
-                                clusteredindex = clusteredindexes[0];
-                                var columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                foreach (var c in columnSpecifications)
-                                {
-                                    String lastElement = c.ObjectName.Parts.Last();
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                }
-
-                                SortedLeadingEdgeIndexColumns =
-                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-                            }
-                            else if (clusteredUniqueConstraintExists)
-                            {
-                                uniqueConstraint = uniqueClusterConstraints[0];
-                                var columnSpecifications = uniqueConstraint.GetReferencedRelationshipInstances(UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                foreach (var c in columnSpecifications)
-                                {
-                                    String lastElement = c.ObjectName.Parts.Last();
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                }
-
-                                SortedLeadingEdgeIndexColumns =
-                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-                            }
-                            else if (clusteredPrimaryKeyExists)
-                            {
-                                primaryKeyConstraint = clusteredpks[0];
-                                var columnSpecifications = primaryKeyConstraint.GetReferencedRelationshipInstances(PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                foreach (var c in columnSpecifications)
-                                {
-                                    String lastElement = c.ObjectName.Parts.Last();
-                                    LeadingEdgeIndexColumns.Add(lastElement);
-                                }
-
-                                LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n).ToList();
-                            }
-
-                            //We might have a clustered index etc on the same columns as a primary key.
-                            // now check the foreign key columns againt the relevant clustered 'index''s columns
-                            foreach (var fc in foreignkeyconstraints)
-                            {
-                                var columnSpecifications = fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns, DacQueryScopes.UserDefined);
-                                // consider a foreign key to be clustered if all its columns appear as the first n columns in a
-                                // clustered index, clustered unique constraint or clustered primary key constraint.
-                                // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                List<String> SortedForeignKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                                if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
-                                {
-                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
-                                    if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
-                                    {
-                                        match = true;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            // now check the foreign key columns againt the relevant clustered 'index''s columns
-                            foreach (var fc in foreignkeyconstraints)
-                            {
-                                var columnSpecifications = fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns, DacQueryScopes.UserDefined);
-                                // consider a foreign key to be clustered if all its columns appear as the first n columns in a
-                                // clustered index, clustered unique constraint or clustered primary key constraint.
-                                // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                List<String> SortedForeignKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                                if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
-                                {
-                                    List<String> leadingCols = SortedLeadingEdgeIndexColumns.Take(SortedForeignKeyColumns.Count).ToList();
-                                    if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
-                                    {
-                                        match = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        foundKeyThatMatchesACluster = match;
-                    }
+                    foundKeyThatMatchesACluster = true;
                 }
-            }
-            // only if all these conditions are true do we need to check for rule violations.
-            // otherwise by default it's a trivial success
-            else
-            {
-                foundKeyThatMatchesACluster = true;
-            }
 
-            if (!foundKeyThatMatchesACluster)
-            {
-                issues.Add(sqlFragment);
+                if (!foundKeyThatMatchesACluster)
+                {
+                    issues.Add(sqlFragment);
+                }
+
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                // Create problems for each object
+                foreach (TSqlFragment issue in issues)
+                {
+                    SqlRuleProblem problem =
+                        new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , sqlFragment);
+
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                    problems.Add(problem);
+                }
+
             }
-
-            // The rule execution context has all the objects we'll need, including the fragment representing the object,
-            // and a descriptor that lets us access rule metadata
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Create problems for each object
-            foreach (TSqlFragment issue in issues)
-            {
-                SqlRuleProblem problem =
-                new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
-
-                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                problems.Add(problem);
-            }
+            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }

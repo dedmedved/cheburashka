@@ -96,40 +96,59 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            // Get Database Schema and name of this model element.
-            DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
-
-            DMVSettings.RefreshModelBuiltInCache(model);
-
-            // visitor to get the occurrences of constraints we want to be named
-            EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new EnforceNamedConstraintVisitor();
-            sqlFragment.Accept(enforceNamedConstraintVisitor);
-            List<ConstraintDefinition> constraints = enforceNamedConstraintVisitor.Constraints;//.Cast<TSqlFragment>().ToList();
-
-            // visitor to get the occurrences of table variable declarations we are not interested in 
-            EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor = new EnforceNamedConstraintDeclareTableVisitor();
-            sqlFragment.Accept(enforceNamedConstraintDeclareTableVisitor);
-            List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
-
-            // every unnamed constraint ( outside of table declaration ) is a problem.
-            List<ConstraintDefinition> issues = constraints.Where(cons => !tableDeclarations.Any(dec => SqlComparisonUtils.SQLModel_Contains(dec, cons))).Select(n => n).ToList();
-
-            // Create problems for each constraint wo a name
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-            foreach (TSqlFragment issue in issues)
+            try
             {
-                var problem = new SqlRuleProblem(
+
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
+
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+
+                // Get Database Schema and name of this model element.
+                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
+
+                DMVSettings.RefreshModelBuiltInCache(model);
+
+                // visitor to get the occurrences of constraints we want to be named
+                EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new EnforceNamedConstraintVisitor();
+                sqlFragment.Accept(enforceNamedConstraintVisitor);
+                List<ConstraintDefinition>
+                    constraints = enforceNamedConstraintVisitor.Constraints; //.Cast<TSqlFragment>().ToList();
+
+                // visitor to get the occurrences of table variable declarations we are not interested in 
+                EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor =
+                    new EnforceNamedConstraintDeclareTableVisitor();
+                sqlFragment.Accept(enforceNamedConstraintDeclareTableVisitor);
+                List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
+
+                // every unnamed constraint ( outside of table declaration ) is a problem.
+                List<ConstraintDefinition> issues = constraints
+                    .Where(cons => !tableDeclarations.Any(dec => SqlComparisonUtils.SQLModel_Contains(dec, cons)))
+                    .Select(n => n).ToList();
+
+                // Create problems for each constraint wo a name
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                foreach (TSqlFragment issue in issues)
+                {
+                    var problem = new SqlRuleProblem(
                         String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 
-                RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment)issue);
-                problems.Add(problem);
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment) issue);
+                    problems.Add(problem);
+                }
+
             }
+            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }
