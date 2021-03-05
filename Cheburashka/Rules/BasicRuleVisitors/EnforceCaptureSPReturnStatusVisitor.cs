@@ -25,7 +25,6 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-
     internal class EnforceCaptureSPReturnStatusVisitor : TSqlConcreteFragmentVisitor
     {
         public EnforceCaptureSPReturnStatusVisitor()
@@ -33,32 +32,27 @@ namespace Cheburashka
             ExecuteSpecifications = new List<ExecuteSpecification>();
         }
 
-        public IList<ExecuteSpecification> ExecuteSpecifications { get; private set; }
+        public IList<ExecuteSpecification> ExecuteSpecifications { get; }
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
            if ((node.Variable == null)
                 ||
-                 ((node.Variable != null) &&
-                //                   ( node.Variable.Value == "" )
-                   (String.IsNullOrEmpty(node.Variable.Name))
-                 )
+                 (string.IsNullOrEmpty(node.Variable.Name))
                )
-            {
-                if (node.ExecutableEntity is ExecutableProcedureReference &&
-                     ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference != null)
-                {
-                    TSqlFragment pr = ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference;
-                    string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
-                    //TSqlParserToken name = pr.ScriptTokenStream[pr.LastTokenIndex];
-                    if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
-                    {
-                        ExecuteSpecifications.Add(node);
-                    }
-                }
-            }
+           {
+               if (node.ExecutableEntity is ExecutableProcedureReference &&
+                   ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference != null)
+               {
+                   TSqlFragment pr = ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference;
+                   string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
+                   //TSqlParserToken name = pr.ScriptTokenStream[pr.LastTokenIndex];
+                   if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
+                   {
+                       ExecuteSpecifications.Add(node);
+                   }
+               }
+           }
         }
     }
-
-
 }

@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -40,7 +41,6 @@ namespace Cheburashka
     /// This rule only applies to Indexes
     /// </summary>
 
-
     [LocalizedExportCodeAnalysisRule(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId,
         RuleConstants.ResourceBaseName, // Name of the resource file to look up displayname and description in
         RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndex_RuleName, // ID used to look up the display name inside the resources file
@@ -49,7 +49,6 @@ namespace Cheburashka
         RuleScope = SqlRuleScope.Element)] // This rule targets specific elements rather than the whole model
     public sealed class CheckClusteredKeyColumnsNotIncludedInIndexRule : SqlCodeAnalysisRule
     {
-
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
@@ -85,77 +84,83 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            DMVSettings.RefreshModelBuiltInCache(model);
-            // Refresh cached index/constraints/tables lists from Model
-            //DMVSettings.RefreshColumnCache(model);
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-            // Get Database Schema and name of this model element.
-            //string selfSchema = modelElement.Name.Parts[0];
-            //string selfTable = modelElement.Name.Parts[1];
-
-
-            //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-            //var thisIndex = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where(( n => n.Name.Parts[0] == selfSchema && n.Name.Parts[1] == selfTable)).Take(1);
-
-
-
-            CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor
-                checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor =
-                    new CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor();
-            sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor);
-            var isClustered = checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.Objects;
-
-            CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor
-                checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor =
-                    new CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor();
-            sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor);
-            var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
-
-            CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns = new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns();
-            sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
-            var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
-
-            //var issues = new List<String>();
-            var issueFound = false;
-
-            if (!isClustered && !isUnique)
+            try
             {
-                // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor =
-                    new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
-                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
-                List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
-                CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
-                    checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
-                        new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
-                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
-                var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-                string owningObjectSchema = parentTable.SchemaIdentifier.Value;
-                string owningObjectTable = parentTable.BaseIdentifier.Value;
-
-
-                //owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
-                //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
-
-                TSqlObject clusteredIndex = null;
-                IList<ObjectIdentifier> clusteredIndexColumns = null;
-                bool bFoundClusteredIndex =
-                    RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out clusteredIndex,
-                        out clusteredIndexColumns);
-                if (bFoundClusteredIndex)
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
                 {
-                    //try
-                    //{
+                    return problems;
+                }
+
+                DMVSettings.RefreshModelBuiltInCache(model);
+                // Refresh cached index/constraints/tables lists from Model
+                //DMVSettings.RefreshColumnCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+                // Get Database Schema and name of this model element.
+                //string selfSchema = modelElement.Name.Parts[0];
+                //string selfTable = modelElement.Name.Parts[1];
+
+                //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+                //var thisIndex = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where(( n => n.Name.Parts[0] == selfSchema && n.Name.Parts[1] == selfTable)).Take(1);
+
+                CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor
+                    checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor =
+                        new CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor();
+                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor);
+                var isClustered = checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.Objects;
+
+                CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor
+                    checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor =
+                        new CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor();
+                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor);
+                var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
+
+                CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns
+                    checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns =
+                        new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns();
+                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
+                var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
+
+                //var issues = new List<String>();
+                var issueFound = false;
+
+                if (!isClustered && !isUnique)
+                {
+                    // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
+                    CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor
+                        =
+                        new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
+                    sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
+                    List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+
+                    CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
+                        checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
+                            new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
+                    sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
+                    var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
+
+                    string owningObjectSchema = parentTable.SchemaIdentifier.Value;
+                    string owningObjectTable = parentTable.BaseIdentifier.Value;
+
+                    //owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
+                    //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
+
+                    bool bFoundClusteredIndex =
+                        RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
+                            out TSqlObject clusteredIndex,
+                            out IList<ObjectIdentifier> clusteredIndexColumns);
+                    if (bFoundClusteredIndex)
+                    {
+                        //try
+                        //{
                         List<String> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
                         List<String> c2 = indexColumns.Select(n => n.Value).ToList();
                         List<String> c2Include = includeColumns.Select(n => n.Value).ToList();
@@ -163,50 +168,52 @@ namespace Cheburashka
                         //allow the lead column to be a clustered index member, as we need to be able to have
                         //different indexes key on different leading edges
                         //but then check the tail columns
-                        var (c2Head, c2Tail) = c2;         // uses ListUtil.Deconstruct - magic !
+                        var (c2Head, c2Tail) = c2; // uses ListUtil.Deconstruct - magic !
                         //IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
                         //IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
                         //issues.AddRange(common);
                         //issues.AddRange(common2);
-                        if (c1.Intersect(c2Tail, SqlComparer.Comparer).Any() || c1.Intersect(c2Include, SqlComparer.Comparer).Any())
+                        if (c1.Intersect(c2Tail, SqlComparer.Comparer).Any() ||
+                            c1.Intersect(c2Include, SqlComparer.Comparer).Any())
                         {
                             issueFound = true;
                         }
-                    //}
-                    //catch
-                    //{
-                    //}
+
+                        //}
+                        //catch
+                        //{
+                        //}
+                    }
+
+                    // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                    // and a descriptor that lets us access rule metadata
+                    RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                    // Create problems for each object
+                    //foreach (TSqlFragment issue in issues) {
+                    if (issueFound)
+                    {
+                        SqlRuleProblem problem =
+                            new SqlRuleProblem(
+                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
+                                    elementName)
+                                , modelElement
+                                , sqlFragment);
+
+                        //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                        problems.Add(problem);
+                    }
                 }
-
-
-
-
-                // The rule execution context has all the objects we'll need, including the fragment representing the object,
-                // and a descriptor that lets us access rule metadata
-                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-                // Create problems for each object
-                //foreach (TSqlFragment issue in issues) {
-                if (issueFound)
-                {
-                    SqlRuleProblem problem =
-                        new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                    problems.Add(problem);
-                }
-
-
             }
+            catch
+            {
+            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+
             return problems;
         }
     }
-
-
 }
+
 
 
 

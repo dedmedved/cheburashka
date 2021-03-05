@@ -30,7 +30,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
     public static class DMVRuleSetup
@@ -46,9 +45,7 @@ namespace Cheburashka
             model        = context.SchemaModel;
             sqlFragment  = context.ScriptFragment;
             modelElement = context.ModelElement;
-
         }
-
 
         //public static void RefreshDDLCache(ModelStore sqlSchemaModel)
         //{
@@ -61,6 +58,5 @@ namespace Cheburashka
             objectSchema = sqlElement.Name.HasName ? sqlElement.Name.Parts[0] : "";
             objectTable  = sqlElement.Name.HasName ? sqlElement.Name.Parts[1] : "";
         }
-
     }
 }

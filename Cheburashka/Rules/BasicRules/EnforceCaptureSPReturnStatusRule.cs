@@ -29,12 +29,15 @@ using System.Globalization;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever a stored procedure is called and its return status is not captured. 
     /// This rule only applies to SQL stored procedures, and triggers.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceCaptureSPReturnStatusRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
@@ -59,7 +62,7 @@ namespace Cheburashka
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
                 //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure, 
+                ModelSchema.Procedure,
                 //ModelSchema.TableValuedFunction, 
                 //ModelSchema.ScalarFunction,
                 ModelSchema.DatabaseDdlTrigger,
@@ -111,7 +114,6 @@ namespace Cheburashka
             }
 
             return problems;
-
         }
     }
 }

@@ -29,12 +29,15 @@ using System.Globalization;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever a call to sp_rename is made. 
     /// This rule only applies to SQL stored procedures.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(DisallowUseOfSp_ReNameRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
@@ -59,7 +62,7 @@ namespace Cheburashka
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
                 //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure, 
+                ModelSchema.Procedure,
                 //ModelSchema.TableValuedFunction,
                 //ModelSchema.ScalarFunction,
 
@@ -85,9 +88,9 @@ namespace Cheburashka
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            
+
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-            
+
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
@@ -112,8 +115,6 @@ namespace Cheburashka
             }
 
             return problems;
-
         }
-
     }
 }

@@ -24,38 +24,18 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class NullLiteralVisitor : TSqlConcreteFragmentVisitor
+    internal class OuterBlockVisitor : TSqlConcreteFragmentVisitor
     {
-        public NullLiteralVisitor()
+        public OuterBlockVisitor()
         {
-            NullLiteralExpressions = new List<ScalarExpression>();
+            BeginEndBlockStatements = new List<BeginEndBlockStatement>();
         }
 
-        public IList<ScalarExpression> NullLiteralExpressions { get; }
+        public IList<BeginEndBlockStatement> BeginEndBlockStatements { get; }
 
-        public override void ExplicitVisit(BooleanComparisonExpression node)
+        public override void ExplicitVisit(BeginEndBlockStatement node)
         {
-            if (  node.FirstExpression is NullLiteral
-               )
-            {
-                NullLiteralExpressions.Add(node.FirstExpression);
-            }
-            if (node.SecondExpression is NullLiteral
-               )
-            {
-                NullLiteralExpressions.Add(node.SecondExpression);
-            }
-            node.AcceptChildren(this);
-        }
-
-        public override void ExplicitVisit(SimpleWhenClause node)
-        {
-            if (node.WhenExpression is NullLiteral
-               )
-            {
-                NullLiteralExpressions.Add(node.WhenExpression);
-            }
-            node.AcceptChildren(this);
+            BeginEndBlockStatements.Add(node);
         }
     }
 }

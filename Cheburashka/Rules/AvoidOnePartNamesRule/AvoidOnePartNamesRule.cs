@@ -28,16 +28,17 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
-
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is au unused variable in a routine.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
@@ -55,7 +56,6 @@ namespace Cheburashka
         /// shown as "DM0029: Always include the schema name when referencing an object."
         /// </summary>
         public const string RuleId = RuleConstants.AvoidOnePartNames_RuleId;
-
 
         public AvoidOnePartNamesRule()
         {
@@ -94,180 +94,181 @@ namespace Cheburashka
 
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-            // The rule execution context has all the objects we'll need, including the fragment representing the object,
-            // and a descriptor that lets us access rule metadata
-            TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
-
-            // visitor to get the occurrences of single part table names
-            var visitor = new AvoidOnePartNameVisitor();
-            sqlFragment.Accept(visitor);
-            IList<SchemaObjectName> onePartNames = visitor.OnePartNames;
-
-
-            // visitor to get the occurrences of data declarations names
-            // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
-
-            UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new UpdateStatementForTargetVisitor();
-            sqlFragment.Accept(updateStatementForTargetVisitor);
-            IList<TableReference> updateStatements = updateStatementForTargetVisitor.DataModificationTargets;
-            DeleteStatementForTargetVisitor deleteStatementForTargetVisitor = new DeleteStatementForTargetVisitor();
-            sqlFragment.Accept(deleteStatementForTargetVisitor);
-            IList<TableReference> deleteStatements = deleteStatementForTargetVisitor.DataModificationTargets;
-            MergeStatementForTargetVisitor mergeStatementForTargetVisitor = new MergeStatementForTargetVisitor();
-            sqlFragment.Accept(mergeStatementForTargetVisitor);
-            IList<TableReference> mergeStatements = mergeStatementForTargetVisitor.DataModificationTargets;
-            List<TableReference> allStatements = new List<TableReference>();
-            allStatements.AddRange(updateStatements);
-            allStatements.AddRange(deleteStatements);
-            allStatements.AddRange(mergeStatements);
-
-            DataTypeVisitor dataTypeVisitor = new DataTypeVisitor();
-            sqlFragment.Accept(dataTypeVisitor);
-            IList<DataTypeReference> dataTypes = dataTypeVisitor.DataTypes;
-
-            IList<CteUtil> cteUtilFragments = SqlRuleUtils.CteStatements(sqlFragment).ToList();
-
-
-            var excludedOnePartNamesContextsVisitor = new ExcludedTwoPartNamesContextsVisitor();
-            sqlFragment.Accept(excludedOnePartNamesContextsVisitor);
-            IList<TSqlFragment> serviceBrokerContexts =
-                excludedOnePartNamesContextsVisitor.ExcludedTwoPartNamesContexts.ToList();
-
-            // Create problems for each one part object name source found 
-            foreach (SchemaObjectName tableSource in onePartNames)
+            try
             {
-                String tableSourceIdentifier =
-                    tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
-                // Check the name isn't a builtin sql type
-                bool foundSurroundingDeclaration = dataTypes.Any(v => v.SQLModel_Contains(tableSource));
-                // Check the name isn't an update or delete or merge statement target
-                if (!foundSurroundingDeclaration)
-                {
-                    foundSurroundingDeclaration = allStatements.Any(v => v.SQLModel_Contains(tableSource));
-                }
+                TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-                //// Check the name isn't literally 'sysname' etc
-                if (!foundSurroundingDeclaration)
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+
+                // visitor to get the occurrences of single part table names
+                var visitor = new AvoidOnePartNameVisitor();
+                sqlFragment.Accept(visitor);
+                IList<SchemaObjectName> onePartNames = visitor.OnePartNames;
+
+                // visitor to get the occurrences of data declarations names
+                // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
+
+                UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new UpdateStatementForTargetVisitor();
+                sqlFragment.Accept(updateStatementForTargetVisitor);
+                IList<TableReference> updateStatements = updateStatementForTargetVisitor.DataModificationTargets;
+                DeleteStatementForTargetVisitor deleteStatementForTargetVisitor = new DeleteStatementForTargetVisitor();
+                sqlFragment.Accept(deleteStatementForTargetVisitor);
+                IList<TableReference> deleteStatements = deleteStatementForTargetVisitor.DataModificationTargets;
+                MergeStatementForTargetVisitor mergeStatementForTargetVisitor = new MergeStatementForTargetVisitor();
+                sqlFragment.Accept(mergeStatementForTargetVisitor);
+                IList<TableReference> mergeStatements = mergeStatementForTargetVisitor.DataModificationTargets;
+                List<TableReference> allStatements = new List<TableReference>();
+                allStatements.AddRange(updateStatements);
+                allStatements.AddRange(deleteStatements);
+                allStatements.AddRange(mergeStatements);
+
+                DataTypeVisitor dataTypeVisitor = new DataTypeVisitor();
+                sqlFragment.Accept(dataTypeVisitor);
+                IList<DataTypeReference> dataTypes = dataTypeVisitor.DataTypes;
+
+                IList<CteUtil> cteUtilFragments = SqlRuleUtils.CteStatements(sqlFragment).ToList();
+
+                var excludedOnePartNamesContextsVisitor = new ExcludedTwoPartNamesContextsVisitor();
+                sqlFragment.Accept(excludedOnePartNamesContextsVisitor);
+                IList<TSqlFragment> serviceBrokerContexts =
+                    excludedOnePartNamesContextsVisitor.ExcludedTwoPartNamesContexts.ToList();
+
+                // Create problems for each one part object name source found 
+                foreach (SchemaObjectName tableSource in onePartNames)
                 {
-                    if (tableSource.FirstTokenIndex == tableSource.LastTokenIndex &&
-                        SqlRuleUtils.IsBuiltinDataTypeThatParsesAsAnIdentifier(
-                            tableSource.ScriptTokenStream[tableSource.FirstTokenIndex].Text)
-                        )
+                    String tableSourceIdentifier =
+                        tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
+                    // Check the name isn't a builtin sql type
+                    bool foundSurroundingDeclaration = dataTypes.Any(v => v.SQLModel_Contains(tableSource));
+                    // Check the name isn't an update or delete or merge statement target
+                    if (!foundSurroundingDeclaration)
                     {
-                        foundSurroundingDeclaration = true;
+                        foundSurroundingDeclaration = allStatements.Any(v => v.SQLModel_Contains(tableSource));
                     }
-                }
 
-                // Check we aren't looking in master or msdb.
-                if (!foundSurroundingDeclaration)
-                {
-                    if (tableSource.DatabaseIdentifier != null)
+                    //// Check the name isn't literally 'sysname' etc
+                    if (!foundSurroundingDeclaration)
+                    {
+                        if (tableSource.FirstTokenIndex == tableSource.LastTokenIndex &&
+                            SqlRuleUtils.IsBuiltinDataTypeThatParsesAsAnIdentifier(
+                                tableSource.ScriptTokenStream[tableSource.FirstTokenIndex].Text)
+                            )
+                        {
+                            foundSurroundingDeclaration = true;
+                        }
+                    }
+
+                    // Check we aren't looking in master or msdb.
+                    if (!foundSurroundingDeclaration)
+                    {
+                        if (tableSource.DatabaseIdentifier != null)
+                        {
+                            foundSurroundingDeclaration =
+                                SqlRuleUtils.IsSystemDatabaseThatNeedNoSchemaQualification(
+                                    tableSource.DatabaseIdentifier.Value);
+                        }
+                    }
+
+                    // Check it isn't a built-in system object
+                    if (!foundSurroundingDeclaration)
+                    {
+                        foundSurroundingDeclaration = SqlRuleUtils.Is_SS2008R2_SystemDatabaseObject(tableSourceIdentifier);
+                    }
+                    // Check it isn't Deleted or Inserted
+                    if (!foundSurroundingDeclaration)
                     {
                         foundSurroundingDeclaration =
-                            SqlRuleUtils.IsSystemDatabaseThatNeedNoSchemaQualification(
-                                tableSource.DatabaseIdentifier.Value);
+                            SqlRuleUtils.IsSystemTableThatNeedNoSchemaQualification(tableSource.BaseIdentifier.Value);
                     }
-                }
-
-                // Check it isn't a built-in system object
-                if (!foundSurroundingDeclaration)
-                {
-                    foundSurroundingDeclaration = SqlRuleUtils.Is_SS2008R2_SystemDatabaseObject(tableSourceIdentifier);
-                }
-                // Check it isn't Deleted or Inserted
-                if (!foundSurroundingDeclaration)
-                {
-                    foundSurroundingDeclaration =
-                        SqlRuleUtils.IsSystemTableThatNeedNoSchemaQualification(tableSource.BaseIdentifier.Value);
-                }
-                // Check the name isn't a CTE name in an update........... target
-                if (!foundSurroundingDeclaration)
-                {
+                    // Check the name isn't a CTE name in an update........... target
+                    if (!foundSurroundingDeclaration)
                     {
-                        if (tableSourceIdentifier == null) throw new Exception(" null tableSourceIdentifier");
+                        {
+                            if (tableSourceIdentifier == null) throw new Exception(" null tableSourceIdentifier");
 
-                        tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();
-                        foundSurroundingDeclaration = 
-                            cteUtilFragments.Any(v =>   SqlComparisonUtils.SQLModel_Contains(v, tableSource)
-                                                     && v.ExpressionNamesAsStrings.Contains(tableSourceIdentifier, SqlComparer.Comparer)
-                                                );
+                            tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();
+                            foundSurroundingDeclaration =
+                                cteUtilFragments.Any(v => SqlComparisonUtils.SQLModel_Contains(v, tableSource)
+                                                         && v.ExpressionNamesAsStrings.Contains(tableSourceIdentifier, SqlComparer.Comparer)
+                                                    );
+                        }
+                    }
+                    // Check it isn't picked up as a service broker contract or service or whatever.
+                    if (!foundSurroundingDeclaration)
+                    {
+                        foundSurroundingDeclaration = serviceBrokerContexts.Any(v => v.SQLModel_Contains(tableSource));
+                    }
+
+                    // If we can't eliminate it, report it as a problem.
+                    if (!foundSurroundingDeclaration)
+                    {
+                        SqlRuleProblem problem =
+                            new SqlRuleProblem(
+                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                                , modelElement
+                                , tableSource);
+
+                        //RuleUtils.UpdateProblemPosition(modelElement, problem, tableSource);
+                        problems.Add(problem);
                     }
                 }
-                // Check it isn't picked up as a service broker contract or service or whatever.
-                if (!foundSurroundingDeclaration)
-                {
-                    foundSurroundingDeclaration = serviceBrokerContexts.Any(v => v.SQLModel_Contains(tableSource));
-                }
 
-                // If we can't eliminate it, report it as a problem.
-                if (!foundSurroundingDeclaration)
+                // may need to sweep user defined type separately
+                // needs new visitor
+
+                // now to look inside literal arguments to system functions.
+                // this is totally independent of the above search.
+                var literalOnePartNameContextsVisitor = new SchemaNameAcceptingFunctionsVisitor();
+                sqlFragment.Accept(literalOnePartNameContextsVisitor);
+                IList<FunctionCall> literalOnePartNameContexts = literalOnePartNameContextsVisitor.OnePartNames;
+
+                // Create problems for each one part object name source found 
+                // check each against list of builtin that might be passed to typeid
+                foreach (FunctionCall functionCall in literalOnePartNameContexts)
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
                             String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
-                            , tableSource);
+                            , functionCall);
 
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, tableSource);
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, functionCall);
                     problems.Add(problem);
                 }
+
+                // now to look inside literal arguments to system procedures.
+                // this is totally independent of the above search.
+                var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
+                sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
+                IList<ExecutableProcedureReference> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames;
+
+                // Create problems for each one part object name source found 
+                // check each against list of builtin that might be passed to typeid
+                foreach (ExecutableProcedureReference executableProcedureReference in literalOnePartNameStoredProcsContexts)
+                {
+                    SqlRuleProblem problem =
+                        new SqlRuleProblem(
+                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            , modelElement
+                            , executableProcedureReference);
+
+                    //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
+                    problems.Add(problem);
+                }
+
             }
-
-            // may need to sweep user defined type separately
-            // needs new visitor
-
-            // now to look inside literal arguments to system functions.
-            // this is totally independent of the above search.
-            var literalOnePartNameContextsVisitor = new SchemaNameAcceptingFunctionsVisitor();
-            sqlFragment.Accept(literalOnePartNameContextsVisitor);
-            IList<FunctionCall> literalOnePartNameContexts = literalOnePartNameContextsVisitor.OnePartNames;
-
-            // Create problems for each one part object name source found 
-            // check each against list of builtin that might be passed to typeid
-            foreach (FunctionCall functionCall in literalOnePartNameContexts)
+            catch
             {
-                SqlRuleProblem problem =
-                    new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , functionCall);
-
-                //RuleUtils.UpdateProblemPosition(modelElement, problem, functionCall);
-                problems.Add(problem);
-
-            }
-            
-            // now to look inside literal arguments to system procedures.
-            // this is totally independent of the above search.
-            var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
-            sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
-            IList<ExecutableProcedureReference> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames;
-
-            // Create problems for each one part object name source found 
-            // check each against list of builtin that might be passed to typeid
-            foreach (ExecutableProcedureReference executableProcedureReference in literalOnePartNameStoredProcsContexts)
-            {
-                SqlRuleProblem problem =
-                    new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , executableProcedureReference);
-
-                //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
-                problems.Add(problem);
-
-            }
+            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
-        }
-
+            }
     }
-    
 }

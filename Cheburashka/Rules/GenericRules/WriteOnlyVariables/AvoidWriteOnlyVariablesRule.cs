@@ -38,7 +38,6 @@ using QuickGraph.Graphviz.Dot;
 
 namespace Cheburashka
 {
-
     public sealed class FileDotEngine : IDotEngine
     {
         public string Run(GraphvizImageType imageType, string dot, string outputFileName)
@@ -52,12 +51,16 @@ namespace Cheburashka
             return output;
         }
     }
+
     /// <summary>
+    /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is a variable in a routine that is only ever written to.
-    /// 
+    /// </para>
+    /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
+    /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidWriteOnlyVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
@@ -106,11 +109,8 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-            TSqlModel           model;
-            TSqlObject          modelElement;
-            TSqlFragment        sqlFragment;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
@@ -120,7 +120,6 @@ namespace Cheburashka
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
-
 
             // visitor to get the declarations of variables
             var declarationVisitor = new VariableDeclarationVisitor();
@@ -160,7 +159,6 @@ namespace Cheburashka
                         where SqlComparer.SQLModel_StringCompareEqual(varReference.Name, varDeclaration.Value) // real condition
                         select varReference;
 
-
             //// rewritten as method chain to allow use of collations
             //IEnumerable<VariableReference> tmpVr = 
             //    allVariableLikeReferences.Join( variableDeclarations
@@ -179,7 +177,6 @@ namespace Cheburashka
             //, (varReference) => new { x = varReference  } 
             //, SqlComparer.Comparer.Compare
             //);
-
 
             // remove all named parameters from the list of set variables
             IEnumerable<SQLExpressionDependency> tmpSetVr =
@@ -224,7 +221,6 @@ namespace Cheburashka
                 }
             }
 
-
             //var graphComparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             var writeDependencies = new BidirectionalGraph<string,Edge<string>>(false,-1,-1, SqlComparer.Comparer);
@@ -238,8 +234,7 @@ namespace Cheburashka
 
             writeDependencies.AddVertex(terminate);
             writeDependencies.AddEdgeRange(
-                nonAssignmentContextVariableReferences.Select((n => new Edge<string>(n.Key, terminate))));
-
+            nonAssignmentContextVariableReferences.Select(n => new Edge<string>(n.Key, terminate)));
 
             foreach (var setVariable in setVariables)
             {
@@ -276,9 +271,8 @@ namespace Cheburashka
 
             // now need to find all variable references that aren't directly in a variable assignment of any kind.
 
-
             List<String> consumedVariables = (from edge in writeDependencies.Edges where edge.Target == terminate select edge.Source).ToList().Distinct().ToList();
-            
+
             var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)
                                                   .Distinct();
@@ -302,14 +296,11 @@ namespace Cheburashka
                         , modelElement
                         , sqlFragment);
 
-
-                RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier)objects[v]));
+                RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[v]);
                 problems.Add(problem);
             }
 
             return problems;
-
         }
-
     }
 }

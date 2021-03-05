@@ -25,42 +25,33 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-
     internal class DeleteWithCTEVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<CteUtil> _targets;
-
         #region ctor
         public DeleteWithCTEVisitor()
         {
-            _targets = new List<CteUtil>();
+            CteUtilFragments = new List<CteUtil>();
         }
         #endregion
 
         #region properties
-        public List<CteUtil> CteUtilFragments
-        {
-            get { return _targets; }
-        }
+        public List<CteUtil> CteUtilFragments { get; }
         #endregion
 
         #region overrides
         public override void ExplicitVisit(DeleteStatement node)
         {
-
-            if ((node.WithCtesAndXmlNamespaces != null))
+            if (node.WithCtesAndXmlNamespaces != null)
             {
                 CteUtil target = new CteUtil(node.FirstTokenIndex, node.LastTokenIndex, 0, 0);
                 foreach (var cte in node.WithCtesAndXmlNamespaces.CommonTableExpressions)
                 {
                     target.Add(cte.ExpressionName);
-                };
-                _targets.Add(target);
+                }
+                CteUtilFragments.Add(target);
             }
         }
         #endregion
 
     }
-
-
 }

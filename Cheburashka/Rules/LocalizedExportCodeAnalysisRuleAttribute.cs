@@ -29,12 +29,15 @@ using System.Resources;
 namespace Cheburashka
 {
     /// <summary>
+    /// <para>
     /// This is an example of a localized export attribute. These can be very useful in the case where
     /// you need localized resource strings for things like the display name and description of a rule.
-    /// 
+    /// </para>
+    /// <para>
     /// All of the export attributes provided by the DAC API can be localized, and internally a very
     /// similar structure is used. If you do not need to perform localization of any resources it's easier to use the
     /// <see cref="ExportCodeAnalysisRuleAttribute"/> directly.
+    /// </para>
     /// 
     /// </summary>
     internal class LocalizedExportCodeAnalysisRuleAttribute : ExportCodeAnalysisRuleAttribute
@@ -105,11 +108,7 @@ namespace Cheburashka
         {
             get
             {
-                if (_displayName == null)
-                {
-                    _displayName = GetResourceString(_displayNameResourceId);
-                }
-                return _displayName;
+                return _displayName ?? (_displayName = GetResourceString(_displayNameResourceId));
             }
         }
 
@@ -120,12 +119,7 @@ namespace Cheburashka
         {
             get
             {
-                if (_descriptionValue == null)
-                {
-                    // Using the descriptionResourceId as the key for looking up the description in the resources file. 
-                    _descriptionValue = GetResourceString(_descriptionResourceId);
-                }
-                return _descriptionValue;
+                return _descriptionValue ?? (_descriptionValue = GetResourceString(_descriptionResourceId));
             }
         }
     }

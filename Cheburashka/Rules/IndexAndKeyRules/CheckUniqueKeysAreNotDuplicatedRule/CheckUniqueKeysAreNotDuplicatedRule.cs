@@ -76,168 +76,216 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-
-
-            DMVSettings.RefreshModelBuiltInCache(model);
-            // Refresh cached index/constraints/tables lists from Model
-            //DMVSettings.RefreshColumnCache(model);
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-            bool unique = true;
-
-
-            // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
-            if ((modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName){ 
-                if (modelElement.GetSourceInformation() == null) { return problems; }
-            }
-
-            var parentObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
-            var parentObjectName   = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
-
-            var structureColumnsVisitor = new StructureColumnsVisitor();
-
-            List<string> thisIndexOrConstraintColumns = new List<string>(); 
-            if (sqlFragment != null) { 
-                sqlFragment.Accept(structureColumnsVisitor);
-                thisIndexOrConstraintColumns = structureColumnsVisitor.Objects;
-            }
-            else {
-                if (modelElement.ObjectType == UniqueConstraint.TypeClass ) {
-                    thisIndexOrConstraintColumns = modelElement.GetReferencedRelationshipInstances(UniqueConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
-                }
-                else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
-                {
-                    thisIndexOrConstraintColumns = modelElement.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns).Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
-                }
-            }
-
-            if (modelElement.ObjectType == Index.TypeClass)
+            try
             {
-                unique = (Boolean?)modelElement.GetProperty(Index.Unique) == true;
-            }
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            if (unique)
-            {
-                var issues = new List<TSqlFragment>();
-
-                List<String> leadingEdgeIndexColumns = new List<String>();
-
-                foreach (var c in thisIndexOrConstraintColumns)
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
                 {
-                    leadingEdgeIndexColumns.Add(c);
+                    return problems;
                 }
 
+                DMVSettings.RefreshModelBuiltInCache(model);
+                // Refresh cached index/constraints/tables lists from Model
+                //DMVSettings.RefreshColumnCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                List<TSqlObject> pks                        = ModelIndexAndKeysUtils.getPrimaryKeys(parentObjectSchema, parentObjectName);
-                List<TSqlObject> indexes                    = ModelIndexAndKeysUtils.getIndexes(parentObjectSchema, parentObjectName);
-                List<TSqlObject> uniqueConstraints          = ModelIndexAndKeysUtils.getUniqueConstraints(parentObjectSchema, parentObjectName);
+                bool unique = true;
 
-
-                bool foundMoreConciseUniqueCondition = false;
-                foreach (var v in pks)  // dummy loop - could only execute once.
+                // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
+                if ((modelElement.ObjectType == UniqueConstraint.TypeClass ||
+                     modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName)
                 {
-                    //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
-                    if (modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass ) 
+                    if (modelElement.GetSourceInformation() == null)
                     {
-                        var columnSpecifications = v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
-                        List<String> sortedPrimaryKeyColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                        List<String> pkLeadingEdgeIndexColumns = new List<String>();
-                        pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
-
-                        foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, pkLeadingEdgeIndexColumns);
-                        if (foundMoreConciseUniqueCondition)
-                        {
-                            break;
-                        }
+                        return problems;
                     }
                 }
-                if (!foundMoreConciseUniqueCondition)
-                {
-                    //loop over unique indexes
-                    foreach (var v in indexes.Where( n => (bool?) n.GetProperty(Index.Unique) == true).Select(n=>n) )
-                    {
-                        //if this object is a pk or uk it isn't an index  and cant be this object we currently checking
-                        //if this object is index then if it don't have the same name it isn't this were currently checking
-                        //so do  the columns checks.
-                        if (   modelElement.ObjectType == UniqueConstraint.TypeClass || modelElement.ObjectType == PrimaryKeyConstraint.TypeClass
-                           || ( ! modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString()) )
-                           )
-                        {
-                            var columnSpecifications = v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
-                            List<String> sortedUniqueIndexColumns = columnSpecifications.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<String> otherLeadingEdgeIndexColumns = new List<String>();
-                            otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
 
-                            foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, otherLeadingEdgeIndexColumns);
+                var parentObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
+                var parentObjectName = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
+
+                var structureColumnsVisitor = new StructureColumnsVisitor();
+
+                List<string> thisIndexOrConstraintColumns = new List<string>();
+                if (sqlFragment != null)
+                {
+                    sqlFragment.Accept(structureColumnsVisitor);
+                    thisIndexOrConstraintColumns = structureColumnsVisitor.Objects;
+                }
+                else
+                {
+                    if (modelElement.ObjectType == UniqueConstraint.TypeClass)
+                    {
+                        thisIndexOrConstraintColumns = modelElement
+                            .GetReferencedRelationshipInstances(UniqueConstraint.Columns)
+                            .Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                    }
+                    else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
+                    {
+                        thisIndexOrConstraintColumns = modelElement
+                            .GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns)
+                            .Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
+                    }
+                }
+
+                if (modelElement.ObjectType == Index.TypeClass)
+                {
+                    unique = (Boolean?) modelElement.GetProperty(Index.Unique) == true;
+                }
+
+                if (unique)
+                {
+                    var issues = new List<TSqlFragment>();
+
+                    List<String> leadingEdgeIndexColumns = new List<String>();
+
+                    foreach (var c in thisIndexOrConstraintColumns)
+                    {
+                        leadingEdgeIndexColumns.Add(c);
+                    }
+
+                    List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(parentObjectSchema, parentObjectName);
+                    List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(parentObjectSchema, parentObjectName);
+                    List<TSqlObject> uniqueConstraints =
+                        ModelIndexAndKeysUtils.getUniqueConstraints(parentObjectSchema, parentObjectName);
+
+                    bool foundMoreConciseUniqueCondition = false;
+                    foreach (var v in pks) // dummy loop - could only execute once.
+                    {
+                        //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
+                        if (modelElement.ObjectType == UniqueConstraint.TypeClass ||
+                            modelElement.ObjectType == Index.TypeClass)
+                        {
+                            var columnSpecifications =
+                                v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns,
+                                    DacQueryScopes.UserDefined);
+                            List<String> sortedPrimaryKeyColumns = columnSpecifications
+                                .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                .Select(n => n.ObjectName.Parts[2]).ToList();
+                            List<String> pkLeadingEdgeIndexColumns = new List<String>();
+                            pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
+
+                            foundMoreConciseUniqueCondition =
+                                DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
+                                    pkLeadingEdgeIndexColumns);
                             if (foundMoreConciseUniqueCondition)
                             {
                                 break;
                             }
                         }
                     }
-                }
-                if (!foundMoreConciseUniqueCondition)
-                {
-                    foreach (var v in uniqueConstraints)
-                    {
-                        //if this object is a pk or index it isn't an uk and cant be this object we currently checking
-                        //if this object is uk then if it don't have the same name it isn't this were currently checking
-                        //so do  the columns checks.
-                        if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass || modelElement.ObjectType == Index.TypeClass
-                           || (    ( modelElement.ObjectType == UniqueConstraint.TypeClass && v.ObjectType == UniqueConstraint.TypeClass ) 
-                                && (  ! modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString())
-                                   )
-                              )
-                           )
-                        {
-                            var uniqueConstraintColumns = v.GetReferencedRelationshipInstances(UniqueConstraint.Columns, DacQueryScopes.UserDefined);
-                            List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns.OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer).Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
-                            ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
 
-                            foundMoreConciseUniqueCondition = DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns, ConstraintLeadingEdgeIndexColumns);
-                            if (foundMoreConciseUniqueCondition)
+                    if (!foundMoreConciseUniqueCondition)
+                    {
+                        //loop over unique indexes
+                        foreach (var v in indexes.Where(n => (bool?) n.GetProperty(Index.Unique) == true)
+                            .Select(n => n))
+                        {
+                            //if this object is a pk or uk it isn't an index  and cant be this object we currently checking
+                            //if this object is index then if it don't have the same name it isn't this were currently checking
+                            //so do  the columns checks.
+                            if (modelElement.ObjectType == UniqueConstraint.TypeClass ||
+                                modelElement.ObjectType == PrimaryKeyConstraint.TypeClass
+                                || (!modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString()))
+                            )
                             {
-                                break;
+                                var columnSpecifications =
+                                    v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
+                                List<String> sortedUniqueIndexColumns = columnSpecifications
+                                    .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                    .Select(n => n.ObjectName.Parts[2]).ToList();
+                                List<String> otherLeadingEdgeIndexColumns = new List<String>();
+                                otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
+
+                                foundMoreConciseUniqueCondition =
+                                    DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
+                                        otherLeadingEdgeIndexColumns);
+                                if (foundMoreConciseUniqueCondition)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                if (foundMoreConciseUniqueCondition)
-                {
-                    if (sqlFragment == null ){
-                        sqlFragment = new UniqueConstraintDefinition();
+
+                    if (!foundMoreConciseUniqueCondition)
+                    {
+                        foreach (var v in uniqueConstraints)
+                        {
+                            //if this object is a pk or index it isn't an uk and cant be this object we currently checking
+                            //if this object is uk then if it don't have the same name it isn't this were currently checking
+                            //so do  the columns checks.
+                            if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass ||
+                                modelElement.ObjectType == Index.TypeClass
+                                || ((modelElement.ObjectType == UniqueConstraint.TypeClass &&
+                                     v.ObjectType == UniqueConstraint.TypeClass)
+                                    && (!modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString())
+                                    )
+                                )
+                            )
+                            {
+                                var uniqueConstraintColumns =
+                                    v.GetReferencedRelationshipInstances(UniqueConstraint.Columns,
+                                        DacQueryScopes.UserDefined);
+                                List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns
+                                    .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                    .Select(n => n.ObjectName.Parts[2]).ToList();
+                                List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
+                                ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
+
+                                foundMoreConciseUniqueCondition =
+                                    DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
+                                        ConstraintLeadingEdgeIndexColumns);
+                                if (foundMoreConciseUniqueCondition)
+                                {
+                                    break;
+                                }
+                            }
+                        }
                     }
-                    issues.Add(sqlFragment);
+
+                    if (foundMoreConciseUniqueCondition)
+                    {
+                        if (sqlFragment == null)
+                        {
+                            sqlFragment = new UniqueConstraintDefinition();
+                        }
+
+                        issues.Add(sqlFragment);
+                    }
+
+                    // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                    // and a descriptor that lets us access rule metadata
+                    RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                    // Create problems for each object
+                    foreach (TSqlFragment issue in issues)
+                    {
+                        SqlRuleProblem problem =
+                            new SqlRuleProblem(
+                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
+                                    elementName)
+                                , modelElement
+                                , sqlFragment);
+                        RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment) issue);
+                        problems.Add(problem);
+                    }
                 }
-
-                // The rule execution context has all the objects we'll need, including the fragment representing the object,
-                // and a descriptor that lets us access rule metadata
-                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-                // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                    new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, ((TSqlFragment)issue));
-                    problems.Add(problem);
-                }
-
             }
+            catch
+            {
+            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+
             return problems;
-        }
+            }
 
-        private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<String> theseKeysColumns, List<String> theOtherKeysColumns)
+private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<String> theseKeysColumns, List<String> theOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 

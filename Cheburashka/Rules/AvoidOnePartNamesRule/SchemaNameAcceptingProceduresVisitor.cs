@@ -34,7 +34,7 @@ namespace Cheburashka
             OnePartNames = new List<ExecutableProcedureReference>();
         }
 
-        public IList<ExecutableProcedureReference> OnePartNames { get; private set; }
+        public IList<ExecutableProcedureReference> OnePartNames { get; }
 
         public override void ExplicitVisit(ExecutableProcedureReference node)
         {
@@ -62,16 +62,13 @@ namespace Cheburashka
                //                EXEC sp_bindrule 'today', 'HumanResources.Employee.HireDate';
                //            EXEC sp_bindefault 'today', 'HumanResources.Employee.HireDate';
 
-
                )
             {
-                var objName = node.Parameters[0].ParameterValue as StringLiteral;
-                if (objName != null)
+                if (node.Parameters[0].ParameterValue is StringLiteral objName)
                 {
                     if (objName.Value.EmptySchemaNameInLiteral()) { OnePartNames.Add(node); }
                 }
             }
         }
-
     }
 }

@@ -75,11 +75,20 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+
             TSqlModel model;
             TSqlObject modelElement;
             TSqlFragment sqlFragment;
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+
+            // If we can't find the file then assume we're in a composite model
+            // and the elements are defined there and
+            // should be analysed there
+            if (modelElement.GetSourceInformation() is null)
+            {
+                return problems;
+            }
 
             DMVSettings.RefreshModelBuiltInCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);

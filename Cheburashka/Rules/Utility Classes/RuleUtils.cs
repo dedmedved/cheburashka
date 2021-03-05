@@ -31,7 +31,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
     internal static class RuleUtils
@@ -55,6 +54,7 @@ namespace Cheburashka
             string elementName = displayServices.GetElementName(modelElement, style);
             return elementName;
         }
+
         /// <summary>
         /// Compute the start Line/Col and the end Line/Col to update problem info
         /// </summary>
@@ -77,12 +77,7 @@ namespace Cheburashka
 
                         if (fullScript != null)
                         {
-                            int startLine = 0;
-                            int startColumn = 0;
-                            int endLine = 0;
-                            int endColumn = 0;
-
-                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out startLine, out startColumn, out endLine, out endColumn))
+                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out int endLine, out int endColumn))
                             {
                                 problem.SetSourceInformation(new SourceInformation(fileName, startLine + 1, startColumn + 1));
                             }
@@ -103,6 +98,7 @@ namespace Cheburashka
                 }
             }
         }
+
         /// <summary>
         /// Read file content from a file.
         /// </summary>
@@ -126,14 +122,12 @@ namespace Cheburashka
             }
             finally
             {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
+                reader?.Close();
             }
 
             return content;
         }
+
         /// This method converts offset from ScriptDom to line\column in script files.
         /// A line is defined as a sequence of characters followed by a carriage return ("\r"), 
         /// a line feed ("\n"), or a carriage return immediately followed by a line feed. 
@@ -164,7 +158,7 @@ namespace Cheburashka
                 {
                     ++endLine;
                     endColumn = 0;
-                    if (afterOffset == false)
+                    if (!afterOffset)
                     {
                         ++startLine;
                         startColumn = 0;
@@ -180,7 +174,7 @@ namespace Cheburashka
 
                     ++endLine;
                     endColumn = 0;
-                    if (afterOffset == false)
+                    if (!afterOffset)
                     {
                         ++startLine;
                         startColumn = 0;
@@ -189,7 +183,7 @@ namespace Cheburashka
                 else
                 {
                     ++endColumn;
-                    if (afterOffset == false)
+                    if (!afterOffset)
                     {
                         ++startColumn;
                     }
@@ -266,7 +260,6 @@ namespace Cheburashka
 
             return bFoundClusteredIndex;
         }
-    
 
     public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex , out IList<ObjectIdentifier> columns)
         {
@@ -284,7 +277,7 @@ namespace Cheburashka
                         if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
                             && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                             && thing.GetProperty<bool>(Index.Clustered)
-                        ) 
+                        )
 
                         {
                             var c = thing.GetReferencedRelationshipInstances(
@@ -357,7 +350,7 @@ namespace Cheburashka
                     }
                 }
             }
-           
+
             return bFoundClusteredIndex;
         }
     }

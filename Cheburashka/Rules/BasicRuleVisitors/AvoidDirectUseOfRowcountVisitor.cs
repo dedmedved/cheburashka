@@ -31,15 +31,12 @@ namespace Cheburashka
             GlobalVariableExpressions = new List<GlobalVariableExpression>();
         }
 
-        public IList<GlobalVariableExpression> GlobalVariableExpressions { get; private set; }
-
-
+        public IList<GlobalVariableExpression> GlobalVariableExpressions { get; }
 
         public override void ExplicitVisit(GlobalVariableExpression node)
         {
             //using (StreamWriter w = File.AppendText(@"c:\temp\blah.txt"))
             //{
-
 
             //    w.WriteLine(node.Name);
             //}
@@ -53,6 +50,5 @@ namespace Cheburashka
                 GlobalVariableExpressions.Add(node);
             }
         }
-
     }
 }

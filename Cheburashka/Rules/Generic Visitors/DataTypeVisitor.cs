@@ -25,7 +25,6 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-
     internal class DataTypeVisitor : TSqlConcreteFragmentVisitor
     {
         public DataTypeVisitor()
@@ -33,7 +32,7 @@ namespace Cheburashka
             DataTypes = new List<DataTypeReference>();
         }
 
-        public List<DataTypeReference> DataTypes { get; private set; }
+        public List<DataTypeReference> DataTypes { get; }
 
         public override void ExplicitVisit(SqlDataTypeReference node)
         {
@@ -48,8 +47,5 @@ namespace Cheburashka
         {
             DataTypes.Add(node);
         }
-
     }
-
-
 }

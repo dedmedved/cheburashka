@@ -22,7 +22,6 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
     internal class TryCatchVisitor : TSqlConcreteFragmentVisitor
@@ -32,7 +31,7 @@ namespace Cheburashka
             TryCatchStatements = new List<TryCatchStatement>();
         }
 
-        public List<TryCatchStatement> TryCatchStatements { get; private set; }
+        public List<TryCatchStatement> TryCatchStatements { get; }
 
         public override void ExplicitVisit(TryCatchStatement node)
         {
@@ -40,4 +39,3 @@ namespace Cheburashka
         }
     }
 }
- 

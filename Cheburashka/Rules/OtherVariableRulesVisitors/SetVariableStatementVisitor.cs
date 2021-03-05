@@ -32,13 +32,11 @@ namespace Cheburashka
             SetVariableStatements = new List<SetVariableStatement>();
         }
 
-        public IList<SetVariableStatement> SetVariableStatements { get; private set; }
+        public IList<SetVariableStatement> SetVariableStatements { get; }
 
         public override void ExplicitVisit(SetVariableStatement node)
         {
             SetVariableStatements.Add(node);
         }
-
     }
-
 }
