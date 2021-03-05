@@ -279,8 +279,9 @@ namespace Cheburashka
         public static bool EmptySchemaNameInLiteral(this string sLit)
         {
             var schema = sLit.ExtractSchemaNameFromLiteralString();
-            bool emptySchema = schema == "" || schema == "[]" || schema == @"""";
-            return emptySchema;
+            return schema?.Length == 0
+                || schema == "[]"
+                || schema == @"""";
         }
     }
 }

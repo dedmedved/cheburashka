@@ -266,7 +266,6 @@ namespace Cheburashka
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
                     problems.Add(problem);
                 }
-
             }
             catch
             {

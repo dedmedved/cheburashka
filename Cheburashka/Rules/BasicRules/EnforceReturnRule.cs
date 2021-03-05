@@ -127,7 +127,6 @@ namespace Cheburashka
             return problems;
         }
 
-
         private bool InvalidUseOfReturn(StatementList code)
         {
             var cnt = code.Statements.Count;
