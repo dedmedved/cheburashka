@@ -1140,6 +1140,9 @@
     <Content Include="TestScripts\EnforceReturnRule\EnforceReturnRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithBeginWithReturnInIfStatementBlock.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceReturnRule\ProcWithNestedBeginWithReturnInBetweenEnds.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
