@@ -40,11 +40,11 @@ namespace Cheburashka
     /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceReturnRule.RuleId,
-        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceReturn_RuleName,                               // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceReturn_ProblemDescription,                     // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,           // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName, // Name of the resource file to look up displayname and description in
+        RuleConstants.EnforceReturn_RuleName, // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceReturn_ProblemDescription, // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryBasics, // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)] // This rule targets specific elements rather than the whole model
     public sealed class EnforceReturnRule : SqlCodeAnalysisRule
     {
         /// <summary>
@@ -98,23 +98,57 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of return statements
-            var visitor = new ReturnVisitor();
-            sqlFragment.Accept(visitor);
-            IList<ReturnStatement> returnStatements = visitor.ReturnStatements;
+            //// visitor to get the occurrences of return statements
+            //var visitor = new ReturnVisitor();
+            //sqlFragment.Accept(visitor);
+            //IList<ReturnStatement> returnStatements = visitor.ReturnStatements;
+            var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
+
+            var problemExists = false;
+
+            var code = createProcedureStatement?.StatementList;
+            if (code is null)
+                problemExists = true;
+            else
+                problemExists = InvalidUseOfReturn(code);
 
             // Create problems for each return not found 
-            if (returnStatements.Count == 0)
+            if (problemExists)
             {
-                var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , sqlFragment
-                                                );
+                var problem = new SqlRuleProblem(
+                    String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    , modelElement
+                    , sqlFragment
+                );
 
                 problems.Add(problem);
             }
 
             return problems;
+        }
+
+
+        private bool InvalidUseOfReturn(StatementList code)
+        {
+            var cnt = code.Statements.Count;
+
+            if (cnt == 0)
+            {
+                return true;
+            }
+            else
+            {
+                var lastStatementIdx = cnt - 1;
+                switch (code.Statements[lastStatementIdx])
+                {
+                    case BeginEndBlockStatement statement:
+                        return InvalidUseOfReturn(statement.StatementList);
+                    case ReturnStatement _:
+                        return false;
+                }
+            }
+
+            return true;
         }
     }
 }

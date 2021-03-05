@@ -1,3 +1,21 @@
+Problem description: Stored Procedure found without Return in [dbo].[EmptyProc].
+FullID: Cheburashka.DM0027
+Severity: Warning
+Model element: dbo.EmptyProc
+Script file: EmptyProc.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
+Problem description: Stored Procedure found without Return in [dbo].[ProcWithNestedBeginWithReturnInWrongPlace].
+FullID: Cheburashka.DM0027
+Severity: Warning
+Model element: dbo.ProcWithNestedBeginWithReturnInWrongPlace
+Script file: ProcWithNestedBeginWithReturnInWrongPlace.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
 Problem description: Stored Procedure found without Return in [dbo].[ProcWithOutReturn].
 FullID: Cheburashka.DM0027
 Severity: Warning

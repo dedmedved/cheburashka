@@ -98,6 +98,7 @@
     <Compile Include="AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
     <Compile Include="BasicRules\AvoidNullLiteralRule.cs" />
     <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
+    <Compile Include="BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="BasicRuleVisitors\OuterBlockVisitor.cs" />
     <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
     <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
@@ -192,7 +193,6 @@
     <Compile Include="Utility Classes\DictionaryAutoIncrement.cs" />
     <Compile Include="Utility Classes\RuleUtils.cs" />
     <Compile Include="Utility Classes\SQLExpressionDependency.cs" />
-    <Compile Include="BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="Utility Classes\SqlComparer.cs" />
     <Compile Include="Utility Classes\SqlComparisonUtils.cs" />
     <Compile Include="Utility Classes\SqlPrint.cs" />
