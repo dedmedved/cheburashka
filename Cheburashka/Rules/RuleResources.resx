@@ -274,10 +274,10 @@
     <value>Tables should normally have a Primary Key constraint defined.</value>
   </data>
   <data name="EnforceReturn_ProblemDescription" xml:space="preserve">
-    <value>Stored Procedure found without Return in {0}.</value>
+    <value>Stored Procedure found without Return as the final executable statement in {0}.</value>
   </data>
   <data name="EnforceReturn_RuleName" xml:space="preserve">
-    <value>Stored Procedures need at least one Return statement.</value>
+    <value>Stored Procedures have Return as the final executable statement.</value>
   </data>
   <data name="EnforceTryCatch_ProblemDescription" xml:space="preserve">
     <value>Code found without Try/Catch in {0}.</value>

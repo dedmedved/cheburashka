@@ -53,10 +53,14 @@ namespace Cheburashka
     public sealed class EnforceIndexKeyColumnSeparationRule : SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
         /// shown as "DM0016: Avoid indexes with keys that are just a permutation of another key, or form the leading edge of another key."
+        /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.EnforceIndexKeyColumnSeparationRuleId;
 

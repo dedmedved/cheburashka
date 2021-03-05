@@ -529,7 +529,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored Procedure found without Return in {0}..
+        ///   Looks up a localized string similar to Stored Procedure found without Return as the final executable statement in {0}..
         /// </summary>
         internal static string EnforceReturn_ProblemDescription {
             get {
@@ -538,7 +538,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored Procedures need at least one Return statement..
+        ///   Looks up a localized string similar to Stored Procedures have Return as the final executable statement..
         /// </summary>
         internal static string EnforceReturn_RuleName {
             get {

@@ -50,10 +50,14 @@ namespace Cheburashka
     public sealed class AvoidOnePartNamesRule : SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
         /// shown as "DM0029: Always include the schema name when referencing an object."
+        /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.AvoidOnePartNames_RuleId;
 
@@ -191,7 +195,7 @@ namespace Cheburashka
                     if (!foundSurroundingDeclaration)
                     {
                         {
-                            if (tableSourceIdentifier == null) throw new Exception(" null tableSourceIdentifier");
+                            if (tableSourceIdentifier == null) throw new Exception("null tableSourceIdentifier");
 
                             tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();
                             foundSurroundingDeclaration =

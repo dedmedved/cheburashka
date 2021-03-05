@@ -1140,7 +1140,25 @@
     <Content Include="TestScripts\EnforceReturnRule\EnforceReturnRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithBeginWithReturnInIfStatementBlock.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithNestedBeginWithReturnInBetweenEnds.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithNestedBeginWithReturnInWrongPlace.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithNestedBeginWithReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\EmptyProc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceReturnRule\ProcWithoutReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceReturnRule\ProcWithoutBeginWithReturn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceReturnRule\ProcWithReturn.sql">
