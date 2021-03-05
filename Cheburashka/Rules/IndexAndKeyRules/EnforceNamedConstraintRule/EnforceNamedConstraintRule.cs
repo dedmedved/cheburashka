@@ -53,10 +53,14 @@ namespace Cheburashka
     public sealed class EnforceNamedConstraintRule: SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
         /// shown as "DM0022: Avoid unnamed constraints.  These are assigned meaningless system-generated names at time of deployment."
+        /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.EnforceNamedConstraintRuleId;
 

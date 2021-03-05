@@ -54,10 +54,14 @@ namespace Cheburashka
     public sealed class EnforceForeignKeyRule: SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
         /// shown as "DM0033: Tables should normally have a Foreign Key relationship with at least one other table."
+        /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.EnforceForeignKey_RuleId;
 
