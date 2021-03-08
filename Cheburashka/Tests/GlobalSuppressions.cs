@@ -4,6 +4,8 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
+using System.Diagnostics.CodeAnalysis;
+
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.BaselinedRuleTest.#ctor(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext,System.String,Microsoft.SqlServer.Dac.Model.TSqlModelOptions,Microsoft.SqlServer.Dac.Model.SqlServerVersion)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.BaselinedRuleTest.GetScriptsFolder(System.String)~System.String")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.RuleTestUtils.SaveStringToFile(System.String,System.String)")]
@@ -22,4 +24,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.BaselinedRuleTest.ListScriptFilenames~System.String")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.RuleTest.CreateModelUsingTestScripts")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CC0001:You should use 'var' whenever possible.", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.RuleTest.DumpErrors(System.Collections.Generic.IList{Microsoft.SqlServer.Dac.Extensibility.ExtensibilityError})")]
-
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Cheburashka.Tests.RuleTestCases._startup")]

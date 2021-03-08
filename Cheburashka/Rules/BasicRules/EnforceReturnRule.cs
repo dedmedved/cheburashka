@@ -104,9 +104,10 @@ namespace Cheburashka
             //IList<ReturnStatement> returnStatements = visitor.ReturnStatements;
             var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
 
-            var problemExists = false;
 
             var code = createProcedureStatement?.StatementList;
+
+            bool problemExists;
             if (code is null)
                 problemExists = true;
             else
@@ -116,7 +117,7 @@ namespace Cheburashka
             if (problemExists)
             {
                 var problem = new SqlRuleProblem(
-                    String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                     , modelElement
                     , sqlFragment
                 );
@@ -126,7 +127,6 @@ namespace Cheburashka
 
             return problems;
         }
-
 
         private bool InvalidUseOfReturn(StatementList code)
         {
@@ -141,6 +141,8 @@ namespace Cheburashka
                 var lastStatementIdx = cnt - 1;
                 switch (code.Statements[lastStatementIdx])
                 {
+                    case BeginEndAtomicBlockStatement statement:        // can only be true at first level of code in an sp, but that will do.
+                        return InvalidUseOfReturn(statement.StatementList);
                     case BeginEndBlockStatement statement:
                         return InvalidUseOfReturn(statement.StatementList);
                     case ReturnStatement _:
