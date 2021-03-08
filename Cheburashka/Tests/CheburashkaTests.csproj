@@ -1137,6 +1137,27 @@
     <Content Include="TestScripts\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule_Table_With_PK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\EnforceInMemoryReturnRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithBeginWithReturnInIfStatementBlock.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithNestedBeginWithReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithNestedBeginWithReturnInBetweenEnds.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithNestedBeginWithReturnInWrongPlace.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithoutReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceInMemoryReturnRule\InMemoryProcWithReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceReturnRule\EnforceReturnRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

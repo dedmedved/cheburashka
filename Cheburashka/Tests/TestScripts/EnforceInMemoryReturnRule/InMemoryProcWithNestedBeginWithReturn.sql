@@ -1,6 +1,8 @@
 
 CREATE PROCEDURE dbo.ProcWithNestedBeginWithReturn
-AS begin
+AS BEGIN ATOMIC   
+    WITH (TRANSACTION ISOLATION LEVEL = SNAPSHOT,
+        LANGUAGE = N'us_english');
 BEGIN
     declare @RC int
     exec @RC = dbo.ProcWithNestedBeginWithReturn; 
