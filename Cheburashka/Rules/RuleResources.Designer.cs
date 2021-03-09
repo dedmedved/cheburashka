@@ -19,7 +19,7 @@ namespace Cheburashka {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RuleResources {
@@ -556,7 +556,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored Procedures and Triggers need at least one Try/Catch block..
+        ///   Looks up a localized string similar to Triggers and non-simple Stored Procedures need at least one Try/Catch block..
         /// </summary>
         internal static string EnforceTryCatch_RuleName {
             get {
