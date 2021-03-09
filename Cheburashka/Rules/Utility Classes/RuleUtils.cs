@@ -66,11 +66,9 @@ namespace Cheburashka
         {
             if (modelElement != null && problem != null && obj != null)
             {
-                String fileName = null;
-
                 if (modelElement.GetSourceInformation() != null)
                 {
-                    fileName = modelElement.GetSourceInformation().SourceName;
+                    string fileName = modelElement.GetSourceInformation().SourceName;
                     if (!String.IsNullOrEmpty(fileName))
                     {
                         string fullScript = ReadFileContent(fileName);

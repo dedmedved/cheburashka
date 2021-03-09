@@ -109,10 +109,10 @@ namespace Cheburashka
                 var owningObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
                 var owningObjectTable = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
 
-                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> uniqueConstraints =
-                    ModelIndexAndKeysUtils.getUniqueConstraints(owningObjectSchema, owningObjectTable);
+                    ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
                 List<String> LeadingEdgeIndexColumns = new List<String>();
                 var columns = modelElement.GetReferenced(Index.Columns);
@@ -253,7 +253,7 @@ namespace Cheburashka
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(TheseKeysColumns, TheOtherKeysColumns);
+            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(TheseKeysColumns, TheOtherKeysColumns);
             // matchedPos lists the columns in TheseKeysColumns that were actually found in TheseKeysColumns
             List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 

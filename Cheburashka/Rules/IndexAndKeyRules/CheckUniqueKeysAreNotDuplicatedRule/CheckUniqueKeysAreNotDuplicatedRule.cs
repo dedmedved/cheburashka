@@ -154,10 +154,10 @@ namespace Cheburashka
                         leadingEdgeIndexColumns.Add(c);
                     }
 
-                    List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(parentObjectSchema, parentObjectName);
-                    List<TSqlObject> indexes = ModelIndexAndKeysUtils.getIndexes(parentObjectSchema, parentObjectName);
+                    List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(parentObjectSchema, parentObjectName);
+                    List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(parentObjectSchema, parentObjectName);
                     List<TSqlObject> uniqueConstraints =
-                        ModelIndexAndKeysUtils.getUniqueConstraints(parentObjectSchema, parentObjectName);
+                        ModelIndexAndKeysUtils.GetUniqueConstraints(parentObjectSchema, parentObjectName);
 
                     bool foundMoreConciseUniqueCondition = false;
                     foreach (var v in pks) // dummy loop - could only execute once.
@@ -293,7 +293,7 @@ private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(theOtherKeysColumns, theseKeysColumns);
+            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(theOtherKeysColumns, theseKeysColumns);
             List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             if (theseKeysColumns.Count >= theOtherKeysColumns.Count

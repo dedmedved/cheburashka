@@ -87,9 +87,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out List<SqlRuleProblem> problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 

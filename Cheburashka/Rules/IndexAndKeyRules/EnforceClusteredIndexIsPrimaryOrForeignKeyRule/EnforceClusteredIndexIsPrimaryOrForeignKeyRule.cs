@@ -104,15 +104,15 @@ namespace Cheburashka
                 // Refresh cached index/constraints/tables lists from Model
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                List<TSqlObject> pks = ModelIndexAndKeysUtils.getPrimaryKeys(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> clusteredpks =
-                    ModelIndexAndKeysUtils.getClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
+                    ModelIndexAndKeysUtils.GetClusteredPrimaryKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> foreignkeyconstraints =
-                    ModelIndexAndKeysUtils.getForeignKeys(owningObjectSchema, owningObjectTable);
+                    ModelIndexAndKeysUtils.GetForeignKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> clusteredindexes =
-                    ModelIndexAndKeysUtils.getClusteredIndexes(owningObjectSchema, owningObjectTable);
+                    ModelIndexAndKeysUtils.GetClusteredIndexes(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> uniqueClusterConstraints =
-                    ModelIndexAndKeysUtils.getClusteredUniqueConstraints(owningObjectSchema, owningObjectTable);
+                    ModelIndexAndKeysUtils.GetClusteredUniqueConstraints(owningObjectSchema, owningObjectTable);
 
                 bool clusteredindexExists = (clusteredindexes.Count > 0);
                 bool clusteredUniqueConstraintExists = (uniqueClusterConstraints.Count > 0);

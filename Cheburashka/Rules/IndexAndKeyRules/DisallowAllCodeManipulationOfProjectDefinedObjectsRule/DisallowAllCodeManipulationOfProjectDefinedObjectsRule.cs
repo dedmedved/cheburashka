@@ -186,14 +186,11 @@ namespace Cheburashka
                 {
                     foreach (var dropIndexClause in dropIndexStatement.DropIndexClauses)
                     {
-                        DropIndexClause dic = dropIndexClause as DropIndexClause;
-                        BackwardsCompatibleDropIndexClause olddic =
-                            dropIndexClause as BackwardsCompatibleDropIndexClause;
                         String schemaName = null;
                         String tableName = null;
                         String indexName = null;
                         bool skipExternalName = false;
-                        if (!(dic is null))
+                        if (!(!(dropIndexClause is DropIndexClause dic)))
                         {
                             if (((dic.Object.DatabaseIdentifier != null
                                   && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
@@ -218,7 +215,7 @@ namespace Cheburashka
                         }
                         else
                         {
-                            if (!(olddic is null))
+                            if (!(!(dropIndexClause is BackwardsCompatibleDropIndexClause olddic)))
                             {
                                 if (((olddic.Index.DatabaseIdentifier != null
                                       && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)

@@ -36,7 +36,7 @@ namespace Cheburashka
     class ModelIndexAndKeysUtils
     {
 
-        public static List<Int32> getCorrespondingKeyPositions(List<String> SearchedForKeys, List<String> SearchedLocation)
+        public static List<Int32> GetCorrespondingKeyPositions(List<String> SearchedForKeys, List<String> SearchedLocation)
         {
             // Look for the columns in SearchedForKeys in the list of columns SearchedLocation.
             String[] ar = SearchedLocation.ToArray();
@@ -52,7 +52,7 @@ namespace Cheburashka
         }
 
 
-        public static List<TSqlObject> getForeignKeys(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetForeignKeys(string owningObjectSchema, string owningObjectTable)
         {
             var fks = new List<TSqlObject>();
             foreach (var fk in DMVSettings.GetForeignKeys)
@@ -72,7 +72,7 @@ namespace Cheburashka
         }
 
         
-        public static List<TSqlObject> getPrimaryKeys(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
@@ -91,7 +91,7 @@ namespace Cheburashka
             return pks;
         }
 
-        public static List<TSqlObject> getClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
@@ -112,7 +112,7 @@ namespace Cheburashka
 
         }
 
-        public static List<TSqlObject> getIndexes(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
@@ -130,7 +130,7 @@ namespace Cheburashka
             }
             return indexes;
         }
-        public static List<TSqlObject> getClusteredIndexes(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetClusteredIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
@@ -150,7 +150,7 @@ namespace Cheburashka
             return indexes;
         }
 
-        public static List<TSqlObject> getUniqueConstraints(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
@@ -168,7 +168,7 @@ namespace Cheburashka
             }
             return unique_constraints;
         }
-        public static List<TSqlObject> getClusteredUniqueConstraints(string owningObjectSchema, string owningObjectTable)
+        public static List<TSqlObject> GetClusteredUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
