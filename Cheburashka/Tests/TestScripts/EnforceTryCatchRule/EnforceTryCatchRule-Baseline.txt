@@ -16,6 +16,15 @@ Start line: 2
 Start column: 1
 ========end of problem========
 
+Problem description: Code found without Try/Catch in [dbo].[ProcSelectIntoWithoutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.ProcSelectIntoWithoutTryCatch
+Script file: ProcSelectIntoWithoutTryCatch.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
 Problem description: Code found without Try/Catch in [dbo].[ProcSelectX2OnlyWithoutTryCatch].
 FullID: Cheburashka.DM0028
 Severity: Warning
