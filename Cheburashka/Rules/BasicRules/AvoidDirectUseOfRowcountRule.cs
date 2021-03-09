@@ -114,7 +114,7 @@ namespace Cheburashka
 
             var variableDeclarationElementVisitor = new VariableDeclarationElementVisitor();
             sqlFragment.Accept(variableDeclarationElementVisitor);
-            IList<DeclareVariableElement> variableDeclarationElements =variableDeclarationElementVisitor.variableDeclarationElements;
+            IList<DeclareVariableElement> variableDeclarationElements =variableDeclarationElementVisitor.VariableDeclarationElements;
 
             // Create problems for each @@rowcount expression found outside of a set statement
             foreach (var expression in expressions)

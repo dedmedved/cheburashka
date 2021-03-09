@@ -21,6 +21,7 @@
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.CheckUniqueKeysAreNotDuplicatedRule_BIN&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.CheckClusteredKeyColumnsNotIncludedInIndex_CI_AI&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceReturn_BIN&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceUseTRY_CATCH_BIN&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

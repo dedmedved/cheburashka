@@ -30,14 +30,14 @@ namespace Cheburashka
     {
         public VariableDeclarationElementVisitor()
         {
-            variableDeclarationElements = new List<DeclareVariableElement>();
+            VariableDeclarationElements = new List<DeclareVariableElement>();
         }
 
-        public IList<DeclareVariableElement> variableDeclarationElements { get; private set; }
+        public IList<DeclareVariableElement> VariableDeclarationElements { get; private set; }
 
         public override void ExplicitVisit(DeclareVariableElement node)
         {
-            variableDeclarationElements.Add(node);
+            VariableDeclarationElements.Add(node);
         }
     }
 }

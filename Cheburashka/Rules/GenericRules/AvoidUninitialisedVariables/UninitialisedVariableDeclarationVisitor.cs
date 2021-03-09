@@ -37,9 +37,8 @@ namespace Cheburashka
 
         public override void ExplicitVisit(DeclareVariableElement node)
         {
-            UserDataTypeReference CheckIT = node.DataType as UserDataTypeReference;
             // for now just ignore user-defined types
-            if (CheckIT == null)
+            if (!(node.DataType is UserDataTypeReference CheckIT))
             {
                 if (node.Value == null)
                 {

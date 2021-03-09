@@ -283,6 +283,6 @@
     <value>Code found without Try/Catch in {0}.</value>
   </data>
   <data name="EnforceTryCatch_RuleName" xml:space="preserve">
-    <value>Stored Procedures and Triggers need at least one Try/Catch block.</value>
+    <value>Triggers and non-simple Stored Procedures need at least one Try/Catch block.</value>
   </data>
 </root>

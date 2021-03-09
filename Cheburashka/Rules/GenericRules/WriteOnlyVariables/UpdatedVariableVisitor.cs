@@ -85,8 +85,7 @@ namespace Cheburashka {
 
             if (node.ParameterValue != null)
             {
-                var referenced = node.ParameterValue as VariableReference;
-                if (referenced != null)
+                if (node.ParameterValue is VariableReference referenced)
                 {
                     var ed = new SQLExpressionDependency(referenced, node.ParameterValue, node.ParameterValue.ToString());
                     // there are no dependencies in the sense we are using them.
@@ -140,11 +139,10 @@ namespace Cheburashka {
             if (node.SelectElements == null) return;
             foreach (var v in node.SelectElements)
             {
-                SelectSetVariable ssv = v as SelectSetVariable;
-                if (ssv != null)
+                if (v is SelectSetVariable ssv)
                 {
-                    SQLExpressionDependency ed = new SQLExpressionDependency(ssv.Variable,ssv,ssv.ToString());
-//                    SetVariables.Add(ed);
+                    SQLExpressionDependency ed = new SQLExpressionDependency(ssv.Variable, ssv, ssv.ToString());
+                    //                    SetVariables.Add(ed);
 
                     //Get variable references in the expression.
                     VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
