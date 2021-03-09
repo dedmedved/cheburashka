@@ -1194,6 +1194,21 @@
     <Content Include="TestScripts\EnforceTryCatchRule\EnforceTryCatchRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectAndSetOnlyWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectInsideIfBeginWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectOnlyWithoutTryCatchInsideNestedBEGIN.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectX2OnlyWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectOnlyWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceTryCatchRule\ProcWithoutTryCatch.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

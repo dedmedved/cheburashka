@@ -78,7 +78,8 @@ namespace Cheburashka
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext) {
+        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
@@ -100,8 +101,22 @@ namespace Cheburashka
             sqlFragment.Accept(visitor);
             List<TryCatchStatement> tryCatchStatements = visitor.TryCatchStatements;
 
+            var createProcedureStatement = sqlFragment as CreateProcedureStatement;
+            var code = createProcedureStatement?.StatementList;
+            bool onlyRestrictedStatementsFound = false;  
+
+            //only applies to sp's, triggers normally do stuff that need trapping
+            if (code != null)
+            {
+                onlyRestrictedStatementsFound = CheckForRestrictedStatementList(code,0 );
+            }
             // Create problems for each try/catch not found 
-            if (tryCatchStatements.Count == 0) {
+            if (    tryCatchStatements.Count == 0 
+                &&  (    (createProcedureStatement is null ) 
+                      || (createProcedureStatement != null && ! onlyRestrictedStatementsFound ) 
+                    ) 
+               )
+            {
                 var problem = new SqlRuleProblem(String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , sqlFragment
@@ -111,6 +126,44 @@ namespace Cheburashka
             }
 
             return problems;
+        }
+
+        private bool CheckForRestrictedStatementList(StatementList code, int selectCount)
+        {
+            if (code is null ) { return true;  };
+
+            foreach ( var s in code.Statements) {
+                switch (s)
+                {
+                    case BeginEndAtomicBlockStatement statement:        
+                        if ( CheckForRestrictedStatementList(statement.StatementList, selectCount) )  continue; else return false;
+                    case BeginEndBlockStatement statement:
+                        if (CheckForRestrictedStatementList(statement.StatementList, selectCount)) continue; else return false;
+                    case SelectStatement _:
+                        if (selectCount == 0)
+                        {
+                            selectCount++; continue;
+                        } else return false;
+                    case ReturnStatement _:
+                        continue;
+                    case SetCommandStatement _:
+                        continue;
+                    case SetOnOffStatement _:
+                        continue;
+                    case SetTextSizeStatement _:
+                        continue;
+                    case SetTransactionIsolationLevelStatement _:
+                        continue;
+                    case SetRowCountStatement _:
+                        continue;
+                    case SetErrorLevelStatement _:
+                        continue;
+                    default:
+                        return false; 
+                }
+            }
+
+            return true;
         }
     }
 }
