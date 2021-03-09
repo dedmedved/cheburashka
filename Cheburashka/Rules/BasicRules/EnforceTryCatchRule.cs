@@ -139,11 +139,16 @@ namespace Cheburashka
                         if ( CheckForRestrictedStatementList(statement.StatementList, selectCount) )  continue; else return false;
                     case BeginEndBlockStatement statement:
                         if (CheckForRestrictedStatementList(statement.StatementList, selectCount)) continue; else return false;
-                    case SelectStatement _:
-                        if (selectCount == 0)
+                    case SelectStatement selectStatement:
+                        if (selectStatement.Into is null)
                         {
-                            selectCount++; continue;
-                        } else return false;
+                            if (selectCount == 0)
+                            {
+                                selectCount++; continue;
+                            }
+                            else return false;
+                        }
+                        else { return false; };
                     case ReturnStatement _:
                         continue;
                     case SetCommandStatement _:

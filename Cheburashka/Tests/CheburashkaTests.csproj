@@ -1200,6 +1200,9 @@
     <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectInsideIfBeginWithoutTryCatch.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectIntoWithoutTryCatch.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceTryCatchRule\ProcSelectOnlyWithoutTryCatchInsideNestedBEGIN.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
