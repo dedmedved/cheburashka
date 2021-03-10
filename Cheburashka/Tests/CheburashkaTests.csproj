@@ -1044,6 +1044,12 @@
     <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_Without_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableRule\EnforceForeignKeyNonStandardTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

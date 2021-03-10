@@ -43,11 +43,11 @@ namespace Cheburashka
 
 
     [LocalizedExportCodeAnalysisRule(EnforceForeignKeyIsIndexedRule.RuleId,
-        RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceForeignKeyIsIndexed_RuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceForeignKeyIsIndexed_ProblemDescription,          // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryDatabaseStructures,             // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
+        RuleConstants.EnforceForeignKeyIsIndexed_RuleName,  // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceForeignKeyIsIndexed_ProblemDescription,        // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryDatabaseStructures,                // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class EnforceForeignKeyIsIndexedRule : SqlCodeAnalysisRule
     {
 
@@ -55,7 +55,7 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0012: Tables should normally be clustered and not heap."
+        /// shown as "DM0014: Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken."
         /// </summary>
         public const string RuleId = RuleConstants.EnforceForeignKeyIsIndexedRuleId;
 
@@ -76,11 +76,7 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlModel model;
-            TSqlObject modelElement;
-            TSqlFragment sqlFragment;
-
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out model, out sqlFragment, out modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out _, out TSqlObject modelElement);
 
             // If we can't find the file then assume we're in a composite model
             // and the elements are defined there and
@@ -90,32 +86,48 @@ namespace Cheburashka
                 return problems;
             }
 
+            var ClusterColumns = new List<string>();
+
             DMVSettings.RefreshModelBuiltInCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.Columns);
-            List<String> x = fkColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
+            var fkTables = modelElement.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
+            var hostTables = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
+
+            // if we can't retrieve this information - compound model etc - crap out early
+
+            if ( hostTables.Count == 0 || fkTables.Count == 0 )
+            {
+                return problems;
+            }
+            var hostColumns = modelElement.GetReferenced(ForeignKeyConstraint.Columns);
+            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.ForeignColumns);
+
+            var hostTable = hostTables[0];
+            var fkTable = fkTables[0];
+
+            List<string> x = hostColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
+
             var ForeignKeyColumns = new List<String>();
             ForeignKeyColumns.AddRange(x);
 
-            EnforceForeignKeyIsIndexedParentObjectVisitor enforceForeignKeyIsIndexedParentObjectVisitor =
-                new EnforceForeignKeyIsIndexedParentObjectVisitor();
-            sqlFragment.Accept(enforceForeignKeyIsIndexedParentObjectVisitor);
+            //           EnforceForeignKeyIsIndexedParentObjectVisitor enforceForeignKeyIsIndexedParentObjectVisitor =
+            //               new EnforceForeignKeyIsIndexedParentObjectVisitor();
+            //           sqlFragment.Accept(enforceForeignKeyIsIndexedParentObjectVisitor);
 
             // Get Database Schema and name of this model element.
-            SchemaObjectName parentTable = enforceForeignKeyIsIndexedParentObjectVisitor.Objects;
-            string owningObjectTable = parentTable.BaseIdentifier.Value;
-            string owningObjectSchema = parentTable.SchemaIdentifier.Value;
+            //SchemaObjectName parentTable = hostTable.Name.Parts[1];
+            string owningObjectSchema = hostTable.Name.Parts[0];
+            string owningObjectTable = hostTable.Name.Parts[1];
 
-            EnforceForeignKeyIsIndexedColumnsVisitor enforceForeignKeyIsIndexedColumnsVisitor =
-                new EnforceForeignKeyIsIndexedColumnsVisitor();
-            sqlFragment.Accept(enforceForeignKeyIsIndexedColumnsVisitor);
-            IList<Identifier> columns = enforceForeignKeyIsIndexedColumnsVisitor.Objects;
 
-            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList(); 
+            //EnforceForeignKeyIsIndexedColumnsVisitor enforceForeignKeyIsIndexedColumnsVisitor =
+            //    new EnforceForeignKeyIsIndexedColumnsVisitor();
+            //sqlFragment.Accept(enforceForeignKeyIsIndexedColumnsVisitor);
+            //IList<Identifier> columns = enforceForeignKeyIsIndexedColumnsVisitor.Objects;
+
+            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             var theseIndexes = new List<TSqlObject>();
-
-
 
             bool foundIndexThatMatchesAKey = false;
 
@@ -126,7 +138,7 @@ namespace Cheburashka
                     && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                 )
                 {
-                    theseIndexes.Add(tab);
+                    theseIndexes.Add(thing);
                 }
             }
 
@@ -139,7 +151,7 @@ namespace Cheburashka
                     && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                 )
                 {
-                    thesePK.Add(tab);
+                    thesePK.Add(thing);
                     break;
                 }
             }
@@ -153,7 +165,7 @@ namespace Cheburashka
                     && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                 )
                 {
-                    theseUN.Add(tab);
+                    theseUN.Add(thing);
                 }
             }
             foreach (var index in theseIndexes)
@@ -175,27 +187,32 @@ namespace Cheburashka
                 //    }
                 //    LeadingEdgeIndexColumns.Add(lastElement);
                 //}
-                foundIndexThatMatchesAKey = checkThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, leadingEdgeIndexColumns);
-                if (foundIndexThatMatchesAKey) {
-                    break;
-                }
+                var idx = index as Object;
+  
+
+                //    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, leadingEdgeIndexColumns);
+                //    if (foundIndexThatMatchesAKey) {
+                //        break;
+                //    }
+                //}
+                //if (!foundIndexThatMatchesAKey)
+                //{
+                //    foreach (var pk in thesePK) {
+                //    }
+                //}
+                //if (!foundIndexThatMatchesAKey) {
+                //    foreach (var un in theseUN) {
+                //    }
+                //}
             }
-            if (!foundIndexThatMatchesAKey)
-            {
-                foreach (var pk in thesePK) {
-                }
-            }
-            if (!foundIndexThatMatchesAKey) {
-                foreach (var un in theseUN) {
-                }
-            }
+            return problems;
         }
 
 
-        private static bool checkThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ForeignKeyIsIndexed, List<String> LeadingEdgeIndexColumns) {
+        private static bool CheckThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ForeignKeyIsIndexed, List<String> LeadingEdgeIndexColumns) {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
+            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
             List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             // if every fk column was found in the index
@@ -228,7 +245,7 @@ namespace Cheburashka
                         }
                     }
 
-                    List<Int32> remainingPos = ModelIndexAndKeysUtils.getCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
+                    List<Int32> remainingPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
                     List<Int32> remainingAndMatchedToClusteringKeyPos = remainingPos.Where(n => n != -1).Select(n => n).ToList();
 
                     // if we found all the unmatched columns in the cluster key we're home and dry !
