@@ -1032,6 +1032,9 @@
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_With_ClusteredIndex_DefinedOutOfLine.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_With_ClusteredIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
