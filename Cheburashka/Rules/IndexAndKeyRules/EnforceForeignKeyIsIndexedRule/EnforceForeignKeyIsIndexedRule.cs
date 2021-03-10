@@ -76,7 +76,7 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out _, out TSqlObject modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             // If we can't find the file then assume we're in a composite model
             // and the elements are defined there and
@@ -85,6 +85,7 @@ namespace Cheburashka
             {
                 return problems;
             }
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             var ClusterColumns = new List<string>();
 
@@ -110,10 +111,6 @@ namespace Cheburashka
 
             var ForeignKeyColumns = new List<String>();
             ForeignKeyColumns.AddRange(x);
-
-            //           EnforceForeignKeyIsIndexedParentObjectVisitor enforceForeignKeyIsIndexedParentObjectVisitor =
-            //               new EnforceForeignKeyIsIndexedParentObjectVisitor();
-            //           sqlFragment.Accept(enforceForeignKeyIsIndexedParentObjectVisitor);
 
             // Get Database Schema and name of this model element.
             //SchemaObjectName parentTable = hostTable.Name.Parts[1];
@@ -142,37 +139,39 @@ namespace Cheburashka
                 }
             }
 
-            var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-            var thesePK = new List<TSqlObject>();
-            foreach (var thing in allPKs)
-            {
-                TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                )
-                {
-                    thesePK.Add(thing);
-                    break;
-                }
-            }
+            //var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+            //var thesePK = new List<TSqlObject>();
+            //foreach (var thing in allPKs)
+            //{
+            //    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+            //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+            //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+            //    )
+            //    {
+            //        thesePK.Add(thing);
+            //        break;
+            //    }
+            //}
 
-            var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-            var theseUN = new List<TSqlObject>();
-            foreach (var thing in allUNs)
-            {
-                TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                )
-                {
-                    theseUN.Add(thing);
-                }
-            }
+            //var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+            //var theseUN = new List<TSqlObject>();
+            //foreach (var thing in allUNs)
+            //{
+            //    TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
+            //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+            //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+            //    )
+            //    {
+            //        theseUN.Add(thing);
+            //    }
+            //}
             foreach (var index in theseIndexes)
             {
                 List<String> leadingEdgeIndexColumns = new List<String>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                var clustered = (bool) index.GetProperty(Index.Clustered);
+
 
                 foreach (var v in cols)//.ToList())
                 {
@@ -187,24 +186,42 @@ namespace Cheburashka
                 //    }
                 //    LeadingEdgeIndexColumns.Add(lastElement);
                 //}
-                var idx = index as Object;
-  
 
-                //    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, index.IsClustered, leadingEdgeIndexColumns);
-                //    if (foundIndexThatMatchesAKey) {
-                //        break;
-                //    }
-                //}
-                //if (!foundIndexThatMatchesAKey)
-                //{
-                //    foreach (var pk in thesePK) {
-                //    }
-                //}
-                //if (!foundIndexThatMatchesAKey) {
-                //    foreach (var un in theseUN) {
-                //    }
-                //}
+
+
+                foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                if (foundIndexThatMatchesAKey)
+                {
+                    break;
+                }
             }
+            //if (!foundIndexThatMatchesAKey)
+            //{
+            //    foreach (var pk in thesePK) {
+            //    }
+            //}
+            //if (!foundIndexThatMatchesAKey) {
+            //    foreach (var un in theseUN) {
+            //    }
+            //}
+            //}
+
+            if (!foundIndexThatMatchesAKey)
+            {
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+
+                SqlRuleProblem problem =
+                    new SqlRuleProblem(
+                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , sqlFragment);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
+
             return problems;
         }
 

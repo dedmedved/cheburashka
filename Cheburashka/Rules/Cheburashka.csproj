@@ -136,8 +136,6 @@
     <Compile Include="IndexAndKeyRules\EnforceClusteredIndexIsPrimaryOrForeignKeyRule\EnforceClusteredIndexIsPrimaryOrForeignKeyRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceClusteredIndexRule\EnforceClusteredIndexRule.cs" />
     <None Include="app.config" />
-    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedColumnsVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedParentObjectVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintDeclareTableVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
