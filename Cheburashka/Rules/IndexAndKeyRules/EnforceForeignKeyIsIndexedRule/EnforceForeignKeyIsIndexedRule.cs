@@ -87,10 +87,10 @@ namespace Cheburashka
             }
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-            var ClusterColumns = new List<string>();
-
             DMVSettings.RefreshModelBuiltInCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+            var ClusterColumns = new List<string>();
 
             var fkTables = modelElement.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
             var hostTables = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
@@ -139,34 +139,49 @@ namespace Cheburashka
                 }
             }
 
-            //var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-            //var thesePK = new List<TSqlObject>();
-            //foreach (var thing in allPKs)
-            //{
-            //    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-            //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-            //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-            //    )
-            //    {
-            //        thesePK.Add(thing);
-            //        break;
-            //    }
-            //}
-
-            //var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-            //var theseUN = new List<TSqlObject>();
-            //foreach (var thing in allUNs)
-            //{
-            //    TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-            //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-            //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-            //    )
-            //    {
-            //        theseUN.Add(thing);
-            //    }
-            //}
             foreach (var index in theseIndexes)
             {
+                List<String> leadingEdgeIndexColumns = new List<String>();
+                var cols = index.GetReferencedRelationshipInstances(
+                    Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                var clustered = (bool) index.GetProperty(Index.Clustered);
+                if (clustered)
+                {
+                    foreach (var v in cols)
+                    {
+                        ClusterColumns.Add(v.ObjectName.Parts[2]);
+                    }
+                }
+            }
+
+            //var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+                //var thesePK = new List<TSqlObject>();
+                //foreach (var thing in allPKs)
+                //{
+                //    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+                //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                //    )
+                //    {
+                //        thesePK.Add(thing);
+                //        break;
+                //    }
+                //}
+
+                //var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+                //var theseUN = new List<TSqlObject>();
+                //foreach (var thing in allUNs)
+                //{
+                //    TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
+                //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                //    )
+                //    {
+                //        theseUN.Add(thing);
+                //    }
+                //}
+                foreach (var index in theseIndexes)
+                {
                 List<String> leadingEdgeIndexColumns = new List<String>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
