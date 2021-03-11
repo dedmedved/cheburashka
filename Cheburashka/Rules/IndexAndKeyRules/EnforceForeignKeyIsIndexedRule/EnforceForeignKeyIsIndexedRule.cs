@@ -118,11 +118,6 @@ namespace Cheburashka
             string owningObjectTable = hostTable.Name.Parts[1];
 
 
-            //EnforceForeignKeyIsIndexedColumnsVisitor enforceForeignKeyIsIndexedColumnsVisitor =
-            //    new EnforceForeignKeyIsIndexedColumnsVisitor();
-            //sqlFragment.Accept(enforceForeignKeyIsIndexedColumnsVisitor);
-            //IList<Identifier> columns = enforceForeignKeyIsIndexedColumnsVisitor.Objects;
-
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             var theseIndexes = new List<TSqlObject>();
 
@@ -139,13 +134,13 @@ namespace Cheburashka
                 }
             }
 
+            var clusteredIndexFound = false;
             foreach (var index in theseIndexes)
             {
-                List<String> leadingEdgeIndexColumns = new List<String>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                var clustered = (bool) index.GetProperty(Index.Clustered);
-                if (clustered)
+                clusteredIndexFound = (bool) index.GetProperty(Index.Clustered);
+                if (clusteredIndexFound)
                 {
                     foreach (var v in cols)
                     {
@@ -154,55 +149,77 @@ namespace Cheburashka
                 }
             }
 
-            //var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-                //var thesePK = new List<TSqlObject>();
-                //foreach (var thing in allPKs)
-                //{
-                //    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                //    )
-                //    {
-                //        thesePK.Add(thing);
-                //        break;
-                //    }
-                //}
-
-                //var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-                //var theseUN = new List<TSqlObject>();
-                //foreach (var thing in allUNs)
-                //{
-                //    TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                //    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                //        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                //    )
-                //    {
-                //        theseUN.Add(thing);
-                //    }
-                //}
-                foreach (var index in theseIndexes)
+            var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+            var thesePK = new List<TSqlObject>();
+            foreach (var thing in allPKs)
+            {
+                TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                )
                 {
+                    thesePK.Add(thing);
+                    break;
+                }
+            }
+            if (!clusteredIndexFound)
+            {
+                foreach (var pk in thesePK)
+                {
+                    var cols = pk.GetReferencedRelationshipInstances(
+                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                    clusteredIndexFound = (bool) pk.GetProperty(Index.Clustered);
+                    if (clusteredIndexFound)
+                    {
+                        foreach (var v in cols)
+                        {
+                            ClusterColumns.Add(v.ObjectName.Parts[2]);
+                        }
+                    }
+
+                }
+            }
+
+            var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+            var theseUN = new List<TSqlObject>();
+            foreach (var thing in allUNs)
+            {
+                TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                )
+                {
+                    theseUN.Add(thing);
+                }
+            }
+            if (!clusteredIndexFound)
+            {
+                foreach (var un in theseUN)
+                {
+                    var cols = un.GetReferencedRelationshipInstances(
+                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                    clusteredIndexFound = (bool)un.GetProperty(Index.Clustered);
+                    if (clusteredIndexFound)
+                    {
+                        foreach (var v in cols)
+                        {
+                            ClusterColumns.Add(v.ObjectName.Parts[2]);
+                        }
+                    }
+                }
+            }
+
+            foreach (var index in theseIndexes)
+            {
                 List<String> leadingEdgeIndexColumns = new List<String>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
 
-
                 foreach (var v in cols)//.ToList())
                 {
                     leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
                 }
-
-
-                //foreach (var c in cols) {
-                //    String lastElement = "";
-                //    foreach (var n in c.Column.Name.Parts) {
-                //        lastElement = n;
-                //    }
-                //    LeadingEdgeIndexColumns.Add(lastElement);
-                //}
-
-
 
                 foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                 if (foundIndexThatMatchesAKey)
@@ -210,16 +227,49 @@ namespace Cheburashka
                     break;
                 }
             }
-            //if (!foundIndexThatMatchesAKey)
-            //{
-            //    foreach (var pk in thesePK) {
-            //    }
-            //}
-            //if (!foundIndexThatMatchesAKey) {
-            //    foreach (var un in theseUN) {
-            //    }
-            //}
-            //}
+            if (!foundIndexThatMatchesAKey)
+            {
+                foreach (var pk in thesePK)
+                {
+                    List<String> leadingEdgeIndexColumns = new List<String>();
+                    var cols = pk.GetReferencedRelationshipInstances(
+                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                    var clustered = (bool)pk.GetProperty(Index.Clustered);
+
+                    foreach (var v in cols)
+                    {
+                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
+                    }
+
+                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                    if (foundIndexThatMatchesAKey)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (!foundIndexThatMatchesAKey)
+            {
+                foreach (var un in theseUN)
+                {
+                    List<String> leadingEdgeIndexColumns = new List<String>();
+                    var cols = un.GetReferencedRelationshipInstances(
+                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                    var clustered = (bool)un.GetProperty(Index.Clustered);
+
+                    foreach (var v in cols)
+                    {
+                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
+                    }
+
+                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                    if (foundIndexThatMatchesAKey)
+                    {
+                        break;
+                    }
+                }
+            }
+    
 
             if (!foundIndexThatMatchesAKey)
             {
