@@ -291,11 +291,11 @@ namespace Cheburashka
         }
 
 
-        private static bool CheckThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ForeignKeyIsIndexed, List<String> LeadingEdgeIndexColumns) {
+        private static bool CheckThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ThisIndexIsClustered, List<String> LeadingEdgeIndexColumns) {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
-            List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
+            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
+            List<int> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             // if every fk column was found in the index
             // and found within the leading n columns, we're ok.
@@ -310,7 +310,7 @@ namespace Cheburashka
             // else if *this* particular index is not clustered and there *are* clustered columns 
             // check that any remaining unmatched keys can be found in the included columns.
             // whilst ensuring all columns we have found live in the first n columns in the index.
-            else if (!ForeignKeyIsIndexed && ClusterColumns.Count > 0) {
+            else if (!ThisIndexIsClustered && ClusterColumns.Count > 0) {
                 // the leading edge columns must still have been found in the first n columns of the index
                 // and there must be no other trailing elements in the actual key of the index.
                 // and I'm still making these rules up on the fly.
@@ -319,16 +319,16 @@ namespace Cheburashka
                     && matchedPos.Count > 0
                     && matchedPos.Count - 1 == matchedPos.Max()
                     ) {
-                    String[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
-                    List<String> unMatchedForeignKeyColumns = new List<String>();
+                    string[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
+                    List<string> unMatchedForeignKeyColumns = new List<string>();
                     for (int i = 0; i < allPos.Count; i++) {
                         if (allPos[i] == -1) {
                             unMatchedForeignKeyColumns.Add(arForeignKeyColumns[i]);
                         }
                     }
 
-                    List<Int32> remainingPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
-                    List<Int32> remainingAndMatchedToClusteringKeyPos = remainingPos.Where(n => n != -1).Select(n => n).ToList();
+                    List<int> remainingPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
+                    List<int> remainingAndMatchedToClusteringKeyPos = remainingPos.Where(n => n != -1).Select(n => n).ToList();
 
                     // if we found all the unmatched columns in the cluster key we're home and dry !
                     if (remainingAndMatchedToClusteringKeyPos.Count == remainingPos.Count) {

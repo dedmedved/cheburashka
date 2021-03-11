@@ -1044,6 +1044,12 @@
     <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
