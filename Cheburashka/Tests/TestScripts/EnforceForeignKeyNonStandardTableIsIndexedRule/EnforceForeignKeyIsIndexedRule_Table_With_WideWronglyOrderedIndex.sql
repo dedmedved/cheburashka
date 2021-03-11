@@ -1,0 +1,11 @@
+﻿CREATE TABLE dbo.EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex (a INT
+, CONSTRAINT PK_EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex primary KEY (a)
+) ;
+GO
+create table EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex_Child (a INT
+, b INT 
+, constraint FK_EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex foreign key (a) references EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex (a)
+)
+GO
+CREATE INDEX ix_EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex on EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex_Child(b,a)
+GO 

@@ -1,0 +1,9 @@
+Problem description: Foreign Key with no supporting index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index].
+FullID: Cheburashka.DM0014
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index
+Script file: EnforceForeignKeyNonStandardTableIsIndexedRule_Table_Without_Index.sql
+Start line: 6
+Start column: 3
+========end of problem========
+
