@@ -69,13 +69,13 @@ namespace Cheburashka
                 if (modelElement.GetSourceInformation() != null)
                 {
                     string fileName = modelElement.GetSourceInformation().SourceName;
-                    if (!String.IsNullOrEmpty(fileName))
+                    if (!string.IsNullOrEmpty(fileName))
                     {
                         string fullScript = ReadFileContent(fileName);
 
                         if (fullScript != null)
                         {
-                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out int endLine, out int endColumn))
+                            if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out _, out _))
                             {
                                 problem.SetSourceInformation(new SourceInformation(fileName, startLine + 1, startColumn + 1));
                             }
