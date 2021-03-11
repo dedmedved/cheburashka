@@ -1041,6 +1041,22 @@
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyNonStandardTableIsIndexedRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyNonStandardTableIsIndexedRule_Table_Without_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_ClusteredIndex.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyNonStandardTableIsIndexedRule_Table_With_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_PrimaryKey.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_UniqueConstraint.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_WideIndex.sql" />
+    <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex.sql" />
     <Content Include="TestScripts\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
