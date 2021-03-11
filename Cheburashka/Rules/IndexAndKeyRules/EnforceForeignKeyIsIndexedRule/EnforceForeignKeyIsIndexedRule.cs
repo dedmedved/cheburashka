@@ -167,8 +167,8 @@ namespace Cheburashka
                 foreach (var pk in thesePK)
                 {
                     var cols = pk.GetReferencedRelationshipInstances(
-                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                    clusteredIndexFound = (bool) pk.GetProperty(Index.Clustered);
+                        PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
+                    clusteredIndexFound = (bool) pk.GetProperty(PrimaryKeyConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
                         foreach (var v in cols)
@@ -197,8 +197,8 @@ namespace Cheburashka
                 foreach (var un in theseUN)
                 {
                     var cols = un.GetReferencedRelationshipInstances(
-                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                    clusteredIndexFound = (bool)un.GetProperty(Index.Clustered);
+                        UniqueConstraint.Columns, DacQueryScopes.UserDefined);
+                    clusteredIndexFound = (bool)un.GetProperty(UniqueConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
                         foreach (var v in cols)
@@ -213,7 +213,7 @@ namespace Cheburashka
             {
                 List<String> leadingEdgeIndexColumns = new List<String>();
                 var cols = index.GetReferencedRelationshipInstances(
-                    Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                    Index.Columns, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
 
                 foreach (var v in cols)//.ToList())
@@ -233,8 +233,8 @@ namespace Cheburashka
                 {
                     List<String> leadingEdgeIndexColumns = new List<String>();
                     var cols = pk.GetReferencedRelationshipInstances(
-                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                    var clustered = (bool)pk.GetProperty(Index.Clustered);
+                        PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
+                    var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
 
                     foreach (var v in cols)
                     {
@@ -254,8 +254,8 @@ namespace Cheburashka
                 {
                     List<String> leadingEdgeIndexColumns = new List<String>();
                     var cols = un.GetReferencedRelationshipInstances(
-                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                    var clustered = (bool)un.GetProperty(Index.Clustered);
+                        UniqueConstraint.Columns, DacQueryScopes.UserDefined);
+                    var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
 
                     foreach (var v in cols)
                     {
