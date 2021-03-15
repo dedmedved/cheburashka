@@ -1,9 +1,9 @@
-Problem description: Foreign Key with no supporting index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index].
+Problem description: Foreign Key with no supporting index found in [dbo].[FKEnforceForeignKeyIsIndexedRule_Table_With_PrimaryKey2].
 FullID: Cheburashka.DM0014
 Severity: Warning
-Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index
-Script file: EnforceForeignKeyNonStandardTableIsIndexedRule_Table_Without_Index.sql
-Start line: 6
+Model element: dbo.FKEnforceForeignKeyIsIndexedRule_Table_With_PrimaryKey2
+Script file: EnforceForeignKeyIsIndexedRule_Table_With_PrimaryKey.sql
+Start line: 14
 Start column: 3
 ========end of problem========
 

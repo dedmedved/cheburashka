@@ -317,15 +317,11 @@ namespace Cheburashka.Tests
                 AppendOneProblemItem(sb, "Severity", problem.Severity.ToString());
                 AppendOneProblemItem(sb, "Model element", displayServices.GetElementName(problem.ModelElement, ElementNameStyle.FullyQualifiedName));
 
-                string fileName = null;
+                string fileName = string.Empty; ;
                 if (problem.SourceName != null)
                 {
                     FileInfo fileInfo = new FileInfo(problem.SourceName);
                     fileName = fileInfo.Name;
-                }
-                else
-                {
-                    fileName = string.Empty;
                 }
 
                 AppendOneProblemItem(sb, "Script file", fileName);
