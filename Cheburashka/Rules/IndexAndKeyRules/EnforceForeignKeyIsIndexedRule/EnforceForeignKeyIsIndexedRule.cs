@@ -102,10 +102,10 @@ namespace Cheburashka
                 return problems;
             }
             var hostColumns = modelElement.GetReferenced(ForeignKeyConstraint.Columns);
-            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.ForeignColumns);
+//            var fkColumns = modelElement.GetReferenced(ForeignKeyConstraint.ForeignColumns);
 
             var hostTable = hostTables[0];
-            var fkTable = fkTables[0];
+//            var fkTable = fkTables[0];
 
             List<string> x = hostColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
 
