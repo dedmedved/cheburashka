@@ -19,7 +19,6 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using System;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 

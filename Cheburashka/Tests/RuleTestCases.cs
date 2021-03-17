@@ -20,8 +20,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
-using System.IO;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

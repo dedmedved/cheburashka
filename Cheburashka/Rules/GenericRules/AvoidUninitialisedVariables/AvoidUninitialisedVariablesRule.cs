@@ -19,7 +19,6 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -27,9 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.IO;
-
-using Cheburashka;
 
 namespace Cheburashka
 {

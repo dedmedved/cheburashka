@@ -20,8 +20,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using Microsoft.SqlServer.Dac.Extensibility;
-
 namespace Cheburashka
 {
     internal static class RuleConstants
