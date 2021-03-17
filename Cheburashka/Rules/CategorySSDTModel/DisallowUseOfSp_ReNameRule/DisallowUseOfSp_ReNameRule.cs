@@ -43,7 +43,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.DisallowUseOfSp_ReName_RuleName,                      // ID used to look up the display name inside the resources file
         RuleConstants.DisallowUseOfSp_ReName_ProblemDescription,            // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryDatabaseStructures,                // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategorySSDTModel,                         // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class DisallowUseOfSp_ReNameRule : SqlCodeAnalysisRule
     {

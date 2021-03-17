@@ -36,11 +36,11 @@ using static System.String;
 namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId,
-        RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,         // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                                                         // Name of the resource file to look up displayname and description in
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,              // ID used to look up the display name inside the resources file
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,    // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategorySSDTModel,                                             // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                                      // This rule targets specific elements rather than the whole model
     public sealed class DisallowAllCodeManipulationOfProjectDefinedObjectsRule : SqlCodeAnalysisRule
     {
         /// <summary>

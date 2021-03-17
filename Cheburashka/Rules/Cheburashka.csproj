@@ -101,8 +101,8 @@
     <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="BasicRuleVisitors\OuterBlockVisitor.cs" />
-    <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
-    <Compile Include="DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
+    <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
     <Compile Include="Generic Visitors\ClrWrapperVisitor.cs" />
     <Compile Include="Generic Visitors\InitialisationContextVisitor.cs" />
     <Compile Include="Generic Visitors\ParameterDeclarationVisitor.cs" />
@@ -117,16 +117,16 @@
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\CreateIndexStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAlterColumnStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableConstraintModificationStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAddTableElementStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableDropTableElementStatementVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
-    <Compile Include="IndexAndKeyRules\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\CreateIndexStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAlterColumnStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableConstraintModificationStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAddTableElementStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableDropTableElementStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
-    <Compile Include="IndexAndKeyRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
+    <Compile Include="CategoryRelationalDesignRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
     <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
     <Compile Include="IndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintDeclareTableVisitor.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintVisitor.cs" />
-    <Compile Include="IndexAndKeyRules\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule.cs" />
+    <Compile Include="CategoryRelationalDesignRules\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule.cs" />
     <Compile Include="SelectSetVariable\SelectSetVariableVisitor.cs" />
     <Compile Include="BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="BasicRules\AvoidDirectUseOfRowcountRule.cs" />
@@ -209,6 +209,7 @@
     <None Include="Cheburashka.snk" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem copy "$(TargetDir)$(TargetName)$(TargetExt)" "$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\Extensions\$(TargetName)$(TargetExt)" /y 
