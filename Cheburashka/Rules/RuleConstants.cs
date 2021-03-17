@@ -170,5 +170,12 @@ namespace Cheburashka
         public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";
 
         public const string CategoryDatabaseStructures          = "CategoryDatabaseStructures";
+
+        public const string CategoryObsoleteCodingStyle         = "CategoryObsoleteCodingStyle";
+        public const string CategoryRelationalDesign            = "CategoryRelationalDesign";
+        public const string CategoryDataTypes                   = "CategoryDataTypes";
+        public const string CategoryDates                       = "CategoryDates";
+        public const string CategoryRegionalisation             = "CategoryRegionalisation";
+        public const string CategorySSDTModel                   = "CategorySSDTModel";
     }
 }
