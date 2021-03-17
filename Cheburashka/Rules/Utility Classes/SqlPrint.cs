@@ -36,27 +36,23 @@ namespace Cheburashka
         {
             if (overwrite)
             {
-                using (StreamWriter w = File.CreateText(filespec))
+                using StreamWriter w = File.CreateText(filespec);
+                w.WriteLine("called");
+                for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
                 {
-                    w.WriteLine("called");
-                    for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
-                    {
-                        w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
-                    }
-                    w.WriteLine();
+                    w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
                 }
+                w.WriteLine();
             }
             else
             {
-                using (StreamWriter w = File.AppendText(filespec))
+                using StreamWriter w = File.AppendText(filespec);
+                w.WriteLine("called");
+                for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
                 {
-                    w.WriteLine("called");
-                    for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
-                    {
-                        w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
-                    }
-                    w.WriteLine();
+                    w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
                 }
+                w.WriteLine();
             }
 
         }
@@ -64,17 +60,13 @@ namespace Cheburashka
         {
             if (overwrite)
             {
-                using (StreamWriter w = File.CreateText(filespec))
-                {
-                    w.WriteLine(element);
-                }
+                using StreamWriter w = File.CreateText(filespec);
+                w.WriteLine(element);
             }
             else
             {
-                using (StreamWriter w = File.AppendText(filespec))
-                {
-                    w.WriteLine(element);
-                }
+                using StreamWriter w = File.AppendText(filespec);
+                w.WriteLine(element);
             }
 
         }
