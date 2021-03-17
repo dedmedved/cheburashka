@@ -26,13 +26,13 @@ namespace Cheburashka.Tests
         {
             try
             {
-                FileStream fileStream = null;
-                StreamWriter streamWriter = null;
                 string directory = Path.GetDirectoryName(filename);
                 if (!Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);
                 }
+                StreamWriter streamWriter;
+                FileStream fileStream;
                 using (fileStream = new FileStream(filename, FileMode.Create))
                 using (streamWriter = new StreamWriter(fileStream))
                 {
@@ -48,10 +48,8 @@ namespace Cheburashka.Tests
 
         public static string ReadFileToString(string filePath)
         {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                return reader.ReadToEnd();
-            }
+            using StreamReader reader = new StreamReader(filePath);
+            return reader.ReadToEnd();
         }
     }
 }
