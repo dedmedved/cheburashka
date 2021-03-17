@@ -186,9 +186,9 @@ namespace Cheburashka
                 {
                     foreach (var dropIndexClause in dropIndexStatement.DropIndexClauses)
                     {
-                        String schemaName = null;
-                        String tableName = null;
-                        String indexName = null;
+                        string schemaName = null;
+                        string tableName = null;
+                        string indexName = null;
                         bool skipExternalName = false;
                         if (!(!(dropIndexClause is DropIndexClause dic)))
                         {

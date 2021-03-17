@@ -69,7 +69,7 @@ namespace Cheburashka {
         {
             //node.SQLModel_DebugPrint(@"C:\temp\ExecuteStatement.out");
             if (node.Variable != null &&
-                !String.IsNullOrEmpty(node.Variable.Name))
+                !string.IsNullOrEmpty(node.Variable.Name))
             {
                 SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable, node.Variable, node.Variable.ToString());
                 // there are no dependencies in the sense we are using them.
@@ -130,7 +130,7 @@ namespace Cheburashka {
 
         public override void ExplicitVisit(BeginDialogStatement node)
         {
-            if (node.Handle == null || String.IsNullOrEmpty(node.Handle.Name)) return;
+            if (node.Handle == null || string.IsNullOrEmpty(node.Handle.Name)) return;
             SQLExpressionDependency ed = new SQLExpressionDependency(node.Handle,node.Handle,node.Handle.ToString());
             SetVariables.Add(ed);
         }

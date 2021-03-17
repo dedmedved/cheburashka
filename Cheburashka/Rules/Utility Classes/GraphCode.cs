@@ -38,7 +38,7 @@ namespace Cheburashka.Utility_Classes
 
 
         // bastardised sort-of Floyd-Warshal algorithm
-        public static BidirectionalGraph<string, Edge<string>> ComputeTransitiveClosure(this BidirectionalGraph<string, Edge<string>> inputGraph, IEqualityComparer<String> comparer)
+        public static BidirectionalGraph<string, Edge<string>> ComputeTransitiveClosure(this BidirectionalGraph<string, Edge<string>> inputGraph, IEqualityComparer<string> comparer)
         {
 
             //This has been a bitch to do......................
@@ -67,7 +67,7 @@ namespace Cheburashka.Utility_Classes
                     {
                         var thisVertexCurrentClosureToVertices =
                             transitiveClosure.Edges.Where(n => comparer.Equals(n.Source,thisVertex)).Select(n => n.Target).ToArray();
-                        var newEdges = new List<Edge<String>>();
+                        var newEdges = new List<Edge<string>>();
                         foreach (
                             var additionalVertex in
                                 inputGraph.Edges.Where(n => thisVertexCurrentClosureToVertices.Contains(n.Source,comparer))

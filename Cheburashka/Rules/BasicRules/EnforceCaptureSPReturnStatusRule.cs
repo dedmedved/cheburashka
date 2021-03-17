@@ -105,7 +105,7 @@ namespace Cheburashka
             // Create problems for each uncaptured execute found 
             foreach (var executeSpecification in executeSpecifications)
             {
-                var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , executeSpecification
                                                 );

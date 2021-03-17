@@ -86,7 +86,7 @@ namespace Cheburashka
             }
             catch (Exception ex)
             {
-                var msg = String.Format(CultureInfo.CurrentCulture, RuleResources.CannotCreateResourceManager, _resourceBaseName, resourceAssembly);
+                var msg = string.Format(CultureInfo.CurrentCulture, RuleResources.CannotCreateResourceManager, _resourceBaseName, resourceAssembly);
                 throw new RuleException(msg, ex);
             }
         }
@@ -108,7 +108,7 @@ namespace Cheburashka
         {
             get
             {
-                return _displayName ?? (_displayName = GetResourceString(_displayNameResourceId));
+                return _displayName ??= GetResourceString(_displayNameResourceId);
             }
         }
 
@@ -119,7 +119,7 @@ namespace Cheburashka
         {
             get
             {
-                return _descriptionValue ?? (_descriptionValue = GetResourceString(_descriptionResourceId));
+                return _descriptionValue ??= GetResourceString(_descriptionResourceId);
             }
         }
     }

@@ -229,8 +229,8 @@ namespace Cheburashka
             //Grab original vertices
             IList<string> vertices = writeDependencies.Vertices.ToList();
 
-            const String writtenTo = "WRITTEN-TO";
-            const String terminate = "TERMINATE";
+            const string writtenTo = "WRITTEN-TO";
+            const string terminate = "TERMINATE";
 
             writeDependencies.AddVertex(terminate);
             writeDependencies.AddEdgeRange(
@@ -271,7 +271,7 @@ namespace Cheburashka
 
             // now need to find all variable references that aren't directly in a variable assignment of any kind.
 
-            List<String> consumedVariables = (from edge in writeDependencies.Edges where edge.Target == terminate select edge.Source).ToList().Distinct().ToList();
+            List<string> consumedVariables = (from edge in writeDependencies.Edges where edge.Target == terminate select edge.Source).ToList().Distinct().ToList();
 
             var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)
@@ -292,7 +292,7 @@ namespace Cheburashka
             {
                 SqlRuleProblem problem =
                     new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 

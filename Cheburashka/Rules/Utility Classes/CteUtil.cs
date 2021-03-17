@@ -31,7 +31,7 @@ namespace Cheburashka
         public CteUtil()
         {
             ExpressionNames = new List<Identifier>();
-            ExpressionNamesAsStrings = new List<String>();
+            ExpressionNamesAsStrings = new List<string>();
         }
         public CteUtil(int firstTokenIndex
                       , int lastTokenIndex
@@ -41,11 +41,11 @@ namespace Cheburashka
             : base(firstTokenIndex, lastTokenIndex, startOffset, fragmentLength)
         {
             ExpressionNames = new List<Identifier>();
-            ExpressionNamesAsStrings = new List<String>();
+            ExpressionNamesAsStrings = new List<string>();
         }
 
 
-        public List<Identifier> ExpressionNames { get; private set; }
+        public List<Identifier> ExpressionNames { get; }
         public List<string> ExpressionNamesAsStrings { get; private set; }
 
 

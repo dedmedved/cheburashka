@@ -140,14 +140,14 @@ namespace Cheburashka
 
                 if (modelElement.ObjectType == Index.TypeClass)
                 {
-                    unique = (Boolean?) modelElement.GetProperty(Index.Unique) == true;
+                    unique = (bool?) modelElement.GetProperty(Index.Unique) == true;
                 }
 
                 if (unique)
                 {
                     var issues = new List<TSqlFragment>();
 
-                    List<String> leadingEdgeIndexColumns = new List<String>();
+                    List<string> leadingEdgeIndexColumns = new List<string>();
 
                     foreach (var c in thisIndexOrConstraintColumns)
                     {
@@ -169,10 +169,10 @@ namespace Cheburashka
                             var columnSpecifications =
                                 v.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns,
                                     DacQueryScopes.UserDefined);
-                            List<String> sortedPrimaryKeyColumns = columnSpecifications
+                            List<string> sortedPrimaryKeyColumns = columnSpecifications
                                 .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                 .Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<String> pkLeadingEdgeIndexColumns = new List<String>();
+                            List<string> pkLeadingEdgeIndexColumns = new List<string>();
                             pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
 
                             foundMoreConciseUniqueCondition =
@@ -201,10 +201,10 @@ namespace Cheburashka
                             {
                                 var columnSpecifications =
                                     v.GetReferencedRelationshipInstances(Index.Columns, DacQueryScopes.UserDefined);
-                                List<String> sortedUniqueIndexColumns = columnSpecifications
+                                List<string> sortedUniqueIndexColumns = columnSpecifications
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<String> otherLeadingEdgeIndexColumns = new List<String>();
+                                List<string> otherLeadingEdgeIndexColumns = new List<string>();
                                 otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
 
                                 foundMoreConciseUniqueCondition =
@@ -237,10 +237,10 @@ namespace Cheburashka
                                 var uniqueConstraintColumns =
                                     v.GetReferencedRelationshipInstances(UniqueConstraint.Columns,
                                         DacQueryScopes.UserDefined);
-                                List<String> sortedUniqueConstraintColumns = uniqueConstraintColumns
+                                List<string> sortedUniqueConstraintColumns = uniqueConstraintColumns
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
+                                List<string> ConstraintLeadingEdgeIndexColumns = new List<string>();
                                 ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
 
                                 foundMoreConciseUniqueCondition =
@@ -256,10 +256,7 @@ namespace Cheburashka
 
                     if (foundMoreConciseUniqueCondition)
                     {
-                        if (sqlFragment == null)
-                        {
-                            sqlFragment = new UniqueConstraintDefinition();
-                        }
+                        sqlFragment ??= new UniqueConstraintDefinition();
 
                         issues.Add(sqlFragment);
                     }
@@ -273,7 +270,7 @@ namespace Cheburashka
                     {
                         SqlRuleProblem problem =
                             new SqlRuleProblem(
-                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
+                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
                                     elementName)
                                 , modelElement
                                 , sqlFragment);
@@ -289,12 +286,12 @@ namespace Cheburashka
             return problems;
             }
 
-private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<String> theseKeysColumns, List<String> theOtherKeysColumns)
+private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(theOtherKeysColumns, theseKeysColumns);
-            List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
+            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(theOtherKeysColumns, theseKeysColumns);
+            List<int> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             if (theseKeysColumns.Count >= theOtherKeysColumns.Count
                 && allPos.Count == matchedPos.Count

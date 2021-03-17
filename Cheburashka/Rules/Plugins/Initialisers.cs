@@ -28,11 +28,11 @@ using System.Threading.Tasks;
 
 namespace Cheburashka
 {
-    static class Initialisers
+    internal static class Initialisers
     {
-        static public List<String> IgnorableReturnStatusStoredProcedures()
+        public static List<string> IgnorableReturnStatusStoredProcedures()
         {
-            return new List<String>();
+            return new List<string>();
         }
     }
 }

@@ -317,7 +317,7 @@ namespace Cheburashka.Tests
                 AppendOneProblemItem(sb, "Severity", problem.Severity.ToString());
                 AppendOneProblemItem(sb, "Model element", displayServices.GetElementName(problem.ModelElement, ElementNameStyle.FullyQualifiedName));
 
-                string fileName = string.Empty; ;
+                string fileName = string.Empty;
                 if (problem.SourceName != null)
                 {
                     FileInfo fileInfo = new FileInfo(problem.SourceName);
@@ -348,7 +348,7 @@ namespace Cheburashka.Tests
         {
             public int Compare(SqlRuleProblem x, SqlRuleProblem y)
             {
-                Int32 compare = string.Compare(x.SourceName, y.SourceName, StringComparison.CurrentCulture);
+                int compare = string.Compare(x.SourceName, y.SourceName, StringComparison.CurrentCulture);
                 if (compare == 0)
                 {
                     compare = x.StartLine - y.StartLine;

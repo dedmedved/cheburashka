@@ -117,7 +117,7 @@ namespace Cheburashka
                     ) 
                )
             {
-                var problem = new SqlRuleProblem(String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                var problem = new SqlRuleProblem(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , sqlFragment
                                                 );
@@ -128,9 +128,9 @@ namespace Cheburashka
             return problems;
         }
 
-        private bool CheckForRestrictedStatementList(StatementList code, int selectCount)
+        private static bool CheckForRestrictedStatementList(StatementList code, int selectCount)
         {
-            if (code is null ) { return true;  };
+            if (code is null ) { return true; }
 
             foreach ( var s in code.Statements) {
                 switch (s)

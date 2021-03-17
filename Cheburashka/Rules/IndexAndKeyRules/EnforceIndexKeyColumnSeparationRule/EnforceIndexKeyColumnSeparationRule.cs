@@ -114,7 +114,7 @@ namespace Cheburashka
                 List<TSqlObject> uniqueConstraints =
                     ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                List<String> LeadingEdgeIndexColumns = new List<String>();
+                List<string> LeadingEdgeIndexColumns = new List<string>();
                 var columns = modelElement.GetReferenced(Index.Columns);
                 List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
                 LeadingEdgeIndexColumns.AddRange(x);
@@ -131,10 +131,10 @@ namespace Cheburashka
                     )
                     {
                         var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                        List<String> PKLeadingEdgeIndexColumns = new List<String>();
+                        List<string> PKLeadingEdgeIndexColumns = new List<string>();
                         foreach (var c in pk_columns)
                         {
-                            String lastElement = "";
+                            string lastElement = "";
                             foreach (var n in c.Name.Parts)
                             {
                                 lastElement = n;
@@ -165,10 +165,10 @@ namespace Cheburashka
                         )
                         {
                             var idx_columns = v.GetReferenced(Index.Columns);
-                            List<String> OtherLeadingEdgeIndexColumns = new List<String>();
+                            List<string> OtherLeadingEdgeIndexColumns = new List<string>();
                             foreach (var c in idx_columns)
                             {
-                                String lastElement = "";
+                                string lastElement = "";
                                 foreach (var n in c.Name.Parts)
                                 {
                                     lastElement = n;
@@ -200,10 +200,10 @@ namespace Cheburashka
                         )
                         {
                             var un_columns = v.GetReferenced(UniqueConstraint.Columns);
-                            List<String> ConstraintLeadingEdgeIndexColumns = new List<String>();
+                            List<string> ConstraintLeadingEdgeIndexColumns = new List<string>();
                             foreach (var c in un_columns)
                             {
-                                String lastElement = "";
+                                string lastElement = "";
                                 foreach (var n in c.Name.Parts)
                                 {
                                     lastElement = n;
@@ -237,7 +237,7 @@ namespace Cheburashka
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
 
@@ -249,13 +249,13 @@ namespace Cheburashka
             return problems;
         }
 
-        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<String> TheseKeysColumns, List<String> TheOtherKeysColumns)
+        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<string> TheseKeysColumns, List<string> TheOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<Int32> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(TheseKeysColumns, TheOtherKeysColumns);
+            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(TheseKeysColumns, TheOtherKeysColumns);
             // matchedPos lists the columns in TheseKeysColumns that were actually found in TheseKeysColumns
-            List<Int32> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
+            List<int> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             // If this index is just a restatement of another index 
             // same columns in potentially different order

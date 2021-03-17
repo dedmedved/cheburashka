@@ -143,7 +143,7 @@ namespace Cheburashka
                     {
                         var problem =
                             new SqlRuleProblem(
-                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                 , modelElement
                                 , sqlFragment);
 
@@ -156,7 +156,7 @@ namespace Cheburashka
                 {
                     var problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
 

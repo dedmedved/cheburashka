@@ -40,13 +40,13 @@ namespace Cheburashka
         {
             List<Identifier> tokens = node.Identifiers.Reverse().ToList();
             Identifier tableName = node.BaseIdentifier;
-            String name = tableName.Value;
+            string name = tableName.Value;
 
             bool noSchemaInMultiPartName = false;
             if (tokens.Count > 1)
             {
                 string schema = tokens.ToArray()[1].Value;
-                if (String.IsNullOrEmpty(schema)) {
+                if (string.IsNullOrEmpty(schema)) {
                     noSchemaInMultiPartName = true;
                 }
             }

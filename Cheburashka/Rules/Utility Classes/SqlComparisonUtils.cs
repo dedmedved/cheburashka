@@ -408,7 +408,7 @@ namespace Cheburashka
 
     //}
 
-    class SqlVariableReferenceComparer : IEqualityComparer<VariableReference>
+    internal class SqlVariableReferenceComparer : IEqualityComparer<VariableReference>
     {
         // sql fragments are equal if their token ranges are equal.
         public bool Equals(VariableReference x, VariableReference y)
@@ -454,9 +454,8 @@ namespace Cheburashka
         public int GetHashCode(Literal sql)
         {
             //Check whether the object is null
-            if (sql is null) return 0;
+            return sql is null ? 0 : sql.FirstTokenIndex;
             //Calculate the hash code for the product.
-            return sql.FirstTokenIndex;
         }
 
     }
@@ -487,10 +486,10 @@ namespace Cheburashka
         }
     }
 
-    class SqlStringComparer : IEqualityComparer<String>
+    class SqlStringComparer : IEqualityComparer<string>
     {
         // sql fragments are equal if their token ranges are equal.
-        public bool Equals(String x, String y)
+        public bool Equals(string x, string y)
         {
             //Check whether the compared objects reference the same data.
             if (ReferenceEquals(x, y)) return true;
@@ -504,7 +503,7 @@ namespace Cheburashka
         // If SQLModel_Equals() returns true for a pair of objects 
         // then GetHashCode() must return the same value for these objects.
 
-        public int GetHashCode(String sql)
+        public int GetHashCode(string sql)
         {
             //Check whether the object is null
             if (sql is null) return 0;

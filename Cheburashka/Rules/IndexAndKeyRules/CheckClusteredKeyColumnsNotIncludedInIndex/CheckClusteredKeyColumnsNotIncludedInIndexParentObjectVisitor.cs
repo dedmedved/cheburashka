@@ -41,10 +41,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public SchemaObjectName Objects
-        {
-            get { return _objects; }
-        }
+        public SchemaObjectName Objects => _objects;
+
         #endregion
 
         #region overrides

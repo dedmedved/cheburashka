@@ -41,10 +41,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public bool Objects
-        {
-            get { return _objects; }
-        }
+        public bool Objects => _objects;
+
         #endregion
 
         #region overrides

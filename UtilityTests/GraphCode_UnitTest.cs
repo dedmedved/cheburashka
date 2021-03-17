@@ -39,7 +39,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_EmptyGraph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             var g2 = GraphCode.ComputeTransitiveClosure(g1);
             Assert.AreEqual(g1.VertexCount, 0);
             Assert.AreEqual(g2.VertexCount, 0);
@@ -49,7 +49,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_OneNodeGraph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             var g2 = GraphCode.ComputeTransitiveClosure(g1);
             Assert.AreEqual(g1.VertexCount, 1);
@@ -65,7 +65,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_OneNode_SelfEdge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddEdge(new Edge<string>("A", "A"));
             var g2 = GraphCode.ComputeTransitiveClosure(g1);
@@ -82,7 +82,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_TwoNodeGraph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddVertex("B");
             var g2 = GraphCode.ComputeTransitiveClosure(g1);
@@ -99,7 +99,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_TwoNode_One_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddEdge(new Edge<string>("A", "B"));
@@ -117,7 +117,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_TwoNode_Two_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddEdge(new Edge<string>("A", "B"));
@@ -136,7 +136,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Two_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
@@ -156,7 +156,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Three_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>();
+            var g1 = new BidirectionalGraph<string, Edge<string>>();
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
@@ -177,7 +177,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_No_Edge_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCulture);
+            var g1 = new BidirectionalGraph<string, Edge<string>>(false, -1, -1, StringComparer.InvariantCulture);
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
@@ -195,7 +195,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            var g1 = new BidirectionalGraph<string, Edge<string>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
@@ -218,7 +218,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_2_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            var g1 = new BidirectionalGraph<string, Edge<string>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
             g1.AddVertex("A");
             g1.AddVertex("B");
             g1.AddVertex("C");
@@ -241,7 +241,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_3_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            var g1 = new BidirectionalGraph<string, Edge<string>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
             g1.AddVertex("A");
             g1.AddVertex("b");
             g1.AddVertex("C");
@@ -264,7 +264,7 @@ namespace UtilityTests
         [TestMethod]
         public void ComputeTransitiveClosure_ThreeNode_Three_Edge_MixedCase_4_Graph()
         {
-            var g1 = new BidirectionalGraph<String, Edge<String>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
+            var g1 = new BidirectionalGraph<string, Edge<string>>(false, -1, -1, StringComparer.InvariantCultureIgnoreCase);
             g1.AddVertex("A one");
             g1.AddVertex("b TWO");
             g1.AddVertex("C three");

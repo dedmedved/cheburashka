@@ -142,7 +142,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     var problem = new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 

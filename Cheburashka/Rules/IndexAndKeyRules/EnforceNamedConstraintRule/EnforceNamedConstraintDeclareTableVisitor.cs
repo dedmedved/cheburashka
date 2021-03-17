@@ -70,9 +70,7 @@ namespace Cheburashka
         {
             if (node.ReturnType != null)
             {
-                TableValuedFunctionReturnType chk  = node.ReturnType as TableValuedFunctionReturnType;
-                SelectFunctionReturnType      chk2 = node.ReturnType as SelectFunctionReturnType;
-                if (chk != null || chk2 != null)
+                if (node.ReturnType is TableValuedFunctionReturnType chk || node.ReturnType is SelectFunctionReturnType chk2)
                 {
                     _objects.Add(node.ReturnType);
                 }
@@ -82,9 +80,7 @@ namespace Cheburashka
         {
             if (node.ReturnType != null)
             {
-                TableValuedFunctionReturnType chk  = node.ReturnType as TableValuedFunctionReturnType;
-                SelectFunctionReturnType      chk2 = node.ReturnType as SelectFunctionReturnType;
-                if (chk != null || chk2 != null)
+                if (node.ReturnType is TableValuedFunctionReturnType chk || node.ReturnType is SelectFunctionReturnType chk2)
                 {
                     _objects.Add(node.ReturnType);
                 }
