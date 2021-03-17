@@ -91,14 +91,14 @@ namespace Cheburashka
         //    //return (node.TableSource != null);
         //    return true;
         //}
-        //// tricky if there is no from clause there is still exactly one tabe involved
+        //// tricky if there is no from clause there is still exactly one table involved
         //public static bool HasOneFromClauseSource(DeleteStatement node)
         //{
         //    return( ( node.FromClauses != null ) && 
         //            ( node.FromClauses.Count == 1 )
         //          );
         //}
-        //// tricky if there is no from clause there is still exactly one tabe involved
+        //// tricky if there is no from clause there is still exactly one table involved
         //public static bool HasOneFromClauseSource(UpdateStatement node)
         //{
         //    return( ( node.FromClauses != null ) && 
@@ -121,7 +121,7 @@ namespace Cheburashka
             //                    (node.TableSource is Microsoft.Data.Schema.ScriptDom.Sql.TableSourceWithAlias)
             //                  );
         }
-        // tricky if there is no from clause there is still exactly one tabe involved
+        // tricky if there is no from clause there is still exactly one table involved
         // in the context in which it is used - it literally means just the 1
         public static bool HasExactlyOneFromClauseTableSource(DeleteSpecification node)
         {
@@ -131,7 +131,7 @@ namespace Cheburashka
                         )
                   );
         }
-        //// tricky if there is no from clause there is still exactly one tabe involved
+        //// tricky if there is no from clause there is still exactly one table involved
         //// not used in any  context - eliminate for now
         //public static bool HasExactlyOneFromClauseTableSource(UpdateStatement node)
         //{
@@ -160,7 +160,7 @@ namespace Cheburashka
             return false;
         }
 
-        // tricky if there is no from clause there is still exactly one tabe involved
+        // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(DeleteSpecification node)
         {
             return ((node.FromClause == null)
@@ -174,7 +174,7 @@ namespace Cheburashka
                         )
                   );
         }
-        // tricky if there is no from clause there is still exactly one tabe involved
+        // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(UpdateSpecification node)
         {
             return ((node.FromClause == null)
@@ -214,14 +214,14 @@ namespace Cheburashka
             return true;
         }
 
-        // tricky if there is no from clause there is still exactly one tabe involved
+        // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtLeastOneTableSource(DeleteSpecification node)
         {
             //silence compiler warnings 
             if (node.FirstTokenIndex == 0) { }
             return true;
         }
-        // tricky if there is no from clause there is still exactly one tabe involved
+        // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtLeastOneTableSource(UpdateSpecification node)
         {
             //silence compiler warnings 
@@ -240,7 +240,7 @@ namespace Cheburashka
 
 
 
-        // leave unimplemnted for now until we see how thse changes pan out
+        // leave unimplemented for now until we see how these changes pan out
 
         //public static bool HasNoIntoClause(QuerySpecification node)
         //{

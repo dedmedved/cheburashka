@@ -104,14 +104,9 @@ namespace Cheburashka
             //IList<ReturnStatement> returnStatements = visitor.ReturnStatements;
             var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
 
-
             var code = createProcedureStatement?.StatementList;
 
-            bool problemExists;
-            if (code is null)
-                problemExists = true;
-            else
-                problemExists = InvalidUseOfReturn(code);
+            var problemExists = code is null || InvalidUseOfReturn(code);
 
             // Create problems for each return not found 
             if (problemExists)

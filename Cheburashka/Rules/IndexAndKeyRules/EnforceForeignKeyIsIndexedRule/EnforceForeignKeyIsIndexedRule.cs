@@ -109,7 +109,7 @@ namespace Cheburashka
 
             List<string> x = hostColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
 
-            var ForeignKeyColumns = new List<String>();
+            var ForeignKeyColumns = new List<string>();
             ForeignKeyColumns.AddRange(x);
 
             // Get Database Schema and name of this model element.
@@ -211,7 +211,7 @@ namespace Cheburashka
 
             foreach (var index in theseIndexes)
             {
-                List<String> leadingEdgeIndexColumns = new List<String>();
+                List<string> leadingEdgeIndexColumns = new List<string>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.Columns, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
@@ -231,7 +231,7 @@ namespace Cheburashka
             {
                 foreach (var pk in thesePK)
                 {
-                    List<String> leadingEdgeIndexColumns = new List<String>();
+                    List<string> leadingEdgeIndexColumns = new List<string>();
                     var cols = pk.GetReferencedRelationshipInstances(
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
@@ -252,7 +252,7 @@ namespace Cheburashka
             {
                 foreach (var un in theseUN)
                 {
-                    List<String> leadingEdgeIndexColumns = new List<String>();
+                    List<string> leadingEdgeIndexColumns = new List<string>();
                     var cols = un.GetReferencedRelationshipInstances(
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
@@ -279,7 +279,7 @@ namespace Cheburashka
 
                 SqlRuleProblem problem =
                     new SqlRuleProblem(
-                        String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 
@@ -291,7 +291,7 @@ namespace Cheburashka
         }
 
 
-        private static bool CheckThatForeignKeysAreCoveredByIndex(List<String> ClusterColumns, List<String> ForeignKeyColumns, bool ThisIndexIsClustered, List<String> LeadingEdgeIndexColumns) {
+        private static bool CheckThatForeignKeysAreCoveredByIndex(List<string> ClusterColumns, List<string> ForeignKeyColumns, bool ThisIndexIsClustered, List<string> LeadingEdgeIndexColumns) {
             bool foundIndexThatMatchesAKey = false;
 
             List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);

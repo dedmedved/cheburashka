@@ -33,11 +33,11 @@ namespace Cheburashka
     {
         public StructureColumnsVisitor()
         {
-            Objects = new List<String>();
+            Objects = new List<string>();
         }
 
         //        public List<ColumnWithSortOrder> Objects => _objects;
-        public List<String> Objects { get; }
+        public List<string> Objects { get; }
 
         // This covers PrimaryKeys as well as normal uniqueConstraints
         public override void ExplicitVisit(UniqueConstraintDefinition node)

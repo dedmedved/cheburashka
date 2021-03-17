@@ -63,10 +63,10 @@ namespace Cheburashka.Tests
             Assert.IsTrue(Directory.Exists(ScriptsFolder), "Expected the test folder '{0}' to exist", ScriptsFolder);
 
             string outputDir = testContext.TestResultsDirectory;
-            string outputFilename = String.Format("{0}-{1}.txt", testName, Output);
+            string outputFilename = string.Format("{0}-{1}.txt", testName, Output);
             OutputFilePath = Path.Combine(outputDir, testName, outputFilename);
 
-            string baselineFilename = String.Format("{0}-{1}.txt", testName, Baseline);
+            string baselineFilename = string.Format("{0}-{1}.txt", testName, Baseline);
             BaselineFilePath = Path.Combine(ScriptsFolder, baselineFilename);
         }
 
@@ -149,7 +149,7 @@ namespace Cheburashka.Tests
 //            if (string.Compare(resultsString, baseline, false, CultureInfo.CurrentCulture) != 0)
             if (string.Compare(strippedResultsString, strippedBaseLine, false, CultureInfo.CurrentCulture) != 0)
                 {
-                Assert.Fail(String.Format(
+                Assert.Fail(string.Format(
                     "The result is not the same as expected. It's recommended you compare the actual output " +
                     "to the baseline. If the output matches your expectations, update the baseline file inside " +
                     "the project.\r\n\r\n" +

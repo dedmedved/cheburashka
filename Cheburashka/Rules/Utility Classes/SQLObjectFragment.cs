@@ -46,12 +46,12 @@ namespace Cheburashka
             FragmentLength = fragmentLength;
         }
 
-        public int FirstTokenIndex { get; set; }
+        public int FirstTokenIndex { get; }
 
         public int LastTokenIndex { get; set; }
 
         public int StartOffset { get; set; }
 
-        public int FragmentLength { get; set; }
+        public int FragmentLength { get; }
     }
 }

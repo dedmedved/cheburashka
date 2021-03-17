@@ -107,8 +107,8 @@ namespace Cheburashka
             //  Verify that the file exists first.
             if (!File.Exists(filePath))
             {
-                Debug.WriteLine(String.Format("Cannot find the file: '{0}'", filePath));
-                return String.Empty;
+                Debug.WriteLine(string.Format("Cannot find the file: '{0}'", filePath));
+                return string.Empty;
             }
 
             string content;
@@ -129,8 +129,8 @@ namespace Cheburashka
         /// This method converts offset from ScriptDom to line\column in script files.
         /// A line is defined as a sequence of characters followed by a carriage return ("\r"), 
         /// a line feed ("\n"), or a carriage return immediately followed by a line feed. 
-        public static bool ComputeLineColumn(string text, Int32 offset, Int32 length,
-                                            out Int32 startLine, out Int32 startColumn, out Int32 endLine, out Int32 endColumn)
+        public static bool ComputeLineColumn(string text, int offset, int length,
+                                            out int startLine, out int startColumn, out int endLine, out int endColumn)
         {
             const char LF = '\n';
             const char CR = '\r';
@@ -151,7 +151,7 @@ namespace Cheburashka
             for (int charIndex = 0; charIndex < length + offset; ++charIndex)
             {
                 char currentChar = text[charIndex];
-                Boolean afterOffset = charIndex >= offset;
+                bool afterOffset = charIndex >= offset;
                 if (currentChar == LF)
                 {
                     ++endLine;

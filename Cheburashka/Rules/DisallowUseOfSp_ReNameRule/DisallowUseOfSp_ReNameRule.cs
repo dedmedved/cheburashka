@@ -110,7 +110,7 @@ namespace Cheburashka
             // Create problems for each sp_rename call statement found 
             foreach (var executeSpecification in executeSpecifications)
             {
-                var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , executeSpecification
                                                 );

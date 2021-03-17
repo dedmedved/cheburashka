@@ -147,7 +147,7 @@ namespace Cheburashka
                 // Create problems for each one part object name source found 
                 foreach (SchemaObjectName tableSource in onePartNames)
                 {
-                    String tableSourceIdentifier =
+                    string tableSourceIdentifier =
                         tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
                     // Check the name isn't a builtin sql type
                     bool foundSurroundingDeclaration = dataTypes.Any(v => v.SQLModel_Contains(tableSource));
@@ -215,7 +215,7 @@ namespace Cheburashka
                     {
                         SqlRuleProblem problem =
                             new SqlRuleProblem(
-                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                 , modelElement
                                 , tableSource);
 
@@ -239,7 +239,7 @@ namespace Cheburashka
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , functionCall);
 
@@ -259,7 +259,7 @@ namespace Cheburashka
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , executableProcedureReference);
 

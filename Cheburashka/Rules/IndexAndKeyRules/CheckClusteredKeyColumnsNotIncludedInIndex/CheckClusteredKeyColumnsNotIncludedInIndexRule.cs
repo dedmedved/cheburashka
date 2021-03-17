@@ -165,9 +165,9 @@ namespace Cheburashka
                     {
                         //try
                         //{
-                        List<String> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
-                        List<String> c2 = indexColumns.Select(n => n.Value).ToList();
-                        List<String> c2Include = includeColumns.Select(n => n.Value).ToList();
+                        List<string> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
+                        List<string> c2 = indexColumns.Select(n => n.Value).ToList();
+                        List<string> c2Include = includeColumns.Select(n => n.Value).ToList();
 
                         //allow the lead column to be a clustered index member, as we need to be able to have
                         //different indexes key on different leading edges
@@ -199,7 +199,7 @@ namespace Cheburashka
                     {
                         SqlRuleProblem problem =
                             new SqlRuleProblem(
-                                String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
+                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
                                     elementName)
                                 , modelElement
                                 , sqlFragment);

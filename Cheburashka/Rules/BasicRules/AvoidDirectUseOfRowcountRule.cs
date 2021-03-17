@@ -130,7 +130,7 @@ namespace Cheburashka
                 }
                 if (!foundSurroundingSetStatement)
                 {
-                    var problem = new SqlRuleProblem(String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    var problem = new SqlRuleProblem(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                     , modelElement
                                                     , expression
                                                     );

@@ -125,8 +125,8 @@ namespace Cheburashka
                 //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
                 //    if (parent != null) {
                 //        if (parent.SchemaObjectName != null) {
-                String parentName = objectName; // parent.SchemaObjectName.BaseIdentifier.Value;
-                String schemaName = objectSchema; // "";
+                string parentName = objectName; // parent.SchemaObjectName.BaseIdentifier.Value;
+                string schemaName = objectSchema; // "";
                 //if (parent.SchemaObjectName.SchemaIdentifier != null) {
                 //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
                 //}
@@ -179,7 +179,7 @@ namespace Cheburashka
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
 

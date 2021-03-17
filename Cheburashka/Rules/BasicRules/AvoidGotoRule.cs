@@ -105,7 +105,7 @@ namespace Cheburashka
             // Create problems for each GOTO statement found 
             foreach (var goToStatement in goToStatements)
             {
-                var problem = new SqlRuleProblem( String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                                 , modelElement
                                                 , goToStatement
                                                 );

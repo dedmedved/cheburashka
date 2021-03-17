@@ -33,19 +33,19 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    class ModelIndexAndKeysUtils
+    internal static class ModelIndexAndKeysUtils
     {
 
-        public static List<Int32> GetCorrespondingKeyPositions(List<String> SearchedForKeys, List<String> SearchedLocation)
+        public static List<int> GetCorrespondingKeyPositions(List<string> SearchedForKeys, List<string> SearchedLocation)
         {
             // Look for the columns in SearchedForKeys in the list of columns SearchedLocation.
-            String[] ar = SearchedLocation.ToArray();
+            string[] ar = SearchedLocation.ToArray();
 
-            List<Int32> res = new List<Int32>();
+            List<int> res = new List<int>();
             foreach (var sk in SearchedForKeys)
             {
                 // if we find the col in the SearchedLocation, record its position (o-based) in res.
-                Int32 pos = Array.FindIndex(ar, mem => SqlComparer.SQLModel_StringCompareEqual(sk, mem));
+                int pos = Array.FindIndex(ar, mem => SqlComparer.SQLModel_StringCompareEqual(sk, mem));
                 res.Add(pos);
             }
             return res;
@@ -101,7 +101,7 @@ namespace Cheburashka
                     TSqlObject definingTable = pk.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    && (Boolean?) pk.GetProperty(PrimaryKeyConstraint.Clustered) == true 
+                    && (bool?) pk.GetProperty(PrimaryKeyConstraint.Clustered) == true 
                     )
                     {
                         pks.Add(pk);
@@ -140,7 +140,7 @@ namespace Cheburashka
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    && (Boolean?)index.GetProperty(Index.Clustered) == true
+                    && (bool?)index.GetProperty(Index.Clustered) == true
                     )
                     {
                         indexes.Add(index);
@@ -178,7 +178,7 @@ namespace Cheburashka
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    && (Boolean?)unique_constraint.GetProperty(UniqueConstraint.Clustered) == true
+                    && (bool?)unique_constraint.GetProperty(UniqueConstraint.Clustered) == true
                     )
                     {
                         unique_constraints.Add(unique_constraint);

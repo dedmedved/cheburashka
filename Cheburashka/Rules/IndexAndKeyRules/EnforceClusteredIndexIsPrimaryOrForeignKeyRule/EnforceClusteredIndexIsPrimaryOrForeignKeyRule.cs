@@ -144,8 +144,8 @@ namespace Cheburashka
                                 TSqlObject clusteredindex = null;
                                 TSqlObject uniqueConstraint = null;
 
-                                List<String> LeadingEdgeIndexColumns = new List<String>();
-                                List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+                                List<string> LeadingEdgeIndexColumns = new List<string>();
+                                List<string> SortedLeadingEdgeIndexColumns = new List<string>();
 
                                 if (clusteredindexExists)
                                 {
@@ -155,7 +155,7 @@ namespace Cheburashka
                                             Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                     foreach (var c in columnSpecifications)
                                     {
-                                        String lastElement = c.ObjectName.Parts.Last();
+                                        string lastElement = c.ObjectName.Parts.Last();
                                         LeadingEdgeIndexColumns.Add(lastElement);
                                     }
 
@@ -172,7 +172,7 @@ namespace Cheburashka
                                             DacQueryScopes.UserDefined);
                                     foreach (var c in columnSpecifications)
                                     {
-                                        String lastElement = c.ObjectName.Parts.Last();
+                                        string lastElement = c.ObjectName.Parts.Last();
                                         LeadingEdgeIndexColumns.Add(lastElement);
                                     }
 
@@ -182,18 +182,18 @@ namespace Cheburashka
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.
-                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                // now check the foreign key columns against the relevant clustered 'index''s columns
                                 foreach (var pk in pks)
                                 {
                                     var columnSpecifications =
                                         pk.GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns,
                                             DacQueryScopes.UserDefined);
-                                    List<String> sortedPrimaryKeyColumns = columnSpecifications
+                                    List<string> sortedPrimaryKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
                                     if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
                                     {
-                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                        List<string> leadingCols = SortedLeadingEdgeIndexColumns
                                             .Take(sortedPrimaryKeyColumns.Count).ToList();
                                         if (leadingCols.SequenceEqual(sortedPrimaryKeyColumns, SqlComparer.Comparer))
                                         {
@@ -219,8 +219,8 @@ namespace Cheburashka
                                 TSqlObject uniqueConstraint = null;
                                 TSqlObject primaryKeyConstraint = null;
 
-                                List<String> LeadingEdgeIndexColumns = new List<String>();
-                                List<String> SortedLeadingEdgeIndexColumns = new List<String>();
+                                List<string> LeadingEdgeIndexColumns = new List<string>();
+                                List<string> SortedLeadingEdgeIndexColumns = new List<string>();
 
                                 if (clusteredindexExists)
                                 {
@@ -230,7 +230,7 @@ namespace Cheburashka
                                             Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                                     foreach (var c in columnSpecifications)
                                     {
-                                        String lastElement = c.ObjectName.Parts.Last();
+                                        string lastElement = c.ObjectName.Parts.Last();
                                         LeadingEdgeIndexColumns.Add(lastElement);
                                     }
 
@@ -247,7 +247,7 @@ namespace Cheburashka
                                             DacQueryScopes.UserDefined);
                                     foreach (var c in columnSpecifications)
                                     {
-                                        String lastElement = c.ObjectName.Parts.Last();
+                                        string lastElement = c.ObjectName.Parts.Last();
                                         LeadingEdgeIndexColumns.Add(lastElement);
                                     }
 
@@ -264,7 +264,7 @@ namespace Cheburashka
                                             DacQueryScopes.UserDefined);
                                     foreach (var c in columnSpecifications)
                                     {
-                                        String lastElement = c.ObjectName.Parts.Last();
+                                        string lastElement = c.ObjectName.Parts.Last();
                                         LeadingEdgeIndexColumns.Add(lastElement);
                                     }
 
@@ -273,7 +273,7 @@ namespace Cheburashka
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.
-                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                // now check the foreign key columns against the relevant clustered 'index''s columns
                                 foreach (var fc in foreignkeyconstraints)
                                 {
                                     var columnSpecifications =
@@ -282,12 +282,12 @@ namespace Cheburashka
                                     // consider a foreign key to be clustered if all its columns appear as the first n columns in a
                                     // clustered index, clustered unique constraint or clustered primary key constraint.
                                     // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                    List<String> SortedForeignKeyColumns = columnSpecifications
+                                    List<string> SortedForeignKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
                                     if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                     {
-                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                        List<string> leadingCols = SortedLeadingEdgeIndexColumns
                                             .Take(SortedForeignKeyColumns.Count).ToList();
                                         if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
                                         {
@@ -297,7 +297,7 @@ namespace Cheburashka
                                     }
                                 }
 
-                                // now check the foreign key columns againt the relevant clustered 'index''s columns
+                                // now check the foreign key columns against the relevant clustered 'index''s columns
                                 foreach (var fc in foreignkeyconstraints)
                                 {
                                     var columnSpecifications =
@@ -306,12 +306,12 @@ namespace Cheburashka
                                     // consider a foreign key to be clustered if all its columns appear as the first n columns in a
                                     // clustered index, clustered unique constraint or clustered primary key constraint.
                                     // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                    List<String> SortedForeignKeyColumns = columnSpecifications
+                                    List<string> SortedForeignKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
                                     if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                     {
-                                        List<String> leadingCols = SortedLeadingEdgeIndexColumns
+                                        List<string> leadingCols = SortedLeadingEdgeIndexColumns
                                             .Take(SortedForeignKeyColumns.Count).ToList();
                                         if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
                                         {
@@ -347,7 +347,7 @@ namespace Cheburashka
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
-                            String.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
 

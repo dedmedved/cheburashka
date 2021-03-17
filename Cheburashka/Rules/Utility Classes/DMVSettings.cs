@@ -34,7 +34,7 @@ namespace Cheburashka
 {
     static class DMVSettings
     {
-        private static readonly int                      _CacheRefreshIntervalSeconds = 15;
+        private const int _CacheRefreshIntervalSeconds = 15;
 
         private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
         private static readonly DateTime                 _lastInsertColumnCacheRefresh;
@@ -51,7 +51,7 @@ namespace Cheburashka
         private static readonly IEnumerable<TSqlObject>              tables;
         private static readonly IEnumerable<TSqlObject> views;
 
-        private static readonly Dictionary<String, List<TSqlObject>> _tablesColumnsCache;
+        private static readonly Dictionary<string, List<TSqlObject>> _tablesColumnsCache;
 
         private static IList<TSqlObject>              _tablesCache;
         private static IList<TSqlObject>              _indexesCache;

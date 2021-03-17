@@ -30,42 +30,39 @@ namespace Cheburashka
 {
     internal class EnforceNamedConstraintVisitor: TSqlConcreteFragmentVisitor
     {
-        private readonly List<ConstraintDefinition > _constraints;
         public EnforceNamedConstraintVisitor()
         {
-            _constraints = new List<ConstraintDefinition>();
+            Constraints = new List<ConstraintDefinition>();
         }
 
-        public List<ConstraintDefinition> Constraints
-        {
-            get { return _constraints; }
-        }
+        public List<ConstraintDefinition> Constraints { get; }
+
         public override void ExplicitVisit(CheckConstraintDefinition node)
         {
-            if (node.ConstraintIdentifier == null || String.IsNullOrEmpty(node.ConstraintIdentifier.Value))
+            if (node.ConstraintIdentifier == null || string.IsNullOrEmpty(node.ConstraintIdentifier.Value))
             {
-                _constraints.Add(node);
+                Constraints.Add(node);
             }
         }
         public override void ExplicitVisit(UniqueConstraintDefinition node)
         {
-            if (node.ConstraintIdentifier == null || String.IsNullOrEmpty(node.ConstraintIdentifier.Value))
+            if (node.ConstraintIdentifier == null || string.IsNullOrEmpty(node.ConstraintIdentifier.Value))
             {
-                _constraints.Add(node);
+                Constraints.Add(node);
             }
         }
         public override void ExplicitVisit(DefaultConstraintDefinition node)
         {
-            if (node.ConstraintIdentifier == null || String.IsNullOrEmpty(node.ConstraintIdentifier.Value))
+            if (node.ConstraintIdentifier == null || string.IsNullOrEmpty(node.ConstraintIdentifier.Value))
             {
-                _constraints.Add(node);
+                Constraints.Add(node);
             }
         }
         public override void ExplicitVisit(ForeignKeyConstraintDefinition node)
         {
-            if (node.ConstraintIdentifier == null || String.IsNullOrEmpty(node.ConstraintIdentifier.Value))
+            if (node.ConstraintIdentifier == null || string.IsNullOrEmpty(node.ConstraintIdentifier.Value))
             {
-                _constraints.Add(node);
+                Constraints.Add(node);
             }
         }
         //public override void ExplicitVisit(NullableConstraintDefinition node)
