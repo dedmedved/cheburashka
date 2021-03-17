@@ -21,7 +21,6 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Cheburashka

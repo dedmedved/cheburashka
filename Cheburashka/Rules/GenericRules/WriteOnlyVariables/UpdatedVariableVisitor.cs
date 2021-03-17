@@ -20,11 +20,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-namespace Cheburashka {
+namespace Cheburashka
+{
 
     //TODO handle XML functions
     internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor

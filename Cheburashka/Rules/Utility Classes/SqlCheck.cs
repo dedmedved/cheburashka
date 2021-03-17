@@ -19,13 +19,6 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
