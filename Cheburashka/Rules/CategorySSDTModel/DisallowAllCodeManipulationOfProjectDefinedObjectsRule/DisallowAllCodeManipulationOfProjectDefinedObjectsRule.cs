@@ -135,6 +135,9 @@ namespace Cheburashka
                 DropIndexStatementVisitor dropIndexStatementVisitor = new DropIndexStatementVisitor();
                 sqlFragment.Accept(dropIndexStatementVisitor);
                 List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
+                DropTableStatementVisitor dropTableStatementVisitor = new DropTableStatementVisitor();
+                sqlFragment.Accept(dropTableStatementVisitor);
+                List<DropTableStatement> dropTableStatements = dropTableStatementVisitor.Objects;
 
                 // some of this logic should be migrated into the visitors
                 // particularly the stuff re external names.
@@ -155,6 +158,29 @@ namespace Cheburashka
                 var allUniqueConstraints = DMVSettings.GetUniqueConstraints;
                 var allForeignKeys = DMVSettings.GetForeignKeys;
                 var allCheckConstraints = DMVSettings.GetCheckConstraints;
+
+                foreach (var dropTableStatement in dropTableStatements)
+                {
+                    foreach (var obj in dropTableStatement.Objects) {
+                        var schema = obj.SchemaIdentifier != null
+                            ? obj.SchemaIdentifier.Value
+                            : "dbo";
+                        var table = obj.BaseIdentifier.Value;
+                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
+                                                                     && SqlComparer.SQLModel_StringCompareEqual(
+                                                                         n.Name.Parts[0],
+                                                                         schema)
+                                                                     && SqlComparer.SQLModel_StringCompareEqual(
+                                                                         n.Name.Parts[1],
+                                                                         table)
+                        ).Select(n => n).ToList();
+
+                        if (tbls.Count > 0)
+                        {
+                            issues.Add(dropTableStatement);
+                        }
+                    }
+                }
 
                 foreach (var createIndexStatement in createIndexStatements)
                 {

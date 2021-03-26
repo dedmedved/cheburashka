@@ -1461,7 +1461,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(DisallowAllCodeManipulationOfProjectDefinedObjectsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql120);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
         }
@@ -1485,7 +1485,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 "DisallowAllCodeManipulationOfProjectDefinedObjects_MixedCaseRule",
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql120);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
         }
