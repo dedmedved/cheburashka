@@ -101,6 +101,7 @@
     <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="BasicRuleVisitors\OuterBlockVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
     <Compile Include="Generic Visitors\ClrWrapperVisitor.cs" />
