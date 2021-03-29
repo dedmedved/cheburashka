@@ -113,7 +113,8 @@ namespace Cheburashka
             string owningObjectTable = hostTable.Name.Parts[1];
 
             // get all unique indexes
-            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where( n => (bool) n.GetProperty(Index.Unique)).ToList();
+// no !     var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where( n => (bool) n.GetProperty(Index.Unique)).ToList();
+            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
             var theseIndexes = new List<TSqlObject>();
 
@@ -207,9 +208,9 @@ namespace Cheburashka
 
             foreach (var index in theseIndexes)
             {
- //               var uniqIdx = (bool)index.GetProperty(Index.Unique);
- //               if (uniqIdx)
- //               {
+                var uniqIdx = (bool)index.GetProperty(Index.Unique);
+                if (uniqIdx)
+                {
                     List<string> leadingEdgeIndexColumns = new List<string>();
                     var cols = index.GetReferencedRelationshipInstances(
                         Index.Columns, DacQueryScopes.UserDefined);
@@ -225,7 +226,7 @@ namespace Cheburashka
                     {
                         break;
                     }
-//                }
+                }
             }
             if (!foundIndexThatMatchesAKey)
             {
