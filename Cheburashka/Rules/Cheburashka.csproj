@@ -126,6 +126,7 @@
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableDropTableElementStatementVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
+    <Compile Include="IndexAndKeyRules\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
     <Compile Include="IndexAndKeyRules\StructureColumnsVisitor.cs" />
