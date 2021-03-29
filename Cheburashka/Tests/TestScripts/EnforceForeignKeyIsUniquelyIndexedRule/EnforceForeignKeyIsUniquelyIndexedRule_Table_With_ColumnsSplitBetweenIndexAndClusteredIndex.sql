@@ -1,0 +1,15 @@
+﻿CREATE TABLE dbo.EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex (a INT NOT null
+, b INT NOT null
+, CONSTRAINT PK_EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex primary KEY (a,b)
+) ;
+GO
+create table EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex_Child (a INT NOT null
+, b INT NOT null
+, c INT 
+, constraint FKEnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex foreign key (a,b) references EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex (a,b)
+)
+GO
+CREATE CLUSTERED INDEX cix_EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex on EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex_Child(b,c)
+GO 
+CREATE UNIQUE INDEX ix_EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex_01 on EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex_Child(a)
+GO 

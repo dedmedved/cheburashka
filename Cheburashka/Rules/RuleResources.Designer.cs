@@ -484,7 +484,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table.
+        ///   Looks up a localized string similar to Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table..
         /// </summary>
         internal static string EnforceForeignKeyIsUniquelyIndexed_RuleName {
             get {

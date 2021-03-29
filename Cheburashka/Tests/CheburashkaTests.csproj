@@ -1054,6 +1054,36 @@
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_Without_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_Index.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_PrimaryKey.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_UniqueConstraint.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_WideIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule_Table_With_WideWronglyOrderedIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceForeignKeyNonStandardTableIsIndexedRule\EnforceForeignKeyNonStandardTableIsIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,63 @@
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_With_ClusteredIndex].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_With_ClusteredIndex
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ClusteredIndex.sql
+Start line: 6
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FKEnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FKEnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndex.sql
+Start line: 9
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_ColumnsSplitBetweenIndexAndClusteredIndexInWrongOrder.sql
+Start line: 9
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_With_Index].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_With_Index
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_Index.sql
+Start line: 6
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_With_WideIndex].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_With_WideIndex
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_WideIndex.sql
+Start line: 7
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_With_WideWronglyOrderedIndex
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_With_WideWronglyOrderedIndex.sql
+Start line: 7
+Start column: 3
+========end of problem========
+
+Problem description: Foreign Key with no supporting unique index found in [dbo].[FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index].
+FullID: Cheburashka.DM0034
+Severity: Warning
+Model element: dbo.FK_EnforceForeignKeyIsIndexedRule_Table_Without_Index
+Script file: EnforceForeignKeyIsUniquelyIndexedRule_Table_Without_Index.sql
+Start line: 6
+Start column: 3
+========end of problem========
+
