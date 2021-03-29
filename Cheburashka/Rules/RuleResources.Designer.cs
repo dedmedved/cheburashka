@@ -475,6 +475,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Foreign Key with no supporting unique index found in {0}..
+        /// </summary>
+        internal static string EnforceForeignKeyIsUniquelyIndexed_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceForeignKeyIsUniquelyIndexed_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table.
+        /// </summary>
+        internal static string EnforceForeignKeyIsUniquelyIndexed_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceForeignKeyIsUniquelyIndexed_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index with a key that is just a subset or permutation of another key  found in {0}..
         /// </summary>
         internal static string EnforceIndexKeyColumnSeparation_ProblemDescription {
