@@ -253,7 +253,7 @@
     <value>Foreign Key with no supporting unique index found in {0}.</value>
   </data>
   <data name="EnforceForeignKeyIsUniquelyIndexed_RuleName" xml:space="preserve">
-    <value>Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table</value>
+    <value>Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table.</value>
   </data>
   <data name="EnforceForeignKey_ProblemDescription" xml:space="preserve">
     <value>Table with no Foreign Key relationships was found in {0}.</value>
