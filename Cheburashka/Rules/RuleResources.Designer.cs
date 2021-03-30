@@ -295,6 +295,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table with multiple Foreign Key relationships to the same Parent Table was found in {0}..
+        /// </summary>
+        internal static string CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apart from tables modelling graph structures, and role-playing tables, it&apos;s unusual to find multiple relationships between two tables.  It may indicate a non-normal database design..
+        /// </summary>
+        internal static string CheckMultipleForeignKeysBetweenTheSameTable_RuleName {
+            get {
+                return ResourceManager.GetString("CheckMultipleForeignKeysBetweenTheSameTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable..
         /// </summary>
         internal static string CheckUniqueConstraintHasNoNullColumns_ProblemDescription {
