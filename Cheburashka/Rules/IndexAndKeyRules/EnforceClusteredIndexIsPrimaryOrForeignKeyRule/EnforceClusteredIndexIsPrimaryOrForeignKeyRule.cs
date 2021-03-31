@@ -76,6 +76,20 @@ namespace Cheburashka
 
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
         {
+            List<string> ExtractLeadingEdgeColumns(IEnumerable<ModelRelationshipInstance> columnSpecifications)
+            {
+                List<string> LeadingEdgeIndexColumns = new List<string>();
+                foreach (var c in columnSpecifications)
+                {
+                    string lastElement = c.ObjectName.Parts.Last();
+                    LeadingEdgeIndexColumns.Add(lastElement);
+                }
+
+                var SortedLeadingEdgeIndexColumns = LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                    .ToList();
+                return SortedLeadingEdgeIndexColumns;
+            }
+
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
@@ -141,44 +155,24 @@ namespace Cheburashka
                         {
                             bool match = false;
                             {
-                                TSqlObject clusteredindex = null;
-                                TSqlObject uniqueConstraint = null;
-
-                                List<string> LeadingEdgeIndexColumns = new List<string>();
                                 List<string> SortedLeadingEdgeIndexColumns = new List<string>();
 
                                 if (clusteredindexExists)
                                 {
-                                    clusteredindex = clusteredindexes[0];
+                                    var clusteredindex = clusteredindexes[0];
                                     var columnSpecifications =
                                         clusteredindex.GetReferencedRelationshipInstances(
                                             Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                    foreach (var c in columnSpecifications)
-                                    {
-                                        string lastElement = c.ObjectName.Parts.Last();
-                                        LeadingEdgeIndexColumns.Add(lastElement);
-                                    }
-
-                                    SortedLeadingEdgeIndexColumns =
-                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
-                                            .ToList();
+                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
                                 else if (clusteredUniqueConstraintExists)
                                 {
-                                    uniqueConstraint = uniqueClusterConstraints[0];
+                                    var uniqueConstraint = uniqueClusterConstraints[0];
                                     var columnSpecifications =
                                         uniqueConstraint.GetReferencedRelationshipInstances(
                                             UniqueConstraint.ColumnsRelationship.RelationshipClass,
                                             DacQueryScopes.UserDefined);
-                                    foreach (var c in columnSpecifications)
-                                    {
-                                        string lastElement = c.ObjectName.Parts.Last();
-                                        LeadingEdgeIndexColumns.Add(lastElement);
-                                    }
-
-                                    SortedLeadingEdgeIndexColumns =
-                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
-                                            .ToList();
+                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.
@@ -215,61 +209,34 @@ namespace Cheburashka
                             bool match = false;
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
-                                TSqlObject clusteredindex = null;
-                                TSqlObject uniqueConstraint = null;
-                                TSqlObject primaryKeyConstraint = null;
-
-                                List<string> LeadingEdgeIndexColumns = new List<string>();
+                                //List<string> LeadingEdgeIndexColumns = new List<string>();
                                 List<string> SortedLeadingEdgeIndexColumns = new List<string>();
 
                                 if (clusteredindexExists)
                                 {
-                                    clusteredindex = clusteredindexes[0];
+                                    var clusteredindex = clusteredindexes[0];
                                     var columnSpecifications =
                                         clusteredindex.GetReferencedRelationshipInstances(
                                             Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                    foreach (var c in columnSpecifications)
-                                    {
-                                        string lastElement = c.ObjectName.Parts.Last();
-                                        LeadingEdgeIndexColumns.Add(lastElement);
-                                    }
-
-                                    SortedLeadingEdgeIndexColumns =
-                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
-                                            .ToList();
+                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
                                 else if (clusteredUniqueConstraintExists)
                                 {
-                                    uniqueConstraint = uniqueClusterConstraints[0];
+                                    var uniqueConstraint = uniqueClusterConstraints[0];
                                     var columnSpecifications =
                                         uniqueConstraint.GetReferencedRelationshipInstances(
                                             UniqueConstraint.ColumnsRelationship.RelationshipClass,
                                             DacQueryScopes.UserDefined);
-                                    foreach (var c in columnSpecifications)
-                                    {
-                                        string lastElement = c.ObjectName.Parts.Last();
-                                        LeadingEdgeIndexColumns.Add(lastElement);
-                                    }
-
-                                    SortedLeadingEdgeIndexColumns =
-                                        LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
-                                            .ToList();
+                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
                                 else if (clusteredPrimaryKeyExists)
                                 {
-                                    primaryKeyConstraint = clusteredpks[0];
+                                    var primaryKeyConstraint = clusteredpks[0];
                                     var columnSpecifications =
                                         primaryKeyConstraint.GetReferencedRelationshipInstances(
                                             PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass,
                                             DacQueryScopes.UserDefined);
-                                    foreach (var c in columnSpecifications)
-                                    {
-                                        string lastElement = c.ObjectName.Parts.Last();
-                                        LeadingEdgeIndexColumns.Add(lastElement);
-                                    }
-
-                                    LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
-                                        .ToList();
+                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.

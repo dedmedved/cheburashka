@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0034: Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceForeignKeyIsUniquelyIndexedRuleId;
+        public const string RuleId = RuleConstants.EnforceForeignKeyIsUniquelyIndexed_RuleId;
 
         public EnforceForeignKeyIsUniquelyIndexedRule()
         {
