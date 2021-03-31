@@ -76,7 +76,7 @@ namespace Cheburashka
 
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
         {
-            List<string> ExtractLeadingEdgeColumns(IEnumerable<ModelRelationshipInstance> columnSpecifications)
+            static List<string> ExtractLeadingEdgeColumns(IEnumerable<ModelRelationshipInstance> columnSpecifications)
             {
                 List<string> LeadingEdgeIndexColumns = new List<string>();
                 foreach (var c in columnSpecifications)
