@@ -62,8 +62,8 @@ namespace Cheburashka
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleId   = "Cheburashka.DM0031";
         public const string DisallowUseOfSp_ReName_RuleId                               = "Cheburashka.DM0032";
         public const string EnforceForeignKey_RuleId                                    = "Cheburashka.DM0033";
-        public const string EnforceForeignKeyIsUniquelyIndexedRuleId                    = "Cheburashka.DM0034";
-        public const string CheckMultipleForeignKeysBetweenTheSameTableRuleId           = "Cheburashka.DM0035";
+        public const string EnforceForeignKeyIsUniquelyIndexed_RuleId                   = "Cheburashka.DM0034";
+        public const string CheckMultipleForeignKeysBetweenTheSameTable_RuleId          = "Cheburashka.DM0035";
 
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";

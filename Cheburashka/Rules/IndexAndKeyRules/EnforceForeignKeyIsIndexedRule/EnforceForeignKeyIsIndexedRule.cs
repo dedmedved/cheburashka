@@ -137,10 +137,11 @@ namespace Cheburashka
                 clusteredIndexFound = (bool) index.GetProperty(Index.Clustered);
                 if (clusteredIndexFound)
                 {
-                    foreach (var v in cols)
-                    {
-                        ClusterColumns.Add(v.ObjectName.Parts[2]);
-                    }
+                    //foreach (var v in cols)
+                    //{
+                    //    ClusterColumns.Add(v.ObjectName.Parts[2]);
+                    //}
+                    ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                 }
             }
 
@@ -166,12 +167,12 @@ namespace Cheburashka
                     clusteredIndexFound = (bool) pk.GetProperty(PrimaryKeyConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        foreach (var v in cols)
-                        {
-                            ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        }
+                        //foreach (var v in cols)
+                        //{
+                        //    ClusterColumns.Add(v.ObjectName.Parts[2]);
+                        //}
+                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
-
                 }
             }
 
@@ -196,10 +197,12 @@ namespace Cheburashka
                     clusteredIndexFound = (bool)un.GetProperty(UniqueConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        foreach (var v in cols)
-                        {
-                            ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        }
+                        //foreach (var v in cols)
+                        //{
+                        //    ClusterColumns.Add(v.ObjectName.Parts[2]);
+                        //}
+                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
+
                     }
                 }
             }
@@ -211,10 +214,11 @@ namespace Cheburashka
                     Index.Columns, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
 
-                foreach (var v in cols)//.ToList())
-                {
-                    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                }
+                //foreach (var v in cols)//.ToList())
+                //{
+                //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
+                //}
+                leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                 foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                 if (foundIndexThatMatchesAKey)
@@ -231,10 +235,11 @@ namespace Cheburashka
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
 
-                    foreach (var v in cols)
-                    {
-                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    }
+                    //foreach (var v in cols)
+                    //{
+                    //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
+                    //}
+                    leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
@@ -252,10 +257,11 @@ namespace Cheburashka
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
 
-                    foreach (var v in cols)
-                    {
-                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    }
+                    //foreach (var v in cols)
+                    //{
+                    //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
+                    //}
+                    leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)

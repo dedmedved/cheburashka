@@ -129,12 +129,12 @@ namespace Cheburashka
                         List<string> PKLeadingEdgeIndexColumns = new List<string>();
                         foreach (var c in pk_columns)
                         {
-                            string lastElement = "";
-                            foreach (var n in c.Name.Parts)
-                            {
-                                lastElement = n;
-                            }
-
+                            //string lastElement = "";
+                            //foreach (var n in c.Name.Parts)
+                            //{
+                            //    lastElement = n;
+                            //}
+                            string lastElement = c.Name.Parts.Last();
                             PKLeadingEdgeIndexColumns.Add(lastElement);
                         }
 
@@ -163,12 +163,12 @@ namespace Cheburashka
                             List<string> OtherLeadingEdgeIndexColumns = new List<string>();
                             foreach (var c in idx_columns)
                             {
-                                string lastElement = "";
-                                foreach (var n in c.Name.Parts)
-                                {
-                                    lastElement = n;
-                                }
-
+                                //string lastElement = "";
+                                //foreach (var n in c.Name.Parts)
+                                //{
+                                //    lastElement = n;
+                                //}
+                                string lastElement = c.Name.Parts.Last();
                                 OtherLeadingEdgeIndexColumns.Add(lastElement);
                             }
 
@@ -198,12 +198,12 @@ namespace Cheburashka
                             List<string> ConstraintLeadingEdgeIndexColumns = new List<string>();
                             foreach (var c in un_columns)
                             {
-                                string lastElement = "";
-                                foreach (var n in c.Name.Parts)
-                                {
-                                    lastElement = n;
-                                }
-
+                                //string lastElement = "";
+                                //foreach (var n in c.Name.Parts)
+                                //{
+                                //    lastElement = n;
+                                //}
+                                string lastElement = c.Name.Parts.Last();
                                 ConstraintLeadingEdgeIndexColumns.Add(lastElement);
                             }
 
