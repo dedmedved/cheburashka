@@ -132,15 +132,11 @@ namespace Cheburashka
             var clusteredIndexFound = false;
             foreach (var index in theseIndexes)
             {
-                var cols = index.GetReferencedRelationshipInstances(
-                    Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                 clusteredIndexFound = (bool) index.GetProperty(Index.Clustered);
                 if (clusteredIndexFound)
                 {
-                    //foreach (var v in cols)
-                    //{
-                    //    ClusterColumns.Add(v.ObjectName.Parts[2]);
-                    //}
+                    var cols = index.GetReferencedRelationshipInstances(
+                        Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
                     ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                 }
             }
@@ -162,15 +158,11 @@ namespace Cheburashka
             {
                 foreach (var pk in thesePK)
                 {
-                    var cols = pk.GetReferencedRelationshipInstances(
-                        PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     clusteredIndexFound = (bool) pk.GetProperty(PrimaryKeyConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        //foreach (var v in cols)
-                        //{
-                        //    ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        //}
+                        var cols = pk.GetReferencedRelationshipInstances(
+                            PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                         ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
                 }
@@ -192,32 +184,23 @@ namespace Cheburashka
             {
                 foreach (var un in theseUN)
                 {
-                    var cols = un.GetReferencedRelationshipInstances(
-                        UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     clusteredIndexFound = (bool)un.GetProperty(UniqueConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        //foreach (var v in cols)
-                        //{
-                        //    ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        //}
+                        var cols = un.GetReferencedRelationshipInstances(
+                            UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                         ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
-
                     }
                 }
             }
 
             foreach (var index in theseIndexes)
             {
-                List<string> leadingEdgeIndexColumns = new List<string>();
                 var cols = index.GetReferencedRelationshipInstances(
                     Index.Columns, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
 
-                //foreach (var v in cols)//.ToList())
-                //{
-                //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                //}
+                List<string> leadingEdgeIndexColumns = new List<string>();
                 leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                 foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
@@ -230,15 +213,11 @@ namespace Cheburashka
             {
                 foreach (var pk in thesePK)
                 {
-                    List<string> leadingEdgeIndexColumns = new List<string>();
                     var cols = pk.GetReferencedRelationshipInstances(
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
 
-                    //foreach (var v in cols)
-                    //{
-                    //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    //}
+                    List<string> leadingEdgeIndexColumns = new List<string>();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
@@ -252,15 +231,11 @@ namespace Cheburashka
             {
                 foreach (var un in theseUN)
                 {
-                    List<string> leadingEdgeIndexColumns = new List<string>();
                     var cols = un.GetReferencedRelationshipInstances(
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
 
-                    //foreach (var v in cols)
-                    //{
-                    //    leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    //}
+                    List<string> leadingEdgeIndexColumns = new List<string>();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
