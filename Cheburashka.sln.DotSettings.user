@@ -12,20 +12,9 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9cdb02dd_002D938e_002D432d_002Db506_002D3a043234b0dd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EnforceForeignKeyNonStandardTable_BIN" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyNonStandardTable_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKey_CI_AI&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.AvoidUnusedTableVariable_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforcePrimaryKeyNonStandard_CI_AI&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyNonStandardTable_CI_AI&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforcePrimaryKeyNonStandard_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.CheckUniqueKeysAreNotDuplicatedRule_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.CheckClusteredKeyColumnsNotIncludedInIndex_CI_AI&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceReturn_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceUseTRY_CATCH_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyIsIndexed_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyIsIndexed_CI_AI&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyNonStandardTableIsIndexed_BIN&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.7.2::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyNonStandardTableIsIndexed_CI_AI&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.EnforceForeignKey_CI_AI&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.EnforceClusteredIndex_BIN&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyIsUniquelyIndexed_BIN&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
