@@ -825,16 +825,10 @@
     <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_Without_FK.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_Without_FK_No_Schema.sql">
+    <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_With_2_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_With_FK.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_With_FK_No_Schema.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule-Baseline.txt">
