@@ -19,17 +19,12 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.IO;
-
-using Cheburashka;
 
 namespace Cheburashka
 {
@@ -248,7 +243,7 @@ namespace Cheburashka
                                             DacQueryScopes.UserDefined);
                                     // consider a foreign key to be clustered if all its columns appear as the first n columns in a
                                     // clustered index, clustered unique constraint or clustered primary key constraint.
-                                    // nb a primary key can be a foreign key too when modelling 1:1 relationships.
+                                    // nb a primary key can be a foreign key too when modeling 1:1 relationships.
                                     List<string> SortedForeignKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
