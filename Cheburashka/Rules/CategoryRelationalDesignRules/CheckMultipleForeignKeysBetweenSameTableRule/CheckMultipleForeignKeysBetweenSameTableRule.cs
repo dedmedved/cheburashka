@@ -140,6 +140,8 @@ namespace Cheburashka
                 var thisHostTableschema = thisHostTable[0].Name.Parts[0];
                 var thisHostTablename = thisHostTable[0].Name.Parts[1];
 
+                bool multipleFKS = false;
+
                 foreach (var thing in allFKs)
                 {
                     var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
@@ -161,6 +163,10 @@ namespace Cheburashka
                         { 
                             fksCount++;
                         }
+                        if (fksCount > 1) {
+                            multipleFKS = true;
+                            break;
+                        }
                     }
                 }
 
@@ -168,7 +174,7 @@ namespace Cheburashka
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                if ( fksCount > 1)
+                if (multipleFKS)
                 {
                     SqlRuleProblem problem =
                         new SqlRuleProblem(
