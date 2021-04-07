@@ -58,13 +58,13 @@ namespace Cheburashka
 
         public const string AvoidOnePartNames_RuleId                            = "Cheburashka.DM0029";
 
-        public const string AvoidNullLiteral_RuleId                             = "Cheburashka.DM0030";
+        public const string AvoidNullLiteral_RuleId                                     = "Cheburashka.DM0030";
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleId   = "Cheburashka.DM0031";
         public const string DisallowUseOfSp_ReName_RuleId                               = "Cheburashka.DM0032";
         public const string EnforceForeignKey_RuleId                                    = "Cheburashka.DM0033";
         public const string EnforceForeignKeyIsUniquelyIndexed_RuleId                   = "Cheburashka.DM0034";
         public const string CheckMultipleForeignKeysBetweenTheSameTable_RuleId          = "Cheburashka.DM0035";
-
+        public const string CheckMultipleForeignKeysFromOneTable_RuleId                 = "Cheburashka.DM0036";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -152,6 +152,9 @@ namespace Cheburashka
 
         public const string CheckMultipleForeignKeysBetweenTheSameTable_RuleName                    = "CheckMultipleForeignKeysBetweenTheSameTable_RuleName";
         public const string CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription          = "CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription";
+
+        public const string CheckMultipleForeignKeysFromOneTable_RuleName                           = "CheckMultipleForeignKeysFromOneTable_RuleName";
+        public const string CheckMultipleForeignKeysFromOneTable_ProblemDescription                 = "CheckMultipleForeignKeysFromOneTable_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

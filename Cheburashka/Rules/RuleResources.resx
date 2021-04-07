@@ -201,6 +201,12 @@
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_RuleName" xml:space="preserve">
     <value>Apart from tables modelling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design.</value>
   </data>
+  <data name="CheckMultipleForeignKeysFromOneTable_ProblemDescription" xml:space="preserve">
+    <value>Table with more than 5 Child Foreign Key relationships was found in {0}.</value>
+  </data>
+  <data name="CheckMultipleForeignKeysFromOneTable_RuleName" xml:space="preserve">
+    <value>Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation.</value>
+  </data>
   <data name="CheckUniqueConstraintHasNoNullColumns_ProblemDescription" xml:space="preserve">
     <value>Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable.</value>
   </data>

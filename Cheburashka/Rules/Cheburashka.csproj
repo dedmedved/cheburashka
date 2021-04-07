@@ -101,6 +101,7 @@
     <Compile Include="BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="BasicRuleVisitors\OuterBlockVisitor.cs" />
+    <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
