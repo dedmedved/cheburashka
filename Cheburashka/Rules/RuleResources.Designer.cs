@@ -313,6 +313,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table with more than 5 Child Foreign Key relationships was found in {0}..
+        /// </summary>
+        internal static string CheckMultipleForeignKeysFromOneTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckMultipleForeignKeysFromOneTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation..
+        /// </summary>
+        internal static string CheckMultipleForeignKeysFromOneTable_RuleName {
+            get {
+                return ResourceManager.GetString("CheckMultipleForeignKeysFromOneTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable..
         /// </summary>
         internal static string CheckUniqueConstraintHasNoNullColumns_ProblemDescription {
