@@ -822,6 +822,15 @@
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_UN.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule_Table_With_FK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

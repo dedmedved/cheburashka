@@ -55,7 +55,7 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0036: Apart from tables modelling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design."
+        /// shown as "DM0036: Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation."
         /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.CheckMultipleForeignKeysFromOneTable_RuleId;
@@ -132,13 +132,13 @@ namespace Cheburashka
                 var fksCount = 0  ;
 
                 var thisForeignTable = modelElement.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
-                var thisHostTable = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
+                //var thisHostTable = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
 
                 var thisForeignTableschema = thisForeignTable[0].Name.Parts[0];
                 var thisForeignTablename = thisForeignTable[0].Name.Parts[1];
 
-                var thisHostTableschema = thisHostTable[0].Name.Parts[0];
-                var thisHostTablename = thisHostTable[0].Name.Parts[1];
+                //var thisHostTableschema = thisHostTable[0].Name.Parts[0];
+                //var thisHostTablename = thisHostTable[0].Name.Parts[1];
 
                 bool multipleFKS = false;
 
@@ -149,21 +149,21 @@ namespace Cheburashka
 
                     if (host.Count > 0 && foreignTable.Count > 0)
                     {
-                        var hostschema = host[0].Name.Parts[0];
-                        var hostname = host[0].Name.Parts[1];
+                        //var hostschema = host[0].Name.Parts[0];
+                        //var hostname = host[0].Name.Parts[1];
 
                         var foreignTableschema = foreignTable[0].Name.Parts[0];
                         var foreignTablename = foreignTable[0].Name.Parts[1];
 
-                        if (hostname.SQLModel_StringCompareEqual(thisHostTablename)
+                        if (/* hostname.SQLModel_StringCompareEqual(thisHostTablename)
                             && hostschema.SQLModel_StringCompareEqual(thisHostTableschema)
-                            && foreignTablename.SQLModel_StringCompareEqual(thisForeignTablename)
+                            && */ foreignTablename.SQLModel_StringCompareEqual(thisForeignTablename)
                             && foreignTableschema.SQLModel_StringCompareEqual(thisForeignTableschema)
                         )
                         { 
                             fksCount++;
                         }
-                        if (fksCount > 1) {
+                        if (fksCount > 5) {
                             multipleFKS = true;
                             break;
                         }
