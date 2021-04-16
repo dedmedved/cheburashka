@@ -403,6 +403,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extra brackets found in {0}..
+        /// </summary>
+        internal static string CheckUnnecessaryBrackets_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckUnnecessaryBrackets_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra brackets are unnecessary..
+        /// </summary>
+        internal static string CheckUnnecessaryBrackets_RuleName {
+            get {
+                return ResourceManager.GetString("CheckUnnecessaryBrackets_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Permanent, statically defined table, constraint or index is altered by code in {0}.This may make the database inconsistent with the project..
         /// </summary>
         internal static string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription {
