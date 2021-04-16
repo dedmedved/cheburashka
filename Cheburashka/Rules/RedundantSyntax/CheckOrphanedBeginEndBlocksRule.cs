@@ -118,12 +118,12 @@ namespace Cheburashka
                 }
 
                 // Create problems for each begin found in the wrong place 
-                if (problemBegins.Count > 0)
+                foreach (var beginEndBlockStatement in problemBegins )
                 {
                     var problem = new SqlRuleProblem(
                         string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
-                        , sqlFragment
+                        , beginEndBlockStatement
                     );
 
                     problems.Add(problem);
