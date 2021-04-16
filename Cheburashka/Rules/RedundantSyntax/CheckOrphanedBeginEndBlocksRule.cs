@@ -110,21 +110,24 @@ namespace Cheburashka
                 code = (sqlFragment as CreateTriggerStatement)?.StatementList;
             }
 
-
-            foreach ( var x in code.Statements) {
-                problemBegins.AddRange(InvalidUseOfBegin(true,x));
-            }
-
-            // Create problems for each begin found in the wrong place 
-            if (problemBegins.Count > 0 )
+            if (! (code is null)) // inline functions have no statement list
             {
-                var problem = new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , sqlFragment
-                );
+                foreach (var x in code.Statements)
+                {
+                    problemBegins.AddRange(InvalidUseOfBegin(true, x));
+                }
 
-                problems.Add(problem);
+                // Create problems for each begin found in the wrong place 
+                if (problemBegins.Count > 0)
+                {
+                    var problem = new SqlRuleProblem(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , sqlFragment
+                    );
+
+                    problems.Add(problem);
+                }
             }
 
             return problems;
