@@ -69,7 +69,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
@@ -211,7 +211,7 @@ namespace Cheburashka
                 var uniqIdx = (bool)index.GetProperty(Index.Unique);
                 if (uniqIdx)
                 {
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
                     var cols = index.GetReferencedRelationshipInstances(
                         Index.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)index.GetProperty(Index.Clustered);
@@ -232,7 +232,7 @@ namespace Cheburashka
             {
                 foreach (var pk in thesePK)
                 {
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
                     var cols = pk.GetReferencedRelationshipInstances(
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
@@ -253,7 +253,7 @@ namespace Cheburashka
             {
                 foreach (var un in theseUN)
                 {
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
                     var cols = un.GetReferencedRelationshipInstances(
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
@@ -279,7 +279,7 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
                 SqlRuleProblem problem =
-                    new SqlRuleProblem(
+                    new(
                         string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
@@ -321,7 +321,7 @@ namespace Cheburashka
                     && matchedPos.Count - 1 == matchedPos.Max()
                     ) {
                     string[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
-                    List<string> unMatchedForeignKeyColumns = new List<string>();
+                    List<string> unMatchedForeignKeyColumns = new();
                     for (int i = 0; i < allPos.Count; i++) {
                         if (allPos[i] == -1) {
                             unMatchedForeignKeyColumns.Add(arForeignKeyColumns[i]);

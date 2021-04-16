@@ -74,7 +74,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -109,7 +109,7 @@ namespace Cheburashka
                 List<TSqlObject> uniqueConstraints =
                     ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                List<string> LeadingEdgeIndexColumns = new List<string>();
+                List<string> LeadingEdgeIndexColumns = new();
                 var columns = modelElement.GetReferenced(Index.Columns);
                 List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
                 LeadingEdgeIndexColumns.AddRange(x);
@@ -126,7 +126,7 @@ namespace Cheburashka
                     )
                     {
                         var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                        List<string> PKLeadingEdgeIndexColumns = new List<string>();
+                        List<string> PKLeadingEdgeIndexColumns = new();
                         foreach (var c in pk_columns)
                         {
                             //string lastElement = "";
@@ -160,7 +160,7 @@ namespace Cheburashka
                         )
                         {
                             var idx_columns = v.GetReferenced(Index.Columns);
-                            List<string> OtherLeadingEdgeIndexColumns = new List<string>();
+                            List<string> OtherLeadingEdgeIndexColumns = new();
                             foreach (var c in idx_columns)
                             {
                                 //string lastElement = "";
@@ -195,7 +195,7 @@ namespace Cheburashka
                         )
                         {
                             var un_columns = v.GetReferenced(UniqueConstraint.Columns);
-                            List<string> ConstraintLeadingEdgeIndexColumns = new List<string>();
+                            List<string> ConstraintLeadingEdgeIndexColumns = new();
                             foreach (var c in un_columns)
                             {
                                 //string lastElement = "";
@@ -231,7 +231,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

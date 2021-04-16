@@ -80,7 +80,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -111,19 +111,19 @@ namespace Cheburashka
 
                 CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor
                     checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor =
-                        new CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor();
+                        new();
                 sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor);
                 var isClustered = checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.Objects;
 
                 CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor
                     checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor =
-                        new CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor();
+                        new();
                 sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor);
                 var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
 
                 CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns
                     checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns =
-                        new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns();
+                        new();
                 sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
                 var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
 
@@ -135,13 +135,13 @@ namespace Cheburashka
                     // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
                     CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor
                         =
-                        new CheckClusteredKeyColumnsNotIncludedInIndexVisitor();
+                        new();
                     sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
                     List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
 
                     CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
                         checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
-                            new CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor();
+                            new();
                     sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
                     var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
 
@@ -192,7 +192,7 @@ namespace Cheburashka
                     if (issueFound)
                     {
                         SqlRuleProblem problem =
-                            new SqlRuleProblem(
+                            new(
                                 string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
                                     elementName)
                                 , modelElement

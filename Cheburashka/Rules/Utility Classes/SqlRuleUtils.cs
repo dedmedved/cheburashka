@@ -35,24 +35,26 @@ namespace Cheburashka
     {
         private static readonly List<string> StoredProceduresOfWhichWeIgnoreTheReturnStatus = Initialisers.IgnorableReturnStatusStoredProcedures();
 
-        private static readonly List<string> BuiltinDataTypesThatParseAsIdentifiers = new List<string>
-        {"sysname"
+        private static readonly List<string> BuiltinDataTypesThatParseAsIdentifiers = new()
+        {
+            "sysname"
         ,"hierarchyid"
         };
 
-        private static readonly List<string> SystemDatabasesThatNeedNoSchemaQualification = new List<string>
-        {"msdb"
+        private static readonly List<string> SystemDatabasesThatNeedNoSchemaQualification = new()
+        {
+            "msdb"
         ,"master"
         };
 
-        private static readonly List<string> SystemTablesThatNeedNoSchemaQualification = new List<string>()
+        private static readonly List<string> SystemTablesThatNeedNoSchemaQualification = new()
         {"Inserted"
         ,"Deleted"
         };
 
-        private static List<string> _builtinDataTypes = new List<string>();
+        private static List<string> _builtinDataTypes = new();
 
-        private static readonly List<string> BuiltinAggregateFunctions = new List<string>()
+        private static readonly List<string> BuiltinAggregateFunctions = new()
         {"avg"
         ,"min"
         ,"max"
@@ -67,7 +69,7 @@ namespace Cheburashka
         ,"varp"
         };
 
-        private static readonly List<string> DateParts = new List<string>()
+        private static readonly List<string> DateParts = new()
         {"year"
         ,"yy"
         ,"yyyy"
@@ -103,7 +105,7 @@ namespace Cheburashka
         private static HashSet<string> _hashSs2008R2SystemObjectNames; //= new HashSet<String>(SqlComparer.Comparer);
 
         //need to double-check these and pick them up dynamically if possible from master/msdb dacpacs
-        private static List<string> _ss2008R2SystemObjectNames = new List<string>();
+        private static List<string> _ss2008R2SystemObjectNames = new();
 
         /// <summary>
         /// Determine if an sp needs to have its return value checked.
@@ -218,7 +220,7 @@ namespace Cheburashka
         /// <param name="sqlFragment">sql to analyse</param>
         public static ReadOnlyCollection<CteUtil> CteStatements(TSqlFragment sqlFragment)
         {
-            List<CteUtil> bits = new List<CteUtil>();
+            List<CteUtil> bits = new();
 
             var svisitor = new SelectWithCTEVisitor();
             sqlFragment.Accept(svisitor);
@@ -259,7 +261,7 @@ namespace Cheburashka
             return normalisedObjectName;
         }
 
-        private static readonly Regex ObjectNameRegex = new Regex(@" ( (?: (?: (?: ""[^ . "" ]* "" ) | (?: \[ [^ . \[ \] ]* \] ) | (?: [^.]* ) ) [.] ) | (?: (?: "" [^ . "" ]* "" ) | (?: \[ [^ . \[ \] ]+ \] ) | (?: [^.]+ ) $ ) )", RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        private static readonly Regex ObjectNameRegex = new(@" ( (?: (?: (?: ""[^ . "" ]* "" ) | (?: \[ [^ . \[ \] ]* \] ) | (?: [^.]* ) ) [.] ) | (?: (?: "" [^ . "" ]* "" ) | (?: \[ [^ . \[ \] ]+ \] ) | (?: [^.]+ ) $ ) )", RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
         private static string ExtractSchemaNameFromLiteralString(this string sLit)
         {

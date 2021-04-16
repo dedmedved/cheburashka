@@ -97,7 +97,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
 
-            List<BeginEndBlockStatement> problemBegins = new List<BeginEndBlockStatement>() ;
+            List<BeginEndBlockStatement> problemBegins = new() ;
 
             StatementList code;
 
@@ -132,7 +132,7 @@ namespace Cheburashka
 
         private List<BeginEndBlockStatement> InvalidUseOfBegin(bool precedingControlStatement,TSqlStatement code)
         {
-            List<BeginEndBlockStatement> problemBegins = new List<BeginEndBlockStatement>();
+            List<BeginEndBlockStatement> problemBegins = new();
 
             switch (code)
             {

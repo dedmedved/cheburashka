@@ -31,7 +31,7 @@ namespace Cheburashka
 //        static Regex sqlVariableRegex = new Regex("(sql:variable(\"@\\w*?\"))");
         //        static Regex sqlVariableRegex = new Regex("variable");
 
-        static readonly Regex sqlVariableRegex = new Regex("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
+        static readonly Regex sqlVariableRegex = new("sql:variable\\(\"(?<variableName>@\\w*?)\"\\)");
 
         public VariableUsageVisitor()
         {

@@ -67,7 +67,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -93,30 +93,30 @@ namespace Cheburashka
                 //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
 
                 // visitor to get the occurrences of statements 
-                AlterIndexStatementVisitor alterIndexStatementVisitor = new AlterIndexStatementVisitor();
+                AlterIndexStatementVisitor alterIndexStatementVisitor = new();
                 sqlFragment.Accept(alterIndexStatementVisitor);
                 List<AlterIndexStatement> alterIndexStatements = alterIndexStatementVisitor.Objects;
 
                 AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor =
-                    new AlterTableConstraintModificationStatementVisitor();
+                    new();
                 sqlFragment.Accept(alterTableConstraintModificationStatementVisitor);
                 List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements =
                     alterTableConstraintModificationStatementVisitor.Objects;
 
                 AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor =
-                    new AlterTableAddTableElementStatementVisitor();
+                    new();
                 sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
                 List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements =
                     alterTableAddTableElementStatementVisitor.Objects;
 
                 AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor =
-                    new AlterTableAlterColumnStatementVisitor();
+                    new();
                 sqlFragment.Accept(alterTableAlterColumnStatementVisitor);
                 List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements =
                     alterTableAlterColumnStatementVisitor.Objects;
 
                 AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor =
-                    new AlterTableDropTableElementStatementVisitor();
+                    new();
                 sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
                 List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements =
                     alterTableDropTableElementStatementVisitor.Objects;
@@ -129,20 +129,20 @@ namespace Cheburashka
                 //sqlFragment.Accept(dropClusteredConstraintStateOptionVisitor);
                 //List<DropClusteredConstraintStateOption> dropClusteredConstraintStateOptions = dropClusteredConstraintStateOptionVisitor.Objects;
 
-                CreateIndexStatementVisitor createIndexStatementVisitor = new CreateIndexStatementVisitor();
+                CreateIndexStatementVisitor createIndexStatementVisitor = new();
                 sqlFragment.Accept(createIndexStatementVisitor);
                 List<CreateIndexStatement> createIndexStatements = createIndexStatementVisitor.Objects;
-                DropIndexStatementVisitor dropIndexStatementVisitor = new DropIndexStatementVisitor();
+                DropIndexStatementVisitor dropIndexStatementVisitor = new();
                 sqlFragment.Accept(dropIndexStatementVisitor);
                 List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
-                DropTableStatementVisitor dropTableStatementVisitor = new DropTableStatementVisitor();
+                DropTableStatementVisitor dropTableStatementVisitor = new();
                 sqlFragment.Accept(dropTableStatementVisitor);
                 List<DropTableStatement> dropTableStatements = dropTableStatementVisitor.Objects;
 
                 // some of this logic should be migrated into the visitors
                 // particularly the stuff re external names.
                 // as this is how we do it elsewhere
-                List<TSqlFragment> issues = new List<TSqlFragment>();
+                List<TSqlFragment> issues = new();
                 // try to speed things up, by not retrieving element where we don't have an alter.
 
                 var allTables = DMVSettings.GetTables;
@@ -211,7 +211,7 @@ namespace Cheburashka
                         string tableName = null;
                         string indexName = null;
                         bool skipExternalName = false;
-                        if (!(!(dropIndexClause is DropIndexClause dic)))
+                        if (!(dropIndexClause is not DropIndexClause dic))
                         {
                             if (((dic.Object.DatabaseIdentifier != null
                                   && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
@@ -236,7 +236,7 @@ namespace Cheburashka
                         }
                         else
                         {
-                            if (!(!(dropIndexClause is BackwardsCompatibleDropIndexClause olddic)))
+                            if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
                             {
                                 if (((olddic.Index.DatabaseIdentifier != null
                                       && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
@@ -550,7 +550,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

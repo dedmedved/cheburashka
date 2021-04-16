@@ -86,7 +86,7 @@ namespace Cheburashka
                 // Get Model collation 
                 SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-                List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+                List<SqlRuleProblem> problems = new();
             try {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
@@ -105,12 +105,12 @@ namespace Cheburashka
 
                 // visitor to get parameter names - these look like variables and need removing
                 // from variable references before we use them
-                NamedParameterUsageVisitor namedParameterUsageVisitor = new NamedParameterUsageVisitor();
+                NamedParameterUsageVisitor namedParameterUsageVisitor = new();
                 sqlFragment.Accept(namedParameterUsageVisitor);
                 IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
                 // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
                 // visitor to get the occurrences of variables
-                VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
+                VariableUsageVisitor usageVisitor = new();
                 sqlFragment.Accept(usageVisitor);
                 IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
                 // remove all named parameters from the list of referenced variables
@@ -127,9 +127,9 @@ namespace Cheburashka
                 //sqlFragment.Accept(usageWriteVisitor);
                 //IList<VariableReference> variableWriteOccurrences = usageWriteVisitor.VariableAssignments;
 
-                Dictionary<string, object> objects = new Dictionary<string, object>(SqlComparer.Comparer);
-                Dictionary<string, int> counts = new Dictionary<string, int>(SqlComparer.Comparer);
-                Dictionary<string, int> writeCounts = new Dictionary<string, int>(SqlComparer.Comparer);
+                Dictionary<string, object> objects = new(SqlComparer.Comparer);
+                Dictionary<string, int> counts = new(SqlComparer.Comparer);
+                Dictionary<string, int> writeCounts = new(SqlComparer.Comparer);
 
                 foreach (Identifier variableDeclaration in variableDeclarations) {
                     objects.Add(variableDeclaration.Value, variableDeclaration);
@@ -159,7 +159,7 @@ namespace Cheburashka
                         //                if (!(writeCounts.ContainsKey(key)))
                         {
                         SqlRuleProblem problem =
-                            new SqlRuleProblem(
+                            new(
                                 string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                 , modelElement
                                 , sqlFragment);

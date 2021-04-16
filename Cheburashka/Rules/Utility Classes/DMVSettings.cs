@@ -101,7 +101,7 @@ namespace Cheburashka
             }
             else
             {
-                List<TSqlObject> x = new List<TSqlObject>();
+                List<TSqlObject> x = new();
                 return x;
             }
         }

@@ -82,7 +82,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
             try
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
@@ -106,13 +106,13 @@ namespace Cheburashka
 
                 // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
                 CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor =
-                    new CheckUniqueConstraintParentObjectVisitor();
+                    new();
                 sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
                 List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
 
                 // visitor to get the columns
                 CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor =
-                    new CheckUniqueConstraintHasNoNullColumnsVisitor();
+                    new();
                 sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
                 List<ColumnWithSortOrder> indexColumns = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
 
@@ -186,10 +186,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
+                        new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName), modelElement, sqlFragment);
 
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);

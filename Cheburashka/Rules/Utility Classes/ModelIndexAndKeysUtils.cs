@@ -36,7 +36,7 @@ namespace Cheburashka
             // Look for the columns in SearchedForKeys in the list of columns SearchedLocation.
             string[] ar = SearchedLocation.ToArray();
 
-            List<int> res = new List<int>();
+            List<int> res = new();
             foreach (var sk in SearchedForKeys)
             {
                 // if we find the col in the SearchedLocation, record its position (o-based) in res.

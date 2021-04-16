@@ -76,7 +76,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
             try
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
@@ -109,7 +109,7 @@ namespace Cheburashka
 
                 // visitor to get the columns
                 CheckUniqueIndexHasNoNullColumnsVisitor checkUniqueIndexHasNoNullColumnsVisitor =
-                    new CheckUniqueIndexHasNoNullColumnsVisitor();
+                    new();
                 sqlFragment.Accept(checkUniqueIndexHasNoNullColumnsVisitor);
                 List<ColumnWithSortOrder> indexColumns = checkUniqueIndexHasNoNullColumnsVisitor.Objects;
 
@@ -173,7 +173,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

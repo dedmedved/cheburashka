@@ -78,7 +78,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -116,7 +116,7 @@ namespace Cheburashka
 
                 var structureColumnsVisitor = new StructureColumnsVisitor();
 
-                List<string> thisIndexOrConstraintColumns = new List<string>();
+                List<string> thisIndexOrConstraintColumns = new();
                 if (sqlFragment != null)
                 {
                     sqlFragment.Accept(structureColumnsVisitor);
@@ -147,7 +147,7 @@ namespace Cheburashka
                 {
                     var issues = new List<TSqlFragment>();
 
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
 
                     foreach (var c in thisIndexOrConstraintColumns)
                     {
@@ -172,7 +172,7 @@ namespace Cheburashka
                             List<string> sortedPrimaryKeyColumns = columnSpecifications
                                 .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                 .Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<string> pkLeadingEdgeIndexColumns = new List<string>();
+                            List<string> pkLeadingEdgeIndexColumns = new();
                             pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
 
                             foundMoreConciseUniqueCondition =
@@ -204,7 +204,7 @@ namespace Cheburashka
                                 List<string> sortedUniqueIndexColumns = columnSpecifications
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> otherLeadingEdgeIndexColumns = new List<string>();
+                                List<string> otherLeadingEdgeIndexColumns = new();
                                 otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
 
                                 foundMoreConciseUniqueCondition =
@@ -240,7 +240,7 @@ namespace Cheburashka
                                 List<string> sortedUniqueConstraintColumns = uniqueConstraintColumns
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> ConstraintLeadingEdgeIndexColumns = new List<string>();
+                                List<string> ConstraintLeadingEdgeIndexColumns = new();
                                 ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
 
                                 foundMoreConciseUniqueCondition =
@@ -269,7 +269,7 @@ namespace Cheburashka
                     foreach (TSqlFragment issue in issues)
                     {
                         SqlRuleProblem problem =
-                            new SqlRuleProblem(
+                            new(
                                 string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription,
                                     elementName)
                                 , modelElement

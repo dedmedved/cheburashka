@@ -96,7 +96,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of try/catch statements
-            TryCatchVisitor visitor = new TryCatchVisitor();
+            TryCatchVisitor visitor = new();
             sqlFragment.Accept(visitor);
             List<TryCatchStatement> tryCatchStatements = visitor.TryCatchStatements;
 
