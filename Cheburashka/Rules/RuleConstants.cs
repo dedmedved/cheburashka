@@ -65,6 +65,7 @@ namespace Cheburashka
         public const string EnforceForeignKeyIsUniquelyIndexed_RuleId                   = "Cheburashka.DM0034";
         public const string CheckMultipleForeignKeysBetweenTheSameTable_RuleId          = "Cheburashka.DM0035";
         public const string CheckMultipleForeignKeysFromOneTable_RuleId                 = "Cheburashka.DM0036";
+        public const string CheckOrphanedBeginEndBlocks_RuleId                          = "Cheburashka.DM0037";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -155,6 +156,11 @@ namespace Cheburashka
 
         public const string CheckMultipleForeignKeysFromOneTable_RuleName                           = "CheckMultipleForeignKeysFromOneTable_RuleName";
         public const string CheckMultipleForeignKeysFromOneTable_ProblemDescription                 = "CheckMultipleForeignKeysFromOneTable_ProblemDescription";
+
+        public const string CheckOrphanedBeginEndBlocks_RuleName                                    = "CheckOrphanedBeginEndBlocks_RuleName";
+        public const string CheckOrphanedBeginEndBlocks_ProblemDescription                          = "CheckOrphanedBeginEndBlocks_ProblemDescription";
+
+
 
         /// <summary>
         /// The design category (should not be localized)

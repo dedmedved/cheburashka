@@ -839,6 +839,45 @@
     <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_With_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\CheckOrphanedBeginEndBlocksRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\DatabaseTriggerWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ServerTriggerWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\DMLTriggerWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\TableValuedFunctionWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ScalarFunctionWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithNestedBeginEndAtomic.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithNestedBeginEnd.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithBeginInsideTry.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithNoBadBeginsAtomic.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithNoBadBeginsNestedStructures.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithRandomlyIntroducedBeginEnd.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\ProcWithNoBadBegins.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

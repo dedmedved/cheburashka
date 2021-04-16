@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -145,6 +145,7 @@
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintVisitor.cs" />
     <Compile Include="CategoryRelationalDesignRules\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule.cs" />
+    <Compile Include="RedundantSyntax\CheckOrphanedBeginEndBlocksRule.cs" />
     <Compile Include="SelectSetVariable\SelectSetVariableVisitor.cs" />
     <Compile Include="BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="BasicRules\AvoidDirectUseOfRowcountRule.cs" />
