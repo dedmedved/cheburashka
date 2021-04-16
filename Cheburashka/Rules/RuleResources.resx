@@ -207,6 +207,12 @@
   <data name="CheckMultipleForeignKeysFromOneTable_RuleName" xml:space="preserve">
     <value>Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation.</value>
   </data>
+  <data name="CheckOrphanedBeginEndBlocks_ProblemDescription" xml:space="preserve">
+    <value>Unattached BEGIN/END block found in {0}.</value>
+  </data>
+  <data name="CheckOrphanedBeginEndBlocks_RuleName" xml:space="preserve">
+    <value>BEGIN/END blocks do not define a scope in T-SQL.  They have no use unless associated with a control construct e.g. IF or WHILE.</value>
+  </data>
   <data name="CheckUniqueConstraintHasNoNullColumns_ProblemDescription" xml:space="preserve">
     <value>Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable.</value>
   </data>
