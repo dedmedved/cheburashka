@@ -119,21 +119,21 @@ namespace Cheburashka
                 // visitor to get the occurrences of data declarations names
                 // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
 
-                UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new UpdateStatementForTargetVisitor();
+                UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new();
                 sqlFragment.Accept(updateStatementForTargetVisitor);
                 IList<TableReference> updateStatements = updateStatementForTargetVisitor.DataModificationTargets;
-                DeleteStatementForTargetVisitor deleteStatementForTargetVisitor = new DeleteStatementForTargetVisitor();
+                DeleteStatementForTargetVisitor deleteStatementForTargetVisitor = new();
                 sqlFragment.Accept(deleteStatementForTargetVisitor);
                 IList<TableReference> deleteStatements = deleteStatementForTargetVisitor.DataModificationTargets;
-                MergeStatementForTargetVisitor mergeStatementForTargetVisitor = new MergeStatementForTargetVisitor();
+                MergeStatementForTargetVisitor mergeStatementForTargetVisitor = new();
                 sqlFragment.Accept(mergeStatementForTargetVisitor);
                 IList<TableReference> mergeStatements = mergeStatementForTargetVisitor.DataModificationTargets;
-                List<TableReference> allStatements = new List<TableReference>();
+                List<TableReference> allStatements = new();
                 allStatements.AddRange(updateStatements);
                 allStatements.AddRange(deleteStatements);
                 allStatements.AddRange(mergeStatements);
 
-                DataTypeVisitor dataTypeVisitor = new DataTypeVisitor();
+                DataTypeVisitor dataTypeVisitor = new();
                 sqlFragment.Accept(dataTypeVisitor);
                 IList<DataTypeReference> dataTypes = dataTypeVisitor.DataTypes;
 
@@ -214,7 +214,7 @@ namespace Cheburashka
                     if (!foundSurroundingDeclaration)
                     {
                         SqlRuleProblem problem =
-                            new SqlRuleProblem(
+                            new(
                                 string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                 , modelElement
                                 , tableSource);
@@ -238,7 +238,7 @@ namespace Cheburashka
                 foreach (FunctionCall functionCall in literalOnePartNameContexts)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , functionCall);
@@ -258,7 +258,7 @@ namespace Cheburashka
                 foreach (ExecutableProcedureReference executableProcedureReference in literalOnePartNameStoredProcsContexts)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , executableProcedureReference);

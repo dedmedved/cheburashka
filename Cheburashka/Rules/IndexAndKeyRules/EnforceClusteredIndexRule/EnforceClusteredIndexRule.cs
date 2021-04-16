@@ -81,7 +81,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -113,7 +113,7 @@ namespace Cheburashka
                 if (!bFoundClusteredIndex)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

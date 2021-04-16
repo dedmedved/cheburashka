@@ -43,7 +43,7 @@ namespace Cheburashka
         {
             if (node.WithCtesAndXmlNamespaces != null)
             {
-                CteUtil target = new CteUtil(node.FirstTokenIndex, node.LastTokenIndex, 0, 0);
+                CteUtil target = new(node.FirstTokenIndex, node.LastTokenIndex, 0, 0);
                 foreach (var cte in node.WithCtesAndXmlNamespaces.CommonTableExpressions)
                 {
                     target.Add(cte.ExpressionName);

@@ -40,7 +40,7 @@ namespace Cheburashka
         {
 
             if (node.Variable == null  || node.Expression == null) return;
-            SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable,node,node.ToString());
+            SQLExpressionDependency ed = new(node.Variable,node,node.ToString());
 
             //Get variable references in the expression.
             var usageVisitor = new VariableUsageVisitor();
@@ -53,10 +53,10 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectSetVariable node)
         {
             if (node.Variable == null || node.Expression == null) return ;
-            SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable, node, node.ToString());
+            SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
-            VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
+            VariableUsageVisitor usageVisitor = new();
             node.Expression.Accept(usageVisitor);
             IList<VariableReference> variableReferences = usageVisitor.VariableReferences;
             //Add to dependencies
@@ -71,7 +71,7 @@ namespace Cheburashka
             if (node.Variable != null &&
                 !string.IsNullOrEmpty(node.Variable.Name))
             {
-                SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable, node.Variable, node.Variable.ToString());
+                SQLExpressionDependency ed = new(node.Variable, node.Variable, node.Variable.ToString());
                 // there are no dependencies in the sense we are using them.
                 SetVariables.Add(ed);
             }
@@ -103,10 +103,10 @@ namespace Cheburashka
         public override void ExplicitVisit(AssignmentSetClause node)
         {
             if (node.Variable == null ) return;
-            SQLExpressionDependency ed = new SQLExpressionDependency(node.Variable, node, node.ToString());
+            SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
-            VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
+            VariableUsageVisitor usageVisitor = new();
             node.NewValue.Accept(usageVisitor);
             IList<VariableReference> variableReferences = usageVisitor.VariableReferences;
             //Add to dependencies
@@ -121,7 +121,7 @@ namespace Cheburashka
                 {
                     if (v != null )
                     {
-                        SQLExpressionDependency ed = new SQLExpressionDependency(v, v, v.ToString());
+                        SQLExpressionDependency ed = new(v, v, v.ToString());
                         SetVariables.Add(ed);
                     }
                 }
@@ -131,7 +131,7 @@ namespace Cheburashka
         public override void ExplicitVisit(BeginDialogStatement node)
         {
             if (node.Handle == null || string.IsNullOrEmpty(node.Handle.Name)) return;
-            SQLExpressionDependency ed = new SQLExpressionDependency(node.Handle,node.Handle,node.Handle.ToString());
+            SQLExpressionDependency ed = new(node.Handle,node.Handle,node.Handle.ToString());
             SetVariables.Add(ed);
         }
         public override void ExplicitVisit(ReceiveStatement node)
@@ -141,11 +141,11 @@ namespace Cheburashka
             {
                 if (v is SelectSetVariable ssv)
                 {
-                    SQLExpressionDependency ed = new SQLExpressionDependency(ssv.Variable, ssv, ssv.ToString());
+                    SQLExpressionDependency ed = new(ssv.Variable, ssv, ssv.ToString());
                     //                    SetVariables.Add(ed);
 
                     //Get variable references in the expression.
-                    VariableUsageVisitor usageVisitor = new VariableUsageVisitor();
+                    VariableUsageVisitor usageVisitor = new();
                     ssv.Expression.Accept(usageVisitor);
                     IList<VariableReference> variableReferences = usageVisitor.VariableReferences;
                     //Add to dependencies

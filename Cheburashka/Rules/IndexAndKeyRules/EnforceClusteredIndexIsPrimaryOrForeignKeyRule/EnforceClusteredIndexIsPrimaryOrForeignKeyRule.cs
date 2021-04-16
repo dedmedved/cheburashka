@@ -73,7 +73,7 @@ namespace Cheburashka
         {
             static List<string> ExtractLeadingEdgeColumns(IEnumerable<ModelRelationshipInstance> columnSpecifications)
             {
-                List<string> LeadingEdgeIndexColumns = new List<string>();
+                List<string> LeadingEdgeIndexColumns = new();
                 foreach (var c in columnSpecifications)
                 {
                     string lastElement = c.ObjectName.Parts.Last();
@@ -88,7 +88,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -130,7 +130,7 @@ namespace Cheburashka
                 bool primaryKeyExists = (pks.Count > 0);
                 bool foreignKeyExists = (foreignkeyconstraints.Count > 0);
 
-                List<TSqlFragment> issues = new List<TSqlFragment>();
+                List<TSqlFragment> issues = new();
                 bool foundKeyThatMatchesACluster = false;
 
                 // only if all these conditions are true do we need to check for rule violations.
@@ -150,7 +150,7 @@ namespace Cheburashka
                         {
                             bool match = false;
                             {
-                                List<string> SortedLeadingEdgeIndexColumns = new List<string>();
+                                List<string> SortedLeadingEdgeIndexColumns = new();
 
                                 if (clusteredindexExists)
                                 {
@@ -205,7 +205,7 @@ namespace Cheburashka
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
                                 //List<string> LeadingEdgeIndexColumns = new List<string>();
-                                List<string> SortedLeadingEdgeIndexColumns = new List<string>();
+                                List<string> SortedLeadingEdgeIndexColumns = new();
 
                                 if (clusteredindexExists)
                                 {
@@ -308,7 +308,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

@@ -149,7 +149,7 @@ namespace Cheburashka
                     if (counts[key] == 0)
                     {
                         SqlRuleProblem problem =
-                            new SqlRuleProblem(
+                            new(
                                 string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                                 , modelElement
                                 , sqlFragment);
@@ -161,7 +161,7 @@ namespace Cheburashka
                 else
                 {
                     SqlRuleProblem problem =
-                        new SqlRuleProblem(
+                        new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);

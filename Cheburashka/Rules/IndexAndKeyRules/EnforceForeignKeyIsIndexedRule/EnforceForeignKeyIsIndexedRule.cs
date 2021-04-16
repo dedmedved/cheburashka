@@ -69,7 +69,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
@@ -200,7 +200,7 @@ namespace Cheburashka
                     Index.Columns, DacQueryScopes.UserDefined);
                 var clustered = (bool) index.GetProperty(Index.Clustered);
 
-                List<string> leadingEdgeIndexColumns = new List<string>();
+                List<string> leadingEdgeIndexColumns = new();
                 leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                 foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
@@ -217,7 +217,7 @@ namespace Cheburashka
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
 
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
@@ -235,7 +235,7 @@ namespace Cheburashka
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
 
-                    List<string> leadingEdgeIndexColumns = new List<string>();
+                    List<string> leadingEdgeIndexColumns = new();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
@@ -254,7 +254,7 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
                 SqlRuleProblem problem =
-                    new SqlRuleProblem(
+                    new(
                         string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
@@ -296,7 +296,7 @@ namespace Cheburashka
                     && matchedPos.Count - 1 == matchedPos.Max()
                     ) {
                     string[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
-                    List<string> unMatchedForeignKeyColumns = new List<string>();
+                    List<string> unMatchedForeignKeyColumns = new();
                     for (int i = 0; i < allPos.Count; i++) {
                         if (allPos[i] == -1) {
                             unMatchedForeignKeyColumns.Add(arForeignKeyColumns[i]);

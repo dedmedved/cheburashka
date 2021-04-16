@@ -40,10 +40,10 @@ namespace Cheburashka
                  (string.IsNullOrEmpty(node.Variable.Name))
                )
            {
-               if (node.ExecutableEntity is ExecutableProcedureReference &&
-                   ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference != null)
+                if (node.ExecutableEntity is ExecutableProcedureReference reference &&
+                   reference.ProcedureReference != null)
                {
-                   TSqlFragment pr = ((ExecutableProcedureReference)node.ExecutableEntity).ProcedureReference;
+                   TSqlFragment pr = reference.ProcedureReference;
                    string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
                    //TSqlParserToken name = pr.ScriptTokenStream[pr.LastTokenIndex];
                    if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))

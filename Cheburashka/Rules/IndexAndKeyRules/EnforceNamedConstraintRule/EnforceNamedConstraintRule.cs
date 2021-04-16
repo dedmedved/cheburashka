@@ -93,7 +93,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             try
             {
@@ -116,14 +116,14 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(model);
 
                 // visitor to get the occurrences of constraints we want to be named
-                EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new EnforceNamedConstraintVisitor();
+                EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new();
                 sqlFragment.Accept(enforceNamedConstraintVisitor);
                 List<ConstraintDefinition>
                     constraints = enforceNamedConstraintVisitor.Constraints; //.Cast<TSqlFragment>().ToList();
 
                 // visitor to get the occurrences of table variable declarations we are not interested in 
                 EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor =
-                    new EnforceNamedConstraintDeclareTableVisitor();
+                    new();
                 sqlFragment.Accept(enforceNamedConstraintDeclareTableVisitor);
                 List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
 
