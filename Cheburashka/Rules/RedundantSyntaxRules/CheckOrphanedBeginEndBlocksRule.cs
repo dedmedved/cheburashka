@@ -96,25 +96,17 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-
             List<BeginEndBlockStatement> problemBegins = new() ;
 
-            StatementList code;
-
-            code = (sqlFragment as CreateProcedureStatement)?.StatementList;
-            if ( code is null ) {
-                code = (sqlFragment as CreateFunctionStatement)?.StatementList;
-            }
-            if (code is null)
-            {
-                code = (sqlFragment as CreateTriggerStatement)?.StatementList;
-            }
+            var code =  (sqlFragment as CreateProcedureStatement)?.StatementList 
+                               ?? (sqlFragment as CreateFunctionStatement)?.StatementList
+                               ?? (sqlFragment as CreateTriggerStatement)?.StatementList;
 
             if (! (code is null)) // inline functions have no statement list
             {
-                foreach (var x in code.Statements)
+                foreach (var sqlStatement in code.Statements)
                 {
-                    problemBegins.AddRange(InvalidUseOfBegin(true, x));
+                    problemBegins.AddRange(InvalidUseOfBegin(true, sqlStatement));
                 }
 
                 // Create problems for each begin found in the wrong place 
@@ -139,35 +131,29 @@ namespace Cheburashka
 
             switch (code)
             {
-                case BeginEndBlockStatement:
-                    var begin_code = code as BeginEndBlockStatement;
-                    if (! precedingControlStatement) {
-                        problemBegins.Add(begin_code);
-                    }
-                    foreach (TSqlStatement s in begin_code.StatementList.Statements)
+                case BeginEndBlockStatement statement:
+                    if (!precedingControlStatement) problemBegins.Add(statement);
+                    foreach (TSqlStatement s in statement.StatementList.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
                     };
                     break;
-                case TryCatchStatement:
-                    var trycatch_code = code as TryCatchStatement;
-                    foreach (TSqlStatement s in trycatch_code.TryStatements.Statements)
+                case TryCatchStatement statement:
+                    foreach (TSqlStatement s in statement.TryStatements.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
                     };
-                    foreach (TSqlStatement s in trycatch_code.CatchStatements.Statements)
+                    foreach (TSqlStatement s in statement.CatchStatements.Statements)
                     {
-                        problemBegins.AddRange(InvalidUseOfBegin(false,s));
+                        problemBegins.AddRange(InvalidUseOfBegin(false, s));
                     };
                     break;
-                case IfStatement:        // can only be true at first level of code in an sp, but that will do.
-                    var if_code = code as IfStatement;
-                    problemBegins.AddRange(InvalidUseOfBegin(true,if_code.ThenStatement));
-                    problemBegins.AddRange(InvalidUseOfBegin(true,if_code.ElseStatement));
+                case IfStatement statement:        
+                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.ThenStatement));
+                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.ElseStatement));
                     break;
-                case WhileStatement:
-                    var while_code = code as WhileStatement;
-                    problemBegins.AddRange(InvalidUseOfBegin(true, while_code.Statement));
+                case WhileStatement statement:
+                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.Statement));
                     break;
             }
             return problemBegins;

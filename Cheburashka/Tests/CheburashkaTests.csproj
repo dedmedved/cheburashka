@@ -968,6 +968,18 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithDoubledBrackets.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithDoubledBrackets.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\DatabaseTriggerWithDoubledBrackets.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\CheckUnnecessaryBracketsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\ProcedureWithAlterColumn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
