@@ -403,7 +403,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extra brackets found in {0}..
+        ///   Looks up a localized string similar to Unnecessary brackets found in {0}..
         /// </summary>
         internal static string CheckUnnecessaryBrackets_ProblemDescription {
             get {
@@ -412,7 +412,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extra brackets are unnecessary..
+        ///   Looks up a localized string similar to Unnecessary bracketing..
         /// </summary>
         internal static string CheckUnnecessaryBrackets_RuleName {
             get {

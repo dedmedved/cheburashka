@@ -968,6 +968,9 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithIfAndWhileWithBrackets.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithDoubledBrackets.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
