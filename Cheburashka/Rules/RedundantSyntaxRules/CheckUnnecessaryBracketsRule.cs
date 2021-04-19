@@ -48,7 +48,7 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0038: Extra brackets are unnecessary."
+        /// shown as "DM0038: Unnecessary bracketing."
         /// </summary>
         public const string RuleId = RuleConstants.CheckUnnecessaryBrackets_RuleId;
 
@@ -108,6 +108,10 @@ namespace Cheburashka
             sqlFragment.Accept(qryVisitor);
             IList<TSqlFragment> qryUnnecessaryBrackets = qryVisitor.UnnecessaryBrackets;
 
+            UnnecessaryControlExpressionParenthesisVisitor ctrlVisitor = new();
+            sqlFragment.Accept(ctrlVisitor);
+            IList<TSqlFragment> ctrlUnnecessaryBrackets = ctrlVisitor.UnnecessaryBrackets;
+
             
 
             foreach (var unnecessaryBracket in unnecessaryBrackets)
@@ -127,6 +131,14 @@ namespace Cheburashka
                 ));
             }
             foreach (var unnecessaryBracket in qryUnnecessaryBrackets)
+            {
+                problems.Add(new SqlRuleProblem(
+                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    , modelElement
+                    , unnecessaryBracket
+                ));
+            }
+            foreach (var unnecessaryBracket in ctrlUnnecessaryBrackets)
             {
                 problems.Add(new SqlRuleProblem(
                     string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)

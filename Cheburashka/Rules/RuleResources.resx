@@ -232,10 +232,10 @@
     <value>Unique constraints and indexes shouldn't be over-constrained.</value>
   </data>
   <data name="CheckUnnecessaryBrackets_ProblemDescription" xml:space="preserve">
-    <value>Extra brackets found in {0}.</value>
+    <value>Unnecessary brackets found in {0}.</value>
   </data>
   <data name="CheckUnnecessaryBrackets_RuleName" xml:space="preserve">
-    <value>Extra brackets are unnecessary.</value>
+    <value>Unnecessary bracketing.</value>
   </data>
   <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription" xml:space="preserve">
     <value>Permanent, statically defined table, constraint or index is altered by code in {0}.This may make the database inconsistent with the project.</value>
