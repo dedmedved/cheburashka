@@ -147,7 +147,11 @@
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
     <Compile Include="IndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintVisitor.cs" />
     <Compile Include="CategoryRelationalDesignRules\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule.cs" />
-    <Compile Include="RedundantSyntax\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="RedundantSyntaxVisitors\UnnecessaryQueryParenthesisExpressionVisitor.cs" />
+    <Compile Include="RedundantSyntaxVisitors\UnnecessaryParenthesisExpressionVisitor.cs" />
+    <Compile Include="RedundantSyntaxVisitors\UnnecessaryBooleanParenthesisExpressionVisitor.cs" />
+    <Compile Include="RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
+    <Compile Include="RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
     <Compile Include="SelectSetVariable\SelectSetVariableVisitor.cs" />
     <Compile Include="BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="BasicRules\AvoidDirectUseOfRowcountRule.cs" />

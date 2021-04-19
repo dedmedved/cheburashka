@@ -1,0 +1,108 @@
+Problem description: Extra brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 16
+Start column: 40
+========end of problem========
+
+Problem description: Extra brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 18
+Start column: 55
+========end of problem========
+
+Problem description: Extra brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 19
+Start column: 47
+========end of problem========
+
+Problem description: Extra brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 20
+Start column: 40
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 15
+Start column: 40
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 17
+Start column: 55
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 18
+Start column: 47
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 19
+Start column: 40
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 13
+Start column: 47
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 15
+Start column: 62
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 16
+Start column: 54
+========end of problem========
+
+Problem description: Extra brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 17
+Start column: 47
+========end of problem========
+
