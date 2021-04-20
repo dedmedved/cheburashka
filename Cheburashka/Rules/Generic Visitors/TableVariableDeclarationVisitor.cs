@@ -32,7 +32,7 @@ namespace Cheburashka
             TableVariableDeclarations = new List<Identifier>();
         }
 
-        public IList<Identifier> TableVariableDeclarations { get; private set; }
+        public IList<Identifier> TableVariableDeclarations { get; }
 
         public override void ExplicitVisit(DeclareTableVariableBody node)
         {

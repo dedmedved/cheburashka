@@ -147,7 +147,7 @@ namespace Cheburashka
                             }
                             else return false;
                         }
-                        else { return false; };
+                        else { return false; }
                     case ReturnStatement _:
                         continue;
                     case SetCommandStatement _:

@@ -34,7 +34,7 @@ namespace Cheburashka
             CteUtilFragments = new List<CteUtil>();
         }
 
-        public List<CteUtil> CteUtilFragments { get; private set; }
+        public List<CteUtil> CteUtilFragments { get; }
 
         public override void ExplicitVisit(UpdateStatement node)
         {
@@ -45,7 +45,8 @@ namespace Cheburashka
                 foreach (var cte in node.WithCtesAndXmlNamespaces.CommonTableExpressions)
                 {
                     target.Add(cte.ExpressionName);
-                };
+                }
+
                 CteUtilFragments.Add(target);
             }
         }

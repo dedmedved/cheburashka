@@ -33,10 +33,7 @@ namespace Cheburashka
         {
             _objects = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> Objects
-        {
-            get { return _objects; }
-        }
+        public List<TSqlFragment> Objects => _objects;
 
         public override void ExplicitVisit(DeclareTableVariableStatement node)
         {

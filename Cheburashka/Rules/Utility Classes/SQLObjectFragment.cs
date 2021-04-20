@@ -22,7 +22,7 @@
 
 namespace Cheburashka
 {
-    abstract public class SqlObjectFragment
+    public abstract class SqlObjectFragment
     {
         // ReSharper disable InconsistentNaming
         // ReSharper restore InconsistentNaming

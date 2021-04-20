@@ -136,17 +136,17 @@ namespace Cheburashka
                     foreach (TSqlStatement s in statement.StatementList.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    };
+                    }
                     break;
                 case TryCatchStatement statement:
                     foreach (TSqlStatement s in statement.TryStatements.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    };
+                    }
                     foreach (TSqlStatement s in statement.CatchStatements.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    };
+                    }
                     break;
                 case IfStatement statement:        
                     problemBegins.AddRange(InvalidUseOfBegin(true, statement.ThenStatement));

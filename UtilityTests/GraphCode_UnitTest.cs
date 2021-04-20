@@ -25,7 +25,7 @@ namespace UtilityTests
                 File.WriteAllText(output, dot);
 
                 // assumes dot.exe is on the path:
-                var args = string.Format(@"{0} -Tjpg -O", output);
+                var args = $@"{output} -Tjpg -O";
                 System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Graphviz2.38\bin\dot.exe", args);
                 return output;
             }

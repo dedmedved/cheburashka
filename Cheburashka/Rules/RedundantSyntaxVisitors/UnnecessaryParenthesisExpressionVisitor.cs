@@ -28,18 +28,17 @@ namespace Cheburashka
     {
         public UnnecessaryParenthesisExpressionVisitor()
         {
-            UnnecessaryBrackets = new List<ParenthesisExpression>();
+            UnnecessaryBrackets = new List<TSqlFragment>();
         }
 
-        public IList<ParenthesisExpression> UnnecessaryBrackets { get; }
+        public IList<TSqlFragment> UnnecessaryBrackets { get; }
 
         public override void ExplicitVisit(ParenthesisExpression node)
         {
             if (node.Expression is ParenthesisExpression
-                || node.Expression is ExistsPredicate
                 )
-                {
-                    UnnecessaryBrackets.Add(node);
+            {
+                UnnecessaryBrackets.Add(node);
             }
             node.AcceptChildren(this);
         }

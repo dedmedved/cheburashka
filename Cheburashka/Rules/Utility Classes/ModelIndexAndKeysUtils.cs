@@ -52,7 +52,7 @@ namespace Cheburashka
             var fks = new List<TSqlObject>();
             foreach (var fk in DMVSettings.GetForeignKeys)
             { 
-                if ( fk.Name == null || (fk.Name.ExternalParts == null || fk.Name.ExternalParts.Count == 0))
+                if ( fk.Name?.ExternalParts == null || fk.Name.ExternalParts.Count == 0)
                 {
 //                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.ForeignTable).FirstOrDefault();
                     TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.Host).FirstOrDefault();
@@ -72,7 +72,7 @@ namespace Cheburashka
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
-                if (pk.Name == null || (pk.Name.ExternalParts == null || pk.Name.ExternalParts.Count == 0))
+                if (pk.Name?.ExternalParts == null || pk.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = pk.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -91,7 +91,7 @@ namespace Cheburashka
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
-                if (pk.Name == null || (pk.Name.ExternalParts == null || pk.Name.ExternalParts.Count == 0))
+                if (pk.Name?.ExternalParts == null || pk.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = pk.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -112,7 +112,7 @@ namespace Cheburashka
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
             {
-                if (index.Name == null || (index.Name.ExternalParts == null || index.Name.ExternalParts.Count == 0))
+                if (index.Name?.ExternalParts == null || index.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -130,7 +130,7 @@ namespace Cheburashka
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
             {
-                if (index.Name == null || (index.Name.ExternalParts == null || index.Name.ExternalParts.Count == 0))
+                if (index.Name?.ExternalParts == null || index.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -150,7 +150,7 @@ namespace Cheburashka
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.Name == null || (unique_constraint.Name.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0))
+                if (unique_constraint.Name?.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -168,7 +168,7 @@ namespace Cheburashka
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.Name == null || (unique_constraint.Name.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0))
+                if (unique_constraint.Name?.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0)
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)

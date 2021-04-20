@@ -105,7 +105,7 @@ namespace Cheburashka
             //  Verify that the file exists first.
             if (!File.Exists(filePath))
             {
-                Debug.WriteLine(string.Format("Cannot find the file: '{0}'", filePath));
+                Debug.WriteLine($"Cannot find the file: '{filePath}'");
                 return string.Empty;
             }
 

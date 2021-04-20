@@ -24,21 +24,62 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class UnnecessaryBooleanParenthesisExpressionVisitor : TSqlConcreteFragmentVisitor
+    internal class UnnecessaryParenthesisVisitor : TSqlConcreteFragmentVisitor
     {
-        public UnnecessaryBooleanParenthesisExpressionVisitor()
+        public UnnecessaryParenthesisVisitor()
         {
             UnnecessaryBrackets = new List<TSqlFragment>();
         }
 
         public IList<TSqlFragment> UnnecessaryBrackets { get; }
 
+        public override void ExplicitVisit(ParenthesisExpression node)
+        {
+            if (node.Expression is ParenthesisExpression
+                )
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.AcceptChildren(this);
+        }
         public override void ExplicitVisit(BooleanParenthesisExpression node)
         {
-            if (node.Expression is ExistsPredicate 
+            if (node.Expression is ExistsPredicate
                 || node.Expression is BooleanParenthesisExpression
                 || node.Expression is BooleanComparisonExpression
             )
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(WhileStatement node)
+        {
+            if (node.Predicate is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.Predicate);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(IfStatement node)
+        {
+            if (node.Predicate is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.Predicate);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(QueryParenthesisExpression node)
+        {
+            if (node.QueryExpression is QueryParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(ScalarSubquery node)
+        {
+            if (node.QueryExpression is QueryParenthesisExpression)
             {
                 UnnecessaryBrackets.Add(node);
             }
