@@ -35,7 +35,11 @@ namespace Cheburashka
 
         public override void ExplicitVisit(BooleanParenthesisExpression node)
         {
-            if (node.Expression is BooleanBinaryExpression || node.Expression is BooleanParenthesisExpression) {
+            if (node.Expression is ExistsPredicate 
+                || node.Expression is BooleanParenthesisExpression
+                || node.Expression is BooleanComparisonExpression
+            )
+            {
                 UnnecessaryBrackets.Add(node);
             }
             node.AcceptChildren(this);
