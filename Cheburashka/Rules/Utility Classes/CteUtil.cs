@@ -45,7 +45,7 @@ namespace Cheburashka
 
 
         public List<Identifier> ExpressionNames { get; }
-        public List<string> ExpressionNamesAsStrings { get; private set; }
+        public List<string> ExpressionNamesAsStrings { get; }
 
 
         public void Add(Identifier identifier)

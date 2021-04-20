@@ -274,7 +274,7 @@ namespace Cheburashka
                                     elementName)
                                 , modelElement
                                 , sqlFragment);
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment) issue);
+                        RuleUtils.UpdateProblemPosition(modelElement, problem, issue);
                         problems.Add(problem);
                     }
                 }

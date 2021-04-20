@@ -32,7 +32,7 @@ namespace Cheburashka
             VariableDeclarations = new List<Identifier>();
         }
 
-        public IList<Identifier> VariableDeclarations { get; private set; }
+        public IList<Identifier> VariableDeclarations { get; }
 
         public override void ExplicitVisit(DeclareVariableElement node)
         {

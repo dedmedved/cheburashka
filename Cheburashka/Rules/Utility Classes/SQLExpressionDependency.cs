@@ -52,7 +52,7 @@ namespace Cheburashka
         public ReadOnlyCollection<VariableReference> Dependencies
         {
             //set { _dependencies = value; } // not used - yet - remove
-            get { return _dependencies.AsReadOnly(); } 
+            get => _dependencies.AsReadOnly();
         }
 
 

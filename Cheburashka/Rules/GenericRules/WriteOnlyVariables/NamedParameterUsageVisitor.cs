@@ -33,7 +33,7 @@ namespace Cheburashka
             NamedParameters = new List<VariableReference>();
         }
 
-        public IList<VariableReference> NamedParameters { get; private set; }
+        public IList<VariableReference> NamedParameters { get; }
 
         public override void ExplicitVisit(ExecuteParameter node)
         {

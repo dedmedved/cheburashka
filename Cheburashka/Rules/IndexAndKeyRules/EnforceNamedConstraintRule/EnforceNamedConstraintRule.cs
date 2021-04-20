@@ -134,14 +134,14 @@ namespace Cheburashka
 
                 // Create problems for each constraint wo a name
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                foreach (TSqlFragment issue in issues)
+                foreach (ConstraintDefinition issue in issues)
                 {
                     var problem = new SqlRuleProblem(
                         string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, (TSqlFragment) issue);
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, issue);
                     problems.Add(problem);
                 }
             }

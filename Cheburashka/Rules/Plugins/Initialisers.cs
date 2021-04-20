@@ -28,7 +28,7 @@ namespace Cheburashka
     {
         public static List<string> IgnorableReturnStatusStoredProcedures()
         {
-            return new List<string>();
+            return new();
         }
     }
 }

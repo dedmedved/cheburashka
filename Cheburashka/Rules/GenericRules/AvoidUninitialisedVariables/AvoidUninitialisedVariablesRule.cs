@@ -158,15 +158,15 @@ namespace Cheburashka
                     if (counts.ContainsKey(key) && (counts[key] >= 1) && (!writeCounts.ContainsKey(key)))
                         //                if (!(writeCounts.ContainsKey(key)))
                         {
-                        SqlRuleProblem problem =
-                            new(
-                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                , modelElement
-                                , sqlFragment);
+                            SqlRuleProblem problem =
+                                new(
+                                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                                    , modelElement
+                                    , sqlFragment);
 
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-                        problems.Add(problem);
-                    }
+                            RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+                            problems.Add(problem);
+                        }
                 }
             }
             catch (Exception e) {

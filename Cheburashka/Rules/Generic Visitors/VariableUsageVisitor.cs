@@ -38,7 +38,7 @@ namespace Cheburashka
             VariableReferences = new List<VariableReference>();
         }
 
-        public IList<VariableReference> VariableReferences { get; private set; }
+        public IList<VariableReference> VariableReferences { get; }
 
         public override void ExplicitVisit(VariableReference node)
         {

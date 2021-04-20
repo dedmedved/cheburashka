@@ -34,7 +34,7 @@ namespace Cheburashka
             SetVariables = new List<SQLExpressionDependency>();
         }
 
-        public List<SQLExpressionDependency> SetVariables { get; private set; }
+        public List<SQLExpressionDependency> SetVariables { get; }
 
         public override void ExplicitVisit(SetVariableStatement node)
         {

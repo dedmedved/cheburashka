@@ -50,7 +50,8 @@ namespace Cheburashka
                 foreach (var cte in node.WithCtesAndXmlNamespaces.CommonTableExpressions)
                 {
                     target.Add(cte.ExpressionName);
-                };
+                }
+
                 _targets.Add(target);
             }
         }
