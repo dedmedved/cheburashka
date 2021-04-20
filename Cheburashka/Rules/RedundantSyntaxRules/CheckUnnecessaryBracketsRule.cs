@@ -97,23 +97,11 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of brackets surrounding other brackets
-            UnnecessaryParenthesisExpressionVisitor visitor = new();
+            UnnecessaryParenthesisVisitor visitor = new();
             sqlFragment.Accept(visitor);
             IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
 
-            UnnecessaryBooleanParenthesisExpressionVisitor boolVisitor = new();
-            sqlFragment.Accept(boolVisitor);
-            IList<TSqlFragment> boolUnnecessaryBrackets = boolVisitor.UnnecessaryBrackets;
-
-            UnnecessaryQueryParenthesisExpressionVisitor qryVisitor = new();
-            sqlFragment.Accept(qryVisitor);
-            IList<TSqlFragment> qryUnnecessaryBrackets = qryVisitor.UnnecessaryBrackets;
-
-            UnnecessaryControlExpressionParenthesisVisitor ctrlVisitor = new();
-            sqlFragment.Accept(ctrlVisitor);
-            IList<TSqlFragment> ctrlUnnecessaryBrackets = ctrlVisitor.UnnecessaryBrackets;
-
-            var brackets = unnecessaryBrackets.Union(boolUnnecessaryBrackets.Union(qryUnnecessaryBrackets.Union(ctrlUnnecessaryBrackets)));
+            var brackets = unnecessaryBrackets.Distinct(); 
 
             foreach (var unnecessaryBracket in brackets)
             {
