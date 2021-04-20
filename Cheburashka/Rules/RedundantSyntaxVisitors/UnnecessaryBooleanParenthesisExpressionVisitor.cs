@@ -28,10 +28,10 @@ namespace Cheburashka
     {
         public UnnecessaryBooleanParenthesisExpressionVisitor()
         {
-            UnnecessaryBrackets = new List<BooleanParenthesisExpression>();
+            UnnecessaryBrackets = new List<TSqlFragment>();
         }
 
-        public IList<BooleanParenthesisExpression> UnnecessaryBrackets { get; }
+        public IList<TSqlFragment> UnnecessaryBrackets { get; }
 
         public override void ExplicitVisit(BooleanParenthesisExpression node)
         {

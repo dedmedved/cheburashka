@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -98,11 +99,11 @@ namespace Cheburashka
             // visitor to get the occurrences of brackets surrounding other brackets
             UnnecessaryParenthesisExpressionVisitor visitor = new();
             sqlFragment.Accept(visitor);
-            IList<ParenthesisExpression> unnecessaryBrackets = visitor.UnnecessaryBrackets;
+            IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
 
             UnnecessaryBooleanParenthesisExpressionVisitor boolVisitor = new();
             sqlFragment.Accept(boolVisitor);
-            IList<BooleanParenthesisExpression> boolUnnecessaryBrackets = boolVisitor.UnnecessaryBrackets;
+            IList<TSqlFragment> boolUnnecessaryBrackets = boolVisitor.UnnecessaryBrackets;
 
             UnnecessaryQueryParenthesisExpressionVisitor qryVisitor = new();
             sqlFragment.Accept(qryVisitor);
@@ -112,33 +113,9 @@ namespace Cheburashka
             sqlFragment.Accept(ctrlVisitor);
             IList<TSqlFragment> ctrlUnnecessaryBrackets = ctrlVisitor.UnnecessaryBrackets;
 
-            
+            var brackets = unnecessaryBrackets.Union(boolUnnecessaryBrackets.Union(qryUnnecessaryBrackets.Union(ctrlUnnecessaryBrackets)));
 
-            foreach (var unnecessaryBracket in unnecessaryBrackets)
-            {
-                problems.Add(new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , unnecessaryBracket
-                ));
-            }
-            foreach (var unnecessaryBracket in boolUnnecessaryBrackets)
-            {
-                problems.Add(new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , unnecessaryBracket
-                ));
-            }
-            foreach (var unnecessaryBracket in qryUnnecessaryBrackets)
-            {
-                problems.Add(new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , unnecessaryBracket
-                ));
-            }
-            foreach (var unnecessaryBracket in ctrlUnnecessaryBrackets)
+            foreach (var unnecessaryBracket in brackets)
             {
                 problems.Add(new SqlRuleProblem(
                     string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
