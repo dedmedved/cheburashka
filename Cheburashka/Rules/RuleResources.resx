@@ -315,4 +315,10 @@
   <data name="EnforceTryCatch_RuleName" xml:space="preserve">
     <value>Triggers and non-simple Stored Procedures need at least one Try/Catch block.</value>
   </data>
+  <data name="EnforceVariableLengthDataSpecification_ProblemDescription" xml:space="preserve">
+    <value>Variable length datatype found with no length specification in {0}.</value>
+  </data>
+  <data name="EnforceVariableLengthDataSpecification_RuleName" xml:space="preserve">
+    <value>Don't rely on default values for variable length datatypes, other than DateTime2. </value>
+  </data>
 </root>

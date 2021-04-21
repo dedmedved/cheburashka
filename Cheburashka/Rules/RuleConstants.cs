@@ -67,6 +67,7 @@ namespace Cheburashka
         public const string CheckMultipleForeignKeysFromOneTable_RuleId                 = "Cheburashka.DM0036";
         public const string CheckOrphanedBeginEndBlocks_RuleId                          = "Cheburashka.DM0037";
         public const string CheckUnnecessaryBrackets_RuleId                             = "Cheburashka.DM0038";
+        public const string EnforceVariableLengthDataSpecification_RuleId               = "Cheburashka.DM0039";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -163,6 +164,9 @@ namespace Cheburashka
 
         public const string CheckUnnecessaryBrackets_RuleName                                       = "CheckUnnecessaryBrackets_RuleName";
         public const string CheckUnnecessaryBrackets_ProblemDescription                             = "CheckUnnecessaryBrackets_ProblemDescription";
+
+        public const string EnforceVariableLengthDataSpecification_RuleName                         = "EnforceVariableLengthDataSpecification_RuleName";
+        public const string EnforceVariableLengthDataSpecification_ProblemDescription               = "EnforceVariableLengthDataSpecification_ProblemDescription";
 
 
         /// <summary>

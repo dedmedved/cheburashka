@@ -653,5 +653,23 @@ namespace Cheburashka {
                 return ResourceManager.GetString("EnforceTryCatch_RuleName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable length datatype found with no length specification in {0}..
+        /// </summary>
+        internal static string EnforceVariableLengthDataSpecification_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceVariableLengthDataSpecification_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t rely on default values for variable length datatypes, other than DateTime2. .
+        /// </summary>
+        internal static string EnforceVariableLengthDataSpecification_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceVariableLengthDataSpecification_RuleName", resourceCulture);
+            }
+        }
     }
 }
