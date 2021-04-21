@@ -158,7 +158,7 @@ namespace Cheburashka
                     bool foundMoreConciseUniqueCondition = false;
                     foreach (var v in pks) // dummy loop - could only execute once.
                     {
-                        //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
+                        //if this object being checked is an index or unique constraint we already know it isn't the primary key so check the primary key for commonality
                         if (modelElement.ObjectType == UniqueConstraint.TypeClass ||
                             modelElement.ObjectType == Index.TypeClass)
                         {

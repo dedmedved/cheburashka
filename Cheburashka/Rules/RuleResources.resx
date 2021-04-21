@@ -199,7 +199,7 @@
     <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
   </data>
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_RuleName" xml:space="preserve">
-    <value>Apart from tables modelling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design.</value>
+    <value>Apart from tables modeling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design.</value>
   </data>
   <data name="CheckMultipleForeignKeysFromOneTable_ProblemDescription" xml:space="preserve">
     <value>Table with more than 5 Child Foreign Key relationships was found in {0}.</value>

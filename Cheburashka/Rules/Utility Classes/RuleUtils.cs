@@ -58,7 +58,7 @@ namespace Cheburashka
         /// </summary>
         /// <param name="modelElement">object the problem was found in</param>
         /// <param name="problem">problem found</param>
-        /// <param name="obj">object within the modelelement</param>
+        /// <param name="obj">object within the model element</param>
 //        public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, int offset, int length)
         public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, TSqlFragment obj)
         {

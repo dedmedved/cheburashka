@@ -173,7 +173,7 @@ namespace Cheburashka.Tests
             string dacpacDir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dacpacDir))
             {
-                Directory.CreateDirectory(dacpacDir);
+                Directory.CreateDirectory(dacpacDir ?? throw new InvalidOperationException());
             }
 
             DacPackageExtensions.BuildPackage(path, model, new PackageMetadata());
@@ -201,7 +201,7 @@ namespace Cheburashka.Tests
         {
             foreach (Tuple<string,string> tuple in TestScripts)
             {
-                // Item1 = script, Item2 = (logicl) source file name
+                // Item1 = script, Item2 = (logical) source file name
                 model.AddOrUpdateObjects(tuple.Item1, tuple.Item2, new TSqlObjectOptions());
             }
         }

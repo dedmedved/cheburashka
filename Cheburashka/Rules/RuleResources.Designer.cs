@@ -304,7 +304,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apart from tables modelling graph structures, and role-playing tables, it&apos;s unusual to find multiple relationships between two tables.  It may indicate a non-normal database design..
+        ///   Looks up a localized string similar to Apart from tables modeling graph structures, and role-playing tables, it&apos;s unusual to find multiple relationships between two tables.  It may indicate a non-normal database design..
         /// </summary>
         internal static string CheckMultipleForeignKeysBetweenTheSameTable_RuleName {
             get {
