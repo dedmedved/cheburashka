@@ -234,7 +234,7 @@ namespace Cheburashka
                         new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
-                            , sqlFragment);
+                            , issue);
 
                     problems.Add(problem);
                 }

@@ -37,10 +37,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<AlterTableAddTableElementStatement> Objects
-        {
-            get { return _objects; }
-        }
+        public List<AlterTableAddTableElementStatement> Objects => _objects;
+
         #endregion
 
         #region overrides

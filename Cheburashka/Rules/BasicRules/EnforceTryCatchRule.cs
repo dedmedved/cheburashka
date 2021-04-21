@@ -148,19 +148,19 @@ namespace Cheburashka
                             else return false;
                         }
                         else { return false; }
-                    case ReturnStatement _:
+                    case ReturnStatement:
                         continue;
-                    case SetCommandStatement _:
+                    case SetCommandStatement:
                         continue;
-                    case SetOnOffStatement _:
+                    case SetOnOffStatement:
                         continue;
-                    case SetTextSizeStatement _:
+                    case SetTextSizeStatement:
                         continue;
-                    case SetTransactionIsolationLevelStatement _:
+                    case SetTransactionIsolationLevelStatement:
                         continue;
-                    case SetRowCountStatement _:
+                    case SetRowCountStatement:
                         continue;
-                    case SetErrorLevelStatement _:
+                    case SetErrorLevelStatement:
                         continue;
                     default:
                         return false; 

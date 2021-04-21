@@ -422,8 +422,6 @@ namespace Cheburashka
 
         public int GetHashCode(VariableReference sql)
         {
-            //Check whether the object is null
-            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.FirstTokenIndex;
         }
@@ -448,9 +446,7 @@ namespace Cheburashka
 
         public int GetHashCode(Literal sql)
         {
-            //Check whether the object is null
-            return sql is null ? 0 : sql.FirstTokenIndex;
-            //Calculate the hash code for the product.
+            return sql.FirstTokenIndex;
         }
 
     }
@@ -474,8 +470,6 @@ namespace Cheburashka
 
         public int GetHashCode(ColumnWithSortOrder sql)
         {
-            //Check whether the object is null
-            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.FirstTokenIndex;
         }
@@ -500,8 +494,6 @@ namespace Cheburashka
 
         public int GetHashCode(string sql)
         {
-            //Check whether the object is null
-            if (sql is null) return 0;
             //Calculate the hash code for the product.
             return sql.GetHashCode();
         }

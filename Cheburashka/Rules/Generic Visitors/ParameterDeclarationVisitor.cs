@@ -38,10 +38,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public ReadOnlyCollection<ProcedureParameter> ParameterDeclarations
-        {
-            get { return _targets.AsReadOnly(); }
-        }
+        public ReadOnlyCollection<ProcedureParameter> ParameterDeclarations => _targets.AsReadOnly();
+
         #endregion
 
         #region overrides

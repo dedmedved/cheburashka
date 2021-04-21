@@ -49,13 +49,9 @@ namespace Cheburashka
         public TSqlFragment Context { get; set; }
         public string ContextClass { get; set; }
 
-        public ReadOnlyCollection<VariableReference> Dependencies
-        {
+        public ReadOnlyCollection<VariableReference> Dependencies =>
             //set { _dependencies = value; } // not used - yet - remove
-            get => _dependencies.AsReadOnly();
-        }
-
-
+            _dependencies.AsReadOnly();
 
 
         public void AddDependency(VariableReference variable)

@@ -36,10 +36,7 @@ namespace Cheburashka
             _targets = new List<CteUtil>();
         }
 
-        public List<CteUtil> CteUtilFragments
-        {
-            get { return _targets; }
-        }
+        public List<CteUtil> CteUtilFragments => _targets;
 
         public override void ExplicitVisit(SelectStatement node)
         {

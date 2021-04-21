@@ -312,7 +312,7 @@ namespace Cheburashka
                         new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
-                            , sqlFragment);
+                            , issue);
 
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);
