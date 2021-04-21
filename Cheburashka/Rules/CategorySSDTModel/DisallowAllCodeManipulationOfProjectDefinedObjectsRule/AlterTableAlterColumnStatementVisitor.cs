@@ -37,10 +37,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<AlterTableAlterColumnStatement> Objects
-        {
-            get { return _objects; }
-        }
+        public List<AlterTableAlterColumnStatement> Objects => _objects;
+
         #endregion
 
         #region overrides

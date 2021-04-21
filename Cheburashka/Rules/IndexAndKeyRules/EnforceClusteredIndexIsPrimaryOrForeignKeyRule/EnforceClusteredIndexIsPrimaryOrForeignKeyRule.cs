@@ -259,29 +259,30 @@ namespace Cheburashka
                                     }
                                 }
 
-                                // now check the foreign key columns against the relevant clustered 'index''s columns
-                                foreach (var fc in foreignkeyconstraints)
-                                {
-                                    var columnSpecifications =
-                                        fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns,
-                                            DacQueryScopes.UserDefined);
-                                    // consider a foreign key to be clustered if all its columns appear as the first n columns in a
-                                    // clustered index, clustered unique constraint or clustered primary key constraint.
-                                    // nb a primary key can be a foreign key too when modelling 1:1 relationships.
-                                    List<string> SortedForeignKeyColumns = columnSpecifications
-                                        .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
-                                        .Select(n => n.ObjectName.Parts[2]).ToList();
-                                    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
-                                    {
-                                        List<string> leadingCols = SortedLeadingEdgeIndexColumns
-                                            .Take(SortedForeignKeyColumns.Count).ToList();
-                                        if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
-                                        {
-                                            match = true;
-                                            break;
-                                        }
-                                    }
-                                }
+                                // Duplicate code
+                                //// now check the foreign key columns against the relevant clustered 'index''s columns
+                                //foreach (var fc in foreignkeyconstraints)
+                                //{
+                                //    var columnSpecifications =
+                                //        fc.GetReferencedRelationshipInstances(ForeignKeyConstraint.Columns,
+                                //            DacQueryScopes.UserDefined);
+                                //    // consider a foreign key to be clustered if all its columns appear as the first n columns in a
+                                //    // clustered index, clustered unique constraint or clustered primary key constraint.
+                                //    // nb a primary key can be a foreign key too when modeling 1:1 relationships.
+                                //    List<string> SortedForeignKeyColumns = columnSpecifications
+                                //        .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
+                                //        .Select(n => n.ObjectName.Parts[2]).ToList();
+                                //    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                //    {
+                                //        List<string> leadingCols = SortedLeadingEdgeIndexColumns
+                                //            .Take(SortedForeignKeyColumns.Count).ToList();
+                                //        if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
+                                //        {
+                                //            match = true;
+                                //            break;
+                                //        }
+                                //    }
+                                //}
                             }
 
                             foundKeyThatMatchesACluster = match;
@@ -311,7 +312,7 @@ namespace Cheburashka
                         new(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
-                            , sqlFragment);
+                            , issue);
 
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);

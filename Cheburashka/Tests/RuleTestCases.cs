@@ -686,7 +686,7 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidUnitialisedVariables_BIN()
+        public void AvoidUninitialisedVariables_BIN()
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
@@ -711,7 +711,7 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidUnitialisedVariables_CI_AI()
+        public void AvoidUninitialisedVariables_CI_AI()
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
@@ -736,7 +736,7 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidUnitialisedVariables_MixedCaseVariableNames_CI_AI()        // NO _BIN test cases for obvious reasons
+        public void AvoidUninitialisedVariables_MixedCaseVariableNames_CI_AI()        // NO _BIN test cases for obvious reasons
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,

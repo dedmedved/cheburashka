@@ -186,7 +186,7 @@ namespace Cheburashka
                 foreach (TSqlFragment issue in issues)
                 {
                     SqlRuleProblem problem =
-                        new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName), modelElement, sqlFragment);
+                        new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName), modelElement, issue);
 
                     //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
                     problems.Add(problem);

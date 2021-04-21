@@ -38,10 +38,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<TSqlFragment> Objects
-        {
-            get { return _objects; }
-        }
+        public List<TSqlFragment> Objects => _objects;
+
         #endregion
 
         #region overrides

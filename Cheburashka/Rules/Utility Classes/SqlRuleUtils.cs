@@ -134,7 +134,6 @@ namespace Cheburashka
         {
             IEnumerable<TSqlObject> allSysObjects = model.GetObjects(DacQueryScopes.BuiltIn, DataType.TypeClass);
             SqlRuleUtils._builtinDataTypes = allSysObjects.Select(n => n.Name.Parts[0]).ToList();
-            return;
         }
 
         /// <summary>
@@ -165,7 +164,6 @@ namespace Cheburashka
             IEnumerable<TSqlObject> allSysObjects      = model.GetObjects(DacQueryScopes.System, Procedure.TypeClass);
             SqlRuleUtils._ss2008R2SystemObjectNames    = allSysObjects.Select(n => n.Name.Parts[1]).ToList();
             _hashSs2008R2SystemObjectNames             = new HashSet<string>(_ss2008R2SystemObjectNames, SqlComparer.Comparer);
-            return;
         }
 
         /// <summary>

@@ -19,17 +19,13 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.IO;
 
-using Cheburashka;
 
 namespace Cheburashka
 {
@@ -162,7 +158,7 @@ namespace Cheburashka
                     bool foundMoreConciseUniqueCondition = false;
                     foreach (var v in pks) // dummy loop - could only execute once.
                     {
-                        //if this object being checked is an index or unique constraint we already know it isnt the primary key so check the primary key for commonality
+                        //if this object being checked is an index or unique constraint we already know it isn't the primary key so check the primary key for commonality
                         if (modelElement.ObjectType == UniqueConstraint.TypeClass ||
                             modelElement.ObjectType == Index.TypeClass)
                         {

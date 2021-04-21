@@ -37,10 +37,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<ColumnWithSortOrder> Objects
-        {
-            get { return _objects; }
-        }
+        public List<ColumnWithSortOrder> Objects => _objects;
+
         #endregion
 
         #region overrides

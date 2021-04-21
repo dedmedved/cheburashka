@@ -37,10 +37,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<AlterIndexStatement> Objects
-        {
-            get { return _objects; }
-        }
+        public List<AlterIndexStatement> Objects => _objects;
+
         #endregion
 
         #region overrides

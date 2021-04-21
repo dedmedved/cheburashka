@@ -37,10 +37,8 @@ namespace Cheburashka
         #endregion
 
         #region properties
-        public List<AlterTableConstraintModificationStatement> Objects
-        {
-            get { return _objects; }
-        }
+        public List<AlterTableConstraintModificationStatement> Objects => _objects;
+
         #endregion
 
         #region overrides

@@ -74,7 +74,7 @@ namespace Cheburashka.Tests
         {
             var testAssembly = this.GetType().Assembly;
             string baseFolder = Path.GetDirectoryName(testAssembly.Location);
-            return Path.Combine(baseFolder, TestScriptsFolder, testName);
+            return Path.Combine(baseFolder ?? throw new InvalidOperationException(), TestScriptsFolder, testName);
         }
 
         protected string ScriptsFolder

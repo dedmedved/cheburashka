@@ -101,7 +101,7 @@ namespace Cheburashka
             sqlFragment.Accept(visitor);
             IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
 
-            // Create problems for each uncaptured execute found 
+            // Create problems for each non-captured execute found 
             foreach (var executeSpecification in executeSpecifications)
             {
                 var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)

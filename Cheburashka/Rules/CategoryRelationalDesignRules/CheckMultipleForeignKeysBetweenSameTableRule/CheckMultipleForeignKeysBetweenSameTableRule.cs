@@ -55,7 +55,7 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0035: Apart from tables modelling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design."
+        /// shown as "DM0035: Apart from tables modeling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design."
         /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.CheckMultipleForeignKeysBetweenTheSameTable_RuleId;

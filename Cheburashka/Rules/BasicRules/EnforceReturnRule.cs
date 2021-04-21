@@ -138,7 +138,7 @@ namespace Cheburashka
                         return InvalidUseOfReturn(statement.StatementList);
                     case BeginEndBlockStatement statement:
                         return InvalidUseOfReturn(statement.StatementList);
-                    case ReturnStatement _:
+                    case ReturnStatement:
                         return false;
                 }
             }

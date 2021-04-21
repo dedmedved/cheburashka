@@ -16,6 +16,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using System;
 using System.IO;
 
 namespace Cheburashka.Tests
@@ -29,7 +30,7 @@ namespace Cheburashka.Tests
                 string directory = Path.GetDirectoryName(filename);
                 if (!Directory.Exists(directory))
                 {
-                    Directory.CreateDirectory(directory);
+                    Directory.CreateDirectory(directory ?? throw new InvalidOperationException());
                 }
                 StreamWriter streamWriter;
                 FileStream fileStream;
