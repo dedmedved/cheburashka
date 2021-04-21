@@ -45,7 +45,7 @@ namespace Cheburashka
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             // has SchemaObjectName
-            _objects = false || node.Clustered == true ;
+            _objects = node.Clustered == true ;
         }
         #endregion
 
