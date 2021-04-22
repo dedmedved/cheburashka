@@ -213,17 +213,20 @@ namespace Cheburashka
                         bool skipExternalName = false;
                         if (!(dropIndexClause is not DropIndexClause dic))
                         {
-                            if (((dic.Object.DatabaseIdentifier != null
-                                  && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
-                                 )
-                                 || dic.Object.DatabaseIdentifier == null
-                                )
-                                && ((dic.Object.ServerIdentifier != null
-                                     && IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
-                                    )
-                                    || dic.Object.ServerIdentifier == null
-                                )
-                            )
+                            //if (((dic.Object.DatabaseIdentifier != null
+                            //      && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
+                            //     )
+                            //     || dic.Object.DatabaseIdentifier == null
+                            //    )
+                            //    && ((dic.Object.ServerIdentifier != null
+                            //         && IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
+                            //        )
+                            //        || dic.Object.ServerIdentifier == null
+                            //    )
+                            if (LocalObjectName(dic.Object.ServerIdentifier, dic.Object.DatabaseIdentifier))
+                            //IsNullOrEmpty(dic.Object.DatabaseIdentifier?.Value)
+                            //    && IsNullOrEmpty(dic.Object.ServerIdentifier?.Value)
+                            //)
                             {
                                 skipExternalName = true;
                             }
@@ -238,16 +241,19 @@ namespace Cheburashka
                         {
                             if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
                             {
-                                if (((olddic.Index.DatabaseIdentifier != null
-                                      && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
-                                     )
-                                     || olddic.Index.DatabaseIdentifier == null
-                                    )
-                                    && ((olddic.Index.ServerIdentifier != null
-                                         && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
-                                        )
-                                        || olddic.Index.ServerIdentifier == null
-                                    )
+                                //if (((olddic.Index.DatabaseIdentifier != null
+                                //      && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
+                                //     )
+                                //     || olddic.Index.DatabaseIdentifier == null
+                                //    )
+                                //    && ((olddic.Index.ServerIdentifier != null
+                                //         && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
+                                //        )
+                                //        || olddic.Index.ServerIdentifier == null
+                                //    )
+                                //)
+                                if (IsNullOrEmpty(olddic.Index.DatabaseIdentifier?.Value)
+                                    && IsNullOrEmpty(olddic.Index.ServerIdentifier?.Value)
                                 )
                                 {
                                     skipExternalName = true;
@@ -281,18 +287,21 @@ namespace Cheburashka
                 {
                     if (alterIndexStatement.Name.Value != null
                         // internal objects only
-                        && ((alterIndexStatement.OnName.DatabaseIdentifier != null
-                             && IsNullOrEmpty(alterIndexStatement.OnName.DatabaseIdentifier.Value)
-                            )
-                            || alterIndexStatement.OnName.DatabaseIdentifier == null
-                        )
-                        && ((alterIndexStatement.OnName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterIndexStatement.OnName.ServerIdentifier.Value)
-                            )
-                            || alterIndexStatement.OnName.ServerIdentifier == null
+                        //&& ((alterIndexStatement.OnName.DatabaseIdentifier != null
+                        //     && IsNullOrEmpty(alterIndexStatement.OnName.DatabaseIdentifier.Value)
+                        //    )
+                        //    || alterIndexStatement.OnName.DatabaseIdentifier == null
+                        //)
+                        //&& ((alterIndexStatement.OnName.ServerIdentifier != null
+                        //     && IsNullOrEmpty(alterIndexStatement.OnName.ServerIdentifier.Value)
+                        //    )
+                        //    || alterIndexStatement.OnName.ServerIdentifier == null
+                        //)
+                    && (IsNullOrEmpty(alterIndexStatement.OnName.DatabaseIdentifier?.Value)
+                        && IsNullOrEmpty(alterIndexStatement.OnName.ServerIdentifier?.Value)
                         )
                     )
-                    {
+                        {
                         List<TSqlObject> ixs = allIndexes
                             .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2],
                                             alterIndexStatement.Name.Value)
@@ -312,19 +321,21 @@ namespace Cheburashka
                 foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements)
                 {
                     // internal objects only
-                    if (((alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier
-                              .Value)
-                         )
-                         || alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName
-                                 .ServerIdentifier
-                                 .Value)
-                            )
-                            || alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier == null
-                        )
+                    //if (((alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier != null
+                    //      && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier
+                    //          .Value)
+                    //     )
+                    //     || alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier == null
+                    //    )
+                    //    && ((alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier != null
+                    //         && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName
+                    //             .ServerIdentifier
+                    //             .Value)
+                    //        )
+                    //        || alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier == null
+                    //    )
+                    if (IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier?.Value)
+                        && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier?.Value)
                     )
                     {
                         foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
@@ -404,18 +415,21 @@ namespace Cheburashka
                 foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements)
                 {
                     // internal objects only
-                    if (((alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
+                    //if (((alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
+                    //      && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
+                    //     )
+                    //     || alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
+                    //    )
+                    //    && ((alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier != null
+                    //         && IsNullOrEmpty(
+                    //             alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier.Value)
+                    //        )
+                    //        || alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier == null
+                    //    )
+                    //)
+                    if (IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier?.Value)
+                        && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier?.Value)
                         )
-                        && ((alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(
-                                 alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier.Value)
-                            )
-                            || alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier == null
-                        )
-                    )
                     {
                         var schema = alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier != null
                             ? alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier.Value
@@ -438,16 +452,18 @@ namespace Cheburashka
                 foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements)
                 {
                     // internal objects only
-                    if (((alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier.Value)
-                            )
-                            || alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier == null
-                        )
+                    //if (((alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier != null
+                    //      && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier.Value)
+                    //     )
+                    //     || alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier == null
+                    //    )
+                    //    && ((alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier != null
+                    //         && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier.Value)
+                    //        )
+                    //        || alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier == null
+                    //    )
+                    if (IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier?.Value)
+                        && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier?.Value)
                     )
                     {
                         var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier != null
@@ -471,18 +487,20 @@ namespace Cheburashka
                 foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
                 {
                     // internal objects only
-                    if (((alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(
-                              alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier
-                                 .Value)
-                            )
-                            || alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier == null
-                        )
+                    //if (((alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
+                    //      && IsNullOrEmpty(
+                    //          alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
+                    //     )
+                    //     || alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
+                    //    )
+                    //    && ((alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier != null
+                    //         && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier
+                    //             .Value)
+                    //        )
+                    //        || alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier == null
+                    //    )
+                    if (IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier?.Value)
+                        && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier?.Value)
                     )
                     {
                         foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
@@ -563,6 +581,10 @@ namespace Cheburashka
             } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
+        }
+        //SchemaObjectName
+        private bool LocalObjectName(Identifier serverName, Identifier dbName){
+            return IsNullOrEmpty(serverName?.Value) && IsNullOrEmpty(dbName?.Value);
         }
     }
 }
