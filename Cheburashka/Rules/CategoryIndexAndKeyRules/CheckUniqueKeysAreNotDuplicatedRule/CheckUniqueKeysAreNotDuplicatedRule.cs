@@ -95,8 +95,6 @@ namespace Cheburashka
                 //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                bool unique = true;
-
                 // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
                 if ((modelElement.ObjectType == UniqueConstraint.TypeClass ||
                      modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName)
@@ -113,6 +111,7 @@ namespace Cheburashka
                 var structureColumnsVisitor = new StructureColumnsVisitor();
 
                 List<string> thisIndexOrConstraintColumns = new();
+                //what is this all about ?????
                 if (sqlFragment != null)
                 {
                     sqlFragment.Accept(structureColumnsVisitor);
@@ -120,23 +119,20 @@ namespace Cheburashka
                 }
                 else
                 {
-                    if (modelElement.ObjectType == UniqueConstraint.TypeClass)
-                    {
-                        thisIndexOrConstraintColumns = modelElement
-                            .GetReferencedRelationshipInstances(UniqueConstraint.Columns)
-                            .Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
-                    }
-                    else if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass)
-                    {
-                        thisIndexOrConstraintColumns = modelElement
-                            .GetReferencedRelationshipInstances(PrimaryKeyConstraint.Columns)
-                            .Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
-                    }
+                    ModelRelationshipClass y = (modelElement.ObjectType == UniqueConstraint.TypeClass) ? UniqueConstraint.Columns
+                                                : PrimaryKeyConstraint.Columns
+                                                ;
+
+                    thisIndexOrConstraintColumns = modelElement
+                                               .GetReferencedRelationshipInstances(y)
+                                               .Where(n => n.ObjectName.HasName).Select(n => n.ObjectName.Parts.Last()).ToList();
                 }
 
+
+                bool unique = true;
                 if (modelElement.ObjectType == Index.TypeClass)
                 {
-                    unique = (bool?) modelElement.GetProperty(Index.Unique) == true;
+                    unique = (bool?)modelElement.GetProperty(Index.Unique) == true;
                 }
 
                 if (unique)
