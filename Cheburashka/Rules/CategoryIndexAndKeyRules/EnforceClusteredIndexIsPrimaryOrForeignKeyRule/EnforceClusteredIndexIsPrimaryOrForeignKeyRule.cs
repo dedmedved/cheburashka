@@ -152,21 +152,12 @@ namespace Cheburashka
                             {
                                 List<string> SortedLeadingEdgeIndexColumns = new();
 
-                                if (clusteredindexExists)
+                                if (clusteredindexExists || clusteredUniqueConstraintExists)
                                 {
-                                    var clusteredindex = clusteredindexes[0];
-                                    var columnSpecifications =
-                                        clusteredindex.GetReferencedRelationshipInstances(
-                                            Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
-                                }
-                                else if (clusteredUniqueConstraintExists)
-                                {
-                                    var uniqueConstraint = uniqueClusterConstraints[0];
-                                    var columnSpecifications =
-                                        uniqueConstraint.GetReferencedRelationshipInstances(
-                                            UniqueConstraint.ColumnsRelationship.RelationshipClass,
-                                            DacQueryScopes.UserDefined);
+                                    TSqlObject clusteredindex = clusteredindexExists ? clusteredindexes[0] : uniqueClusterConstraints[0];
+                                    ModelRelationshipClass relationshipClass = clusteredindexExists ? Index.ColumnsRelationship.RelationshipClass : UniqueConstraint.ColumnsRelationship.RelationshipClass ;
+                                    IEnumerable<ModelRelationshipInstance> columnSpecifications;
+                                    columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(relationshipClass,DacQueryScopes.UserDefined);
                                     SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 
@@ -204,33 +195,21 @@ namespace Cheburashka
                             bool match = false;
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
-                                //List<string> LeadingEdgeIndexColumns = new List<string>();
                                 List<string> SortedLeadingEdgeIndexColumns = new();
 
-                                if (clusteredindexExists)
                                 {
-                                    var clusteredindex = clusteredindexes[0];
-                                    var columnSpecifications =
-                                        clusteredindex.GetReferencedRelationshipInstances(
-                                            Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
-                                }
-                                else if (clusteredUniqueConstraintExists)
-                                {
-                                    var uniqueConstraint = uniqueClusterConstraints[0];
-                                    var columnSpecifications =
-                                        uniqueConstraint.GetReferencedRelationshipInstances(
-                                            UniqueConstraint.ColumnsRelationship.RelationshipClass,
-                                            DacQueryScopes.UserDefined);
-                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
-                                }
-                                else if (clusteredPrimaryKeyExists)
-                                {
-                                    var primaryKeyConstraint = clusteredpks[0];
-                                    var columnSpecifications =
-                                        primaryKeyConstraint.GetReferencedRelationshipInstances(
-                                            PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass,
-                                            DacQueryScopes.UserDefined);
+                                    ModelRelationshipClass modelRelationshipClass = (clusteredindexExists) ? Index.ColumnsRelationship.RelationshipClass
+                                    : (clusteredUniqueConstraintExists) ? UniqueConstraint.ColumnsRelationship.RelationshipClass
+                                    : (clusteredPrimaryKeyExists) ? PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass
+                                    : null
+                                    ;
+                                    TSqlObject idxOrConstraint = (clusteredindexExists) ? clusteredindexes[0]
+                                    : (clusteredUniqueConstraintExists) ? uniqueClusterConstraints[0]
+                                    : (clusteredPrimaryKeyExists) ? clusteredpks[0]
+                                    : null
+                                    ;
+
+                                    IEnumerable<ModelRelationshipInstance> columnSpecifications = idxOrConstraint.GetReferencedRelationshipInstances(modelRelationshipClass, DacQueryScopes.UserDefined);
                                     SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 

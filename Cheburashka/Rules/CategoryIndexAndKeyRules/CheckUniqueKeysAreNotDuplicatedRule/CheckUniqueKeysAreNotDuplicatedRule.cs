@@ -107,7 +107,6 @@ namespace Cheburashka
 
                 var parentObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
                 var parentObjectName = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
-
                 var structureColumnsVisitor = new StructureColumnsVisitor();
 
                 List<string> thisIndexOrConstraintColumns = new();
@@ -137,8 +136,7 @@ namespace Cheburashka
 
                 if (unique)
                 {
-                    var issues = new List<TSqlFragment>();
-
+                    List<TSqlFragment> issues = new();
                     List<string> leadingEdgeIndexColumns = new();
 
                     foreach (var c in thisIndexOrConstraintColumns)
