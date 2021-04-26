@@ -83,7 +83,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -100,17 +100,8 @@ namespace Cheburashka
             UnnecessaryParenthesisVisitor visitor = new();
             sqlFragment.Accept(visitor);
             IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
-
-            var brackets = unnecessaryBrackets.Distinct(); 
-
-            foreach (var unnecessaryBracket in brackets)
-            {
-                problems.Add(new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , unnecessaryBracket
-                ));
-            }
+            var brackets = unnecessaryBrackets.Distinct();
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, brackets.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             return problems;
         }
     }

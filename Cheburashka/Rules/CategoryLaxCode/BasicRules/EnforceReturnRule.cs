@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -38,11 +39,11 @@ namespace Cheburashka
     /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceReturnRule.RuleId,
-        RuleConstants.ResourceBaseName, // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceReturn_RuleName, // ID used to look up the display name inside the resources file
+        RuleConstants.ResourceBaseName,                 // Name of the resource file to look up displayname and description in
+        RuleConstants.EnforceReturn_RuleName,           // ID used to look up the display name inside the resources file
         RuleConstants.EnforceReturn_ProblemDescription, // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics, // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)] // This rule targets specific elements rather than the whole model
+        Category = RuleConstants.CategoryBasics,        // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]              // This rule targets specific elements rather than the whole model
     public sealed class EnforceReturnRule : SqlCodeAnalysisRule
     {
         /// <summary>
@@ -83,7 +84,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -96,26 +97,14 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            //// visitor to get the occurrences of return statements
-            //var visitor = new ReturnVisitor();
-            //sqlFragment.Accept(visitor);
-            //IList<ReturnStatement> returnStatements = visitor.ReturnStatements;
             var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
-
             var code = createProcedureStatement?.StatementList;
-
             var problemExists = code is null || InvalidUseOfReturn(code);
 
             // Create problems for each return not found 
             if (problemExists)
             {
-                var problem = new SqlRuleProblem(
-                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                    , modelElement
-                    , sqlFragment
-                );
-
-                problems.Add(problem);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { sqlFragment }, ruleDescriptor);
             }
 
             return problems;

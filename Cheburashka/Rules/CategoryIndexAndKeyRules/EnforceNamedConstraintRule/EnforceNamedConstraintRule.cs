@@ -118,8 +118,8 @@ namespace Cheburashka
                 // visitor to get the occurrences of constraints we want to be named
                 EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new();
                 sqlFragment.Accept(enforceNamedConstraintVisitor);
-                List<ConstraintDefinition>
-                    constraints = enforceNamedConstraintVisitor.Constraints; //.Cast<TSqlFragment>().ToList();
+                List<TSqlFragment>
+                    constraints = enforceNamedConstraintVisitor.Constraints.Cast<TSqlFragment>().ToList();
 
                 // visitor to get the occurrences of table variable declarations we are not interested in 
                 EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor =
@@ -128,22 +128,13 @@ namespace Cheburashka
                 List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
 
                 // every unnamed constraint ( outside of table declaration ) is a problem.
-                List<ConstraintDefinition> issues = constraints
+                List<TSqlFragment> issues = constraints
                     .Where(cons => !tableDeclarations.Any(dec => SqlComparisonUtils.SQLModel_Contains(dec, cons)))
                     .Select(n => n).ToList();
 
                 // Create problems for each constraint wo a name
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                foreach (ConstraintDefinition issue in issues)
-                {
-                    var problem = new SqlRuleProblem(
-                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
-
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, issue);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 

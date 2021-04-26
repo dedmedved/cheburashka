@@ -28,6 +28,8 @@ using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Globalization;
+
 
 namespace Cheburashka
 {
@@ -348,6 +350,21 @@ namespace Cheburashka
             }
 
             return bFoundClusteredIndex;
+        }
+
+        public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, List<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
+        {
+            foreach (TSqlFragment issue in issues)
+            {
+                SqlRuleProblem problem =
+                    new(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , issue);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
         }
     }
 }

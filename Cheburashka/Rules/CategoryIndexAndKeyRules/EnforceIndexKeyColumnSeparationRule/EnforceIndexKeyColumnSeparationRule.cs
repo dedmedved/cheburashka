@@ -226,18 +226,8 @@ namespace Cheburashka
                 }
 
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
-                // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , issue);
-
-                    problems.Add(problem);
-                }
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 

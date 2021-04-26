@@ -43,7 +43,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.AvoidDirectUseOfRowcount_RuleName,                    // ID used to look up the display name inside the resources file
         RuleConstants.AvoidDirectUseOfRowcount_ProblemDescription,          // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,           // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidDirectUseOfRowcountRule : SqlCodeAnalysisRule
     {
@@ -84,7 +84,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -128,12 +128,7 @@ namespace Cheburashka
                 }
                 if (!foundSurroundingSetStatement)
                 {
-                    var problem = new SqlRuleProblem(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                    , modelElement
-                                                    , expression
-                                                    );
-
-                    problems.Add(problem);
+                    RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { expression }, ruleDescriptor);
                 }
             }
 

@@ -181,16 +181,8 @@ namespace Cheburashka
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
-                // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                        new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName), modelElement, issue);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                    problems.Add(problem);
-                }
             }
             catch
             {

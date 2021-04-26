@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -40,7 +41,7 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidNullLiteralRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidNullLiteral_RuleName,            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNullLiteral_RuleName,                            // ID used to look up the display name inside the resources file
         RuleConstants.AvoidNullLiteral_ProblemDescription,                  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
@@ -88,7 +89,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -105,17 +106,8 @@ namespace Cheburashka
             var visitor = new NullLiteralVisitor();
             sqlFragment.Accept(visitor);
             IList<ScalarExpression> nullLiteralExpressions = visitor.NullLiteralExpressions;
-
             // Create problems for each Return statement found 
-            foreach (var nullLiteralExpression in nullLiteralExpressions)
-            {
-                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , nullLiteralExpression
-                                                );
-
-                problems.Add(problem);
-            }
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, nullLiteralExpressions.Cast<TSqlFragment>().ToList(), ruleDescriptor);
 
             return problems;
         }

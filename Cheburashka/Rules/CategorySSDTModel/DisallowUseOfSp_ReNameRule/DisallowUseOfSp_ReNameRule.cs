@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -88,7 +89,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -98,25 +99,14 @@ namespace Cheburashka
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of sp_rename call statements
             var visitor = new DisallowUseOfSp_ReNameVisitor();
             sqlFragment.Accept(visitor);
             IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
-
             // Create problems for each sp_rename call statement found 
-            foreach (var executeSpecification in executeSpecifications)
-            {
-                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , executeSpecification
-                                                );
-
-                problems.Add(problem);
-            }
-
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, executeSpecifications.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             return problems;
         }
     }

@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -83,7 +84,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -108,18 +109,7 @@ namespace Cheburashka
                 {
                     problemBegins.AddRange(InvalidUseOfBegin(true, sqlStatement));
                 }
-
-                // Create problems for each begin found in the wrong place 
-                foreach (var beginEndBlockStatement in problemBegins )
-                {
-                    var problem = new SqlRuleProblem(
-                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , beginEndBlockStatement
-                    );
-
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, problemBegins.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             }
 
             return problems;

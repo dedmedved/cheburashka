@@ -388,16 +388,7 @@ namespace Cheburashka
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, issue);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch
             {

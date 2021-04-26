@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+
 namespace Cheburashka
 {
     /// <summary>
@@ -155,9 +156,9 @@ namespace Cheburashka
                                 if (clusteredindexExists || clusteredUniqueConstraintExists)
                                 {
                                     TSqlObject clusteredindex = clusteredindexExists ? clusteredindexes[0] : uniqueClusterConstraints[0];
-                                    ModelRelationshipClass relationshipClass = clusteredindexExists ? Index.ColumnsRelationship.RelationshipClass : UniqueConstraint.ColumnsRelationship.RelationshipClass ;
+                                    ModelRelationshipClass relationshipClass = clusteredindexExists ? Index.ColumnsRelationship.RelationshipClass : UniqueConstraint.ColumnsRelationship.RelationshipClass;
                                     IEnumerable<ModelRelationshipInstance> columnSpecifications;
-                                    columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(relationshipClass,DacQueryScopes.UserDefined);
+                                    columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(relationshipClass, DacQueryScopes.UserDefined);
                                     SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 
@@ -260,17 +261,7 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
                 // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , issue);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 

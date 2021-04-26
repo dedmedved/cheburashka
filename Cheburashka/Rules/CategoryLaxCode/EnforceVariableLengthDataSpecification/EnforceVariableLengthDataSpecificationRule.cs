@@ -96,7 +96,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             try
             {
@@ -252,20 +252,9 @@ namespace Cheburashka
                 var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
                 sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
                 IList<ExecutableProcedureReference> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames;
-
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
-                foreach (ExecutableProcedureReference executableProcedureReference in literalOnePartNameStoredProcsContexts)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , executableProcedureReference);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             }
             catch
             {

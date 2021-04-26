@@ -43,7 +43,7 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up display name and description in
-        RuleConstants.AvoidOnePartNames_RuleName,           // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidOnePartNames_RuleName,                           // ID used to look up the display name inside the resources file
         RuleConstants.AvoidOnePartNames_ProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNaming,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
@@ -96,7 +96,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             try
             {
@@ -255,17 +255,7 @@ namespace Cheburashka
 
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
-                foreach (ExecutableProcedureReference executableProcedureReference in literalOnePartNameStoredProcsContexts)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , executableProcedureReference);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, executableProcedureReference);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             }
             catch
             {

@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -42,7 +43,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.AvoidGoto_RuleName,                                   // ID used to look up the display name inside the resources file
         RuleConstants.AvoidGoto_ProblemDescription,                         // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,           // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidGotoRule : SqlCodeAnalysisRule
     {
@@ -83,7 +84,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -100,18 +101,8 @@ namespace Cheburashka
             var visitor = new GotoVisitor();
             sqlFragment.Accept(visitor);
             IList<GoToStatement> goToStatements = visitor.GoToStatements;
-
             // Create problems for each GOTO statement found 
-            foreach (var goToStatement in goToStatements)
-            {
-                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , goToStatement
-                                                );
-
-                problems.Add(problem);
-            }
-
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, goToStatements.Cast<TSqlFragment>().ToList(), ruleDescriptor);
             return problems;
         }
     }

@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -42,7 +43,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.EnforceCaptureSPReturnStatus_RuleName,                // ID used to look up the display name inside the resources file
         RuleConstants.EnforceCaptureSPReturnStatus_ProblemDescription,      // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,           // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class EnforceCaptureSPReturnStatusRule : SqlCodeAnalysisRule
     {
@@ -83,7 +84,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -100,17 +101,8 @@ namespace Cheburashka
             EnforceCaptureSPReturnStatusVisitor visitor = new();
             sqlFragment.Accept(visitor);
             IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
-
             // Create problems for each non-captured execute found 
-            foreach (var executeSpecification in executeSpecifications)
-            {
-                var problem = new SqlRuleProblem( string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , executeSpecification
-                                                );
-
-                problems.Add(problem);
-            }
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, executeSpecifications.Cast<TSqlFragment>().ToList(), ruleDescriptor);
 
             return problems;
         }

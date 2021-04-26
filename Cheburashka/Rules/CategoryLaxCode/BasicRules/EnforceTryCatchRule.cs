@@ -24,6 +24,7 @@ using System.Globalization;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
@@ -82,7 +83,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -116,12 +117,7 @@ namespace Cheburashka
                     ) 
                )
             {
-                var problem = new SqlRuleProblem(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                                , modelElement
-                                                , sqlFragment
-                                                );
-
-                problems.Add(problem);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { sqlFragment }, ruleDescriptor);
             }
 
             return problems;
