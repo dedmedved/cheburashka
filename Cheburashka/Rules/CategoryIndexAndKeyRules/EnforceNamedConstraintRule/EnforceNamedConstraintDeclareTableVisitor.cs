@@ -62,7 +62,7 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(CreateFunctionStatement node)
         {
-            if (node.ReturnType != null)
+            if (node.ReturnType is not null)
             {
                 if (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType)
                 {
@@ -72,7 +72,7 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(AlterFunctionStatement node)
         {
-            if (node.ReturnType != null)
+            if (node.ReturnType is not null)
             {
                 if (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType)
                 {

@@ -103,7 +103,7 @@ namespace Cheburashka
                                ?? (sqlFragment as CreateFunctionStatement)?.StatementList
                                ?? (sqlFragment as CreateTriggerStatement)?.StatementList;
 
-            if (! (code is null)) // inline functions have no statement list
+            if (code is not null) // inline functions have no statement list
             {
                 foreach (var sqlStatement in code.Statements)
                 {

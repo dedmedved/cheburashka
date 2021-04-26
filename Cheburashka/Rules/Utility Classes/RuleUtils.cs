@@ -64,16 +64,16 @@ namespace Cheburashka
 //        public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, int offset, int length)
         public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, TSqlFragment obj)
         {
-            if (modelElement != null && problem != null && obj != null)
+            if (modelElement is not null && problem is not null && obj is not null)
             {
-                if (modelElement.GetSourceInformation() != null)
+                if (modelElement.GetSourceInformation() is not null)
                 {
                     string fileName = modelElement.GetSourceInformation().SourceName;
                     if (!string.IsNullOrEmpty(fileName))
                     {
                         string fullScript = ReadFileContent(fileName);
 
-                        if (fullScript != null)
+                        if (fullScript is not null)
                         {
                             if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out _, out _))
                             {

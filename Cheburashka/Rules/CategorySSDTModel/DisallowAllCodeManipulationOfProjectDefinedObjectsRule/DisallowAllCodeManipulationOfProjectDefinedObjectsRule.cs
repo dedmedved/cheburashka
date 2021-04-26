@@ -155,7 +155,7 @@ namespace Cheburashka
                 foreach (var dropTableStatement in dropTableStatements)
                 {
                     foreach (var obj in dropTableStatement.Objects) {
-                        var schema = obj.SchemaIdentifier != null
+                        var schema = obj.SchemaIdentifier is not null
                             ? obj.SchemaIdentifier.Value
                             : "dbo";
                         var table = obj.BaseIdentifier.Value;
@@ -173,7 +173,7 @@ namespace Cheburashka
 
                 foreach (var createIndexStatement in createIndexStatements)
                 {
-                    var schema = createIndexStatement.OnName.SchemaIdentifier != null
+                    var schema = createIndexStatement.OnName.SchemaIdentifier is not null
                         ? createIndexStatement.OnName.SchemaIdentifier.Value
                         : "dbo";
                     var table = createIndexStatement.OnName.BaseIdentifier.Value;
@@ -199,7 +199,7 @@ namespace Cheburashka
                         if (!(dropIndexClause is not DropIndexClause dic))
                         {
                             processIndexDropStatement = dic.Object.IsLocalObject();
-                            schemaName = dic.Object.SchemaIdentifier != null
+                            schemaName = dic.Object.SchemaIdentifier is not null
                                 ? dic.Object.SchemaIdentifier.Value
                                 : "dbo";
                             tableName = dic.Object.BaseIdentifier.Value;
@@ -210,7 +210,7 @@ namespace Cheburashka
                             if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
                             {
                                 processIndexDropStatement = olddic.Index.IsLocalObject();
-                                schemaName = olddic.Index.SchemaIdentifier != null
+                                schemaName = olddic.Index.SchemaIdentifier is not null
                                     ? olddic.Index.SchemaIdentifier.Value
                                     : "dbo";
                                 tableName = olddic.Index.BaseIdentifier.Value;
@@ -231,7 +231,7 @@ namespace Cheburashka
 
                 foreach (var alterIndexStatement in alterIndexStatements)
                 {
-                    if (alterIndexStatement.Name.Value != null
+                    if (alterIndexStatement.Name.Value is not null
                     &&  alterIndexStatement.OnName.IsLocalObject()
                     )
                     {
@@ -334,7 +334,7 @@ namespace Cheburashka
                     // internal objects only
                     if (alterTableAlterColumnStatement.SchemaObjectName.IsLocalObject())
                         {
-                            var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier != null
+                            var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier is not null
                             ? alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier.Value
                             : "dbo";
                         var table = alterTableAlterColumnStatement.SchemaObjectName.BaseIdentifier.Value;

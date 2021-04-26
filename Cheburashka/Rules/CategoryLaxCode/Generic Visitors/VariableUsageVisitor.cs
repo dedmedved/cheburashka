@@ -48,7 +48,7 @@ namespace Cheburashka
         //TODO Implement this with a new class to handle variable references in code.
         public override void ExplicitVisit(FunctionCall node) {
 //            node.SQLModel_DebugPrint(@"C:\temp\p.out");
-            if (node.CallTarget != null) {
+            if (node.CallTarget is not null) {
                 foreach (var p in node.Parameters) {
 //                                        p.SQLModel_DebugPrint(@"C:\temp\p.out");
                     var matches = new List<VariableReference>();

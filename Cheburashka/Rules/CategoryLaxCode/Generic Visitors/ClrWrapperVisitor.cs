@@ -35,7 +35,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(AlterFunctionStatement node)
         {
-            if (node.MethodSpecifier != null)
+            if (node.MethodSpecifier is not null)
             {
                 ClrWrappers.Add(node);
             }
@@ -43,7 +43,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(CreateFunctionStatement node)
         {
-            if (node.MethodSpecifier != null)
+            if (node.MethodSpecifier is not null)
             {
                 ClrWrappers.Add(node);
             }
@@ -51,7 +51,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(AlterProcedureStatement node)
         {
-            if (node.MethodSpecifier != null)
+            if (node.MethodSpecifier is not null)
             {
                 ClrWrappers.Add(node);
             }
@@ -59,7 +59,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(CreateProcedureStatement node)
         {
-            if (node.MethodSpecifier != null)
+            if (node.MethodSpecifier is not null)
             {
                 ClrWrappers.Add(node);
             }

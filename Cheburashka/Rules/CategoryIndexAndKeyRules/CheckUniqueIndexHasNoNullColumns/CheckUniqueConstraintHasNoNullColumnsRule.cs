@@ -126,13 +126,13 @@ namespace Cheburashka
                         parent = ps as AlterTableAddTableElementStatement;
                     }
 
-                    if (parent != null)
+                    if (parent is not null)
                     {
-                        if (parent.SchemaObjectName != null)
+                        if (parent.SchemaObjectName is not null)
                         {
                             string parentName = parent.SchemaObjectName.BaseIdentifier.Value;
                             string schemaName = "";
-                            if (parent.SchemaObjectName.SchemaIdentifier != null)
+                            if (parent.SchemaObjectName.SchemaIdentifier is not null)
                             {
                                 schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
                             }

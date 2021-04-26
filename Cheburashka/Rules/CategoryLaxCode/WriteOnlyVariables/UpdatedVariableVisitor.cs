@@ -68,7 +68,7 @@ namespace Cheburashka
         public override void ExplicitVisit(ExecuteSpecification node)
         {
             //node.SQLModel_DebugPrint(@"C:\temp\ExecuteStatement.out");
-            if (node.Variable != null &&
+            if (node.Variable is not null &&
                 !string.IsNullOrEmpty(node.Variable.Name))
             {
                 SQLExpressionDependency ed = new(node.Variable, node.Variable, node.Variable.ToString());
@@ -83,7 +83,7 @@ namespace Cheburashka
             //node.SQLModel_DebugPrint(@"C:\temp\ExecuteParameter.out");
             if (!node.IsOutput) return;
 
-            if (node.ParameterValue != null)
+            if (node.ParameterValue is not null)
             {
                 if (node.ParameterValue is VariableReference referenced)
                 {
@@ -91,7 +91,7 @@ namespace Cheburashka
                     // there are no dependencies in the sense we are using them.
                     SetVariables.Add(ed);
                 }
-                else if (node.Variable != null)
+                else if (node.Variable is not null)
                 {
                     var ed = new SQLExpressionDependency(node.Variable, node.Variable, node.Variable.ToString());
                     // there are no dependencies in the sense we are using them.
@@ -115,11 +115,11 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(FetchCursorStatement node)
         {
-            if (node.IntoVariables != null)
+            if (node.IntoVariables is not null)
             {
                 foreach (var v in node.IntoVariables)
                 {
-                    if (v != null )
+                    if (v is not null )
                     {
                         SQLExpressionDependency ed = new(v, v, v.ToString());
                         SetVariables.Add(ed);

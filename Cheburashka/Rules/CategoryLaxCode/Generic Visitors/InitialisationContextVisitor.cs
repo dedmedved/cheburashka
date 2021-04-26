@@ -39,7 +39,7 @@ namespace Cheburashka
             {
                 return;}
 
-            if ( node.Value != null )
+            if ( node.Value is not null )
             {
                 InitialisationExpressions.Add(node.Value);
             }

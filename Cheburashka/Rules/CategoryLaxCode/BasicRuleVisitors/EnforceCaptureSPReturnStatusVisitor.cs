@@ -41,7 +41,7 @@ namespace Cheburashka
                )
            {
                 if (node.ExecutableEntity is ExecutableProcedureReference reference &&
-                   reference.ProcedureReference != null)
+                   reference.ProcedureReference is not null)
                {
                    TSqlFragment pr = reference.ProcedureReference;
                    string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;

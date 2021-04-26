@@ -41,7 +41,7 @@ namespace Cheburashka
         #region overrides
         public override void ExplicitVisit(DeleteStatement node)
         {
-            if (node.WithCtesAndXmlNamespaces != null)
+            if (node.WithCtesAndXmlNamespaces is not null)
             {
                 CteUtil target = new(node.FirstTokenIndex, node.LastTokenIndex, 0, 0);
                 foreach (var cte in node.WithCtesAndXmlNamespaces.CommonTableExpressions)

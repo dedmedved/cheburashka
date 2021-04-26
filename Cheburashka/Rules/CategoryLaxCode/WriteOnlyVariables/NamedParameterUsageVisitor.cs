@@ -38,8 +38,8 @@ namespace Cheburashka
         public override void ExplicitVisit(ExecuteParameter node)
         {
             VariableReference pv = node.Variable ;
-//            if (PV != null && PV.LiteralType == LiteralType.Variable)
-            if (pv != null )
+//            if (PV is not null && PV.LiteralType == LiteralType.Variable)
+            if (pv is not null )
             {
                 NamedParameters.Add(pv);
             }

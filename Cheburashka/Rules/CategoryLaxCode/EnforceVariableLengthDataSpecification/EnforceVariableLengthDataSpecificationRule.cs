@@ -172,7 +172,7 @@ namespace Cheburashka
                     // Check we aren't looking in master or msdb.
                     if (!foundSurroundingDeclaration)
                     {
-                        if (tableSource.DatabaseIdentifier != null)
+                        if (tableSource.DatabaseIdentifier is not null)
                         {
                             foundSurroundingDeclaration =
                                 SqlRuleUtils.IsSystemDatabaseThatNeedNoSchemaQualification(

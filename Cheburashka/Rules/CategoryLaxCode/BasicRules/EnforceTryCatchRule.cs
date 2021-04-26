@@ -106,14 +106,14 @@ namespace Cheburashka
             bool onlyRestrictedStatementsFound = false;  
 
             //only applies to sp's, triggers normally do stuff that need trapping
-            if (code != null)
+            if (code is not null)
             {
                 onlyRestrictedStatementsFound = CheckForRestrictedStatementList(code,0 );
             }
             // Create problems for each try/catch not found 
             if (    tryCatchStatements.Count == 0 
                 &&  (    (createProcedureStatement is null ) 
-                      || (createProcedureStatement != null && ! onlyRestrictedStatementsFound ) 
+                      || (createProcedureStatement is not null && ! onlyRestrictedStatementsFound ) 
                     ) 
                )
             {

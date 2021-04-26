@@ -111,7 +111,7 @@ namespace Cheburashka
 
                 List<string> thisIndexOrConstraintColumns = new();
                 //what is this all about ?????
-                if (sqlFragment != null)
+                if (sqlFragment is not null)
                 {
                     sqlFragment.Accept(structureColumnsVisitor);
                     thisIndexOrConstraintColumns = structureColumnsVisitor.Objects;

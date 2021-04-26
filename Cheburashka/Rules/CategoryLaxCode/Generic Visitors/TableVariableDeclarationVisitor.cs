@@ -38,7 +38,7 @@ namespace Cheburashka
         {
             // whey-hey
             // inline row-producing functions use this and don't have a variable associated with them
-            if (node.VariableName != null)
+            if (node.VariableName is not null)
             {
                 TableVariableDeclarations.Add(node.VariableName);
             }

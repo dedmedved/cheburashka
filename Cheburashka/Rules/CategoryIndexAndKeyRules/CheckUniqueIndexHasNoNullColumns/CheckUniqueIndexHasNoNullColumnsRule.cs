@@ -118,11 +118,11 @@ namespace Cheburashka
                 //foreach (var ps in parentSources) {
                 //    dynamic parent = ps as CreateTableStatement;
                 //    if (parent == null) { parent = ps as AlterTableAddTableElementStatement; }
-                //    if (parent != null) {
-                //        if (parent.SchemaObjectName != null) {
+                //    if (parent is not null) {
+                //        if (parent.SchemaObjectName is not null) {
                 string parentName = objectName; // parent.SchemaObjectName.BaseIdentifier.Value;
                 string schemaName = objectSchema; // "";
-                //if (parent.SchemaObjectName.SchemaIdentifier != null) {
+                //if (parent.SchemaObjectName.SchemaIdentifier is not null) {
                 //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
                 //}
                 // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
