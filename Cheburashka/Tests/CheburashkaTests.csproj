@@ -887,6 +887,9 @@
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumns_MixedCaseRule\CheckUniqueIndexHasNoNullColumns_MixedCaseRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

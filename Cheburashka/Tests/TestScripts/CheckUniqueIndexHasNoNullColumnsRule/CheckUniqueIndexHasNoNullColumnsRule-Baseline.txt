@@ -7,3 +7,12 @@ Start line: 9
 Start column: 154
 ========end of problem========
 
+Problem description: Unique, non-filtered index found with nullable columns in [dbo].[CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted].[ix_CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted].  You should probably make the columns non-nullable, or make the index filtered to exclude nulls.
+FullID: Cheburashka.DM0017
+Severity: Warning
+Model element: dbo.CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted.ix_CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted
+Script file: CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted.sql
+Start line: 9
+Start column: 188
+========end of problem========
+

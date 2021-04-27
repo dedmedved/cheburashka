@@ -213,14 +213,7 @@ namespace Cheburashka
                     // If we can't eliminate it, report it as a problem.
                     if (!foundSurroundingDeclaration)
                     {
-                        SqlRuleProblem problem =
-                            new(
-                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                , modelElement
-                                , tableSource);
-
-                        //RuleUtils.UpdateProblemPosition(modelElement, problem, tableSource);
-                        problems.Add(problem);
+                        RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { tableSource }, ruleDescriptor);
                     }
                 }
 
@@ -235,17 +228,7 @@ namespace Cheburashka
 
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
-                foreach (FunctionCall functionCall in literalOnePartNameContexts)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , functionCall);
-
-                    //RuleUtils.UpdateProblemPosition(modelElement, problem, functionCall);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
 
                 // now to look inside literal arguments to system procedures.
                 // this is totally independent of the above search.

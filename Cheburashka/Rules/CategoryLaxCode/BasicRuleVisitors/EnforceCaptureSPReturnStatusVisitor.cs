@@ -35,23 +35,19 @@ namespace Cheburashka
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
-           if ((node.Variable is null)
-                ||
-                 (string.IsNullOrEmpty(node.Variable.Name))
-               )
-           {
+            if (string.IsNullOrEmpty(node.Variable?.Name))
+            {
                 if (node.ExecutableEntity is ExecutableProcedureReference reference &&
                    reference.ProcedureReference is not null)
-               {
+                {
                    TSqlFragment pr = reference.ProcedureReference;
                    string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
-                   //TSqlParserToken name = pr.ScriptTokenStream[pr.LastTokenIndex];
-                   if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
-                   {
+                    if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
+                    {
                        ExecuteSpecifications.Add(node);
-                   }
-               }
-           }
+                    }
+                }
+            }
         }
     }
 }

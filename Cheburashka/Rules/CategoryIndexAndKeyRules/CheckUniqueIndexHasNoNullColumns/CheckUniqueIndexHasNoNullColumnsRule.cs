@@ -148,22 +148,13 @@ namespace Cheburashka
                                 iCOl.Column.MultiPartIdentifier
                                     .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value,
                                 tCol.Parts[2])
-                            //where tCol.IsNullable
-                            //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
                             select iCOl;
-
-                        foreach (var c in nullableIndexColumns)
-                        {
-                            issues.Add(c);
-                        }
+                        issues.AddRange(nullableIndexColumns);
                     }
                 }
                 catch
                 {
                 }
-                //        }
-                //    }
-                //}
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata

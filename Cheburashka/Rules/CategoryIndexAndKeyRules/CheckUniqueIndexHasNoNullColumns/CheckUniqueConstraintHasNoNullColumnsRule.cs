@@ -120,60 +120,45 @@ namespace Cheburashka
 
                 foreach (var ps in parentSources)
                 {
-                    dynamic parent = ps as CreateTableStatement;
-                    if (parent is null)
-                    {
-                        parent = ps as AlterTableAddTableElementStatement;
-                    }
+                    var schemaObjectName = (sqlFragment as CreateTableStatement)?.SchemaObjectName
+                        ?? (sqlFragment as AlterTableAddTableElementStatement)?.SchemaObjectName;
 
-                    if (parent is not null)
+                    if (schemaObjectName is not null)
                     {
-                        if (parent.SchemaObjectName is not null)
+                        string parentName = schemaObjectName.BaseIdentifier.Value;
+                        string schemaName = schemaObjectName.SchemaIdentifier?.Value ?? "";
+
+                        // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
+                        // this will happen for dynamically created objects and missing objects.
+                        //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+                        IEnumerable<TSqlObject> tables = model
+                                .GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
+                                .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
+                                            n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
+                            ;
+                        TSqlObject table = tables.SingleOrDefault();
+
+                        try
                         {
-                            string parentName = parent.SchemaObjectName.BaseIdentifier.Value;
-                            string schemaName = "";
-                            if (parent.SchemaObjectName.SchemaIdentifier is not null)
+                            var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                                .Select(n => n.ObjectName).ToList();
+
+                            if (tableColumns.Count != 0)
                             {
-                                schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
+                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                                    from tCol in tableColumns
+                                    where SqlComparer.SQLModel_StringCompareEqual(
+                                        iCOl.Column.MultiPartIdentifier
+                                            .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
+                                            .Value, tCol.Parts[2])
+                                    select iCOl;
+
+                                issues.AddRange(nullableIndexColumns);
                             }
-
-                            // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-                            // this will happen for dynamically created objects and missing objects.
-                            //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
-                            IEnumerable<TSqlObject> tables = model
-                                    .GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                                    .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
-                                                n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
-                                ;
-                            TSqlObject table = tables.SingleOrDefault();
-
-                            try
-                            {
-                                var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                                    .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                                    .Select(n => n.ObjectName).ToList();
-
-                                if (tableColumns.Count != 0)
-                                {
-                                    IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                                        from tCol in tableColumns
-                                        where SqlComparer.SQLModel_StringCompareEqual(
-                                            iCOl.Column.MultiPartIdentifier
-                                                .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
-                                                .Value, tCol.Parts[2])
-                                        //where tCol.IsNullable
-                                        //where tCol.Object.GetReferenced(Column.DataType).FirstOrDefault().GetProperty<bool?>(DataType.UddtNullable)
-                                        select iCOl;
-
-                                    foreach (var c in nullableIndexColumns)
-                                    {
-                                        issues.Add(c);
-                                    }
-                                }
-                            }
-                            catch
-                            {
-                            }
+                        }
+                        catch
+                        {
                         }
                     }
                 }
