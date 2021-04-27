@@ -40,7 +40,7 @@ namespace Cheburashka
             // for now just ignore user-defined types
             if (!(node.DataType is UserDataTypeReference))
             {
-                if (node.Value == null)
+                if (node.Value is null)
                 {
                     VariableDeclarations.Add(node.VariableName);
                 }

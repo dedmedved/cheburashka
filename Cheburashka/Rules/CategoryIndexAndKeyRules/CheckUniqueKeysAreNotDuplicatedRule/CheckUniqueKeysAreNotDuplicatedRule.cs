@@ -99,7 +99,7 @@ namespace Cheburashka
                 if ((modelElement.ObjectType == UniqueConstraint.TypeClass ||
                      modelElement.ObjectType == PrimaryKeyConstraint.TypeClass) && !modelElement.Name.HasName)
                 {
-                    if (modelElement.GetSourceInformation() == null)
+                    if (modelElement.GetSourceInformation() is null)
                     {
                         return problems;
                     }

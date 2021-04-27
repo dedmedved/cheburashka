@@ -39,7 +39,7 @@ namespace Cheburashka
         public override void ExplicitVisit(SetVariableStatement node)
         {
 
-            if (node.Variable == null  || node.Expression == null) return;
+            if (node.Variable is null  || node.Expression is null) return;
             SQLExpressionDependency ed = new(node.Variable,node,node.ToString());
 
             //Get variable references in the expression.
@@ -52,7 +52,7 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(SelectSetVariable node)
         {
-            if (node.Variable == null || node.Expression == null) return ;
+            if (node.Variable is null || node.Expression is null) return ;
             SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
@@ -102,7 +102,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            if (node.Variable == null ) return;
+            if (node.Variable is null ) return;
             SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
@@ -130,13 +130,13 @@ namespace Cheburashka
 
         public override void ExplicitVisit(BeginDialogStatement node)
         {
-            if (node.Handle == null || string.IsNullOrEmpty(node.Handle.Name)) return;
+            if (node.Handle is null || string.IsNullOrEmpty(node.Handle.Name)) return;
             SQLExpressionDependency ed = new(node.Handle,node.Handle,node.Handle.ToString());
             SetVariables.Add(ed);
         }
         public override void ExplicitVisit(ReceiveStatement node)
         {
-            if (node.SelectElements == null) return;
+            if (node.SelectElements is null) return;
             foreach (var v in node.SelectElements)
             {
                 if (v is SelectSetVariable ssv)

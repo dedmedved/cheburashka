@@ -47,7 +47,7 @@ namespace Cheburashka
             //find unique indexes that are not filtered
             if (node.Unique )
             {
-                if (node.FilterPredicate == null)
+                if (node.FilterPredicate is null)
                 {
                     foreach (var v in node.Columns)
                     {

@@ -176,7 +176,7 @@ namespace Cheburashka
             //fill the hash-table on first call from list
             //we need the deferred create as we don't know the model collation until runtime
             //there may be better methods frankly.
-            //if (_HashSS2008R2_SystemObjectNames == null)
+            //if (_HashSS2008R2_SystemObjectNames is null)
             //{
             //    _HashSS2008R2_SystemObjectNames = new HashSet<String>(SS2008R2_SystemObjectNames, SqlComparer.Comparer);
             //}

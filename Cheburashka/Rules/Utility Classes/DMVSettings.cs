@@ -57,7 +57,7 @@ namespace Cheburashka
 
         public static void RefreshModelBuiltInCache(TSqlModel model)
         {
-            if (_modelVersion == null || _modelVersion != model.Version)
+            if (_modelVersion is null || _modelVersion != model.Version)
             {
                 _modelVersion = model.Version;
                 SqlRuleUtils.SetBuiltinDataTypes(model);

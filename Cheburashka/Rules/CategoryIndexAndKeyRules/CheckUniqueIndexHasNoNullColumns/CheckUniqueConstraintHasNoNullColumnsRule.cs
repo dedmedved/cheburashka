@@ -121,7 +121,7 @@ namespace Cheburashka
                 foreach (var ps in parentSources)
                 {
                     dynamic parent = ps as CreateTableStatement;
-                    if (parent == null)
+                    if (parent is null)
                     {
                         parent = ps as AlterTableAddTableElementStatement;
                     }

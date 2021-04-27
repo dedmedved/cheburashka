@@ -195,7 +195,7 @@ namespace Cheburashka
                     if (!foundSurroundingDeclaration)
                     {
                         {
-                            if (tableSourceIdentifier == null) throw new Exception("null tableSourceIdentifier");
+                            if (tableSourceIdentifier is null) throw new Exception("null tableSourceIdentifier");
 
                             tableSourceIdentifier = tableSourceIdentifier.GetNormalisedName();
                             foundSurroundingDeclaration =

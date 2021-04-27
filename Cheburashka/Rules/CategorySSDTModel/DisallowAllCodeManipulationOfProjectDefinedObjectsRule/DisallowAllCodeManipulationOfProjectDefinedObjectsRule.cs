@@ -256,7 +256,7 @@ namespace Cheburashka
                             List<TSqlObject> pkcs = allPrimaryKeys
                                 .Where(n => n.Name?.HasName == true
                                             && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                    .SchemaIdentifier == null ||
+                                                    .SchemaIdentifier is null ||
                                                 SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
                                                     alterTableConstraintModificationStatement.SchemaObjectName
                                                         .SchemaIdentifier.Value))
@@ -273,7 +273,7 @@ namespace Cheburashka
                                 List<TSqlObject> fkcs = allForeignKeys
                                     .Where(n => n.Name?.HasName == true
                                                 && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                        .SchemaIdentifier == null ||
+                                                        .SchemaIdentifier is null ||
                                                     SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
                                                         alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                                 && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
@@ -287,7 +287,7 @@ namespace Cheburashka
                                     List<TSqlObject> ukcs = allUniqueConstraints
                                         .Where(n => n.Name?.HasName == true
                                                     && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                            .SchemaIdentifier == null ||
+                                                            .SchemaIdentifier is null ||
                                                         SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
                                                             alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                                     && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
@@ -301,7 +301,7 @@ namespace Cheburashka
                                         List<TSqlObject> chks = allCheckConstraints
                                             .Where(n => n.Name?.HasName == true
                                                         && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                                .SchemaIdentifier == null ||
+                                                                .SchemaIdentifier is null ||
                                                             SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
                                                                 alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
                                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
@@ -400,7 +400,7 @@ namespace Cheburashka
             {
                 return allPossibleAffectedObjects
                     .Where(n => n.Name?.HasName == true
-                                && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier == null 
+                                && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier is null 
                                    || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier.Value)
                                    )
                                 && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], dropElement.Name.Value)
@@ -422,7 +422,7 @@ namespace Cheburashka
             {
                 var table = alterTableAddTableElementStatement.SchemaObjectName.BaseIdentifier.Value;
                 List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                             && (alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier == null 
+                                                             && (alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier is null 
                                                              || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier.Value)
                                                              )
                                                              && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)

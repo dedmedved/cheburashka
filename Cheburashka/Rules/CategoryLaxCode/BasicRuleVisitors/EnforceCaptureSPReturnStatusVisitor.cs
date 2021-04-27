@@ -35,7 +35,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
-           if ((node.Variable == null)
+           if ((node.Variable is null)
                 ||
                  (string.IsNullOrEmpty(node.Variable.Name))
                )

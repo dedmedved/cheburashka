@@ -35,7 +35,7 @@ namespace Cheburashka
         }
         public static bool HasNoFromClause(DeleteSpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                     ||
                     ((node.FromClause is not null) &&
                       (node.FromClause.TableReferences.Count == 0)
@@ -44,7 +44,7 @@ namespace Cheburashka
         }
         public static bool HasNoFromClause(UpdateSpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                     ||
                     ((node.FromClause is not null) &&
                       (node.FromClause.TableReferences.Count == 0)
@@ -53,7 +53,7 @@ namespace Cheburashka
         }
         public static bool HasNoFromClause(QuerySpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                     ||
                     ((node.FromClause is not null) &&
                       (node.FromClause.TableReferences.Count == 0)
@@ -156,7 +156,7 @@ namespace Cheburashka
         // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(DeleteSpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                      ||
                         ((node.FromClause is not null) &&
                            (node.FromClause.TableReferences.Count == 0)
@@ -170,7 +170,7 @@ namespace Cheburashka
         // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(UpdateSpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                      ||
                         ((node.FromClause is not null) &&
                            (node.FromClause.TableReferences.Count == 0)
@@ -183,7 +183,7 @@ namespace Cheburashka
         }
         public static bool HasAtMostOneTableSource(QuerySpecification node)
         {
-            return ((node.FromClause == null)
+            return ((node.FromClause is null)
                      ||
                         ((node.FromClause is not null) &&
                            (node.FromClause.TableReferences.Count == 0)
@@ -237,7 +237,7 @@ namespace Cheburashka
 
         //public static bool HasNoIntoClause(QuerySpecification node)
         //{
-        //    return ((node.Into == null)
+        //    return ((node.Into is null)
         //            ||
         //              (
         //                (node.Into is not null) &&

@@ -36,7 +36,7 @@ namespace Cheburashka
         public override void ExplicitVisit(ReturnStatement node)
         {
             // We are only interested in bare returns occurrences
-            if (node.Expression == null)
+            if (node.Expression is null)
             {
                 BareReturnStatements.Add(node);
             }
