@@ -83,10 +83,9 @@ namespace Cheburashka
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
         {
-                // Get Model collation 
-                SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
-
-                List<SqlRuleProblem> problems = new();
+            // Get Model collation 
+            SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
+            List<SqlRuleProblem> problems = new();
             try {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
@@ -154,23 +153,34 @@ namespace Cheburashka
                         writeCounts[variable.Name]++;
                     }
                 }
-                foreach (var key in objects.Keys) {
-                    if (counts.ContainsKey(key) && (counts[key] >= 1) && (!writeCounts.ContainsKey(key)))
-                        //                if (!(writeCounts.ContainsKey(key)))
-                        {
-                            SqlRuleProblem problem =
-                                new(
-                                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                    , modelElement
-                                    , sqlFragment);
 
-                            RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-                            problems.Add(problem);
-                        }
-                }
+                //This replaces the more tangled code below, but it might not be as clear
+                var cmp = SqlComparer.Comparer;
+                var uninitialisedVariables = objects.Keys.Intersect(counts.Keys, cmp)
+                                                                       .Except(writeCounts.Keys, cmp)
+                                                                       .Where(key => counts[key] >= 1)
+                                                                       .Select(key => objects[key]).Cast<TSqlFragment>().ToList();
+
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, uninitialisedVariables, ruleDescriptor);
+
+                //foreach (var key in objects.Keys) {
+                //    if (counts.ContainsKey(key) && (counts[key] >= 1) && (!writeCounts.ContainsKey(key)))
+                //        //                if (!(writeCounts.ContainsKey(key)))
+                //        {
+                //            SqlRuleProblem problem =
+                //                new(
+                //                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                //                    , modelElement
+                //                    , sqlFragment);
+
+                //            RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+                //            problems.Add(problem);
+                //        }
+                //}
+
             }
             catch (Exception e) {
-//                SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
+ //               SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
             }
             return problems;
         }
