@@ -31,11 +31,11 @@ using static System.String;
 namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId,
-        RuleConstants.ResourceBaseName,                                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,              // ID used to look up the display name inside the resources file
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,    // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategorySSDTModel,                                             // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                                      // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                                                             // Name of the resource file to look up displayname and description in
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,  // ID used to look up the display name inside the resources file
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,        // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategorySSDTModel,                                                 // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                                          // This rule targets specific elements rather than the whole model
     public sealed class DisallowAllCodeManipulationOfProjectDefinedObjectsRule : SqlCodeAnalysisRule
     {
         /// <summary>
@@ -88,38 +88,25 @@ namespace Cheburashka
                 //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                //ISqlIndex idx = sqlElement as ISqlIndex;
-                //ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
-                //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
-
-                // visitor to get the occurrences of statements 
                 AlterIndexStatementVisitor alterIndexStatementVisitor = new();
                 sqlFragment.Accept(alterIndexStatementVisitor);
                 List<AlterIndexStatement> alterIndexStatements = alterIndexStatementVisitor.Objects;
 
-                AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor =
-                    new();
+                AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor = new();
                 sqlFragment.Accept(alterTableConstraintModificationStatementVisitor);
-                List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements =
-                    alterTableConstraintModificationStatementVisitor.Objects;
+                List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements = alterTableConstraintModificationStatementVisitor.Objects;
 
-                AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor =
-                    new();
+                AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor = new();
                 sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
-                List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements =
-                    alterTableAddTableElementStatementVisitor.Objects;
+                List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements = alterTableAddTableElementStatementVisitor.Objects;
 
-                AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor =
-                    new();
+                AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor = new();
                 sqlFragment.Accept(alterTableAlterColumnStatementVisitor);
-                List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements =
-                    alterTableAlterColumnStatementVisitor.Objects;
+                List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements = alterTableAlterColumnStatementVisitor.Objects;
 
-                AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor =
-                    new();
+                AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor = new();
                 sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
-                List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements =
-                    alterTableDropTableElementStatementVisitor.Objects;
+                List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
 
                 //DropClusteredConstraintFragmentOptionVisitor dropClusteredConstraintFragmentOptionVisitor = new DropClusteredConstraintFragmentOptionVisitor();
                 //sqlFragment.Accept(dropClusteredConstraintFragmentOptionVisitor);
@@ -408,12 +395,12 @@ namespace Cheburashka
             }
         }
 
-        private static void CheckAllProjectDefinedTables(SchemaObjectName obj, IList<TSqlObject> allTables, List<TSqlFragment> issues, TSqlFragment dropTableStatement)
+        private static void CheckAllProjectDefinedTables(SchemaObjectName schemaObject, IList<TSqlObject> allTables, List<TSqlFragment> issues, TSqlFragment statement)
         {
-            var schema = obj.SchemaIdentifier is not null
-                ? obj.SchemaIdentifier.Value
+            var schema = schemaObject.SchemaIdentifier is not null
+                ? schemaObject.SchemaIdentifier.Value
                 : "dbo";
-            var table = obj.BaseIdentifier.Value;
+            var table = schemaObject.BaseIdentifier.Value;
             List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
                                                          && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
                                                          && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
@@ -421,7 +408,7 @@ namespace Cheburashka
 
             if (tbls.Count > 0)
             {
-                issues.Add(dropTableStatement);
+                issues.Add(statement);
             }
         }
     }
