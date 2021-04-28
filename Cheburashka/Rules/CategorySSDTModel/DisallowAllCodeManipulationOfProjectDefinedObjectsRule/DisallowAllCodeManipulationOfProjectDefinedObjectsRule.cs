@@ -217,16 +217,7 @@ namespace Cheburashka
                     {
                         foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
                         {
-                            List<TSqlObject> pkcs = allPrimaryKeys
-                                .Where(n => n.Name?.HasName == true
-                                            && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                    .SchemaIdentifier is null ||
-                                                SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                    alterTableConstraintModificationStatement.SchemaObjectName
-                                                        .SchemaIdentifier.Value))
-                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value)
-                                )
-                                .Select(n => n).ToList();
+                            List<TSqlObject> pkcs = FindMatches(allPrimaryKeys, alterTableConstraintModificationStatement, consName);
 
                             if (pkcs.Count > 0)
                             {
@@ -234,42 +225,21 @@ namespace Cheburashka
                             }
                             else
                             {
-                                List<TSqlObject> fkcs = allForeignKeys
-                                    .Where(n => n.Name?.HasName == true
-                                                && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                        .SchemaIdentifier is null ||
-                                                    SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                        alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
-                                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
-                                    .Select(n => n).ToList();
+                                List<TSqlObject> fkcs = FindMatches(allForeignKeys, alterTableConstraintModificationStatement, consName);
                                 if (fkcs.Count > 0)
                                 {
                                     issues.Add(alterTableConstraintModificationStatement);
                                 }
                                 else
                                 {
-                                    List<TSqlObject> ukcs = allUniqueConstraints
-                                        .Where(n => n.Name?.HasName == true
-                                                    && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                            .SchemaIdentifier is null ||
-                                                        SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                            alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
-                                                    && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
-                                        .Select(n => n).ToList();
+                                    List<TSqlObject> ukcs = FindMatches(allUniqueConstraints, alterTableConstraintModificationStatement, consName);
                                     if (ukcs.Count > 0)
                                     {
                                         issues.Add(alterTableConstraintModificationStatement);
                                     }
                                     else
                                     {
-                                        List<TSqlObject> chks = allCheckConstraints
-                                            .Where(n => n.Name?.HasName == true
-                                                        && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                                .SchemaIdentifier is null ||
-                                                            SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                                alterTableConstraintModificationStatement.SchemaObjectName.SchemaIdentifier.Value))
-                                                        && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value))
-                                            .Select(n => n).ToList();
+                                        List<TSqlObject> chks = FindMatches(allCheckConstraints, alterTableConstraintModificationStatement, consName);
                                         if (chks.Count > 0)
                                         {
                                             issues.Add(alterTableConstraintModificationStatement);
@@ -285,11 +255,7 @@ namespace Cheburashka
                 {
                     if (alterTableAddTableElementStatement.SchemaObjectName.IsLocalObject())
                     {
-                        List<TSqlObject> tbls = FindMatchingAddedTableElements(allTables, alterTableAddTableElementStatement);
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(alterTableAddTableElementStatement);
-                        }
+                        CheckAllProjectDefinedTables(alterTableAddTableElementStatement.SchemaObjectName, allTables, issues, alterTableAddTableElementStatement);
                     }
                 }
 
@@ -297,20 +263,8 @@ namespace Cheburashka
                 {
                     // internal objects only
                     if (alterTableAlterColumnStatement.SchemaObjectName.IsLocalObject())
-                        {
-                            var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier is not null
-                            ? alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier.Value
-                            : "dbo";
-                        var table = alterTableAlterColumnStatement.SchemaObjectName.BaseIdentifier.Value;
-                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
-                        ).Select(n => n).ToList();
-
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(alterTableAlterColumnStatement);
-                        }
+                    {
+                        CheckAllProjectDefinedTables(alterTableAlterColumnStatement.SchemaObjectName, allTables, issues, alterTableAlterColumnStatement); 
                     }
                 }
 
@@ -392,6 +346,20 @@ namespace Cheburashka
                                                              && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
                 ).Select(n => n).ToList();
                 return tbls;
+            }
+
+            static List<TSqlObject> FindMatches(IList<TSqlObject> allPrimaryKeys, AlterTableConstraintModificationStatement alterTableConstraintModificationStatement, Identifier consName)
+            {
+                return allPrimaryKeys
+                    .Where(n => n.Name?.HasName == true
+                                && (alterTableConstraintModificationStatement.SchemaObjectName
+                                        .SchemaIdentifier is null ||
+                                    SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
+                                        alterTableConstraintModificationStatement.SchemaObjectName
+                                            .SchemaIdentifier.Value))
+                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value)
+                    )
+                    .Select(n => n).ToList();
             }
         }
 
