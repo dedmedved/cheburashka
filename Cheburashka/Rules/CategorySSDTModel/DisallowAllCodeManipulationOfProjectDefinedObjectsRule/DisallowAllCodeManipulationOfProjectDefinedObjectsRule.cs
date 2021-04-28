@@ -154,38 +154,15 @@ namespace Cheburashka
 
                 foreach (var dropTableStatement in dropTableStatements)
                 {
-                    foreach (var obj in dropTableStatement.Objects) {
-                        var schema = obj.SchemaIdentifier is not null
-                            ? obj.SchemaIdentifier.Value
-                            : "dbo";
-                        var table = obj.BaseIdentifier.Value;
-                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],schema)
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],table)
-                        ).Select(n => n).ToList();
-
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(dropTableStatement);
-                        }
+                    foreach (var obj in dropTableStatement.Objects)
+                    {
+                        CheckAllProjectDefinedTables(obj, allTables, issues, dropTableStatement);
                     }
                 }
 
                 foreach (var createIndexStatement in createIndexStatements)
                 {
-                    var schema = createIndexStatement.OnName.SchemaIdentifier is not null
-                        ? createIndexStatement.OnName.SchemaIdentifier.Value
-                        : "dbo";
-                    var table = createIndexStatement.OnName.BaseIdentifier.Value;
-                    List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                 && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],schema)
-                                                                 && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],table)
-                    ).Select(n => n).ToList();
-
-                    if (tbls.Count > 0)
-                    {
-                        issues.Add(createIndexStatement);
-                    }
+                    CheckAllProjectDefinedTables(createIndexStatement.OnName, allTables, issues, createIndexStatement);
                 }
 
                 foreach (var dropIndexStatement in dropIndexStatements)
@@ -428,6 +405,23 @@ namespace Cheburashka
                                                              && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
                 ).Select(n => n).ToList();
                 return tbls;
+            }
+        }
+
+        private static void CheckAllProjectDefinedTables(SchemaObjectName obj, IList<TSqlObject> allTables, List<TSqlFragment> issues, TSqlFragment dropTableStatement)
+        {
+            var schema = obj.SchemaIdentifier is not null
+                ? obj.SchemaIdentifier.Value
+                : "dbo";
+            var table = obj.BaseIdentifier.Value;
+            List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
+                                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
+                                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
+            ).Select(n => n).ToList();
+
+            if (tbls.Count > 0)
+            {
+                issues.Add(dropTableStatement);
             }
         }
     }
