@@ -100,9 +100,9 @@ namespace Cheburashka
             // visitor to get the occurrences of goto statements
             var visitor = new GotoVisitor();
             sqlFragment.Accept(visitor);
-            IList<GoToStatement> goToStatements = visitor.GoToStatements;
+            var issues = visitor.GoToStatements.Cast<TSqlFragment>().ToList();
             // Create problems for each GOTO statement found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, goToStatements.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
     }

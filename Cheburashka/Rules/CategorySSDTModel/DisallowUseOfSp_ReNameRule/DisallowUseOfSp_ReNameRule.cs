@@ -104,9 +104,9 @@ namespace Cheburashka
             // visitor to get the occurrences of sp_rename call statements
             var visitor = new DisallowUseOfSp_ReNameVisitor();
             sqlFragment.Accept(visitor);
-            IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
+            var issues = visitor.ExecuteSpecifications.Cast<TSqlFragment>().ToList();
             // Create problems for each sp_rename call statement found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, executeSpecifications.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
     }

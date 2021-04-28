@@ -251,10 +251,8 @@ namespace Cheburashka
                 // this is totally independent of the above search.
                 var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
                 sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
-                IList<ExecutableProcedureReference> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames;
-                // Create problems for each one part object name source found 
-                // check each against list of builtin that might be passed to typeid
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+                var issues = literalOnePartNameStoredProcsContextsVisitor.OnePartNames.Cast<TSqlFragment>().ToList();
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch
             {

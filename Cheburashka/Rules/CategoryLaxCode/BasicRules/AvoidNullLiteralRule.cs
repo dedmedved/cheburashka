@@ -105,9 +105,9 @@ namespace Cheburashka
             // visitor to get the occurrences of bare return statements
             var visitor = new NullLiteralVisitor();
             sqlFragment.Accept(visitor);
-            IList<ScalarExpression> nullLiteralExpressions = visitor.NullLiteralExpressions;
+            var issues = visitor.NullLiteralExpressions.Cast<TSqlFragment>().ToList();
             // Create problems for each Return statement found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, nullLiteralExpressions.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }

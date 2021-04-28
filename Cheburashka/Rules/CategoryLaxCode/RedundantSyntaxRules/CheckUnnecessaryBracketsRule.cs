@@ -100,8 +100,8 @@ namespace Cheburashka
             UnnecessaryParenthesisVisitor visitor = new();
             sqlFragment.Accept(visitor);
             IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
-            var brackets = unnecessaryBrackets.Distinct();
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, brackets.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            var issues = unnecessaryBrackets.Distinct().ToList();
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
     }

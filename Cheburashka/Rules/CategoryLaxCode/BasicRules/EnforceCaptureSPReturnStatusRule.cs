@@ -100,9 +100,9 @@ namespace Cheburashka
             // visitor to get the occurrences of execute statements
             EnforceCaptureSPReturnStatusVisitor visitor = new();
             sqlFragment.Accept(visitor);
-            IList<ExecuteSpecification> executeSpecifications = visitor.ExecuteSpecifications;
+            var issues = visitor.ExecuteSpecifications.Cast<TSqlFragment>().ToList();
             // Create problems for each non-captured execute found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, executeSpecifications.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }

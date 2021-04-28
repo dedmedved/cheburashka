@@ -101,9 +101,9 @@ namespace Cheburashka
             // visitor to get the occurrences of bare return statements
             var visitor = new BareReturnVisitor();
             sqlFragment.Accept(visitor);
-            IList<ReturnStatement> bareReturnStatements = visitor.BareReturnStatements;
+            var issues = visitor.BareReturnStatements.Cast<TSqlFragment>().ToList();
             // Create problems for each Return statement found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, bareReturnStatements.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
     }

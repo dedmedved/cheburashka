@@ -97,7 +97,7 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            List<BeginEndBlockStatement> problemBegins = new() ;
+            List<TSqlFragment> issues = new() ;
 
             var code =  (sqlFragment as CreateProcedureStatement)?.StatementList 
                                ?? (sqlFragment as CreateFunctionStatement)?.StatementList
@@ -107,9 +107,9 @@ namespace Cheburashka
             {
                 foreach (var sqlStatement in code.Statements)
                 {
-                    problemBegins.AddRange(InvalidUseOfBegin(true, sqlStatement));
+                    issues.AddRange(InvalidUseOfBegin(true, sqlStatement));
                 }
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, problemBegins.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
 
             return problems;

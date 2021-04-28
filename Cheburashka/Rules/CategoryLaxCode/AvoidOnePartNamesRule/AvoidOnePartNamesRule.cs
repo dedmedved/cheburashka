@@ -224,21 +224,21 @@ namespace Cheburashka
                 // this is totally independent of the above search.
                 var literalOnePartNameContextsVisitor = new SchemaNameAcceptingFunctionsVisitor();
                 sqlFragment.Accept(literalOnePartNameContextsVisitor);
-                IList<FunctionCall> literalOnePartNameContexts = literalOnePartNameContextsVisitor.OnePartNames;
+                List<TSqlFragment> literalOnePartNameContexts = literalOnePartNameContextsVisitor.OnePartNames.Cast<TSqlFragment>().ToList();
 
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameContexts, ruleDescriptor);
 
                 // now to look inside literal arguments to system procedures.
                 // this is totally independent of the above search.
                 var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
                 sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
-                IList<ExecutableProcedureReference> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames;
+                List<TSqlFragment> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames.Cast<TSqlFragment>().ToList();
 
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts.Cast<TSqlFragment>().ToList(), ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts, ruleDescriptor);
             }
             catch
             {

@@ -128,7 +128,7 @@ namespace Cheburashka
                 }
                 if (!foundSurroundingSetStatement)
                 {
-                    RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { expression }, ruleDescriptor);
+                    RuleUtils.UpdateProblems(problems, modelElement, elementName, expression, ruleDescriptor);
                 }
             }
 
