@@ -19,12 +19,11 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
+using System.Collections.Generic;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Cheburashka
 {
@@ -38,7 +37,7 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(EnforceReturnRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
         RuleConstants.EnforceReturn_RuleName,           // ID used to look up the display name inside the resources file
         RuleConstants.EnforceReturn_ProblemDescription,                 // ID used to look up the description inside the resources file
@@ -118,18 +117,16 @@ namespace Cheburashka
             {
                 return true;
             }
-            else
+
+            var lastStatementIdx = cnt - 1;
+            switch (code.Statements[lastStatementIdx])
             {
-                var lastStatementIdx = cnt - 1;
-                switch (code.Statements[lastStatementIdx])
-                {
-                    case BeginEndAtomicBlockStatement statement:        // can only be true at first level of code in an sp, but that will do.
-                        return InvalidUseOfReturn(statement.StatementList);
-                    case BeginEndBlockStatement statement:
-                        return InvalidUseOfReturn(statement.StatementList);
-                    case ReturnStatement:
-                        return false;
-                }
+                case BeginEndAtomicBlockStatement statement:        // can only be true at first level of code in an sp, but that will do.
+                    return InvalidUseOfReturn(statement.StatementList);
+                case BeginEndBlockStatement statement:
+                    return InvalidUseOfReturn(statement.StatementList);
+                case ReturnStatement:
+                    return false;
             }
 
             return true;
