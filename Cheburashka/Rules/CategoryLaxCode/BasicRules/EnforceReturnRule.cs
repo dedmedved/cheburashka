@@ -104,7 +104,7 @@ namespace Cheburashka
             // Create problems for each return not found 
             if (problemExists)
             {
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { sqlFragment }, ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
 
             return problems;

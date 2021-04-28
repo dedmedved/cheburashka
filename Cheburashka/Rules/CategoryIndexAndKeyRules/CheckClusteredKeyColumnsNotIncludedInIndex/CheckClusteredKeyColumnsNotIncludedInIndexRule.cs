@@ -191,7 +191,7 @@ namespace Cheburashka
                     //foreach (TSqlFragment issue in issues) {
                     if (issueFound)
                     {
-                        RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment>{sqlFragment}, ruleDescriptor);
+                        RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
                     }
                 }
             }

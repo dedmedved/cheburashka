@@ -175,7 +175,7 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 if (multipleFKS)
                 {
-                    RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { sqlFragment }, ruleDescriptor);
+                    RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
                 }
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects

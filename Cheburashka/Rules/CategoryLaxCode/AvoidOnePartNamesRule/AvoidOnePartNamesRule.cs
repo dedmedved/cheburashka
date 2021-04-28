@@ -213,7 +213,7 @@ namespace Cheburashka
                     // If we can't eliminate it, report it as a problem.
                     if (!foundSurroundingDeclaration)
                     {
-                        RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { tableSource }, ruleDescriptor);
+                        RuleUtils.UpdateProblems(problems, modelElement, elementName, tableSource, ruleDescriptor);
                     }
                 }
 

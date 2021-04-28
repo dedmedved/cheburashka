@@ -117,7 +117,7 @@ namespace Cheburashka
                     ) 
                )
             {
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, new List<TSqlFragment> { sqlFragment }, ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
 
             return problems;
