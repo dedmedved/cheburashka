@@ -108,14 +108,6 @@ namespace Cheburashka
                 sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
                 List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
 
-                //DropClusteredConstraintFragmentOptionVisitor dropClusteredConstraintFragmentOptionVisitor = new DropClusteredConstraintFragmentOptionVisitor();
-                //sqlFragment.Accept(dropClusteredConstraintFragmentOptionVisitor);
-                //List<DropClusteredConstraintFragmentOption> dropClusteredConstraintFragmentOptions = dropClusteredConstraintFragmentOptionVisitor.Objects;
-
-                //DropClusteredConstraintStateOptionVisitor dropClusteredConstraintStateOptionVisitor = new DropClusteredConstraintStateOptionVisitor();
-                //sqlFragment.Accept(dropClusteredConstraintStateOptionVisitor);
-                //List<DropClusteredConstraintStateOption> dropClusteredConstraintStateOptions = dropClusteredConstraintStateOptionVisitor.Objects;
-
                 CreateIndexStatementVisitor createIndexStatementVisitor = new();
                 sqlFragment.Accept(createIndexStatementVisitor);
                 List<CreateIndexStatement> createIndexStatements = createIndexStatementVisitor.Objects;
