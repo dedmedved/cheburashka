@@ -90,7 +90,7 @@ namespace Cheburashka
 
             // if we can't retrieve this information - compound model etc - crap out early
 
-            if ( hostTables.Count == 0 || fkTables.Count == 0 )
+            if (hostTables.Count == 0 || fkTables.Count == 0)
             {
                 return problems;
             }
@@ -137,10 +137,7 @@ namespace Cheburashka
                 clusteredIndexFound = (bool) index.GetProperty(Index.Clustered);
                 if (clusteredIndexFound)
                 {
-                    foreach (var v in cols)
-                    {
-                        ClusterColumns.Add(v.ObjectName.Parts[2]);
-                    }
+                    ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                 }
             }
 
@@ -166,10 +163,7 @@ namespace Cheburashka
                     clusteredIndexFound = (bool) pk.GetProperty(PrimaryKeyConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        foreach (var v in cols)
-                        {
-                            ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        }
+                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
 
                 }
@@ -196,10 +190,7 @@ namespace Cheburashka
                     clusteredIndexFound = (bool)un.GetProperty(UniqueConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
-                        foreach (var v in cols)
-                        {
-                            ClusterColumns.Add(v.ObjectName.Parts[2]);
-                        }
+                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
                 }
             }
@@ -213,12 +204,7 @@ namespace Cheburashka
                     var cols = index.GetReferencedRelationshipInstances(
                         Index.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)index.GetProperty(Index.Clustered);
-
-                    foreach (var v in cols)//.ToList())
-                    {
-                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    }
-
+                    leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
                     {
@@ -234,12 +220,7 @@ namespace Cheburashka
                     var cols = pk.GetReferencedRelationshipInstances(
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)pk.GetProperty(PrimaryKeyConstraint.Clustered);
-
-                    foreach (var v in cols)
-                    {
-                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    }
-
+                    leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
                     {
@@ -255,12 +236,7 @@ namespace Cheburashka
                     var cols = un.GetReferencedRelationshipInstances(
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
                     var clustered = (bool)un.GetProperty(UniqueConstraint.Clustered);
-
-                    foreach (var v in cols)
-                    {
-                        leadingEdgeIndexColumns.Add(v.ObjectName.Parts[2]);
-                    }
-
+                    leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
                     {

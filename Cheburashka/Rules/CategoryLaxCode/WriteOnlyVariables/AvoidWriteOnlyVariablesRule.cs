@@ -197,14 +197,17 @@ namespace Cheburashka
             var nonAssignmentContextVariableReferences = new Dictionary<string, List<VariableReference>>(SqlComparer.Comparer);
             foreach (var varRef in variableReferences)
             {
-                bool assignmentRefFound = false;
-                foreach ( var codeFragment in setVariables.Select(n => n.Context) )
-                {
-                    if ( codeFragment.SQLModel_Contains(varRef))
-                    {
-                        assignmentRefFound = true;
-                    }
-                }
+                
+                var foundContexts = setVariables.Select(setVariable => setVariable.Context).Where(codeFragment => codeFragment.SQLModel_Contains(varRef));
+                bool assignmentRefFound = foundContexts.Count() > 0;
+                //foreach ( var codeFragment in setVariables.Select(n => n.Context) )
+                //{
+                //    if ( codeFragment.SQLModel_Contains(varRef))
+                //    {
+                //        assignmentRefFound = true;
+                //        break;
+                //    }
+                //}
                 if ( ! assignmentRefFound )
                 {
                     if (!nonAssignmentContextVariableReferences.ContainsKey(varRef.Name))

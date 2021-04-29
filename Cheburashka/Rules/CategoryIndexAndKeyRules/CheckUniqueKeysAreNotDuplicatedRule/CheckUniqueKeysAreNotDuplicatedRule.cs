@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 
@@ -137,12 +136,8 @@ namespace Cheburashka
                 if (unique)
                 {
                     List<TSqlFragment> issues = new();
-                    List<string> leadingEdgeIndexColumns = new();
-
-                    foreach (var c in thisIndexOrConstraintColumns)
-                    {
-                        leadingEdgeIndexColumns.Add(c);
-                    }
+                    List<string> leadingEdgeIndexColumns = thisIndexOrConstraintColumns;//new();
+                    //leadingEdgeIndexColumns.AddRange(thisIndexOrConstraintColumns);
 
                     List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(parentObjectSchema, parentObjectName);
                     List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(parentObjectSchema, parentObjectName);
@@ -162,8 +157,8 @@ namespace Cheburashka
                             List<string> sortedPrimaryKeyColumns = columnSpecifications
                                 .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                 .Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<string> pkLeadingEdgeIndexColumns = new();
-                            pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
+                            List<string> pkLeadingEdgeIndexColumns = sortedPrimaryKeyColumns;// new();
+                            //pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
 
                             foundMoreConciseUniqueCondition =
                                 DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
@@ -194,8 +189,8 @@ namespace Cheburashka
                                 List<string> sortedUniqueIndexColumns = columnSpecifications
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> otherLeadingEdgeIndexColumns = new();
-                                otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
+                                List<string> otherLeadingEdgeIndexColumns = sortedUniqueIndexColumns;//new();
+                                //otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
 
                                 foundMoreConciseUniqueCondition =
                                     DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
@@ -230,8 +225,8 @@ namespace Cheburashka
                                 List<string> sortedUniqueConstraintColumns = uniqueConstraintColumns
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> ConstraintLeadingEdgeIndexColumns = new();
-                                ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
+                                List<string> ConstraintLeadingEdgeIndexColumns = sortedUniqueConstraintColumns;// new();
+                                //ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
 
                                 foundMoreConciseUniqueCondition =
                                     DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
@@ -265,7 +260,7 @@ namespace Cheburashka
             return problems;
             }
 
-private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
+        private static bool DetermineIfThisConstraintIsImpliedByTheOtherConstraint(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
