@@ -148,17 +148,13 @@ namespace Cheburashka
                 {
                     foreach (var dropIndexClause in dropIndexStatement.DropIndexClauses)
                     {
-                        string schemaName = null;
-                        string tableName = null;
+                        SchemaObjectName schemaObject = null;
                         string indexName = null;
                         bool processIndexDropStatement = false;
                         if (!(dropIndexClause is not DropIndexClause dic))
                         {
                             processIndexDropStatement = dic.Object.IsLocalObject();
-                            schemaName = dic.Object.SchemaIdentifier is not null
-                                ? dic.Object.SchemaIdentifier.Value
-                                : "dbo";
-                            tableName = dic.Object.BaseIdentifier.Value;
+                            schemaObject = dic.Object;
                             indexName = dic.Index.Value;
                         }
                         else
@@ -166,21 +162,14 @@ namespace Cheburashka
                             if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
                             {
                                 processIndexDropStatement = olddic.Index.IsLocalObject();
-                                schemaName = olddic.Index.SchemaIdentifier is not null
-                                    ? olddic.Index.SchemaIdentifier.Value
-                                    : "dbo";
-                                tableName = olddic.Index.BaseIdentifier.Value;
+                                schemaObject = olddic.Index;
                                 indexName = olddic.Index.ChildIdentifier.Value;
                             }
                         }
 
                         if (processIndexDropStatement)
                         {
-                            List<TSqlObject> ixs = FindMatchingDroppedOrAlteredIndexes(allIndexes, schemaName, tableName, indexName);
-                            if (ixs.Count > 0)
-                            {
-                                issues.Add(dropIndexClause);
-                            }
+                            CheckDroppedOrAlteredIndexes(allIndexes, issues, dropIndexClause, schemaObject, indexName);
                         }
                     }
                 }
@@ -191,14 +180,11 @@ namespace Cheburashka
                     &&  alterIndexStatement.OnName.IsLocalObject()
                     )
                     {
-                        List<TSqlObject> ixs = FindMatchingDroppedOrAlteredIndexes(allIndexes
-                                                                    , alterIndexStatement.OnName.SchemaIdentifier.Value
-                                                                    , alterIndexStatement.OnName.BaseIdentifier.Value
-                                                                    , alterIndexStatement.Name.Value);
-                        if (ixs.Count > 0)
-                        {
-                            issues.Add(alterIndexStatement);
-                        }
+                        CheckDroppedOrAlteredIndexes(allIndexes
+                                                    , issues
+                                                    , alterIndexStatement
+                                                    , alterIndexStatement.OnName
+                                                    , alterIndexStatement.Name.Value);
                     }
                 }
 
@@ -209,36 +195,10 @@ namespace Cheburashka
                     {
                         foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
                         {
-                            List<TSqlObject> pkcs = FindMatches(allPrimaryKeys, alterTableConstraintModificationStatement, consName);
-
-                            if (pkcs.Count > 0)
-                            {
-                                issues.Add(alterTableConstraintModificationStatement);
-                            }
-                            else
-                            {
-                                List<TSqlObject> fkcs = FindMatches(allForeignKeys, alterTableConstraintModificationStatement, consName);
-                                if (fkcs.Count > 0)
-                                {
-                                    issues.Add(alterTableConstraintModificationStatement);
-                                }
-                                else
-                                {
-                                    List<TSqlObject> ukcs = FindMatches(allUniqueConstraints, alterTableConstraintModificationStatement, consName);
-                                    if (ukcs.Count > 0)
-                                    {
-                                        issues.Add(alterTableConstraintModificationStatement);
-                                    }
-                                    else
-                                    {
-                                        List<TSqlObject> chks = FindMatches(allCheckConstraints, alterTableConstraintModificationStatement, consName);
-                                        if (chks.Count > 0)
-                                        {
-                                            issues.Add(alterTableConstraintModificationStatement);
-                                        }
-                                    }
-                                }
-                            }
+                            if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                            else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                            else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
+                            else if (CheckAlterTableStatement(allCheckConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
                         }
                     }
                 }
@@ -269,27 +229,9 @@ namespace Cheburashka
                             .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
                         )
                         {
-                            List<TSqlObject> pkcs = FindMatchingDroppedTableConstraint(allPrimaryKeys, alterTableDropTableElementStatement, dropElement);
-                            if (pkcs.Count > 0)
-                            {
-                                issues.Add(alterTableDropTableElementStatement);
-                            }
-                            else
-                            {
-                                List<TSqlObject> fkcs = FindMatchingDroppedTableConstraint(allForeignKeys, alterTableDropTableElementStatement, dropElement);
-                                if (fkcs.Count > 0)
-                                {
-                                    issues.Add(alterTableDropTableElementStatement);
-                                }
-                                else
-                                {
-                                    List<TSqlObject> ukcs = FindMatchingDroppedTableConstraint(allUniqueConstraints, alterTableDropTableElementStatement, dropElement);
-                                    if (ukcs.Count > 0)
-                                    {
-                                        issues.Add(alterTableDropTableElementStatement);
-                                    }
-                                }
-                            }
+                            if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                            else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                            else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
                         }
                     }
                 }
@@ -306,67 +248,47 @@ namespace Cheburashka
 
             return problems;
 
-            static List<TSqlObject> FindMatchingDroppedTableConstraint(IList<TSqlObject> allPossibleAffectedObjects, AlterTableDropTableElementStatement alterTableDropTableElementStatement, AlterTableDropTableElement dropElement)
-            {
-                return allPossibleAffectedObjects
-                    .Where(n => n.Name?.HasName == true
-                                && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier is null 
-                                   || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier.Value)
-                                   )
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], dropElement.Name.Value)
-                    )
-                    .Select(n => n).ToList();
-            }
-
-            static List<TSqlObject> FindMatchingDroppedOrAlteredIndexes(IList<TSqlObject> allObjects, string schemaName, string tableName, string objectName)
-            {
-                return allObjects
-                    .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], objectName)
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], tableName)
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schemaName)
-                    )
-                    .Select(n => n).ToList();
-            }
-
-            static List<TSqlObject> FindMatchingAddedTableElements(IList<TSqlObject> allTables, AlterTableAddTableElementStatement alterTableAddTableElementStatement)
-            {
-                var table = alterTableAddTableElementStatement.SchemaObjectName.BaseIdentifier.Value;
-                List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                             && (alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier is null 
-                                                             || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier.Value)
-                                                             )
-                                                             && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
-                ).Select(n => n).ToList();
-                return tbls;
-            }
-
-            static List<TSqlObject> FindMatches(IList<TSqlObject> allPrimaryKeys, AlterTableConstraintModificationStatement alterTableConstraintModificationStatement, Identifier consName)
-            {
-                return allPrimaryKeys
-                    .Where(n => n.Name?.HasName == true
-                                && (alterTableConstraintModificationStatement.SchemaObjectName
-                                        .SchemaIdentifier is null ||
-                                    SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                        alterTableConstraintModificationStatement.SchemaObjectName
-                                            .SchemaIdentifier.Value))
-                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value)
-                    )
-                    .Select(n => n).ToList();
-            }
         }
 
-        private static void CheckAllProjectDefinedTables(SchemaObjectName schemaObject, IList<TSqlObject> allTables, List<TSqlFragment> issues, TSqlFragment statement)
+        private static void CheckAllProjectDefinedTables(SchemaObjectName schemaObject, IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, TSqlFragment statement)
         {
-            var schema = schemaObject.SchemaIdentifier is not null
-                ? schemaObject.SchemaIdentifier.Value
-                : "dbo";
-            var table = schemaObject.BaseIdentifier.Value;
-            List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schema)
-                                                         && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], table)
-            ).Select(n => n).ToList();
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => n.Name?.HasName == true
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (schemaObject.SchemaIdentifier?.Value ?? "dbo") )
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], schemaObject.BaseIdentifier.Value)
+                )
+                .Select(n => n).ToList();
 
-            if (tbls.Count > 0)
+            if (objs.Count > 0)
+            {
+                issues.Add(statement);
+            }
+
+        }
+        // making this a function breaks all kinds of rules but it needs to short-cicuit further executoin for the sake of efficiency
+        private static bool CheckAlterTableStatement(IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, AlterTableStatement alterTableStatement, Identifier alteredElement)
+        {
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => n.Name?.HasName == true
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (alterTableStatement.SchemaObjectName.SchemaIdentifier?.Value ?? "dbo"))
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], alteredElement.Value)
+                )
+                .Select(n => n).ToList();
+            if (objs.Count > 0)
+            {
+                issues.Add(alterTableStatement);
+            }
+            return objs.Count > 0;
+        }
+        private static void CheckDroppedOrAlteredIndexes(IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, TSqlFragment statement, SchemaObjectName schemaObject, /*string schemaName, string tableName,*/ string objectName)
+        {
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], objectName)
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], schemaObject.BaseIdentifier.Value)
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (schemaObject.SchemaIdentifier?.Value ?? "dbo"))
+                )
+                .Select(n => n).ToList();
+            if (objs.Count > 0)
             {
                 issues.Add(statement);
             }
