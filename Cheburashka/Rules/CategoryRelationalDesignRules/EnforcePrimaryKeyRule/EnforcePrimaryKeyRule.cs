@@ -128,11 +128,7 @@ namespace Cheburashka
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-                if (!bFoundPrimaryKey)
-                {
-                    RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
-                }
+                RuleUtils.UpdateProblems(!bFoundPrimaryKey,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 

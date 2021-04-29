@@ -111,14 +111,12 @@ namespace Cheburashka
                 onlyRestrictedStatementsFound = CheckForRestrictedStatementList(code,0 );
             }
             // Create problems for each try/catch not found 
-            if (    tryCatchStatements.Count == 0 
-                &&  (    (createProcedureStatement is null ) 
-                      || (createProcedureStatement is not null && ! onlyRestrictedStatementsFound ) 
-                    ) 
-               )
-            {
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
-            }
+            var problemExists = (tryCatchStatements.Count == 0
+                && ((createProcedureStatement is null)
+                      || (createProcedureStatement is not null && !onlyRestrictedStatementsFound)
+                    ));
+
+            RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
 
             return problems;
         }

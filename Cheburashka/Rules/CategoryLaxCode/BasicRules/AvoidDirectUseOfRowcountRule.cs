@@ -126,10 +126,7 @@ namespace Cheburashka
                 {
                     foundSurroundingSetStatement = variableDeclarationElements.Any(svs => svs.SQLModel_Contains(expression));
                 }
-                if (!foundSurroundingSetStatement)
-                {
-                    RuleUtils.UpdateProblems(problems, modelElement, elementName, expression, ruleDescriptor);
-                }
+                RuleUtils.UpdateProblems(!foundSurroundingSetStatement,problems, modelElement, elementName, expression, ruleDescriptor);
             }
 
             return problems;

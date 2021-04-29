@@ -210,11 +210,7 @@ namespace Cheburashka
                         foundSurroundingDeclaration = serviceBrokerContexts.Any(v => v.SQLModel_Contains(tableSource));
                     }
 
-                    // If we can't eliminate it, report it as a problem.
-                    if (!foundSurroundingDeclaration)
-                    {
-                        RuleUtils.UpdateProblems(problems, modelElement, elementName, tableSource, ruleDescriptor);
-                    }
+                    RuleUtils.UpdateProblems(!foundSurroundingDeclaration,problems, modelElement, elementName, tableSource, ruleDescriptor);
                 }
 
                 // may need to sweep user defined type separately

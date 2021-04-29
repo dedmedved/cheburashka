@@ -377,5 +377,19 @@ namespace Cheburashka
             //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
             problems.Add(problem);
         }
+        public static void UpdateProblems(bool problemExists, List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, TSqlFragment issue, RuleDescriptor ruleDescriptor)
+        {
+            if (problemExists)
+            {
+                SqlRuleProblem problem =
+                    new(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , issue);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
+        }
     }
 }

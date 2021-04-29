@@ -244,13 +244,9 @@ namespace Cheburashka
                 }
             }
 
-            if (!foundIndexThatMatchesAKey)
-            {
-                // The rule execution context has all the objects we'll need, including the fragment representing the object,
-                // and a descriptor that lets us access rule metadata
-                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
-            }
+            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+            RuleUtils.UpdateProblems(!foundIndexThatMatchesAKey,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+
             return problems;
         }
 

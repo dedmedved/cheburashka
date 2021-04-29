@@ -189,10 +189,7 @@ namespace Cheburashka
 
                     // Create problems for each object
                     //foreach (TSqlFragment issue in issues) {
-                    if (issueFound)
-                    {
-                        RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
-                    }
+                    RuleUtils.UpdateProblems(issueFound, problems, modelElement, elementName, sqlFragment, ruleDescriptor);
                 }
             }
             catch

@@ -101,10 +101,7 @@ namespace Cheburashka
             var problemExists = code is null || InvalidUseOfReturn(code);
 
             // Create problems for each return not found 
-            if (problemExists)
-            {
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
-            }
+            RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
 
             return problems;
         }
