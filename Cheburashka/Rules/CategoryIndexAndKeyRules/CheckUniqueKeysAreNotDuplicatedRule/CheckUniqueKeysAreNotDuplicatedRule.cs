@@ -135,7 +135,7 @@ namespace Cheburashka
 
                 if (unique)
                 {
-                    List<TSqlFragment> issues = new();
+                    //List<TSqlFragment> issues = new();
                     List<string> leadingEdgeIndexColumns = thisIndexOrConstraintColumns;//new();
                     //leadingEdgeIndexColumns.AddRange(thisIndexOrConstraintColumns);
 
@@ -239,17 +239,10 @@ namespace Cheburashka
                         }
                     }
 
-                    if (foundMoreConciseUniqueCondition)
-                    {
-                        sqlFragment ??= new UniqueConstraintDefinition();
-
-                        issues.Add(sqlFragment);
-                    }
-
                     // The rule execution context has all the objects we'll need, including the fragment representing the object,
                     // and a descriptor that lets us access rule metadata
                     RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                    RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+                    RuleUtils.UpdateProblems(foundMoreConciseUniqueCondition, problems, modelElement, elementName, sqlFragment, ruleDescriptor);
 
                 }
             }
