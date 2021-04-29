@@ -151,20 +151,19 @@ namespace Cheburashka
                         SchemaObjectName schemaObject = null;
                         string indexName = null;
                         bool processIndexDropStatement = false;
-                        if (!(dropIndexClause is not DropIndexClause dic))
+//                        if (!(dropIndexClause is not DropIndexClause dic))
+                        if (dropIndexClause is DropIndexClause dic)
                         {
                             processIndexDropStatement = dic.Object.IsLocalObject();
                             schemaObject = dic.Object;
                             indexName = dic.Index.Value;
                         }
-                        else
+                        else if (dropIndexClause is BackwardsCompatibleDropIndexClause olddic)
                         {
-                            if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
-                            {
-                                processIndexDropStatement = olddic.Index.IsLocalObject();
-                                schemaObject = olddic.Index;
-                                indexName = olddic.Index.ChildIdentifier.Value;
-                            }
+//                          if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
+                            processIndexDropStatement = olddic.Index.IsLocalObject();
+                            schemaObject = olddic.Index;
+                            indexName = olddic.Index.ChildIdentifier.Value;
                         }
 
                         if (processIndexDropStatement)
@@ -174,10 +173,9 @@ namespace Cheburashka
                     }
                 }
 
-                foreach (var alterIndexStatement in alterIndexStatements)
+                foreach (var alterIndexStatement in alterIndexStatements.Where(n => n.OnName.IsLocalObject()))
                 {
                     if (alterIndexStatement.Name.Value is not null
-                    &&  alterIndexStatement.OnName.IsLocalObject()
                     )
                     {
                         CheckDroppedOrAlteredIndexes(allIndexes
@@ -188,51 +186,37 @@ namespace Cheburashka
                     }
                 }
 
-                foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements)
+                foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
                     // internal objects only
-                    if (alterTableConstraintModificationStatement.SchemaObjectName.IsLocalObject())
+                    foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
                     {
-                        foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
-                        {
-                            if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableConstraintModificationStatement, consName)) { }
-                            else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableConstraintModificationStatement, consName)) { }
-                            else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
-                            else if (CheckAlterTableStatement(allCheckConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
-                        }
+                        if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allCheckConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
                     }
                 }
 
-                foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements)
+                foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    if (alterTableAddTableElementStatement.SchemaObjectName.IsLocalObject())
-                    {
-                        CheckAllProjectDefinedTables(alterTableAddTableElementStatement.SchemaObjectName, allTables, issues, alterTableAddTableElementStatement);
-                    }
+                    CheckAllProjectDefinedTables(alterTableAddTableElementStatement.SchemaObjectName, allTables, issues, alterTableAddTableElementStatement);
                 }
 
-                foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements)
+                foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    // internal objects only
-                    if (alterTableAlterColumnStatement.SchemaObjectName.IsLocalObject())
-                    {
-                        CheckAllProjectDefinedTables(alterTableAlterColumnStatement.SchemaObjectName, allTables, issues, alterTableAlterColumnStatement); 
-                    }
+                    CheckAllProjectDefinedTables(alterTableAlterColumnStatement.SchemaObjectName, allTables, issues, alterTableAlterColumnStatement);
                 }
 
-                foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
+                foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    // internal objects only
-                    if (alterTableDropTableElementStatement.SchemaObjectName.IsLocalObject())
+                    foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
+                        .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
+                    )
                     {
-                        foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
-                            .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
-                        )
-                        {
-                            if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
-                            else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
-                            else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
-                        }
+                        if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                        else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                        else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
                     }
                 }
 
