@@ -269,27 +269,24 @@ namespace Cheburashka
             {
                 foreach (var thing in allIndexes)
                 {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
+                    TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
+                    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                        && thing.GetProperty<bool>(Index.Clustered)
+                    )
+
                     {
-                        TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(Index.Clustered)
-                        )
-
+                        var c = thing.GetReferencedRelationshipInstances(
+                            Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                        foreach (var v in c.ToList())
                         {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
-                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
+                            columns.Add(v.ObjectName);
                         }
+                        //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+
+                        clusteredIndex = thing;
+                        bFoundClusteredIndex = true;
+                        break;
                     }
                 }
             }
@@ -298,26 +295,23 @@ namespace Cheburashka
                 var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
                 foreach (var thing in allPKs)
                 {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
+                    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+                    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                        && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
+                    )
                     {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
-                        )
+                        var c = thing.GetReferencedRelationshipInstances(
+                            PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                        foreach (var v in c.ToList())
                         {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
-
-                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
+                            columns.Add(v.ObjectName);
                         }
+
+                        //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+                        clusteredIndex = thing;
+                        bFoundClusteredIndex = true;
+                        break;
                     }
                 }
             }
@@ -326,25 +320,22 @@ namespace Cheburashka
                 var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
                 foreach (var thing in allUNs)
                 {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
+                    TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
+                    if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                        && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                        && thing.GetProperty<bool>(UniqueConstraint.Clustered)
+                    )
                     {
-                        TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(UniqueConstraint.Clustered)
-                        )
+                        var c = thing.GetReferencedRelationshipInstances(
+                            UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
+                        foreach (var v in c.ToList())
                         {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
-                            //columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
+                            columns.Add(v.ObjectName);
                         }
+                        //columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
+                        clusteredIndex = thing;
+                        bFoundClusteredIndex = true;
+                        break;
                     }
                 }
             }
