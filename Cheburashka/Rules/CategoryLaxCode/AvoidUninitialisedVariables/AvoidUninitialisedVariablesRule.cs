@@ -135,22 +135,16 @@ namespace Cheburashka
                 }
 
                 foreach (VariableReference variableReference in variableReferences) {
-                    //counts.AddAndIncrement(variableReference.Name);
-                    if (!counts.ContainsKey(variableReference.Name)) {
+                    if (!counts.ContainsKey(variableReference.Name)) // we only care if its been used - not how many times its been used
+                    { 
                         counts.Add(variableReference.Name, 1);
-                    }
-                    else {
-                        counts[variableReference.Name]++;
                     }
                 }
                 foreach (var setVariable in setVariables) {
                     var variable = setVariable.Variable;
-                    //writeCounts.AddAndIncrement(variableWriteOccurrence.Name);
-                    if (!writeCounts.ContainsKey(variable.Name)) {
+                    if (!writeCounts.ContainsKey(variable.Name))// we only care if its been used - not how many times its been used
+                    {
                         writeCounts.Add(variable.Name, 1);
-                    }
-                    else {
-                        writeCounts[variable.Name]++;
                     }
                 }
 
@@ -162,21 +156,6 @@ namespace Cheburashka
                                                                        .Select(key => objects[key]).Cast<TSqlFragment>().ToList();
 
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, uninitialisedVariables, ruleDescriptor);
-
-                //foreach (var key in objects.Keys) {
-                //    if (counts.ContainsKey(key) && (counts[key] >= 1) && (!writeCounts.ContainsKey(key)))
-                //        //                if (!(writeCounts.ContainsKey(key)))
-                //        {
-                //            SqlRuleProblem problem =
-                //                new(
-                //                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                //                    , modelElement
-                //                    , sqlFragment);
-
-                //            RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-                //            problems.Add(problem);
-                //        }
-                //}
 
             }
             catch (Exception e) {
