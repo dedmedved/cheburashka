@@ -354,7 +354,7 @@ namespace Cheburashka
         bool bFoundClusteredIndex = false;
         foreach (var thing in allIndexes)
         {
-            TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
+            TSqlObject tab = thing.GetReferenced(relClass).ToList()[0];
             if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
                 && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
                 && thing.GetProperty<bool>(propertyType)
