@@ -154,7 +154,7 @@ namespace Cheburashka
                     bool bFoundClusteredIndex =
                         RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
                             out TSqlObject clusteredIndex,
-                            out IList<ObjectIdentifier> clusteredIndexColumns);
+                            out List<ObjectIdentifier> clusteredIndexColumns);
                     if (bFoundClusteredIndex)
                     {
                         //try
