@@ -259,21 +259,21 @@ namespace Cheburashka
                 var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
                 var relClass = Index.ColumnsRelationship.RelationshipClass;
                 var propertyType = Index.Clustered;
-                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, columns, allIndexes, propertyType, relClass);
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allIndexes, propertyType, relClass);
             }
             if (!bFoundClusteredIndex)
             {
                 var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
                 var relClass = PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass;
                 var propertyType = PrimaryKeyConstraint.Clustered;
-                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, columns, allPKs, propertyType, relClass);
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allPKs, propertyType, relClass);
             }
             if (!bFoundClusteredIndex)
             {
                 var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
                 var relClass = UniqueConstraint.ColumnsRelationship.RelationshipClass;
                 var propertyType = UniqueConstraint.Clustered;
-                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, columns, allUNs, propertyType, relClass);
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allUNs, propertyType, relClass);
             }
 
             return bFoundClusteredIndex;
@@ -282,7 +282,7 @@ namespace Cheburashka
     private static bool FindClusteringObject(string owningObjectSchema
                                             , string owningObjectTable
                                             , ref TSqlObject clusteredIndex
-                                            , List<ObjectIdentifier> columns
+                                            , ref List<ObjectIdentifier> columns
                                             , List<TSqlObject> allIndexes
                                             , ModelPropertyClass propertyType
                                             , ModelRelationshipClass relClass)
@@ -298,7 +298,11 @@ namespace Cheburashka
 
             {
                 var c = thing.GetReferencedRelationshipInstances(relClass, DacQueryScopes.UserDefined).ToList();
-                columns.AddRange(c.Select(n => n.ObjectName));
+                foreach (var v in c.ToList())
+                {
+                    columns.Add(v.ObjectName);
+                }
+                 //   columns.AddRange(c.Select(n => n.ObjectName));
 
                 clusteredIndex = thing;
                 bFoundClusteredIndex = true;
