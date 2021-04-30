@@ -28,6 +28,8 @@ using Microsoft.SqlServer.Dac;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Globalization;
+
 
 namespace Cheburashka
 {
@@ -62,16 +64,16 @@ namespace Cheburashka
 //        public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, int offset, int length)
         public static void UpdateProblemPosition(TSqlObject modelElement, SqlRuleProblem problem, TSqlFragment obj)
         {
-            if (modelElement != null && problem != null && obj != null)
+            if (modelElement is not null && problem is not null && obj is not null)
             {
-                if (modelElement.GetSourceInformation() != null)
+                if (modelElement.GetSourceInformation() is not null)
                 {
                     string fileName = modelElement.GetSourceInformation().SourceName;
                     if (!string.IsNullOrEmpty(fileName))
                     {
                         string fullScript = ReadFileContent(fileName);
 
-                        if (fullScript != null)
+                        if (fullScript is not null)
                         {
                             if (ComputeLineColumn(fullScript, obj.StartOffset, obj.FragmentLength, out int startLine, out int startColumn, out _, out _))
                             {
@@ -191,163 +193,156 @@ namespace Cheburashka
 
         public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex)
         {
-            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             clusteredIndex = null;
             bool bFoundClusteredIndex = false;
-            if (!bFoundClusteredIndex)
+
             {
-                foreach (var thing in allIndexes)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(Index.Clustered)
-                        )
-                        {
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
+                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+                var relClass = Index.ColumnsRelationship.RelationshipClass;
+                var propertyType = Index.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, allIndexes, propertyType, relClass);
             }
             if (!bFoundClusteredIndex)
             {
                 var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-                foreach (var thing in allPKs)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
-                        )
-                        {
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
+                var relClass = PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass;
+                var propertyType = PrimaryKeyConstraint.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, allPKs, propertyType, relClass);
             }
             if (!bFoundClusteredIndex)
             {
                 var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-                foreach (var thing in allUNs)
+                var relClass = UniqueConstraint.ColumnsRelationship.RelationshipClass;
+                var propertyType = UniqueConstraint.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, allUNs, propertyType, relClass);
+            }
+
+            return bFoundClusteredIndex;
+        }
+
+        public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex, out List<ObjectIdentifier> columns)
+        {
+            clusteredIndex = null;
+            columns = new List<ObjectIdentifier>();
+            bool bFoundClusteredIndex = false;
+            {
+                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+                var relClass = Index.ColumnsRelationship.RelationshipClass;
+                var propertyType = Index.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allIndexes, propertyType, relClass);
+            }
+            if (!bFoundClusteredIndex)
+            {
+                var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+                var relClass = PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass;
+                var propertyType = PrimaryKeyConstraint.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allPKs, propertyType, relClass);
+            }
+            if (!bFoundClusteredIndex)
+            {
+                var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
+                var relClass = UniqueConstraint.ColumnsRelationship.RelationshipClass;
+                var propertyType = UniqueConstraint.Clustered;
+                bFoundClusteredIndex = FindClusteringObject(owningObjectSchema, owningObjectTable, ref clusteredIndex, ref columns, allUNs, propertyType, relClass);
+            }
+
+            return bFoundClusteredIndex;
+        }
+
+        private static bool FindClusteringObject(string owningObjectSchema
+            , string owningObjectTable
+            , ref TSqlObject clusteredIndex
+            , List<TSqlObject> allIndexes
+            , ModelPropertyClass propertyType
+            , ModelRelationshipClass relClass)
+        {
+            bool bFoundClusteredIndex = false;
+            foreach (var thing in allIndexes)
+            {
+                TSqlObject tab = thing.GetReferenced(relClass).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                    && thing.GetProperty<bool>(propertyType)
+                )
+
                 {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(UniqueConstraint.Clustered)
-                        )
-                        {
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
+                    clusteredIndex = thing;
+                    bFoundClusteredIndex = true;
+                    break;
                 }
             }
 
             return bFoundClusteredIndex;
         }
 
-    public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex , out IList<ObjectIdentifier> columns)
+        private static bool FindClusteringObject(string owningObjectSchema
+                                            , string owningObjectTable
+                                            , ref TSqlObject clusteredIndex
+                                            , ref List<ObjectIdentifier> columns
+                                            , List<TSqlObject> allIndexes
+                                            , ModelPropertyClass propertyType
+                                            , ModelRelationshipClass relClass)
         {
-            var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-            clusteredIndex = null;
-            columns = new List<ObjectIdentifier>();
             bool bFoundClusteredIndex = false;
-            if (!bFoundClusteredIndex)
+            foreach (var thing in allIndexes)
             {
-                foreach (var thing in allIndexes)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(Index.Clustered)
-                        )
+                TSqlObject tab = thing.GetReferenced(relClass).ToList()[0];
+                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
+                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                    && thing.GetProperty<bool>(propertyType)
+                )
 
-                        {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
-                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (!bFoundClusteredIndex)
-            {
-                var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-                foreach (var thing in allPKs)
                 {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(PrimaryKeyConstraint.Clustered)
-                        )
-                        {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
+                    var c = thing.GetReferencedRelationshipInstances(relClass, DacQueryScopes.UserDefined).ToList();
+                    columns.AddRange(c.Select(n => n.ObjectName));
 
-                            //                            columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (!bFoundClusteredIndex)
-            {
-                var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-                foreach (var thing in allUNs)
-                {
-                    if (!bFoundClusteredIndex) //TODO: V3022 https://www.viva64.com/en/w/V3022 Expression '!bFoundClusteredIndex' is always true.
-                    {
-                        TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                            && thing.GetProperty<bool>(UniqueConstraint.Clustered)
-                        )
-                        {
-                            var c = thing.GetReferencedRelationshipInstances(
-                                UniqueConstraint.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                            foreach (var v in c.ToList())
-                            {
-                                columns.Add(v.ObjectName);
-                            }
-                            //columns = thing.GetChildren().Cast<ColumnWithSortOrder>();
-                            clusteredIndex = thing;
-                            bFoundClusteredIndex = true;
-                            break;
-                        }
-                    }
+                    clusteredIndex = thing;
+                    bFoundClusteredIndex = true;
+                    break;
                 }
             }
 
             return bFoundClusteredIndex;
+        }
+
+    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, List<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
+        {
+            foreach (TSqlFragment issue in issues)
+            {
+                SqlRuleProblem problem =
+                    new(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , issue);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
+        }
+        public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, TSqlFragment issue, RuleDescriptor ruleDescriptor)
+        {
+            SqlRuleProblem problem =
+                new(
+                    string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    , modelElement
+                    , issue);
+
+            //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+            problems.Add(problem);
+        }
+        public static void UpdateProblems(bool problemExists, List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, TSqlFragment issue, RuleDescriptor ruleDescriptor)
+        {
+            if (problemExists)
+            {
+                SqlRuleProblem problem =
+                    new(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , issue);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
         }
     }
 }

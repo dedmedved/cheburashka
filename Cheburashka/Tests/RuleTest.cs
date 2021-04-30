@@ -213,11 +213,11 @@ namespace Cheburashka.Tests
         /// <param name="verify">Action that runs verification on the result of analysis</param>
         public virtual void RunTest(string fullId, Action<CodeAnalysisResult, string> verify)
         {
-            if (fullId == null)
+            if (fullId is null)
             {
                 throw new ArgumentNullException(nameof(fullId));
             }
-            if (fullId == null)
+            if (fullId is null)
             {
                 throw new ArgumentNullException(nameof(verify));
             }

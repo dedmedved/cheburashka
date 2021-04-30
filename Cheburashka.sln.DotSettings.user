@@ -17,6 +17,7 @@
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.EnforceForeignKeyIsUniquelyIndexed_BIN&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.CheckOrphanedBeginEndBlocks_BIN&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.CheckUnnecessaryBrackets_BIN&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::DF142FCD-E8E0-4841-BDB9-C9974F09068D::.NETFramework,Version=v4.8::Cheburashka.Tests.RuleTestCases.AvoidUninitialisedVariables_BIN&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

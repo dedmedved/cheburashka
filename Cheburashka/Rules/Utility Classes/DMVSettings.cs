@@ -35,8 +35,8 @@ namespace Cheburashka
         private static readonly DateTime                 _lastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
-        public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
-        public static bool AllowClusterOnForeignKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
+        //public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
+        //public static bool AllowClusterOnForeignKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
 
         //private static IEnumerable<TSqlObject>  _builtinDataTypes;
 
@@ -57,7 +57,7 @@ namespace Cheburashka
 
         public static void RefreshModelBuiltInCache(TSqlModel model)
         {
-            if (_modelVersion == null || _modelVersion != model.Version)
+            if (_modelVersion is null || _modelVersion != model.Version)
             {
                 _modelVersion = model.Version;
                 SqlRuleUtils.SetBuiltinDataTypes(model);

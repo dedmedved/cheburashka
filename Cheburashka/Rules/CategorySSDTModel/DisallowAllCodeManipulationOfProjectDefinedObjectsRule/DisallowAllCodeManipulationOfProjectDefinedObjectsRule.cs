@@ -31,11 +31,11 @@ using static System.String;
 namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId,
-        RuleConstants.ResourceBaseName,                                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,              // ID used to look up the display name inside the resources file
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,    // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategorySSDTModel,                                             // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                                      // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                                                             // Name of the resource file to look up displayname and description in
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,  // ID used to look up the display name inside the resources file
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,        // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategorySSDTModel,                                                 // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                                          // This rule targets specific elements rather than the whole model
     public sealed class DisallowAllCodeManipulationOfProjectDefinedObjectsRule : SqlCodeAnalysisRule
     {
         /// <summary>
@@ -88,46 +88,25 @@ namespace Cheburashka
                 //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                //ISqlIndex idx = sqlElement as ISqlIndex;
-                //ISqlPrimaryKeyConstraint pk = sqlElement as ISqlPrimaryKeyConstraint;
-                //ISqlUniqueConstraint uk = sqlElement as ISqlUniqueConstraint;
-
-                // visitor to get the occurrences of statements 
                 AlterIndexStatementVisitor alterIndexStatementVisitor = new();
                 sqlFragment.Accept(alterIndexStatementVisitor);
                 List<AlterIndexStatement> alterIndexStatements = alterIndexStatementVisitor.Objects;
 
-                AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor =
-                    new();
+                AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor = new();
                 sqlFragment.Accept(alterTableConstraintModificationStatementVisitor);
-                List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements =
-                    alterTableConstraintModificationStatementVisitor.Objects;
+                List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements = alterTableConstraintModificationStatementVisitor.Objects;
 
-                AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor =
-                    new();
+                AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor = new();
                 sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
-                List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements =
-                    alterTableAddTableElementStatementVisitor.Objects;
+                List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements = alterTableAddTableElementStatementVisitor.Objects;
 
-                AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor =
-                    new();
+                AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor = new();
                 sqlFragment.Accept(alterTableAlterColumnStatementVisitor);
-                List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements =
-                    alterTableAlterColumnStatementVisitor.Objects;
+                List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements = alterTableAlterColumnStatementVisitor.Objects;
 
-                AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor =
-                    new();
+                AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor = new();
                 sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
-                List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements =
-                    alterTableDropTableElementStatementVisitor.Objects;
-
-                //DropClusteredConstraintFragmentOptionVisitor dropClusteredConstraintFragmentOptionVisitor = new DropClusteredConstraintFragmentOptionVisitor();
-                //sqlFragment.Accept(dropClusteredConstraintFragmentOptionVisitor);
-                //List<DropClusteredConstraintFragmentOption> dropClusteredConstraintFragmentOptions = dropClusteredConstraintFragmentOptionVisitor.Objects;
-
-                //DropClusteredConstraintStateOptionVisitor dropClusteredConstraintStateOptionVisitor = new DropClusteredConstraintStateOptionVisitor();
-                //sqlFragment.Accept(dropClusteredConstraintStateOptionVisitor);
-                //List<DropClusteredConstraintStateOption> dropClusteredConstraintStateOptions = dropClusteredConstraintStateOptionVisitor.Objects;
+                List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
 
                 CreateIndexStatementVisitor createIndexStatementVisitor = new();
                 sqlFragment.Accept(createIndexStatementVisitor);
@@ -146,13 +125,6 @@ namespace Cheburashka
                 // try to speed things up, by not retrieving element where we don't have an alter.
 
                 var allTables = DMVSettings.GetTables;
-
-                //var allIndexes              = (alterIndexStatements.Count > 0                       || dropIndexStatements.Count > 0                 ) ? DMVSettings.GetIndexes           : new List<TSqlObject>();
-                //var allPrimaryKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetPrimaryKeys       : new List<TSqlObject>();
-                //var allUniqueConstraints    = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetUniqueConstraints : new List<TSqlObject>();
-                //var allForeignKeys          = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetForeignKeys       : new List<TSqlObject>();
-                //var allCheckConstraints     = (alterTableConstraintModificationStatements.Count > 0 || alterTableDropTableElementStatements.Count > 0) ? DMVSettings.GetCheckConstraints  : new List<TSqlObject>();
-
                 var allIndexes = DMVSettings.GetIndexes;
                 var allPrimaryKeys = DMVSettings.GetPrimaryKeys;
                 var allUniqueConstraints = DMVSettings.GetUniqueConstraints;
@@ -161,385 +133,90 @@ namespace Cheburashka
 
                 foreach (var dropTableStatement in dropTableStatements)
                 {
-                    foreach (var obj in dropTableStatement.Objects) {
-                        var schema = obj.SchemaIdentifier != null
-                            ? obj.SchemaIdentifier.Value
-                            : "dbo";
-                        var table = obj.BaseIdentifier.Value;
-                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[0],
-                                                                         schema)
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[1],
-                                                                         table)
-                        ).Select(n => n).ToList();
-
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(dropTableStatement);
-                        }
+                    foreach (var obj in dropTableStatement.Objects)
+                    {
+                        CheckAllProjectDefinedTables(obj, allTables, issues, dropTableStatement);
                     }
                 }
 
                 foreach (var createIndexStatement in createIndexStatements)
                 {
-                    var schema = createIndexStatement.OnName.SchemaIdentifier != null
-                        ? createIndexStatement.OnName.SchemaIdentifier.Value
-                        : "dbo";
-                    var table = createIndexStatement.OnName.BaseIdentifier.Value;
-                    List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                 && SqlComparer.SQLModel_StringCompareEqual(
-                                                                     n.Name.Parts[0],
-                                                                     schema)
-                                                                 && SqlComparer.SQLModel_StringCompareEqual(
-                                                                     n.Name.Parts[1],
-                                                                     table)
-                    ).Select(n => n).ToList();
-
-                    if (tbls.Count > 0)
-                    {
-                        issues.Add(createIndexStatement);
-                    }
+                    CheckAllProjectDefinedTables(createIndexStatement.OnName, allTables, issues, createIndexStatement);
                 }
 
                 foreach (var dropIndexStatement in dropIndexStatements)
                 {
                     foreach (var dropIndexClause in dropIndexStatement.DropIndexClauses)
                     {
-                        string schemaName = null;
-                        string tableName = null;
+                        SchemaObjectName schemaObject = null;
                         string indexName = null;
-                        bool skipExternalName = false;
-                        if (!(dropIndexClause is not DropIndexClause dic))
+                        bool processIndexDropStatement = false;
+//                        if (!(dropIndexClause is not DropIndexClause dic))
+                        if (dropIndexClause is DropIndexClause dic)
                         {
-                            if (((dic.Object.DatabaseIdentifier != null
-                                  && IsNullOrEmpty(dic.Object.DatabaseIdentifier.Value)
-                                 )
-                                 || dic.Object.DatabaseIdentifier == null
-                                )
-                                && ((dic.Object.ServerIdentifier != null
-                                     && IsNullOrEmpty(dic.Object.ServerIdentifier.Value)
-                                    )
-                                    || dic.Object.ServerIdentifier == null
-                                )
-                            )
-                            {
-                                skipExternalName = true;
-                            }
-
-                            schemaName = dic.Object.SchemaIdentifier != null
-                                ? dic.Object.SchemaIdentifier.Value
-                                : "dbo";
-                            tableName = dic.Object.BaseIdentifier.Value;
+                            processIndexDropStatement = dic.Object.IsLocalObject();
+                            schemaObject = dic.Object;
                             indexName = dic.Index.Value;
                         }
-                        else
+                        else if (dropIndexClause is BackwardsCompatibleDropIndexClause olddic)
                         {
-                            if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
-                            {
-                                if (((olddic.Index.DatabaseIdentifier != null
-                                      && IsNullOrEmpty(olddic.Index.DatabaseIdentifier.Value)
-                                     )
-                                     || olddic.Index.DatabaseIdentifier == null
-                                    )
-                                    && ((olddic.Index.ServerIdentifier != null
-                                         && IsNullOrEmpty(olddic.Index.ServerIdentifier.Value)
-                                        )
-                                        || olddic.Index.ServerIdentifier == null
-                                    )
-                                )
-                                {
-                                    skipExternalName = true;
-                                }
-
-                                schemaName = olddic.Index.SchemaIdentifier != null
-                                    ? olddic.Index.SchemaIdentifier.Value
-                                    : "dbo";
-                                tableName = olddic.Index.BaseIdentifier.Value;
-                                indexName = olddic.Index.ChildIdentifier.Value;
-                            }
+//                          if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
+                            processIndexDropStatement = olddic.Index.IsLocalObject();
+                            schemaObject = olddic.Index;
+                            indexName = olddic.Index.ChildIdentifier.Value;
                         }
 
-                        if (skipExternalName)
+                        if (processIndexDropStatement)
                         {
-                            List<TSqlObject> ixs = allIndexes
-                                .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], indexName)
-                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], tableName)
-                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], schemaName)
-                                )
-                                .Select(n => n).ToList();
-                            if (ixs.Count > 0)
-                            {
-                                issues.Add(dropIndexClause);
-                            }
+                            CheckDroppedOrAlteredIndexes(allIndexes, issues, dropIndexClause, schemaObject, indexName);
                         }
                     }
                 }
 
-                foreach (var alterIndexStatement in alterIndexStatements)
+                foreach (var alterIndexStatement in alterIndexStatements.Where(n => n.OnName.IsLocalObject()))
                 {
-                    if (alterIndexStatement.Name.Value != null
-                        // internal objects only
-                        && ((alterIndexStatement.OnName.DatabaseIdentifier != null
-                             && IsNullOrEmpty(alterIndexStatement.OnName.DatabaseIdentifier.Value)
-                            )
-                            || alterIndexStatement.OnName.DatabaseIdentifier == null
-                        )
-                        && ((alterIndexStatement.OnName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterIndexStatement.OnName.ServerIdentifier.Value)
-                            )
-                            || alterIndexStatement.OnName.ServerIdentifier == null
-                        )
+                    if (alterIndexStatement.Name.Value is not null
                     )
                     {
-                        List<TSqlObject> ixs = allIndexes
-                            .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2],
-                                            alterIndexStatement.Name.Value)
-                                        && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                            alterIndexStatement.OnName.BaseIdentifier.Value)
-                                        && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                            alterIndexStatement.OnName.SchemaIdentifier.Value)
-                            )
-                            .Select(n => n).ToList();
-                        if (ixs.Count > 0)
-                        {
-                            issues.Add(alterIndexStatement);
-                        }
+                        CheckDroppedOrAlteredIndexes(allIndexes
+                                                    , issues
+                                                    , alterIndexStatement
+                                                    , alterIndexStatement.OnName
+                                                    , alterIndexStatement.Name.Value);
                     }
                 }
 
-                foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements)
+                foreach (var alterTableConstraintModificationStatement in alterTableConstraintModificationStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
                     // internal objects only
-                    if (((alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier
-                              .Value)
-                         )
-                         || alterTableConstraintModificationStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableConstraintModificationStatement.SchemaObjectName
-                                 .ServerIdentifier
-                                 .Value)
-                            )
-                            || alterTableConstraintModificationStatement.SchemaObjectName.ServerIdentifier == null
-                        )
-                    )
+                    foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
                     {
-                        foreach (var consName in alterTableConstraintModificationStatement.ConstraintNames)
-                        {
-                            List<TSqlObject> pkcs = allPrimaryKeys
-                                .Where(n => n.Name?.HasName == true
-                                            && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                    .SchemaIdentifier == null ||
-                                                SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                    alterTableConstraintModificationStatement.SchemaObjectName
-                                                        .SchemaIdentifier
-                                                        .Value))
-                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], consName.Value)
-                                )
-                                .Select(n => n).ToList();
-
-                            if (pkcs.Count > 0)
-                            {
-                                issues.Add(alterTableConstraintModificationStatement);
-                            }
-                            else
-                            {
-                                List<TSqlObject> fkcs = allForeignKeys
-                                    .Where(n => n.Name?.HasName == true
-                                                && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                        .SchemaIdentifier == null ||
-                                                    SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                        alterTableConstraintModificationStatement.SchemaObjectName
-                                                            .SchemaIdentifier.Value))
-                                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                    consName.Value))
-                                    .Select(n => n).ToList();
-                                if (fkcs.Count > 0)
-                                {
-                                    issues.Add(alterTableConstraintModificationStatement);
-                                }
-                                else
-                                {
-                                    List<TSqlObject> ukcs = allUniqueConstraints
-                                        .Where(n => n.Name?.HasName == true
-                                                    && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                            .SchemaIdentifier == null ||
-                                                        SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                            alterTableConstraintModificationStatement.SchemaObjectName
-                                                                .SchemaIdentifier.Value))
-                                                    && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                        consName.Value))
-                                        .Select(n => n).ToList();
-                                    if (ukcs.Count > 0)
-                                    {
-                                        issues.Add(alterTableConstraintModificationStatement);
-                                    }
-                                    else
-                                    {
-                                        List<TSqlObject> chks = allCheckConstraints
-                                            .Where(n => n.Name?.HasName == true
-                                                        && (alterTableConstraintModificationStatement.SchemaObjectName
-                                                                .SchemaIdentifier == null ||
-                                                            SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                                alterTableConstraintModificationStatement
-                                                                    .SchemaObjectName
-                                                                    .SchemaIdentifier.Value))
-                                                        && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                            consName.Value))
-                                            .Select(n => n).ToList();
-                                        if (chks.Count > 0)
-                                        {
-                                            issues.Add(alterTableConstraintModificationStatement);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
+                        else if (CheckAlterTableStatement(allCheckConstraints, issues, alterTableConstraintModificationStatement, consName)) { }
                     }
                 }
 
-                foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements)
+                foreach (var alterTableAddTableElementStatement in alterTableAddTableElementStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    // internal objects only
-                    if (((alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableAddTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(
-                                 alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier.Value)
-                            )
-                            || alterTableAddTableElementStatement.SchemaObjectName.ServerIdentifier == null
-                        )
-                    )
-                    {
-                        var schema = alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier != null
-                            ? alterTableAddTableElementStatement.SchemaObjectName.SchemaIdentifier.Value
-                            : "dbo";
-                        var table = alterTableAddTableElementStatement.SchemaObjectName.BaseIdentifier.Value;
-                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[0], schema)
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[1], table)
-                        ).Select(n => n).ToList();
-
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(alterTableAddTableElementStatement);
-                        }
-                    }
+                    CheckAllProjectDefinedTables(alterTableAddTableElementStatement.SchemaObjectName, allTables, issues, alterTableAddTableElementStatement);
                 }
 
-                foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements)
+                foreach (var alterTableAlterColumnStatement in alterTableAlterColumnStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    // internal objects only
-                    if (((alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableAlterColumnStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier.Value)
-                            )
-                            || alterTableAlterColumnStatement.SchemaObjectName.ServerIdentifier == null
-                        )
-                    )
-                    {
-                        var schema = alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier != null
-                            ? alterTableAlterColumnStatement.SchemaObjectName.SchemaIdentifier.Value
-                            : "dbo";
-                        var table = alterTableAlterColumnStatement.SchemaObjectName.BaseIdentifier.Value;
-                        List<TSqlObject> tbls = allTables.Where(n => n.Name?.HasName == true
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[0], schema)
-                                                                     && SqlComparer.SQLModel_StringCompareEqual(
-                                                                         n.Name.Parts[1], table)
-                        ).Select(n => n).ToList();
-
-                        if (tbls.Count > 0)
-                        {
-                            issues.Add(alterTableAlterColumnStatement);
-                        }
-                    }
+                    CheckAllProjectDefinedTables(alterTableAlterColumnStatement.SchemaObjectName, allTables, issues, alterTableAlterColumnStatement);
                 }
 
-                foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements)
+                foreach (var alterTableDropTableElementStatement in alterTableDropTableElementStatements.Where(n => n.SchemaObjectName.IsLocalObject()))
                 {
-                    // internal objects only
-                    if (((alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier != null
-                          && IsNullOrEmpty(
-                              alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier.Value)
-                         )
-                         || alterTableDropTableElementStatement.SchemaObjectName.DatabaseIdentifier == null
-                        )
-                        && ((alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier != null
-                             && IsNullOrEmpty(alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier
-                                 .Value)
-                            )
-                            || alterTableDropTableElementStatement.SchemaObjectName.ServerIdentifier == null
-                        )
+                    foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
+                        .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
                     )
                     {
-                        foreach (var dropElement in alterTableDropTableElementStatement.AlterTableDropTableElements
-                            .Where(n => n.TableElementType == TableElementType.Constraint).Select(n => n)
-                        )
-                        {
-                            List<TSqlObject> pkcs = allPrimaryKeys
-                                .Where(n => n.Name?.HasName == true
-                                            && (alterTableDropTableElementStatement.SchemaObjectName.SchemaIdentifier ==
-                                                null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                    alterTableDropTableElementStatement.SchemaObjectName
-                                                        .SchemaIdentifier
-                                                        .Value))
-                                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                dropElement.Name.Value)
-                                )
-                                .Select(n => n).ToList();
-
-                            if (pkcs.Count > 0)
-                            {
-                                issues.Add(alterTableDropTableElementStatement);
-                            }
-                            else
-                            {
-                                List<TSqlObject> fkcs = allForeignKeys
-                                    .Where(n => n.Name?.HasName == true
-                                                && (alterTableDropTableElementStatement.SchemaObjectName
-                                                        .SchemaIdentifier ==
-                                                    null || SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                        alterTableDropTableElementStatement.SchemaObjectName
-                                                            .SchemaIdentifier.Value))
-                                                && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                    dropElement.Name.Value))
-                                    .Select(n => n).ToList();
-                                if (fkcs.Count > 0)
-                                {
-                                    issues.Add(alterTableDropTableElementStatement);
-                                }
-                                else
-                                {
-                                    List<TSqlObject> ukcs = allUniqueConstraints
-                                        .Where(n => n.Name?.HasName == true
-                                                    && (alterTableDropTableElementStatement.SchemaObjectName
-                                                            .SchemaIdentifier == null ||
-                                                        SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0],
-                                                            alterTableDropTableElementStatement.SchemaObjectName
-                                                                .SchemaIdentifier.Value))
-                                                    && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1],
-                                                        dropElement.Name.Value))
-                                        .Select(n => n).ToList();
-                                    if (ukcs.Count > 0)
-                                    {
-                                        issues.Add(alterTableDropTableElementStatement);
-                                    }
-                                }
-                            }
-                        }
+                        if (CheckAlterTableStatement(allPrimaryKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                        else if (CheckAlterTableStatement(allForeignKeys, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
+                        else if (CheckAlterTableStatement(allUniqueConstraints, issues, alterTableDropTableElementStatement, dropElement.Name)) { }
                     }
                 }
 
@@ -547,24 +224,67 @@ namespace Cheburashka
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 // Create problems for each object
-                foreach (TSqlFragment issue in issues)
-                {
-                    SqlRuleProblem problem =
-                        new(
-                            Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, issue);
-                    problems.Add(problem);
-                }
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch
             {
             } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
+
+        }
+
+        private static void CheckAllProjectDefinedTables(SchemaObjectName schemaObject, IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, TSqlFragment statement)
+        {
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => n.Name?.HasName == true
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (schemaObject.SchemaIdentifier?.Value ?? "dbo") )
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], schemaObject.BaseIdentifier.Value)
+                )
+                .Select(n => n).ToList();
+
+            if (objs.Count > 0)
+            {
+                issues.Add(statement);
+            }
+
+        }
+        // making this a function breaks all kinds of rules but it needs to short-cicuit further executoin for the sake of efficiency
+        private static bool CheckAlterTableStatement(IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, AlterTableStatement alterTableStatement, Identifier alteredElement)
+        {
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => n.Name?.HasName == true
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (alterTableStatement.SchemaObjectName.SchemaIdentifier?.Value ?? "dbo"))
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], alteredElement.Value)
+                )
+                .Select(n => n).ToList();
+            if (objs.Count > 0)
+            {
+                issues.Add(alterTableStatement);
+            }
+            return objs.Count > 0;
+        }
+        private static void CheckDroppedOrAlteredIndexes(IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, TSqlFragment statement, SchemaObjectName schemaObject, /*string schemaName, string tableName,*/ string objectName)
+        {
+            List<TSqlObject> objs = allObjectsToMatch
+                .Where(n => SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[2], objectName)
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[1], schemaObject.BaseIdentifier.Value)
+                            && SqlComparer.SQLModel_StringCompareEqual(n.Name.Parts[0], (schemaObject.SchemaIdentifier?.Value ?? "dbo"))
+                )
+                .Select(n => n).ToList();
+            if (objs.Count > 0)
+            {
+                issues.Add(statement);
+            }
         }
     }
 }
-
+public static class SchemaObjectNameExtensions
+{
+    public static bool IsLocalObject(this SchemaObjectName name)
+    {
+        return IsNullOrEmpty(name.ServerIdentifier?.Value)
+             && IsNullOrEmpty(name.DatabaseIdentifier?.Value);
+    }
+}
 

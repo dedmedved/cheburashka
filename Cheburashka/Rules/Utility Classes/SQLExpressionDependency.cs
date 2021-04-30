@@ -56,7 +56,7 @@ namespace Cheburashka
 
         public void AddDependency(VariableReference variable)
         {
-            if (variable == null) throw new ArgumentNullException(nameof(variable));
+            if (variable is null) throw new ArgumentNullException(nameof(variable));
             _dependencies.Add(variable);
         }
         public void AddDependencies(IList<VariableReference> variables)

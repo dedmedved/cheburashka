@@ -51,8 +51,8 @@ namespace Cheburashka
         {
             var fks = new List<TSqlObject>();
             foreach (var fk in DMVSettings.GetForeignKeys)
-            { 
-                if ( fk.Name?.ExternalParts == null || fk.Name.ExternalParts.Count == 0)
+            {
+                if (fk.IsLocalObject())
                 {
 //                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.ForeignTable).FirstOrDefault();
                     TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.Host).FirstOrDefault();
@@ -72,9 +72,9 @@ namespace Cheburashka
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
-                if (pk.Name?.ExternalParts == null || pk.Name.ExternalParts.Count == 0)
-                {
-                    TSqlObject definingTable = pk.GetParent();
+                if (pk.IsLocalObject())
+                    {
+                        TSqlObject definingTable = pk.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
                     && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
                     )
@@ -91,7 +91,7 @@ namespace Cheburashka
             var pks = new List<TSqlObject>();
             foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
-                if (pk.Name?.ExternalParts == null || pk.Name.ExternalParts.Count == 0)
+                if (pk.IsLocalObject())
                 {
                     TSqlObject definingTable = pk.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -112,7 +112,7 @@ namespace Cheburashka
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
             {
-                if (index.Name?.ExternalParts == null || index.Name.ExternalParts.Count == 0)
+                if (index.IsLocalObject())
                 {
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -130,7 +130,7 @@ namespace Cheburashka
             var indexes = new List<TSqlObject>();
             foreach (var index in DMVSettings.GetIndexes)
             {
-                if (index.Name?.ExternalParts == null || index.Name.ExternalParts.Count == 0)
+                if (index.IsLocalObject())
                 {
                     TSqlObject definingTable = index.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -150,7 +150,7 @@ namespace Cheburashka
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.Name?.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0)
+                if (unique_constraint.IsLocalObject())
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -168,7 +168,7 @@ namespace Cheburashka
             var unique_constraints = new List<TSqlObject>();
             foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.Name?.ExternalParts == null || unique_constraint.Name.ExternalParts.Count == 0)
+                if (unique_constraint.IsLocalObject())
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
                     if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
@@ -189,14 +189,14 @@ namespace Cheburashka
         //    List<String> ClusterColumns = new List<String>();
 
         //    List<ISqlPrimaryKeyConstraint> clusteredpks = DMVSettings.getPrimaryKeys
-        //                                    .Where(n => (n.DefiningTable.Name.ExternalParts == null || n.DefiningTable.Name.ExternalParts.Count == 0)
+        //                                    .Where(n => (n.DefiningTable.Name.ExternalParts is null || n.DefiningTable.Name.ExternalParts.Count == 0)
         //                                              && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[0], owningObjectSchema)
         //                                              && SqlComparer.SQLModel_StringCompareEqual(n.DefiningTable.Name.Parts[1], owningObjectTable)
         //                                              && n.IsClustered
         //                                              ).Select(n => n).ToList();
 
         //    List<ISqlIndex> clusteredindexes = DMVSettings.getIndexes
-        //                                                .Where(n => (n.Name.ExternalParts == null
+        //                                                .Where(n => (n.Name.ExternalParts is null
         //                                                         || n.Name.ExternalParts.Count == 0
         //                                                         )
         //                                                      && SqlComparer.SQLModel_StringCompareEqual(n.IndexedObject.Name.Parts[0], owningObjectSchema)
@@ -206,8 +206,8 @@ namespace Cheburashka
 
         //    List<ISqlUniqueConstraint> uniqueClusterConstraints = DMVSettings.getUniqueConstraints
         //                                                .Where(n =>
-        //                                                        (     n.Name                        == null
-        //                                                        || (  n.Name.ExternalParts          == null
+        //                                                        (     n.Name                        is null
+        //                                                        || (  n.Name.ExternalParts          is null
         //                                                           || n.Name.ExternalParts.Count    == 0
         //                                                           )
         //                                                        )
@@ -267,5 +267,12 @@ namespace Cheburashka
         //    return ClusterColumns;
         //}
 
+    }
+}
+public static class ExternalNameExtensions
+{
+    public static bool IsLocalObject(this TSqlObject obj)
+    {
+        return (obj.Name.ExternalParts?.Count ?? 0) == 0;
     }
 }
