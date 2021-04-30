@@ -114,44 +114,27 @@ namespace Cheburashka
             IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
             IList<VariableReference> variableReferences = tmpVr.ToList();
 
-            var objects = new Dictionary<string, object>(SqlComparer.Comparer);
+            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);
 
-            foreach (Identifier variableDeclaration in tableVariableDeclarations)
+            foreach (Identifier variableDeclaration in tableVariableDeclarations) // variable declarations are unique collation-wise so add will work w/o error
             {
                 objects.Add(variableDeclaration.Value, variableDeclaration);
             }
 
             foreach (VariableReference variableReference in variableReferences)
             {
-                if (!counts.ContainsKey(variableReference.Name))
+                if (!counts.ContainsKey(variableReference.Name))// only need to notice the first occurrence
                 {
                     counts.Add(variableReference.Name, 1);
-                }
-                else
-                {
-                    counts[variableReference.Name]++;
                 }
             }
 
             foreach (var key in objects.Keys)
             {
-                if (counts.ContainsKey(key))
-                {
-                    if ((counts[key]) == 0)
-                    {
-                        var problem =
-                            new SqlRuleProblem(
-                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                , modelElement
-                                , sqlFragment);
-
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-                        problems.Add(problem);
-                    }
-                }
-                // I cant see any reason for this code
-                else
+                if ((counts.ContainsKey(key) && counts[key] == 0)
+                   || !counts.ContainsKey(key)
+                   )
                 {
                     var problem =
                         new SqlRuleProblem(
@@ -159,7 +142,7 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, objects[key]);
                     problems.Add(problem);
                 }
             }

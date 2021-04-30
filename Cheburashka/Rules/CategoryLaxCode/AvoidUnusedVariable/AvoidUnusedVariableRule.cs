@@ -120,45 +120,27 @@ namespace Cheburashka
 
             List<VariableReference> variableReferences = tmpVr.ToList();
 
-            var objects = new Dictionary<string, object>(SqlComparer.Comparer);
+            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);
 
-            foreach (Identifier variableDeclaration in variableDeclarations)
+            foreach (Identifier variableDeclaration in variableDeclarations)    // variable declarations are unique collation-wise so add will work w/o error
             {
                 objects.Add(variableDeclaration.Value, variableDeclaration);
             }
 
             foreach (VariableReference variableReference in variableReferences)
             {
-                //counts.AddAndIncrement(variableReference.Name);
-                if (!counts.ContainsKey(variableReference.Name))
+                if (!counts.ContainsKey(variableReference.Name)) // only need the 1st occurrence
                 {
                     counts.Add(variableReference.Name, 1);
-                }
-                else
-                {
-                    counts[variableReference.Name]++;
                 }
             }
 
             foreach (var key in objects.Keys)
             {
-                if (counts.ContainsKey(key))
-                {
-//                    if (counts[key] == 1)
-                    if (counts[key] == 0)
-                    {
-                        SqlRuleProblem problem =
-                            new(
-                                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                                , modelElement
-                                , sqlFragment);
-
-                        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-                        problems.Add(problem);
-                    }
-                }
-                else
+                if (  (counts.ContainsKey(key) && counts[key] == 0)
+                   || !counts.ContainsKey(key)
+                   )
                 {
                     SqlRuleProblem problem =
                         new(
@@ -166,7 +148,7 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, objects[key]);
                     problems.Add(problem);
                 }
             }

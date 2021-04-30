@@ -122,9 +122,7 @@ namespace Cheburashka
             IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
             List<VariableReference> variableReferences = tmpVr.ToList();
 
-            //Hashtable objects = new Hashtable();
-            //Hashtable counts = new Hashtable();
-            var objects = new Dictionary<string, object>(SqlComparer.Comparer);
+            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);
 
             foreach (Identifier parameterDeclaration in parameterDeclarations)
@@ -134,20 +132,16 @@ namespace Cheburashka
 
             foreach (VariableReference variableReference in variableReferences)
             {
-                if (!counts.ContainsKey(variableReference.Name))
+                if (!counts.ContainsKey(variableReference.Name)) // finding the first usage is sufficient - we don't need all of them
                 {
                     counts.Add(variableReference.Name, 1);
-                }
-                else
-                {
-                    counts[variableReference.Name]++;
                 }
             }
             //var 
             foreach (var key in objects.Keys)
             {
-                if (  ( counts.ContainsKey(key) && counts[key] == 0 ) 
-                   || ! counts.ContainsKey(key) 
+                if (  ( counts.ContainsKey(key) && counts[key] == 0 )
+                   || ! counts.ContainsKey(key)
                    )
                 {
                     var problem =
@@ -156,7 +150,7 @@ namespace Cheburashka
                             , modelElement
                             , sqlFragment);
 
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+                    RuleUtils.UpdateProblemPosition(modelElement, problem, objects[key]);
                     problems.Add(problem);
                 }
             }

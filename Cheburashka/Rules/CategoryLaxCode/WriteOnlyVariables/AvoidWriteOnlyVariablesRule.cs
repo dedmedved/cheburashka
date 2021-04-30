@@ -279,8 +279,8 @@ namespace Cheburashka
 //            var unUsedVariables = setVariables.Where(n => ! usedVariables.Contains(n.Variable.Name));
 //            var unConsumedButSetVariables = unConsumedVariables.Where( n => ! );
 
-            var objects = new Dictionary<string, object>(SqlComparer.Comparer);
-            foreach (Identifier variableDeclaration in variableDeclarations)
+            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
+            foreach (Identifier variableDeclaration in variableDeclarations)    // variable declarations are unique collation-wise so add will work w/o error
             {
                 objects.Add(variableDeclaration.Value, variableDeclaration);
             }
@@ -293,7 +293,7 @@ namespace Cheburashka
                         , modelElement
                         , sqlFragment);
 
-                RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[v]);
+                RuleUtils.UpdateProblemPosition(modelElement, problem, objects[v]);
                 problems.Add(problem);
             }
 
