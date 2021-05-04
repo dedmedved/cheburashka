@@ -1847,8 +1847,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckMultipleForeignKeysBetweenSameTableRule" folder and compares the
+        /// results to the "CheckMultipleForeignKeysBetweenSameTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1872,8 +1872,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckMultipleForeignKeysBetweenSameTableRule" folder and compares the
+        /// results to the "CheckMultipleForeignKeysBetweenSameTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1894,11 +1894,11 @@ namespace Cheburashka.Tests
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMultipleForeignKeysBetweenSameTableRule.RuleId);
         }
-        
+
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckMultipleForeignKeysFromOneTableRule" folder and compares the
+        /// results to the "CheckMultipleForeignKeysFromOneTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1922,8 +1922,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckMultipleForeignKeysFromOneTableRule" folder and compares the
+        /// results to the "CheckMultipleForeignKeysFromOneTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1947,8 +1947,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckOrphanedBeginEndBlocksRule" folder and compares the
+        /// results to the "CheckOrphanedBeginEndBlocksRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1972,8 +1972,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckOrphanedBeginEndBlocksRule" folder and compares the
+        /// results to the "CheckOrphanedBeginEndBlocksRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -1996,8 +1996,8 @@ namespace Cheburashka.Tests
         }
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckUnnecessaryBracketsRule" folder and compares the
+        /// results to the "CheckUnnecessaryBracketsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -2021,8 +2021,8 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\EnforceForeignKeyIsUniquelyIndexedRule" folder and compares the
-        /// results to the "EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\CheckUnnecessaryBracketsRule" folder and compares the
+        /// results to the "CheckUnnecessaryBracketsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -2043,5 +2043,55 @@ namespace Cheburashka.Tests
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckUnnecessaryBracketsRule.RuleId);
         }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\EnforceVariableLengthDataSpecificationRule" folder and compares the
+        /// results to the "EnforceVariableLengthDataSpecificationRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void EnforceVariableLengthDataSpecificationRule_BIN()
+        {
+            using BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(EnforceVariableLengthDataSpecificationRule),
+                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
+                SqlServerVersion.Sql110
+                );
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(EnforceVariableLengthDataSpecificationRule.RuleId);
+        }
+
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\EnforceVariableLengthDataSpecificationRule" folder and compares the
+        /// results to the "EnforceVariableLengthDataSpecificationRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void EnforceVariableLengthDataSpecificationRule_CI_AI()
+        {
+            using BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(EnforceVariableLengthDataSpecificationRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql110
+                );
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(EnforceVariableLengthDataSpecificationRule.RuleId);
+        }
+
     }
 }
