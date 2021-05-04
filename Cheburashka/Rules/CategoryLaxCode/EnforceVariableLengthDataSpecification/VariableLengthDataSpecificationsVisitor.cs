@@ -23,38 +23,96 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
+
 namespace Cheburashka
 {
     internal class VariableLengthDataSpecificationsVisitor : TSqlConcreteFragmentVisitor
     {
         public VariableLengthDataSpecificationsVisitor()
         {
-            OnePartNames = new List<FunctionCall>();
+            EmptyvariableLengthDataSpecifications = new List<SqlDataTypeReference>();
         }
 
-        public IList<FunctionCall> OnePartNames { get; }
+        public IList<SqlDataTypeReference> EmptyvariableLengthDataSpecifications { get; }
 
-        public override void ExplicitVisit(FunctionCall node)
+        public override void ExplicitVisit(ConvertCall node)
         {
-            if (   node.FunctionName.Value.SQLModel_StringCompareEqual("object_id")
-                || node.FunctionName.Value.SQLModel_StringCompareEqual("index_col")
-                || node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
-               )
+            if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
             {
-                //node.SQLModel_DebugPrint(@"c:\temp\object_id.txt");
-                if (node.Parameters[0] is StringLiteral objName)
+                HandleReference(sqlDataTypeReference);
+            }
+        }
+        public override void ExplicitVisit(TryConvertCall node)
+        {
+            if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
+            {
+                HandleReference(sqlDataTypeReference);
+            }
+        }
+        public override void ExplicitVisit(CastCall node)
+        {
+            if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
+            {
+                HandleReference(sqlDataTypeReference);
+            }
+        }
+        public override void ExplicitVisit(TryCastCall node)
+        {
+            if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
+            {
+                HandleReference(sqlDataTypeReference);
+            }
+        }
+        public override void ExplicitVisit(DeclareVariableElement node)
+        {
+            if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
+            {
+                HandleReference(sqlDataTypeReference);
+            }
+        }
+        void HandleReference(SqlDataTypeReference node)
+        {
+            if ((node.Parameters?.Count ?? 0) == 0 )
+            {
+                switch (node.SqlDataTypeOption)
                 {
-                    //objName.SQLModel_DebugPrint(@"c:\temp\object_id.txt");
-                    var sLit = objName.Value;
-                    // only continue with this check if we're not calling type_id against a built-in datatype
-                    if ((node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
-                         && !SqlRuleUtils.IsBuiltinDataTypes(sLit)
-                         )
-                         || !node.FunctionName.Value.SQLModel_StringCompareEqual("type_id")
-                        )
-                    {
-                        if (objName.Value.EmptySchemaNameInLiteral()) { OnePartNames.Add(node); }
-                    }
+                    case SqlDataTypeOption.Binary:
+                    case SqlDataTypeOption.Char:
+                    case SqlDataTypeOption.Decimal:
+                    case SqlDataTypeOption.Float:
+                    case SqlDataTypeOption.NChar:
+                    case SqlDataTypeOption.Numeric:
+                    case SqlDataTypeOption.NVarChar:
+                    case SqlDataTypeOption.VarBinary:
+                    case SqlDataTypeOption.VarChar:
+                        EmptyvariableLengthDataSpecifications.Add(node);
+                        break;
+
+                    case SqlDataTypeOption.Bit:
+                    case SqlDataTypeOption.Cursor:
+                    case SqlDataTypeOption.Image:
+                    case SqlDataTypeOption.Text:
+                    case SqlDataTypeOption.NText:
+                    case SqlDataTypeOption.DateTime:
+                    case SqlDataTypeOption.DateTime2:           // yeah they are variable but lets not sweat it for these
+                    case SqlDataTypeOption.DateTimeOffset:      // yeah they are variable but lets not sweat it for these
+                    case SqlDataTypeOption.Int:
+                    case SqlDataTypeOption.Money:
+                    case SqlDataTypeOption.None:
+                    case SqlDataTypeOption.Real:
+                    case SqlDataTypeOption.SmallDateTime:
+                    case SqlDataTypeOption.SmallInt:
+                    case SqlDataTypeOption.SmallMoney:
+                    case SqlDataTypeOption.Sql_Variant:
+                    case SqlDataTypeOption.Table:
+                    case SqlDataTypeOption.Time:
+                    case SqlDataTypeOption.Timestamp:
+                    case SqlDataTypeOption.TinyInt:
+                    case SqlDataTypeOption.UniqueIdentifier:
+                        break;
+
+                    default:
+                        break;
                 }
             }
         }

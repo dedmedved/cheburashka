@@ -1392,6 +1392,30 @@
     <Content Include="TestScripts\EnforceTryCatchRule\TableTriggerWithTryCatch.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\EnforceVariableLengthDataSpecificationRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedCastSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithNoVariableTypesSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\README.txt" />
     <Content Include="TestScripts\_startup\_startup.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
