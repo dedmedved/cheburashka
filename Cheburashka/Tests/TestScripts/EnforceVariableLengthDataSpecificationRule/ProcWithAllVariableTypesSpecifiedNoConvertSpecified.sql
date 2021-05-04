@@ -1,5 +1,5 @@
 
-CREATE PROCEDURE dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
+CREATE PROCEDURE dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
 AS 
 BEGIN
 declare  @Binary            BINARY          (10)
@@ -12,14 +12,14 @@ declare  @Binary            BINARY          (10)
 ,        @VarBinary         VarBinary       (10)
 ,        @VarChar           VarChar         (10)
 
-select convert(BINARY       , @Binary            )--   (10)
-select convert(CHAR         , @Char              )--   (10)
-select convert(Decimal      , @Decimal           )--   (10)
-select convert(Float        , @Float             )--   (10)
-select convert(NChar        , @NChar             )--   (10)
-select convert(Numeric      , @Numeric           )--   (10)
-select convert(NVarChar     , @NVarChar          )--   (10)
-select convert(VarBinary    , @VarBinary         )--   (10)
-select convert(VarChar      , @VarChar           )--   (10)
+select try_convert(BINARY       , @Binary            )--   (10)
+select try_convert(CHAR         , @Char              )--   (10)
+select try_convert(Decimal      , @Decimal           )--   (10)
+select try_convert(Float        , @Float             )--   (10)
+select try_convert(NChar        , @NChar             )--   (10)
+select try_convert(Numeric      , @Numeric           )--   (10)
+select try_convert(NVarChar     , @NVarChar          )--   (10)
+select try_convert(VarBinary    , @VarBinary         )--   (10)
+select try_convert(VarChar      , @VarChar           )--   (10)
 
 END

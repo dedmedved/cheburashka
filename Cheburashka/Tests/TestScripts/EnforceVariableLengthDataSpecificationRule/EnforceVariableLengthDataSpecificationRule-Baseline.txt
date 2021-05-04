@@ -79,11 +79,173 @@ Start line: 23
 Start column: 34
 ========end of problem========
 
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 15
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 16
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 17
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 18
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 19
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 20
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 21
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 22
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Start line: 23
+Start column: 20
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 15
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 16
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 17
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 18
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 19
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 20
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 21
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 22
+Start column: 38
+========end of problem========
+
+Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
+FullID: Cheburashka.DM0039
+Severity: Warning
+Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Start line: 23
+Start column: 38
+========end of problem========
+
 Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoConvertSpecified].
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 15
 Start column: 16
 ========end of problem========
@@ -92,7 +254,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 16
 Start column: 16
 ========end of problem========
@@ -101,7 +263,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 17
 Start column: 16
 ========end of problem========
@@ -110,7 +272,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 18
 Start column: 16
 ========end of problem========
@@ -119,7 +281,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 19
 Start column: 16
 ========end of problem========
@@ -128,7 +290,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 20
 Start column: 16
 ========end of problem========
@@ -137,7 +299,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 21
 Start column: 16
 ========end of problem========
@@ -146,7 +308,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 22
 Start column: 16
 ========end of problem========
@@ -155,90 +317,9 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
 Start line: 23
 Start column: 16
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 15
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 16
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 17
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 18
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 19
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 20
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 21
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 22
-Start column: 38
-========end of problem========
-
-Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithAllVariableTypesSpecifiedNoTryCastSpecified].
-FullID: Cheburashka.DM0039
-Severity: Warning
-Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
-Start line: 23
-Start column: 38
 ========end of problem========
 
 Problem description: Variable length datatype found with no length specification in [dbo].[ProcWithNoVariableTypesSpecified].
