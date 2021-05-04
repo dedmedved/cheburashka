@@ -1395,6 +1395,12 @@
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\EnforceVariableLengthDataSpecificationRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
