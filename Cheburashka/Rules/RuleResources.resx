@@ -189,6 +189,12 @@
   <data name="CheckClusteredKeyColumnsNotIncludedInIndex_RuleName" xml:space="preserve">
     <value>Clustered Key Columns need not be explicitly included in a non-unique Index on a Clustered Table.  The clustering columns are already added to the end of the index leaf entry.</value>
   </data>
+  <data name="CheckDefaultsAreOnNotNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Default found on nullable column in {0}.</value>
+  </data>
+  <data name="CheckDefaultsAreOnNotNullColumns_RuleName" xml:space="preserve">
+    <value>Default values make more sense on non-nullable columns.</value>
+  </data>
   <data name="CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription" xml:space="preserve">
     <value>Duplicated column found in index or constraint in {0}.</value>
   </data>

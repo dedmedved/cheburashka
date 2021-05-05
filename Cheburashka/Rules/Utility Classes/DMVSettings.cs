@@ -54,6 +54,7 @@ namespace Cheburashka
         private static IList<TSqlObject>              _foreignKeyConstraints;
         private static IList<TSqlObject>              _uniqueConstraints;
         private static IList<TSqlObject>              _checkConstraints;
+        private static IList<TSqlObject>              _defaultConstraints;
 
         public static void RefreshModelBuiltInCache(TSqlModel model)
         {
@@ -76,15 +77,17 @@ namespace Cheburashka
                 IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
                 IList<TSqlObject> ukcs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
                 IList<TSqlObject> chks = model.GetObjects(DacQueryScopes.UserDefined, CheckConstraint.TypeClass).ToList();
+                IList<TSqlObject> dfts = model.GetObjects(DacQueryScopes.UserDefined, DefaultConstraint.TypeClass).ToList();
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
-                _tablesCache            = tbls;
+                _tablesCache = tbls;
                 _indexesCache           = idxs ;
                 _primaryKeyConstraints  = pkcs ;
                 _foreignKeyConstraints  = fkcs ;
                 _uniqueConstraints      = ukcs ;
                 _checkConstraints       = chks ;
+                _defaultConstraints     = dfts ;
             }
             else
             {
@@ -112,5 +115,6 @@ namespace Cheburashka
         public static IList<TSqlObject> GetForeignKeys => _foreignKeyConstraints;
         public static IList<TSqlObject> GetUniqueConstraints => _uniqueConstraints;
         public static IList<TSqlObject> GetCheckConstraints => _checkConstraints;
+        public static IList<TSqlObject> GetDefaultConstraints => _defaultConstraints;
     }
 }

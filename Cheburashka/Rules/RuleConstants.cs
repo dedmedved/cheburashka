@@ -68,6 +68,7 @@ namespace Cheburashka
         public const string CheckOrphanedBeginEndBlocks_RuleId                          = "Cheburashka.DM0037";
         public const string CheckUnnecessaryBrackets_RuleId                             = "Cheburashka.DM0038";
         public const string EnforceVariableLengthDataSpecification_RuleId               = "Cheburashka.DM0039";
+        public const string CheckDefaultsAreOnNotNullColumns_RuleId                     = "Cheburashka.DM0040";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -168,6 +169,8 @@ namespace Cheburashka
         public const string EnforceVariableLengthDataSpecification_RuleName                         = "EnforceVariableLengthDataSpecification_RuleName";
         public const string EnforceVariableLengthDataSpecification_ProblemDescription               = "EnforceVariableLengthDataSpecification_ProblemDescription";
 
+        public const string CheckDefaultsAreOnNotNullColumns_RuleName                               = "CheckDefaultsAreOnNotNullColumns_RuleName";
+        public const string CheckDefaultsAreOnNotNullColumns_ProblemDescription                     = "CheckDefaultsAreOnNotNullColumns_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

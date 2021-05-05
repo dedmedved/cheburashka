@@ -277,6 +277,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default found on nullable column in {0}..
+        /// </summary>
+        internal static string CheckDefaultsAreOnNotNullColumns_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckDefaultsAreOnNotNullColumns_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default values make more sense on non-nullable columns..
+        /// </summary>
+        internal static string CheckDefaultsAreOnNotNullColumns_RuleName {
+            get {
+                return ResourceManager.GetString("CheckDefaultsAreOnNotNullColumns_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicated column found in index or constraint in {0}..
         /// </summary>
         internal static string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription {
