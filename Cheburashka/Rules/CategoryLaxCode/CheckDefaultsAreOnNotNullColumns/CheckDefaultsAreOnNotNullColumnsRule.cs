@@ -84,7 +84,6 @@ namespace Cheburashka
         {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
-
             List<SqlRuleProblem> problems = new();
 
             try
@@ -106,30 +105,12 @@ namespace Cheburashka
                     return problems;
                 }
 
-                // Get Database Schema and name of this model element.
-                string owningObjectSchema = modelElement.Name.Parts[0];
-                string owningObjectTable = modelElement.Name.Parts[1];
-
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
-//                var allDefaults = DMVSettings.GetDefaultConstraints; 
 
-                TSqlObject table = modelElement;
-                var columns = table.GetReferenced(Table.Columns, DacQueryScopes.UserDefined);
-                // dont do that - iterte over tabel getting sqlfragments going that way
-
-                List<TSqlFragment> issues = new();
-                //foreach (var col in columns)
-                //{
-                //    var refCol = col.GetReferenced(DefaultConstraint.Host).ToList();
-                //    var nullable = col.GetProperty<bool>(Column.Nullable);
-                //    if ( ( refCol?.Count ?? 0 ) > 0 && nullable) 
-                //    {
-                //        issues.Add(col.);
-                //    }
-                //}
-
-
+                var visitor = new CheckDefaultsAreOnNotNullColumnsVisitor();
+                sqlFragment.Accept(visitor);
+                var issues = visitor.ColumnDefinitions.Cast<TSqlFragment>().ToList();
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
