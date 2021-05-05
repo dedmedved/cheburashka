@@ -102,6 +102,8 @@
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\BareReturnVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\OuterBlockVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsRule.cs" />
+    <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\EnforceVariableLengthDataSpecificationRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\VariableLengthDataSpecificationsVisitor.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
