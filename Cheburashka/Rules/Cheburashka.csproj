@@ -106,6 +106,8 @@
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\EnforceVariableLengthDataSpecificationRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\VariableLengthDataSpecificationsVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberVisitor.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />

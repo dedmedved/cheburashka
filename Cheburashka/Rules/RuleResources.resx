@@ -129,6 +129,12 @@
   <data name="AvoidDirectUseOfRowcount_RuleName" xml:space="preserve">
     <value>@@rowcount and/or @@error should never be used directly.</value>
   </data>
+  <data name="AvoidErrorNumber_ProblemDescription" xml:space="preserve">
+    <value>@@error global variable usage found in {0}.</value>
+  </data>
+  <data name="AvoidErrorNumber_RuleName" xml:space="preserve">
+    <value>Avoid using @error.  Use Try/Catch.</value>
+  </data>
   <data name="AvoidGoto_ProblemDescription" xml:space="preserve">
     <value>GOTO statement was found in {0}.</value>
   </data>

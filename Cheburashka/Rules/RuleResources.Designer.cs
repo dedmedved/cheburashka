@@ -97,6 +97,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @@error global variable usage found in {0}..
+        /// </summary>
+        internal static string AvoidErrorNumber_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidErrorNumber_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid using @error.  Use Try/Catch..
+        /// </summary>
+        internal static string AvoidErrorNumber_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidErrorNumber_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GOTO statement was found in {0}..
         /// </summary>
         internal static string AvoidGoto_ProblemDescription {
