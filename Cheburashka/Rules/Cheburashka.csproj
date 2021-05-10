@@ -106,6 +106,8 @@
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\EnforceVariableLengthDataSpecificationRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\VariableLengthDataSpecificationsVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberVisitor.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />
@@ -157,12 +159,12 @@
     <Compile Include="SelectSetVariable\SelectSetVariableVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidDirectUseOfRowcountRule.cs" />
-    <Compile Include="CategoryLaxCode\BasicRules\AvoidGotoRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\EnforceCaptureSPReturnStatusRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\EnforceReturnRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\EnforceTryCatchRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidDirectUseOfRowcountVisitor.cs" />
-    <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidGotoVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\EnforceCaptureSPReturnStatusVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\ReturnVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\TryCatchVisitor.cs" />

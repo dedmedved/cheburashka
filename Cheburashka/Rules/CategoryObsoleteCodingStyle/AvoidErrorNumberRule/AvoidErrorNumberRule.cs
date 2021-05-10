@@ -39,23 +39,23 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidGotoRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(AvoidErrorNumberRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidGoto_RuleName,                                   // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidGoto_ProblemDescription,                         // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
+        RuleConstants.AvoidErrorNumber_RuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidErrorNumber_ProblemDescription,                  // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidGotoRule : SqlCodeAnalysisRule
+    public sealed class AvoidErrorNumberRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0025: Avoid using Goto statements."
+        /// shown as "DM0041: Avoid using @@ERROR.  Use Try/Catch."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidGoto_RuleId;
+        public const string RuleId = RuleConstants.AvoidErrorNumber_RuleId;
 
-        public AvoidGotoRule()
+        public AvoidErrorNumberRule()
         {
             // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
@@ -98,10 +98,10 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of goto statements
-            var visitor = new GotoVisitor();
+            var visitor = new AvoidErrorNumberVisitor();
             sqlFragment.Accept(visitor);
-            var issues = visitor.GoToStatements.Cast<TSqlFragment>().ToList();
-            // Create problems for each GOTO statement found 
+            var issues = visitor.GlobalVariableExpressions.Cast<TSqlFragment>().ToList();
+            // Create problems for each @@ERROR usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
