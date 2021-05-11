@@ -159,6 +159,12 @@
   <data name="AvoidUninitialisedVariables_RuleName" xml:space="preserve">
     <value>Variables whose value is never set will be null.</value>
   </data>
+  <data name="AvoidUnusedLabels_ProblemDescription" xml:space="preserve">
+    <value>Unreferenced label found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedLabels_RuleName" xml:space="preserve">
+    <value>Avoid unreferenced labels in code.</value>
+  </data>
   <data name="AvoidUnusedParameter_ProblemDescription" xml:space="preserve">
     <value>Unused Parameter found in {0}.</value>
   </data>

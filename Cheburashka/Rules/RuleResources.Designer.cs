@@ -187,6 +187,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unreferenced label found in {0}..
+        /// </summary>
+        internal static string AvoidUnusedLabels_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidUnusedLabels_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid unreferenced labels in code..
+        /// </summary>
+        internal static string AvoidUnusedLabels_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidUnusedLabels_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unused Parameter found in {0}..
         /// </summary>
         internal static string AvoidUnusedParameter_ProblemDescription {

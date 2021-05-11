@@ -98,6 +98,8 @@
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
+    <Compile Include="CategoryLaxCode\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidNullLiteralRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidNullLiteralVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\BareReturnVisitor.cs" />
