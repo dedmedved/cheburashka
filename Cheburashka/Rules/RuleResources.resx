@@ -141,6 +141,12 @@
   <data name="AvoidGoto_RuleName" xml:space="preserve">
     <value>Avoid using Goto statements.</value>
   </data>
+  <data name="AvoidNonANSIJoins_ProblemDescription" xml:space="preserve">
+    <value>Old style join found in {0}.</value>
+  </data>
+  <data name="AvoidNonANSIJoins_RuleName" xml:space="preserve">
+    <value>Avoid non-ANSI joins.  Use ANSI syntax, or T-SQL Apply.</value>
+  </data>
   <data name="AvoidNullLiteral_ProblemDescription" xml:space="preserve">
     <value>Null Literal was found in a comparison in {0}.</value>
   </data>
