@@ -456,6 +456,27 @@
     <Content Include="TestScripts\AvoidUninitialisedVariablesRule\TableValuedFunctionWithUninitialisedVariable.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\AvoidUnusedLabelsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\DatabaseScalarFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\InlineFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\ProcWithUnUsedLabel.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\ServerTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedLabelsRule\TableValuedFunctionWithUnUsedLabel.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidUnusedParameter_MixedCaseVariableNamesRule\Assembly.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

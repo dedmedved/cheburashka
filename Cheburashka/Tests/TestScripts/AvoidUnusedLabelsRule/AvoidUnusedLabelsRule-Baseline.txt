@@ -1,0 +1,36 @@
+Problem description: Unreferenced label found in [dbo].[DatabaseScalarFunction].
+FullID: Cheburashka.DM0042
+Severity: Warning
+Model element: dbo.DatabaseScalarFunction
+Script file: DatabaseScalarFunction.sql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Unreferenced label found in [dbo].[ProcWithUnUsedLabel].
+FullID: Cheburashka.DM0042
+Severity: Warning
+Model element: dbo.ProcWithUnUsedLabel
+Script file: ProcWithUnUsedLabel.sql
+Start line: 7
+Start column: 1
+========end of problem========
+
+Problem description: Unreferenced label found in [ServerTrigger].
+FullID: Cheburashka.DM0042
+Severity: Warning
+Model element: ServerTrigger
+Script file: ServerTrigger.sql
+Start line: 9
+Start column: 1
+========end of problem========
+
+Problem description: Unreferenced label found in [dbo].[TableValuedFunctionWithUnUSedLabel].
+FullID: Cheburashka.DM0042
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithUnUSedLabel
+Script file: TableValuedFunctionWithUnUsedLabel.sql
+Start line: 17
+Start column: 1
+========end of problem========
+

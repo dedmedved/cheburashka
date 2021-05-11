@@ -70,6 +70,7 @@ namespace Cheburashka
         public const string EnforceVariableLengthDataSpecification_RuleId               = "Cheburashka.DM0039";
         public const string CheckDefaultsAreOnNotNullColumns_RuleId                     = "Cheburashka.DM0040";
         public const string AvoidErrorNumber_RuleId                                     = "Cheburashka.DM0041";
+        public const string AvoidUnusedLabels_RuleId                                    = "Cheburashka.DM0042";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -175,6 +176,9 @@ namespace Cheburashka
 
         public const string AvoidErrorNumber_RuleName                                               = "AvoidErrorNumber_RuleName";
         public const string AvoidErrorNumber_ProblemDescription                                     = "AvoidErrorNumber_ProblemDescription";
+
+        public const string AvoidUnusedLabels_RuleName                                              = "AvoidUnusedLabels_RuleName";
+        public const string AvoidUnusedLabels_ProblemDescription                                    = "AvoidUnusedLabels_ProblemDescription";
 
 
         /// <summary>
