@@ -31,37 +31,38 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever global variable @@error appears inside a subroutine body. 
-    /// This rule only applies to SQL stored procedures, functions and triggers.
+    /// whenever a non NASI join expression appears inside a subroutine body. 
+    /// This rule only applies to SQL views, stored procedures, functions and triggers.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidErrorNumberRule.RuleId,
-        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidErrorNumber_RuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidErrorNumber_ProblemDescription,                  // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidErrorNumberRule : SqlCodeAnalysisRule
+    [LocalizedExportCodeAnalysisRule(AvoidNonANSIJoinsRule.RuleId,
+        RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
+        RuleConstants.AvoidNonANSIJoins_RuleName,                             // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNonANSIJoins_ProblemDescription,                   // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryObsoleteCodingStyle,           // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
+    public sealed class AvoidNonANSIJoinsRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0041: Avoid using @@ERROR.  Use Try/Catch."
+        /// shown as "DM0043: Avoid non-ANSI joins.  Use ANSI syntax, or T-SQL Apply."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidErrorNumber_RuleId;
+        public const string RuleId = RuleConstants.AvoidNonANSIJoins_RuleId;
 
-        public AvoidErrorNumberRule()
+        public AvoidNonANSIJoinsRule()
         {
             // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
                 //ModelSchema.ExtendedProcedure,
+                ModelSchema.View,
                 ModelSchema.Procedure,
                 ModelSchema.TableValuedFunction,
                 ModelSchema.ScalarFunction,
@@ -98,9 +99,10 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of goto statements
-            var visitor = new AvoidErrorNumberVisitor();
+            var visitor = new NonANSIJoinVisitor();
             sqlFragment.Accept(visitor);
-            var issues = visitor.GlobalVariableExpressions.Cast<TSqlFragment>().ToList();
+            var issues = visitor.TableReferences.Cast<TSqlFragment>().ToList();
+
             // Create problems for each @@ERROR usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

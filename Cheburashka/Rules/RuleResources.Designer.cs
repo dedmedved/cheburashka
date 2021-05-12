@@ -133,6 +133,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Old style join found in {0}..
+        /// </summary>
+        internal static string AvoidNonANSIJoins_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidNonANSIJoins_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid non-ANSI joins.  Use ANSI syntax, or T-SQL Apply..
+        /// </summary>
+        internal static string AvoidNonANSIJoins_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidNonANSIJoins_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Null Literal was found in a comparison in {0}..
         /// </summary>
         internal static string AvoidNullLiteral_ProblemDescription {
