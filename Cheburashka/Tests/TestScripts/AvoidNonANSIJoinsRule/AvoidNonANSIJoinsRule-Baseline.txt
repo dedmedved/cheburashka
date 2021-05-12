@@ -1,0 +1,36 @@
+Problem description: Old style join found in [dbo].[ProcWithNonANSIJoins].
+FullID: Cheburashka.DM0043
+Severity: Warning
+Model element: dbo.ProcWithNonANSIJoins
+Script file: ProcWithNonANSIJoins.sql
+Start line: 5
+Start column: 7
+========end of problem========
+
+Problem description: Old style join found in [dbo].[ProcWithNonANSIJoins].
+FullID: Cheburashka.DM0043
+Severity: Warning
+Model element: dbo.ProcWithNonANSIJoins
+Script file: ProcWithNonANSIJoins.sql
+Start line: 8
+Start column: 2
+========end of problem========
+
+Problem description: Old style join found in [dbo].[ProcWithNonANSIJoins].
+FullID: Cheburashka.DM0043
+Severity: Warning
+Model element: dbo.ProcWithNonANSIJoins
+Script file: ProcWithNonANSIJoins.sql
+Start line: 9
+Start column: 2
+========end of problem========
+
+Problem description: Old style join found in [dbo].[ProcWithNonANSIJoins].
+FullID: Cheburashka.DM0043
+Severity: Warning
+Model element: dbo.ProcWithNonANSIJoins
+Script file: ProcWithNonANSIJoins.sql
+Start line: 10
+Start column: 2
+========end of problem========
+

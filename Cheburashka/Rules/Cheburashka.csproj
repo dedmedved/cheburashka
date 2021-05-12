@@ -111,7 +111,7 @@
     <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberRule.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNonANSIJoinsRule\NonANSIJoinVisitor.cs" />
-    <Compile Include="CategoryObsoleteCodingStyle\AvoidNonANSIJoinsRule\AvoidNonANSIJoinRules.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidNonANSIJoinsRule\AvoidNonANSIJoinsRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />
