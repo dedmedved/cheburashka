@@ -191,6 +191,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidNonANSIJoinsRule\No_Tests_for_other_object_types_have_been_written.txt" />
+    <Content Include="TestScripts\AvoidNonANSIJoinsRule\ProcWithOneFromClauseElement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidNonANSIJoinsRule\ProcWithNonANSIJoins.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
