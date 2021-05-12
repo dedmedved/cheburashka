@@ -41,6 +41,7 @@ namespace Cheburashka
             {
                 TableReferences.AddRange(node.TableReferences.Skip(1));
             }
+            node.AcceptChildren(this);
         }
     }
 }

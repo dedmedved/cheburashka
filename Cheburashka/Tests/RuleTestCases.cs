@@ -2228,7 +2228,7 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidUnusedLabelso_CI_AI()
+        public void AvoidUnusedLabels_CI_AI()
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
@@ -2258,7 +2258,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidNonANSIJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql150);
+                SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidNonANSIJoinsRule.RuleId);
         }
@@ -2276,13 +2276,13 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidUnusedLabel_CI_AI()
+        public void AvoidNonANSIJoins_CI_AI()
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidNonANSIJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql150);
+                SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidNonANSIJoinsRule.RuleId);
         }

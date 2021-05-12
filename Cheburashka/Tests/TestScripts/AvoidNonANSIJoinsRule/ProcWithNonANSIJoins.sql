@@ -7,7 +7,7 @@ BEGIN
  ON z.[C1] = a.[C1],
  dbo.Table2,
  dbo.Table4, 
- (SELECT [C1] FROM dbo.Table3) x
+ (SELECT a.[C1] FROM dbo.Table3,Table1 a ) x
  JOIN dbo.Table1 y
  ON x.[C1] = y.[C1]
 
