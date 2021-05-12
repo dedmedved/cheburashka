@@ -21,6 +21,8 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
@@ -37,7 +39,7 @@ namespace Cheburashka
         {
             if ( node.TableReferences.Count > 1 )
             {
-                TableReferences.AddRange(node.TableReferences);
+                TableReferences.AddRange(node.TableReferences.Skip(1));
             }
         }
     }
