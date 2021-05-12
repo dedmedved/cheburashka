@@ -35,7 +35,10 @@ namespace Cheburashka
 
         public override void ExplicitVisit(FromClause node)
         {
-            TableReferences.AddRange(node.TableReferences);
+            if ( node.TableReferences.Count > 1 )
+            {
+                TableReferences.AddRange(node.TableReferences);
+            }
         }
     }
 }
