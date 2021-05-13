@@ -79,6 +79,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avoid checking a column for not null if an explicit value check is also made.  The explicit check makes the null check redundant..
+        /// </summary>
+        internal static string AvoidCheckIsNotNull_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidCheckIsNotNull_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redundant &apos;is not null&apos; check found in {0}..
+        /// </summary>
+        internal static string AvoidCheckIsNotNull_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidCheckIsNotNull_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @@rowcount and/or @@error was used directly in {0}.  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use..
         /// </summary>
         internal static string AvoidDirectUseOfRowcount_ProblemDescription {

@@ -72,6 +72,7 @@ namespace Cheburashka
         public const string AvoidErrorNumber_RuleId                                     = "Cheburashka.DM0041";
         public const string AvoidUnusedLabels_RuleId                                    = "Cheburashka.DM0042";
         public const string AvoidNonANSIJoins_RuleId                                    = "Cheburashka.DM0043";
+        public const string AvoidCheckIsNotNull_RuleId                                  = "Cheburashka.DM0044";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -184,7 +185,8 @@ namespace Cheburashka
         public const string AvoidNonANSIJoins_RuleName                                              = "AvoidNonANSIJoins_RuleName";
         public const string AvoidNonANSIJoins_ProblemDescription                                    = "AvoidNonANSIJoins_ProblemDescription";
 
-        
+        public const string AvoidCheckIsNotNull_RuleName                                            = "AvoidCheckIsNotNull_RuleName";
+        public const string AvoidCheckIsNotNull_ProblemDescription                                  = "AvoidCheckIsNotNull_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

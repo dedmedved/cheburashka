@@ -123,6 +123,12 @@
   <data name="AvoidBareReturn_RuleName" xml:space="preserve">
     <value>Avoid using Return statements with no explicit return value in Stored Procedures.</value>
   </data>
+  <data name="AvoidCheckIsNotNull_ProblemDescription" xml:space="preserve">
+    <value>Avoid checking a column for not null if an explicit value check is also made.  The explicit check makes the null check redundant.</value>
+  </data>
+  <data name="AvoidCheckIsNotNull_RuleName" xml:space="preserve">
+    <value>Redundant 'is not null' check found in {0}.</value>
+  </data>
   <data name="AvoidDirectUseOfRowcount_ProblemDescription" xml:space="preserve">
     <value>@@rowcount and/or @@error was used directly in {0}.  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.</value>
   </data>
