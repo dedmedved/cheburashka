@@ -35,7 +35,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(GlobalVariableExpression node)
         {
-            if (node.Name.SQLModel_StringCompareEqual("@@trancount"))
+            if (node.Name.ToLower()== "@@trancount")
             {
                 Expressions.Add(node);
             }

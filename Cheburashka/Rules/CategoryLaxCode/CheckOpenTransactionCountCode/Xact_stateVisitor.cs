@@ -35,7 +35,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(FunctionCall node)
         {
-            if (node.FunctionName.Value.SQLModel_StringCompareEqual("xact_state"))
+            if (node.FunctionName.Value.ToLower() == "xact_state")
             {
                 Expressions.Add(node);
             }
