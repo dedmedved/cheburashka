@@ -1,0 +1,8 @@
+﻿create PROC CheckOpenTransactionCountCodeRule_Proc
+AS
+IF @@TRANCOUNT = 1 ROLLBACK
+IF XACT_STATE() = 1 ROLLBACK
+
+IF @@TRANCOUNT = 1 OR XACT_STATE() = 1 ROLLBACK
+
+RETURN 

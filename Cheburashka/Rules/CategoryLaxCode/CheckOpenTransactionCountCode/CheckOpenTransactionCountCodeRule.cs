@@ -111,8 +111,8 @@ namespace Cheburashka
                 expr.Accept(trancountVisitor);
                 expr.Accept(xact_stateVisitor);
                 // This is a really poor way of checking for epxressoin correctness - but in general its the best that can be done
-                if (   (trancountVisitor.Expressions.Count >  0 && trancountVisitor.Expressions.Count == 0)
-                    || (trancountVisitor.Expressions.Count == 0 && trancountVisitor.Expressions.Count >  0)
+                if (   (trancountVisitor.Expressions.Count >  0 && xact_stateVisitor.Expressions.Count == 0)
+                    || (trancountVisitor.Expressions.Count == 0 && xact_stateVisitor.Expressions.Count >  0)
                     ) {
                     issues.Add(expr);
                 }

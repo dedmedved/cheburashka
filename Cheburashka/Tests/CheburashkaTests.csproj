@@ -900,6 +900,13 @@
     <Content Include="TestScripts\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule_Table_With_FK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_Function.sql" />
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_Proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\CheckOrphanedBeginEndBlocksRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
