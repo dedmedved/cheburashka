@@ -906,7 +906,22 @@
     <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_Function.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_DML_Trigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_Proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_DatabaseTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_ServerTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckOpenTransactionCountCodeRule\CheckOpenTransactionCountCodeRule_TableValuedFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckOrphanedBeginEndBlocksRule\CheckOrphanedBeginEndBlocksRule-Baseline.txt">
