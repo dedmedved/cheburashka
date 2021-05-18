@@ -3,7 +3,7 @@ FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
 Script file: CheckOpenTransactionCountCodeRule_Function.sql
-Start line: 5
+Start line: 6
 Start column: 4
 ========end of problem========
 
@@ -12,17 +12,26 @@ FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
 Script file: CheckOpenTransactionCountCodeRule_Function.sql
-Start line: 6
+Start line: 7
 Start column: 4
 ========end of problem========
 
-Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Proc].
+Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Function].
 FullID: Cheburashka.DM0045
 Severity: Warning
-Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
-Script file: CheckOpenTransactionCountCodeRule_Proc.sql
-Start line: 3
-Start column: 4
+Model element: dbo.CheckOpenTransactionCountCodeRule_Function
+Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Start line: 10
+Start column: 7
+========end of problem========
+
+Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Function].
+FullID: Cheburashka.DM0045
+Severity: Warning
+Model element: dbo.CheckOpenTransactionCountCodeRule_Function
+Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Start line: 11
+Start column: 7
 ========end of problem========
 
 Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Proc].
@@ -32,5 +41,32 @@ Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
 Script file: CheckOpenTransactionCountCodeRule_Proc.sql
 Start line: 4
 Start column: 4
+========end of problem========
+
+Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Proc].
+FullID: Cheburashka.DM0045
+Severity: Warning
+Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
+Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Start line: 5
+Start column: 4
+========end of problem========
+
+Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Proc].
+FullID: Cheburashka.DM0045
+Severity: Warning
+Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
+Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Start line: 8
+Start column: 7
+========end of problem========
+
+Problem description: Code found checking @@trancount but not xact_state() or vice-versa in [dbo].[CheckOpenTransactionCountCodeRule_Proc].
+FullID: Cheburashka.DM0045
+Severity: Warning
+Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
+Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Start line: 9
+Start column: 7
 ========end of problem========
 
