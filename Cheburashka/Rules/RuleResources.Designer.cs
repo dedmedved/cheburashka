@@ -403,6 +403,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code found checking @@trancount but not xact_state() or vice-versa in {0}..
+        /// </summary>
+        internal static string CheckOpenTransactionCountCode_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckOpenTransactionCountCode_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neither @@trancount not xact_state() by themselves give the full picture of the number of open transaction.  Check both..
+        /// </summary>
+        internal static string CheckOpenTransactionCountCode_RuleName {
+            get {
+                return ResourceManager.GetString("CheckOpenTransactionCountCode_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unattached BEGIN/END block found in {0}..
         /// </summary>
         internal static string CheckOrphanedBeginEndBlocks_ProblemDescription {

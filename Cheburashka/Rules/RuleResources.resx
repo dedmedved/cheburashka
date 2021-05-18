@@ -231,6 +231,12 @@
   <data name="CheckMultipleForeignKeysFromOneTable_RuleName" xml:space="preserve">
     <value>Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation.</value>
   </data>
+  <data name="CheckOpenTransactionCountCode_ProblemDescription" xml:space="preserve">
+    <value>Code found checking @@trancount but not xact_state() or vice-versa in {0}.</value>
+  </data>
+  <data name="CheckOpenTransactionCountCode_RuleName" xml:space="preserve">
+    <value>Neither @@trancount not xact_state() by themselves give the full picture of the number of open transaction.  Check both.</value>
+  </data>
   <data name="CheckOrphanedBeginEndBlocks_ProblemDescription" xml:space="preserve">
     <value>Unattached BEGIN/END block found in {0}.</value>
   </data>
