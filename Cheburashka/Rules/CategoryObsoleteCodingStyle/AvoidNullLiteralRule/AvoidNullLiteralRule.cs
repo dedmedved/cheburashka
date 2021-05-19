@@ -29,8 +29,9 @@ using System.Linq;
 namespace Cheburashka
 {
     /// <summary>
-    /// <para>This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement is not found in a subroutine body. 
+    /// <para>
+    /// This is a SQL rule which returns a warning message 
+    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
     /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
@@ -38,23 +39,27 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(CheckOrphanedBeginEndBlocksRule.RuleId,
-        RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckOrphanedBeginEndBlocks_RuleName,             // ID used to look up the display name inside the resources file
-        RuleConstants.CheckOrphanedBeginEndBlocks_ProblemDescription,   // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                        // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
-    public sealed class CheckOrphanedBeginEndBlocksRule : SqlCodeAnalysisRule
+    [LocalizedExportCodeAnalysisRule(AvoidNullLiteralRule.RuleId,
+        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
+        RuleConstants.AvoidNullLiteral_RuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNullLiteral_ProblemDescription,                  // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
+    public sealed class AvoidNullLiteralRule : SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0037: BEGIN/END blocks do not define a scope in T-SQL.  They have no use unless associated with a control construct e.g. IF or WHILE."
+        /// shown as "DM0030: Avoid using Null literals in expressions and comparisons."
+        /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckOrphanedBeginEndBlocks_RuleId;
+        public const string RuleId = RuleConstants.AvoidNullLiteral_RuleId;
 
-        public CheckOrphanedBeginEndBlocksRule()
+        public AvoidNullLiteralRule()
         {
             // This rule supports Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
@@ -97,56 +102,14 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            List<TSqlFragment> issues = new() ;
-
-            var code =  (sqlFragment as CreateProcedureStatement)?.StatementList 
-                               ?? (sqlFragment as CreateFunctionStatement)?.StatementList
-                               ?? (sqlFragment as CreateTriggerStatement)?.StatementList;
-
-            if (code is not null) // inline functions have no statement list
-            {
-                foreach (var sqlStatement in code.Statements)
-                {
-                    issues.AddRange(InvalidUseOfBegin(true, sqlStatement));
-                }
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
-            }
+            // visitor to get the occurrences of bare return statements
+            var visitor = new NullLiteralVisitor();
+            sqlFragment.Accept(visitor);
+            var issues = visitor.NullLiteralExpressions.Cast<TSqlFragment>().ToList();
+            // Create problems for each Return statement found 
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
-        }
-
-        private List<BeginEndBlockStatement> InvalidUseOfBegin(bool precedingControlStatement,TSqlStatement code)
-        {
-            List<BeginEndBlockStatement> problemBegins = new();
-
-            switch (code)
-            {
-                case BeginEndBlockStatement statement:
-                    if (!precedingControlStatement) problemBegins.Add(statement);
-                    foreach (TSqlStatement s in statement.StatementList.Statements)
-                    {
-                        problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    }
-                    break;
-                case TryCatchStatement statement:
-                    foreach (TSqlStatement s in statement.TryStatements.Statements)
-                    {
-                        problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    }
-                    foreach (TSqlStatement s in statement.CatchStatements.Statements)
-                    {
-                        problemBegins.AddRange(InvalidUseOfBegin(false, s));
-                    }
-                    break;
-                case IfStatement statement:        
-                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.ThenStatement));
-                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.ElseStatement));
-                    break;
-                case WhileStatement statement:
-                    problemBegins.AddRange(InvalidUseOfBegin(true, statement.Statement));
-                    break;
-            }
-            return problemBegins;
         }
     }
 }

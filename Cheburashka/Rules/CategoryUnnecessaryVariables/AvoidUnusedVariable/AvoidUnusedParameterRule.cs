@@ -32,7 +32,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is an unused variable in a routine.
+    /// whenever there is an unused parameter in a routine.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -40,23 +40,23 @@ namespace Cheburashka
     /// </para>
     /// </summary>
 
-    [LocalizedExportCodeAnalysisRule(AvoidUnusedVariablesRule.RuleId,
-        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedVariables_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedVariables_ProblemDescription,              // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryVariableUsage,                           // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidUnusedVariablesRule : SqlCodeAnalysisRule
+    [LocalizedExportCodeAnalysisRule(AvoidUnusedParameterRule.RuleId,
+        RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up displayname and description in
+        RuleConstants.AvoidUnusedParameter_RuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUnusedParameter_ProblemDescription,                  // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryUnnecessaryVariables,                  // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
+    public sealed class AvoidUnusedParameterRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0002: Unused Variables point to potential coding errors."
+        /// shown as "DM0005: Unused Parameters point to potential coding errors."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUnusedVariables_RuleId;
+        public const string RuleId = RuleConstants.AvoidUnusedParameter_RuleId;
 
-        public AvoidUnusedVariablesRule()
+        public AvoidUnusedParameterRule()
         {
             // This rule supports Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
@@ -66,10 +66,6 @@ namespace Cheburashka
                 ModelSchema.Procedure,
                 ModelSchema.TableValuedFunction,
                 ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
             };
         }
 
@@ -85,21 +81,31 @@ namespace Cheburashka
         {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out List<SqlRuleProblem> problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
-
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the declarations of variables
-            var declarationVisitor = new VariableDeclarationVisitor();
-            sqlFragment.Accept(declarationVisitor);
-            IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
+            // visitor to get wrappers for CLR code
+            var clrWrapperVisitor = new ClrWrapperVisitor();
+            sqlFragment.Accept(clrWrapperVisitor);
+            List<ProcedureStatementBodyBase> clrWrappers = clrWrapperVisitor.ClrWrappers;
+
+            // visitor to get the declarations of parameters
+            var parameterDeclarationVisitor = new ParameterDeclarationVisitor();
+            sqlFragment.Accept(parameterDeclarationVisitor);
+            IEnumerable<ProcedureParameter> tmpParameterDeclarations = parameterDeclarationVisitor.ParameterDeclarations;
+            IEnumerable<Identifier> tmpParameterDeclarations2 = from t in tmpParameterDeclarations
+                                                                select t.VariableName;
+            // Remove parameter declarations that occur in CLR wrappers
+            //            parameterDeclarations.RemoveAll(pd => clrWrappers.Any(clr => SqlComparisonUtils.Contains(clr, pd)));
+            List<Identifier> parameterDeclarations = tmpParameterDeclarations2.ToList().FindAll(pd => !clrWrappers.Any(clr => clr.SQLModel_Contains(pd)));
 
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
@@ -110,40 +116,36 @@ namespace Cheburashka
             // visitor to get the occurrences of variables
             var usageVisitor = new VariableUsageVisitor();
             sqlFragment.Accept(usageVisitor);
-            IEnumerable<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+            IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
 
             // remove all named parameters from the list of referenced variables
-
-//TODO - work out how to eliminate based solely on name.
-
             IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-
             List<VariableReference> variableReferences = tmpVr.ToList();
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);
 
-            foreach (Identifier variableDeclaration in variableDeclarations)    // variable declarations are unique collation-wise so add will work w/o error
+            foreach (Identifier parameterDeclaration in parameterDeclarations)
             {
-                objects.Add(variableDeclaration.Value, variableDeclaration);
+                objects.Add(parameterDeclaration.Value, parameterDeclaration);
             }
 
             foreach (VariableReference variableReference in variableReferences)
             {
-                if (!counts.ContainsKey(variableReference.Name)) // only need the 1st occurrence
+                if (!counts.ContainsKey(variableReference.Name)) // finding the first usage is sufficient - we don't need all of them
                 {
                     counts.Add(variableReference.Name, 1);
                 }
             }
-
+            //var 
             foreach (var key in objects.Keys)
             {
-                if (  (counts.ContainsKey(key) && counts[key] == 0)
-                   || !counts.ContainsKey(key)
+                if (  ( counts.ContainsKey(key) && counts[key] == 0 )
+                   || ! counts.ContainsKey(key)
                    )
                 {
-                    SqlRuleProblem problem =
-                        new(
+                    var problem =
+                        new SqlRuleProblem(
                             string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                             , modelElement
                             , sqlFragment);
@@ -152,7 +154,36 @@ namespace Cheburashka
                     problems.Add(problem);
                 }
             }
+
             return problems;
         }
     }
 }
+
+//if (counts.ContainsKey(key) )
+//{
+//    if (counts[key] == 0) //unlike other unused objects the parameter declaration
+//        //doesn't itself get include in the count
+//        //as its a different kind of thing
+//    {
+//        var problem =
+//            new SqlRuleProblem(
+//                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+//                , modelElement
+//                , sqlFragment);
+
+//        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+//        problems.Add(problem);
+//    }
+//}
+//else
+//{
+//    var problem =
+//        new SqlRuleProblem(
+//            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+//            , modelElement
+//            , sqlFragment);
+
+//    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
+//    problems.Add(problem);
+//}

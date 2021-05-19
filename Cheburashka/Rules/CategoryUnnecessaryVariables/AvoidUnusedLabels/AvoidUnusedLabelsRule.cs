@@ -19,7 +19,6 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -32,31 +31,31 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is an unused table variable in a routine.
+    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
+    /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-
-    [LocalizedExportCodeAnalysisRule(AvoidUnusedTableVariableRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(AvoidUnusedLabelsRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedTableVariable_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedTableVariable_ProblemDescription,              // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryVariableUsage,                           // Rule category (e.g. "Design", "Naming")
+        RuleConstants.AvoidUnusedLabels_RuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUnusedLabels_ProblemDescription,                 // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidUnusedTableVariableRule : SqlCodeAnalysisRule
+    public sealed class AvoidUnusedLabelsRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0004: Unused Table Variables point to potential coding errors."
+        /// shown as "DM0042: Avoid unreferenced labels in code."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUnusedTableVariable_RuleId;
+        public const string RuleId = RuleConstants.AvoidUnusedLabels_RuleId;
 
-        public AvoidUnusedTableVariableRule()
+        public AvoidUnusedLabelsRule()
         {
             // This rule supports Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
@@ -85,68 +84,33 @@ namespace Cheburashka
         {
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out List<SqlRuleProblem> problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+
+            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+
+            TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+            TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the declarations of table variables
-            var tableDeclarationVisitor = new TableVariableDeclarationVisitor();
-            sqlFragment.Accept(tableDeclarationVisitor);
-            IList<Identifier> tableVariableDeclarations = tableDeclarationVisitor.TableVariableDeclarations;
+            // visitor to get the occurrences of bare return statements
+            var gotoVisitor = new GotoVisitor();
+            sqlFragment.Accept(gotoVisitor);
+            var gotoLabels = gotoVisitor.GoToStatements.Select(n => n.LabelName.Value).ToList();
 
-            // visitor to get parameter names - these look like variables and need removing
-            // from variable references before we use them
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+            var labelVisitor = new LabelVisitor();
+            sqlFragment.Accept(labelVisitor);
+            var labels = labelVisitor.Labels;
 
-            // visitor to get the occurrences of variables
-            var usageVisitor = new VariableTableReferenceVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
-            // remove all named parameters from the list of referenced variables
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            IList<VariableReference> variableReferences = tmpVr.ToList();
+            var issues = labels.Where( l => ! gotoLabels.Any(gl => gl.SQLModel_StringCompareEqual(l.Value.Substring(0,l.Value.Length-1)))).Cast<TSqlFragment>().ToList();
 
-            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
-            var counts = new Dictionary<string, int>(SqlComparer.Comparer);
-
-            foreach (Identifier variableDeclaration in tableVariableDeclarations) // variable declarations are unique collation-wise so add will work w/o error
-            {
-                objects.Add(variableDeclaration.Value, variableDeclaration);
-            }
-
-            foreach (VariableReference variableReference in variableReferences)
-            {
-                if (!counts.ContainsKey(variableReference.Name))// only need to notice the first occurrence
-                {
-                    counts.Add(variableReference.Name, 1);
-                }
-            }
-
-            foreach (var key in objects.Keys)
-            {
-                if ((counts.ContainsKey(key) && counts[key] == 0)
-                   || !counts.ContainsKey(key)
-                   )
-                {
-                    var problem =
-                        new SqlRuleProblem(
-                            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                            , modelElement
-                            , sqlFragment);
-
-                    RuleUtils.UpdateProblemPosition(modelElement, problem, objects[key]);
-                    problems.Add(problem);
-                }
-            }
-
+            // Create problems for each unused label found 
+            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
     }

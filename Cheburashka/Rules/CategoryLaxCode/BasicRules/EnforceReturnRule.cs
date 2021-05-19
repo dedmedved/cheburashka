@@ -39,9 +39,9 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceReturn_RuleName,           // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceReturn_RuleName,                           // ID used to look up the display name inside the resources file
         RuleConstants.EnforceReturn_ProblemDescription,                 // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                        // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryNonStrictCodingStyle,                // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
     public sealed class EnforceReturnRule : SqlCodeAnalysisRule
     {

@@ -198,13 +198,13 @@ namespace Cheburashka
         public const string NameSpace                           = "Cheburashka";
 
         public const string CategoryVariableNaming              = "CategoryVariableNaming";
-        public const string CategoryVariableUsage               = "VariableUsage";
+        public const string CategoryVariableUsage               = "CategoryVariableUsage";
 
-        public const string CategoryDesign                      = "Design";
-        public const string CategoryPerformance                 = "Performance";
-        public const string CategoryNaming                      = "Naming";
+        public const string CategoryDesign                      = "CategoryDesign";
+        public const string CategoryPerformance                 = "CategoryPerformance";
+        public const string CategoryNaming                      = "CategoryNaming";
 
-        public const string CategoryBasics                      = "Basics";
+        public const string CategoryBasics                      = "CategoryBasics";
         public const string CategoryModel                       = "CategoryModel";
         public const string CategoryBatch                       = "CategoryBatch";
         public const string CategoryOnline                      = "CategoryOnline";
@@ -214,13 +214,24 @@ namespace Cheburashka
         public const string CategoryTemporaryTables             = "CategoryTemporaryTables";
         public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";
 
-        public const string CategoryDatabaseStructures          = "CategoryDatabaseStructures";
+        public const string CategoryDatabaseStructures          = "Data.Database.PhysicalStructure";
+        public const string CategoryRelationalDesignKeys        = "Data.Database.Keys";
+        public const string CategoryRelationalDesignNull        = "Data.Database.Nulls";
 
-        public const string CategoryObsoleteCodingStyle         = "CategoryObsoleteCodingStyle";
-        public const string CategoryRelationalDesign            = "CategoryRelationalDesign";
+        public const string CategorySSDTModel                   = "Data.SSDT.Model";
+        public const string CategoryObsoleteCodingStyle         = "Code.ObsoleteStyle.Code";
+        public const string CategoryModernCodingStyle           = "Code.ModernStyle.Code";
+
+        public const string CategoryNonStrictCodingStyle        = "Code.LaxCode.StoredProcedures";
+        public const string CategoryNonStrictCodingStyleNames   = "Code.LaxCode.Naming";
+        public const string CategoryNonStrictCodingStyleData    = "Code.LaxCode.Data";
+        public const string CategoryUnnecessaryCode             = "Code.Redundant.UnnecessaryCode";
+        public const string CategoryUnnecessaryVariables        = "Code.Redundant.UnusedObjects";
+
+
         public const string CategoryDataTypes                   = "CategoryDataTypes";
         public const string CategoryDates                       = "CategoryDates";
         public const string CategoryRegionalisation             = "CategoryRegionalisation";
-        public const string CategorySSDTModel                   = "CategorySSDTModel";
+
     }
 }
