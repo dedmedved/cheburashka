@@ -50,7 +50,6 @@ namespace Cheburashka
 
         public CheckUniqueKeysAreNotDuplicatedRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetIndexLikeClasses();
         }
 

@@ -57,14 +57,7 @@ namespace Cheburashka
 
         public CheckClusteredKeyColumnsNotIncludedInIndexRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Index
-                // if the clustering keys are in a pk or unique constraint, there's not much we can recommend
-                //presumably they need to be there
-            };
+            SupportedElementTypes = SqlRuleUtils.GetIndexClass();
         }
 
         /// <summary>

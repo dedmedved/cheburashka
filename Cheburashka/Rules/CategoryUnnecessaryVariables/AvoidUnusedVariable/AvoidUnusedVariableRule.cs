@@ -58,7 +58,6 @@ namespace Cheburashka
 
         public AvoidUnusedVariablesRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 

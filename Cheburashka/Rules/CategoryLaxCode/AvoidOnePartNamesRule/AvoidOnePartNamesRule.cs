@@ -63,7 +63,6 @@ namespace Cheburashka
 
         public AvoidOnePartNamesRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = new[]
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types

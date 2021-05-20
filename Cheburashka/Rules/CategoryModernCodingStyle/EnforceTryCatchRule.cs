@@ -56,7 +56,6 @@ namespace Cheburashka
         public const string RuleId = RuleConstants.EnforceTryCatch_RuleId;
 
         public EnforceTryCatchRule() {
-            // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 

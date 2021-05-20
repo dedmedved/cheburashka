@@ -64,12 +64,7 @@ namespace Cheburashka
 
         public CheckDefaultsAreOnNotNullColumnsRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table
-            };
+            SupportedElementTypes = SqlRuleUtils.GetTableClass();
         }
 
         /// <summary>

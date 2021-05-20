@@ -61,7 +61,6 @@ namespace Cheburashka
 
         public EnforceNamedConstraintRule()
         {
-            // This rule supports Table,Triggers and Procedures. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetConstraintDefiningClasses();
         }
 

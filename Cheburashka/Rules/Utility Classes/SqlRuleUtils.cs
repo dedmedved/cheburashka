@@ -341,6 +341,23 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
+        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.PrimaryKeyConstraint
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.ForeignKeyConstraint
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.Table
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.Index
+        });
+
         public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[3]
         {
                 ModelSchema.PrimaryKeyConstraint,

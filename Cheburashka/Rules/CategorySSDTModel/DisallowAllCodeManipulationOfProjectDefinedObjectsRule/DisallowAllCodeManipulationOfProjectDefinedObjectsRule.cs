@@ -52,7 +52,6 @@ namespace Cheburashka
 
         public DisallowAllCodeManipulationOfProjectDefinedObjectsRule()
         {
-            // This rule supports Code items. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 

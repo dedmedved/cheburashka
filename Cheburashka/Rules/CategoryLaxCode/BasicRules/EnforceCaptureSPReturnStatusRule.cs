@@ -57,7 +57,6 @@ namespace Cheburashka
 
         public EnforceCaptureSPReturnStatusRule()
         {
-            // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 
