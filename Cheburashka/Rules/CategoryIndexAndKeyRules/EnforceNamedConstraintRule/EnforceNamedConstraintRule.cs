@@ -62,22 +62,7 @@ namespace Cheburashka
         public EnforceNamedConstraintRule()
         {
             // This rule supports Table,Triggers and Procedures. Only those objects will be passed to the Analyze method
-
-            //[SupportedElementType(typeof(ISqlProcedure))]
-            //[SupportedElementType(typeof(ISqlTrigger))]
-            //[SupportedElementType(typeof(ISqlFunction))]
-            //[SupportedElementType(typeof(ISqlView))]
-            //[SupportedElementType(typeof(ISqlTable))]
-
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table,
-                ModelSchema.Procedure,
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetConstraintDefiningClasses();
         }
 
         /// <summary>
