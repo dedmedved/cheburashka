@@ -66,6 +66,8 @@ namespace Cheburashka
             {
                 // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
                 //ModelSchema.ExtendedProcedure,
+                ModelSchema.View,
+
                 ModelSchema.Procedure,
                 ModelSchema.TableValuedFunction,
                 ModelSchema.ScalarFunction,

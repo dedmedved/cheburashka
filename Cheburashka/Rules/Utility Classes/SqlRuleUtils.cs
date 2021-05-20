@@ -281,5 +281,64 @@ namespace Cheburashka
                 || schema == "[]"
                 || schema == @"""";
         }
+
+        ///// <summary>
+        ///// Gets the set of classes representing Views, Subroutines and Triggers. This is a common set of classes used during
+        ///// analysis
+        ///// </summary>
+        ///// <returns>List representing view, subroutines and triggers</returns>
+        //public static ReadOnlyCollection<ModelTypeClass> GetViewSubroutineAndTriggerClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[8]
+        //{
+        //    ModelSchema.View,
+        //    ModelSchema.ScalarFunction,
+        //    ModelSchema.ExtendedProcedure,
+        //    ModelSchema.TableValuedFunction,
+        //    ModelSchema.Procedure,
+        //    ModelSchema.DatabaseDdlTrigger,
+        //    ModelSchema.DmlTrigger,
+        //    ModelSchema.ServerDdlTrigger
+        //});
+
+        /// <summary>
+        /// Gets the set of classes representing code. This is a common set of classes used during analysis.
+        /// </summary>
+        /// <returns>List representing subroutines</returns>
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[7]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
+        /// <summary>
+        /// Gets the set of classes representing code which can alter state. This is a common set of classes used during analysis.
+        /// </summary>
+        /// <returns>List representing subroutines</returns>
+        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+        ///// <summary>
+        ///// Gets the set of classes representing a potential source of columns. Tables, Views, Functions can all be
+        ///// a source for this
+        ///// </summary>
+        ///// <returns>The <see cref="T:Microsoft.SqlServer.Dac.Model.ModelTypeClass" />es representing view, subroutines and triggers</returns>
+        //public static ReadOnlyCollection<ModelTypeClass> GetColumnSourceClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        //{
+        //    ModelSchema.Table,
+        //    ModelSchema.FileTable,
+        //    ModelSchema.View,
+        //    ModelSchema.TableValuedFunction,
+        //    ModelSchema.Queue
+        //});
+
     }
 }

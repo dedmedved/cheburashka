@@ -31,7 +31,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
+    /// whenever an unreferenced label appears inside a subroutine body. 
     /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
@@ -54,22 +54,20 @@ namespace Cheburashka
         /// shown as "DM0042: Avoid unreferenced labels in code."
         /// </summary>
         public const string RuleId = RuleConstants.AvoidUnusedLabels_RuleId;
-
+      //  public SmallVariableLengthTypesRule()
+      //  {
+      //      IList<ModelTypeClass> collection = (IList<ModelTypeClass>)new List<ModelTypeClass>()
+      //{
+      //  Table.TypeClass,
+      //  DataType.TypeClass
+      //};
+      //      collection.AddRange<ModelTypeClass, ModelTypeClass>((IEnumerable<ModelTypeClass>)Microsoft.SqlServer.Dac.Model.ModelSchema.GetSubroutineClasses());
+      //      this.SupportedElementTypes = collection;
+      //  }
         public AvoidUnusedLabelsRule()
         {
             // This rule supports Procedures. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                ModelSchema.TableValuedFunction,
-                ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 
         /// <summary>

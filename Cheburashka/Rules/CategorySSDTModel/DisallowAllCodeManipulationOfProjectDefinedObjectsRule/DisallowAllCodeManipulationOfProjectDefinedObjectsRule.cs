@@ -52,14 +52,8 @@ namespace Cheburashka
 
         public DisallowAllCodeManipulationOfProjectDefinedObjectsRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                 ModelSchema.Procedure
-                ,ModelSchema.DmlTrigger
-                ,ModelSchema.DatabaseDdlTrigger
-            };
+            // This rule supports Code items. Only those objects will be passed to the Analyze method
+            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
