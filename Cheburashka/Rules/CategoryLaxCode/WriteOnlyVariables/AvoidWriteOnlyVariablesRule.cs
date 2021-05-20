@@ -92,7 +92,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
@@ -111,9 +111,9 @@ namespace Cheburashka
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
             // !!! THIS DOESN'T SEEM TO WORK - did it ever - even in the old codebase ?!!!! 
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+            //var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
+            //sqlFragment.Accept(namedParameterUsageVisitor);
+            //IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
 
             // visitor to get the occurrences of variables
             var usageVisitor = new VariableUsageVisitor();

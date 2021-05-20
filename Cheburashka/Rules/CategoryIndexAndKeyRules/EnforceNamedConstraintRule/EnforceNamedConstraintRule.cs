@@ -95,7 +95,7 @@ namespace Cheburashka
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
                 // Get Database Schema and name of this model element.
-                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
+//                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 

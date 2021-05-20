@@ -100,8 +100,8 @@ namespace Cheburashka
                 }
 
                 // Get Database Schema and name of this model element.
-                string owningObjectSchema = modelElement.Name.Parts[0];
-                string owningObjectTable = modelElement.Name.Parts[1];
+                //string owningObjectSchema = modelElement.Name.Parts[0];
+                //string owningObjectTable = modelElement.Name.Parts[1];
 
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);

@@ -97,7 +97,7 @@ namespace Cheburashka
                 //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+//                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
                 // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
                 CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor =

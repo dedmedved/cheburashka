@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -146,7 +145,7 @@ namespace Cheburashka
 
                     bool bFoundClusteredIndex =
                         RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
-                            out TSqlObject clusteredIndex,
+                            out _,
                             out List<ObjectIdentifier> clusteredIndexColumns);
                     if (bFoundClusteredIndex)
                     {
@@ -159,7 +158,7 @@ namespace Cheburashka
                         //allow the lead column to be a clustered index member, as we need to be able to have
                         //different indexes key on different leading edges
                         //but then check the tail columns
-                        var (c2Head, c2Tail) = c2; // uses ListUtil.Deconstruct - magic !
+                        var (_, c2Tail) = c2; // uses ListUtil.Deconstruct - magic !
                         //IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
                         //IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
                         //issues.AddRange(common);
