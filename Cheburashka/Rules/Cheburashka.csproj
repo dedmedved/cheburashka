@@ -127,8 +127,8 @@
     <Compile Include="CategoryLaxCode\Generic Visitors\TableVariableDeclarationVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\VariableDeclarationElementVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\VariableTableReferenceVisitor.cs" />
-    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariable\AvoidUnusedParameterRule.cs" />
-    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariable\AvoidUnusedTableVariableRule.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedParameterRule.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedTableVariableRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="CategoryLaxCode\Generic Visitors\VariableUsageVisitor.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUninitialisedVariables\AvoidUninitialisedVariablesRule.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUninitialisedVariables\UninitialisedVariableDeclarationVisitor.cs" />
-    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariable\AvoidUnusedVariableRule.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedVariableRule.cs" />
     <Compile Include="CategoryLaxCode\WriteOnlyVariables\AvoidWriteOnlyVariablesRule.cs" />
     <Compile Include="CategoryLaxCode\WriteOnlyVariables\NamedParameterUsageVisitor.cs" />
     <Compile Include="CategoryLaxCode\WriteOnlyVariables\UpdatedVariableVisitor.cs" />

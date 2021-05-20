@@ -35,7 +35,7 @@ namespace Cheburashka
                 w.WriteLine("called");
                 for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
                 {
-                    w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
+                    w.Write($"[{element.ScriptTokenStream[i].TokenType}] {element.ScriptTokenStream[i].Text} ");
                 }
                 w.WriteLine();
             }
@@ -45,7 +45,7 @@ namespace Cheburashka
                 w.WriteLine("called");
                 for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
                 {
-                    w.Write("[" + element.ScriptTokenStream[i].TokenType + "] " + element.ScriptTokenStream[i].Text + " ");
+                    w.Write($"[{element.ScriptTokenStream[i].TokenType}] {element.ScriptTokenStream[i].Text} ");
                 }
                 w.WriteLine();
             }
