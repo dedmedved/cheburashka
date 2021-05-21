@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -54,7 +53,7 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0018: Tables should normally be clustered and not heap."
+        /// shown as "DM0018: Unique constraints generally should not have nullable columns."
         /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.CheckUniqueConstraintHasNoNullColumnsRuleId;

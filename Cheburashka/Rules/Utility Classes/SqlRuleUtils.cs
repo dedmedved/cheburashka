@@ -375,6 +375,19 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
+        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[9]
+        {
+                ModelSchema.Table,
+                ModelSchema.View,
+                ModelSchema.Index,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
         ///// <summary>
         ///// Gets the set of classes representing a potential source of columns. Tables, Views, Functions can all be
         ///// a source for this
