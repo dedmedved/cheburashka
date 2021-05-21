@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheburashka", "Cheburashka\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7C65837-38D0-4AD8-83C6-8A98516EA61C}"
 	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
+		PVS-License.txt = PVS-License.txt
 		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
