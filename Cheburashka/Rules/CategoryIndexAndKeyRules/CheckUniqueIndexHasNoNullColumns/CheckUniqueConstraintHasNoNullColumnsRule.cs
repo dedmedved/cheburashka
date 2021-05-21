@@ -100,21 +100,19 @@ namespace Cheburashka
 //                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
                 // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor =
-                    new();
-                sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-                List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
+                //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new();
+                //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
+                //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
 
                 // visitor to get the columns
-                CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor =
-                    new();
+                CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor = new();
                 sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
                 List<ColumnWithSortOrder> indexColumns = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
 
                 var issues = new List<TSqlFragment>();
 
-                foreach (var ps in parentSources)
-                {
+                //foreach (var ps in parentSources)
+                //{
                     var schemaObjectName = (sqlFragment as CreateTableStatement)?.SchemaObjectName
                         ?? (sqlFragment as AlterTableAddTableElementStatement)?.SchemaObjectName;
 
@@ -156,7 +154,7 @@ namespace Cheburashka
                         {
                         }
                     }
-                }
+                //}
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
