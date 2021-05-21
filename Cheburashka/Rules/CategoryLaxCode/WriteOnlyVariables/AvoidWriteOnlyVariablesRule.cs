@@ -62,7 +62,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.AvoidWriteOnlyVariables_RuleName,                     // ID used to look up the display name inside the resources file
         RuleConstants.AvoidWriteOnlyVariables_ProblemDescription,           // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryVariableUsage,                     // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidWriteOnlyVariablesRule : SqlCodeAnalysisRule
     {
@@ -76,19 +76,7 @@ namespace Cheburashka
 
         public AvoidWriteOnlyVariablesRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                ModelSchema.TableValuedFunction,
-                ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 
         /// <summary>
@@ -104,7 +92,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
@@ -123,9 +111,9 @@ namespace Cheburashka
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
             // !!! THIS DOESN'T SEEM TO WORK - did it ever - even in the old codebase ?!!!! 
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+            //var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
+            //sqlFragment.Accept(namedParameterUsageVisitor);
+            //IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
 
             // visitor to get the occurrences of variables
             var usageVisitor = new VariableUsageVisitor();

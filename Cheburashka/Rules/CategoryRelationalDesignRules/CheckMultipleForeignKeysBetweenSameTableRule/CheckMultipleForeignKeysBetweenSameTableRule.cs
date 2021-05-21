@@ -42,9 +42,9 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckMultipleForeignKeysBetweenSameTableRule.RuleId,
         RuleConstants.ResourceBaseName,                                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckMultipleForeignKeysBetweenTheSameTable_RuleName,     // ID used to look up the display name inside the resources file
+        RuleConstants.CheckMultipleForeignKeysBetweenTheSameTable_RuleName,                     // ID used to look up the display name inside the resources file
         RuleConstants.CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription,           // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryRelationalDesign,                                      // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryRelationalDesignKeys,                                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                                      // This rule targets specific elements rather than the whole model
     public sealed class CheckMultipleForeignKeysBetweenSameTableRule: SqlCodeAnalysisRule
     {
@@ -62,12 +62,7 @@ namespace Cheburashka
 
         public CheckMultipleForeignKeysBetweenSameTableRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.ForeignKeyConstraint
-            };
+            SupportedElementTypes = SqlRuleUtils.GetForeignKeyConstraintClass();
         }
 
         /// <summary>
@@ -105,8 +100,8 @@ namespace Cheburashka
                 }
 
                 // Get Database Schema and name of this model element.
-                string owningObjectSchema = modelElement.Name.Parts[0];
-                string owningObjectTable = modelElement.Name.Parts[1];
+                //string owningObjectSchema = modelElement.Name.Parts[0];
+                //string owningObjectTable = modelElement.Name.Parts[1];
 
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);

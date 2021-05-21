@@ -61,23 +61,7 @@ namespace Cheburashka
 
         public EnforceNamedConstraintRule()
         {
-            // This rule supports Table,Triggers and Procedures. Only those objects will be passed to the Analyze method
-
-            //[SupportedElementType(typeof(ISqlProcedure))]
-            //[SupportedElementType(typeof(ISqlTrigger))]
-            //[SupportedElementType(typeof(ISqlFunction))]
-            //[SupportedElementType(typeof(ISqlView))]
-            //[SupportedElementType(typeof(ISqlTable))]
-
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table,
-                ModelSchema.Procedure,
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetConstraintDefiningClasses();
         }
 
         /// <summary>
@@ -111,7 +95,7 @@ namespace Cheburashka
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
                 // Get Database Schema and name of this model element.
-                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
+//                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 

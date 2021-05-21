@@ -147,7 +147,7 @@ namespace Cheburashka.Tests
                 Console.WriteLine("Issues found during model build:");
                 foreach (var message in validationMessages)
                 {
-                    Console.WriteLine("\t" + message.Message);
+                    Console.WriteLine($"\t{message.Message}");
                     breakingIssuesFound = breakingIssuesFound || message.MessageType == DacMessageType.Error;
                 }
             }
@@ -290,7 +290,7 @@ namespace Cheburashka.Tests
                     hasError = true;
                     if (error.Document != null)
                     {
-                        errorMessage.AppendFormat("{0}({1}, {2}): ", error.Document, error.Line, error.Column);
+                        errorMessage.Append($"{error.Document}({error.Line}, {error.Column}): ");
                     }
                     errorMessage.AppendLine(error.Message);
                 }

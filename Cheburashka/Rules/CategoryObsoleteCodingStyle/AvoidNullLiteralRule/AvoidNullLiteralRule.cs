@@ -39,37 +39,29 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidUnusedLabelsRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(AvoidNullLiteralRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedLabels_RuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedLabels_ProblemDescription,                 // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
+        RuleConstants.AvoidNullLiteral_RuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNullLiteral_ProblemDescription,                  // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidUnusedLabelsRule : SqlCodeAnalysisRule
+    public sealed class AvoidNullLiteralRule : SqlCodeAnalysisRule
     {
         /// <summary>
+        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
+        /// </para>
+        /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0042: Avoid unreferenced labels in code."
+        /// shown as "DM0030: Avoid using Null literals in expressions and comparisons."
+        /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUnusedLabels_RuleId;
+        public const string RuleId = RuleConstants.AvoidNullLiteral_RuleId;
 
-        public AvoidUnusedLabelsRule()
+        public AvoidNullLiteralRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                ModelSchema.TableValuedFunction,
-                ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetCodeAndViewContainingClasses();
         }
 
         /// <summary>
@@ -94,23 +86,17 @@ namespace Cheburashka
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
+            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of bare return statements
-            var gotoVisitor = new GotoVisitor();
-            sqlFragment.Accept(gotoVisitor);
-            var gotoLabels = gotoVisitor.GoToStatements.Select(n => n.LabelName.Value).ToList();
-
-            var labelVisitor = new LabelVisitor();
-            sqlFragment.Accept(labelVisitor);
-            var labels = labelVisitor.Labels;
-
-            var issues = labels.Where( l => ! gotoLabels.Any(gl => gl.SQLModel_StringCompareEqual(l.Value.Substring(0,l.Value.Length-1)))).Cast<TSqlFragment>().ToList();
-
-            // Create problems for each unused label found 
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+            var visitor = new NullLiteralVisitor();
+            sqlFragment.Accept(visitor);
+            var issues = visitor.NullLiteralExpressions.Cast<TSqlFragment>().ToList();
+            // Create problems for each Return statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+
             return problems;
         }
     }

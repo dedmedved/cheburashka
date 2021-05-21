@@ -43,11 +43,11 @@ namespace Cheburashka
     /// </summary>
 
     [LocalizedExportCodeAnalysisRule(CheckDefaultsAreOnNotNullColumnsRule.RuleId,
-        RuleConstants.ResourceBaseName,                                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckDefaultsAreOnNotNullColumns_RuleName,     // ID used to look up the display name inside the resources file
-        RuleConstants.CheckDefaultsAreOnNotNullColumns_ProblemDescription,           // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryRelationalDesign,                                      // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                                      // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                                             // Name of the resource file to look up displayname and description in
+        RuleConstants.CheckDefaultsAreOnNotNullColumns_RuleName,                    // ID used to look up the display name inside the resources file
+        RuleConstants.CheckDefaultsAreOnNotNullColumns_ProblemDescription,          // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryRelationalDesignNull,                      // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                          // This rule targets specific elements rather than the whole model
     public sealed class CheckDefaultsAreOnNotNullColumnsRule: SqlCodeAnalysisRule
     {
         /// <summary>
@@ -64,12 +64,7 @@ namespace Cheburashka
 
         public CheckDefaultsAreOnNotNullColumnsRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table
-            };
+            SupportedElementTypes = SqlRuleUtils.GetTableClass();
         }
 
         /// <summary>

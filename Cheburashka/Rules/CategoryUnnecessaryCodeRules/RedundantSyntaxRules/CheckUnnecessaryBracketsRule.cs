@@ -29,51 +29,33 @@ using System.Linq;
 namespace Cheburashka
 {
     /// <summary>
-    /// <para>
-    /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
-    /// This rule only applies to SQL stored procedures.
+    /// <para>This is a SQL rule which returns a warning message 
+    /// whenever brackets are used unnecessarily.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidNullLiteralRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(CheckUnnecessaryBracketsRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidNullLiteral_RuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidNullLiteral_ProblemDescription,                  // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
+        RuleConstants.CheckUnnecessaryBrackets_RuleName,                    // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUnnecessaryBrackets_ProblemDescription,          // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryUnnecessaryCode,                   // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidNullLiteralRule : SqlCodeAnalysisRule
+    public sealed class CheckUnnecessaryBracketsRule : SqlCodeAnalysisRule
     {
         /// <summary>
-        /// <para>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
-        /// </para>
-        /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0030: Avoid using Null literals in expressions and comparisons."
-        /// </para>
+        /// shown as "DM0038: Unnecessary bracketing."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidNullLiteral_RuleId;
+        public const string RuleId = RuleConstants.CheckUnnecessaryBrackets_RuleId;
 
-        public AvoidNullLiteralRule()
+        public CheckUnnecessaryBracketsRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                ModelSchema.TableValuedFunction,
-                ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetCodeAndViewContainingClasses();
         }
 
         /// <summary>
@@ -89,7 +71,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            List<SqlRuleProblem> problems = new List<SqlRuleProblem>();
+            List<SqlRuleProblem> problems = new();
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
@@ -102,13 +84,12 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of bare return statements
-            var visitor = new NullLiteralVisitor();
+            // visitor to get the occurrences of brackets surrounding other brackets
+            UnnecessaryParenthesisVisitor visitor = new();
             sqlFragment.Accept(visitor);
-            var issues = visitor.NullLiteralExpressions.Cast<TSqlFragment>().ToList();
-            // Create problems for each Return statement found 
+            IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
+            var issues = unnecessaryBrackets.Distinct().ToList();
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
-
             return problems;
         }
     }

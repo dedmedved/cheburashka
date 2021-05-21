@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -54,19 +53,14 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0018: Tables should normally be clustered and not heap."
+        /// shown as "DM0018: Unique constraints generally should not have nullable columns."
         /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.CheckUniqueConstraintHasNoNullColumnsRuleId;
 
         public CheckUniqueConstraintHasNoNullColumnsRule()
         {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Table
-            };
+            SupportedElementTypes = SqlRuleUtils.GetTableClass();
         }
 
         /// <summary>
@@ -102,24 +96,22 @@ namespace Cheburashka
                 //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
+//                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
 
                 // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor =
-                    new();
-                sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-                List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
+                //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new();
+                //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
+                //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
 
                 // visitor to get the columns
-                CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor =
-                    new();
+                CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor = new();
                 sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
                 List<ColumnWithSortOrder> indexColumns = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
 
                 var issues = new List<TSqlFragment>();
 
-                foreach (var ps in parentSources)
-                {
+                //foreach (var ps in parentSources)
+                //{
                     var schemaObjectName = (sqlFragment as CreateTableStatement)?.SchemaObjectName
                         ?? (sqlFragment as AlterTableAddTableElementStatement)?.SchemaObjectName;
 
@@ -161,7 +153,7 @@ namespace Cheburashka
                         {
                         }
                     }
-                }
+                //}
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata

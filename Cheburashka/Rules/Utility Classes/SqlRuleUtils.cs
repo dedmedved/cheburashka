@@ -281,5 +281,126 @@ namespace Cheburashka
                 || schema == "[]"
                 || schema == @"""";
         }
+
+
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[7]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetParameterizedCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[4]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeAndViewContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[8]
+        {
+                ModelSchema.View,
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+        //ModelSchema.ExtendedProcedure,
+
+        public static ReadOnlyCollection<ModelTypeClass> GetDataTypeUsingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[9]
+        {
+                ModelSchema.Table,
+                ModelSchema.View,
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetProcedureClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[2]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        {
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.PrimaryKeyConstraint
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.ForeignKeyConstraint
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.Table
+        });
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+                ModelSchema.Index
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[3]
+        {
+                ModelSchema.PrimaryKeyConstraint,
+                ModelSchema.Index,
+                ModelSchema.UniqueConstraint
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetConstraintDefiningClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[6]
+        {
+                ModelSchema.Table,
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
+        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[9]
+        {
+                ModelSchema.Table,
+                ModelSchema.View,
+                ModelSchema.Index,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
+        ///// <summary>
+        ///// Gets the set of classes representing a potential source of columns. Tables, Views, Functions can all be
+        ///// a source for this
+        ///// </summary>
+        ///// <returns>The <see cref="T:Microsoft.SqlServer.Dac.Model.ModelTypeClass" />es representing view, subroutines and triggers</returns>
+        //public static ReadOnlyCollection<ModelTypeClass> GetColumnSourceClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        //{
+        //    ModelSchema.Table,
+        //    ModelSchema.FileTable,
+        //    ModelSchema.View,
+        //    ModelSchema.TableValuedFunction,
+        //    ModelSchema.Queue
+        //});
+
     }
 }

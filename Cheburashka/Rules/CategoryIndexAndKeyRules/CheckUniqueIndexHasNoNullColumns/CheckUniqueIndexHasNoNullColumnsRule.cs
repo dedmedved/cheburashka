@@ -56,12 +56,7 @@ namespace Cheburashka
         public const string RuleId = RuleConstants.CheckUniqueIndexHasNoNullColumnsRuleId;
 
         public CheckUniqueIndexHasNoNullColumnsRule() {
-            // This rule supports Tables. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                ModelSchema.Index
-            };
+            SupportedElementTypes = SqlRuleUtils.GetIndexClass();
         }
 
         /// <summary>

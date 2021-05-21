@@ -40,11 +40,11 @@ namespace Cheburashka
     /// </para>
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceTryCatchRule.RuleId,
-        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceTryCatch_RuleName,                // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceTryCatch_ProblemDescription,      // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,           // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
+        RuleConstants.ResourceBaseName,                             // Name of the resource file to look up displayname and description in
+        RuleConstants.EnforceTryCatch_RuleName,                     // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceTryCatch_ProblemDescription,           // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryModernCodingStyle,         // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                          // This rule targets specific elements rather than the whole model
     public sealed class EnforceTryCatchRule : SqlCodeAnalysisRule
     {
         /// <summary>
@@ -56,18 +56,7 @@ namespace Cheburashka
         public const string RuleId = RuleConstants.EnforceTryCatch_RuleId;
 
         public EnforceTryCatchRule() {
-            // This rule supports Procedures, Functions and Triggers. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                //ModelSchema.TableValuedFunction, 
-                //ModelSchema.ScalarFunction,
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 
         /// <summary>

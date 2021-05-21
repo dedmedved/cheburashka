@@ -42,7 +42,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
         RuleConstants.CheckOrphanedBeginEndBlocks_RuleName,             // ID used to look up the display name inside the resources file
         RuleConstants.CheckOrphanedBeginEndBlocks_ProblemDescription,   // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                        // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryUnnecessaryCode,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
     public sealed class CheckOrphanedBeginEndBlocksRule : SqlCodeAnalysisRule
     {
@@ -56,19 +56,7 @@ namespace Cheburashka
 
         public CheckOrphanedBeginEndBlocksRule()
         {
-            // This rule supports Procedures. Only those objects will be passed to the Analyze method
-            SupportedElementTypes = new[]
-            {
-                // Note: can use the ModelSchema definitions, or access the TypeClass for any of these types
-                //ModelSchema.ExtendedProcedure,
-                ModelSchema.Procedure,
-                ModelSchema.TableValuedFunction,
-                ModelSchema.ScalarFunction,
-
-                ModelSchema.DatabaseDdlTrigger,
-                ModelSchema.DmlTrigger,
-                ModelSchema.ServerDdlTrigger
-            };
+            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 
         /// <summary>
