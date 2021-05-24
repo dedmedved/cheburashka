@@ -1429,6 +1429,21 @@
     <Content Include="TestScripts\EnforceReturnRule\ProcWithReturn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\EnforceTableAliasRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\onelevelinlinequerieswithsubqueries_proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\Table3.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\Table2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceTryCatchRule\DatabaseTriggerWithoutTryCatch.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

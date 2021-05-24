@@ -74,6 +74,8 @@ namespace Cheburashka
         public const string AvoidNonANSIJoins_RuleId                                    = "Cheburashka.DM0043";
 
         public const string CheckOpenTransactionCountCode_RuleId                        = "Cheburashka.DM0045";
+        
+        public const string EnforceTableAlias_RuleId                                    = "Cheburashka.DM0047";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -189,6 +191,8 @@ namespace Cheburashka
         public const string CheckOpenTransactionCountCode_RuleName                                  = "CheckOpenTransactionCountCode_RuleName";
         public const string CheckOpenTransactionCountCode_ProblemDescription                        = "CheckOpenTransactionCountCode_ProblemDescription";
 
+        public const string EnforceTableAlias_RuleName                                              = "EnforceTableAlias_RuleName";
+        public const string EnforceTableAlias_ProblemDescription                                    = "EnforceTableAlias_ProblemDescription";
 
 
         /// <summary>

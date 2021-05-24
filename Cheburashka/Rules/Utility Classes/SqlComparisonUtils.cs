@@ -28,32 +28,32 @@ namespace Cheburashka
 {
     public static class SqlComparisonUtils
     {
-        //public static bool SQLModel_Contains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
-        //{
-        //    return
-        //        ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
-        //          (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
-        //        );
-        //}
-        //public static bool StrictlyContains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
-        //{
-        //    return
-        //        ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
-        //          (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
-        //        );
-        //}
-        //public static bool SemiContains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
-        //{
-        //    return (
-        //             ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
-        //              (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
-        //             )
-        //           ||
-        //             ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
-        //              (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
-        //             )
-        //           );
-        //}
+        public static bool SQLModel_Contains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
+        {
+            return
+                ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
+                  (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
+                );
+        }
+        public static bool StrictlyContains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
+        {
+            return
+                ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
+                  (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
+                );
+        }
+        public static bool SemiContains(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
+        {
+            return (
+                     ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
+                      (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
+                     )
+                   ||
+                     ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
+                      (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
+                     )
+                   );
+        }
         //public static bool SQLModel_Equals(SqlObjectFragment fragment1, SqlObjectFragment fragment2)
         //{
         //    return
@@ -87,15 +87,6 @@ namespace Cheburashka
         //          )
         //        );
         //}
-
-
-        /// <summary>
-        /// /////////////////////
-        /// </summary>
-        /// <param name="fragment1"></param>
-        /// <param name="fragment2"></param>
-        /// <returns></returns>
-
 
         public static bool SQLModel_Contains(this TSqlFragment fragment1, SqlObjectFragment fragment2)
         {
@@ -156,14 +147,6 @@ namespace Cheburashka
                   )
                 );
         }
-
-        /// <summary>
-        /// /////////////////////
-        /// </summary>
-        /// <param name="fragment1"></param>
-        /// <param name="fragment2"></param>
-        /// <returns></returns>
-
 
         public static bool SQLModel_Contains(SqlObjectFragment fragment1, TSqlFragment fragment2)
         {
@@ -226,13 +209,6 @@ namespace Cheburashka
         }
 
 
-        /// <summary>
-        /// /////////////////////
-        /// </summary>
-        /// <param name="fragment1"></param>
-        /// <param name="fragment2"></param>
-        /// <returns></returns>
-
         public static bool SQLModel_Contains(this TSqlFragment fragment1, TSqlFragment fragment2)
         {
             return
@@ -240,25 +216,25 @@ namespace Cheburashka
                   (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
                 );
         }
-        //public static bool StrictlyContains(this TSqlFragment fragment1, TSqlFragment fragment2)
-        //{
-        //    return
-        //        ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
-        //          (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
-        //        );
-        //}
-        //public static bool SemiContains(this TSqlFragment fragment1, TSqlFragment fragment2)
-        //{
-        //    return (
-        //             ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
-        //              (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
-        //             )
-        //           ||
-        //             ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
-        //              (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
-        //             )
-        //           );
-        //}
+        public static bool StrictlyContains(this TSqlFragment fragment1, TSqlFragment fragment2)
+        {
+            return
+                ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
+                  (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
+                );
+        }
+        public static bool SemiContains(this TSqlFragment fragment1, TSqlFragment fragment2)
+        {
+            return (
+                     ((fragment1.FirstTokenIndex <= fragment2.FirstTokenIndex) &&
+                      (fragment1.LastTokenIndex > fragment2.LastTokenIndex)
+                     )
+                   ||
+                     ((fragment1.FirstTokenIndex < fragment2.FirstTokenIndex) &&
+                      (fragment1.LastTokenIndex >= fragment2.LastTokenIndex)
+                     )
+                   );
+        }
         public static bool SQLModel_Equals(this TSqlFragment fragment1, TSqlFragment fragment2)
         {
             return

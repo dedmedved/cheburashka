@@ -1,0 +1,216 @@
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 16
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 24
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 25
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 48
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 67
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 68
+Start column: 38
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 74
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 75
+Start column: 41
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 94
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 98
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 106
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 107
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 110
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 111
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 145
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 151
+Start column: 32
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 176
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 177
+Start column: 38
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 180
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 181
+Start column: 38
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 187
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 188
+Start column: 41
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 191
+Start column: 17
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 192
+Start column: 41
+========end of problem========
+

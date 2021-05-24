@@ -727,6 +727,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Source found without an alias in {0}..
+        /// </summary>
+        internal static string EnforceTableAlias_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceTableAlias_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tables, views and other data sources in DML need aliases where disambiguation is necessary..
+        /// </summary>
+        internal static string EnforceTableAlias_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceTableAlias_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code found without Try/Catch in {0}..
         /// </summary>
         internal static string EnforceTryCatch_ProblemDescription {
