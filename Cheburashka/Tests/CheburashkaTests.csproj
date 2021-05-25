@@ -1432,6 +1432,9 @@
     <Content Include="TestScripts\EnforceTableAliasRule\EnforceTableAliasRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\DMLTargetAndOutputInto_proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceTableAliasRule\onelevelinlinequerieswithsubqueries_proc.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

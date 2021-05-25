@@ -2383,7 +2383,5 @@ namespace Cheburashka.Tests
             test.RunTest(EnforceTableAliasRule.RuleId);
         }
 
-
-
     }
 }

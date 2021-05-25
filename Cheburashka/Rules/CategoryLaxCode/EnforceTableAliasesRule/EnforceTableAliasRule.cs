@@ -72,31 +72,36 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of if and while statement expressions
-            EnforceTableAliasVisitor enforceTableAliasVisitor = new EnforceTableAliasVisitor();
+            // visitor to get the occurrences of all insert/merge etc targets and output into clauses
+            EnforceTableAliasExcludedContextsVisitor enforceTableAliasExcludedContextsVisitor = new();
+            sqlFragment.Accept(enforceTableAliasExcludedContextsVisitor);
+            List<TSqlFragment> allenforceTableAliasExcludedTableSources = enforceTableAliasExcludedContextsVisitor.ExcludedFragments;
+
+            // visitor to get the occurrences of all data source things
+            EnforceTableAliasVisitor enforceTableAliasVisitor = new();
             sqlFragment.Accept(enforceTableAliasVisitor);
-            List<TableReferenceWithAlias> allTableSources = enforceTableAliasVisitor.TableSources;
+            List<TSqlFragment> allTableSources = enforceTableAliasVisitor.TableSources;
 
             //Check things we don't want to look inside (columns in update and delete statements with only one table)
             //Ditto select statements and CTE subqueries
-            SingleSourceSQLVisitor singleSourceSQLVisitor = new SingleSourceSQLVisitor();
+            SingleSourceSQLVisitor singleSourceSQLVisitor = new();
             sqlFragment.Accept(singleSourceSQLVisitor);
             List<TSqlFragment> allSingleSourceStatements = singleSourceSQLVisitor.SingleSourceSQLs;
 
             //Now work out what are the top level single source subqueries..............
             //First find all DMLS - we don't want to consider any single data source subqueries in any of these
             //Those !have! to be qualified with a prefix
-            DMLSQLVisitor dMLSQLVisitor = new DMLSQLVisitor();
+            DMLSQLVisitor dMLSQLVisitor = new();
             sqlFragment.Accept(dMLSQLVisitor);
             List<TSqlFragment> allDMLs = dMLSQLVisitor.DMLs;
 
             //Now find all Subqueries not in another subquery that have no more than one data source
-            SingleSourceSubQueryQuerySpecificationVisitor singleSourceSubQueryVisitor = new SingleSourceSubQueryQuerySpecificationVisitor();
+            SingleSourceSubQueryQuerySpecificationVisitor singleSourceSubQueryVisitor = new();
             sqlFragment.Accept(singleSourceSubQueryVisitor);
             List<TSqlFragment> singleSourceSubQueries = singleSourceSubQueryVisitor.SingleSourceSubQueryQuerySpecifications;
 
             //Eliminate any that are within the scope of an DML statement.
-            List<TSqlFragment> nonContainedSingleSourceSubQueries = new List<TSqlFragment>();
+            List<TSqlFragment> nonContainedSingleSourceSubQueries = new();
             foreach (var sub in singleSourceSubQueries)
             {
                 if (!allDMLs.Any(dml => SqlComparisonUtils.SQLModel_Contains(dml, sub)))
@@ -108,19 +113,19 @@ namespace Cheburashka
             allSingleSourceStatements.AddRange(nonContainedSingleSourceSubQueries);
 
             // Now all we need are top level inline views
-            SingleSourceQueryDerivedTableQuerySpecificationVisitor singleSourceQueryDerivedTableQuerySpecificationVisitor = new SingleSourceQueryDerivedTableQuerySpecificationVisitor();
+            SingleSourceQueryDerivedTableQuerySpecificationVisitor singleSourceQueryDerivedTableQuerySpecificationVisitor = new();
             sqlFragment.Accept(singleSourceQueryDerivedTableQuerySpecificationVisitor);
             List<TSqlFragment> singleSourceQueryDerivedTableQuerySpecifications = singleSourceQueryDerivedTableQuerySpecificationVisitor.SingleSourceQueryDerivedTableQuerySpecifications;
 
             // We need to find top level inline views that are part of an apply
             // So - find Applies
-            ApplySingleSourceQueryDefinitionVisitor applyTableSourceVisitor = new ApplySingleSourceQueryDefinitionVisitor();
+            ApplySingleSourceQueryDefinitionVisitor applyTableSourceVisitor = new();
             sqlFragment.Accept(applyTableSourceVisitor);
             List<TSqlFragment> applyTableSources = applyTableSourceVisitor.ApplySingleSourceQueryDefinitions;
 
             //If the inline query is an apply query,
             //Eliminate it, as it must always contain aliased tables.
-            List<TSqlFragment> nonApplyContainedSingleSourceQueryDerivedTableQuerySpecifications = new List<TSqlFragment>();
+            List<TSqlFragment> nonApplyContainedSingleSourceQueryDerivedTableQuerySpecifications = new();
             foreach (var singleSourceInLineQuery in singleSourceQueryDerivedTableQuerySpecifications)
             {
                 // If the query isn't contained in any apply clause we can add it.
@@ -135,94 +140,105 @@ namespace Cheburashka
             allSingleSourceStatements.AddRange(nonApplyContainedSingleSourceQueryDerivedTableQuerySpecifications);
 
             // Now we need to gather all subqueries.
-            SubQueryVisitor subQueryVisitor = new SubQueryVisitor();
+            SubQueryVisitor subQueryVisitor = new();
             sqlFragment.Accept(subQueryVisitor);
             List<ScalarSubquery> subQuerys = subQueryVisitor.SubQueries;
 
             // Now we need to gather all applies.
-            ApplyTableSourceVisitor applyTableSourceVisitor2 = new ApplyTableSourceVisitor();
+            ApplyTableSourceVisitor applyTableSourceVisitor2 = new();
             sqlFragment.Accept(applyTableSourceVisitor2);
             List<TSqlFragment> applyTableSources2 = applyTableSourceVisitor2.ApplyTableSources;
 
             //We also need all CTES - to help eliminate subqueries down the line
-            CTEVisitor cteVisitor = new CTEVisitor();
+            CTEVisitor cteVisitor = new();
             sqlFragment.Accept(cteVisitor);
             List<TSqlFragment> ctes = cteVisitor.CTES;
 
             // Create problems for each unaliased table name found 
-            foreach (var tableSource in allTableSources)
+            foreach (var tableSource in allTableSources) //.Where( ts => ( ts is NamedTableReference || ts is VariableTableReference ) 
+                //&& SqlComparisonUtils.SQLModel_Contains(allenforceTableAliasExcludedTableSources.Any(ts))) )
             {
-                bool ignoreThisTableSourceHere = false;
-
-                // what is it inside.
-                List<TSqlFragment> containers = allSingleSourceStatements.FindAll(n => SqlComparisonUtils.SQLModel_Contains(n, tableSource));
-                // which is it most tightly inside ?
-                // we could sort
-                // means writing another comparer
-                // let's loop for now
-                if (containers.Count > 0)
+                var processTableSource = true;
+                foreach (var _ in allenforceTableAliasExcludedTableSources.Where(exclusion => SqlComparisonUtils.SQLModel_Contains(tableSource, exclusion)).Select(exclusion => new { }))
                 {
-                    TSqlFragment tightestContainer = containers[0];
-                    foreach (var c in containers)
+                    processTableSource = false;
+                    break;
+                }
+
+                if (processTableSource)
+                {
+                    bool ignoreThisTableSourceHere = false;
+
+                    // what is it inside.
+                    List<TSqlFragment> containers = allSingleSourceStatements.FindAll(n => SqlComparisonUtils.SQLModel_Contains(n, tableSource));
+                    // which is it most tightly inside ?
+                    // we could sort
+                    // means writing another comparer
+                    // let's loop for now
+                    if (containers.Count > 0)
                     {
-                        if (SqlComparisonUtils.SQLModel_Contains(tightestContainer, c))
+                        TSqlFragment tightestContainer = containers[0];
+                        foreach (var c in containers)
                         {
-                            tightestContainer = c;
-                        }
-                    }
-
-                    // Check that the table source is within the scope of the single source quep
-                    // And not in any intervening subquery or apply clause - where we need to enforce the alias
-                    // And also check that the single source quep has no direct sub queries itself.
-                    if ((!subQuerys.Any(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
-                                                    && SqlComparisonUtils.StrictlyContains(subQuery, tableSource)
-                                            )
-                            )
-                        && (!applyTableSources2.Any(ats => SqlComparisonUtils.SemiContains(tightestContainer, ats)
-                                                            && SqlComparisonUtils.StrictlyContains(ats, tableSource)
-                                                    )
-                            )
-                        )
-                    {
-                        // we also need to eliminate subqueries in CTES in top-level containers from consideration
-                        List<ScalarSubquery> containedSubQuerys =
-                             subQuerys.FindAll(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
-                                             && (!ctes.Any(cte => SqlComparisonUtils.SQLModel_Contains(tightestContainer, cte)
-                                                          && SqlComparisonUtils.SQLModel_Contains(cte, subQuery))
-                                                )
-                                              );
-
-                        bool foundSubQueryInSingleSourceQuep = false;
-
-                        foreach (var sq in containedSubQuerys)
-                        {
-                            TSqlFragment tightest_sq_Container = null;
-                            List<TSqlFragment> sq_containers = allSingleSourceStatements.FindAll(n => SqlComparisonUtils.SQLModel_Contains(n, sq));
-                            if (sq_containers.Count > 0)
+                            if (SqlComparisonUtils.SQLModel_Contains(tightestContainer, c))
                             {
-                                tightest_sq_Container = sq_containers[0];
-                                foreach (var c in sq_containers)
+                                tightestContainer = c;
+                            }
+                        }
+
+                        // Check that the table source is within the scope of the single source quep
+                        // And not in any intervening subquery or apply clause - where we need to enforce the alias
+                        // And also check that the single source quep has no direct sub queries itself.
+                        if ((!subQuerys.Any(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
+                                                        && SqlComparisonUtils.StrictlyContains(subQuery, tableSource)
+                                                )
+                                )
+                            && (!applyTableSources2.Any(ats => SqlComparisonUtils.SemiContains(tightestContainer, ats)
+                                                                && SqlComparisonUtils.StrictlyContains(ats, tableSource)
+                                                        )
+                                )
+                            )
+                        {
+                            // we also need to eliminate subqueries in CTES in top-level containers from consideration
+                            List<ScalarSubquery> containedSubQuerys =
+                                 subQuerys.FindAll(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
+                                                 && (!ctes.Any(cte => SqlComparisonUtils.SQLModel_Contains(tightestContainer, cte)
+                                                              && SqlComparisonUtils.SQLModel_Contains(cte, subQuery))
+                                                    )
+                                                  );
+
+                            bool foundSubQueryInSingleSourceQuep = false;
+
+                            foreach (var sq in containedSubQuerys)
+                            {
+                                TSqlFragment tightest_sq_Container = null;
+                                List<TSqlFragment> sq_containers = allSingleSourceStatements.FindAll(n => SqlComparisonUtils.SQLModel_Contains(n, sq));
+                                if (sq_containers.Count > 0)
                                 {
-                                    if (SqlComparisonUtils.SQLModel_Contains(tightest_sq_Container, c))
+                                    tightest_sq_Container = sq_containers[0];
+                                    foreach (var c in sq_containers)
                                     {
-                                        tightest_sq_Container = c;
+                                        if (SqlComparisonUtils.SQLModel_Contains(tightest_sq_Container, c))
+                                        {
+                                            tightest_sq_Container = c;
+                                        }
                                     }
                                 }
+                                // if we find a subquery in this single source quep - we can't ignore the table source
+                                if (tightest_sq_Container is not null && SqlComparisonUtils.Equals(tightest_sq_Container, tightestContainer))
+                                {
+                                    foundSubQueryInSingleSourceQuep = true;
+                                    break;
+                                }
                             }
-                            // if we find a subquery in this single source quep - we can't ignore the table source
-                            if (tightest_sq_Container is not null && SqlComparisonUtils.Equals(tightest_sq_Container, tightestContainer))
+                            if (!foundSubQueryInSingleSourceQuep)
                             {
-                                foundSubQueryInSingleSourceQuep = true;
-                                break;
+                                ignoreThisTableSourceHere = true;
                             }
                         }
-                        if (!foundSubQueryInSingleSourceQuep)
-                        {
-                            ignoreThisTableSourceHere = true;
-                        }
+                        RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                        RuleUtils.UpdateProblems(!ignoreThisTableSourceHere, problems, modelElement, elementName, tableSource, ruleDescriptor);
                     }
-                    RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                    RuleUtils.UpdateProblems(!ignoreThisTableSourceHere, problems, modelElement, elementName, tableSource, ruleDescriptor);
                 }
             }
             return problems;

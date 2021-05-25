@@ -103,6 +103,7 @@
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\CTEVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\DMLSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasRule.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasExcludedContextsVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceQueryDerivedTableQuerySpecificationVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />

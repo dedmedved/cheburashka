@@ -26,14 +26,14 @@ namespace Cheburashka
 {
     internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TableReferenceWithAlias> _tableSources;
+        private List<TSqlFragment> _tableSources;
 
         public EnforceTableAliasVisitor()
         {
-            _tableSources = new List<TableReferenceWithAlias>();
+            _tableSources = new List<TSqlFragment>();
         }
 
-        public List<TableReferenceWithAlias> TableSources => _tableSources;
+        public List<TSqlFragment> TableSources => _tableSources;
 
         public override void ExplicitVisit(AdHocTableReference node)
         {
