@@ -236,9 +236,9 @@ namespace Cheburashka
                                 ignoreThisTableSourceHere = true;
                             }
                         }
-                        RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                        RuleUtils.UpdateProblems(!ignoreThisTableSourceHere, problems, modelElement, elementName, tableSource, ruleDescriptor);
                     }
+                    RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                    RuleUtils.UpdateProblems(!ignoreThisTableSourceHere, problems, modelElement, elementName, tableSource, ruleDescriptor);
                 }
             }
             return problems;

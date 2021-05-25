@@ -48,6 +48,7 @@ namespace Cheburashka
             {
                 _excludedFragments.Add(node.InsertSpecification.Target);
             }
+            node.AcceptChildren(this);
         }
         public override void ExplicitVisit(MergeStatement node)
         {
@@ -55,6 +56,7 @@ namespace Cheburashka
             {
                 _excludedFragments.Add(node.MergeSpecification.Target);
             }
+            node.AcceptChildren(this);
         }
         public override void ExplicitVisit(DeleteStatement node)
         {
@@ -62,6 +64,7 @@ namespace Cheburashka
             {
                 _excludedFragments.Add(node.DeleteSpecification.Target);
             }
+            node.AcceptChildren(this);
         }
         public override void ExplicitVisit(UpdateStatement node)
         {
@@ -69,6 +72,7 @@ namespace Cheburashka
             {
                 _excludedFragments.Add(node.UpdateSpecification.Target);
             }
+            node.AcceptChildren(this);
         }
     }
 }
