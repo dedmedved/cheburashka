@@ -1,3 +1,57 @@
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 10
+Start column: 54
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 10
+Start column: 61
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 12
+Start column: 15
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 12
+Start column: 22
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 13
+Start column: 15
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.DMLTargetAndOutputInto_proc
+Script file: DMLTargetAndOutputInto_proc.sql
+Start line: 13
+Start column: 27
+========end of problem========
+
 Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
 FullID: Cheburashka.DM0047
 Severity: Warning

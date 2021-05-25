@@ -7,9 +7,9 @@ INSERT INTO Table1 VALUES(1)
 INSERT INTO Table1 SELECT * FROM Table2
 INSERT INTO Table1 output 'aa' INTO Table3 SELECT * FROM Table2
 INSERT INTO Table1 output 'aa' INTO @x SELECT * FROM Table2
-INSERT INTO Table1 output 'aa' INTO @x SELECT * FROM Table2,Table2 -- should be an error but isn't
+INSERT INTO Table1 output 'aa' INTO @x SELECT * FROM Table2,Table2 
 
-SELECT * FROM Table2,Table2
+SELECT * FROM dbo.Table2,dbo.Table2
 SELECT * FROM Table2 JOIN Table2 ON a=a
 
 INSERT INTO Table1 
@@ -23,7 +23,5 @@ SET a=1
 OUTPUT 'aa' INTO @x 
 FROM Table1 t
 WHERE NOT EXISTS (select  a FROM Table1 a WHERE a=a)
-
-
 END
 
