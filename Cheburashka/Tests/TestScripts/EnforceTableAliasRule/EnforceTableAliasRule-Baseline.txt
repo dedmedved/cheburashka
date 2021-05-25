@@ -31,7 +31,7 @@ Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
 Script file: DMLTargetAndOutputInto_proc.sql
 Start line: 12
-Start column: 22
+Start column: 26
 ========end of problem========
 
 Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOutputInto_proc].
