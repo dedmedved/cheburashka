@@ -74,5 +74,14 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        public override void ExplicitVisit(DataModificationTableReference node)
+        {
+            if (node.DataModificationSpecification.Target is not null)
+            {
+                _excludedFragments.Add(node.DataModificationSpecification.Target);
+            }
+            node.AcceptChildren(this);
+        }
+        
     }
 }

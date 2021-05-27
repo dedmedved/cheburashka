@@ -69,6 +69,43 @@ namespace Cheburashka
             }
         }
 
+        public override void ExplicitVisit(DataModificationTableReference node){
+            //List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            //switch (node.DataModificationSpecification)
+            //{
+            //    case InsertSpecification:
+            //        {
+            //            var ispec = node.DataModificationSpecification as InsertSpecification;
+            //            if (ispec?.InsertSource is SelectInsertSource select)
+            //            {
+            //                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
+            //            }
+            //            break;
+            //        }
+            //    case MergeSpecification:
+            //        {
+            //            var ispec = node.DataModificationSpecification as MergeSpecification;
+            //            if (ispec. .InsertSource is SelectInsertSource select)
+            //            {
+            //                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
+            //            }
+            //            break;
+            //        }
+            //    case UpdateSpecification:
+            //        break;
+            //    case DeleteSpecification:
+            //        break;
+            //}
+            ////node.AcceptChildren(this);
+
+            //SQLGatherQuery.GetQuery(node.DataModificationSpecification.Target.
+
+            //.QueryExpression, ref querySpecifications);
+            //List<QuerySpecification> qss = querySpecifications.FindAll(n => SqlCheck.HasFromClause(n));// && SqlCheck.HasNoIntoClause(n));
+            //_targets.AddRange(qss);
+            _targets.Add(node);
+        }
+
         public override void ExplicitVisit(SelectStatement node)
         {
             // We want to ignore select statements that dont select from anything.

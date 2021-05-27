@@ -52,6 +52,24 @@ Start line: 13
 Start column: 27
 ========end of problem========
 
+Problem description: Data Source found without an alias in [dbo].[InsertFromDMLInsertProc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.InsertFromDMLInsertProc
+Script file: InsertFromDMLInsertProc.sql
+Start line: 36
+Start column: 14
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[InsertFromDMLInsertProc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.InsertFromDMLInsertProc
+Script file: InsertFromDMLInsertProc.sql
+Start line: 37
+Start column: 14
+========end of problem========
+
 Problem description: Data Source found without an alias in [dbo].[onelevelinlinequerieswithsubqueries].
 FullID: Cheburashka.DM0047
 Severity: Warning

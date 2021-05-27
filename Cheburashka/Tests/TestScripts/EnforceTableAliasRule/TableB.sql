@@ -1,0 +1,2 @@
+﻿CREATE TABLE TableB(B1 INT, B2 INT);
+go
