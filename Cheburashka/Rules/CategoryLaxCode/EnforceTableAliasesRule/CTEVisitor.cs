@@ -26,16 +26,14 @@ namespace Cheburashka
 {
     internal class CTEVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public CTEVisitor()
         {
             _targets = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> CTES
-        {
-            get { return _targets; }
-        }
+        public List<TSqlFragment> CTES => _targets;
+
         public override void ExplicitVisit(CommonTableExpression node)
         {
             _targets.Add(node);

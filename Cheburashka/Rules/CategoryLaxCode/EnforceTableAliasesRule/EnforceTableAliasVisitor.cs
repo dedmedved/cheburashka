@@ -26,7 +26,7 @@ namespace Cheburashka
 {
     internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _tableSources;
+        private readonly List<TSqlFragment> _tableSources;
 
         public EnforceTableAliasVisitor()
         {

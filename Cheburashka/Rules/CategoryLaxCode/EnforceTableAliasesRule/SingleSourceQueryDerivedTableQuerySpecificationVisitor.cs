@@ -26,7 +26,7 @@ namespace Cheburashka
 {
     internal class SingleSourceQueryDerivedTableQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public SingleSourceQueryDerivedTableQuerySpecificationVisitor()
         {
@@ -37,7 +37,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(QueryDerivedTable node)
         {
-            List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
             foreach (var sq in querySpecifications)
             {

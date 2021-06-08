@@ -125,15 +125,12 @@ namespace Cheburashka
                 if (!isClustered && !isUnique)
                 {
                     // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                    CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor
-                        =
-                        new();
+                    CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor = new();
                     sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
                     List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
 
                     CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
-                        checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor =
-                            new();
+                        checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new();
                     sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
                     var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
 

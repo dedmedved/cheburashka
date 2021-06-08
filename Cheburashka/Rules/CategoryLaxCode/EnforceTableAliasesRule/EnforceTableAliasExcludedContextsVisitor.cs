@@ -26,7 +26,7 @@ namespace Cheburashka
 {
     internal class EnforceTableAliasExcludedContextsVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _excludedFragments;
+        private readonly List<TSqlFragment> _excludedFragments;
 
         public EnforceTableAliasExcludedContextsVisitor()
         {
@@ -82,6 +82,5 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
-        
     }
 }

@@ -14,7 +14,7 @@ SELECT * FROM Table2 JOIN Table2 ON a=a
 
 INSERT INTO Table1 
 OUTPUT 'aa' INTO @x 
-select  a.a
+select  b.a
 from    Table2 b
 WHERE NOT EXISTS (select  a FROM Table1 a WHERE a=a)
 

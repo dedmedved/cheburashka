@@ -27,7 +27,7 @@ namespace Cheburashka
 {
     internal class SingleSourceSubQueryQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public SingleSourceSubQueryQuerySpecificationVisitor()
         {

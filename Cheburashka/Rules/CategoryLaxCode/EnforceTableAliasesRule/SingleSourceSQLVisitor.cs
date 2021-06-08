@@ -27,7 +27,7 @@ namespace Cheburashka
 {
     internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public SingleSourceSQLVisitor()
         {
@@ -65,25 +65,39 @@ namespace Cheburashka
         {
             if (node.InsertSource is SelectInsertSource source)
             {
-                List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
-                SQLGatherQuery.GetQuery(source.Select, ref querySpecifications);
-                _targets.AddRange(querySpecifications.Where(sq => SqlCheck.HasAtMostOneTableSource(sq)).Select(sq => node));
+                // if the insert is from a DataModificationTableReference - dive into it
+                // and pull out the real inner DML it's shielding via AcceptChildren
+                // and don't return this as a single source SQL context, because
+                // for our purposes it isn't
+                var querySpecification = source.Select as QuerySpecification ;
+                var fromClauseTableReferences = querySpecification?.FromClause?.TableReferences;
+                if (fromClauseTableReferences?.Count == 1 && fromClauseTableReferences[0] is DataModificationTableReference)
+                {
+                    node.AcceptChildren(this);
+                }
+                // otherwise use existing gather query logic to pull out the query specifications 
+                else
+                {
+                    List<QuerySpecification> querySpecifications = new();
+                    SQLGatherQuery.GetQuery(source.Select, ref querySpecifications);
+                    _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource).Select(sq => node));
+                }
             }
-            node.AcceptChildren(this);
+
         }
 
         public override void ExplicitVisit(SelectStatement node)
         {
-            List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(sq => SqlCheck.HasAtMostOneTableSource(sq)));
+            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             node.AcceptChildren(this);
         }
         public override void ExplicitVisit(CommonTableExpression node)
         {
-            List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(sq => SqlCheck.HasAtMostOneTableSource(sq)));
+            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             node.AcceptChildren(this);
         }
     }

@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
@@ -193,7 +192,7 @@ namespace Cheburashka
                         foundSurroundingDeclaration = serviceBrokerContexts.Any(v => v.SQLModel_Contains(tableSource));
                     }
 
-                    RuleUtils.UpdateProblems(!foundSurroundingDeclaration,problems, modelElement, elementName, tableSource, ruleDescriptor);
+                    RuleUtils.UpdateProblems(!foundSurroundingDeclaration, problems, modelElement, elementName, tableSource, ruleDescriptor);
                 }
 
                 // may need to sweep user defined type separately

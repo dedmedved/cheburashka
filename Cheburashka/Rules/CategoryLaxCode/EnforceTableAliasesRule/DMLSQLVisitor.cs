@@ -28,7 +28,7 @@ namespace Cheburashka
 
     internal class DMLSQLVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public DMLSQLVisitor()
         {
@@ -57,31 +57,33 @@ namespace Cheburashka
             {
                 List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
                 SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-                List<QuerySpecification> qss = querySpecifications.FindAll(n => SqlCheck.HasFromClause(n));// && SqlCheck.HasNoIntoClause(n));
+                List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
                 _targets.AddRange(qss);
             }
-            // if its a values clause it can contain scalar subqueries (I suppose) - so don't return it an elimination context.
-            else if (node.InsertSpecification.InsertSource is ValuesInsertSource values) { }
+            // if its a values clause it can contain scalar sub-queries (I suppose) - so don't return it an elimination context.
+            else if (node.InsertSpecification.InsertSource is ValuesInsertSource) { }
             // give up - just add it in
             else
             {
                 _targets.Add(node);
             }
+            node.AcceptChildren(this);
         }
 
         public override void ExplicitVisit(DataModificationTableReference node){
-            //List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
-            //switch (node.DataModificationSpecification)
-            //{
-            //    case InsertSpecification:
-            //        {
-            //            var ispec = node.DataModificationSpecification as InsertSpecification;
-            //            if (ispec?.InsertSource is SelectInsertSource select)
-            //            {
-            //                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-            //            }
-            //            break;
-            //        }
+            List<QuerySpecification> querySpecifications = new();
+            switch (node.DataModificationSpecification)
+            {
+                case InsertSpecification insertSpecification:
+                    {
+                        if (insertSpecification?.InsertSource is SelectInsertSource select)
+                        {
+                            SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
+                            List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
+                            _targets.AddRange(qss);
+                        }
+                        break;
+                    }
             //    case MergeSpecification:
             //        {
             //            var ispec = node.DataModificationSpecification as MergeSpecification;
@@ -95,8 +97,8 @@ namespace Cheburashka
             //        break;
             //    case DeleteSpecification:
             //        break;
-            //}
-            ////node.AcceptChildren(this);
+            }
+            //node.AcceptChildren(this);
 
             //SQLGatherQuery.GetQuery(node.DataModificationSpecification.Target.
 
@@ -108,11 +110,11 @@ namespace Cheburashka
 
         public override void ExplicitVisit(SelectStatement node)
         {
-            // We want to ignore select statements that dont select from anything.
+            // We want to ignore select statements that don't select from anything.
             // Assignment selects has the same status for us here as do set = (subquery) 
             List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            List<QuerySpecification> qss = querySpecifications.FindAll(n => SqlCheck.HasFromClause(n));// && SqlCheck.HasNoIntoClause(n));
+            List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
             _targets.AddRange(qss);
         }
     }

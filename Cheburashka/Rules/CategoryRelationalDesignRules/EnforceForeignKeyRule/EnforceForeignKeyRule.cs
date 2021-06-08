@@ -81,8 +81,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
-                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
                 if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
                     createTableStatement.AsEdge || createTableStatement.AsFileTable))
@@ -105,9 +104,7 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                var allFKs =
-                    DMVSettings
-                        .GetForeignKeys; // model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
+                var allFKs = DMVSettings.GetForeignKeys; 
 
                 bool bFoundForeignKey = false;
 
