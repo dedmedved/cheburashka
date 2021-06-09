@@ -57,8 +57,7 @@ namespace Cheburashka
             {
                 List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
                 SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-                List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
-                _targets.AddRange(qss);
+                _targets.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
             }
             // if its a values clause it can contain scalar sub-queries (I suppose) - so don't return it an elimination context.
             else if (node.InsertSpecification.InsertSource is ValuesInsertSource) { }
@@ -112,10 +111,9 @@ namespace Cheburashka
         {
             // We want to ignore select statements that don't select from anything.
             // Assignment selects has the same status for us here as do set = (subquery) 
-            List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
-            _targets.AddRange(qss);
+            _targets.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
         }
     }
 }

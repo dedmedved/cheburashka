@@ -67,7 +67,7 @@ namespace Cheburashka
             {
                 // if the insert is from a DataModificationTableReference - dive into it
                 // and pull out the real inner DML it's shielding via AcceptChildren
-                // and don't return this as a single source SQL context, because
+                // and don't return *THIS* source as a single source SQL context, because
                 // for our purposes it isn't
                 var querySpecification = source.Select as QuerySpecification ;
                 var fromClauseTableReferences = querySpecification?.FromClause?.TableReferences;

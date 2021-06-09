@@ -40,7 +40,7 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceTableAliasRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceTableAlias_RuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceTableAlias_RuleName,           // ID used to look up the display name inside the resources file
         RuleConstants.EnforceTableAlias_ProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
@@ -131,7 +131,7 @@ namespace Cheburashka
                 // If the query isn't contained in any apply clause we can add it.
                 // Or if it is contained in an apply clause, but there is an intervening join query
                 // with no intermediate apply clause containing the query
-                if ((!applyTableSources.Any(applySource => SqlComparisonUtils.Equals(applySource, singleSourceInLineQuery)))
+                if (!applyTableSources.Any(applySource => SqlComparisonUtils.Equals(applySource, singleSourceInLineQuery))
                     )
                 {
                     nonApplyContainedSingleSourceQueryDerivedTableQuerySpecifications.Add(singleSourceInLineQuery);
@@ -200,7 +200,7 @@ namespace Cheburashka
                             )
                         {
                             // we also need to eliminate sub-queries in CTES in top-level containers from consideration
-                            List<ScalarSubquery> containedSubQuerys =
+                            List<ScalarSubquery> containedSubQueries =
                                  subQueries.FindAll(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
                                                  && (!visitorCtes.Any(cte => SqlComparisonUtils.SQLModel_Contains(tightestContainer, cte)
                                                               && SqlComparisonUtils.SQLModel_Contains(cte, subQuery))
@@ -209,7 +209,7 @@ namespace Cheburashka
 
                             bool foundSubQueryInSingleSourceQuep = false;
 
-                            foreach (var sq in containedSubQuerys)
+                            foreach (var sq in containedSubQueries)
                             {
                                 TSqlFragment tightest_sq_Container = null;
                                 List<TSqlFragment> sq_containers = allSingleSourceStatements.FindAll(n => SqlComparisonUtils.SQLModel_Contains(n, sq));
