@@ -80,8 +80,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
-                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
                 // If we can't find the file then assume we're in a composite model
@@ -98,8 +97,7 @@ namespace Cheburashka
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 
-                bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
-                    out _);
+                bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out _);
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata

@@ -35,47 +35,40 @@ namespace Cheburashka
         }
         public static bool HasNoFromClause(DeleteSpecification node)
         {
-            return ((node.FromClause is null)
-                    ||
-                    ((node.FromClause is not null) &&
-                      (node.FromClause.TableReferences.Count == 0)
-                    )
-                  );
+            return node.FromClause is null
+                   ||
+                   node.FromClause.TableReferences.Count == 0;
         }
         public static bool HasNoFromClause(UpdateSpecification node)
         {
-            return ((node.FromClause is null)
+            return node.FromClause is null
                     ||
-                    ((node.FromClause is not null) &&
-                      (node.FromClause.TableReferences.Count == 0)
-                    )
-                  );
+                    node.FromClause.TableReferences.Count == 0
+                  ;
         }
         public static bool HasNoFromClause(QuerySpecification node)
         {
-            return ((node.FromClause is null)
+            return node.FromClause is null
                     ||
-                    ((node.FromClause is not null) &&
-                      (node.FromClause.TableReferences.Count == 0)
-                    )
-                  );
+                    node.FromClause.TableReferences.Count == 0
+                  ;
         }
 
         public static bool HasFromClause(MergeSpecification node)
         {
-            return (!HasNoFromClause(node));
+            return !HasNoFromClause(node);
         }
         public static bool HasFromClause(DeleteSpecification node)
         {
-            return (!HasNoFromClause(node));
+            return !HasNoFromClause(node);
         }
         public static bool HasFromClause(UpdateSpecification node)
         {
-            return (!HasNoFromClause(node));
+            return !HasNoFromClause(node);
         }
         public static bool HasFromClause(QuerySpecification node)
         {
-            return (!HasNoFromClause(node));
+            return !HasNoFromClause(node);
         }
 
 
@@ -118,11 +111,9 @@ namespace Cheburashka
         // in the context in which it is used - it literally means just the 1
         public static bool HasExactlyOneFromClauseTableSource(DeleteSpecification node)
         {
-            return (((node.FromClause is not null) &&
-                            (node.FromClause.TableReferences.Count == 1) &&
-                            (node.FromClause.TableReferences[0] is TableReferenceWithAlias)
-                        )
-                  );
+            return node.FromClause is not null &&
+                   node.FromClause.TableReferences.Count == 1 &&
+                   node.FromClause.TableReferences[0] is TableReferenceWithAlias;
         }
         //// tricky if there is no from clause there is still exactly one table involved
         //// not used in any  context - eliminate for now
@@ -136,10 +127,9 @@ namespace Cheburashka
         //}
         public static bool HasExactlyOneFromClauseTableSource(QuerySpecification node)
         {
-            return ((node.FromClause is not null) &&
-                    (node.FromClause.TableReferences.Count == 1) &&
-                    (node.FromClause.TableReferences[0] is TableReferenceWithAlias)
-                  );
+            return node.FromClause is not null &&
+                   node.FromClause.TableReferences.Count == 1 &&
+                   node.FromClause.TableReferences[0] is TableReferenceWithAlias;
         }
 
 
@@ -156,43 +146,33 @@ namespace Cheburashka
         // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(DeleteSpecification node)
         {
-            return ((node.FromClause is null)
-                     ||
-                        ((node.FromClause is not null) &&
-                           (node.FromClause.TableReferences.Count == 0)
-                        )
-                     ||
-                        ((node.FromClause.TableReferences.Count == 1) &&
-                           (node.FromClause.TableReferences[0] is TableReferenceWithAlias)
-                        )
-                  );
+            return node.FromClause is null
+                   ||
+                   node.FromClause.TableReferences.Count == 0
+                   ||
+                   node.FromClause.TableReferences.Count == 1 &&
+                   node.FromClause.TableReferences[0] is TableReferenceWithAlias;
         }
         // tricky if there is no from clause there is still exactly one table involved
         public static bool HasAtMostOneTableSource(UpdateSpecification node)
         {
-            return ((node.FromClause is null)
+            return node.FromClause is null
                      ||
-                        ((node.FromClause is not null) &&
-                           (node.FromClause.TableReferences.Count == 0)
-                        )
+                        node.FromClause.TableReferences.Count == 0
                      ||
-                        ((node.FromClause.TableReferences.Count == 1) &&
-                           (node.FromClause.TableReferences[0] is TableReferenceWithAlias)
-                        )
-                  );
+                        node.FromClause.TableReferences.Count == 1 &&
+                        node.FromClause.TableReferences[0] is TableReferenceWithAlias
+                  ;
         }
         public static bool HasAtMostOneTableSource(QuerySpecification node)
         {
-            return ((node.FromClause is null)
+            return node.FromClause is null
                      ||
-                        ((node.FromClause is not null) &&
-                           (node.FromClause.TableReferences.Count == 0)
-                        )
+                        node.FromClause.TableReferences.Count == 0
                      ||
-                        ((node.FromClause.TableReferences.Count == 1) &&
-                           (node.FromClause.TableReferences[0] is TableReferenceWithAlias)
-                        )
-                  );
+                        node.FromClause.TableReferences.Count == 1 &&
+                        node.FromClause.TableReferences[0] is TableReferenceWithAlias
+                  ;
         }
 
         ////////////////////////////
@@ -223,10 +203,10 @@ namespace Cheburashka
         }
         public static bool HasAtLeastOneTableSource(QuerySpecification node)
         {
-            return (((node.FromClause is not null) &&
-                           (node.FromClause.TableReferences.Count > 0)
-                        )
-                  );
+            return node.FromClause is not null &&
+                           node.FromClause.TableReferences.Count > 0
+                        
+                  ;
         }
 
         ////////////////////////////

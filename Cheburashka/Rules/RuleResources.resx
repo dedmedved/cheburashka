@@ -339,6 +339,12 @@
   <data name="EnforceReturn_RuleName" xml:space="preserve">
     <value>Stored Procedures have Return as the final executable statement.</value>
   </data>
+  <data name="EnforceTableAlias_ProblemDescription" xml:space="preserve">
+    <value>Data Source found without an alias in {0}.</value>
+  </data>
+  <data name="EnforceTableAlias_RuleName" xml:space="preserve">
+    <value>Tables, views and other data sources in DML need aliases where disambiguation is necessary.</value>
+  </data>
   <data name="EnforceTryCatch_ProblemDescription" xml:space="preserve">
     <value>Code found without Try/Catch in {0}.</value>
   </data>

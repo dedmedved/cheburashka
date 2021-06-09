@@ -98,6 +98,17 @@
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\ApplySingleSourceQueryDefinitionVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\ApplyTableSourceVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\CTEVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\DMLSQLVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasRule.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasExcludedContextsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceQueryDerivedTableQuerySpecificationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSubQueryQuerySpecificationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />
@@ -191,6 +202,7 @@
     </Compile>
     <Compile Include="Utility Classes\ModelIndexAndKeysUtils.cs" />
     <Compile Include="Utility Classes\SqlCheck.cs" />
+    <Compile Include="Utility Classes\SQLGatherQuery.cs" />
     <Compile Include="Utility Classes\SQLObjectFragment.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\UpdateWithCTEVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\VariableUsageVisitor.cs" />

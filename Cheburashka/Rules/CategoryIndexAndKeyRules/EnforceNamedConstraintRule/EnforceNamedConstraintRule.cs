@@ -94,20 +94,15 @@ namespace Cheburashka
 
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
 
-                // Get Database Schema and name of this model element.
-//                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
-
                 DMVSettings.RefreshModelBuiltInCache(model);
 
                 // visitor to get the occurrences of constraints we want to be named
                 EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new();
                 sqlFragment.Accept(enforceNamedConstraintVisitor);
-                List<TSqlFragment>
-                    constraints = enforceNamedConstraintVisitor.Constraints.Cast<TSqlFragment>().ToList();
+                List<TSqlFragment> constraints = enforceNamedConstraintVisitor.Constraints.Cast<TSqlFragment>().ToList();
 
                 // visitor to get the occurrences of table variable declarations we are not interested in 
-                EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor =
-                    new();
+                EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor = new();
                 sqlFragment.Accept(enforceNamedConstraintDeclareTableVisitor);
                 List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
 
