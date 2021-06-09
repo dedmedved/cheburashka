@@ -39,7 +39,7 @@ namespace Cheburashka
         {
             List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
             SQLGatherQuery.GetQuery(node, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(sq => SqlCheck.HasAtMostOneTableSource(sq)));
+            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             //DEFINITELY NOT !!
             //node.AcceptChildren(this);
         }

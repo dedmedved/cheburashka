@@ -70,43 +70,43 @@ namespace Cheburashka
             node.AcceptChildren(this);
         }
 
-        public override void ExplicitVisit(DataModificationTableReference node){
-            List<QuerySpecification> querySpecifications = new();
-            switch (node.DataModificationSpecification)
-            {
-                case InsertSpecification insertSpecification:
-                    {
-                        if (insertSpecification?.InsertSource is SelectInsertSource select)
-                        {
-                            SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-                            List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
-                            _targets.AddRange(qss);
-                        }
-                        break;
-                    }
-            //    case MergeSpecification:
-            //        {
-            //            var ispec = node.DataModificationSpecification as MergeSpecification;
-            //            if (ispec. .InsertSource is SelectInsertSource select)
-            //            {
-            //                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-            //            }
-            //            break;
-            //        }
-            //    case UpdateSpecification:
-            //        break;
-            //    case DeleteSpecification:
-            //        break;
-            }
-            //node.AcceptChildren(this);
+        //public override void ExplicitVisit(DataModificationTableReference node){
+        //    List<QuerySpecification> querySpecifications = new();
+        //    switch (node.DataModificationSpecification)
+        //    {
+        //        case InsertSpecification insertSpecification:
+        //            {
+        //                if (insertSpecification?.InsertSource is SelectInsertSource select)
+        //                {
+        //                    SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
+        //                    List<QuerySpecification> qss = querySpecifications.FindAll(SqlCheck.HasFromClause);// && SqlCheck.HasNoIntoClause(n));
+        //                    _targets.AddRange(qss);
+        //                }
+        //                break;
+        //            }
+        //    //    case MergeSpecification:
+        //    //        {
+        //    //            var ispec = node.DataModificationSpecification as MergeSpecification;
+        //    //            if (ispec. .InsertSource is SelectInsertSource select)
+        //    //            {
+        //    //                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
+        //    //            }
+        //    //            break;
+        //    //        }
+        //    //    case UpdateSpecification:
+        //    //        break;
+        //    //    case DeleteSpecification:
+        //    //        break;
+        //    }
+        //    //node.AcceptChildren(this);
 
-            //SQLGatherQuery.GetQuery(node.DataModificationSpecification.Target.
+        //    //SQLGatherQuery.GetQuery(node.DataModificationSpecification.Target.
 
-            //.QueryExpression, ref querySpecifications);
-            //List<QuerySpecification> qss = querySpecifications.FindAll(n => SqlCheck.HasFromClause(n));// && SqlCheck.HasNoIntoClause(n));
-            //_targets.AddRange(qss);
-            _targets.Add(node);
-        }
+        //    //.QueryExpression, ref querySpecifications);
+        //    //List<QuerySpecification> qss = querySpecifications.FindAll(n => SqlCheck.HasFromClause(n));// && SqlCheck.HasNoIntoClause(n));
+        //    //_targets.AddRange(qss);
+        //    _targets.Add(node);
+        //}
 
         public override void ExplicitVisit(SelectStatement node)
         {

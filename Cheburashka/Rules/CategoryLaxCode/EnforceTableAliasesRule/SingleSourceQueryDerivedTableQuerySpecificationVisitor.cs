@@ -20,6 +20,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
@@ -39,13 +40,7 @@ namespace Cheburashka
         {
             List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            foreach (var sq in querySpecifications)
-            {
-                if (SqlCheck.HasAtMostOneTableSource(sq))
-                {
-                    _targets.Add(sq);
-                }
-            }
+            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             node.AcceptChildren(this);
         }
     }

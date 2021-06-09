@@ -26,17 +26,14 @@ namespace Cheburashka
 {
     internal class ApplyTableSourceVisitor : TSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
+        private readonly List<TSqlFragment> _targets;
 
         public ApplyTableSourceVisitor()
         {
             _targets = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> ApplyTableSources
-        {
-            get => _targets;
-        }
+        public List<TSqlFragment> ApplyTableSources => _targets;
 
         public override void ExplicitVisit(UnqualifiedJoin node)
         {
