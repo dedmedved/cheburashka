@@ -77,10 +77,17 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(DataModificationTableReference node)
         {
-            if (node.DataModificationSpecification.Target is not null)
+            if (node.DataModificationSpecification is not MergeSpecification)
             {
-                _excludedFragments.Add(node.DataModificationSpecification.Target);
+                if (node.DataModificationSpecification.Target is not null)
+                {
+                    _excludedFragments.Add(node.DataModificationSpecification.Target);
+                }
             }
+            //if (node.DataModificationSpecification.Target is not null)
+            //{
+            //    _excludedFragments.Add(node.DataModificationSpecification.Target);
+            //}
             node.AcceptChildren(this);
         }
     }
