@@ -1540,6 +1540,21 @@
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\PreferThrowToRaiserrorRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithoutRaiserror.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevelEmbeddedInAVar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorAtLevel10.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserror.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\README.txt" />
     <Content Include="TestScripts\_startup\_startup.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
