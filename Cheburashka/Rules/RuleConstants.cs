@@ -76,6 +76,7 @@ namespace Cheburashka
         public const string CheckOpenTransactionCountCode_RuleId                        = "Cheburashka.DM0045";
         
         public const string EnforceTableAlias_RuleId                                    = "Cheburashka.DM0047";
+        public const string PreferThrowToRaiserror_RuleId                               = "Cheburashka.DM0048";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -194,6 +195,8 @@ namespace Cheburashka
         public const string EnforceTableAlias_RuleName                                              = "EnforceTableAlias_RuleName";
         public const string EnforceTableAlias_ProblemDescription                                    = "EnforceTableAlias_ProblemDescription";
 
+        public const string PreferThrowToRaiserror_RuleName                                         = "PreferThrowToRaiserror_RuleName";
+        public const string PreferThrowToRaiserror_ProblemDescription                               = "PreferThrowToRaiserror_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

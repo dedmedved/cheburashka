@@ -109,6 +109,8 @@
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSubQueryQuerySpecificationVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />

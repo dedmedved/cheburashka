@@ -779,5 +779,23 @@ namespace Cheburashka {
                 return ResourceManager.GetString("EnforceVariableLengthDataSpecification_RuleName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raiserror found in {0}..
+        /// </summary>
+        internal static string PreferThrowToRaiserror_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferThrowToRaiserror_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefer using Throw to Raiserror when raising an error..
+        /// </summary>
+        internal static string PreferThrowToRaiserror_RuleName {
+            get {
+                return ResourceManager.GetString("PreferThrowToRaiserror_RuleName", resourceCulture);
+            }
+        }
     }
 }

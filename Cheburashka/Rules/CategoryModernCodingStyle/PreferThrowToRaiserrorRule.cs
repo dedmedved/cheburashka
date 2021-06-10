@@ -19,11 +19,11 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -31,33 +31,32 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a GOTO statement appears inside a subroutine body. 
-    /// This rule only applies to SQL stored procedures, functions and triggers.
+    /// whenever a stored procedure or trigger uses raiserror rather than throw. 
+    /// This rule only applies to SQL stored procedures, and triggers.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidGotoRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(PreferThrowToRaiserrorRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidGoto_RuleName,                                   // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidGoto_ProblemDescription,                         // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
+        RuleConstants.PreferThrowToRaiserror_RuleName,                     // ID used to look up the display name inside the resources file
+        RuleConstants.PreferThrowToRaiserror_ProblemDescription,            // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class AvoidGotoRule : SqlCodeAnalysisRule
+    public sealed class PreferThrowToRaiserrorRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0025: Avoid using Goto statements."
+        /// shown as "DM0048: Prefer using Throw to Raiserror when raising an error."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidGoto_RuleId;
+        public const string RuleId = RuleConstants.PreferThrowToRaiserror_RuleId;
 
-        public AvoidGotoRule()
-        {
-            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
+        public PreferThrowToRaiserrorRule() {
+            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 
         /// <summary>
@@ -86,12 +85,12 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of goto statements
-            var visitor = new GotoVisitor();
+            // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
+            RaiserrorVisitor visitor = new();
             sqlFragment.Accept(visitor);
-            var issues = visitor.GoToStatements.Cast<TSqlFragment>().ToList();
-            // Create problems for each GOTO statement found 
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+            List<TSqlFragment> raiseErrorStatements = visitor.RaiseErrorStatements.Cast<TSqlFragment>().ToList();
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, raiseErrorStatements, ruleDescriptor);
+
             return problems;
         }
     }

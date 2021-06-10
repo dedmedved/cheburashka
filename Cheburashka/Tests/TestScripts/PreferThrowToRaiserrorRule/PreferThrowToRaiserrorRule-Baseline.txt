@@ -1,0 +1,18 @@
+Problem description: Raiserror found in [dbo].[ProcWithRaiserror].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserror
+Script file: ProcWithRaiserror.sql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevelEmbeddedInAVar].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserrorWithLevelEmbeddedInAVar
+Script file: ProcWithRaiserrorWithLevelEmbeddedInAVar.sql
+Start line: 7
+Start column: 9
+========end of problem========
+

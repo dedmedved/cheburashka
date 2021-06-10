@@ -357,4 +357,10 @@
   <data name="EnforceVariableLengthDataSpecification_RuleName" xml:space="preserve">
     <value>Don't rely on default values for variable length datatypes, other than DateTime2. </value>
   </data>
+  <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
+    <value>Raiserror found in {0}.</value>
+  </data>
+  <data name="PreferThrowToRaiserror_RuleName" xml:space="preserve">
+    <value>Prefer using Throw to Raiserror when raising an error.</value>
+  </data>
 </root>
