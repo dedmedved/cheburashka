@@ -83,7 +83,6 @@ namespace Cheburashka
                     _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource).Select(sq => node));
                 }
             }
-
         }
 
         public override void ExplicitVisit(SelectStatement node)

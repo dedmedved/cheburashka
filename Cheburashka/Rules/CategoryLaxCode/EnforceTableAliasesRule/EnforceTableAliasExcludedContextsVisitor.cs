@@ -52,10 +52,11 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(MergeStatement node)
         {
-            if (node.MergeSpecification.Target is not null)
-            {
-                _excludedFragments.Add(node.MergeSpecification.Target);
-            }
+            // Target needs an alias (and it should be tgt !)
+            //if (node.MergeSpecification.Target is not null)
+            //{
+            //    _excludedFragments.Add(node.MergeSpecification.Target);
+            //}
             node.AcceptChildren(this);
         }
         public override void ExplicitVisit(DeleteStatement node)
@@ -76,10 +77,17 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(DataModificationTableReference node)
         {
-            if (node.DataModificationSpecification.Target is not null)
+            if (node.DataModificationSpecification is not MergeSpecification)
             {
-                _excludedFragments.Add(node.DataModificationSpecification.Target);
+                if (node.DataModificationSpecification.Target is not null)
+                {
+                    _excludedFragments.Add(node.DataModificationSpecification.Target);
+                }
             }
+            //if (node.DataModificationSpecification.Target is not null)
+            //{
+            //    _excludedFragments.Add(node.DataModificationSpecification.Target);
+            //}
             node.AcceptChildren(this);
         }
     }
