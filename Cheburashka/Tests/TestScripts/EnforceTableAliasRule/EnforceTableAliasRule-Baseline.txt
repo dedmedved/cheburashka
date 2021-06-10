@@ -147,6 +147,15 @@ FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
 Script file: InsertFromDMLMergeProc.sql
+Start line: 35
+Start column: 15
+========end of problem========
+
+Problem description: Data Source found without an alias in [dbo].[InsertFromDMLMergeProc].
+FullID: Cheburashka.DM0047
+Severity: Warning
+Model element: dbo.InsertFromDMLMergeProc
+Script file: InsertFromDMLMergeProc.sql
 Start line: 36
 Start column: 15
 ========end of problem========
