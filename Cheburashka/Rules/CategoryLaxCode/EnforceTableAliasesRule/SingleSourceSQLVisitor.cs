@@ -28,7 +28,6 @@ namespace Cheburashka
     internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor
     {
         private readonly List<TSqlFragment> _targets;
-
         public SingleSourceSQLVisitor()
         {
             _targets = new List<TSqlFragment>();
@@ -38,26 +37,16 @@ namespace Cheburashka
 
         public override void ExplicitVisit(DeleteSpecification node)
         {
-            if (SqlCheck.HasAtMostOneTableSource(node))
-            {
-                _targets.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(UpdateSpecification node)
         {
-            if (SqlCheck.HasAtMostOneTableSource(node))
-            {
-                _targets.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(MergeSpecification node)
         {
-            if (SqlCheck.HasAtMostOneTableSource(node))
-            {
-                _targets.Add(node);
-            }
+            //Merge statements must have at least two table sources.
+            //So just check children
             node.AcceptChildren(this);
         }
 
@@ -78,26 +67,35 @@ namespace Cheburashka
                 // otherwise use existing gather query logic to pull out the query specifications 
                 else
                 {
-                    List<QuerySpecification> querySpecifications = new();
-                    SQLGatherQuery.GetQuery(source.Select, ref querySpecifications);
-                    _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource).Select(sq => node));
+                    GatherTargets(source.Select);
                 }
             }
         }
 
         public override void ExplicitVisit(SelectStatement node)
         {
-            List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            GatherTargets(node.QueryExpression);
             node.AcceptChildren(this);
         }
         public override void ExplicitVisit(CommonTableExpression node)
         {
-            List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            GatherTargets(node.QueryExpression);
             node.AcceptChildren(this);
+        }
+
+        void HandleNode(UpdateDeleteSpecificationBase node)
+        {
+            if (SqlCheck.HasAtMostOneTableSource(node))
+            {
+                _targets.Add(node);
+            }
+            node.AcceptChildren(this);
+        }
+        void GatherTargets(QueryExpression queryExpression)
+        {
+            List<QuerySpecification> querySpecifications = new();
+            SQLGatherQuery.GetQuery(queryExpression, ref querySpecifications);
+            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
         }
     }
 }
