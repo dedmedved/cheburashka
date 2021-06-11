@@ -1435,10 +1435,19 @@
     <Content Include="TestScripts\EnforceTableAliasRule\DMLTargetAndOutputInto_proc.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLDeleteProcWithAliases.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLMergeProcWithAliases.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLMergeProc.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLDeleteProc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLUpdateProcWithAliases.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceTableAliasRule\InsertFromDMLUpdateProc.sql">

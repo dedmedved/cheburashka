@@ -75,6 +75,21 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+
+        // can't believe i need to do this to prevent it picking up the TableReference which doesn't carry an alias
+        public override void ExplicitVisit(MergeSpecification node)
+        {
+            if (node.TableAlias is null)
+            {
+                _tableSources.Add(node.TableReference);
+            }
+            node.SearchCondition.AcceptChildren(this);
+            foreach (var clause in node.ActionClauses)
+            {
+                clause.AcceptChildren(this);
+            }
+        }
+        // this clause is broken for merge statement target nodes
         public override void ExplicitVisit(NamedTableReference node)
         {
             if (node.Alias is null)

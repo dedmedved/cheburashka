@@ -1,4 +1,4 @@
-﻿CREATE PROC InsertFromDMLDeleteProc
+﻿CREATE PROC InsertFromDMLDeleteProcWithAliases
 AS
 BEGIN
     INSERT INTO TableC
@@ -6,9 +6,10 @@ BEGIN
     ,		B2
     FROM
     (
-        DELETE TableB
+        DELETE B
         OUTPUT	deleted.B1 AS B1
         ,		deleted.B2 AS B2
+        FROM   TableB B
     )   z;
 
 
@@ -17,18 +18,18 @@ BEGIN
     ,		B2
     FROM
     (
-        DELETE TableB
+        DELETE B
         OUTPUT	deleted.B1 AS B1
         ,		deleted.B2 AS B2
-        FROM    TableB
-        ,       TableC
+        FROM    TableB B
+        ,       TableC C
     )   z;
 
-    DELETE TableB
+    DELETE B
     OUTPUT	deleted.B1 AS B1
     ,		deleted.B2 AS B2
-    FROM    TableB
-    ,       TableC
+    FROM    TableB B
+    ,       TableC C
 
 END;
 
