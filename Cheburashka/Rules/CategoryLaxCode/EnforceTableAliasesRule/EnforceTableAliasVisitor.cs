@@ -37,181 +37,111 @@ namespace Cheburashka
 
         public override void ExplicitVisit(AdHocTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(BuiltInFunctionTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(FullTextTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(GlobalFunctionTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(InternalOpenRowset node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
 
-        // can't believe i need to do this to prevent it picking up the TableReference which doesn't carry an alias
+        // I can't believe I need to do this to prevent it picking up the TableReference which doesn't carry an alias
         public override void ExplicitVisit(MergeSpecification node)
         {
             if (node.TableAlias is null)
             {
-                _tableSources.Add(node.TableReference);
+                _tableSources.Add(node.Target);
             }
-            node.SearchCondition.AcceptChildren(this);
+            node.TableReference.Accept(this);
+            node.SearchCondition.Accept(this);
             foreach (var clause in node.ActionClauses)
             {
-                clause.AcceptChildren(this);
+                clause.Accept(this);
             }
         }
         // this clause is broken for merge statement target nodes
         public override void ExplicitVisit(NamedTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(OpenJsonTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(OpenQueryTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(OpenRowsetTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(OpenXmlTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(PivotedTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(SemanticTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(UnpivotedTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(VariableTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
 
         public override void ExplicitVisit(BulkOpenRowset node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(ChangeTableChangesTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(ChangeTableVersionTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(DataModificationTableReference node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(InlineDerivedTable node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(QueryDerivedTable node)
         {
-            if (node.Alias is null)
-            {
-                _tableSources.Add(node);
-            }
-            node.AcceptChildren(this);
+            HandleNode(node);
         }
         public override void ExplicitVisit(SchemaObjectFunctionTableReference node)
+        {
+            HandleNode(node);
+        }
+        public override void ExplicitVisit(VariableMethodCallTableReference node)
+        {
+            HandleNode(node);
+        }
+
+        void HandleNode(TableReferenceWithAliasAndColumns node)
         {
             if (node.Alias is null)
             {
@@ -219,7 +149,7 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
-        public override void ExplicitVisit(VariableMethodCallTableReference node)
+        void HandleNode(TableReferenceWithAlias node)
         {
             if (node.Alias is null)
             {

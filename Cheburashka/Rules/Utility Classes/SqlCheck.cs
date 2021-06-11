@@ -133,6 +133,11 @@ namespace Cheburashka
         }
 
 
+        //Derived
+        //    Microsoft.SqlServer.TransactSql.ScriptDom.InsertSpecification
+        //Microsoft.SqlServer.TransactSql.ScriptDom.MergeSpecification
+        //    Microsoft.SqlServer.TransactSql.ScriptDom.UpdateDeleteSpecificationBase
+
         // For this helper method - at most means any table source at all
         // Semantics are shite aren't they
         public static bool HasAtMostOneTableSource(MergeSpecification node)
@@ -144,7 +149,7 @@ namespace Cheburashka
         }
 
         // tricky if there is no from clause there is still exactly one table involved
-        public static bool HasAtMostOneTableSource(DeleteSpecification node)
+        public static bool HasAtMostOneTableSource(UpdateDeleteSpecificationBase node)
         {
             return node.FromClause is null
                    ||
@@ -153,17 +158,17 @@ namespace Cheburashka
                    node.FromClause.TableReferences.Count == 1 &&
                    node.FromClause.TableReferences[0] is TableReferenceWithAlias;
         }
-        // tricky if there is no from clause there is still exactly one table involved
-        public static bool HasAtMostOneTableSource(UpdateSpecification node)
-        {
-            return node.FromClause is null
-                     ||
-                        node.FromClause.TableReferences.Count == 0
-                     ||
-                        node.FromClause.TableReferences.Count == 1 &&
-                        node.FromClause.TableReferences[0] is TableReferenceWithAlias
-                  ;
-        }
+        //// tricky if there is no from clause there is still exactly one table involved
+        //public static bool HasAtMostOneTableSource(UpdateSpecification node)
+        //{
+        //    return node.FromClause is null
+        //             ||
+        //                node.FromClause.TableReferences.Count == 0
+        //             ||
+        //                node.FromClause.TableReferences.Count == 1 &&
+        //                node.FromClause.TableReferences[0] is TableReferenceWithAlias
+        //          ;
+        //}
         public static bool HasAtMostOneTableSource(QuerySpecification node)
         {
             return node.FromClause is null
