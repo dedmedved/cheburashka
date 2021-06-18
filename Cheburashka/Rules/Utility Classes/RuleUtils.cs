@@ -194,7 +194,7 @@ namespace Cheburashka
         public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex)
         {
             clusteredIndex = null;
-            bool bFoundClusteredIndex = false;
+            bool bFoundClusteredIndex;
 
             {
                 var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
@@ -224,7 +224,7 @@ namespace Cheburashka
         {
             clusteredIndex = null;
             columns = new List<ObjectIdentifier>();
-            bool bFoundClusteredIndex = false;
+            bool bFoundClusteredIndex;
             {
                 var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
                 var relClass = Index.ColumnsRelationship.RelationshipClass;
