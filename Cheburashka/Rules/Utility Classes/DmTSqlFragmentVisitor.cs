@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    static class ApplyTSqlFragmentVisitor
+    static class DmTSqlFragmentVisitor
     {
         public static IList<TSqlFragment> Visit<T>( TSqlFragment sqlFragment, T visitor) where T : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
         {

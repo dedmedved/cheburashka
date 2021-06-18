@@ -178,7 +178,7 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
     <Compile Include="Interfaces\ICheburashkaTSqlConcreteFragmentVisitor.cs" />
-    <Compile Include="Utility Classes\ApplyTSqlFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\DmTSqlFragmentVisitor.cs" />
     <Compile Include="VariableVisitors\SelectSetVariableVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidDirectUseOfRowcountRule.cs" />
