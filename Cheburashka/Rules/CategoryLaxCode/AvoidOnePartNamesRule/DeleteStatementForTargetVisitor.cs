@@ -22,23 +22,25 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
-    internal class DeleteStatementForTargetVisitor : TSqlConcreteFragmentVisitor
+    internal class DeleteStatementForTargetVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public DeleteStatementForTargetVisitor()
         {
-            DataModificationTargets = new List<TableReference>();
+            TableReferences = new List<TableReference>();
         }
-
-        public List<TableReference> DataModificationTargets { get; }
+        public IList<TSqlFragment> SqlFragments() { return TableReferences.Cast<TSqlFragment>().ToList(); }
+        public IList<TableReference> TableReferences { get; }
 
         public override void ExplicitVisit(DeleteSpecification node)
         {
             if (SqlCheck.HasFromClause(node))
             {
-                DataModificationTargets.Add(node.Target);
+                TableReferences.Add(node.Target);
             }
         }
     }

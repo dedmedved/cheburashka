@@ -305,7 +305,7 @@ namespace Cheburashka
             return bFoundClusteredIndex;
         }
 
-    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, List<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
+    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, IList<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
         {
             foreach (TSqlFragment issue in issues)
             {

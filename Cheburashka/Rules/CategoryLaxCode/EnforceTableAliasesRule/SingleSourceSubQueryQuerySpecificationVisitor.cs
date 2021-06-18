@@ -27,19 +27,17 @@ namespace Cheburashka
 {
     internal class SingleSourceSubQueryQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
-
         public SingleSourceSubQueryQuerySpecificationVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            SingleSourceSubQueryQuerySpecifications = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> SingleSourceSubQueryQuerySpecifications => _targets;
+        public List<TSqlFragment> SingleSourceSubQueryQuerySpecifications { get; }
 
         public override void ExplicitVisit(ScalarSubquery node)
         {
             List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
             SQLGatherQuery.GetQuery(node, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            SingleSourceSubQueryQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             //DEFINITELY NOT !!
             //node.AcceptChildren(this);
         }

@@ -85,6 +85,36 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
+            InitialisationContextVisitor initialisationContextVisitor = new();
+            sqlFragment.Accept(initialisationContextVisitor);
+            List<DeclareVariableElement> initialisedVars = initialisationContextVisitor.InitialisationExpressions;
+            // get all assignments to variables
+            var updatedVariableVisitor = new UpdatedVariableVisitor();
+            sqlFragment.Accept(updatedVariableVisitor);
+            List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
+
+            Dictionary<string, object> objects = new(SqlComparer.Comparer);
+
+            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value
+            var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
+                                                                                    && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.SmallInt
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Int
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.BigInt
+                                                                                    )
+                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out _ )
+                                                                                )
+                                                                         .Select(n => n.VariableName.Value);
+
+            var setVariableNames = setVariables.Select(n => n.Variable.Name);
+            var onlyInitialisedVariableNames = initialisedVariableNames.Except(setVariableNames);
+
+            foreach (var variableDeclaration in onlyInitialisedVariableNames)
+            {
+                objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value == variableDeclaration)
+                                                                .Select(x=>x));
+            }
+
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
             RaiserrorVisitor visitor = new();
             sqlFragment.Accept(visitor);

@@ -22,10 +22,11 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SchemaNameAcceptingFunctionsVisitor : TSqlConcreteFragmentVisitor
+    internal class SchemaNameAcceptingFunctionsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SchemaNameAcceptingFunctionsVisitor()
         {
@@ -33,7 +34,7 @@ namespace Cheburashka
         }
 
         public IList<FunctionCall> OnePartNames { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return OnePartNames.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(FunctionCall node)
         {
             if (   node.FunctionName.Value.SQLModel_StringCompareEqual("object_id")

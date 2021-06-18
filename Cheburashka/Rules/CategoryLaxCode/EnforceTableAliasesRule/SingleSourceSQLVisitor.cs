@@ -27,13 +27,12 @@ namespace Cheburashka
 {
     internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
         public SingleSourceSQLVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            SingleSourceSQLs = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> SingleSourceSQLs => _targets;
+        public List<TSqlFragment> SingleSourceSQLs { get; }
 
         public override void ExplicitVisit(DeleteSpecification node)
         {
@@ -87,7 +86,7 @@ namespace Cheburashka
         {
             if (SqlCheck.HasAtMostOneTableSource(node))
             {
-                _targets.Add(node);
+                SingleSourceSQLs.Add(node);
             }
             node.AcceptChildren(this);
         }
@@ -95,7 +94,7 @@ namespace Cheburashka
         {
             List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(queryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            SingleSourceSQLs.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
         }
     }
 }

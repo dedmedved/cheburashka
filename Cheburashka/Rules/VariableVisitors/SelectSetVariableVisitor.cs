@@ -19,22 +19,24 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class CTEVisitor : TSqlConcreteFragmentVisitor
+    internal class SelectSetVariableVisitor : TSqlConcreteFragmentVisitor
     {
-        public CTEVisitor()
+        public SelectSetVariableVisitor()
         {
-            CTES = new List<TSqlFragment>();
+            SetVariableStatements = new List<SelectSetVariable>();
         }
-        public List<TSqlFragment> CTES { get; }
 
-        public override void ExplicitVisit(CommonTableExpression node)
+        public IList<SelectSetVariable> SetVariableStatements { get; }
+
+        public override void ExplicitVisit(SelectSetVariable node)
         {
-            CTES.Add(node);
+            SetVariableStatements.Add(node);
         }
     }
 }

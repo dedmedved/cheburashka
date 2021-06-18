@@ -28,20 +28,16 @@ namespace Cheburashka
     {
         public InitialisationContextVisitor()
         {
-            InitialisationExpressions = new List<ScalarExpression>();
+            InitialisationExpressions = new List<DeclareVariableElement>();
         }
 
-        public IList<ScalarExpression> InitialisationExpressions { get; }
+        public List<DeclareVariableElement> InitialisationExpressions { get; }
 
-        public override void ExplicitVisit(DeclareVariableElement node) // probably safe enough
+        public override void ExplicitVisit(DeclareVariableElement node) 
         {
-            if (node is ProcedureParameter)
+            if (node is not ProcedureParameter && node.Value is not null )
             {
-                return;}
-
-            if ( node.Value is not null )
-            {
-                InitialisationExpressions.Add(node.Value);
+                InitialisationExpressions.Add(node);
             }
         }
     }

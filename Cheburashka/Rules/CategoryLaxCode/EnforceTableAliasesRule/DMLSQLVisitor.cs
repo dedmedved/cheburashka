@@ -28,25 +28,23 @@ namespace Cheburashka
 
     internal class DMLSQLVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
-
         public DMLSQLVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            DMLs = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> DMLs => _targets;
+        public List<TSqlFragment> DMLs { get; }
 
         public override void ExplicitVisit(DeleteStatement node)
         {
-            _targets.Add(node);
+            DMLs.Add(node);
         }
         public override void ExplicitVisit(UpdateStatement node)
         {
-            _targets.Add(node);
+            DMLs.Add(node);
         }
         public override void ExplicitVisit(MergeStatement node)
         {
-            _targets.Add(node);
+            DMLs.Add(node);
         }
         public override void ExplicitVisit(InsertStatement node)
         {
@@ -57,14 +55,14 @@ namespace Cheburashka
             {
                 List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
                 SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-                _targets.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
+                DMLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
             }
             // if its a values clause it can contain scalar sub-queries (I suppose) - so don't return it an elimination context.
             else if (node.InsertSpecification.InsertSource is ValuesInsertSource) { }
             // give up - just add it in
             else
             {
-                _targets.Add(node);
+                DMLs.Add(node);
             }
             node.AcceptChildren(this);
         }
@@ -113,7 +111,7 @@ namespace Cheburashka
             // Assignment selects has the same status for us here as do set = (subquery) 
             List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
+            DMLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
         }
     }
 }

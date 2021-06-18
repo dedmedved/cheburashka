@@ -26,20 +26,18 @@ namespace Cheburashka
 {
     internal class ApplyTableSourceVisitor : TSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
-
         public ApplyTableSourceVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            ApplyTableSources = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> ApplyTableSources => _targets;
+        public List<TSqlFragment> ApplyTableSources { get; }
 
         public override void ExplicitVisit(UnqualifiedJoin node)
         {
             if (node.UnqualifiedJoinType is UnqualifiedJoinType.CrossApply or UnqualifiedJoinType.OuterApply)
             {
-                _targets.Add(node.SecondTableReference);
+                ApplyTableSources.Add(node.SecondTableReference);
             }
             node.AcceptChildren(this);
         }

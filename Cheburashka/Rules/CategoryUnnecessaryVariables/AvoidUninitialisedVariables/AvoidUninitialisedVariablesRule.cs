@@ -109,11 +109,6 @@ namespace Cheburashka
                 sqlFragment.Accept(updatedVariableVisitor);
                 List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
 
-                //// get all assignments to variables
-                //VariableAssignmentVisitor usageWriteVisitor = new VariableAssignmentVisitor();
-                //sqlFragment.Accept(usageWriteVisitor);
-                //IList<VariableReference> variableWriteOccurrences = usageWriteVisitor.VariableAssignments;
-
                 Dictionary<string, object> objects = new(SqlComparer.Comparer);
                 Dictionary<string, int> counts = new(SqlComparer.Comparer);
                 Dictionary<string, int> writeCounts = new(SqlComparer.Comparer);

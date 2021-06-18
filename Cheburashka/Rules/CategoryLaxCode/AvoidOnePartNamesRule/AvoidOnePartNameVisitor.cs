@@ -26,7 +26,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class AvoidOnePartNameVisitor : TSqlConcreteFragmentVisitor
+    internal class AvoidOnePartNameVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public AvoidOnePartNameVisitor()
         {
@@ -34,7 +34,7 @@ namespace Cheburashka
         }
 
         public IList<SchemaObjectName> OnePartNames { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return OnePartNames.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(SchemaObjectName node)
         {
             List<Identifier> tokens = node.Identifiers.Reverse().ToList();

@@ -31,7 +31,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
+    /// whenever an IF or WHILE expression refers to only one of @@trancount or xact_state() and not the other. 
     /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
@@ -43,7 +43,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.CheckOpenTransactionCountCode_RuleName,               // ID used to look up the display name inside the resources file
         RuleConstants.CheckOpenTransactionCountCode_ProblemDescription,     // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryNonStrictCodingStyle,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class CheckOpenTransactionCountCodeRule : SqlCodeAnalysisRule
     {
