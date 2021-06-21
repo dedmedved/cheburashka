@@ -98,23 +98,22 @@ namespace Cheburashka
         {
             var cnt = code.Statements.Count;
 
-            if (cnt == 0)
+            switch (cnt)
             {
-                return true;
+                case 0:
+                    return true;
+                default:
+                {
+                    var lastStatementIdx = cnt - 1;
+                    return code.Statements[lastStatementIdx] switch
+                    {   // can only be true at first level of code in an sp, but that will do.
+                        BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                        BeginEndBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                        ReturnStatement => false,
+                        _ => true
+                    };
+                }
             }
-
-            var lastStatementIdx = cnt - 1;
-            switch (code.Statements[lastStatementIdx])
-            {
-                case BeginEndAtomicBlockStatement statement:        // can only be true at first level of code in an sp, but that will do.
-                    return InvalidUseOfReturn(statement.StatementList);
-                case BeginEndBlockStatement statement:
-                    return InvalidUseOfReturn(statement.StatementList);
-                case ReturnStatement:
-                    return false;
-            }
-
-            return true;
         }
     }
 }

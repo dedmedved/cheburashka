@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class Xact_StateVisitor : TSqlConcreteFragmentVisitor
+    internal class Xact_StateVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public Xact_StateVisitor()
         {
@@ -32,6 +33,7 @@ namespace Cheburashka
         }
 
         public IList<TSqlFragment> Expressions { get; }
+        public IList<TSqlFragment> SqlFragments() { return Expressions.ToList(); }
 
         public override void ExplicitVisit(FunctionCall node)
         {

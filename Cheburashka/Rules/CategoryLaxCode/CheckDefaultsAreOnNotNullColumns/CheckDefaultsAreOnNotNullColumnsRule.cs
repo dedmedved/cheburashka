@@ -25,7 +25,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -84,13 +83,6 @@ namespace Cheburashka
             try
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
-                if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
-                    createTableStatement.AsEdge || createTableStatement.AsFileTable))
-                {
-                    return problems;
-                }
-
                 // If we can't find the file then assume we're in a composite model
                 // and the elements are defined there and
                 // should be analysed there
@@ -99,19 +91,24 @@ namespace Cheburashka
                     return problems;
                 }
 
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
+                    createTableStatement.AsEdge || createTableStatement.AsFileTable))
+                {
+                    return problems;
+                }
+
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-                var visitor = new CheckDefaultsAreOnNotNullColumnsVisitor();
-                sqlFragment.Accept(visitor);
-                var issues = visitor.ColumnDefinitions.Cast<TSqlFragment>().ToList();
+                
+                var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckDefaultsAreOnNotNullColumnsVisitor());
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
-            catch (Exception e)  { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }

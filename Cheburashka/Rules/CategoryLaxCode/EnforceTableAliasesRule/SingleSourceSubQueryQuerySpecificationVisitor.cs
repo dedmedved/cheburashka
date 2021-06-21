@@ -25,17 +25,17 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class SingleSourceSubQueryQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
+    internal class SingleSourceSubQueryQuerySpecificationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SingleSourceSubQueryQuerySpecificationVisitor()
         {
             SingleSourceSubQueryQuerySpecifications = new List<TSqlFragment>();
         }
         public List<TSqlFragment> SingleSourceSubQueryQuerySpecifications { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceSubQueryQuerySpecifications.ToList(); }
         public override void ExplicitVisit(ScalarSubquery node)
         {
-            List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+            List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node, ref querySpecifications);
             SingleSourceSubQueryQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             //DEFINITELY NOT !!

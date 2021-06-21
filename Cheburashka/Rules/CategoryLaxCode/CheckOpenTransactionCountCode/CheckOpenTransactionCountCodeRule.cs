@@ -23,8 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Cheburashka
 {
@@ -85,22 +83,17 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of if and while statement expressions
-            var checkOpenTransactionCountCodeVisitor = new CheckOpenTransactionCountCodeVisitor();
-            sqlFragment.Accept(checkOpenTransactionCountCodeVisitor);
-            var expressions = checkOpenTransactionCountCodeVisitor.Expressions;
+            var expressions = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckOpenTransactionCountCodeVisitor());
 
             var issues = new List<TSqlFragment>();
             foreach ( var expr in expressions) {
 
-                var trancountVisitor = new TrancountVisitor();
-                var xact_stateVisitor = new Xact_StateVisitor();
+                var trancounts = DmTSqlFragmentVisitor.Visit(expr, new TrancountVisitor());
+                var xacts = DmTSqlFragmentVisitor.Visit(expr, new Xact_StateVisitor());
 
-                expr.Accept(trancountVisitor);
-                expr.Accept(xact_stateVisitor);
                 // This is a really poor way of checking for epxressoin correctness - but in general its the best that can be done
-                if (   (trancountVisitor.Expressions.Count >  0 && xact_stateVisitor.Expressions.Count == 0)
-                    || (trancountVisitor.Expressions.Count == 0 && xact_stateVisitor.Expressions.Count >  0)
+                if (   (trancounts.Count >  0 && xacts.Count == 0)
+                    || (trancounts.Count == 0 && xacts.Count >  0)
                     ) {
                     issues.Add(expr);
                 }

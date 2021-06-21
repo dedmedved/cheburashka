@@ -21,17 +21,18 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class CTEVisitor : TSqlConcreteFragmentVisitor
+    internal class CTEVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public CTEVisitor()
         {
             CTES = new List<TSqlFragment>();
         }
         public List<TSqlFragment> CTES { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return CTES.ToList(); }
         public override void ExplicitVisit(CommonTableExpression node)
         {
             CTES.Add(node);

@@ -25,7 +25,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class SingleSourceQueryDerivedTableQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
+    internal class SingleSourceQueryDerivedTableQuerySpecificationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SingleSourceQueryDerivedTableQuerySpecificationVisitor()
         {
@@ -33,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> SingleSourceQueryDerivedTableQuerySpecifications { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceQueryDerivedTableQuerySpecifications.ToList(); }
         public override void ExplicitVisit(QueryDerivedTable node)
         {
             List<QuerySpecification> querySpecifications = new();

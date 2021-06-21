@@ -25,7 +25,7 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor
+    internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SingleSourceSQLVisitor()
         {
@@ -33,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> SingleSourceSQLs { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceSQLs.ToList(); }
         public override void ExplicitVisit(DeleteSpecification node)
         {
             HandleNode(node);

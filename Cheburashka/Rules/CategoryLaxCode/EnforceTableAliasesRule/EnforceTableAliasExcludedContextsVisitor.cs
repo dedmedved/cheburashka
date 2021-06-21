@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceTableAliasExcludedContextsVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceTableAliasExcludedContextsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public EnforceTableAliasExcludedContextsVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> ExcludedFragments { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return ExcludedFragments.ToList(); }
         public override void ExplicitVisit(OutputIntoClause node)
         {
             if (node.IntoTable is not null)

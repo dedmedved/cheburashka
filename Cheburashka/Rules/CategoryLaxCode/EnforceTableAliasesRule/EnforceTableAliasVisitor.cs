@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public EnforceTableAliasVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> TableSources { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return TableSources.ToList(); }
         public override void ExplicitVisit(AdHocTableReference node)
         {
             HandleNode(node);

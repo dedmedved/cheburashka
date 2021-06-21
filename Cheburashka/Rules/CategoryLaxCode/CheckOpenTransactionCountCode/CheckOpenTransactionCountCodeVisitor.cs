@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class CheckOpenTransactionCountCodeVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckOpenTransactionCountCodeVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public CheckOpenTransactionCountCodeVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<BooleanExpression> Expressions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return Expressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(IfStatement node)
         {
             Expressions.Add(node.Predicate);

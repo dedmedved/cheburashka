@@ -116,7 +116,6 @@
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\BareReturnVisitor.cs" />
-    <Compile Include="CategoryLaxCode\BasicRuleVisitors\OuterBlockVisitor.cs" />
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsRule.cs" />
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
     <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\CheckOpenTransactionCountCodeRule.cs" />
@@ -189,7 +188,6 @@
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidDirectUseOfRowcountVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\EnforceCaptureSPReturnStatusVisitor.cs" />
-    <Compile Include="CategoryLaxCode\BasicRuleVisitors\ReturnVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\TryCatchVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\DataTypeVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\DeleteWithCTEVisitor.cs" />

@@ -26,14 +26,14 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
 
-    internal class DMLSQLVisitor : TSqlConcreteFragmentVisitor
+    internal class DMLSQLVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public DMLSQLVisitor()
         {
             DMLs = new List<TSqlFragment>();
         }
         public List<TSqlFragment> DMLs { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return DMLs.ToList(); }
         public override void ExplicitVisit(DeleteStatement node)
         {
             DMLs.Add(node);
@@ -53,7 +53,7 @@ namespace Cheburashka
             // also any insert .. values 
             if (node.InsertSpecification.InsertSource is SelectInsertSource select)
             {
-                List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+                List<QuerySpecification> querySpecifications = new();
                 SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
                 DMLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
             }
