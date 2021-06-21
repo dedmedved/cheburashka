@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceCaptureSPReturnStatusVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceCaptureSPReturnStatusVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public EnforceCaptureSPReturnStatusVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<ExecuteSpecification> ExecuteSpecifications { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return ExecuteSpecifications.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ExecuteSpecification node)
         {
             if (string.IsNullOrEmpty(node.Variable?.Name))

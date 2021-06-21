@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -87,9 +86,8 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of execute statements
-            EnforceCaptureSPReturnStatusVisitor visitor = new();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.ExecuteSpecifications.Cast<TSqlFragment>().ToList();
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceCaptureSPReturnStatusVisitor());
+
             // Create problems for each non-captured execute found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
