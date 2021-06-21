@@ -22,10 +22,11 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SetVariableStatementVisitor : TSqlConcreteFragmentVisitor
+    internal class SetVariableStatementVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SetVariableStatementVisitor()
         {
@@ -33,7 +34,7 @@ namespace Cheburashka
         }
 
         public IList<SetVariableStatement> SetVariableStatements { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return SetVariableStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(SetVariableStatement node)
         {
             SetVariableStatements.Add(node);
