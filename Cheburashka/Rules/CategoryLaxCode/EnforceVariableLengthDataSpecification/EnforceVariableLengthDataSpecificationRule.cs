@@ -20,9 +20,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
@@ -96,10 +94,7 @@ namespace Cheburashka
 
                 // visitor to get the occurrences of data declarations names
                 // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
-
-                VariableLengthDataSpecificationsVisitor variableLengthDataSpecificationsVisitor = new();
-                sqlFragment.Accept(variableLengthDataSpecificationsVisitor);
-                List<TSqlFragment> emptyvariableLengthDataSpecifications = variableLengthDataSpecificationsVisitor.EmptyvariableLengthDataSpecifications.Cast<TSqlFragment>().ToList();
+                var emptyvariableLengthDataSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableLengthDataSpecificationsVisitor());
 
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, emptyvariableLengthDataSpecifications, ruleDescriptor);
             }

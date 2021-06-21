@@ -22,11 +22,12 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 
 namespace Cheburashka
 {
-    internal class VariableLengthDataSpecificationsVisitor : TSqlConcreteFragmentVisitor
+    internal class VariableLengthDataSpecificationsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public VariableLengthDataSpecificationsVisitor()
         {
@@ -34,7 +35,7 @@ namespace Cheburashka
         }
 
         public IList<SqlDataTypeReference> EmptyvariableLengthDataSpecifications { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return EmptyvariableLengthDataSpecifications.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ConvertCall node)
         {
             if (node.DataType is SqlDataTypeReference sqlDataTypeReference)
