@@ -22,11 +22,12 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Cheburashka
 {
 
-    internal class VariableUsageVisitor : TSqlConcreteFragmentVisitor
+    internal class VariableUsageVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 //        static Regex sqlVariableRegex = new Regex("(sql:variable(\"@\\w*?\"))");
         //        static Regex sqlVariableRegex = new Regex("variable");
@@ -39,7 +40,7 @@ namespace Cheburashka
         }
 
         public IList<VariableReference> VariableReferences { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return VariableReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(VariableReference node)
         {
             VariableReferences.Add(node);

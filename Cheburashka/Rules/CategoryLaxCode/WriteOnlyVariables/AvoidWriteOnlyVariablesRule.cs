@@ -103,37 +103,15 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the declarations of variables
-            var declarationVisitor = new VariableDeclarationVisitor();
-            sqlFragment.Accept(declarationVisitor);
-            IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
-
-            // visitor to get parameter names - these look like variables and need removing
-            // from variable references before we use them
-            // !!! THIS DOESN'T SEEM TO WORK - did it ever - even in the old codebase ?!!!! 
-            //var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            //sqlFragment.Accept(namedParameterUsageVisitor);
-            //IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-
-            // visitor to get the occurrences of variables
-            var usageVisitor = new VariableUsageVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IEnumerable<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
-
-            // get all assignments to variables
+            // visitor to get the declarations of variables - the cast is ugly but accurate
+            var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableDeclarationVisitor()).Cast<Identifier>().ToList();
+            // visitor to get the occurrences of variables - the cast is ugly but accurate
+            var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
+            // get all assignments to variables 
             var updatedVariableVisitor = new UpdatedVariableVisitor();
             sqlFragment.Accept(updatedVariableVisitor);
-            //List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
             IEnumerable<SQLExpressionDependency> allSetVariables = updatedVariableVisitor.SetVariables;
 
-            //// remove all named parameters from the list of referenced variables
-            //// broken see replacement below
-            //IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            //List<VariableReference> variableReferences = tmpVr.ToList();
-
-            // remove all named parameters from the list of referenced variables
-            // broken see replacement below
-            // also equality doesn't honour sql server  collation
             IEnumerable<VariableReference> tmpVr =
                         from varReference in allVariableLikeReferences
                         join varDeclaration in variableDeclarations
@@ -141,24 +119,7 @@ namespace Cheburashka
                         where SqlComparer.SQLModel_StringCompareEqual(varReference.Name, varDeclaration.Value) // real condition
                         select varReference;
 
-            //// rewritten as method chain to allow use of collations
-            //IEnumerable<VariableReference> tmpVr = 
-            //    allVariableLikeReferences.Join( variableDeclarations
-            //                                  , varReference => varReference.Name
-            //                                  , varDeclaration => varDeclaration.Value
-            //                                  , (varReference, varDeclaration) => varReference
-            //                                  , SqlComparer.Comparer
-            //                                  );
-
             List<VariableReference> variableReferences = tmpVr.ToList();
-
-            //var query = allVariableLikeReferences.Join
-            //(variableDeclarations
-            //, varReference => varReference.Name
-            //, varDeclaration => varDeclaration.Value
-            //, (varReference) => new { x = varReference  } 
-            //, SqlComparer.Comparer.Compare
-            //);
 
             // remove all named parameters from the list of set variables
             IEnumerable<SQLExpressionDependency> tmpSetVr =
@@ -167,15 +128,6 @@ namespace Cheburashka
                         on 1 equals 1  // fake out the on clause
                         where SqlComparer.SQLModel_StringCompareEqual(varSetVar.Variable.Name, varDeclaration.Value) // real condition
                         select varSetVar;
-
-            //// rewritten as method chain to allow use of collations
-            //IEnumerable<SQLExpressionDependency> tmpSetVr = 
-            //    allSetVariables.Join( variableDeclarations
-            //                        , varSetVar => varSetVar.Variable.Name
-            //                        , varDeclaration => varDeclaration.Value
-            //                        , (varSetVar, varDeclaration) => varSetVar
-            //                        , SqlComparer.Comparer
-            //                        );
 
             List<SQLExpressionDependency> setVariables = tmpSetVr.ToList();
 
@@ -187,15 +139,8 @@ namespace Cheburashka
             {
                 
                 var foundContexts = setVariables.Select(setVariable => setVariable.Context).Where(codeFragment => codeFragment.SQLModel_Contains(varRef));
-                bool assignmentRefFound = foundContexts.Count() > 0;
-                //foreach ( var codeFragment in setVariables.Select(n => n.Context) )
-                //{
-                //    if ( codeFragment.SQLModel_Contains(varRef))
-                //    {
-                //        assignmentRefFound = true;
-                //        break;
-                //    }
-                //}
+                bool assignmentRefFound = foundContexts.Any();
+
                 if ( ! assignmentRefFound )
                 {
                     if (!nonAssignmentContextVariableReferences.ContainsKey(varRef.Name))
@@ -256,16 +201,14 @@ namespace Cheburashka
 
             // now need to find all variable references that aren't directly in a variable assignment of any kind.
 
-            List<string> consumedVariables = (from edge in writeDependencies.Edges where edge.Target == terminate select edge.Source).ToList().Distinct().ToList();
+            List<string> consumedVariables = (from edge in writeDependencies.Edges 
+                                              where edge.Target == terminate 
+                                              select edge.Source
+                                              ).ToList().Distinct().ToList();
 
             var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)
                                                   .Distinct();
-                                                  //.ToList();
-
-//            var usedVariables = (from edge in writeDependencies.Edges where edge.Source == "WRITTEN-TO" select edge.Target).ToList().Distinct();
-//            var unUsedVariables = setVariables.Where(n => ! usedVariables.Contains(n.Variable.Name));
-//            var unConsumedButSetVariables = unConsumedVariables.Where( n => ! );
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             foreach (Identifier variableDeclaration in variableDeclarations)    // variable declarations are unique collation-wise so add will work w/o error
@@ -276,8 +219,7 @@ namespace Cheburashka
             foreach (var v in unConsumedVariables)
             {
                 SqlRuleProblem problem =
-                    new(
-                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                    new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
                         , modelElement
                         , sqlFragment);
 

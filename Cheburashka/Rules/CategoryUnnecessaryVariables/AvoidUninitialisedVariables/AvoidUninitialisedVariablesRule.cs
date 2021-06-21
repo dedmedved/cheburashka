@@ -107,7 +107,7 @@ namespace Cheburashka
                 // get all assignments to variables
                 var updatedVariableVisitor = new UpdatedVariableVisitor();
                 sqlFragment.Accept(updatedVariableVisitor);
-                List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
+                IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
 
                 Dictionary<string, object> objects = new(SqlComparer.Comparer);
                 Dictionary<string, int> counts = new(SqlComparer.Comparer);
