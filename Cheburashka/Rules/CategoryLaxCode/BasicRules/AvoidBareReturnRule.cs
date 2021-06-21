@@ -87,9 +87,8 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of bare return statements
-            var visitor = new BareReturnVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.BareReturnStatements.Cast<TSqlFragment>().ToList();
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new BareReturnVisitor());
+
             // Create problems for each Return statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

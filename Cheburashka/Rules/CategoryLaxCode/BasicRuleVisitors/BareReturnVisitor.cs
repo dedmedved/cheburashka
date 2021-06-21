@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class BareReturnVisitor : TSqlConcreteFragmentVisitor
+    internal class BareReturnVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public BareReturnVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<ReturnStatement> BareReturnStatements { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return BareReturnStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ReturnStatement node)
         {
             // We are only interested in bare returns occurrences

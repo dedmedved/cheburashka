@@ -94,19 +94,19 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the occurrences of single part table names
-                IList<TSqlFragment> onePartNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidOnePartNameVisitor());
-                IList<TSqlFragment> updateStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new UpdateStatementForTargetVisitor());
-                IList<TSqlFragment> deleteStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new DeleteStatementForTargetVisitor());
-                IList<TSqlFragment> mergeStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new MergeStatementForTargetVisitor());
+                var onePartNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidOnePartNameVisitor());
+                var updateStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new UpdateStatementForTargetVisitor());
+                var deleteStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new DeleteStatementForTargetVisitor());
+                var mergeStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new MergeStatementForTargetVisitor());
 
                 List<TSqlFragment> allStatements = new();
                 allStatements.AddRange(updateStatements);
                 allStatements.AddRange(deleteStatements);
                 allStatements.AddRange(mergeStatements);
 
-                IList<TSqlFragment> dataTypes = DmTSqlFragmentVisitor.Visit(sqlFragment, new DataTypeVisitor());
+                var dataTypes = DmTSqlFragmentVisitor.Visit(sqlFragment, new DataTypeVisitor());
                 IList<CteUtil> cteUtilFragments = SqlRuleUtils.CteStatements(sqlFragment).ToList();
-                IList<TSqlFragment> serviceBrokerContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExcludedTwoPartNamesContextsVisitor());
+                var serviceBrokerContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExcludedTwoPartNamesContextsVisitor());
 
                 // Create problems for each one part object name source found 
                 foreach (SchemaObjectName tableSource in onePartNames.Cast<SchemaObjectName>()) // the cast should work
@@ -178,14 +178,14 @@ namespace Cheburashka
 
                 // now to look inside literal arguments to system functions.
                 // this is totally independent of the above search.
-                IList<TSqlFragment> literalOnePartNameContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingFunctionsVisitor());
+               var literalOnePartNameContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingFunctionsVisitor());
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameContexts, ruleDescriptor);
 
                 // now to look inside literal arguments to system procedures.
                 // this is totally independent of the above search.
-                IList<TSqlFragment> literalOnePartNameStoredProcsContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingProceduresVisitor());
+                var literalOnePartNameStoredProcsContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingProceduresVisitor());
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts, ruleDescriptor);
