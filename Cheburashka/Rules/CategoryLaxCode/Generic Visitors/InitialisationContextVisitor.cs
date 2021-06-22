@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class InitialisationContextVisitor : TSqlConcreteFragmentVisitor
+    internal class InitialisationContextVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public InitialisationContextVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<DeclareVariableElement> InitialisationExpressions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return InitialisationExpressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(DeclareVariableElement node) 
         {
             if (node is not ProcedureParameter && node.Value is not null )

@@ -86,9 +86,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of try/catch statements
-            TryCatchVisitor visitor = new();
-            sqlFragment.Accept(visitor);
-            List<TryCatchStatement> tryCatchStatements = visitor.TryCatchStatements;
+            var tryCatchStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new TryCatchVisitor());
 
             var createProcedureStatement = sqlFragment as CreateProcedureStatement;
             var code = createProcedureStatement?.StatementList;
@@ -100,10 +98,8 @@ namespace Cheburashka
                 onlyRestrictedStatementsFound = CheckForRestrictedStatementList(code,0 );
             }
             // Create problems for each try/catch not found 
-            var problemExists = (tryCatchStatements.Count == 0
-                && ((createProcedureStatement is null)
-                      || (createProcedureStatement is not null && !onlyRestrictedStatementsFound)
-                    ));
+            var problemExists = tryCatchStatements.Count == 0
+                                && (createProcedureStatement is null || ! onlyRestrictedStatementsFound);
 
             RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
 

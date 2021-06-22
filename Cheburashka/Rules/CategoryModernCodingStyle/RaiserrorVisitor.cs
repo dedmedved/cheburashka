@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class RaiserrorVisitor : TSqlConcreteFragmentVisitor
+    internal class RaiserrorVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public RaiserrorVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<RaiseErrorStatement> RaiseErrorStatements { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return RaiseErrorStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(RaiseErrorStatement node)
         {
             // if the error level has been passed and its a literal int then check it's > 10

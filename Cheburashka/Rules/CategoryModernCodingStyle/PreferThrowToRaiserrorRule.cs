@@ -85,9 +85,8 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            InitialisationContextVisitor initialisationContextVisitor = new();
-            sqlFragment.Accept(initialisationContextVisitor);
-            List<DeclareVariableElement> initialisedVars = initialisationContextVisitor.InitialisationExpressions;
+            //Casting is rubbish - but safe
+            List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();
             // get all assignments to variables
             var updatedVariableVisitor = new UpdatedVariableVisitor();
             sqlFragment.Accept(updatedVariableVisitor);
@@ -116,9 +115,7 @@ namespace Cheburashka
             }
 
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
-            RaiserrorVisitor visitor = new();
-            sqlFragment.Accept(visitor);
-            List<TSqlFragment> raiseErrorStatements = visitor.RaiseErrorStatements.Cast<TSqlFragment>().ToList();
+            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor());
             RuleUtils.UpdateProblems(problems, modelElement, elementName, raiseErrorStatements, ruleDescriptor);
 
             return problems;
