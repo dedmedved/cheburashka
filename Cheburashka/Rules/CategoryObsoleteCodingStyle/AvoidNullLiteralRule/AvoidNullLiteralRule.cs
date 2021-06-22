@@ -90,11 +90,9 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of bare return statements
-            var visitor = new NullLiteralVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.NullLiteralExpressions.Cast<TSqlFragment>().ToList();
-            // Create problems for each Return statement found 
+            // visitor to get the occurrences of null literals
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new NullLiteralVisitor());
+            // Create problems for each null literal found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;

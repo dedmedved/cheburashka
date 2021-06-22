@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class NullLiteralVisitor : TSqlConcreteFragmentVisitor
+    internal class NullLiteralVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public NullLiteralVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<ScalarExpression> NullLiteralExpressions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return NullLiteralExpressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(BooleanComparisonExpression node)
         {
             if (  node.FirstExpression is NullLiteral

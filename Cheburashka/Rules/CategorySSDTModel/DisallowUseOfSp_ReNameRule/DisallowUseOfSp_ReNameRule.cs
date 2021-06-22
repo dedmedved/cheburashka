@@ -90,9 +90,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of sp_rename call statements
-            var visitor = new DisallowUseOfSp_ReNameVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.ExecuteSpecifications.Cast<TSqlFragment>().ToList();
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new DisallowUseOfSp_ReNameVisitor());
             // Create problems for each sp_rename call statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

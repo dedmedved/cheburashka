@@ -86,12 +86,9 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of goto statements
-            var visitor = new NonANSIJoinVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.TableReferences.Cast<TSqlFragment>().ToList();
-
-            // Create problems for each @@ERROR usage found 
+            // visitor to get the occurrences of non-ANSI join expressions
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonANSIJoinVisitor());
+            // Create problems for each non-ANSI join usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
