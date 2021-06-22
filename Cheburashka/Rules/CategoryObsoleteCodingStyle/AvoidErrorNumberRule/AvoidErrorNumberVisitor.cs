@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class AvoidErrorNumberVisitor : TSqlConcreteFragmentVisitor
+    internal class AvoidErrorNumberVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public AvoidErrorNumberVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<GlobalVariableExpression> GlobalVariableExpressions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return GlobalVariableExpressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(GlobalVariableExpression node)
         {
             if ( node.Name.ToLower() == "@@error") {

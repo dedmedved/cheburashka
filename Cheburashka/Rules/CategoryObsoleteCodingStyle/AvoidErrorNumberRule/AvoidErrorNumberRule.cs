@@ -86,10 +86,8 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of goto statements
-            var visitor = new AvoidErrorNumberVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.GlobalVariableExpressions.Cast<TSqlFragment>().ToList();
+            // visitor to get the occurrences of @@errornumber
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidErrorNumberVisitor());
             // Create problems for each @@ERROR usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
