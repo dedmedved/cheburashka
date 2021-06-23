@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class UnnecessaryParenthesisVisitor : TSqlConcreteFragmentVisitor
+    internal class UnnecessaryParenthesisVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public UnnecessaryParenthesisVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<TSqlFragment> UnnecessaryBrackets { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return UnnecessaryBrackets; }
         public override void ExplicitVisit(ParenthesisExpression node)
         {
             if (node.Expression is ParenthesisExpression

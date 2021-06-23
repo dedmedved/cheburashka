@@ -84,10 +84,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of brackets surrounding other brackets
-            UnnecessaryParenthesisVisitor visitor = new();
-            sqlFragment.Accept(visitor);
-            IList<TSqlFragment> unnecessaryBrackets = visitor.UnnecessaryBrackets;
-            var issues = unnecessaryBrackets.Distinct().ToList();
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new UnnecessaryParenthesisVisitor()).Distinct().ToList();
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;
         }
