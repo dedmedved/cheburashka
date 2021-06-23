@@ -87,7 +87,6 @@ namespace Cheburashka
 
             // visitor to get the occurrences of bare return statements
             var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new BareReturnVisitor());
-
             // Create problems for each Return statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

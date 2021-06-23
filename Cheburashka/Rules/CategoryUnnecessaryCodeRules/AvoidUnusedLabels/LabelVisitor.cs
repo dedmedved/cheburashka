@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class LabelVisitor : TSqlConcreteFragmentVisitor
+    internal class LabelVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public LabelVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<LabelStatement> Labels { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return Labels.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(LabelStatement node)
         {
             Labels.Add(node);
