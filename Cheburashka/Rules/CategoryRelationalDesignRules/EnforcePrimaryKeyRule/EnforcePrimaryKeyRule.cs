@@ -110,8 +110,7 @@ namespace Cheburashka
                     if (!bFoundPrimaryKey)
                     {
                         TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
+                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
                         {
                             bFoundPrimaryKey = true;
                             //break;

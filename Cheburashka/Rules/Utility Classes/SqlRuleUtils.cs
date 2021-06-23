@@ -388,6 +388,11 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
+        public static bool ObjectNameMatches(TSqlObject tab, string tableName, string schemaName)
+        {
+            return tab.Name.Parts[1].SQLModel_StringCompareEqual(tableName)
+                   && tab.Name.Parts[0].SQLModel_StringCompareEqual(schemaName);
+        }
         ///// <summary>
         ///// Gets the set of classes representing a potential source of columns. Tables, Views, Functions can all be
         ///// a source for this

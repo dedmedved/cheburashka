@@ -137,9 +137,6 @@ namespace Cheburashka
                     string owningObjectSchema = parentTable.SchemaIdentifier.Value;
                     string owningObjectTable = parentTable.BaseIdentifier.Value;
 
-                    //owningObjectSchema.SQLModel_DebugPrint(@"c:\temp\xx.txt");
-                    //owningObjectTable.SQLModel_DebugPrint(@"c:\temp\xx.txt");
-
                     bool bFoundClusteredIndex =
                         RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
                             out _,

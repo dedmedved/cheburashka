@@ -141,11 +141,11 @@ namespace Cheburashka
 
                         if (host.Count > 0 && foreignTable.Count > 0)
                         {
-                            var hostschema = host[0].Name.Parts[0];
-                            var hostname = host[0].Name.Parts[1];
+                            //var hostschema = host[0].Name.Parts[0];
+                            //var hostname = host[0].Name.Parts[1];
 
-                            var foreignTableschema = foreignTable[0].Name.Parts[0];
-                            var foreignTablename = foreignTable[0].Name.Parts[1];
+                            //var foreignTableschema = foreignTable[0].Name.Parts[0];
+                            //var foreignTablename = foreignTable[0].Name.Parts[1];
 
                             //var hostschema = tab.ObjectName.Parts[0];
                             //var hostname = tab.ObjectName.Parts[1];
@@ -153,10 +153,12 @@ namespace Cheburashka
                             //var foreignTableschema = tab2.ObjectName.Parts[0];
                             //var foreignTablename = tab2.ObjectName.Parts[1];
 
-                            if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
-                                 && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
-                                || (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
-                                    && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                            if (SqlRuleUtils.ObjectNameMatches(host[0], owningObjectTable, owningObjectSchema)
+                                || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObjectTable, owningObjectSchema)
+                                //(hostname.SQLModel_StringCompareEqual(owningObjectTable)
+                                // && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                                //|| (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
+                                //    && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
                             )
                             {
                                 bFoundForeignKey = true;

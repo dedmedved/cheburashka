@@ -92,11 +92,7 @@ namespace Cheburashka
             // visitor to get the occurrences of variables
             var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
             // remove all named parameters from the list of referenced variables
-
-//TODO - work out how to eliminate based solely on name.
-
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            List<VariableReference> variableReferences = tmpVr.ToList();
+            List<VariableReference> variableReferences  = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);

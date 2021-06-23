@@ -56,9 +56,7 @@ namespace Cheburashka
                 {
 //                    TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.ForeignTable).FirstOrDefault();
                     TSqlObject definingTable = fk.GetReferenced(ForeignKeyConstraint.Host).FirstOrDefault();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    ) {
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema)) {
                         fks.Add(fk);
                     }
                 }
@@ -73,11 +71,9 @@ namespace Cheburashka
             foreach (var pk in DMVSettings.GetPrimaryKeys)
             {
                 if (pk.IsLocalObject())
-                    {
-                        TSqlObject definingTable = pk.GetParent();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    )
+                {
+                    TSqlObject definingTable = pk.GetParent();
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema))
                     {
                         pks.Add(pk);
                     }
@@ -115,9 +111,7 @@ namespace Cheburashka
                 if (index.IsLocalObject())
                 {
                     TSqlObject definingTable = index.GetParent();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    )
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema))
                     {
                         indexes.Add(index);
                     }
@@ -133,8 +127,7 @@ namespace Cheburashka
                 if (index.IsLocalObject())
                 {
                     TSqlObject definingTable = index.GetParent();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema)
                     && (bool?)index.GetProperty(Index.Clustered) == true
                     )
                     {
@@ -153,9 +146,7 @@ namespace Cheburashka
                 if (unique_constraint.IsLocalObject())
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
-                    )
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema))
                     {
                         unique_constraints.Add(unique_constraint);
                     }
@@ -171,8 +162,7 @@ namespace Cheburashka
                 if (unique_constraint.IsLocalObject())
                 {
                     TSqlObject definingTable = unique_constraint.GetParent();
-                    if (SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[0], owningObjectSchema)
-                    && SqlComparer.SQLModel_StringCompareEqual(definingTable.Name.Parts[1], owningObjectTable)
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema)
                     && (bool?)unique_constraint.GetProperty(UniqueConstraint.Clustered) == true
                     )
                     {
