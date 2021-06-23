@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class ClrWrapperVisitor : TSqlConcreteFragmentVisitor
+    internal class ClrWrapperVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public ClrWrapperVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<ProcedureStatementBodyBase> ClrWrappers { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return ClrWrappers.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(AlterFunctionStatement node)
         {
             if (node.MethodSpecifier is not null)

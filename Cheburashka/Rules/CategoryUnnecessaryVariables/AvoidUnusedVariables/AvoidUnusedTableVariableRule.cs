@@ -84,23 +84,14 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the declarations of table variables
-            var tableDeclarationVisitor = new TableVariableDeclarationVisitor();
-            sqlFragment.Accept(tableDeclarationVisitor);
-            IList<Identifier> tableVariableDeclarations = tableDeclarationVisitor.TableVariableDeclarations;
-
+            var tableVariableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new TableVariableDeclarationVisitor()).Cast<Identifier>().ToList();
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-
+            var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
             // visitor to get the occurrences of variables
-            var usageVisitor = new VariableTableReferenceVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+            var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableTableReferenceVisitor()).Cast<VariableReference>().ToList();
             // remove all named parameters from the list of referenced variables
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            IList<VariableReference> variableReferences = tmpVr.ToList();
+            IList<VariableReference> variableReferences = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);

@@ -108,13 +108,16 @@ namespace Cheburashka
             switch (code)
             {
                 case BeginEndBlockStatement statement:
+                {
                     if (!precedingControlStatement) problemBegins.Add(statement);
                     foreach (TSqlStatement s in statement.StatementList.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
                     }
                     break;
+                }
                 case TryCatchStatement statement:
+                {
                     foreach (TSqlStatement s in statement.TryStatements.Statements)
                     {
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
@@ -124,13 +127,18 @@ namespace Cheburashka
                         problemBegins.AddRange(InvalidUseOfBegin(false, s));
                     }
                     break;
-                case IfStatement statement:        
+                }
+                case IfStatement statement:
+                {
                     problemBegins.AddRange(InvalidUseOfBegin(true, statement.ThenStatement));
                     problemBegins.AddRange(InvalidUseOfBegin(true, statement.ElseStatement));
                     break;
+                }
                 case WhileStatement statement:
+                {
                     problemBegins.AddRange(InvalidUseOfBegin(true, statement.Statement));
                     break;
+                }
             }
             return problemBegins;
         }

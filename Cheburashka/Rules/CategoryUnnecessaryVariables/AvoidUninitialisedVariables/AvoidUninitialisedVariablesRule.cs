@@ -85,23 +85,15 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the declarations of uninitialised variables
-                var declarationVisitor = new UninitialisedVariableDeclarationVisitor();
-                sqlFragment.Accept(declarationVisitor);
-                IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
-
+                var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new UninitialisedVariableDeclarationVisitor()).Cast<Identifier>().ToList();
                 // visitor to get parameter names - these look like variables and need removing
                 // from variable references before we use them
-                NamedParameterUsageVisitor namedParameterUsageVisitor = new();
-                sqlFragment.Accept(namedParameterUsageVisitor);
-                IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+                var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
                 // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
                 // visitor to get the occurrences of variables
-                VariableUsageVisitor usageVisitor = new();
-                sqlFragment.Accept(usageVisitor);
-                IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+                var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
                 // remove all named parameters from the list of referenced variables
-                IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-                List<VariableReference> variableReferences = tmpVr.ToList();
+                List<VariableReference> variableReferences = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
                 // get all assignments to variables
                 var updatedVariableVisitor = new UpdatedVariableVisitor();
@@ -140,9 +132,7 @@ namespace Cheburashka
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, uninitialisedVariables, ruleDescriptor);
 
             }
-            catch (Exception e) {
- //               SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
-            }
+            catch  { }
             return problems;
         }
     }

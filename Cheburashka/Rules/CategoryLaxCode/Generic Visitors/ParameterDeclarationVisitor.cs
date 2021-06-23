@@ -23,57 +23,45 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class ParameterDeclarationVisitor : TSqlConcreteFragmentVisitor
+    internal class ParameterDeclarationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private readonly List<ProcedureParameter> _targets;
-
-        #region ctor
         public ParameterDeclarationVisitor()
         {
-            _targets = new List<ProcedureParameter>();
+            ParameterDeclarations = new List<ProcedureParameter>();
         }
-        #endregion
-
-        #region properties
-        public ReadOnlyCollection<ProcedureParameter> ParameterDeclarations => _targets.AsReadOnly();
-
-        #endregion
-
-        #region overrides
+        public IList<ProcedureParameter> ParameterDeclarations { get; }
+        public IList<TSqlFragment> SqlFragments() { return ParameterDeclarations.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(AlterFunctionStatement node)
         {
             foreach (var p in node.Parameters)
             {
-                _targets.Add(p);
+                ParameterDeclarations.Add(p);
             }
         }
         public override void ExplicitVisit(CreateFunctionStatement node)
         {
             foreach (var p in node.Parameters)
             {
-                _targets.Add(p);
+                ParameterDeclarations.Add(p);
             }
         }
         public override void ExplicitVisit(AlterProcedureStatement node)
         {
             foreach (var p in node.Parameters)
             {
-                _targets.Add(p);
+                ParameterDeclarations.Add(p);
             }
         }
         public override void ExplicitVisit(CreateProcedureStatement node)
         {
             foreach (var p in node.Parameters)
             {
-                _targets.Add(p);
+                ParameterDeclarations.Add(p);
             }
         }
-        #endregion
-
     }
-
-
 }
