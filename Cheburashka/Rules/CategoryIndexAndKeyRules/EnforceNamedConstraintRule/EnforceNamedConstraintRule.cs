@@ -92,7 +92,7 @@ namespace Cheburashka
                     return problems;
                 }
 
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 

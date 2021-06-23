@@ -38,10 +38,18 @@ namespace Cheburashka
         /// <summary>
         /// Gets a formatted element name with the default style <see cref="ElementNameStyle.EscapedFullyQualifiedName"/>
         /// </summary>
-        public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext, TSqlObject modelElement)
+        public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext)
         {
-            return GetElementName(modelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
+            return GetElementName(ruleExecutionContext.ModelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
         }
+
+        ///// <summary>
+        ///// Gets a formatted element name with the default style <see cref="ElementNameStyle.EscapedFullyQualifiedName"/>
+        ///// </summary>
+        //public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext, TSqlObject modelElement)
+        //{
+        //    return GetElementName(modelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
+        //}
 
         /// <summary>
         /// Gets a formatted element name

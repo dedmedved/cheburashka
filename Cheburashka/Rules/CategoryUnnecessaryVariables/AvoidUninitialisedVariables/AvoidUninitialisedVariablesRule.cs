@@ -77,7 +77,7 @@ namespace Cheburashka
             try {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata

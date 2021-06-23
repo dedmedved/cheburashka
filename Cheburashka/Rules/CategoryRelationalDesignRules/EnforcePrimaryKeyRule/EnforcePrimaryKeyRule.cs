@@ -79,7 +79,7 @@ namespace Cheburashka
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 bool bFoundPrimaryKey = false;
 
                 if (sqlFragment is CreateTableStatement createTableStatement)
