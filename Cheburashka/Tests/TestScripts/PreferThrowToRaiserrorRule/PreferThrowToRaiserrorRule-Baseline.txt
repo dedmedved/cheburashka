@@ -7,3 +7,39 @@ Start line: 7
 Start column: 9
 ========end of problem========
 
+Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow
+Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow.sql
+Start line: 8
+Start column: 9
+========end of problem========
+
+Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation
+Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation.sql
+Start line: 8
+Start column: 9
+========end of problem========
+
+Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVar].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVar
+Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVar.sql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow].
+FullID: Cheburashka.DM0048
+Severity: Warning
+Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow
+Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow.sql
+Start line: 8
+Start column: 9
+========end of problem========
+

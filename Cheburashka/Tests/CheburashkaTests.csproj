@@ -1555,7 +1555,19 @@
     <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithoutRaiserror.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevelEmbeddedInAVar.sql">
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevel11EmbeddedInAVar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorWithLevel10EmbeddedInAVar.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferThrowToRaiserrorRule\ProcWithRaiserrorAtLevel10.sql">

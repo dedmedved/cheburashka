@@ -92,7 +92,7 @@ namespace Cheburashka
             sqlFragment.Accept(updatedVariableVisitor);
             IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
 
-            Dictionary<string, object> objects = new(SqlComparer.Comparer);
+//            Dictionary<string, object> objects = new(SqlComparer.Comparer);
 
             // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
             var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
@@ -103,23 +103,23 @@ namespace Cheburashka
                                                                                     )
                                                                                     && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out int litVal ) && litVal <= 10
                                                                                 )
-                                                                         .Select(n => n.VariableName.Value);
+                                                                         .Select(n => n.VariableName.Value).ToList();
 
             var setVariableNames = setVariables.Select(n => n.Variable.Name);
             var variableNames = initialisedVariableNames.ToList();
-            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames);
+            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames,SqlComparer.Comparer);
 
-            foreach (var variableDeclaration in onlyInitialisedVariableNames)
-            {
-                objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value == variableDeclaration).Select(x=>x));
-            }
+            //foreach (var variableDeclaration in onlyInitialisedVariableNames)
+            //{
+            //    objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value.SQLModel_StringCompareEqual(variableDeclaration)).Select(x=>x));
+            //}
 
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
             var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
             // eliminate raiserror statements where the errorlevel is one of the initialised variables with a value <= 10 
             var nonIssues = raiseErrorStatements.Where(n => n.SecondParameter is VariableReference)
                                                 .Select(n => n)
-                                                .Where( n => variableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
+                                                .Where( n => onlyInitialisedVariableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
             var issues = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
