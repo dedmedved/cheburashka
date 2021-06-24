@@ -92,8 +92,6 @@ namespace Cheburashka
             sqlFragment.Accept(updatedVariableVisitor);
             IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
 
-//            Dictionary<string, object> objects = new(SqlComparer.Comparer);
-
             // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
             var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
                                                                                     && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
@@ -108,11 +106,6 @@ namespace Cheburashka
             var setVariableNames = setVariables.Select(n => n.Variable.Name);
             var variableNames = initialisedVariableNames.ToList();
             var onlyInitialisedVariableNames = variableNames.Except(setVariableNames,SqlComparer.Comparer);
-
-            //foreach (var variableDeclaration in onlyInitialisedVariableNames)
-            //{
-            //    objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value.SQLModel_StringCompareEqual(variableDeclaration)).Select(x=>x));
-            //}
 
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
             var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
