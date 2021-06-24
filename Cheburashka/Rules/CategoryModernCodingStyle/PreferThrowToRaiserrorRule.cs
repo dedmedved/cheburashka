@@ -24,6 +24,7 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
+using QuickGraph;
 
 namespace Cheburashka
 {
@@ -93,29 +94,35 @@ namespace Cheburashka
 
             Dictionary<string, object> objects = new(SqlComparer.Comparer);
 
-            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value
+            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
             var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
                                                                                     && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
                                                                                     || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.SmallInt
                                                                                     || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Int
                                                                                     || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.BigInt
                                                                                     )
-                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out _ )
+                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out int litVal ) && litVal <= 10
                                                                                 )
                                                                          .Select(n => n.VariableName.Value);
 
             var setVariableNames = setVariables.Select(n => n.Variable.Name);
-            var onlyInitialisedVariableNames = initialisedVariableNames.Except(setVariableNames);
+            var variableNames = initialisedVariableNames.ToList();
+            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames);
 
             foreach (var variableDeclaration in onlyInitialisedVariableNames)
             {
-                objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value == variableDeclaration)
-                                                                .Select(x=>x));
+                objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value == variableDeclaration).Select(x=>x));
             }
 
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
-            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor());
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, raiseErrorStatements, ruleDescriptor);
+            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
+            // eliminate raiserror statements where the errorlevel is one of the initialised variables with a value <= 10 
+            var nonIssues = raiseErrorStatements.Where(n => n.SecondParameter is VariableReference)
+                                                .Select(n => n)
+                                                .Where( n => variableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
+            var issues = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
+
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }
