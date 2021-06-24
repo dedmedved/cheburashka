@@ -21,12 +21,12 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    
 
-    internal class NamedParameterUsageVisitor : TSqlConcreteFragmentVisitor
+    internal class NamedParameterUsageVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public NamedParameterUsageVisitor()
         {
@@ -34,6 +34,7 @@ namespace Cheburashka
         }
 
         public IList<VariableReference> NamedParameters { get; }
+        public IList<TSqlFragment> SqlFragments() { return NamedParameters.Cast<TSqlFragment>().ToList(); }
 
         public override void ExplicitVisit(ExecuteParameter node)
         {

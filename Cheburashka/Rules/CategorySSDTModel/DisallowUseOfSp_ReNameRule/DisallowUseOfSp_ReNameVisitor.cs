@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class DisallowUseOfSp_ReNameVisitor : TSqlConcreteFragmentVisitor
+    internal class DisallowUseOfSp_ReNameVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public DisallowUseOfSp_ReNameVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<ExecuteSpecification> ExecuteSpecifications { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return ExecuteSpecifications.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ExecuteSpecification node)
         {
         // TODO - look inside dynamic sql strings

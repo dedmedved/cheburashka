@@ -24,7 +24,6 @@ using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -77,7 +76,7 @@ namespace Cheburashka
             try {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
@@ -86,33 +85,20 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the declarations of uninitialised variables
-                var declarationVisitor = new UninitialisedVariableDeclarationVisitor();
-                sqlFragment.Accept(declarationVisitor);
-                IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
-
+                var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new UninitialisedVariableDeclarationVisitor()).Cast<Identifier>().ToList();
                 // visitor to get parameter names - these look like variables and need removing
                 // from variable references before we use them
-                NamedParameterUsageVisitor namedParameterUsageVisitor = new();
-                sqlFragment.Accept(namedParameterUsageVisitor);
-                IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
+                var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
                 // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
                 // visitor to get the occurrences of variables
-                VariableUsageVisitor usageVisitor = new();
-                sqlFragment.Accept(usageVisitor);
-                IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+                var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
                 // remove all named parameters from the list of referenced variables
-                IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-                List<VariableReference> variableReferences = tmpVr.ToList();
+                List<VariableReference> variableReferences = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
                 // get all assignments to variables
                 var updatedVariableVisitor = new UpdatedVariableVisitor();
                 sqlFragment.Accept(updatedVariableVisitor);
-                List<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
-
-                //// get all assignments to variables
-                //VariableAssignmentVisitor usageWriteVisitor = new VariableAssignmentVisitor();
-                //sqlFragment.Accept(usageWriteVisitor);
-                //IList<VariableReference> variableWriteOccurrences = usageWriteVisitor.VariableAssignments;
+                IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
 
                 Dictionary<string, object> objects = new(SqlComparer.Comparer);
                 Dictionary<string, int> counts = new(SqlComparer.Comparer);
@@ -146,9 +132,7 @@ namespace Cheburashka
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, uninitialisedVariables, ruleDescriptor);
 
             }
-            catch (Exception e) {
- //               SqlPrint.SQLModel_DebugPrint(e.Message,@"c:\temp\mb.out",false);
-            }
+            catch  { }
             return problems;
         }
     }

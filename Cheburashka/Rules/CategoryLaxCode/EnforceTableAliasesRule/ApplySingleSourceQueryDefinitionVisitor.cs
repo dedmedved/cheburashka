@@ -25,26 +25,24 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class ApplySingleSourceQueryDefinitionVisitor : TSqlConcreteFragmentVisitor
+    internal class ApplySingleSourceQueryDefinitionVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private List<TSqlFragment> _targets;
-
         public ApplySingleSourceQueryDefinitionVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            ApplySingleSourceQueryDefinitions = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> ApplySingleSourceQueryDefinitions => _targets;
-
+        public List<TSqlFragment> ApplySingleSourceQueryDefinitions { get; }
+        public IList<TSqlFragment> SqlFragments() { return ApplySingleSourceQueryDefinitions.ToList(); }
         public override void ExplicitVisit(UnqualifiedJoin node)
         {
             if (node.UnqualifiedJoinType is UnqualifiedJoinType.CrossApply or UnqualifiedJoinType.OuterApply)
             {
                 if (node.SecondTableReference is QueryDerivedTable qdt)
                 {
-                    List<QuerySpecification> querySpecifications = new List<QuerySpecification>();
+                    List<QuerySpecification> querySpecifications = new();
                     SQLGatherQuery.GetQuery(qdt.QueryExpression, ref querySpecifications);
-                    _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+                    ApplySingleSourceQueryDefinitions.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
                 }
             }
             node.AcceptChildren(this);

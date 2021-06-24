@@ -21,32 +21,31 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceTableAliasExcludedContextsVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceTableAliasExcludedContextsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _excludedFragments;
-
         public EnforceTableAliasExcludedContextsVisitor()
         {
-            _excludedFragments = new List<TSqlFragment>();
+            ExcludedFragments = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> ExcludedFragments => _excludedFragments;
-
+        public List<TSqlFragment> ExcludedFragments { get; }
+        public IList<TSqlFragment> SqlFragments() { return ExcludedFragments.ToList(); }
         public override void ExplicitVisit(OutputIntoClause node)
         {
             if (node.IntoTable is not null)
             {
-                _excludedFragments.Add(node.IntoTable);
+                ExcludedFragments.Add(node.IntoTable);
             }
         }
         public override void ExplicitVisit(InsertStatement node)
         {
             if (node.InsertSpecification.Target is not null)
             {
-                _excludedFragments.Add(node.InsertSpecification.Target);
+                ExcludedFragments.Add(node.InsertSpecification.Target);
             }
             node.AcceptChildren(this);
         }
@@ -63,7 +62,7 @@ namespace Cheburashka
         {
             if (node.DeleteSpecification.Target is not null)
             {
-                _excludedFragments.Add(node.DeleteSpecification.Target);
+                ExcludedFragments.Add(node.DeleteSpecification.Target);
             }
             node.AcceptChildren(this);
         }
@@ -71,7 +70,7 @@ namespace Cheburashka
         {
             if (node.UpdateSpecification.Target is not null)
             {
-                _excludedFragments.Add(node.UpdateSpecification.Target);
+                ExcludedFragments.Add(node.UpdateSpecification.Target);
             }
             node.AcceptChildren(this);
         }
@@ -81,7 +80,7 @@ namespace Cheburashka
             {
                 if (node.DataModificationSpecification.Target is not null)
                 {
-                    _excludedFragments.Add(node.DataModificationSpecification.Target);
+                    ExcludedFragments.Add(node.DataModificationSpecification.Target);
                 }
             }
             //if (node.DataModificationSpecification.Target is not null)

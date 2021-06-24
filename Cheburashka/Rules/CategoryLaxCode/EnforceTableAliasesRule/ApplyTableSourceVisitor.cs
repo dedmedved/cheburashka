@@ -21,25 +21,24 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class ApplyTableSourceVisitor : TSqlConcreteFragmentVisitor
+    internal class ApplyTableSourceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
-
         public ApplyTableSourceVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            ApplyTableSources = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> ApplyTableSources => _targets;
-
+        public List<TSqlFragment> ApplyTableSources { get; }
+        public IList<TSqlFragment> SqlFragments() { return ApplyTableSources.ToList(); }
         public override void ExplicitVisit(UnqualifiedJoin node)
         {
             if (node.UnqualifiedJoinType is UnqualifiedJoinType.CrossApply or UnqualifiedJoinType.OuterApply)
             {
-                _targets.Add(node.SecondTableReference);
+                ApplyTableSources.Add(node.SecondTableReference);
             }
             node.AcceptChildren(this);
         }

@@ -23,25 +23,22 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SubQueryVisitor : TSqlConcreteFragmentVisitor
+    internal class SubQueryVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private List<ScalarSubquery> _targets;
-
         public SubQueryVisitor()
         {
-            _targets = new List<ScalarSubquery>();
+            SubQueries = new List<ScalarSubquery>();
         }
-        public List<ScalarSubquery> SubQueries
-        {
-            get { return _targets; }
-        }
+        public List<ScalarSubquery> SubQueries { get; }
 
+        public IList<TSqlFragment> SqlFragments() { return SubQueries.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ScalarSubquery node)
         {
-            _targets.Add(node);
+            SubQueries.Add(node);
             node.AcceptChildren(this);
         }
     }

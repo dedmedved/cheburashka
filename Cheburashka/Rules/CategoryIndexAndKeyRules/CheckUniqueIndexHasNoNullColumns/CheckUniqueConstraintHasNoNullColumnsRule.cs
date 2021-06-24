@@ -81,7 +81,7 @@ namespace Cheburashka
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // If we can't find the file then assume we're in a composite model
                 // and the elements are defined there and

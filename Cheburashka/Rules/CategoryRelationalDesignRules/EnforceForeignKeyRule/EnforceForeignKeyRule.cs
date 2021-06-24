@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -82,7 +81,7 @@ namespace Cheburashka
             try
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
                     createTableStatement.AsEdge || createTableStatement.AsFileTable))
                 {
@@ -142,11 +141,11 @@ namespace Cheburashka
 
                         if (host.Count > 0 && foreignTable.Count > 0)
                         {
-                            var hostschema = host[0].Name.Parts[0];
-                            var hostname = host[0].Name.Parts[1];
+                            //var hostschema = host[0].Name.Parts[0];
+                            //var hostname = host[0].Name.Parts[1];
 
-                            var foreignTableschema = foreignTable[0].Name.Parts[0];
-                            var foreignTablename = foreignTable[0].Name.Parts[1];
+                            //var foreignTableschema = foreignTable[0].Name.Parts[0];
+                            //var foreignTablename = foreignTable[0].Name.Parts[1];
 
                             //var hostschema = tab.ObjectName.Parts[0];
                             //var hostname = tab.ObjectName.Parts[1];
@@ -154,10 +153,12 @@ namespace Cheburashka
                             //var foreignTableschema = tab2.ObjectName.Parts[0];
                             //var foreignTablename = tab2.ObjectName.Parts[1];
 
-                            if ((hostname.SQLModel_StringCompareEqual(owningObjectTable)
-                                 && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
-                                || (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
-                                    && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                            if (SqlRuleUtils.ObjectNameMatches(host[0], owningObjectTable, owningObjectSchema)
+                                || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObjectTable, owningObjectSchema)
+                                //(hostname.SQLModel_StringCompareEqual(owningObjectTable)
+                                // && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                                //|| (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
+                                //    && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
                             )
                             {
                                 bFoundForeignKey = true;

@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -79,7 +78,7 @@ namespace Cheburashka
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 bool bFoundPrimaryKey = false;
 
                 if (sqlFragment is CreateTableStatement createTableStatement)
@@ -111,8 +110,7 @@ namespace Cheburashka
                     if (!bFoundPrimaryKey)
                     {
                         TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                            && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema))
+                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
                         {
                             bFoundPrimaryKey = true;
                             //break;

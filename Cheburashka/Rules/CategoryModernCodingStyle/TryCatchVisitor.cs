@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class TryCatchVisitor : TSqlConcreteFragmentVisitor
+    internal class TryCatchVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public TryCatchVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TryCatchStatement> TryCatchStatements { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return TryCatchStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(TryCatchStatement node)
         {
             TryCatchStatements.Add(node);

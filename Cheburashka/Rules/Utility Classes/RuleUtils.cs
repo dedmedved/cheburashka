@@ -38,10 +38,18 @@ namespace Cheburashka
         /// <summary>
         /// Gets a formatted element name with the default style <see cref="ElementNameStyle.EscapedFullyQualifiedName"/>
         /// </summary>
-        public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext, TSqlObject modelElement)
+        public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext)
         {
-            return GetElementName(modelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
+            return GetElementName(ruleExecutionContext.ModelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
         }
+
+        ///// <summary>
+        ///// Gets a formatted element name with the default style <see cref="ElementNameStyle.EscapedFullyQualifiedName"/>
+        ///// </summary>
+        //public static string GetElementName(SqlRuleExecutionContext ruleExecutionContext, TSqlObject modelElement)
+        //{
+        //    return GetElementName(modelElement, ruleExecutionContext, ElementNameStyle.EscapedFullyQualifiedName);
+        //}
 
         /// <summary>
         /// Gets a formatted element name
@@ -194,7 +202,7 @@ namespace Cheburashka
         public static bool FindClusteredIndex(TSqlModel model, string owningObjectSchema, string owningObjectTable, out TSqlObject clusteredIndex)
         {
             clusteredIndex = null;
-            bool bFoundClusteredIndex = false;
+            bool bFoundClusteredIndex;
 
             {
                 var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
@@ -224,7 +232,7 @@ namespace Cheburashka
         {
             clusteredIndex = null;
             columns = new List<ObjectIdentifier>();
-            bool bFoundClusteredIndex = false;
+            bool bFoundClusteredIndex;
             {
                 var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
                 var relClass = Index.ColumnsRelationship.RelationshipClass;
@@ -260,8 +268,7 @@ namespace Cheburashka
             foreach (var thing in allIndexes)
             {
                 TSqlObject tab = thing.GetReferenced(relClass).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema)
                     && thing.GetProperty<bool>(propertyType)
                 )
 
@@ -287,8 +294,7 @@ namespace Cheburashka
             foreach (var thing in allIndexes)
             {
                 TSqlObject tab = thing.GetReferenced(relClass).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
+                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema)
                     && thing.GetProperty<bool>(propertyType)
                 )
 
@@ -305,7 +311,7 @@ namespace Cheburashka
             return bFoundClusteredIndex;
         }
 
-    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, List<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
+    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, IList<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
         {
             foreach (TSqlFragment issue in issues)
             {

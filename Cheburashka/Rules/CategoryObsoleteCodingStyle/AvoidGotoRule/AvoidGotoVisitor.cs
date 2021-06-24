@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class GotoVisitor : TSqlConcreteFragmentVisitor
+    internal class GotoVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public GotoVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<GoToStatement> GoToStatements { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return GoToStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(GoToStatement node)
         {
             GoToStatements.Add(node);

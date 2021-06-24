@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -77,7 +76,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -85,15 +84,10 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of bare return statements
-            var gotoVisitor = new GotoVisitor();
-            sqlFragment.Accept(gotoVisitor);
-            var gotoLabels = gotoVisitor.GoToStatements.Select(n => n.LabelName.Value).ToList();
-
-            var labelVisitor = new LabelVisitor();
-            sqlFragment.Accept(labelVisitor);
-            var labels = labelVisitor.Labels;
-
+            // visitor to get the occurrences of goto statements - the cast is ugly but safe
+            var gotoLabels = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor()).Cast<GoToStatement>().Select(n => n.LabelName.Value).ToList();
+            // visitor to get all labels - the cast is ugly but safe
+            var labels = DmTSqlFragmentVisitor.Visit(sqlFragment, new LabelVisitor()).Cast<LabelStatement>().ToList();
             var issues = labels.Where( l => ! gotoLabels.Any(gl => gl.SQLModel_StringCompareEqual(l.Value.Substring(0,l.Value.Length-1)))).Cast<TSqlFragment>().ToList();
 
             // Create problems for each unused label found 

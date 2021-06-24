@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -77,7 +76,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -87,36 +86,17 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of @@rowcount
-            var directUseOfRowcountVisitor = new AvoidDirectUseOfRowcountVisitor();
-            sqlFragment.Accept(directUseOfRowcountVisitor);
-            IList<GlobalVariableExpression> expressions = directUseOfRowcountVisitor.GlobalVariableExpressions;
-
-            var setVariableStatementVisitor = new SetVariableStatementVisitor();
-            sqlFragment.Accept(setVariableStatementVisitor);
-            IList<SetVariableStatement> setVariableStatements = setVariableStatementVisitor.SetVariableStatements;
-
-            var selectSetVariableStatementVisitor = new SelectSetVariableVisitor();
-            sqlFragment.Accept(selectSetVariableStatementVisitor);
-            IList<SelectSetVariable> selectSetVariableStatements = selectSetVariableStatementVisitor.SetVariableStatements;
-
-            var variableDeclarationElementVisitor = new VariableDeclarationElementVisitor();
-            sqlFragment.Accept(variableDeclarationElementVisitor);
-            IList<DeclareVariableElement> variableDeclarationElements =variableDeclarationElementVisitor.VariableDeclarationElements;
+            var expressions = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidDirectUseOfRowcountVisitor());
+            var setVariableStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new SetVariableStatementVisitor());
+            var selectSetVariableStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new SelectSetVariableVisitor());
+            var variableDeclarationElements = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableDeclarationElementVisitor());
 
             // Create problems for each @@rowcount expression found outside of a set statement
-            foreach (var expression in expressions)
-            {
-                bool foundSurroundingSetStatement = setVariableStatements.Any(svs => svs.SQLModel_Contains(expression));
-                if (!foundSurroundingSetStatement)
-                {
-                    foundSurroundingSetStatement = selectSetVariableStatements.Any(svs => svs.SQLModel_Contains(expression));
-                }
-                if (!foundSurroundingSetStatement)
-                {
-                    foundSurroundingSetStatement = variableDeclarationElements.Any(svs => svs.SQLModel_Contains(expression));
-                }
-                RuleUtils.UpdateProblems(!foundSurroundingSetStatement,problems, modelElement, elementName, expression, ruleDescriptor);
-            }
+            var invalidReferences = expressions.Where(n => !setVariableStatements.Any(svs => svs.SQLModel_Contains(n))
+                                                                               && !selectSetVariableStatements.Any(svs => svs.SQLModel_Contains(n))
+                                                                               && !variableDeclarationElements.Any(svs => svs.SQLModel_Contains(n))
+                                    ).ToList();
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, invalidReferences, ruleDescriptor);
 
             return problems;
         }

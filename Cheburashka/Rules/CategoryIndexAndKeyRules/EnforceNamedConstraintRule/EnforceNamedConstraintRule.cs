@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -92,7 +91,7 @@ namespace Cheburashka
                     return problems;
                 }
 
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 

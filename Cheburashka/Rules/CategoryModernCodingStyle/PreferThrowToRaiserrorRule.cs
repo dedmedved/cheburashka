@@ -20,11 +20,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Globalization;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
+using QuickGraph;
 
 namespace Cheburashka
 {
@@ -76,7 +76,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -85,11 +85,44 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
+            //Casting is rubbish - but safe
+            List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();
+            // get all assignments to variables
+            var updatedVariableVisitor = new UpdatedVariableVisitor();
+            sqlFragment.Accept(updatedVariableVisitor);
+            IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
+
+//            Dictionary<string, object> objects = new(SqlComparer.Comparer);
+
+            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
+            var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
+                                                                                    && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.SmallInt
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Int
+                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.BigInt
+                                                                                    )
+                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out int litVal ) && litVal <= 10
+                                                                                )
+                                                                         .Select(n => n.VariableName.Value).ToList();
+
+            var setVariableNames = setVariables.Select(n => n.Variable.Name);
+            var variableNames = initialisedVariableNames.ToList();
+            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames,SqlComparer.Comparer);
+
+            //foreach (var variableDeclaration in onlyInitialisedVariableNames)
+            //{
+            //    objects.Add(variableDeclaration, initialisedVars.Where(n => n.VariableName.Value.SQLModel_StringCompareEqual(variableDeclaration)).Select(x=>x));
+            //}
+
             // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
-            RaiserrorVisitor visitor = new();
-            sqlFragment.Accept(visitor);
-            List<TSqlFragment> raiseErrorStatements = visitor.RaiseErrorStatements.Cast<TSqlFragment>().ToList();
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, raiseErrorStatements, ruleDescriptor);
+            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
+            // eliminate raiserror statements where the errorlevel is one of the initialised variables with a value <= 10 
+            var nonIssues = raiseErrorStatements.Where(n => n.SecondParameter is VariableReference)
+                                                .Select(n => n)
+                                                .Where( n => onlyInitialisedVariableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
+            var issues = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
+
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }

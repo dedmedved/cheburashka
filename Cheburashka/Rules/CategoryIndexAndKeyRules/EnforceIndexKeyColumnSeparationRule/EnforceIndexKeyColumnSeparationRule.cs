@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -75,7 +74,7 @@ namespace Cheburashka
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // If we can't find the file then assume we're in a composite model
                 // and the elements are defined there and
@@ -114,24 +113,10 @@ namespace Cheburashka
                 {
                     // if this 'index' isn't the index underlying the pk, check it.
                     // is this right/needed/wasted effort ?
-                    if (!v.Name.HasName || v.Name is null ||
-                        !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                          && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
-                            )
-                    )
+                    if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObjectTable, owningObjectSchema))
                     {
                         var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                        List<string> PKLeadingEdgeIndexColumns = new();
-                        foreach (var c in pk_columns)
-                        {
-                            //string lastElement = "";
-                            //foreach (var n in c.Name.Parts)
-                            //{
-                            //    lastElement = n;
-                            //}
-                            string lastElement = c.Name.Parts.Last();
-                            PKLeadingEdgeIndexColumns.Add(lastElement);
-                        }
+                        List<string> PKLeadingEdgeIndexColumns = pk_columns.Select(c => c.Name.Parts.Last()).ToList();
 
                         foundMoreInclusiveIndex =
                             DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
@@ -148,24 +133,13 @@ namespace Cheburashka
                     foreach (var v in indexes)
                     {
                         // if this 'index' isn't the index we're checking - check it.
-                        if (!(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], owningObjectTable)
+                        if (!(SqlRuleUtils.ObjectNameMatches(v, owningObjectTable, selfSchema) // this static method only partially matches what we want to check but use it anyway
                               && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[2], selfName)
                             )
                         )
                         {
                             var idx_columns = v.GetReferenced(Index.Columns);
-                            List<string> OtherLeadingEdgeIndexColumns = new();
-                            foreach (var c in idx_columns)
-                            {
-                                //string lastElement = "";
-                                //foreach (var n in c.Name.Parts)
-                                //{
-                                //    lastElement = n;
-                                //}
-                                string lastElement = c.Name.Parts.Last();
-                                OtherLeadingEdgeIndexColumns.Add(lastElement);
-                            }
+                            List<string> OtherLeadingEdgeIndexColumns = idx_columns.Select(c => c.Name.Parts.Last()).ToList();
 
                             foundMoreInclusiveIndex =
                                 DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
@@ -183,24 +157,10 @@ namespace Cheburashka
                     foreach (var v in uniqueConstraints)
                     {
                         // if this 'index' isn't the index we're checking - check it.
-                        if (!v.Name.HasName || v.Name is null ||
-                            !(SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[0], selfSchema)
-                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[1], selfName)
-                                )
-                        )
+                        if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, selfName, selfSchema))
                         {
                             var un_columns = v.GetReferenced(UniqueConstraint.Columns);
-                            List<string> ConstraintLeadingEdgeIndexColumns = new();
-                            foreach (var c in un_columns)
-                            {
-                                //string lastElement = "";
-                                //foreach (var n in c.Name.Parts)
-                                //{
-                                //    lastElement = n;
-                                //}
-                                string lastElement = c.Name.Parts.Last();
-                                ConstraintLeadingEdgeIndexColumns.Add(lastElement);
-                            }
+                            List<string> ConstraintLeadingEdgeIndexColumns = un_columns.Select(c => c.Name.Parts.Last()).ToList();
 
                             foundMoreInclusiveIndex =
                                 DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,

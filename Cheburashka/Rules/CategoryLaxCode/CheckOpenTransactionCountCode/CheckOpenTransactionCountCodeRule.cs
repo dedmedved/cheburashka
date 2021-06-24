@@ -23,15 +23,13 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Cheburashka
 {
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
+    /// whenever an IF or WHILE expression refers to only one of @@trancount or xact_state() and not the other. 
     /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
@@ -43,7 +41,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
         RuleConstants.CheckOpenTransactionCountCode_RuleName,               // ID used to look up the display name inside the resources file
         RuleConstants.CheckOpenTransactionCountCode_ProblemDescription,     // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryNonStrictCodingStyle,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class CheckOpenTransactionCountCodeRule : SqlCodeAnalysisRule
     {
@@ -77,7 +75,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -85,22 +83,17 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of if and while statement expressions
-            var checkOpenTransactionCountCodeVisitor = new CheckOpenTransactionCountCodeVisitor();
-            sqlFragment.Accept(checkOpenTransactionCountCodeVisitor);
-            var expressions = checkOpenTransactionCountCodeVisitor.Expressions;
+            var expressions = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckOpenTransactionCountCodeVisitor());
 
             var issues = new List<TSqlFragment>();
             foreach ( var expr in expressions) {
 
-                var trancountVisitor = new TrancountVisitor();
-                var xact_stateVisitor = new Xact_StateVisitor();
+                var trancounts = DmTSqlFragmentVisitor.Visit(expr, new TrancountVisitor());
+                var xacts = DmTSqlFragmentVisitor.Visit(expr, new Xact_StateVisitor());
 
-                expr.Accept(trancountVisitor);
-                expr.Accept(xact_stateVisitor);
                 // This is a really poor way of checking for epxressoin correctness - but in general its the best that can be done
-                if (   (trancountVisitor.Expressions.Count >  0 && xact_stateVisitor.Expressions.Count == 0)
-                    || (trancountVisitor.Expressions.Count == 0 && xact_stateVisitor.Expressions.Count >  0)
+                if (   (trancounts.Count >  0 && xacts.Count == 0)
+                    || (trancounts.Count == 0 && xacts.Count >  0)
                     ) {
                     issues.Add(expr);
                 }

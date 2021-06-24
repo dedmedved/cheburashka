@@ -20,24 +20,28 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+
 
 namespace Cheburashka
 {
-    internal class UpdateStatementForTargetVisitor : TSqlConcreteFragmentVisitor
+    internal class UpdateStatementForTargetVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public UpdateStatementForTargetVisitor()
         {
-            DataModificationTargets = new List<TableReference>();
+            TableReferences = new List<TableReference>();
         }
 
-        public IList<TableReference> DataModificationTargets { get; }
+        public IList<TableReference> TableReferences { get; }
+
+        public IList<TSqlFragment> SqlFragments() { return TableReferences.Cast<TSqlFragment>().ToList();}
 
         public override void ExplicitVisit(UpdateSpecification node)
         {
             if (SqlCheck.HasFromClause(node))
             {
-                DataModificationTargets.Add(node.Target);
+                TableReferences.Add(node.Target);
             }
         }
     }

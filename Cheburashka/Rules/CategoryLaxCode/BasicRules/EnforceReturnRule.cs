@@ -75,7 +75,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -98,23 +98,22 @@ namespace Cheburashka
         {
             var cnt = code.Statements.Count;
 
-            if (cnt == 0)
+            switch (cnt)
             {
-                return true;
+                case 0:
+                    return true;
+                default:
+                {
+                    var lastStatementIdx = cnt - 1;
+                    return code.Statements[lastStatementIdx] switch
+                    {   // can only be true at first level of code in an sp, but that will do.
+                        BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                        BeginEndBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                        ReturnStatement => false,
+                        _ => true
+                    };
+                }
             }
-
-            var lastStatementIdx = cnt - 1;
-            switch (code.Statements[lastStatementIdx])
-            {
-                case BeginEndAtomicBlockStatement statement:        // can only be true at first level of code in an sp, but that will do.
-                    return InvalidUseOfReturn(statement.StatementList);
-                case BeginEndBlockStatement statement:
-                    return InvalidUseOfReturn(statement.StatementList);
-                case ReturnStatement:
-                    return false;
-            }
-
-            return true;
         }
     }
 }

@@ -23,8 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Cheburashka
 {
@@ -77,7 +75,7 @@ namespace Cheburashka
 
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -87,9 +85,7 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of goto statements
-            var visitor = new GotoVisitor();
-            sqlFragment.Accept(visitor);
-            var issues = visitor.GoToStatements.Cast<TSqlFragment>().ToList();
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor());
             // Create problems for each GOTO statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

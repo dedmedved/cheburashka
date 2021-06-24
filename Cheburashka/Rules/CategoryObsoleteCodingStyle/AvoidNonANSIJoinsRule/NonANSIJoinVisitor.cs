@@ -23,10 +23,9 @@ using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
 
-
 namespace Cheburashka
 {
-    internal class NonANSIJoinVisitor : TSqlConcreteFragmentVisitor
+    internal class NonANSIJoinVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public NonANSIJoinVisitor()
         {
@@ -34,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TableReference> TableReferences { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return TableReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(FromClause node)
         {
             if ( node.TableReferences.Count > 1 )

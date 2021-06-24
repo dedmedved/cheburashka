@@ -22,24 +22,26 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class MergeStatementForTargetVisitor : TSqlConcreteFragmentVisitor
+    internal class MergeStatementForTargetVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public MergeStatementForTargetVisitor()
         {
-            DataModificationTargets = new List<TableReference>();
+            TableReferences = new List<TableReference>();
         }
 
-        public List<TableReference> DataModificationTargets { get; }
+        public List<TableReference> TableReferences { get; }
+        public IList<TSqlFragment> SqlFragments() { return TableReferences.Cast<TSqlFragment>().ToList(); }
 
         public override void ExplicitVisit(MergeSpecification node)
         {
             // Merge statements always need a Source
             // So always add the Target ( into the list of things
             // not to raise a warning for.)
-            DataModificationTargets.Add(node.Target);
+            TableReferences.Add(node.Target);
         }
     }
 }

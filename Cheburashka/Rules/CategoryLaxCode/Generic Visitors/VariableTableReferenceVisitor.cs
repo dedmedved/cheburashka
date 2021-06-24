@@ -21,11 +21,12 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
 
-    internal class VariableTableReferenceVisitor : TSqlConcreteFragmentVisitor
+    internal class VariableTableReferenceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public VariableTableReferenceVisitor()
         {
@@ -33,7 +34,7 @@ namespace Cheburashka
         }
 
         public IList<VariableReference> VariableReferences { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return VariableReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(VariableTableReference node)
         {
             VariableReferences.Add(node.Variable);

@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SchemaNameAcceptingProceduresVisitor : TSqlConcreteFragmentVisitor
+    internal class SchemaNameAcceptingProceduresVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public SchemaNameAcceptingProceduresVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<ExecutableProcedureReference> OnePartNames { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return OnePartNames.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ExecutableProcedureReference node)
         {
             if (   node.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value.SQLModel_StringCompareEqual("sp_depends"              )

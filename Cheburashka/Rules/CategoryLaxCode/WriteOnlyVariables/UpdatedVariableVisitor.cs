@@ -22,20 +22,21 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
 
     //TODO handle XML functions
-    internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor
+    internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public UpdatedVariableVisitor()
         {
             SetVariables = new List<SQLExpressionDependency>();
         }
 
-        public List<SQLExpressionDependency> SetVariables { get; }
-
+        public IList<SQLExpressionDependency> SetVariables { get; }
+        public IList<TSqlFragment> SqlFragments() { return SetVariables.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(SetVariableStatement node)
         {
 

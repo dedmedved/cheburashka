@@ -22,15 +22,17 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class ExcludedTwoPartNamesContextsVisitor : TSqlConcreteFragmentVisitor
+    internal class ExcludedTwoPartNamesContextsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public ExcludedTwoPartNamesContextsVisitor()
         {
             ExcludedTwoPartNamesContexts = new List<TSqlFragment>();
         }
+        public IList<TSqlFragment> SqlFragments() { return ExcludedTwoPartNamesContexts.Cast<TSqlFragment>().ToList(); }
 
         public IList<TSqlFragment> ExcludedTwoPartNamesContexts { get; }
 

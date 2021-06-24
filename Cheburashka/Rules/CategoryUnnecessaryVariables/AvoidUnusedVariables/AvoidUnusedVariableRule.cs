@@ -75,7 +75,7 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out List<SqlRuleProblem> problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -85,28 +85,14 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the declarations of variables
-            var declarationVisitor = new VariableDeclarationVisitor();
-            sqlFragment.Accept(declarationVisitor);
-            IList<Identifier> variableDeclarations = declarationVisitor.VariableDeclarations;
-
+            var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableDeclarationVisitor()).Cast<Identifier>().ToList();
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-
+            var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
             // visitor to get the occurrences of variables
-            var usageVisitor = new VariableUsageVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IEnumerable<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
-
+            var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
             // remove all named parameters from the list of referenced variables
-
-//TODO - work out how to eliminate based solely on name.
-
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-
-            List<VariableReference> variableReferences = tmpVr.ToList();
+            List<VariableReference> variableReferences  = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);

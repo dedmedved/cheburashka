@@ -66,40 +66,25 @@ namespace Cheburashka
             List<SqlRuleProblem> problems = new();
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of all insert/merge etc targets and output into clauses
-            EnforceTableAliasExcludedContextsVisitor enforceTableAliasExcludedContextsVisitor = new();
-            sqlFragment.Accept(enforceTableAliasExcludedContextsVisitor);
-            List<TSqlFragment> tableAliasExcludedTableSources = enforceTableAliasExcludedContextsVisitor.ExcludedFragments;
-
+            var tableAliasExcludedTableSources = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceTableAliasExcludedContextsVisitor());
             // visitor to get the occurrences of all data source things
-            EnforceTableAliasVisitor enforceTableAliasVisitor = new();
-            sqlFragment.Accept(enforceTableAliasVisitor);
-            List<TSqlFragment> allTableSources = enforceTableAliasVisitor.TableSources;
-
+            var allTableSources = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceTableAliasVisitor());
             //Check things we don't want to look inside (columns in update and delete statements with only one table)
             //Ditto select statements and CTE sub-queries
-            SingleSourceSQLVisitor singleSourceSQLVisitor = new();
-            sqlFragment.Accept(singleSourceSQLVisitor);
-            List<TSqlFragment> allSingleSourceStatements = singleSourceSQLVisitor.SingleSourceSQLs;
-
+            List<TSqlFragment> allSingleSourceStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new SingleSourceSQLVisitor()).ToList();
             //Now work out what are the top level single source sub-queries..............
             //First find all DMLS - we don't want to consider any single data source sub-queries in any of these
             //Those !have! to be qualified with a prefix
-            DMLSQLVisitor dmlsqlVisitor = new();
-            sqlFragment.Accept(dmlsqlVisitor);
-            List<TSqlFragment> allDMLs = dmlsqlVisitor.DMLs;
-
+            var allDMLs = DmTSqlFragmentVisitor.Visit(sqlFragment, new DMLSQLVisitor());
             //Now find all sub-queries not in another sub-query that have no more than one data source
-            SingleSourceSubQueryQuerySpecificationVisitor singleSourceSubQueryVisitor = new();
-            sqlFragment.Accept(singleSourceSubQueryVisitor);
-            List<TSqlFragment> singleSourceSubQueries = singleSourceSubQueryVisitor.SingleSourceSubQueryQuerySpecifications;
-
+            var singleSourceSubQueries = DmTSqlFragmentVisitor.Visit(sqlFragment, new SingleSourceSubQueryQuerySpecificationVisitor());
             //Eliminate any that are within the scope of an DML statement.
             List<TSqlFragment> nonContainedSingleSourceSubQueries = new();
             foreach (var sub in singleSourceSubQueries)
@@ -111,17 +96,11 @@ namespace Cheburashka
             }
             // Add these top level single source sub-queries to our list
             allSingleSourceStatements.AddRange(nonContainedSingleSourceSubQueries);
-
             // Now all we need are top level inline views
-            SingleSourceQueryDerivedTableQuerySpecificationVisitor singleSourceQueryDerivedTableQuerySpecificationVisitor = new();
-            sqlFragment.Accept(singleSourceQueryDerivedTableQuerySpecificationVisitor);
-            List<TSqlFragment> singleSourceQueryDerivedTableQuerySpecifications = singleSourceQueryDerivedTableQuerySpecificationVisitor.SingleSourceQueryDerivedTableQuerySpecifications;
-
+            var singleSourceQueryDerivedTableQuerySpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new SingleSourceQueryDerivedTableQuerySpecificationVisitor());
             // We need to find top level inline views that are part of an apply
             // So - find Applies
-            ApplySingleSourceQueryDefinitionVisitor applyTableSourceVisitor = new();
-            sqlFragment.Accept(applyTableSourceVisitor);
-            List<TSqlFragment> applyTableSources = applyTableSourceVisitor.ApplySingleSourceQueryDefinitions;
+            var applyTableSources = DmTSqlFragmentVisitor.Visit(sqlFragment, new ApplySingleSourceQueryDefinitionVisitor());
 
             //If the inline query is an apply query,
             //Eliminate it, as it must always contain aliased tables.
@@ -140,19 +119,11 @@ namespace Cheburashka
             allSingleSourceStatements.AddRange(nonApplyContainedSingleSourceQueryDerivedTableQuerySpecifications);
 
             // Now we need to gather all sub-queries.
-            SubQueryVisitor subQueryVisitor = new();
-            sqlFragment.Accept(subQueryVisitor);
-            List<ScalarSubquery> subQueries = subQueryVisitor.SubQueries;
-
+            var subQueries = DmTSqlFragmentVisitor.Visit(sqlFragment, new SubQueryVisitor()).ToList();
             // Now we need to gather all applies.
-            ApplyTableSourceVisitor applyTableSourceVisitor2 = new();
-            sqlFragment.Accept(applyTableSourceVisitor2);
-            List<TSqlFragment> applyTableSources2 = applyTableSourceVisitor2.ApplyTableSources;
-
+            var applyTableSources2 = DmTSqlFragmentVisitor.Visit(sqlFragment, new ApplyTableSourceVisitor()).ToList();
             //We also need all CTES - to help eliminate sub-queries down the line
-            CTEVisitor cteVisitor = new();
-            sqlFragment.Accept(cteVisitor);
-            List<TSqlFragment> visitorCtes = cteVisitor.CTES;
+            var visitorCtes = DmTSqlFragmentVisitor.Visit(sqlFragment, new CTEVisitor()).ToList();
 
             // Create problems for each un-aliased table name found 
             foreach (var tableSource in allTableSources) //.Where( ts => ( ts is NamedTableReference || ts is VariableTableReference ) 
@@ -200,7 +171,7 @@ namespace Cheburashka
                             )
                         {
                             // we also need to eliminate sub-queries in CTES in top-level containers from consideration
-                            List<ScalarSubquery> containedSubQueries =
+                            var containedSubQueries =
                                  subQueries.FindAll(subQuery => SqlComparisonUtils.SemiContains(tightestContainer, subQuery)
                                                  && (!visitorCtes.Any(cte => SqlComparisonUtils.SQLModel_Contains(tightestContainer, cte)
                                                               && SqlComparisonUtils.SQLModel_Contains(cte, subQuery))

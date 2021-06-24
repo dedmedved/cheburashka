@@ -27,7 +27,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
 
-    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public CheckDefaultsAreOnNotNullColumnsVisitor()
         {
@@ -35,7 +35,7 @@ namespace Cheburashka
         }
 
         public IList<ColumnDefinition> ColumnDefinitions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return ColumnDefinitions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ColumnDefinition node)
         {
             var nullables = node.Constraints.Where(n => n is NullableConstraintDefinition).ToList();

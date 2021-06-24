@@ -23,7 +23,6 @@ using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Cheburashka
@@ -73,7 +72,7 @@ namespace Cheburashka
             {
                 return problems;
             }
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             DMVSettings.RefreshModelBuiltInCache(model);
             DMVSettings.RefreshConstraintsAndIndexesCache(model);
@@ -114,9 +113,7 @@ namespace Cheburashka
             foreach (var thing in allIndexes)
             {
                 TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                )
+                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
                 {
                     theseIndexes.Add(thing);
                 }
@@ -139,9 +136,7 @@ namespace Cheburashka
             foreach (var thing in allPKs)
             {
                 TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                )
+                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
                 {
                     thesePK.Add(thing);
                     break;
@@ -166,9 +161,7 @@ namespace Cheburashka
             foreach (var thing in allUNs)
             {
                 TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                if (tab.Name.Parts[1].SQLModel_StringCompareEqual(owningObjectTable)
-                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(owningObjectSchema)
-                )
+                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
                 {
                     theseUN.Add(thing);
                 }

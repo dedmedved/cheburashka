@@ -19,23 +19,25 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class ReturnVisitor : TSqlConcreteFragmentVisitor
+    internal class SelectSetVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public ReturnVisitor()
+        public SelectSetVariableVisitor()
         {
-            ReturnStatements = new List<ReturnStatement>();
+            SetVariableStatements = new List<SelectSetVariable>();
         }
 
-        public IList<ReturnStatement> ReturnStatements { get; }
-
-        public override void ExplicitVisit(ReturnStatement node)
+        public IList<SelectSetVariable> SetVariableStatements { get; }
+        public IList<TSqlFragment> SqlFragments() { return SetVariableStatements.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(SelectSetVariable node)
         {
-            ReturnStatements.Add(node);
+            SetVariableStatements.Add(node);
         }
     }
 }

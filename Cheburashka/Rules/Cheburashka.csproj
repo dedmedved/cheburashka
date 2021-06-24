@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,12 +111,11 @@
     <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />
     <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
-    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
-    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedLabels\LabelVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\BareReturnVisitor.cs" />
-    <Compile Include="CategoryLaxCode\BasicRuleVisitors\OuterBlockVisitor.cs" />
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsRule.cs" />
     <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
     <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\CheckOpenTransactionCountCodeRule.cs" />
@@ -177,7 +176,9 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
-    <Compile Include="SelectSetVariable\SelectSetVariableVisitor.cs" />
+    <Compile Include="Interfaces\ICheburashkaTSqlConcreteFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\DmTSqlFragmentVisitor.cs" />
+    <Compile Include="VariableVisitors\SelectSetVariableVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidDirectUseOfRowcountRule.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoRule.cs" />
@@ -187,7 +188,6 @@
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidDirectUseOfRowcountVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRuleVisitors\EnforceCaptureSPReturnStatusVisitor.cs" />
-    <Compile Include="CategoryLaxCode\BasicRuleVisitors\ReturnVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\TryCatchVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\DataTypeVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\DeleteWithCTEVisitor.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="LocalizedExportCodeAnalysisRuleAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="OtherVariableRulesVisitors\SetVariableStatementVisitor.cs" />
+    <Compile Include="VariableVisitors\SetVariableStatementVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleConstants.cs" />
     <Compile Include="RuleResources.Designer.cs">

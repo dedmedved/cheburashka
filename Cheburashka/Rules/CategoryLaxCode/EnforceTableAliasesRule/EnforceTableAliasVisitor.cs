@@ -21,20 +21,19 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceTableAliasVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _tableSources;
-
         public EnforceTableAliasVisitor()
         {
-            _tableSources = new List<TSqlFragment>();
+            TableSources = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> TableSources => _tableSources;
-
+        public List<TSqlFragment> TableSources { get; }
+        public IList<TSqlFragment> SqlFragments() { return TableSources.ToList(); }
         public override void ExplicitVisit(AdHocTableReference node)
         {
             HandleNode(node);
@@ -56,12 +55,12 @@ namespace Cheburashka
             HandleNode(node);
         }
 
-        // I can't believe I need to do this to prevent it picking up the TableReference which doesn't carry an alias
+        // I can't believe I need to do this to prevent it picking up the TableReferences which doesn't carry an alias
         public override void ExplicitVisit(MergeSpecification node)
         {
             if (node.TableAlias is null)
             {
-                _tableSources.Add(node.Target);
+                TableSources.Add(node.Target);
             }
             node.TableReference.Accept(this);
             node.SearchCondition.Accept(this);
@@ -145,7 +144,7 @@ namespace Cheburashka
         {
             if (node.Alias is null)
             {
-                _tableSources.Add(node);
+                TableSources.Add(node);
             }
             node.AcceptChildren(this);
         }
@@ -153,7 +152,7 @@ namespace Cheburashka
         {
             if (node.Alias is null)
             {
-                _tableSources.Add(node);
+                TableSources.Add(node);
             }
             node.AcceptChildren(this);
         }

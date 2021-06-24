@@ -21,21 +21,22 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class OuterBlockVisitor : TSqlConcreteFragmentVisitor
+    internal class LabelVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public OuterBlockVisitor()
+        public LabelVisitor()
         {
-            BeginEndBlockStatements = new List<BeginEndBlockStatement>();
+            Labels = new List<LabelStatement>();
         }
 
-        public IList<BeginEndBlockStatement> BeginEndBlockStatements { get; }
-
-        public override void ExplicitVisit(BeginEndBlockStatement node)
+        public IList<LabelStatement> Labels { get; }
+        public IList<TSqlFragment> SqlFragments() { return Labels.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(LabelStatement node)
         {
-            BeginEndBlockStatements.Add(node);
+            Labels.Add(node);
         }
     }
 }

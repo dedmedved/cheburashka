@@ -84,7 +84,7 @@ namespace Cheburashka
             {
                 TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
-                string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
@@ -94,43 +94,24 @@ namespace Cheburashka
                 DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the occurrences of single part table names
-                var visitor = new AvoidOnePartNameVisitor();
-                sqlFragment.Accept(visitor);
-                IList<SchemaObjectName> onePartNames = visitor.OnePartNames;
+                var onePartNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidOnePartNameVisitor());
+                var updateStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new UpdateStatementForTargetVisitor());
+                var deleteStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new DeleteStatementForTargetVisitor());
+                var mergeStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new MergeStatementForTargetVisitor());
 
-                // visitor to get the occurrences of data declarations names
-                // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
-
-                UpdateStatementForTargetVisitor updateStatementForTargetVisitor = new();
-                sqlFragment.Accept(updateStatementForTargetVisitor);
-                IList<TableReference> updateStatements = updateStatementForTargetVisitor.DataModificationTargets;
-                DeleteStatementForTargetVisitor deleteStatementForTargetVisitor = new();
-                sqlFragment.Accept(deleteStatementForTargetVisitor);
-                IList<TableReference> deleteStatements = deleteStatementForTargetVisitor.DataModificationTargets;
-                MergeStatementForTargetVisitor mergeStatementForTargetVisitor = new();
-                sqlFragment.Accept(mergeStatementForTargetVisitor);
-                IList<TableReference> mergeStatements = mergeStatementForTargetVisitor.DataModificationTargets;
-                List<TableReference> allStatements = new();
+                List<TSqlFragment> allStatements = new();
                 allStatements.AddRange(updateStatements);
                 allStatements.AddRange(deleteStatements);
                 allStatements.AddRange(mergeStatements);
 
-                DataTypeVisitor dataTypeVisitor = new();
-                sqlFragment.Accept(dataTypeVisitor);
-                IList<DataTypeReference> dataTypes = dataTypeVisitor.DataTypes;
-
+                var dataTypes = DmTSqlFragmentVisitor.Visit(sqlFragment, new DataTypeVisitor());
                 IList<CteUtil> cteUtilFragments = SqlRuleUtils.CteStatements(sqlFragment).ToList();
-
-                var excludedOnePartNamesContextsVisitor = new ExcludedTwoPartNamesContextsVisitor();
-                sqlFragment.Accept(excludedOnePartNamesContextsVisitor);
-                IList<TSqlFragment> serviceBrokerContexts =
-                    excludedOnePartNamesContextsVisitor.ExcludedTwoPartNamesContexts.ToList();
+                var serviceBrokerContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExcludedTwoPartNamesContextsVisitor());
 
                 // Create problems for each one part object name source found 
-                foreach (SchemaObjectName tableSource in onePartNames)
+                foreach (SchemaObjectName tableSource in onePartNames.Cast<SchemaObjectName>()) // the cast should work
                 {
-                    string tableSourceIdentifier =
-                        tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
+                    string tableSourceIdentifier = tableSource.ScriptTokenStream[tableSource.LastTokenIndex].Text;
                     // Check the name isn't a builtin sql type
                     bool foundSurroundingDeclaration = dataTypes.Any(v => v.SQLModel_Contains(tableSource));
                     // Check the name isn't an update or delete or merge statement target
@@ -156,9 +137,7 @@ namespace Cheburashka
                     {
                         if (tableSource.DatabaseIdentifier is not null)
                         {
-                            foundSurroundingDeclaration =
-                                SqlRuleUtils.IsSystemDatabaseThatNeedNoSchemaQualification(
-                                    tableSource.DatabaseIdentifier.Value);
+                            foundSurroundingDeclaration = SqlRuleUtils.IsSystemDatabaseThatNeedNoSchemaQualification(tableSource.DatabaseIdentifier.Value);
                         }
                     }
 
@@ -170,8 +149,7 @@ namespace Cheburashka
                     // Check it isn't Deleted or Inserted
                     if (!foundSurroundingDeclaration)
                     {
-                        foundSurroundingDeclaration =
-                            SqlRuleUtils.IsSystemTableThatNeedNoSchemaQualification(tableSource.BaseIdentifier.Value);
+                        foundSurroundingDeclaration = SqlRuleUtils.IsSystemTableThatNeedNoSchemaQualification(tableSource.BaseIdentifier.Value);
                     }
                     // Check the name isn't a CTE name in an update........... target
                     if (!foundSurroundingDeclaration)
@@ -200,20 +178,14 @@ namespace Cheburashka
 
                 // now to look inside literal arguments to system functions.
                 // this is totally independent of the above search.
-                var literalOnePartNameContextsVisitor = new SchemaNameAcceptingFunctionsVisitor();
-                sqlFragment.Accept(literalOnePartNameContextsVisitor);
-                List<TSqlFragment> literalOnePartNameContexts = literalOnePartNameContextsVisitor.OnePartNames.Cast<TSqlFragment>().ToList();
-
+               var literalOnePartNameContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingFunctionsVisitor());
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameContexts, ruleDescriptor);
 
                 // now to look inside literal arguments to system procedures.
                 // this is totally independent of the above search.
-                var literalOnePartNameStoredProcsContextsVisitor = new SchemaNameAcceptingProceduresVisitor();
-                sqlFragment.Accept(literalOnePartNameStoredProcsContextsVisitor);
-                List<TSqlFragment> literalOnePartNameStoredProcsContexts = literalOnePartNameStoredProcsContextsVisitor.OnePartNames.Cast<TSqlFragment>().ToList();
-
+                var literalOnePartNameStoredProcsContexts = DmTSqlFragmentVisitor.Visit(sqlFragment, new SchemaNameAcceptingProceduresVisitor());
                 // Create problems for each one part object name source found 
                 // check each against list of builtin that might be passed to typeid
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, literalOnePartNameStoredProcsContexts, ruleDescriptor);

@@ -76,7 +76,7 @@ namespace Cheburashka
 
             DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext, modelElement);
+            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
             // The rule execution context has all the objects we'll need, including the fragment representing the object,
             // and a descriptor that lets us access rule metadata
@@ -85,34 +85,20 @@ namespace Cheburashka
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get wrappers for CLR code
-            var clrWrapperVisitor = new ClrWrapperVisitor();
-            sqlFragment.Accept(clrWrapperVisitor);
-            List<ProcedureStatementBodyBase> clrWrappers = clrWrapperVisitor.ClrWrappers;
-
+            var clrWrappers = DmTSqlFragmentVisitor.Visit(sqlFragment, new ClrWrapperVisitor()).Cast<ProcedureStatementBodyBase>().ToList();
             // visitor to get the declarations of parameters
-            var parameterDeclarationVisitor = new ParameterDeclarationVisitor();
-            sqlFragment.Accept(parameterDeclarationVisitor);
-            IEnumerable<ProcedureParameter> tmpParameterDeclarations = parameterDeclarationVisitor.ParameterDeclarations;
-            IEnumerable<Identifier> tmpParameterDeclarations2 = from t in tmpParameterDeclarations
-                                                                select t.VariableName;
+            var declarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new ParameterDeclarationVisitor()).Cast<ProcedureParameter>().ToList().Select( t => t.VariableName);
             // Remove parameter declarations that occur in CLR wrappers
-            //            parameterDeclarations.RemoveAll(pd => clrWrappers.Any(clr => SqlComparisonUtils.Contains(clr, pd)));
-            List<Identifier> parameterDeclarations = tmpParameterDeclarations2.ToList().FindAll(pd => !clrWrappers.Any(clr => clr.SQLModel_Contains(pd)));
+            List<Identifier> parameterDeclarations = declarations.ToList().FindAll(pd => !clrWrappers.Any(clr => clr.SQLModel_Contains(pd)));
 
             // visitor to get parameter names - these look like variables and need removing
             // from variable references before we use them
-            var namedParameterUsageVisitor = new NamedParameterUsageVisitor();
-            sqlFragment.Accept(namedParameterUsageVisitor);
-            IEnumerable<VariableReference> namedParameters = namedParameterUsageVisitor.NamedParameters;
-
+            var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
             // visitor to get the occurrences of variables
-            var usageVisitor = new VariableUsageVisitor();
-            sqlFragment.Accept(usageVisitor);
-            IList<VariableReference> allVariableLikeReferences = usageVisitor.VariableReferences;
+            var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
 
             // remove all named parameters from the list of referenced variables
-            IEnumerable<VariableReference> tmpVr = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer());
-            List<VariableReference> variableReferences = tmpVr.ToList();
+            List<VariableReference> variableReferences = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
             var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
             var counts = new Dictionary<string, int>(SqlComparer.Comparer);

@@ -21,10 +21,11 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class AvoidDirectUseOfRowcountVisitor : TSqlConcreteFragmentVisitor
+    internal class AvoidDirectUseOfRowcountVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public AvoidDirectUseOfRowcountVisitor()
         {
@@ -32,7 +33,7 @@ namespace Cheburashka
         }
 
         public IList<GlobalVariableExpression> GlobalVariableExpressions { get; }
-
+        public IList<TSqlFragment> SqlFragments() { return GlobalVariableExpressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(GlobalVariableExpression node)
         {
             //using (StreamWriter w = File.AppendText(@"c:\temp\blah.txt"))

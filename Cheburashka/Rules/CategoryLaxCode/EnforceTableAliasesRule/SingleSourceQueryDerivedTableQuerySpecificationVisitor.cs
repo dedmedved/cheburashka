@@ -25,22 +25,20 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class SingleSourceQueryDerivedTableQuerySpecificationVisitor : TSqlConcreteFragmentVisitor
+    internal class SingleSourceQueryDerivedTableQuerySpecificationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        private readonly List<TSqlFragment> _targets;
-
         public SingleSourceQueryDerivedTableQuerySpecificationVisitor()
         {
-            _targets = new List<TSqlFragment>();
+            SingleSourceQueryDerivedTableQuerySpecifications = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> SingleSourceQueryDerivedTableQuerySpecifications => _targets;
-
+        public List<TSqlFragment> SingleSourceQueryDerivedTableQuerySpecifications { get; }
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceQueryDerivedTableQuerySpecifications.ToList(); }
         public override void ExplicitVisit(QueryDerivedTable node)
         {
             List<QuerySpecification> querySpecifications = new();
             SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            _targets.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            SingleSourceQueryDerivedTableQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             node.AcceptChildren(this);
         }
     }

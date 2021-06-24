@@ -22,21 +22,23 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
-    internal class DataTypeVisitor : TSqlConcreteFragmentVisitor
+    internal class DataTypeVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public DataTypeVisitor()
         {
-            DataTypes = new List<DataTypeReference>();
+            DataTypeReferences = new List<DataTypeReference>();
         }
 
-        public List<DataTypeReference> DataTypes { get; }
-
+        public List<DataTypeReference> DataTypeReferences { get; }
+        public IList<TSqlFragment> SqlFragments() { return DataTypeReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(SqlDataTypeReference node)
         {
-            DataTypes.Add(node);
+            DataTypeReferences.Add(node);
         }
         // These are schema bound and do need a 2-part reference.
         //public override void ExplicitVisit(UserDataTypeReference node)
@@ -45,7 +47,7 @@ namespace Cheburashka
         //}
         public override void ExplicitVisit(XmlDataTypeReference node)
         {
-            DataTypes.Add(node);
+            DataTypeReferences.Add(node);
         }
     }
 }
