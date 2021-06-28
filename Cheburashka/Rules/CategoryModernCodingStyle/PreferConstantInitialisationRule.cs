@@ -38,24 +38,24 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(PreferThrowToRaiserrorRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(PreferConstantInitialisationRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.PreferThrowToRaiserror_RuleName,                     // ID used to look up the display name inside the resources file
-        RuleConstants.PreferThrowToRaiserror_ProblemDescription,            // ID used to look up the description inside the resources file
+        RuleConstants.PreferConstantInitialisation_RuleName,                // ID used to look up the display name inside the resources file
+        RuleConstants.PreferConstantInitialisation_ProblemDescription,      // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class PreferThrowToRaiserrorRule : SqlCodeAnalysisRule
+    public sealed class PreferConstantInitialisationRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0048: Prefer using Throw to Raiserror when raising an error."
+        /// shown as "DM0049: Variables set to constant values and never reset, are best set on declaration."
         /// </summary>
-        public const string RuleId = RuleConstants.PreferThrowToRaiserror_RuleId;
+        public const string RuleId = RuleConstants.PreferConstantInitialisation_RuleId;
 
-        public PreferThrowToRaiserrorRule() {
-            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
+        public PreferConstantInitialisationRule() {
+            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 
         /// <summary>

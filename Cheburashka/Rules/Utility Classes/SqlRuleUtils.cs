@@ -393,6 +393,11 @@ namespace Cheburashka
             return tab.Name.Parts[1].SQLModel_StringCompareEqual(tableName)
                    && tab.Name.Parts[0].SQLModel_StringCompareEqual(schemaName);
         }
+        public static bool ObjectNameMatches(TSqlObject table1, TSqlObject table2)
+        {
+            return table1.Name.Parts[1].SQLModel_StringCompareEqual(table2.Name.Parts[1])
+                   && table1.Name.Parts[0].SQLModel_StringCompareEqual(table2.Name.Parts[0]);
+        }
         ///// <summary>
         ///// Gets the set of classes representing a potential source of columns. Tables, Views, Functions can all be
         ///// a source for this

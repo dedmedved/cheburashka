@@ -109,8 +109,10 @@
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSubQueryQuerySpecificationVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferConstantInitialisationRule.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />
     <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\ConstantOnlyUpdatedVariableVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />
@@ -176,8 +178,11 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="Interfaces\ICheburashkaSqlExpressionDependencyVisitor.cs" />
     <Compile Include="Interfaces\ICheburashkaTSqlConcreteFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\DmSqlExpressionDependencyVisitor.cs" />
     <Compile Include="Utility Classes\DmTSqlFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\SQLInitialisationDependency.cs" />
     <Compile Include="VariableVisitors\SelectSetVariableVisitor.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidBareReturnRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\AvoidDirectUseOfRowcountRule.cs" />

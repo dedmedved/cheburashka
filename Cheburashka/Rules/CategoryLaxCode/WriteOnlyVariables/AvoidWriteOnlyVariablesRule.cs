@@ -108,9 +108,7 @@ namespace Cheburashka
             // visitor to get the occurrences of variables - the cast is ugly but accurate
             var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
             // get all assignments to variables 
-            var updatedVariableVisitor = new UpdatedVariableVisitor();
-            sqlFragment.Accept(updatedVariableVisitor);
-            IEnumerable<SQLExpressionDependency> allSetVariables = updatedVariableVisitor.SetVariables;
+            var allSetVariables = DmSqlExpressionDependencyVisitor.Visit(sqlFragment, new UpdatedVariableVisitor());
 
             IEnumerable<VariableReference> tmpVr =
                         from varReference in allVariableLikeReferences

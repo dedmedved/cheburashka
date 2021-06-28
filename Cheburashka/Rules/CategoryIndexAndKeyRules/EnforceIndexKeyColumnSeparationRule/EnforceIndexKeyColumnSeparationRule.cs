@@ -92,16 +92,13 @@ namespace Cheburashka
                 string selfSchema = modelElement.Name.Parts[0];
                 string selfName = modelElement.Name.Parts[2]; //  is this right ?
 
-                //var owningObjectSchema = modelElement.Name.Parts[0]; // modelElement.GetParent().Name.Parts[0];
-                //var owningObjectTable  = modelElement.Name.Parts[1]; // modelElement.GetParent().Name.Parts[1];
-
-                var owningObjectSchema = modelElement.GetParent(DacQueryScopes.All).Name.Parts[0];
-                var owningObjectTable = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
+                var owningObject = modelElement.GetParent(DacQueryScopes.All);
+                var owningObjectSchema = owningObject.Name.Parts[0];
+                var owningObjectTable = owningObject.Name.Parts[1];
 
                 List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> uniqueConstraints =
-                    ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
+                List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
                 List<string> LeadingEdgeIndexColumns = new();
                 var columns = modelElement.GetReferenced(Index.Columns);
@@ -113,7 +110,7 @@ namespace Cheburashka
                 {
                     // if this 'index' isn't the index underlying the pk, check it.
                     // is this right/needed/wasted effort ?
-                    if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObjectTable, owningObjectSchema))
+                    if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObject))
                     {
                         var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
                         List<string> PKLeadingEdgeIndexColumns = pk_columns.Select(c => c.Name.Parts.Last()).ToList();
