@@ -30,21 +30,27 @@ namespace Cheburashka
     //TODO handle XML functions
     internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public ConstantOnlyUpdatedVariableVisitor()
-        {
-            SetVariables = new List<Literal>();
-        }
 
         // The first assignment we find to a variable
         private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
         private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
-        public IList<Literal> SetVariables { get; }
+
+        public IList<TSqlFragment> VariableAssignments()
+        {
+            var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+            List<TSqlFragment> sqlFragments = new();
+            foreach (var v in singleValidAssignmentKeys)
+            {
+                sqlFragments.Add(variableAssignments[v]);
+            }
+            return sqlFragments;
+        }
 
         public IList<TSqlFragment> SqlFragments()
         {
-            return SetVariables.Cast<TSqlFragment>().ToList();
+            return VariableAssignments();
         }
 
         public override void ExplicitVisit(SetVariableStatement node)
@@ -111,11 +117,11 @@ namespace Cheburashka
             {
                 if (!variableAssignments.ContainsKey(var.Name))
                 {
-                    variableAssignments.Add(var.Name, initExpression);
+                    variableAssignments.Add(var.Name, source);
                 }
                 else if (!invalidVariableAssignments.ContainsKey(var.Name))
                 {
-                    invalidVariableAssignments.Add(var.Name, initExpression);
+                    invalidVariableAssignments.Add(var.Name, source);
                 }
             }
             else
