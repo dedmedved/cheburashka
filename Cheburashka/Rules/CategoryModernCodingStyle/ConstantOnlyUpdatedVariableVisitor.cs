@@ -36,9 +36,9 @@ namespace Cheburashka
         }
 
         // The first assignment we find to a variable
-        private readonly Dictionary<string, Literal> variableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, Literal> invalidVariableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
         public IList<Literal> SetVariables { get; }
 
@@ -49,12 +49,12 @@ namespace Cheburashka
 
         public override void ExplicitVisit(SetVariableStatement node)
         {
-            UpdateDictionariesWithExpression(node.Variable,node.Expression,node.AssignmentKind);
+            UpdateDictionariesWithExpression(node.Variable,node.Expression,node.AssignmentKind,node);
         }
 
         public override void ExplicitVisit(SelectSetVariable node)
         {
-            UpdateDictionariesWithExpression(node.Variable, node.Expression, node.AssignmentKind);
+            UpdateDictionariesWithExpression(node.Variable, node.Expression, node.AssignmentKind,node);
         }
 
         public override void ExplicitVisit(ExecuteSpecification node)
@@ -73,7 +73,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind);
+            UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
         }
         public override void ExplicitVisit(FetchCursorStatement node)
         {
@@ -102,7 +102,7 @@ namespace Cheburashka
                 AddVariableToListOfIgnoredVariables(variable);
             }
         }
-        private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment)
+        private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)
         {
             if (var is null || expression is null) return;
             if (expression is Literal initExpression
