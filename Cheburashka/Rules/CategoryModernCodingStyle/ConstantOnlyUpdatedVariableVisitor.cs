@@ -57,8 +57,21 @@ namespace Cheburashka
             UpdateDictionariesWithExpression(node.Variable,node.Expression,node.AssignmentKind,node);
         }
 
+        public override void ExplicitVisit(SelectStatement node)
+        {
+            // only visit the SelectSetVariable nodes if this statement has no from clause
+            // and is a simple query expression no unions, no nested barcketed expressions
+            // keep it simple
+            if ( node.QueryExpression is QuerySpecification {FromClause: null})
+            {
+                node.AcceptChildren(this);
+            }
+
+        }
+
         public override void ExplicitVisit(SelectSetVariable node)
         {
+            //As above - only where we have no from clause - so we're certain the variable assignment happens
             UpdateDictionariesWithExpression(node.Variable, node.Expression, node.AssignmentKind,node);
         }
 

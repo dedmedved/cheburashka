@@ -1569,6 +1569,9 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableExecuteSetToInt.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSelectSetToIntLiteralFromTableIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToDateFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
