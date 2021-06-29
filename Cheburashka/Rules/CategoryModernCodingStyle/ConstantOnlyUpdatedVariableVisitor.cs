@@ -111,17 +111,16 @@ namespace Cheburashka
         private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)
         {
             if (var is null || expression is null) return;
-            if (expression is Literal initExpression
-                && assignment == AssignmentKind.Equals
+            if (expression is Literal && assignment == AssignmentKind.Equals
             )
             {
                 if (!variableAssignments.ContainsKey(var.Name))
                 {
                     variableAssignments.Add(var.Name, source);
                 }
-                else if (!invalidVariableAssignments.ContainsKey(var.Name))
+                else
                 {
-                    invalidVariableAssignments.Add(var.Name, source);
+                    AddVariableToListOfIgnoredVariables(var);
                 }
             }
             else
