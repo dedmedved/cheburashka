@@ -1557,6 +1557,18 @@
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentReceiveMessageIsIgnored.sql" />
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentBeginDialogIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntInCatchIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntButHasGotoAndIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntInWhileIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntInIfIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToInt.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
