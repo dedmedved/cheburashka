@@ -118,10 +118,14 @@ namespace Cheburashka
             {
                 AddVariableToListOfIgnoredVariables(node.VariableName);
             }
-            if (node is ProcedureParameter)
-            {
-                AddVariableToListOfIgnoredVariables(node.VariableName);
-            }
+            //if (node is ProcedureParameter)
+            //{
+            //    AddVariableToListOfIgnoredVariables(node.VariableName);
+            //}
+        }
+        public override void ExplicitVisit(ProcedureParameter node)
+        {
+            AddVariableToListOfIgnoredVariables(node.VariableName);
         }
 
         private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)

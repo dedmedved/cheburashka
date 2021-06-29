@@ -1,4 +1,4 @@
-CREATE PROCEDURE dbo.ProcWithSingleParameterSetToIntIsIgnored @var int 
+CREATE PROCEDURE dbo.ProcWithSingleParameterSetToIntIsIgnored @var int = null
 AS 
 BEGIN
 set @var = 1; 
