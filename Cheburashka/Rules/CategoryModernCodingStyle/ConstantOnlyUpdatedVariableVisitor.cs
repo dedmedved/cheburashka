@@ -27,7 +27,6 @@ using System.Linq;
 namespace Cheburashka
 {
 
-    //TODO handle XML functions
     internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
@@ -108,6 +107,15 @@ namespace Cheburashka
                 AddVariableToListOfIgnoredVariables(variable);
             }
         }
+
+        public override void ExplicitVisit(DeclareVariableElement node)
+        {
+            if (node is not ProcedureParameter && node.Value is not null)
+            {
+                AddVariableToListOfIgnoredVariables(node.VariableName);
+            }
+        }
+
         private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)
         {
             if (var is null || expression is null) return;
@@ -133,6 +141,12 @@ namespace Cheburashka
         {
             if (!invalidVariableAssignments.ContainsKey(var.Name))
                 invalidVariableAssignments.Add(var.Name,
+                    new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+        }
+        private void AddVariableToListOfIgnoredVariables(Identifier var)
+        {
+            if (!invalidVariableAssignments.ContainsKey(var.Value))
+                invalidVariableAssignments.Add(var.Value,
                     new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
     }

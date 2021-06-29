@@ -84,35 +84,8 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            //Casting is rubbish - but safe
-            List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();
-            // get all assignments to variables
-            var setVariables = DmSqlExpressionDependencyVisitor.Visit(sqlFragment, new UpdatedVariableVisitor());
-
-            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
-            var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
-                                                                                    && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.SmallInt
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Int
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.BigInt
-                                                                                    )
-                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out int litVal ) && litVal <= 10
-                                                                                )
-                                                                         .Select(n => n.VariableName.Value).ToList();
-
-            var setVariableNames = setVariables.Select(n => n.Variable.Name);
-            var variableNames = initialisedVariableNames.ToList();
-            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames,SqlComparer.Comparer);
-
-            // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
-            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
-            // eliminate raiserror statements where the errorlevel is one of the initialised variables with a value <= 10 
-            var nonIssues = raiseErrorStatements.Where(n => n.SecondParameter is VariableReference)
-                                                .Select(n => n)
-                                                .Where( n => onlyInitialisedVariableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
-            var issues = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
-
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, singlySetLiteralVariableFragments, ruleDescriptor);
 
             return problems;
         }

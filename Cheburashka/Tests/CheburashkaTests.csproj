@@ -1549,6 +1549,48 @@
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\PreferConstantInitialisationRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentReceiveMessageIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentBeginDialogIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableFetchSetToIntIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableExecuteSetToOutputVar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableExecuteSetToInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToDateFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToDateLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSelectSetToIntLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\FunctionWithSingleVariableSetToIntLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\Service.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralAfterInitialisation.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralTwice.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteral.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferThrowToRaiserrorRule\PreferThrowToRaiserrorRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
