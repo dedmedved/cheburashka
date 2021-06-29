@@ -84,6 +84,9 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
+            // it musn't be a parameter
+            // anything with gotos is too hard to handle - skip for now
+            //
             var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
             RuleUtils.UpdateProblems(problems, modelElement, elementName, singlySetLiteralVariableFragments, ruleDescriptor);
 

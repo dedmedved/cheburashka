@@ -76,10 +76,14 @@ namespace Cheburashka
                 AddVariableToListOfIgnoredVariables(node.Variable);
         }
 
+        //can't be an assignment set clause - the update might update no rows
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
+            AddVariableToListOfIgnoredVariables(node.Variable);
+            //UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
         }
+        //can't be a fetch clause - the fetch might not return anything
+        //and assigning constants to variable in a fetch will be a target of anothert rule
         public override void ExplicitVisit(FetchCursorStatement node)
         {
             if (node.IntoVariables is not null)
@@ -96,8 +100,7 @@ namespace Cheburashka
             if (node.Handle is null || string.IsNullOrEmpty(node.Handle.Name)) return;
             AddVariableToListOfIgnoredVariables(node.Handle);
         }
-        //FOR the 1st version where we only look at literal values - this is not a valid scenario
-        // BUT we do need to check our variable isnt set this way
+
         public override void ExplicitVisit(ReceiveStatement node)
         {
             if (node.SelectElements is null) return;
@@ -111,6 +114,10 @@ namespace Cheburashka
         public override void ExplicitVisit(DeclareVariableElement node)
         {
             if (node is not ProcedureParameter && node.Value is not null)
+            {
+                AddVariableToListOfIgnoredVariables(node.VariableName);
+            }
+            if (node is ProcedureParameter)
             {
                 AddVariableToListOfIgnoredVariables(node.VariableName);
             }
