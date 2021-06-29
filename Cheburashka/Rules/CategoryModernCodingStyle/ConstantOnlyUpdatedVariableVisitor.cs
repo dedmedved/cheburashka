@@ -79,7 +79,8 @@ namespace Cheburashka
         //can't be an assignment set clause - the update might update no rows
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            AddVariableToListOfIgnoredVariables(node.Variable);
+            if (node.Variable is not null )
+                AddVariableToListOfIgnoredVariables(node.Variable);
             //UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
         }
         //can't be a fetch clause - the fetch might not return anything
@@ -146,12 +147,14 @@ namespace Cheburashka
 
         private void AddVariableToListOfIgnoredVariables(VariableReference var)
         {
+            if (var is null) return;
             if (!invalidVariableAssignments.ContainsKey(var.Name))
                 invalidVariableAssignments.Add(var.Name,
                     new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
         private void AddVariableToListOfIgnoredVariables(Identifier var)
         {
+            if (var is null) return;
             if (!invalidVariableAssignments.ContainsKey(var.Value))
                 invalidVariableAssignments.Add(var.Value,
                     new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria

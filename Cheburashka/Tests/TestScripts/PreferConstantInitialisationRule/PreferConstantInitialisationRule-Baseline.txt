@@ -7,15 +7,6 @@ Start line: 6
 Start column: 5
 ========end of problem========
 
-Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableAssignmentSetToInt]
-FullID: Cheburashka.DM0049
-Severity: Warning
-Model element: dbo.ProcWithSingleVariableAssignmentSetToInt
-Script file: ProcWithSingleVariableAssignmentSetToInt.sql
-Start line: 5
-Start column: 28
-========end of problem========
-
 Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSelectSetToIntLiteral]
 FullID: Cheburashka.DM0049
 Severity: Warning
