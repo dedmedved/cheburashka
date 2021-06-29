@@ -178,6 +178,9 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="Generic Visitors\CatchStatementVisitor.cs" />
+    <Compile Include="Generic Visitors\WhileStatementVisitor.cs" />
+    <Compile Include="Generic Visitors\IfStatementVisitor.cs" />
     <Compile Include="Interfaces\ICheburashkaSqlExpressionDependencyVisitor.cs" />
     <Compile Include="Interfaces\ICheburashkaTSqlConcreteFragmentVisitor.cs" />
     <Compile Include="Utility Classes\DmSqlExpressionDependencyVisitor.cs" />

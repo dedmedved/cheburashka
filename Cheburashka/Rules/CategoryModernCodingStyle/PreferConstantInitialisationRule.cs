@@ -84,11 +84,46 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // it musn't be a parameter
+
             // anything with gotos is too hard to handle - skip for now
-            //
+            var gotos = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor());
+            if (gotos.Any())
+                return problems;
+
+            // get ifs and whiles and catches
+            var ifs = DmTSqlFragmentVisitor.Visit(sqlFragment, new IfStatementVisitor());
+            var whiles = DmTSqlFragmentVisitor.Visit(sqlFragment, new WhileStatementVisitor());
+            var visitor = new CatchStatementVisitor();
+            sqlFragment.Accept(visitor);
+            var catchLists = visitor.CatchStatements;
+
+            // get all candidate initialisations
             var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
-            RuleUtils.UpdateProblems(problems, modelElement, elementName, singlySetLiteralVariableFragments, ruleDescriptor);
+            var issues = new List<TSqlFragment>();
+
+            // check they aren't initialised in possibly unexecuted code.
+            foreach (var v in singlySetLiteralVariableFragments)
+            {
+                var ifFree = !ifs.Any(i => i.SQLModel_Contains(v));
+                var whileFree = !whiles.Any(i => i.SQLModel_Contains(v));
+                var catchFree = true;
+                foreach (var statementList in catchLists)
+                {
+                    var thisCatchIsFree = ! statementList.Statements.Any(i => i.SQLModel_Contains(v)); ;
+                    if (!thisCatchIsFree)
+                    {
+                        catchFree = false;
+                        break;
+                    }
+                }
+
+                if (ifFree && whileFree && catchFree)
+                {
+                    issues.Add(v);
+                }
+            }
+
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }
