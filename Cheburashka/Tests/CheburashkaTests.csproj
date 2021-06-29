@@ -1555,8 +1555,13 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleParameterSetToIntIsIgnored.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentReceiveMessageIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentReceiveMessageIsIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentBeginDialogIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntFollowedBySelectSetShouldBeIgnored.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntInCatchIsIgnored.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1596,7 +1601,9 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\FunctionWithSingleVariableSetToIntLiteral.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\PreferConstantInitialisationRule\Service.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\Service.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\Table1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
