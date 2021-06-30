@@ -29,10 +29,10 @@ namespace Cheburashka
     {
         public NonDeterministicSystemFunctionVisitor()
         {
-            NonDeterministicSystemFunctions = new List<FunctionCall>();
+            NonDeterministicSystemFunctions = new List<TSqlFragment>();
         }
 
-        public List<FunctionCall> NonDeterministicSystemFunctions { get; }
+        public List<TSqlFragment> NonDeterministicSystemFunctions { get; }
         public IList<TSqlFragment> SqlFragments() { return NonDeterministicSystemFunctions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(FunctionCall node)
         {
@@ -41,19 +41,31 @@ namespace Cheburashka
             // in the code, and not per-execution
             // error-handling code is the most likely to be wrongly identified
             // as a constant initialisation
-            if ( node.FunctionName.Value.SQLModel_StringCompareEqual("ROWCOUNT")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("TRANCOUNT")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("IDENTITY")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_NUMBER")
+            if ( node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_NUMBER")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_MESSAGE")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_PROCEDURE")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_SEVERITY")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_STATE")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("ERROR_LINE")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("CURSOR_ROWS")
-              || node.FunctionName.Value.SQLModel_StringCompareEqual("FETCH_STATUS")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("CURSOR_STATUS")
+            )
+            {
+                NonDeterministicSystemFunctions.Add(node);
+            }
+        }
+        public override void ExplicitVisit(GlobalVariableExpression node)
+        {
+            // This list is a bit hap-hazard
+            // try to catch stuff that might change from line to line
+            // in the code, and not per-execution
+            // error-handling code is the most likely to be wrongly identified
+            // as a constant initialisation
+            if ( node.Name.SQLModel_StringCompareEqual("@@ROWCOUNT")
+              || node.Name.SQLModel_StringCompareEqual("@@ERROR")
+              || node.Name.SQLModel_StringCompareEqual("@@TRANCOUNT")
+              || node.Name.SQLModel_StringCompareEqual("@@IDENTITY")
+              || node.Name.SQLModel_StringCompareEqual("@@CURSOR_ROWS")
+              || node.Name.SQLModel_StringCompareEqual("@@FETCH_STATUS")
             )
             {
                 NonDeterministicSystemFunctions.Add(node);

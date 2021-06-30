@@ -34,15 +34,6 @@ Start line: 5
 Start column: 5
 ========end of problem========
 
-Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToERRORFunction]
-FullID: Cheburashka.DM0049
-Severity: Warning
-Model element: dbo.ProcWithSingleVariableSetToERRORFunction
-Script file: ProcWithSingleVariableSetToERRORFunction.sql
-Start line: 5
-Start column: 5
-========end of problem========
-
 Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToIntExpression]
 FullID: Cheburashka.DM0049
 Severity: Warning
