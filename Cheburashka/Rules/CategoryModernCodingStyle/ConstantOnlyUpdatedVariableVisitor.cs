@@ -35,7 +35,7 @@ namespace Cheburashka
         // The second assignment we find to a variable, or an assignment we don't like
         private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
-        public bool terminateAll = false;
+        private bool ignoreAllVisitedVariables = false;
 
         public IList<TSqlFragment> VariableAssignments()
         {
@@ -69,16 +69,17 @@ namespace Cheburashka
             }
             else
             {
-                terminateAll = true;
+                ignoreAllVisitedVariables = true;
                 node.AcceptChildren(this);
-                terminateAll = false;
+                ignoreAllVisitedVariables = false;
             }
         }
 
         public override void ExplicitVisit(SelectSetVariable node)
         {
-            if (terminateAll)
+            if (ignoreAllVisitedVariables)
                 //if the select statement has a from clause, ignroe everything we meet.
+                //(so far thats the only condition triggering this logic)
                 AddVariableToListOfIgnoredVariables(node.Variable); 
             else 
                 //As above - only where we have no from clause - so we're certain the variable assignment happens
