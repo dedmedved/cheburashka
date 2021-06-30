@@ -101,19 +101,6 @@ namespace Cheburashka
             var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
             var issues = new List<TSqlFragment>();
 
-            // fix this mess
-            //declare @mkw int set @mkw = null
-
-            //select @mkw = dt_techcode from nvddictionarytechnicallink, nvddictionarytechnical where dtl_staticname = 'TD_weight' and dt_techcode = dtl_techcode
-            //    --dt_techcode from nvddictionarytechnical where dt_description = 'Minimum Kerbweight'
-
-            //if @mkw is null begin
-
-            //RAISERROR('Unable to find tech item called: Minimum Kerbweight. Operation Failed.', 16, 1);
-            //return
-            //    end
-
-
             // check they aren't initialised in possibly unexecuted code.
             foreach (var v in singlySetLiteralVariableFragments)
             {

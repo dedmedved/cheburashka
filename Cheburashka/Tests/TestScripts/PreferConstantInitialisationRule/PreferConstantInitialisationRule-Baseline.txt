@@ -16,6 +16,15 @@ Start line: 5
 Start column: 12
 ========end of problem========
 
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToDateFunction]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToDateFunction
+Script file: ProcWithSingleVariableSetToDateFunction.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
 Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToDateLiteral]
 FullID: Cheburashka.DM0049
 Severity: Warning

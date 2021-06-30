@@ -155,12 +155,23 @@ namespace Cheburashka
         private void UpdateDictionariesWithExpression(VariableReference var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)
         {
             if (var is null || expression is null) return;
-            if (expression is Literal && assignment == AssignmentKind.Equals
+//            if (expression is Literal && assignment == AssignmentKind.Equals
+            // the expression can now be a literal expression 
+            if (assignment == AssignmentKind.Equals
             )
             {
-                if (!variableAssignments.ContainsKey(var.Name))
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                // if the scalar expression doesnt contain any variables its safe to consider it to be an initialisation expression
+                if ( ! referencedVariables.Any())
                 {
-                    variableAssignments.Add(var.Name, source);
+                    if (!variableAssignments.ContainsKey(var.Name))
+                    {
+                        variableAssignments.Add(var.Name, source);
+                    }
+                    else
+                    {
+                        AddVariableToListOfIgnoredVariables(var);
+                    }
                 }
                 else
                 {
