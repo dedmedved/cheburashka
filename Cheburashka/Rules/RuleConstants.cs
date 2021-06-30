@@ -77,6 +77,7 @@ namespace Cheburashka
         
         public const string EnforceTableAlias_RuleId                                    = "Cheburashka.DM0047";
         public const string PreferThrowToRaiserror_RuleId                               = "Cheburashka.DM0048";
+        public const string PreferConstantInitialisation_RuleId                         = "Cheburashka.DM0049";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -197,6 +198,11 @@ namespace Cheburashka
 
         public const string PreferThrowToRaiserror_RuleName                                         = "PreferThrowToRaiserror_RuleName";
         public const string PreferThrowToRaiserror_ProblemDescription                               = "PreferThrowToRaiserror_ProblemDescription";
+
+        public const string PreferConstantInitialisation_RuleName                                   = "PreferConstantInitialisation_RuleName";
+        public const string PreferConstantInitialisation_ProblemDescription                         = "PreferConstantInitialisation_ProblemDescription";
+
+
 
         /// <summary>
         /// The design category (should not be localized)

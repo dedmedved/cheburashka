@@ -97,8 +97,7 @@ namespace Cheburashka
                 }
 
                 // Get Database Schema and name of this model element.
-                string owningObjectSchema = modelElement.Name.Parts[0];
-                string owningObjectTable = modelElement.Name.Parts[1];
+                var owningObject = modelElement;
 
                 DMVSettings.RefreshModelBuiltInCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
@@ -120,10 +119,6 @@ namespace Cheburashka
                 if (mainTables.Count > 0)
                 {
                     return problems;
-
-                    //mainTable = mainTables[0];
-                    //mainTableschema = mainTable.Name.Parts[0];
-                    //mainTablename = mainTable.Name.Parts[1];
                 }
 
                 //object myObject = modelElement.GetType().GetField("ContextObject.TemporalSystemVersioningCurrentTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(modelElement);
@@ -134,31 +129,10 @@ namespace Cheburashka
                         var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
                         var foreignTable = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
 
-                        //var tables = thing.GetReferencedRelationshipInstances().ToList()
-                        //    .Where(n => n.Object.ObjectType.Name == "Table").ToList();
-                        //var tab = tables[0];
-                        //var tab2 = tables[1];
-
                         if (host.Count > 0 && foreignTable.Count > 0)
                         {
-                            //var hostschema = host[0].Name.Parts[0];
-                            //var hostname = host[0].Name.Parts[1];
-
-                            //var foreignTableschema = foreignTable[0].Name.Parts[0];
-                            //var foreignTablename = foreignTable[0].Name.Parts[1];
-
-                            //var hostschema = tab.ObjectName.Parts[0];
-                            //var hostname = tab.ObjectName.Parts[1];
-
-                            //var foreignTableschema = tab2.ObjectName.Parts[0];
-                            //var foreignTablename = tab2.ObjectName.Parts[1];
-
-                            if (SqlRuleUtils.ObjectNameMatches(host[0], owningObjectTable, owningObjectSchema)
-                                || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObjectTable, owningObjectSchema)
-                                //(hostname.SQLModel_StringCompareEqual(owningObjectTable)
-                                // && hostschema.SQLModel_StringCompareEqual(owningObjectSchema))
-                                //|| (foreignTablename.SQLModel_StringCompareEqual(owningObjectTable)
-                                //    && foreignTableschema.SQLModel_StringCompareEqual(owningObjectSchema))
+                            if (SqlRuleUtils.ObjectNameMatches(host[0], owningObject)
+                                || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObject)
                             )
                             {
                                 bFoundForeignKey = true;

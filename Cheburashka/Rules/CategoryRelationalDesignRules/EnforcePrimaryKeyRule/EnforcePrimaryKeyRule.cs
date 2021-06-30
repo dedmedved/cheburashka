@@ -98,8 +98,9 @@ namespace Cheburashka
                 }
 
                 // Get Database Schema and name of this model element.
-                string owningObjectSchema = modelElement.Name.Parts[0];
-                string owningObjectTable = modelElement.Name.Parts[1];
+                var owningObject = modelElement;
+                string owningObjectSchema = owningObject.Name.Parts[0];
+                string owningObjectTable = owningObject.Name.Parts[1];
 
                 DMVSettings.RefreshModelBuiltInCache(model);
 
@@ -110,7 +111,7 @@ namespace Cheburashka
                     if (!bFoundPrimaryKey)
                     {
                         TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
+                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObject))
                         {
                             bFoundPrimaryKey = true;
                             //break;

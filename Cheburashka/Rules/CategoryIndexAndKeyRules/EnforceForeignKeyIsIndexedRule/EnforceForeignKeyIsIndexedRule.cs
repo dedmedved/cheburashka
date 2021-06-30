@@ -99,12 +99,6 @@ namespace Cheburashka
             var ForeignKeyColumns = new List<string>();
             ForeignKeyColumns.AddRange(x);
 
-            // Get Database Schema and name of this model element.
-            //SchemaObjectName parentTable = hostTable.Name.Parts[1];
-            string owningObjectSchema = hostTable.Name.Parts[0];
-            string owningObjectTable = hostTable.Name.Parts[1];
-
-
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             var theseIndexes = new List<TSqlObject>();
 
@@ -113,7 +107,7 @@ namespace Cheburashka
             foreach (var thing in allIndexes)
             {
                 TSqlObject tab = thing.GetReferenced(Index.IndexedObject).ToList()[0];
-                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
+                if (SqlRuleUtils.ObjectNameMatches(tab, hostTable))
                 {
                     theseIndexes.Add(thing);
                 }
@@ -136,7 +130,7 @@ namespace Cheburashka
             foreach (var thing in allPKs)
             {
                 TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
+                if (SqlRuleUtils.ObjectNameMatches(tab, hostTable))
                 {
                     thesePK.Add(thing);
                     break;
@@ -161,7 +155,7 @@ namespace Cheburashka
             foreach (var thing in allUNs)
             {
                 TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
-                if (SqlRuleUtils.ObjectNameMatches(tab, owningObjectTable, owningObjectSchema))
+                if (SqlRuleUtils.ObjectNameMatches(tab, hostTable))
                 {
                     theseUN.Add(thing);
                 }

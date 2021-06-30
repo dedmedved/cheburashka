@@ -5,7 +5,6 @@ namespace Cheburashka
 {
     public interface ICheburashkaTSqlConcreteFragmentVisitor
     {
-        //public IList<TSqlFragment> SqlFragments => SqlFragments();
         public IList<TSqlFragment> SqlFragments();
     }
 }

@@ -22,7 +22,6 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Cheburashka

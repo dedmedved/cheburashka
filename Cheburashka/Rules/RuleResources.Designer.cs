@@ -781,6 +781,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Constant set but not by an initialiser in {0}.
+        /// </summary>
+        internal static string PreferConstantInitialisation_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferConstantInitialisation_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables set to constant values and never reset, are best set on declaration..
+        /// </summary>
+        internal static string PreferConstantInitialisation_RuleName {
+            get {
+                return ResourceManager.GetString("PreferConstantInitialisation_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raiserror found in {0}..
         /// </summary>
         internal static string PreferThrowToRaiserror_ProblemDescription {

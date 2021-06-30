@@ -22,21 +22,21 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.Linq;
+
 
 namespace Cheburashka
 {
 
     //TODO handle XML functions
-    internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class UpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaSqlExpressionDependencyVisitor
     {
         public UpdatedVariableVisitor()
         {
             SetVariables = new List<SQLExpressionDependency>();
         }
-
         public IList<SQLExpressionDependency> SetVariables { get; }
-        public IList<TSqlFragment> SqlFragments() { return SetVariables.Cast<TSqlFragment>().ToList(); }
+        public IList<SQLExpressionDependency> SQLExpressionDependencies() { return SetVariables; }
+
         public override void ExplicitVisit(SetVariableStatement node)
         {
 
@@ -51,6 +51,7 @@ namespace Cheburashka
             ed.AddDependencies(variableReferences);
             SetVariables.Add(ed);
         }
+
         public override void ExplicitVisit(SelectSetVariable node)
         {
             if (node.Variable is null || node.Expression is null) return ;
@@ -64,6 +65,7 @@ namespace Cheburashka
             ed.AddDependencies(variableReferences);
             SetVariables.Add(ed);
         }
+
         // This override prevents us writing a visitor for ExecuteParameter
         // The default visitor action stops.
         public override void ExplicitVisit(ExecuteSpecification node)
@@ -79,6 +81,7 @@ namespace Cheburashka
             // recurse into parameters
             node.AcceptChildren(this);
         }
+
         public override void ExplicitVisit(ExecuteParameter node)
         {
             //node.SQLModel_DebugPrint(@"C:\temp\ExecuteParameter.out");

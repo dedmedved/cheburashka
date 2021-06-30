@@ -22,7 +22,6 @@
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -96,9 +95,7 @@ namespace Cheburashka
                 List<VariableReference> variableReferences = allVariableLikeReferences.Except(namedParameters, new SqlVariableReferenceComparer()).ToList();
 
                 // get all assignments to variables
-                var updatedVariableVisitor = new UpdatedVariableVisitor();
-                sqlFragment.Accept(updatedVariableVisitor);
-                IList<SQLExpressionDependency> setVariables = updatedVariableVisitor.SetVariables;
+                var setVariables = DmSqlExpressionDependencyVisitor.Visit(sqlFragment, new UpdatedVariableVisitor());
 
                 Dictionary<string, object> objects = new(SqlComparer.Comparer);
                 Dictionary<string, int> counts = new(SqlComparer.Comparer);

@@ -38,24 +38,24 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(PreferThrowToRaiserrorRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(PreferConstantInitialisationRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.PreferThrowToRaiserror_RuleName,                     // ID used to look up the display name inside the resources file
-        RuleConstants.PreferThrowToRaiserror_ProblemDescription,            // ID used to look up the description inside the resources file
+        RuleConstants.PreferConstantInitialisation_RuleName,                // ID used to look up the display name inside the resources file
+        RuleConstants.PreferConstantInitialisation_ProblemDescription,      // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class PreferThrowToRaiserrorRule : SqlCodeAnalysisRule
+    public sealed class PreferConstantInitialisationRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0048: Prefer using Throw to Raiserror when raising an error."
+        /// shown as "DM0049: Variables set to constant values and never reset, are best set on declaration."
         /// </summary>
-        public const string RuleId = RuleConstants.PreferThrowToRaiserror_RuleId;
+        public const string RuleId = RuleConstants.PreferConstantInitialisation_RuleId;
 
-        public PreferThrowToRaiserrorRule() {
-            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
+        public PreferConstantInitialisationRule() {
+            SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
         }
 
         /// <summary>
@@ -84,33 +84,44 @@ namespace Cheburashka
 
             DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            //Casting is rubbish - but safe
-            List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();
-            // get all assignments to variables
-            var setVariables = DmSqlExpressionDependencyVisitor.Visit(sqlFragment, new UpdatedVariableVisitor());
 
-            // restrict initialisedVariableNames to anything that is an int type and has been assigned an int value <= 10
-            var initialisedVariableNames = initialisedVars.Where(n=> n.DataType is SqlDataTypeReference dataTypeReference 
-                                                                                    && ( dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.TinyInt
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.SmallInt
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Int
-                                                                                    || dataTypeReference.SqlDataTypeOption == SqlDataTypeOption.BigInt
-                                                                                    )
-                                                                                    && n.Value is IntegerLiteral literal && int.TryParse(literal.Value, out int litVal ) && litVal <= 10
-                                                                                )
-                                                                         .Select(n => n.VariableName.Value).ToList();
+            // anything with gotos is too hard to handle - skip for now
+            var gotos = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor());
+            if (gotos.Any())
+                return problems;
 
-            var setVariableNames = setVariables.Select(n => n.Variable.Name);
-            var variableNames = initialisedVariableNames.ToList();
-            var onlyInitialisedVariableNames = variableNames.Except(setVariableNames,SqlComparer.Comparer);
+            // get ifs and whiles and catches
+            var ifs = DmTSqlFragmentVisitor.Visit(sqlFragment, new IfStatementVisitor());
+            var whiles = DmTSqlFragmentVisitor.Visit(sqlFragment, new WhileStatementVisitor());
+            var visitor = new CatchStatementVisitor();
+            sqlFragment.Accept(visitor);
+            var catchLists = visitor.CatchStatements;
 
-            // visitor to get the occurrences of raiserror statements - that might cause a transfer of control
-            var raiseErrorStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new RaiserrorVisitor()).Cast<RaiseErrorStatement>().ToList();
-            // eliminate raiserror statements where the errorlevel is one of the initialised variables with a value <= 10 
-            var nonIssues = raiseErrorStatements.Where(n => n.SecondParameter is VariableReference)
-                                                .Select(n => n)
-                                                .Where( n => onlyInitialisedVariableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
-            var issues = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
+            // get all candidate initialisations
+            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
+            var issues = new List<TSqlFragment>();
+
+            // check they aren't initialised in possibly unexecuted code.
+            foreach (var v in singlySetLiteralVariableFragments)
+            {
+                var ifFree = !ifs.Any(i => i.SQLModel_Contains(v));
+                var whileFree = !whiles.Any(i => i.SQLModel_Contains(v));
+                var catchFree = true;
+                foreach (var statementList in catchLists)
+                {
+                    var thisCatchIsFree = ! statementList.Statements.Any(i => i.SQLModel_Contains(v)); ;
+                    if (!thisCatchIsFree)
+                    {
+                        catchFree = false;
+                        break;
+                    }
+                }
+
+                if (ifFree && whileFree && catchFree)
+                {
+                    issues.Add(v);
+                }
+            }
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 

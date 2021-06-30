@@ -357,6 +357,12 @@
   <data name="EnforceVariableLengthDataSpecification_RuleName" xml:space="preserve">
     <value>Don't rely on default values for variable length datatypes, other than DateTime2. </value>
   </data>
+  <data name="PreferConstantInitialisation_ProblemDescription" xml:space="preserve">
+    <value>Constant set but not by an initialiser in {0}</value>
+  </data>
+  <data name="PreferConstantInitialisation_RuleName" xml:space="preserve">
+    <value>Variables set to constant values and never reset, are best set on declaration.</value>
+  </data>
   <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
     <value>Raiserror found in {0}.</value>
   </data>
