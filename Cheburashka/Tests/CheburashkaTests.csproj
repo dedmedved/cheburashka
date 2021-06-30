@@ -1559,6 +1559,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentBeginDialogIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntPlusVarExpression.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntExpression.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentSetToIntFollowedBySelectSetShouldBeIgnored.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
