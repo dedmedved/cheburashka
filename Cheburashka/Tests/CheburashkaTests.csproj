@@ -1559,6 +1559,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableAssignmentBeginDialogIsIgnored.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSelectSetToERRORFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToError_lineFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
