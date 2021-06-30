@@ -178,6 +178,7 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="Generic Visitors\VariableReferenceVisitor.cs" />
     <Compile Include="Generic Visitors\CatchStatementVisitor.cs" />
     <Compile Include="Generic Visitors\WhileStatementVisitor.cs" />
     <Compile Include="Generic Visitors\IfStatementVisitor.cs" />
