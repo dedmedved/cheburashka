@@ -161,8 +161,9 @@ namespace Cheburashka
             )
             {
                 var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
                 // if the scalar expression doesnt contain any variables its safe to consider it to be an initialisation expression
-                if ( ! referencedVariables.Any())
+                if ( ! referencedVariables.Any() && !disallowedNonDeterministicFunctions.Any() )
                 {
                     if (!variableAssignments.ContainsKey(var.Name))
                     {

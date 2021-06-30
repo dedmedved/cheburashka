@@ -111,6 +111,7 @@
     <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferConstantInitialisationRule.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\NonDeterministicSystemFunctionVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\ConstantOnlyUpdatedVariableVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
