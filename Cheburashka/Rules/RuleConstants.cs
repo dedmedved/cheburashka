@@ -78,6 +78,7 @@ namespace Cheburashka
         public const string EnforceTableAlias_RuleId                                    = "Cheburashka.DM0047";
         public const string PreferThrowToRaiserror_RuleId                               = "Cheburashka.DM0048";
         public const string PreferConstantInitialisation_RuleId                         = "Cheburashka.DM0049";
+        public const string AvoidRaiseErrorOutsideTryCatch_RuleId                       = "Cheburashka.DM0050";
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -127,29 +128,29 @@ namespace Cheburashka
         public const string CheckUniqueConstraintHasNoNullColumns_RuleName                  = "CheckUniqueConstraintHasNoNullColumns_RuleName";
         public const string CheckUniqueConstraintHasNoNullColumns_ProblemDescription        = "CheckUniqueConstraintHasNoNullColumns_ProblemDescription";
 
-        public const string AvoidBareReturn_RuleName                        = "AvoidBareReturn_RuleName";
-        public const string AvoidBareReturn_ProblemDescription              = "AvoidBareReturn_ProblemDescription";
-
-        public const string AvoidGoto_RuleName                              = "AvoidGoto_RuleName";
-        public const string AvoidGoto_ProblemDescription                    = "AvoidGoto_ProblemDescription";
-
-        public const string AvoidNullLiteral_RuleName                       = "AvoidNullLiteral_RuleName";
-        public const string AvoidNullLiteral_ProblemDescription             = "AvoidNullLiteral_ProblemDescription";
-
-        public const string EnforceTryCatch_RuleName                        = "EnforceTryCatch_RuleName";
-        public const string EnforceTryCatch_ProblemDescription              = "EnforceTryCatch_ProblemDescription";
-
-        public const string EnforceReturn_RuleName                          = "EnforceReturn_RuleName";
-        public const string EnforceReturn_ProblemDescription                = "EnforceReturn_ProblemDescription";
-
-        public const string AvoidDirectUseOfRowcount_RuleName               = "AvoidDirectUseOfRowcount_RuleName";
-        public const string AvoidDirectUseOfRowcount_ProblemDescription     = "AvoidDirectUseOfRowcount_ProblemDescription";
-
-        public const string EnforceCaptureSPReturnStatus_RuleName           = "EnforceCaptureSPReturnStatus_RuleName";
-        public const string EnforceCaptureSPReturnStatus_ProblemDescription = "EnforceCaptureSPReturnStatus_ProblemDescription";
-
-        public const string AvoidOnePartNames_RuleName                      = "AvoidOnePartNames_RuleName";
-        public const string AvoidOnePartNames_ProblemDescription            = "AvoidOnePartNames_ProblemDescription";
+        public const string AvoidBareReturn_RuleName                                        = "AvoidBareReturn_RuleName";
+        public const string AvoidBareReturn_ProblemDescription                              = "AvoidBareReturn_ProblemDescription";
+                                                                                            
+        public const string AvoidGoto_RuleName                                              = "AvoidGoto_RuleName";
+        public const string AvoidGoto_ProblemDescription                                    = "AvoidGoto_ProblemDescription";
+                                                                                            
+        public const string AvoidNullLiteral_RuleName                                       = "AvoidNullLiteral_RuleName";
+        public const string AvoidNullLiteral_ProblemDescription                             = "AvoidNullLiteral_ProblemDescription";
+                                                                                            
+        public const string EnforceTryCatch_RuleName                                        = "EnforceTryCatch_RuleName";
+        public const string EnforceTryCatch_ProblemDescription                              = "EnforceTryCatch_ProblemDescription";
+                                                                                            
+        public const string EnforceReturn_RuleName                                          = "EnforceReturn_RuleName";
+        public const string EnforceReturn_ProblemDescription                                = "EnforceReturn_ProblemDescription";
+                                                                                            
+        public const string AvoidDirectUseOfRowcount_RuleName                               = "AvoidDirectUseOfRowcount_RuleName";
+        public const string AvoidDirectUseOfRowcount_ProblemDescription                     = "AvoidDirectUseOfRowcount_ProblemDescription";
+                                                                                            
+        public const string EnforceCaptureSPReturnStatus_RuleName                           = "EnforceCaptureSPReturnStatus_RuleName";
+        public const string EnforceCaptureSPReturnStatus_ProblemDescription                 = "EnforceCaptureSPReturnStatus_ProblemDescription";
+                                                                                            
+        public const string AvoidOnePartNames_RuleName                                      = "AvoidOnePartNames_RuleName";
+        public const string AvoidOnePartNames_ProblemDescription                            = "AvoidOnePartNames_ProblemDescription";
 
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName             = "DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName";
         public const string DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription   = "DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription";
@@ -202,6 +203,8 @@ namespace Cheburashka
         public const string PreferConstantInitialisation_RuleName                                   = "PreferConstantInitialisation_RuleName";
         public const string PreferConstantInitialisation_ProblemDescription                         = "PreferConstantInitialisation_ProblemDescription";
 
+        public const string AvoidRaiseErrorOutsideTryCatch_RuleName                                 = "AvoidRaiseErrorOutsideTryCatch_RuleName";
+        public const string AvoidRaiseErrorOutsideTryCatch_ProblemDescription                       = "AvoidRaiseErrorOutsideTryCatch_ProblemDescription";
 
 
         /// <summary>
