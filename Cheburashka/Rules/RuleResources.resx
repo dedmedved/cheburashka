@@ -159,6 +159,12 @@
   <data name="AvoidOnePartNames_RuleName" xml:space="preserve">
     <value>Always include the schema name when referencing an object.</value>
   </data>
+  <data name="AvoidRaiseErrorOutsideTryCatch_ProblemDescription" xml:space="preserve">
+    <value>Raiserror found outside TRY/CATCH block in {0}.</value>
+  </data>
+  <data name="AvoidRaiseErrorOutsideTryCatch_RuleName" xml:space="preserve">
+    <value>Raiserror with level &gt;10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller.</value>
+  </data>
   <data name="AvoidUninitialisedVariables_ProblemDescription" xml:space="preserve">
     <value>Uninitialised variable found in {0}.</value>
   </data>

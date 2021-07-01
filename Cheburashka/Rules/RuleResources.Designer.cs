@@ -187,6 +187,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raiserror found outside TRY/CATCH block in {0}..
+        /// </summary>
+        internal static string AvoidRaiseErrorOutsideTryCatch_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidRaiseErrorOutsideTryCatch_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raiserror with level &gt;10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller..
+        /// </summary>
+        internal static string AvoidRaiseErrorOutsideTryCatch_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidRaiseErrorOutsideTryCatch_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uninitialised variable found in {0}..
         /// </summary>
         internal static string AvoidUninitialisedVariables_ProblemDescription {
