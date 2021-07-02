@@ -1583,6 +1583,9 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToERRORFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntPlusVarExpression.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
