@@ -109,6 +109,7 @@
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSubQueryQuerySpecificationVisitor.cs" />
     <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\NonUpdatedParameterVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferConstantInitialisationRule.cs" />
     <Compile Include="CategoryModernCodingStyle\AvoidRaiseErrorOutsideTryCatchRule.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />

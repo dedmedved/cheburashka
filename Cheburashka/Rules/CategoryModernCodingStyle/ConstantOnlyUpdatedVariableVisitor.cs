@@ -30,6 +30,19 @@ namespace Cheburashka
     internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
+        public List<ProcedureParameter> Parameters;
+        public List<VariableReference> VariableReferences;
+        // Any assignment we find to a variable, or an assignment we don't like
+        private readonly Dictionary<string, TSqlFragment> invalidparameterAssignments = new(SqlComparer.Comparer);
+
+        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters) => Parameters = parameters;
+        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters,List<VariableReference> variables)
+        {
+            Parameters = parameters;
+            VariableReferences = variables;
+        }
+
+
         // The first assignment we find to a variable
         private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
@@ -61,7 +74,7 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectStatement node)
         {
             // only visit the SelectSetVariable nodes if this statement has no from clause
-            // and is a simple query expression no unions, no nested barcketed expressions
+            // and is a simple query expression no unions, no nested bracketed expressions
             // keep it simple
             if ( node.QueryExpression is QuerySpecification {FromClause: null})
             {
@@ -78,8 +91,8 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectSetVariable node)
         {
             if (ignoreAllVisitedVariables)
-                //if the select statement has a from clause, ignroe everything we meet.
-                //(so far thats the only condition triggering this logic)
+                //if the select statement has a from clause, ignore everything we meet.
+                //(so far that's the only condition triggering this logic)
                 AddVariableToListOfIgnoredVariables(node.Variable); 
             else 
                 //As above - only where we have no from clause - so we're certain the variable assignment happens
@@ -105,7 +118,6 @@ namespace Cheburashka
         {
             if (node.Variable is not null )
                 AddVariableToListOfIgnoredVariables(node.Variable);
-            //UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
         }
         //can't be a fetch clause - the fetch might not return anything
         //and assigning constants to variable in a fetch will be a target of anothert rule
@@ -142,10 +154,6 @@ namespace Cheburashka
             {
                 AddVariableToListOfIgnoredVariables(node.VariableName);
             }
-            //if (node is ProcedureParameter)
-            //{
-            //    AddVariableToListOfIgnoredVariables(node.VariableName);
-            //}
         }
         public override void ExplicitVisit(ProcedureParameter node)
         {
@@ -162,7 +170,7 @@ namespace Cheburashka
             {
                 var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
-                // if the scalar expression doesnt contain any variables its safe to consider it to be an initialisation expression
+                // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
                 {
                     if (!variableAssignments.ContainsKey(var.Name))
