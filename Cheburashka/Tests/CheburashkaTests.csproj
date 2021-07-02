@@ -1564,6 +1564,12 @@
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\FunctionWithSingleVariableInitialisedFromIntParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\FunctionWithSingleVariableSetToIntParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\PreferConstantInitialisationRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1581,6 +1587,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToERRORFunction.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralAfterInitialisation.sql" />
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableInitialisedFromParameter.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntParameter.sql">
@@ -1640,7 +1650,7 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\Table1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralAfterInitialisation.sql">
+    <Content Include="TestScripts\PreferConstantInitialisationRule\TriggerWithSingleVariableSetToIntLiteral.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralTwice.sql">

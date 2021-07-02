@@ -97,6 +97,7 @@ namespace Cheburashka
             sqlFragment.Accept(visitor);
             var catchLists = visitor.CatchStatements;
 
+            // find all unset parameters -- these feed into out list of permitted variable 'things'
             // get all candidate initialisations
             var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
             var issues = new List<TSqlFragment>();

@@ -52,3 +52,12 @@ Start line: 5
 Start column: 5
 ========end of problem========
 
+Problem description: Constant set but not by an initialiser in [dbo].[TriggerWithSingleVariableSetToIntLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.TriggerWithSingleVariableSetToIntLiteral
+Script file: TriggerWithSingleVariableSetToIntLiteral.sql
+Start line: 7
+Start column: 5
+========end of problem========
+
