@@ -104,11 +104,11 @@ namespace Cheburashka
                            : new List<ProcedureParameter>();
 
                 ;
-            // find all unset parameters -- these feed into out list of permitted variable 'things'
-            var NonAssignedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().ToList();
+            // find all unset parameters -- these feed into our list of permitted variable 'things'
+            var nonAssignedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().ToList();
 
             // get all candidate initialisations
-            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(NonAssignedParameters));
+            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(nonAssignedParameters));
             var issues = new List<TSqlFragment>();
 
             // check they aren't initialised in possibly unexecuted code.

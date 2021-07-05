@@ -32,33 +32,42 @@ namespace Cheburashka
 
         public List<ProcedureParameter> Parameters;
         public List<VariableReference> VariableReferences;
-        // Any assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, TSqlFragment> invalidparameterAssignments = new(SqlComparer.Comparer);
+        private readonly bool bCheckParameters;
+        private readonly bool bCheckVariables;
 
-        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters) => Parameters = parameters;
-        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters,List<VariableReference> variables)
+
+        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters)
         {
             Parameters = parameters;
+            bCheckParameters = true;
+            bCheckVariables = false;
+        }
+
+        public ConstantOnlyUpdatedVariableVisitor(List<VariableReference> variables)
+        {
             VariableReferences = variables;
+            bCheckParameters = false;
+            bCheckVariables = true;
         }
 
 
         // The first assignment we find to a variable
         private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, VariableReference> variables = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
         private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
         private bool ignoreAllVisitedVariables = false;
 
+        public IList<VariableReference> Variables()
+        {
+            var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+            return singleValidAssignmentKeys.Select(v => variables[v]).ToList();
+        }
         public IList<TSqlFragment> VariableAssignments()
         {
             var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
-            List<TSqlFragment> sqlFragments = new();
-            foreach (var v in singleValidAssignmentKeys)
-            {
-                sqlFragments.Add(variableAssignments[v]);
-            }
-            return sqlFragments;
+            return singleValidAssignmentKeys.Select(v => variableAssignments[v]).ToList();
         }
 
         public IList<TSqlFragment> SqlFragments()
@@ -141,7 +150,7 @@ namespace Cheburashka
         public override void ExplicitVisit(ReceiveStatement node)
         {
             if (node.SelectElements is null) return;
-            var setVariables = node.SelectElements.Where(n => n is SelectSetVariable ssv).Cast<SelectSetVariable>().ToList().Select(n => n.Variable);
+            var setVariables = node.SelectElements.Where(n => n is SelectSetVariable).Cast<SelectSetVariable>().ToList().Select(n => n.Variable);
             foreach (var variable in setVariables)
             {
                 AddVariableToListOfIgnoredVariables(variable);
@@ -168,13 +177,26 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                List<TSqlFragment> referencedVariables = new ();//= DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                if (bCheckParameters)
+                {
+                    var pNames = Parameters.Select(n => n.VariableName.Value).ToList();
+                    referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(pNames)).ToList();
+                }
+                if (bCheckVariables)
+                {
+                    var vNames = VariableReferences.Select(n => n.Name).ToList();
+                    referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(vNames)).ToList();
+                }
+
+                //var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
                 // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
                 {
                     if (!variableAssignments.ContainsKey(var.Name))
                     {
+                        variables.Add(var.Name, var);
                         variableAssignments.Add(var.Name, source);
                     }
                     else

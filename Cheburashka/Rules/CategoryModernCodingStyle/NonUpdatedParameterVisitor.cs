@@ -36,7 +36,7 @@ namespace Cheburashka
 
         public NonUpdatedParameterVisitor(List<ProcedureParameter> parameters) => Parameters = parameters;
 
-        public IList<ProcedureParameter> ParameterAssignments()
+        public IList<ProcedureParameter> NonAssignedParameters()
         {
             var singleValidAssignments = Parameters.Where( P => ! invalidparameterAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(P.VariableName.Value))).ToList();
             return singleValidAssignments;
@@ -44,7 +44,7 @@ namespace Cheburashka
 
         public IList<TSqlFragment> SqlFragments()
         {
-            return ParameterAssignments().Cast<TSqlFragment>().ToList();
+            return NonAssignedParameters().Cast<TSqlFragment>().ToList();
         }
 
         public override void ExplicitVisit(SetVariableStatement node)
