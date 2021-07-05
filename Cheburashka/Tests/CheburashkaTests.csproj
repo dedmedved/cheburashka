@@ -1583,6 +1583,15 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSelectSetToERRORFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToInitialisedInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToSecondSetInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToNonDeclaredSetInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToError_lineFunction.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1591,6 +1600,15 @@
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteralAfterInitialisation.sql" />
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableInitialisedFromParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToDeclaredInt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntParameterWhereParameterIsSetBeforeReference.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntParameterWhereParameterIsSetAfterReference.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntParameter.sql">
