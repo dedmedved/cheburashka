@@ -93,9 +93,9 @@ namespace Cheburashka
             // get ifs and whiles and catches
             var ifs = DmTSqlFragmentVisitor.Visit(sqlFragment, new IfStatementVisitor());
             var whiles = DmTSqlFragmentVisitor.Visit(sqlFragment, new WhileStatementVisitor());
-            var visitor = new CatchStatementVisitor();
-            sqlFragment.Accept(visitor);
-            var catchLists = visitor.CatchStatements;
+            var catchStatementVisitor = new CatchStatementVisitor();
+            sqlFragment.Accept(catchStatementVisitor);
+            var catchLists = catchStatementVisitor.CatchStatements;
 
             // Get parameters
 
@@ -103,9 +103,16 @@ namespace Cheburashka
                            : sqlFragment is CreateFunctionStatement  createFunctionStatement  ? createFunctionStatement.Parameters.ToList()
                            : new List<ProcedureParameter>();
 
-                ;
             // find all unset parameters -- these feed into our list of permitted variable 'things'
-            var nonAssignedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().ToList();
+            var nonAssignedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().Select(n => n.VariableName.Value).ToList();
+            // find all initialised-only variables -- these feed into our list of permitted variable 'things'
+            // only allow variables intialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
+            // again disallow anything intialised in a control structure - yeah.
+            var initialisedVariableVisitor = new InitialisedOnlyVariablesVisitor(nonAssignedParameters);
+            sqlFragment.Accept(initialisedVariableVisitor);
+            var initialisedOnlyVariables = initialisedVariableVisitor.InitialisedOnlyVariables();
+
+            nonAssignedParameters.AddRange(initialisedOnlyVariables);
 
             // get all candidate initialisations
             var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(nonAssignedParameters));

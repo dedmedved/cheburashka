@@ -1564,6 +1564,18 @@
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\PreferConstantInitialisationRuleComplexExamples-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToVariableInitialisedFromParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToInitialisedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRule\FunctionWithSingleVariableInitialisedFromIntParameter.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

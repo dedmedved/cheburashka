@@ -30,24 +30,11 @@ namespace Cheburashka
     internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
-        public List<ProcedureParameter> Parameters;
-        public List<VariableReference> VariableReferences;
-        private readonly bool bCheckParameters;
-        private readonly bool bCheckVariables;
+        public List<string> VariableNames;
 
-
-        public ConstantOnlyUpdatedVariableVisitor(List<ProcedureParameter> parameters)
+        public ConstantOnlyUpdatedVariableVisitor(List<string> variables)
         {
-            Parameters = parameters;
-            bCheckParameters = true;
-            bCheckVariables = false;
-        }
-
-        public ConstantOnlyUpdatedVariableVisitor(List<VariableReference> variables)
-        {
-            VariableReferences = variables;
-            bCheckParameters = false;
-            bCheckVariables = true;
+            VariableNames = variables;
         }
 
 
@@ -157,6 +144,7 @@ namespace Cheburashka
             }
         }
 
+        // ignore any declared variable that already have an initialiser
         public override void ExplicitVisit(DeclareVariableElement node)
         {
             if (node is not ProcedureParameter && node.Value is not null)
@@ -177,19 +165,7 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                List<TSqlFragment> referencedVariables = new ();//= DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
-                if (bCheckParameters)
-                {
-                    var pNames = Parameters.Select(n => n.VariableName.Value).ToList();
-                    referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(pNames)).ToList();
-                }
-                if (bCheckVariables)
-                {
-                    var vNames = VariableReferences.Select(n => n.Name).ToList();
-                    referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(vNames)).ToList();
-                }
-
-                //var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(VariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
                 // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
