@@ -1567,7 +1567,10 @@
     <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\PreferConstantInitialisationRuleComplexExamples-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameterInsideWhile - Copy.sql">
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToChainOfVariablesInitialisedInsideWhileFromParameter.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameterInsideWhile.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter.sql">
