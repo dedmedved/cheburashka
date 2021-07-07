@@ -27,7 +27,7 @@ using System.Linq;
 namespace Cheburashka
 {
 
-    internal class InitialisedOnlyVariablesVisitor : TSqlConcreteFragmentVisitor//, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class InitialisedOnlyVariablesVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
         private readonly List<string> InputVariableNames;

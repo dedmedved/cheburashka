@@ -1,3 +1,12 @@
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter
+Script file: ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter.sql
+Start line: 7
+Start column: 5
+========end of problem========
+
 Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToInitialisedVariable]
 FullID: Cheburashka.DM0049
 Severity: Warning
