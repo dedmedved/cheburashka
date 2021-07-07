@@ -104,18 +104,15 @@ namespace Cheburashka
                            : new List<ProcedureParameter>();
 
             // find all unset parameters -- these feed into our list of permitted variable 'things'
-            var nonAssignedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().Select(n => n.VariableName.Value).ToList();
+            var nonAssignedParametersAndVariables = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters)).Cast<ProcedureParameter>().Select(n => n.VariableName.Value).ToList();
             // find all initialised-only variables -- these feed into our list of permitted variable 'things'
             // only allow variables intialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
             // again disallow anything intialised in a control structure - yeah.
-            var initialisedVariableVisitor = new InitialisedOnlyVariablesVisitor(nonAssignedParameters);
+            var initialisedVariableVisitor = new InitialisedOnlyVariablesVisitor(nonAssignedParametersAndVariables);
             sqlFragment.Accept(initialisedVariableVisitor);
 
-            eliminate any of these set in any invalid context;
-
             var initialisedOnlyVariables = initialisedVariableVisitor.InitialisedOnlyVariables();
-            // check they aren't initialised in possibly unexecuted code. - but that means beinbg fixed to return sql fragments and variabel names
-            var validanitialisedOnlyVariables = new List<TSqlFragment>();
+            // check they aren't initialised in possibly unexecuted code.
             foreach (var v in initialisedOnlyVariables)
             {
                 var ifFree = !ifs.Any(i => i.SQLModel_Contains(v));
@@ -134,14 +131,12 @@ namespace Cheburashka
 
                 if (ifFree && whileFree && catchFree)
                 {
-                    validanitialisedOnlyVariables.Add(v);
+                    nonAssignedParametersAndVariables.Add(v.VariableName.Value);
                 }
             }
 
-            nonAssignedParameters.AddRange(initialisedOnlyVariables);
-
             // get all candidate initialisations
-            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(nonAssignedParameters));
+            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(nonAssignedParametersAndVariables));
             var issues = new List<TSqlFragment>();
 
             // check they aren't initialised in possibly unexecuted code.

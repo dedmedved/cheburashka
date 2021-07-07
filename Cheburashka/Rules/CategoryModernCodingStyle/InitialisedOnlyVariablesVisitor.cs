@@ -30,28 +30,36 @@ namespace Cheburashka
     internal class InitialisedOnlyVariablesVisitor : TSqlConcreteFragmentVisitor//, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
-        public List<string> InputVariableNames;
+        private readonly List<string> InputVariableNames;
 
         public InitialisedOnlyVariablesVisitor(List<string> inputVariables) => InputVariableNames = inputVariables;
 
         // The declarations of variables with assigned values.
-        private readonly Dictionary<string, TSqlFragment> variableInitialisations = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, DeclareVariableElement> variableInitialisations = new(SqlComparer.Comparer);
         // Any assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, string> invalidVariableAssignments = new(SqlComparer.Comparer);
 
         //public InitialisedOnlyVariablesVisitor(List<VariableReference> variableReferences) => VariableReferences = variableReferences;
 
-        public IList<string> InitialisedOnlyVariables()
+        public IList<DeclareVariableElement> InitialisedOnlyVariables()
         {
             var variablesNamesFound = variableInitialisations.Keys;
             var singleValidAssignments = variablesNamesFound.Where( V => !invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(V))).ToList();
+            //var variablesFound = variableInitialisations.Keys;
+            return singleValidAssignments.Select(varName => variableInitialisations[varName]).ToList();
+        }
+
+        public IList<string> InitialisedOnlyVariableNames()
+        {
+            var variablesNamesFound = variableInitialisations.Keys;
+            var singleValidAssignments = variablesNamesFound.Where(V => !invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(V))).ToList();
             return singleValidAssignments;
         }
 
-        //public IList<TSqlFragment> SqlFragments()
-        //{
-        //    return InitialisedOnlyVariables().Cast<TSqlFragment>().ToList();
-        //}
+        public IList<TSqlFragment> SqlFragments()
+        {
+            return InitialisedOnlyVariables().Cast<TSqlFragment>().ToList();
+        }
 
         public override void ExplicitVisit(SetVariableStatement node)
         {
@@ -131,7 +139,7 @@ namespace Cheburashka
             }
         }
 
-        private void UpdateDictionariesWithExpression(Identifier var, ScalarExpression expression, AssignmentKind assignment, TSqlFragment source)
+        private void UpdateDictionariesWithExpression(Identifier var, ScalarExpression expression, AssignmentKind assignment, DeclareVariableElement source)
         {
             if (var is null || expression is null) return;
             // the expression can now be a literal expression 
@@ -168,7 +176,7 @@ namespace Cheburashka
             if (var is null) return;
             if (!invalidVariableAssignments.ContainsKey(var))
                 invalidVariableAssignments.Add(var,
-                    new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+                    ""); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
     }
 }
