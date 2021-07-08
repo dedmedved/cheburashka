@@ -80,6 +80,9 @@ namespace Cheburashka
         public const string PreferConstantInitialisation_RuleId                         = "Cheburashka.DM0049";
         public const string AvoidRaiseErrorOutsideTryCatch_RuleId                       = "Cheburashka.DM0050";
 
+        public const string EnforceExplicitInsertColumnList_RuleId                      = "Cheburashka.DM0051";
+
+
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariables_ProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
 
@@ -205,6 +208,9 @@ namespace Cheburashka
 
         public const string AvoidRaiseErrorOutsideTryCatch_RuleName                                 = "AvoidRaiseErrorOutsideTryCatch_RuleName";
         public const string AvoidRaiseErrorOutsideTryCatch_ProblemDescription                       = "AvoidRaiseErrorOutsideTryCatch_ProblemDescription";
+
+        public const string EnforceExplicitInsertColumnList_RuleName                                = "EnforceExplicitInsertColumnList_RuleName";
+        public const string EnforceExplicitInsertColumnList_ProblemDescription                      = "EnforceExplicitInsertColumnList_ProblemDescription";
 
 
         /// <summary>

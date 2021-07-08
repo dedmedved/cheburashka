@@ -619,6 +619,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert statement or clause without column list found in {0}..
+        /// </summary>
+        internal static string EnforceExplicitInsertColumnList_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceExplicitInsertColumnList_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert statements and clauses should always have an explicit column list..
+        /// </summary>
+        internal static string EnforceExplicitInsertColumnList_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceExplicitInsertColumnList_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table with no Foreign Key relationships was found in {0}..
         /// </summary>
         internal static string EnforceForeignKey_ProblemDescription {
