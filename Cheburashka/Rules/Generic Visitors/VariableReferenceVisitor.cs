@@ -27,16 +27,17 @@ namespace Cheburashka
 {
     internal class VariableReferenceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public VariableReferenceVisitor()
-        {
-            VariableReferences = new List<VariableReference>();
-        }
-
-        public List<VariableReference> VariableReferences { get; }
+        public List<string> AllowedVariableNames = new();
+        public VariableReferenceVisitor() {}
+        public VariableReferenceVisitor(List<string> allowedVariableNames) => AllowedVariableNames = allowedVariableNames;
+        public List<VariableReference> VariableReferences { get; } = new List<VariableReference>();
         public IList<TSqlFragment> SqlFragments() { return VariableReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(VariableReference node)
         {
-            VariableReferences.Add(node);
+            if ( !AllowedVariableNames.Any( n => n.SQLModel_StringCompareEqual(node.Name)))
+            {
+                VariableReferences.Add(node);
+            }
         }
     }
 }

@@ -27,25 +27,45 @@ using System.Linq;
 namespace Cheburashka
 {
 
-    internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor//, ICheburashkaTSqlConcreteFragmentVisitor
     {
+
+        public List<string> VariableNames;
+
+        public ConstantOnlyUpdatedVariableVisitor(List<string> variables)
+        {
+            VariableNames = variables;
+        }
+
 
         // The first assignment we find to a variable
         private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
+//        private readonly Dictionary<string, VariableReference> variables = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
         private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
-        private bool ignoreAllVisitedVariables = false;
+        private bool ignoreAllVisitedVariables;
 
+        public Dictionary<string, TSqlFragment> VariablesAndValues()
+        {
+            var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+            var x = new Dictionary<string, TSqlFragment>();
+            foreach (var k in singleValidAssignmentKeys)
+            {
+                x.Add(k, variableAssignments[k]);
+            }
+
+            return x;
+        }
+        //public IList<VariableReference> Variables()
+        //{
+        //    var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+        //    return singleValidAssignmentKeys.Select(v => variables[v]).ToList();
+        //}
         public IList<TSqlFragment> VariableAssignments()
         {
             var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
-            List<TSqlFragment> sqlFragments = new();
-            foreach (var v in singleValidAssignmentKeys)
-            {
-                sqlFragments.Add(variableAssignments[v]);
-            }
-            return sqlFragments;
+            return singleValidAssignmentKeys.Select(v => variableAssignments[v]).ToList();
         }
 
         public IList<TSqlFragment> SqlFragments()
@@ -61,7 +81,7 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectStatement node)
         {
             // only visit the SelectSetVariable nodes if this statement has no from clause
-            // and is a simple query expression no unions, no nested barcketed expressions
+            // and is a simple query expression no unions, no nested bracketed expressions
             // keep it simple
             if ( node.QueryExpression is QuerySpecification {FromClause: null})
             {
@@ -78,8 +98,8 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectSetVariable node)
         {
             if (ignoreAllVisitedVariables)
-                //if the select statement has a from clause, ignroe everything we meet.
-                //(so far thats the only condition triggering this logic)
+                //if the select statement has a from clause, ignore everything we meet.
+                //(so far that's the only condition triggering this logic)
                 AddVariableToListOfIgnoredVariables(node.Variable); 
             else 
                 //As above - only where we have no from clause - so we're certain the variable assignment happens
@@ -105,7 +125,6 @@ namespace Cheburashka
         {
             if (node.Variable is not null )
                 AddVariableToListOfIgnoredVariables(node.Variable);
-            //UpdateDictionariesWithExpression(node.Variable, node.NewValue, node.AssignmentKind,node);
         }
         //can't be a fetch clause - the fetch might not return anything
         //and assigning constants to variable in a fetch will be a target of anothert rule
@@ -129,23 +148,20 @@ namespace Cheburashka
         public override void ExplicitVisit(ReceiveStatement node)
         {
             if (node.SelectElements is null) return;
-            var setVariables = node.SelectElements.Where(n => n is SelectSetVariable ssv).Cast<SelectSetVariable>().ToList().Select(n => n.Variable);
+            var setVariables = node.SelectElements.Where(n => n is SelectSetVariable).Cast<SelectSetVariable>().ToList().Select(n => n.Variable);
             foreach (var variable in setVariables)
             {
                 AddVariableToListOfIgnoredVariables(variable);
             }
         }
 
+        // ignore any declared variable that already have an initialiser
         public override void ExplicitVisit(DeclareVariableElement node)
         {
             if (node is not ProcedureParameter && node.Value is not null)
             {
                 AddVariableToListOfIgnoredVariables(node.VariableName);
             }
-            //if (node is ProcedureParameter)
-            //{
-            //    AddVariableToListOfIgnoredVariables(node.VariableName);
-            //}
         }
         public override void ExplicitVisit(ProcedureParameter node)
         {
@@ -160,13 +176,14 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor());
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(VariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
-                // if the scalar expression doesnt contain any variables its safe to consider it to be an initialisation expression
+                // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
                 {
                     if (!variableAssignments.ContainsKey(var.Name))
                     {
+                        //variables.Add(var.Name, var);
                         variableAssignments.Add(var.Name, source);
                     }
                     else

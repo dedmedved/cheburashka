@@ -93,39 +93,98 @@ namespace Cheburashka
             // get ifs and whiles and catches
             var ifs = DmTSqlFragmentVisitor.Visit(sqlFragment, new IfStatementVisitor());
             var whiles = DmTSqlFragmentVisitor.Visit(sqlFragment, new WhileStatementVisitor());
-            var visitor = new CatchStatementVisitor();
-            sqlFragment.Accept(visitor);
-            var catchLists = visitor.CatchStatements;
+            var catchStatementVisitor = new CatchStatementVisitor();
+            sqlFragment.Accept(catchStatementVisitor);
+            var catchLists = catchStatementVisitor.CatchStatements;
 
-            // get all candidate initialisations
-            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor());
-            var issues = new List<TSqlFragment>();
-
-            // check they aren't initialised in possibly unexecuted code.
-            foreach (var v in singlySetLiteralVariableFragments)
+            // Get parameters
+            var parameters = sqlFragment switch
             {
-                var ifFree = !ifs.Any(i => i.SQLModel_Contains(v));
-                var whileFree = !whiles.Any(i => i.SQLModel_Contains(v));
-                var catchFree = true;
-                foreach (var statementList in catchLists)
+                CreateProcedureStatement createProcedureStatement => createProcedureStatement.Parameters.ToList(),
+                CreateFunctionStatement createFunctionStatement => createFunctionStatement.Parameters.ToList(),
+                _ => new List<ProcedureParameter>()
+            };
+
+            // find all unset parameters -- these feed into our list of permitted variable 'things'
+            var nonAssignedParametersAndVariables = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters))
+                                                                          .Cast<ProcedureParameter>().ToList();
+            // find all initialised-only variables -- these feed into our list of permitted variable 'things'
+            // only allow variables intialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
+            // again disallow anything intialised in a control structure - yeah.
+
+            var bInitialisedVariableStillToFind = true;
+            var initialisedOnlyVariablesCount = nonAssignedParametersAndVariables.Count;
+            List<string> nonAssignedParametersAndVariablesNames = nonAssignedParametersAndVariables.Select(n => n.VariableName.Value).ToList();
+            while (bInitialisedVariableStillToFind)
+            {
+                var initialisedOnlyVariables = DmTSqlFragmentVisitor.Visit(sqlFragment
+                                                                          , new InitialisedOnlyVariablesVisitor(nonAssignedParametersAndVariablesNames))
+                                                                    .Cast<DeclareVariableElement>().ToList();
+                // check they aren't initialised in possibly unexecuted code.
+                //nonAssignedParametersAndVariablesNames = initialisedOnlyVariables.Select(n => n.VariableName.Value).ToList();
+                foreach (var v in initialisedOnlyVariables)
                 {
-                    var thisCatchIsFree = ! statementList.Statements.Any(i => i.SQLModel_Contains(v)); ;
-                    if (!thisCatchIsFree)
+                    // improve the add if missing logic - currently it sucks but most variable lists are short anyway
+                    IfFree(ifs, v, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
+                    if (ifFree && whileFree && catchFree && ! nonAssignedParametersAndVariablesNames.Any( n => v.VariableName.Value.SQLModel_StringCompareEqual(n)))
                     {
-                        catchFree = false;
-                        break;
+                        nonAssignedParametersAndVariablesNames.Add(v.VariableName.Value);
                     }
                 }
 
-                if (ifFree && whileFree && catchFree)
+                bInitialisedVariableStillToFind = nonAssignedParametersAndVariablesNames.Count != initialisedOnlyVariablesCount;
+
+                initialisedOnlyVariablesCount = nonAssignedParametersAndVariablesNames.Count;
+
+            }
+
+
+            // get all candidate initialisations
+            var candidateConstantAssigments = nonAssignedParametersAndVariablesNames;
+            var bAssignedConstantsStillToFind = true;
+            var permissibleVariablesCount = nonAssignedParametersAndVariables.Count;
+            var issues = new List<TSqlFragment>();
+
+            while (bAssignedConstantsStillToFind)
+            {
+                var singlySetLiteralVariableVisitor = new ConstantOnlyUpdatedVariableVisitor(candidateConstantAssigments);
+                sqlFragment.Accept(singlySetLiteralVariableVisitor);
+                var singlySetLiteralVariableFragments = singlySetLiteralVariableVisitor.VariablesAndValues();
+
+                // check they aren't initialised in possibly unexecuted code.
+                foreach (var v in singlySetLiteralVariableFragments.Keys)
                 {
-                    issues.Add(v);
+                    var SQL = singlySetLiteralVariableFragments[v];
+                    IfFree(ifs, SQL, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
+                    if (ifFree && whileFree && catchFree && ! candidateConstantAssigments.Any(n => v.SQLModel_StringCompareEqual(n)))
+                    {
+                        issues.Add(SQL); // yep this is ugly as well
+                        candidateConstantAssigments.Add(v);
+                    }
                 }
+                bAssignedConstantsStillToFind = candidateConstantAssigments.Count != permissibleVariablesCount;
+
+                permissibleVariablesCount = candidateConstantAssigments.Count;
             }
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }
+
+        static void IfFree(IEnumerable<TSqlFragment> sqlFragments, TSqlFragment v, IEnumerable<TSqlFragment> list, IEnumerable<StatementList> statementLists, out bool ifFree, out bool whileFree, out bool catchFree)
+        {
+            ifFree = !sqlFragments.Any(i => i.SQLModel_Contains(v));
+            whileFree = !list.Any(i => i.SQLModel_Contains(v));
+            catchFree = true;
+            foreach (var statementList in statementLists)
+            {
+                var thisCatchIsFree = !statementList.Statements.Any(i => i.SQLModel_Contains(v));
+                if (thisCatchIsFree) continue;
+                catchFree = false;
+                break;
+            }
+        }
+
     }
 }

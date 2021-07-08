@@ -50,6 +50,7 @@ namespace Cheburashka
               || node.FunctionName.Value.SQLModel_StringCompareEqual("CURSOR_STATUS")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("SCOPE_IDENTITY")
               || node.FunctionName.Value.SQLModel_StringCompareEqual("IDENT_CURRENT")
+              || node.FunctionName.Value.SQLModel_StringCompareEqual("XACT_STATE")
             )
             {
                 NonDeterministicSystemFunctions.Add(node);
