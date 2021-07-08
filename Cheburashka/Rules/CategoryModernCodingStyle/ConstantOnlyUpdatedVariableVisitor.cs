@@ -27,7 +27,7 @@ using System.Linq;
 namespace Cheburashka
 {
 
-    internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class ConstantOnlyUpdatedVariableVisitor : TSqlConcreteFragmentVisitor//, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
         public List<string> VariableNames;
@@ -40,17 +40,28 @@ namespace Cheburashka
 
         // The first assignment we find to a variable
         private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
-        private readonly Dictionary<string, VariableReference> variables = new(SqlComparer.Comparer);
+//        private readonly Dictionary<string, VariableReference> variables = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
         private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
 
-        private bool ignoreAllVisitedVariables = false;
+        private bool ignoreAllVisitedVariables;
 
-        public IList<VariableReference> Variables()
+        public Dictionary<string, TSqlFragment> VariablesAndValues()
         {
             var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
-            return singleValidAssignmentKeys.Select(v => variables[v]).ToList();
+            var x = new Dictionary<string, TSqlFragment>();
+            foreach (var k in singleValidAssignmentKeys)
+            {
+                x.Add(k, variableAssignments[k]);
+            }
+
+            return x;
         }
+        //public IList<VariableReference> Variables()
+        //{
+        //    var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+        //    return singleValidAssignmentKeys.Select(v => variables[v]).ToList();
+        //}
         public IList<TSqlFragment> VariableAssignments()
         {
             var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
@@ -172,7 +183,7 @@ namespace Cheburashka
                 {
                     if (!variableAssignments.ContainsKey(var.Name))
                     {
-                        variables.Add(var.Name, var);
+                        //variables.Add(var.Name, var);
                         variableAssignments.Add(var.Name, source);
                     }
                     else

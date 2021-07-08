@@ -124,6 +124,7 @@ namespace Cheburashka
                 //nonAssignedParametersAndVariablesNames = initialisedOnlyVariables.Select(n => n.VariableName.Value).ToList();
                 foreach (var v in initialisedOnlyVariables)
                 {
+                    // improve the add if missing logic - currently it sucks but most variable lists are short anyway
                     IfFree(ifs, v, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
                     if (ifFree && whileFree && catchFree && ! nonAssignedParametersAndVariablesNames.Any( n => v.VariableName.Value.SQLModel_StringCompareEqual(n)))
                     {
@@ -139,23 +140,38 @@ namespace Cheburashka
 
 
             // get all candidate initialisations
-            var singlySetLiteralVariableFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new ConstantOnlyUpdatedVariableVisitor(nonAssignedParametersAndVariablesNames));
+            var candidateConstantAssigments = nonAssignedParametersAndVariablesNames;
+            var bAssignedConstantsStillToFind = true;
+            var permissibleVariablesCount = nonAssignedParametersAndVariables.Count;
             var issues = new List<TSqlFragment>();
 
-            // check they aren't initialised in possibly unexecuted code.
-            foreach (var v in singlySetLiteralVariableFragments)
+            while (bAssignedConstantsStillToFind)
             {
-                IfFree(ifs, v, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
-                if (ifFree && whileFree && catchFree)
+                var singlySetLiteralVariableVisitor = new ConstantOnlyUpdatedVariableVisitor(candidateConstantAssigments);
+                sqlFragment.Accept(singlySetLiteralVariableVisitor);
+                var singlySetLiteralVariableFragments = singlySetLiteralVariableVisitor.VariablesAndValues();
+
+                // check they aren't initialised in possibly unexecuted code.
+                foreach (var v in singlySetLiteralVariableFragments.Keys)
                 {
-                    issues.Add(v);
+                    var SQL = singlySetLiteralVariableFragments[v];
+                    IfFree(ifs, SQL, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
+                    if (ifFree && whileFree && catchFree && ! candidateConstantAssigments.Any(n => v.SQLModel_StringCompareEqual(n)))
+                    {
+                        issues.Add(SQL); // yep this is ugly as well
+                        candidateConstantAssigments.Add(v);
+                    }
                 }
+                bAssignedConstantsStillToFind = candidateConstantAssigments.Count != permissibleVariablesCount;
+
+                permissibleVariablesCount = candidateConstantAssigments.Count;
             }
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             return problems;
         }
+
         static void IfFree(IEnumerable<TSqlFragment> sqlFragments, TSqlFragment v, IEnumerable<TSqlFragment> list, IEnumerable<StatementList> statementLists, out bool ifFree, out bool whileFree, out bool catchFree)
         {
             ifFree = !sqlFragments.Any(i => i.SQLModel_Contains(v));
