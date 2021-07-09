@@ -1,0 +1,54 @@
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList
+Script file: ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList.sql
+Start line: 6
+Start column: 1
+========end of problem========
+
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithoutAnyExplicitInsertColumnInInsertFromDML].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithoutAnyExplicitInsertColumnInInsertFromDML
+Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithoutAnyExplicitInsertColumnInInsertFromDML].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithoutAnyExplicitInsertColumnInInsertFromDML
+Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql
+Start line: 6
+Start column: 1
+========end of problem========
+
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithoutExplicitInsertColumnSelectList].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithoutExplicitInsertColumnSelectList
+Script file: ProcWithoutExplicitInsertColumnSelectList.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithoutExplicitInsertColumnSelectListFromDML].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithoutExplicitInsertColumnSelectListFromDML
+Script file: ProcWithoutExplicitInsertColumnSelectListFromDML.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Insert statement or clause without column list found in [dbo].[ProcWithoutExplicitInsertColumnValuesList].
+FullID: Cheburashka.DM0051
+Severity: Warning
+Model element: dbo.ProcWithoutExplicitInsertColumnValuesList
+Script file: ProcWithoutExplicitInsertColumnValuesList.sql
+Start line: 4
+Start column: 1
+========end of problem========
+

@@ -1228,6 +1228,36 @@
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\EnforceExplicitInsertColumnListRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithoutExplicitInsertColumnSelectListFromDML.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithExplicitInsertColumnSelectListFromDML.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithoutExplicitInsertColumnValuesList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithoutExplicitInsertColumnSelectList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithExplicitInsertColumnSelectList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithExplicitInsertColumnValuesList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
