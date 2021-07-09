@@ -303,6 +303,12 @@
   <data name="EnforceClusteredIndex_RuleName" xml:space="preserve">
     <value>Tables should normally be clustered and not heap.</value>
   </data>
+  <data name="EnforceExplicitInsertColumnList_ProblemDescription" xml:space="preserve">
+    <value>Insert statement or clause without column list found in {0}.</value>
+  </data>
+  <data name="EnforceExplicitInsertColumnList_RuleName" xml:space="preserve">
+    <value>Insert statements and clauses should always have an explicit column list.</value>
+  </data>
   <data name="EnforceForeignKeyIsIndexed_ProblemDescription" xml:space="preserve">
     <value>Foreign Key with no supporting index found in {0}.</value>
   </data>
