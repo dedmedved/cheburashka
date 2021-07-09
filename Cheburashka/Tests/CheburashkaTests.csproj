@@ -1231,6 +1231,15 @@
     <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\EnforceExplicitInsertColumnListRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithMergeWithoutExplicitInsertColumnSelectList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithMergeWithExplicitInsertColumnSelectList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceExplicitInsertColumnListRule\ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
