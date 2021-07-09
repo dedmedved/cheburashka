@@ -75,17 +75,53 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-            string elementName = RuleUtils.GetElementName(ruleExecutionContext);
+            List<SqlRuleProblem> problems = new();
 
-            DMVSettings.RefreshModelBuiltInCache(model);
-
-            var createTriggerStatement = sqlFragment as CreateTriggerStatement;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-            if (createTriggerStatement?.TriggerType == TriggerType.InsteadOf)
+            try
             {
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                string elementName = RuleUtils.GetElementName(ruleExecutionContext);
+                bool bTriggerIsDefinedOnTable = false;
+
+                // If we can't find the file then assume we're in a composite model
+                // and the elements are defined there and
+                // should be analysed there
+                if (modelElement.GetSourceInformation() is null)
+                {
+                    return problems;
+                }
+
+                // Get Database Schema and name of this model element.
+                var owningObject = modelElement;
+
+                DMVSettings.RefreshModelBuiltInCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+                var allTables = DMVSettings.GetTables;
+
+                if (sqlFragment is CreateTriggerStatement {TriggerType: TriggerType.InsteadOf})
+                {
+                    foreach (var table in allTables)
+                    {
+                        foreach (var trigger in table.GetReferencing(DmlTrigger.TriggerObject).ToList())
+                        {
+                            if (SqlRuleUtils.ObjectNameMatches(trigger, owningObject))
+                            {
+                                bTriggerIsDefinedOnTable = true;
+                                break;
+                            }
+                        }
+                        if (bTriggerIsDefinedOnTable)
+                            break;
+                    }
+                }
+
+                // The rule execution context has all the objects we'll need, including the fragment representing the object,
+                // and a descriptor that lets us access rule metadata
+                RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
+                RuleUtils.UpdateProblems(bTriggerIsDefinedOnTable,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
+            catch (Exception e) {} // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }
