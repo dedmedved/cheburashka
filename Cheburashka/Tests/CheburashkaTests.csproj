@@ -897,6 +897,15 @@
     <Content Include="TestScripts\CheckDefaultsAreOnNotNullColumnsRule\CheckDefaultsAreOnNotNullColumnsRule_Table.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\CheckForInsteadOfTriggersOnTablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\Table2WithAfterUpdateTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\Table1WithInsteadOfTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
