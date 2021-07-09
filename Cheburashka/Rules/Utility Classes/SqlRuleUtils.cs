@@ -387,6 +387,10 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
+        public static ReadOnlyCollection<ModelTypeClass> GetDMLTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        {
+            ModelSchema.DmlTrigger
+        });
 
         public static bool ObjectNameMatches(TSqlObject tab, string tableName, string schemaName)
         {

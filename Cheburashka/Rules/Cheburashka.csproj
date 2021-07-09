@@ -119,6 +119,7 @@
     <Compile Include="CategoryModernCodingStyle\NonDeterministicSystemFunctionVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\ConstantOnlyUpdatedVariableVisitor.cs" />
+    <Compile Include="CategoryRelationalDesignRules\CheckForInsteadOfTriggersOnTablesRule\CheckForInsteadOfTriggersOnTablesRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\LabelVisitor.cs" />
     <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />

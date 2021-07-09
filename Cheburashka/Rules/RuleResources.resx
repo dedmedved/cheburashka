@@ -225,6 +225,12 @@
   <data name="CheckForDuplicatedColumnsInIndexOrConstraint_RuleName" xml:space="preserve">
     <value>Avoid duplicating columns in the key of any index or constraint.</value>
   </data>
+  <data name="CheckForInsteadOfTriggersOnTables_ProblemDescription" xml:space="preserve">
+    <value>Instead-of Trigger found on a table rather than a view in {0}.</value>
+  </data>
+  <data name="CheckForInsteadOfTriggersOnTables_RuleName" xml:space="preserve">
+    <value>Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views.</value>
+  </data>
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription" xml:space="preserve">
     <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
   </data>
@@ -367,7 +373,7 @@
     <value>Variable length datatype found with no length specification in {0}.</value>
   </data>
   <data name="EnforceVariableLengthDataSpecification_RuleName" xml:space="preserve">
-    <value>Don't rely on default values for variable length datatypes, other than DateTime2. </value>
+    <value>Don't rely on default lengths for variable length datatypes, other than DateTime2. </value>
   </data>
   <data name="PreferConstantInitialisation_ProblemDescription" xml:space="preserve">
     <value>Constant set but not by an initialiser in {0}</value>

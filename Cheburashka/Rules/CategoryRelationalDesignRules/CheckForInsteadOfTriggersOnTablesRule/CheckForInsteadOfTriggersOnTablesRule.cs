@@ -19,11 +19,14 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
+using System;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
 using System.Linq;
+using TriggerType = Microsoft.SqlServer.TransactSql.ScriptDom.TriggerType;
 
 namespace Cheburashka
 {
@@ -38,25 +41,25 @@ namespace Cheburashka
     /// </para>
     /// </summary>
 
-    [LocalizedExportCodeAnalysisRule(EnforcePrimaryKeyRule.RuleId,
-        RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforcePrimaryKey_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.EnforcePrimaryKey_ProblemDescription,              // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryRelationalDesignKeys,           // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
-    public sealed class EnforcePrimaryKeyRule: SqlCodeAnalysisRule
+    [LocalizedExportCodeAnalysisRule(CheckForInsteadOfTriggersOnTablesRule.RuleId,
+        RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
+        RuleConstants.CheckForInsteadOfTriggersOnTables_RuleName,           // ID used to look up the display name inside the resources file
+        RuleConstants.CheckForInsteadOfTriggersOnTables_ProblemDescription, // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryRelationalDesignKeys,              // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
+    public sealed class CheckForInsteadOfTriggersOnTablesRule: SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0011: Tables should normally have a Primary Key constraint defined."
+        /// shown as "DM0052: Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforcePrimaryKey_RuleId;
+        public const string RuleId = RuleConstants.CheckForInsteadOfTriggersOnTables_RuleId;
 
-        public EnforcePrimaryKeyRule()
+        public CheckForInsteadOfTriggersOnTablesRule()
         {
-            SupportedElementTypes = SqlRuleUtils.GetTableClass();
+           SupportedElementTypes = SqlRuleUtils.GetDMLTriggerClass();
         }
 
         /// <summary>
@@ -76,18 +79,9 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
-                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
-                bool bFoundPrimaryKey = false;
-
-                if (sqlFragment is CreateTableStatement createTableStatement)
-                {
-                    if (createTableStatement.AsNode || createTableStatement.AsEdge || createTableStatement.AsFileTable)
-                    {
-                        return problems;
-                    }
-                }
+                bool bTriggerIsDefinedOnTable = false;
 
                 // If we can't find the file then assume we're in a composite model
                 // and the elements are defined there and
@@ -101,28 +95,33 @@ namespace Cheburashka
                 var owningObject = modelElement;
 
                 DMVSettings.RefreshModelBuiltInCache(model);
+                DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
+                var allTables = DMVSettings.GetTables;
 
-                foreach (var thing in allPKs)
+                if (sqlFragment is CreateTriggerStatement {TriggerType: TriggerType.InsteadOf})
                 {
-                    if (!bFoundPrimaryKey)
+                    foreach (var table in allTables)
                     {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObject))
+                        foreach (var trigger in table.GetReferencing(DmlTrigger.TriggerObject).ToList())
                         {
-                            bFoundPrimaryKey = true;
-                            //break;
+                            if (SqlRuleUtils.ObjectNameMatches(trigger, owningObject))
+                            {
+                                bTriggerIsDefinedOnTable = true;
+                                break;
+                            }
                         }
+                        if (bTriggerIsDefinedOnTable)
+                            break;
                     }
                 }
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                RuleUtils.UpdateProblems(!bFoundPrimaryKey,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+                RuleUtils.UpdateProblems(bTriggerIsDefinedOnTable,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
-            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            catch (Exception e) {} // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }
