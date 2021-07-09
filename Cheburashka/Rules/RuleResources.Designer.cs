@@ -385,6 +385,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Instead-of Trigger found on a table rather than a view in {0}..
+        /// </summary>
+        internal static string CheckForInsteadOfTriggersOnTables_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckForInsteadOfTriggersOnTables_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views..
+        /// </summary>
+        internal static string CheckForInsteadOfTriggersOnTables_RuleName {
+            get {
+                return ResourceManager.GetString("CheckForInsteadOfTriggersOnTables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table with multiple Foreign Key relationships to the same Parent Table was found in {0}..
         /// </summary>
         internal static string CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription {
@@ -808,7 +826,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t rely on default values for variable length datatypes, other than DateTime2. .
+        ///   Looks up a localized string similar to Don&apos;t rely on default lengths for variable length datatypes, other than DateTime2. .
         /// </summary>
         internal static string EnforceVariableLengthDataSpecification_RuleName {
             get {

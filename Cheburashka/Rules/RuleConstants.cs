@@ -81,6 +81,7 @@ namespace Cheburashka
         public const string AvoidRaiseErrorOutsideTryCatch_RuleId                       = "Cheburashka.DM0050";
 
         public const string EnforceExplicitInsertColumnList_RuleId                      = "Cheburashka.DM0051";
+        public const string CheckForInsteadOfTriggersOnTables_RuleId                    = "Cheburashka.DM0052";
 
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
@@ -211,6 +212,9 @@ namespace Cheburashka
 
         public const string EnforceExplicitInsertColumnList_RuleName                                = "EnforceExplicitInsertColumnList_RuleName";
         public const string EnforceExplicitInsertColumnList_ProblemDescription                      = "EnforceExplicitInsertColumnList_ProblemDescription";
+
+        public const string CheckForInsteadOfTriggersOnTables_RuleName                              = "CheckForInsteadOfTriggersOnTables_RuleName";
+        public const string CheckForInsteadOfTriggersOnTables_ProblemDescription                    = "CheckForInsteadOfTriggersOnTables_ProblemDescription";
 
 
         /// <summary>
