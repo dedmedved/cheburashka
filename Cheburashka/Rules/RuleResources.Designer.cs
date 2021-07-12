@@ -403,6 +403,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Same variable used in different output positions in procedure call in {0}..
+        /// </summary>
+        internal static string CheckForMultipleOutputVariables_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckForMultipleOutputVariables_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t use the same variable to receive multiple output or return values in a stored procedure call..
+        /// </summary>
+        internal static string CheckForMultipleOutputVariables_RuleName {
+            get {
+                return ResourceManager.GetString("CheckForMultipleOutputVariables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table with multiple Foreign Key relationships to the same Parent Table was found in {0}..
         /// </summary>
         internal static string CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription {
