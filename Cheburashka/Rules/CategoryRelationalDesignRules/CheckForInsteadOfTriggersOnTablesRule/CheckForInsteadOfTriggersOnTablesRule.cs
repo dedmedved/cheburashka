@@ -91,29 +91,15 @@ namespace Cheburashka
                     return problems;
                 }
 
-                // Get Database Schema and name of this model element.
-                var owningObject = modelElement;
-
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-                var allTables = DMVSettings.GetTables;
-
                 if (sqlFragment is CreateTriggerStatement {TriggerType: TriggerType.InsteadOf})
                 {
-                    foreach (var table in allTables)
-                    {
-                        foreach (var trigger in table.GetReferencing(DmlTrigger.TriggerObject).ToList())
-                        {
-                            if (SqlRuleUtils.ObjectNameMatches(trigger, owningObject))
-                            {
-                                bTriggerIsDefinedOnTable = true;
-                                break;
-                            }
-                        }
-                        if (bTriggerIsDefinedOnTable)
-                            break;
-                    }
+                    DMVSettings.RefreshModelBuiltInCache(model);
+                    DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+                    var allTables = DMVSettings.GetTables;
+                    var table = modelElement.GetReferenced(DmlTrigger.TriggerObject).ToList()[0];
+
+                    bTriggerIsDefinedOnTable =  allTables.Contains(table);
                 }
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
@@ -121,7 +107,7 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 RuleUtils.UpdateProblems(bTriggerIsDefinedOnTable,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
-            catch (Exception e) {} // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            catch {} // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }

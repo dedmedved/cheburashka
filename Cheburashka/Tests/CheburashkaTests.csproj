@@ -900,6 +900,9 @@
     <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\CheckForInsteadOfTriggersOnTablesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\View1WithInsteadOfTrigger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\Table2WithAfterUpdateTrigger.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
