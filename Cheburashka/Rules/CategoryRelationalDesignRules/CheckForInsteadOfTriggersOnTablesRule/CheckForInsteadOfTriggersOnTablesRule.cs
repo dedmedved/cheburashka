@@ -91,16 +91,14 @@ namespace Cheburashka
                     return problems;
                 }
 
-                // Get Database Schema and name of this model element.
-
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
-
-                var allTables = DMVSettings.GetTables;
-
                 if (sqlFragment is CreateTriggerStatement {TriggerType: TriggerType.InsteadOf})
                 {
+                    DMVSettings.RefreshModelBuiltInCache(model);
+                    DMVSettings.RefreshConstraintsAndIndexesCache(model);
+
+                    var allTables = DMVSettings.GetTables;
                     var table = modelElement.GetReferenced(DmlTrigger.TriggerObject).ToList()[0];
+
                     bTriggerIsDefinedOnTable =  allTables.Contains(table);
                 }
 
