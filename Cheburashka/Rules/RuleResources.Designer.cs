@@ -367,24 +367,6 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicated column found in index or constraint in {0}..
-        /// </summary>
-        internal static string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription {
-            get {
-                return ResourceManager.GetString("CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Avoid duplicating columns in the key of any index or constraint..
-        /// </summary>
-        internal static string CheckForDuplicatedColumnsInIndexOrConstraint_RuleName {
-            get {
-                return ResourceManager.GetString("CheckForDuplicatedColumnsInIndexOrConstraint_RuleName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Instead-of Trigger found on a table rather than a view in {0}..
         /// </summary>
         internal static string CheckForInsteadOfTriggersOnTables_ProblemDescription {
