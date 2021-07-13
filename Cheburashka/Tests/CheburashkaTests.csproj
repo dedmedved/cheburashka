@@ -909,6 +909,12 @@
     <Content Include="TestScripts\CheckForInsteadOfTriggersOnTablesRule\Table1WithInsteadOfTrigger.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckForMultipleOutputVariablesRule\ProcWith2OutputVariablesAssignedToSameVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckForMultipleOutputVariablesRule\ProcWithAllVariablesOK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1613,6 +1619,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceVariableLengthDataSpecificationRule\ProcWithAllVariableTypesSpecified.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckForMultipleOutputVariablesRule\CheckForMultipleOutputVariablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckForMultipleOutputVariablesRule\ProcWithOutputVariableAndReturnValueAssignedToSameVariable.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferConstantInitialisationRuleComplexExamples\PreferConstantInitialisationRuleComplexExamples-Baseline.txt">

@@ -2,7 +2,7 @@
 go
 create view View1 as select * from Table3;
 go
-create trigger vw_trg_1 on View1
+create trigger vw_trg_1 on view1
 instead of update 
 as
 begin

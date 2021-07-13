@@ -1,0 +1,36 @@
+Problem description: Same variable used in different output positions in procedure call in [dbo].[ProcWith2OutputVariablesAssignedToSameVariable].
+FullID: Cheburashka.DM0053
+Severity: Warning
+Model element: dbo.ProcWith2OutputVariablesAssignedToSameVariable
+Script file: ProcWith2OutputVariablesAssignedToSameVariable.sql
+Start line: 6
+Start column: 66
+========end of problem========
+
+Problem description: Same variable used in different output positions in procedure call in [dbo].[ProcWith2OutputVariablesAssignedToSameVariable].
+FullID: Cheburashka.DM0053
+Severity: Warning
+Model element: dbo.ProcWith2OutputVariablesAssignedToSameVariable
+Script file: ProcWith2OutputVariablesAssignedToSameVariable.sql
+Start line: 6
+Start column: 85
+========end of problem========
+
+Problem description: Same variable used in different output positions in procedure call in [dbo].[ProcWithOutputVariableAndReturnValueAssignedToSameVariable].
+FullID: Cheburashka.DM0053
+Severity: Warning
+Model element: dbo.ProcWithOutputVariableAndReturnValueAssignedToSameVariable
+Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.sql
+Start line: 6
+Start column: 6
+========end of problem========
+
+Problem description: Same variable used in different output positions in procedure call in [dbo].[ProcWithOutputVariableAndReturnValueAssignedToSameVariable].
+FullID: Cheburashka.DM0053
+Severity: Warning
+Model element: dbo.ProcWithOutputVariableAndReturnValueAssignedToSameVariable
+Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.sql
+Start line: 6
+Start column: 78
+========end of problem========
+

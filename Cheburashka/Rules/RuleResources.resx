@@ -219,17 +219,17 @@
   <data name="CheckDefaultsAreOnNotNullColumns_RuleName" xml:space="preserve">
     <value>Default values make more sense on non-nullable columns.</value>
   </data>
-  <data name="CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription" xml:space="preserve">
-    <value>Duplicated column found in index or constraint in {0}.</value>
-  </data>
-  <data name="CheckForDuplicatedColumnsInIndexOrConstraint_RuleName" xml:space="preserve">
-    <value>Avoid duplicating columns in the key of any index or constraint.</value>
-  </data>
   <data name="CheckForInsteadOfTriggersOnTables_ProblemDescription" xml:space="preserve">
     <value>Instead-of Trigger found on a table rather than a view in {0}.</value>
   </data>
   <data name="CheckForInsteadOfTriggersOnTables_RuleName" xml:space="preserve">
     <value>Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views.</value>
+  </data>
+  <data name="CheckForMultipleOutputVariables_ProblemDescription" xml:space="preserve">
+    <value>Same variable used in different output positions in procedure call in {0}.</value>
+  </data>
+  <data name="CheckForMultipleOutputVariables_RuleName" xml:space="preserve">
+    <value>Don't use the same variable to receive multiple output or return values in a stored procedure call.</value>
   </data>
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription" xml:space="preserve">
     <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
