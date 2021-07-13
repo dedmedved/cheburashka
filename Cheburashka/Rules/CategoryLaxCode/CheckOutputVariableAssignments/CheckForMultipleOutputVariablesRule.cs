@@ -42,7 +42,7 @@ namespace Cheburashka
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up display name and description in
         RuleConstants.CheckForMultipleOutputVariables_RuleName,                 // ID used to look up the display name inside the resources file
         RuleConstants.CheckForMultipleOutputVariables_ProblemDescription,       // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryNonStrictCodingStyleData,              // Rule category (e.g. "Design", "Naming")
+        Category = RuleConstants.CategoryNonStrictCodingStyle,                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class CheckForMultipleOutputVariablesRule : SqlCodeAnalysisRule
     {
@@ -60,7 +60,7 @@ namespace Cheburashka
 
         public CheckForMultipleOutputVariablesRule()
         {
-            SupportedElementTypes = SqlRuleUtils.GetDataTypeUsingClasses();
+            SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
 
         /// <summary>

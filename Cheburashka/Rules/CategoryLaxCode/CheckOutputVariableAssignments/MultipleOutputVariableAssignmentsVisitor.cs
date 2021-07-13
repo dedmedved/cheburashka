@@ -30,52 +30,57 @@ namespace Cheburashka
     internal class MultipleOutputVariableAssignmentsVisitor : TSqlConcreteFragmentVisitor,
         ICheburashkaTSqlConcreteFragmentVisitor
     {
+
         private readonly Dictionary<string, List<VariableReference>> variableUsages = new(SqlComparer.Comparer);
         private readonly Dictionary<string, int> variableCounts = new(SqlComparer.Comparer);
-    
 
-    public IList<VariableReference> MultipleOutputVariables()
-    {
-        List<VariableReference> values = new();
-        foreach (var key in variableCounts.Keys.Where(key => variableCounts[key] > 1))
+        public MultipleOutputVariableAssignmentsVisitor()
         {
-            values.AddRange(variableUsages[key]);
+            MultipleOutputVariables = new List<VariableReference>();
         }
-        return values;
-    }
+        public IList<VariableReference> MultipleOutputVariables { get; }
 
-    public IList<TSqlFragment> SqlFragments() { return MultipleOutputVariables().Cast<TSqlFragment>().ToList(); }
+        public IList<TSqlFragment> SqlFragments() { return MultipleOutputVariables.Cast<TSqlFragment>().ToList(); }
+
         public override void ExplicitVisit(ExecuteSpecification node)
         {
+            variableCounts.Clear();
+            variableUsages.Clear();
+
             if (node.Variable is not null)
             {
-                if (variableUsages.ContainsKey(node.Variable.Name))
+                RecordDetailsOfUse(node.Variable);
+            }
+            // iterate over parameters
+            node.AcceptChildren(this);
+
+            foreach (var key in variableCounts.Keys.Where(key => variableCounts[key] > 1))
+            {
+                foreach (var v in variableUsages[key])
                 {
-                    variableCounts[node.Variable.Name]++;
-                    variableUsages[node.Variable.Name].Add(node.Variable);
-                }
-                else
-                {
-                    variableCounts.Add(node.Variable.Name, 1);
-                    variableUsages.Add(node.Variable.Name,new List<VariableReference>{node.Variable});
+                    MultipleOutputVariables.Add(v);
                 }
             }
-            node.AcceptChildren(this);
         }
         public override void ExplicitVisit(ExecuteParameter node)
         {
             if (node.IsOutput && node.ParameterValue is VariableReference vr)
             {
-                if (variableUsages.ContainsKey(vr.Name))
-                {
-                    variableCounts[vr.Name]++;
-                    variableUsages[vr.Name].Add(vr);
-                }
-                else
-                {
-                    variableCounts.Add(vr.Name, 1);
-                    variableUsages.Add(vr.Name, new List<VariableReference> {vr});
-                }
+                RecordDetailsOfUse(vr);
+            }
+        }
+
+        private void RecordDetailsOfUse(VariableReference vr)
+        {
+            if (variableUsages.ContainsKey(vr.Name))
+            {
+                variableCounts[vr.Name]++;
+                variableUsages[vr.Name].Add(vr);
+            }
+            else
+            {
+                variableCounts.Add(vr.Name, 1);
+                variableUsages.Add(vr.Name, new List<VariableReference> {vr});
             }
         }
     }
