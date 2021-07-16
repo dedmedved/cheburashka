@@ -83,6 +83,7 @@ namespace Cheburashka
         public const string EnforceExplicitInsertColumnList_RuleId                      = "Cheburashka.DM0051";
         public const string CheckForInsteadOfTriggersOnTables_RuleId                    = "Cheburashka.DM0052";
         public const string CheckForMultipleOutputVariables_RuleId                      = "Cheburashka.DM0053";
+        public const string CheckCallerDefinesCorrectOutputVariables_RuleId             = "Cheburashka.DM0054";
 
 
         public const string AvoidUnusedVariables_RuleName                               = "AvoidUnusedVariables_RuleName";
@@ -219,6 +220,9 @@ namespace Cheburashka
 
         public const string CheckForMultipleOutputVariables_RuleName                                = "CheckForMultipleOutputVariables_RuleName";
         public const string CheckForMultipleOutputVariables_ProblemDescription                      = "CheckForMultipleOutputVariables_ProblemDescription";
+
+        public const string CheckCallerDefinesCorrectOutputVariables_RuleName                       = "CheckCallerDefinesCorrectOutputVariables_RuleName";
+        public const string CheckCallerDefinesCorrectOutputVariables_ProblemDescription             = "CheckCallerDefinesCorrectOutputVariables_ProblemDescription";
 
 
         /// <summary>

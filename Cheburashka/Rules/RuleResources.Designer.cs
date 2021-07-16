@@ -331,6 +331,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non-output variable found in an output parameter position in {0}..
+        /// </summary>
+        internal static string CheckCallerDefinesCorrectOutputVariables_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckCallerDefinesCorrectOutputVariables_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If an output parameter is defined, then ensure the parameter is passed as an output parameter..
+        /// </summary>
+        internal static string CheckCallerDefinesCorrectOutputVariables_RuleName {
+            get {
+                return ResourceManager.GetString("CheckCallerDefinesCorrectOutputVariables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clustered Key Column found in non-unique Index on a Clustered Table in {0}..
         /// </summary>
         internal static string CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription {

@@ -207,6 +207,12 @@
   <data name="CategorySamples" xml:space="preserve">
     <value>SamplesCategory</value>
   </data>
+  <data name="CheckCallerDefinesCorrectOutputVariables_ProblemDescription" xml:space="preserve">
+    <value>Non-output variable found in an output parameter position in {0}.</value>
+  </data>
+  <data name="CheckCallerDefinesCorrectOutputVariables_RuleName" xml:space="preserve">
+    <value>If an output parameter is defined, then ensure the parameter is passed as an output parameter.</value>
+  </data>
   <data name="CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription" xml:space="preserve">
     <value>Clustered Key Column found in non-unique Index on a Clustered Table in {0}.</value>
   </data>
