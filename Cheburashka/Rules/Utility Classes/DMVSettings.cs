@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using Microsoft.SqlServer.Dac.Model;
 
 namespace Cheburashka
@@ -48,6 +49,7 @@ namespace Cheburashka
 
         private static readonly Dictionary<string, List<TSqlObject>> _tablesColumnsCache;
 
+        private static IList<TSqlObject>              _proceduresCache;
         private static IList<TSqlObject>              _tablesCache;
         private static IList<TSqlObject>              _indexesCache;
         private static IList<TSqlObject>              _primaryKeyConstraints;
@@ -71,6 +73,7 @@ namespace Cheburashka
             if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
+                IList<TSqlObject> prcs = model.GetObjects(DacQueryScopes.UserDefined, Procedure.TypeClass).ToList();
                 IList<TSqlObject> tbls = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
                 IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
                 IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
@@ -81,7 +84,8 @@ namespace Cheburashka
 
                 // Only store 2-part name, or unnamed  ie local stuff.
 
-                _tablesCache = tbls;
+                _proceduresCache        = prcs ;
+                _tablesCache            = tbls ;
                 _indexesCache           = idxs ;
                 _primaryKeyConstraints  = pkcs ;
                 _foreignKeyConstraints  = fkcs ;
@@ -109,6 +113,7 @@ namespace Cheburashka
             }
         }
 
+        public static IList<TSqlObject> GetProcedures => _proceduresCache;
         public static IList<TSqlObject> GetTables => _tablesCache;
         public static IList<TSqlObject> GetIndexes => _indexesCache;
         public static IList<TSqlObject> GetPrimaryKeys => _primaryKeyConstraints;
