@@ -83,8 +83,6 @@ namespace Cheburashka
                 }
 
                 DMVSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
                 // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
@@ -101,7 +99,7 @@ namespace Cheburashka
                 var parentObjectName = modelElement.GetParent(DacQueryScopes.All).Name.Parts[1];
                 var structureColumnsVisitor = new StructureColumnsVisitor();
 
-                List<string> thisIndexOrConstraintColumns = new();
+                List<string> thisIndexOrConstraintColumns;
                 //what is this all about ?????
                 if (sqlFragment is not null)
                 {
@@ -134,8 +132,7 @@ namespace Cheburashka
 
                     List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(parentObjectSchema, parentObjectName);
                     List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(parentObjectSchema, parentObjectName);
-                    List<TSqlObject> uniqueConstraints =
-                        ModelIndexAndKeysUtils.GetUniqueConstraints(parentObjectSchema, parentObjectName);
+                    List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(parentObjectSchema, parentObjectName);
 
                     bool foundMoreConciseUniqueCondition = false;
                     foreach (var v in pks) // dummy loop - could only execute once.
