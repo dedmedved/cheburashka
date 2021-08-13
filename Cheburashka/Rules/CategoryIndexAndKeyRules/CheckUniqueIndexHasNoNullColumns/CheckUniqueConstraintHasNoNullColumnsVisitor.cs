@@ -22,26 +22,23 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
 
-    internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<ColumnWithSortOrder> _objects;
 
-        #region ctor
         public CheckUniqueConstraintHasNoNullColumnsVisitor()
         {
             _objects = new List<ColumnWithSortOrder>();
         }
-        #endregion
-
-        #region properties
         public List<ColumnWithSortOrder> Objects => _objects;
-        #endregion
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
 
-        #region overrides
         public override void ExplicitVisit(UniqueConstraintDefinition node)
         {
             // primary key unique constraints by definition have no nullable columns
@@ -53,10 +50,5 @@ namespace Cheburashka
                 }
             }
         }
-
-        #endregion
-
     }
-
-
 }

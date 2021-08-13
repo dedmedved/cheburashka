@@ -111,7 +111,7 @@ namespace Cheburashka
                             if (isOutput)
                             {
                                 var matchingVariable = callingParameters.Where(n=>n.Variable.Name.SQLModel_StringCompareEqual(paramName)).ToList();
-                                if 
+                                //if 
                             }
                             var xy = 1;
                         }

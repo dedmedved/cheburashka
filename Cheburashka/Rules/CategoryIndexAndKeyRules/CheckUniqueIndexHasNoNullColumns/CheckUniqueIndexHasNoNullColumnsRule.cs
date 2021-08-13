@@ -87,42 +87,20 @@ namespace Cheburashka
                 }
 
                 DMVSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
                 // Get Database Schema and name of this model element.
-
                 DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
 
-                //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-
-                //// visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new CheckUniqueConstraintParentObjectVisitor();
-                //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-                //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
-
                 // visitor to get the columns
-                CheckUniqueIndexHasNoNullColumnsVisitor checkUniqueIndexHasNoNullColumnsVisitor =
-                    new();
-                sqlFragment.Accept(checkUniqueIndexHasNoNullColumnsVisitor);
-                List<ColumnWithSortOrder> indexColumns = checkUniqueIndexHasNoNullColumnsVisitor.Objects;
+                var indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckUniqueIndexHasNoNullColumnsVisitor()).Cast<ColumnWithSortOrder>().ToList();
+
 
                 var issues = new List<TSqlFragment>();
 
-                //foreach (var ps in parentSources) {
-                //    dynamic parent = ps as CreateTableStatement;
-                //    if (parent is null) { parent = ps as AlterTableAddTableElementStatement; }
-                //    if (parent is not null) {
-                //        if (parent.SchemaObjectName is not null) {
                 string parentName = objectName; // parent.SchemaObjectName.BaseIdentifier.Value;
                 string schemaName = objectSchema; // "";
-                //if (parent.SchemaObjectName.SchemaIdentifier is not null) {
-                //    schemaName = parent.SchemaObjectName.SchemaIdentifier.Value;
-                //}
-                // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-                // this will happen for dynamically created objects and missing objects.
-                //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+
                 IEnumerable<TSqlObject> tables = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
                         .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
                                     n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))

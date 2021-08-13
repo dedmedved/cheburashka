@@ -92,68 +92,54 @@ namespace Cheburashka
                 }
 
                 DMVSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-//                var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-
-                // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                //CheckUniqueConstraintParentObjectVisitor checkUniqueConstraintParentObjectVisitor = new();
-                //sqlFragment.Accept(checkUniqueConstraintParentObjectVisitor);
-                //List<TSqlFragment> parentSources = checkUniqueConstraintParentObjectVisitor.Objects;
-
                 // visitor to get the columns
-                CheckUniqueConstraintHasNoNullColumnsVisitor checkUniqueConstraintHasNoNullColumnsVisitor = new();
-                sqlFragment.Accept(checkUniqueConstraintHasNoNullColumnsVisitor);
-                List<ColumnWithSortOrder> indexColumns = checkUniqueConstraintHasNoNullColumnsVisitor.Objects;
+                var indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckUniqueConstraintHasNoNullColumnsVisitor()).Cast<ColumnWithSortOrder>().ToList();
 
                 var issues = new List<TSqlFragment>();
 
-                //foreach (var ps in parentSources)
-                //{
-                    var schemaObjectName = (sqlFragment as CreateTableStatement)?.SchemaObjectName
-                        ?? (sqlFragment as AlterTableAddTableElementStatement)?.SchemaObjectName;
+                var schemaObjectName = (sqlFragment as CreateTableStatement)?.SchemaObjectName
+                    ?? (sqlFragment as AlterTableAddTableElementStatement)?.SchemaObjectName;
 
-                    if (schemaObjectName is not null)
+                if (schemaObjectName is not null)
+                {
+                    string parentName = schemaObjectName.BaseIdentifier.Value;
+                    string schemaName = schemaObjectName.SchemaIdentifier?.Value ?? "";
+
+                    // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
+                    // this will happen for dynamically created objects and missing objects.
+                    //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+                    IEnumerable<TSqlObject> tables = model
+                            .GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
+                            .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
+                                        n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
+                        ;
+                    TSqlObject table = tables.SingleOrDefault();
+
+                    try
                     {
-                        string parentName = schemaObjectName.BaseIdentifier.Value;
-                        string schemaName = schemaObjectName.SchemaIdentifier?.Value ?? "";
+                        var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+                            .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                            .Select(n => n.ObjectName).ToList();
 
-                        // tableColumns cannot be null, but can be empty if the object can't be found in the model definition.
-                        // this will happen for dynamically created objects and missing objects.
-                        //TSqlObject table = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
-                        IEnumerable<TSqlObject> tables = model
-                                .GetObjects(DacQueryScopes.UserDefined, Table.TypeClass)
-                                .Where(n => n.Name.Parts[0].SQLModel_StringCompareEqual(schemaName) &&
-                                            n.Name.Parts[1].SQLModel_StringCompareEqual(parentName))
-                            ;
-                        TSqlObject table = tables.SingleOrDefault();
-
-                        try
+                        if (tableColumns.Count != 0)
                         {
-                            var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                                .Select(n => n.ObjectName).ToList();
+                            IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                                from tCol in tableColumns
+                                where SqlComparer.SQLModel_StringCompareEqual(
+                                    iCOl.Column.MultiPartIdentifier
+                                        .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
+                                        .Value, tCol.Parts[2])
+                                select iCOl;
 
-                            if (tableColumns.Count != 0)
-                            {
-                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                                    from tCol in tableColumns
-                                    where SqlComparer.SQLModel_StringCompareEqual(
-                                        iCOl.Column.MultiPartIdentifier
-                                            .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
-                                            .Value, tCol.Parts[2])
-                                    select iCOl;
-
-                                issues.AddRange(nullableIndexColumns);
-                            }
-                        }
-                        catch
-                        {
+                            issues.AddRange(nullableIndexColumns);
                         }
                     }
-                //}
+                    catch
+                    {
+                    }
+                }
 
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata

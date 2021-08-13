@@ -22,26 +22,21 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class CheckUniqueIndexHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckUniqueIndexHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<ColumnWithSortOrder> _objects;
 
-        #region ctor
         public CheckUniqueIndexHasNoNullColumnsVisitor()
         {
             _objects = new List<ColumnWithSortOrder>();
         }
-        #endregion
-
-        #region properties
         public List<ColumnWithSortOrder> Objects => _objects;
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
 
-        #endregion
-
-        #region overrides
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             //find unique indexes that are not filtered
@@ -56,10 +51,5 @@ namespace Cheburashka
                 }
             }
         }
-
-        #endregion
-
     }
-
-
 }
