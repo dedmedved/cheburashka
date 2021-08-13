@@ -30,7 +30,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is a unique index with nullable columns in a model.
+    /// whenever there is a potential duplicate index or constraint in a model.
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
@@ -99,10 +99,10 @@ namespace Cheburashka
                 List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                List<string> LeadingEdgeIndexColumns = new();
+                List<string> leadingEdgeIndexColumns = new();
                 var columns = modelElement.GetReferenced(Index.Columns);
                 List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
-                LeadingEdgeIndexColumns.AddRange(x);
+                leadingEdgeIndexColumns.AddRange(x);
 
                 bool foundMoreInclusiveIndex = false;
                 foreach (var v in pks)
@@ -111,12 +111,12 @@ namespace Cheburashka
                     // is this right/needed/wasted effort ?
                     if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObject))
                     {
-                        var pk_columns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                        List<string> PKLeadingEdgeIndexColumns = pk_columns.Select(c => c.Name.Parts.Last()).ToList();
+                        var pkColumns = v.GetReferenced(PrimaryKeyConstraint.Columns);
+                        List<string> pkLeadingEdgeIndexColumns = pkColumns.Select(c => c.Name.Parts.Last()).ToList();
 
                         foundMoreInclusiveIndex =
-                            DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
-                                PKLeadingEdgeIndexColumns);
+                            DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
+                                pkLeadingEdgeIndexColumns);
                         if (foundMoreInclusiveIndex)
                         {
                             break;
@@ -134,12 +134,12 @@ namespace Cheburashka
                             )
                         )
                         {
-                            var idx_columns = v.GetReferenced(Index.Columns);
-                            List<string> OtherLeadingEdgeIndexColumns = idx_columns.Select(c => c.Name.Parts.Last()).ToList();
+                            var idxColumns = v.GetReferenced(Index.Columns);
+                            List<string> otherLeadingEdgeIndexColumns = idxColumns.Select(c => c.Name.Parts.Last()).ToList();
 
                             foundMoreInclusiveIndex =
-                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
-                                    OtherLeadingEdgeIndexColumns);
+                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
+                                    otherLeadingEdgeIndexColumns);
                             if (foundMoreInclusiveIndex)
                             {
                                 break;
@@ -155,12 +155,12 @@ namespace Cheburashka
                         // if this 'index' isn't the index we're checking - check it.
                         if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, selfName, selfSchema))
                         {
-                            var un_columns = v.GetReferenced(UniqueConstraint.Columns);
-                            List<string> ConstraintLeadingEdgeIndexColumns = un_columns.Select(c => c.Name.Parts.Last()).ToList();
+                            var unColumns = v.GetReferenced(UniqueConstraint.Columns);
+                            List<string> constraintLeadingEdgeIndexColumns = unColumns.Select(c => c.Name.Parts.Last()).ToList();
 
                             foundMoreInclusiveIndex =
-                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(LeadingEdgeIndexColumns,
-                                    ConstraintLeadingEdgeIndexColumns);
+                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
+                                    constraintLeadingEdgeIndexColumns);
                             if (foundMoreInclusiveIndex)
                             {
                                 break;
