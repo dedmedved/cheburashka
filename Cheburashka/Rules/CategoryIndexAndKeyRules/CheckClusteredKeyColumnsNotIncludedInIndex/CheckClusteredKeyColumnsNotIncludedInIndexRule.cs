@@ -125,9 +125,8 @@ namespace Cheburashka
                 if (!isClustered && !isUnique)
                 {
                     // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                    CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor = new();
-                    sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
-                    List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+                    List<Identifier> indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitor()).Cast<Identifier>().ToList();
+
 
                     CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
                         checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new();
