@@ -29,27 +29,18 @@ namespace Cheburashka
     {
         private SchemaObjectName _objects;
 
-        #region ctor
+
         public CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor()
         {
             _objects = new SchemaObjectName();
         }
-        #endregion
 
-        #region properties
         public SchemaObjectName Objects => _objects;
 
-        #endregion
-
-        #region overrides
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             // has SchemaObjectName
             _objects = node.OnName;
         }
-        #endregion
-
     }
-
-
 }
