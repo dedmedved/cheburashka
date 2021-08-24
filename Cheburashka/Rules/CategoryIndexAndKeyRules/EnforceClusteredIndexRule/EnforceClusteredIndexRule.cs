@@ -90,8 +90,9 @@ namespace Cheburashka
                     return problems;
                 }
                 // not for these tables
-                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment) ||
-                    SqlRuleUtils.IsMemoryOptimizedTableCreateStatement(sqlFragment))
+                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment) //||
+                    //SqlRuleUtils.IsMemoryOptimizedTableCreateStatement(sqlFragment)
+                    )
                 {
                     return problems;
                 }
