@@ -89,6 +89,14 @@ namespace Cheburashka
                 {
                     return problems;
                 }
+                // not for these tables
+                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment) ||
+                    SqlRuleUtils.IsMemoryOptimizedTableCreateStatement(sqlFragment))
+                {
+                    return problems;
+                }
+                // check Table options 
+                // https://docs.microsoft.com/en-us/dotnet/api/microsoft.sqlserver.transactsql.scriptdom.tableoption?view=sql-dacfx-150
 
                 // Get Database Schema and name of this model element.
                 string owningObjectSchema = modelElement.Name.Parts[0];

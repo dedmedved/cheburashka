@@ -82,8 +82,7 @@ namespace Cheburashka
             {
                 DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
-                if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
-                    createTableStatement.AsEdge || createTableStatement.AsFileTable))
+                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment))
                 {
                     return problems;
                 }
@@ -151,5 +150,6 @@ namespace Cheburashka
 
             return problems;
         }
+
     }
 }
