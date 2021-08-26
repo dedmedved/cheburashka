@@ -109,8 +109,8 @@ namespace Cheburashka
             var nonAssignedParametersAndVariables = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters))
                                                                           .Cast<ProcedureParameter>().ToList();
             // find all initialised-only variables -- these feed into our list of permitted variable 'things'
-            // only allow variables intialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
-            // again disallow anything intialised in a control structure - yeah.
+            // only allow variables initialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
+            // again disallow anything initialised in a control structure - yeah.
 
             var bInitialisedVariableStillToFind = true;
             var initialisedOnlyVariablesCount = nonAssignedParametersAndVariables.Count;
@@ -120,7 +120,7 @@ namespace Cheburashka
                 var initialisedOnlyVariables = DmTSqlFragmentVisitor.Visit(sqlFragment
                                                                           , new InitialisedOnlyVariablesVisitor(nonAssignedParametersAndVariablesNames))
                                                                     .Cast<DeclareVariableElement>().ToList();
-                // check they aren't initialised in possibly unexecuted code.
+                // check they aren't initialised in possibly un-executed code.
                 //nonAssignedParametersAndVariablesNames = initialisedOnlyVariables.Select(n => n.VariableName.Value).ToList();
                 foreach (var v in initialisedOnlyVariables)
                 {

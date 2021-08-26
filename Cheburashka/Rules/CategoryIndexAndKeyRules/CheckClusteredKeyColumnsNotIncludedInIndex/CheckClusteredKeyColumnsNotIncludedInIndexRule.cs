@@ -125,9 +125,7 @@ namespace Cheburashka
                 if (!isClustered && !isUnique)
                 {
                     // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
-                    CheckClusteredKeyColumnsNotIncludedInIndexVisitor checkClusteredKeyColumnsNotIncludedInIndexVisitor = new();
-                    sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor);
-                    List<Identifier> indexColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor.Objects;
+                    List<Identifier> indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitor()).Cast<Identifier>().ToList();
 
                     CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
                         checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new();
@@ -143,8 +141,6 @@ namespace Cheburashka
                             out List<ObjectIdentifier> clusteredIndexColumns);
                     if (bFoundClusteredIndex)
                     {
-                        //try
-                        //{
                         List<string> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
                         List<string> c2 = indexColumns.Select(n => n.Value).ToList();
                         List<string> c2Include = includeColumns.Select(n => n.Value).ToList();
@@ -162,19 +158,11 @@ namespace Cheburashka
                         {
                             issueFound = true;
                         }
-
-                        //}
-                        //catch
-                        //{
-                        //}
                     }
 
                     // The rule execution context has all the objects we'll need, including the fragment representing the object,
                     // and a descriptor that lets us access rule metadata
                     RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-                    // Create problems for each object
-                    //foreach (TSqlFragment issue in issues) {
                     RuleUtils.UpdateProblems(issueFound, problems, modelElement, elementName, sqlFragment, ruleDescriptor);
                 }
             }

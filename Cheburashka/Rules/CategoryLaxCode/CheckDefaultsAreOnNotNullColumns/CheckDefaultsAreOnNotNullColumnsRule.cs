@@ -90,8 +90,7 @@ namespace Cheburashka
                 }
 
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
-                if (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
-                    createTableStatement.AsEdge || createTableStatement.AsFileTable))
+                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment))
                 {
                     return problems;
                 }
