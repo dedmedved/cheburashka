@@ -90,34 +90,13 @@ namespace Cheburashka
                 }
 
                 DMVSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
                 DMVSettings.RefreshConstraintsAndIndexesCache(model);
 
-                // Get Database Schema and name of this model element.
-                //string selfSchema = modelElement.Name.Parts[0];
-                //string selfTable = modelElement.Name.Parts[1];
+                var createIndexStatement = sqlFragment as CreateIndexStatement ;
 
-                //var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
-                //var thisIndex = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).Where(( n => n.Name.Parts[0] == selfSchema && n.Name.Parts[1] == selfTable)).Take(1);
-
-                CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor
-                    checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor =
-                        new();
-                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor);
-                var isClustered = checkClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.Objects;
-
-                CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor
-                    checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor =
-                        new();
-                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor);
-                var isUnique = checkClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.Objects;
-
-                CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns
-                    checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns =
-                        new();
-                sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns);
-                var includeColumns = checkClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.Objects;
+                var isClustered = createIndexStatement is { Clustered: { } } && (bool)createIndexStatement.Clustered;
+                var isUnique = createIndexStatement is { Unique: true };
+                var includeColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns()).Cast<Identifier>().ToList();
 
                 //var issues = new List<String>();
                 var issueFound = false;

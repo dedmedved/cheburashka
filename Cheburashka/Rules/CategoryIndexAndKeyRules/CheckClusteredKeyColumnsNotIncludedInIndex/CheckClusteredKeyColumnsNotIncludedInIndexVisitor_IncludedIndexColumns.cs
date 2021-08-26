@@ -19,28 +19,25 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
+using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
 
-    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns : TSqlConcreteFragmentVisitor
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<Identifier> _objects;
 
-        #region ctor
         public CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns()
         {
             _objects = new List<Identifier>();
         }
-        #endregion
+        public List<Identifier>  Objects => _objects;
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
 
-        #region properties
-        public List<Identifier> Objects => _objects;
-        #endregion
-
-        #region overrides
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             foreach (var v in node.IncludeColumns)
@@ -48,9 +45,6 @@ namespace Cheburashka
                 _objects.Add(v.MultiPartIdentifier.Identifiers[0]);
             }
         }
-
-        #endregion
-
     }
 
 

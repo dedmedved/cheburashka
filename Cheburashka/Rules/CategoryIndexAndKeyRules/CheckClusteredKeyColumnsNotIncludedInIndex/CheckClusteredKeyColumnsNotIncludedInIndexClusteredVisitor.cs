@@ -20,7 +20,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
+
 
 namespace Cheburashka
 {
@@ -29,25 +32,20 @@ namespace Cheburashka
     {
         private bool _objects;
 
-        #region ctor
         public CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor()
         {
             _objects = false;
         }
-        #endregion
-
-        #region properties
+ 
         public bool Objects => _objects;
+   //     public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
 
-        #endregion
 
-        #region overrides
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             // has SchemaObjectName
             _objects = node.Clustered == true ;
         }
-        #endregion
 
     }
 

@@ -153,9 +153,7 @@
     <Compile Include="CategoryLaxCode\Generic Visitors\VariableTableReferenceVisitor.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedParameterRule.cs" />
     <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedTableVariableRule.cs" />
-    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexClusteredVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
-    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexUniquenessVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />

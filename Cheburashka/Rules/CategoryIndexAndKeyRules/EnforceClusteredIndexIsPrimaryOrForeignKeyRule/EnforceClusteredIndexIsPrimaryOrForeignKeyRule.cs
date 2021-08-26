@@ -68,16 +68,16 @@ namespace Cheburashka
         {
             static List<string> ExtractLeadingEdgeColumns(IEnumerable<ModelRelationshipInstance> columnSpecifications)
             {
-                List<string> LeadingEdgeIndexColumns = new();
+                List<string> leadingEdgeIndexColumns = new();
                 foreach (var c in columnSpecifications)
                 {
                     string lastElement = c.ObjectName.Parts.Last();
-                    LeadingEdgeIndexColumns.Add(lastElement);
+                    leadingEdgeIndexColumns.Add(lastElement);
                 }
 
-                var SortedLeadingEdgeIndexColumns = LeadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
+                var sortedLeadingEdgeIndexColumns = leadingEdgeIndexColumns.OrderBy(col => col, SqlComparer.Comparer).Select(n => n)
                     .ToList();
-                return SortedLeadingEdgeIndexColumns;
+                return sortedLeadingEdgeIndexColumns;
             }
 
             // Get Model collation 
@@ -118,12 +118,12 @@ namespace Cheburashka
                 List<TSqlObject> uniqueClusterConstraints =
                     ModelIndexAndKeysUtils.GetClusteredUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                bool clusteredindexExists = (clusteredindexes.Count > 0);
-                bool clusteredUniqueConstraintExists = (uniqueClusterConstraints.Count > 0);
-                bool clusteredPrimaryKeyExists = (clusteredpks.Count > 0);
+                bool clusteredindexExists = clusteredindexes.Count > 0;
+                bool clusteredUniqueConstraintExists = uniqueClusterConstraints.Count > 0;
+                bool clusteredPrimaryKeyExists = clusteredpks.Count > 0;
 
-                bool primaryKeyExists = (pks.Count > 0);
-                bool foreignKeyExists = (foreignkeyconstraints.Count > 0);
+                bool primaryKeyExists = pks.Count > 0;
+                bool foreignKeyExists = foreignkeyconstraints.Count > 0;
 
                 bool foundKeyThatMatchesACluster = false;
 
@@ -141,15 +141,14 @@ namespace Cheburashka
                     {
                         bool match = false;
                         {
-                            List<string> SortedLeadingEdgeIndexColumns = new();
+                            List<string> sortedLeadingEdgeIndexColumns = new();
 
                             if (clusteredindexExists || clusteredUniqueConstraintExists)
                             {
                                 TSqlObject clusteredindex = clusteredindexExists ? clusteredindexes[0] : uniqueClusterConstraints[0];
                                 ModelRelationshipClass relationshipClass = clusteredindexExists ? Index.ColumnsRelationship.RelationshipClass : UniqueConstraint.ColumnsRelationship.RelationshipClass;
-                                IEnumerable<ModelRelationshipInstance> columnSpecifications;
-                                columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(relationshipClass, DacQueryScopes.UserDefined);
-                                SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
+                                IEnumerable<ModelRelationshipInstance> columnSpecifications = clusteredindex.GetReferencedRelationshipInstances(relationshipClass, DacQueryScopes.UserDefined);
+                                sortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                             }
 
                             //We might have a clustered index etc on the same columns as a primary key.
@@ -162,9 +161,9 @@ namespace Cheburashka
                                 List<string> sortedPrimaryKeyColumns = columnSpecifications
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                if (SortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
+                                if (sortedLeadingEdgeIndexColumns.Count >= sortedPrimaryKeyColumns.Count)
                                 {
-                                    List<string> leadingCols = SortedLeadingEdgeIndexColumns
+                                    List<string> leadingCols = sortedLeadingEdgeIndexColumns
                                         .Take(sortedPrimaryKeyColumns.Count).ToList();
                                     if (leadingCols.SequenceEqual(sortedPrimaryKeyColumns, SqlComparer.Comparer))
                                     {
@@ -185,7 +184,7 @@ namespace Cheburashka
                             bool match = false;
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
-                                List<string> SortedLeadingEdgeIndexColumns = new();
+                                List<string> sortedLeadingEdgeIndexColumns;
 
                                 {
                                     ModelRelationshipClass modelRelationshipClass = (clusteredindexExists) ? Index.ColumnsRelationship.RelationshipClass
@@ -200,7 +199,7 @@ namespace Cheburashka
                                     ;
 
                                     IEnumerable<ModelRelationshipInstance> columnSpecifications = idxOrConstraint.GetReferencedRelationshipInstances(modelRelationshipClass, DacQueryScopes.UserDefined);
-                                    SortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
+                                    sortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.
@@ -216,9 +215,9 @@ namespace Cheburashka
                                     List<string> SortedForeignKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
-                                    if (SortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                    if (sortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
                                     {
-                                        List<string> leadingCols = SortedLeadingEdgeIndexColumns
+                                        List<string> leadingCols = sortedLeadingEdgeIndexColumns
                                             .Take(SortedForeignKeyColumns.Count).ToList();
                                         if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
                                         {
