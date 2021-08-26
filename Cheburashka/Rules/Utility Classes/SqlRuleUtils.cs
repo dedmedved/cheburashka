@@ -415,6 +415,21 @@ namespace Cheburashka
         //    ModelSchema.TableValuedFunction,
         //    ModelSchema.Queue
         //});
+        public static bool IsNonStandardTableCreateStatement(TSqlFragment sqlFragment)
+        {
+            return (sqlFragment is CreateTableStatement createTableStatement && (createTableStatement.AsNode ||
+                createTableStatement.AsEdge || createTableStatement.AsFileTable));
+        }
+        public static bool IsMemoryOptimizedTableCreateStatement(TSqlFragment sqlFragment)
+        {
+            if (sqlFragment is CreateTableStatement createTableStatement)
+            {
+                var tableOptions = createTableStatement.Options;
+                var foundMemoryOption = tableOptions.Any(n => n is MemoryOptimizedTableOption);
+                return foundMemoryOption;
+            }
+            return false;
+        }
 
     }
 }

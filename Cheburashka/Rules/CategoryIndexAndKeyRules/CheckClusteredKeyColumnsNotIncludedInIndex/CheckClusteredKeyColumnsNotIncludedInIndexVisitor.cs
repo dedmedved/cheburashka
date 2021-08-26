@@ -21,26 +21,24 @@
 //------------------------------------------------------------------------------
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cheburashka
 {
 
-    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor : TSqlConcreteFragmentVisitor
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<Identifier> _objects;
 
-        #region ctor
+
         public CheckClusteredKeyColumnsNotIncludedInIndexVisitor()
         {
             _objects = new List<Identifier>();
         }
-        #endregion
 
-        #region properties
         public List<Identifier> Objects => _objects;
-        #endregion
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
 
-        #region overrides
         public override void ExplicitVisit(CreateIndexStatement node)
         {
             foreach (var v in node.Columns)
@@ -48,10 +46,5 @@ namespace Cheburashka
                 _objects.Add(v.Column.MultiPartIdentifier.Identifiers[0]);
             }
         }
-
-        #endregion
-
     }
-
-
 }
