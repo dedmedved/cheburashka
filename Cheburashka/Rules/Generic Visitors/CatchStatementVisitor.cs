@@ -25,7 +25,7 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class CatchStatementVisitor : TSqlConcreteFragmentVisitor//, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class CatchStatementVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         public CatchStatementVisitor()
         {
@@ -33,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<StatementList> CatchStatements { get; }
-        //public IList<TSqlFragment> SqlFragments() { return CatchStatements.Cast<TSqlFragment>().ToList(); }
+        public IList<TSqlFragment> SqlFragments() { return CatchStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(TryCatchStatement node)
         {
             CatchStatements.Add(node.CatchStatements);

@@ -28,8 +28,8 @@ namespace Cheburashka
 {
     /// <summary>
     /// <para>This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement is not found in a subroutine body. 
-    /// This rule only applies to SQL stored procedures.
+    /// whenever a BEGIN/END block is found, and is not attached to a control statement i.e. IF or WHILE. 
+    /// This rule only applies to SQL stored procedures, functions, and triggers.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be

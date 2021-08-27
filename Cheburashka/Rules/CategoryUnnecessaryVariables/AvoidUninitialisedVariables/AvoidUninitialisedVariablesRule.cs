@@ -30,7 +30,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is an unused variable in a routine.
+    /// whenever there is an un-initialised variable in a routine.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidUninitialisedVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUninitialisedVariablesRuleName,                 // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUninitialisedVariablesProblemDescription,       // ID used to look up the description inside the resources file
+        RuleConstants.AvoidUninitialisedVariablesRuleName,                  // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUninitialisedVariablesProblemDescription,        // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidUninitialisedVariablesRule : SqlCodeAnalysisRule
@@ -88,7 +88,7 @@ namespace Cheburashka
                 // visitor to get parameter names - these look like variables and need removing
                 // from variable references before we use them
                 var namedParameters = DmTSqlFragmentVisitor.Visit(sqlFragment, new NamedParameterUsageVisitor()).Cast<VariableReference>().ToList();
-                // don't need to distinguish read from write usages for SSDT AST - so don#t capture them
+                // don't need to distinguish read from write usages for SSDT AST - so don't capture them
                 // visitor to get the occurrences of variables
                 var allVariableLikeReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableUsageVisitor()).Cast<VariableReference>().ToList();
                 // remove all named parameters from the list of referenced variables

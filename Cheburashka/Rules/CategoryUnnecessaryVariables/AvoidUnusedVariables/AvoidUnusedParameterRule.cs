@@ -138,30 +138,4 @@ namespace Cheburashka
     }
 }
 
-//if (counts.ContainsKey(key) )
-//{
-//    if (counts[key] == 0) //unlike other unused objects the parameter declaration
-//        //doesn't itself get include in the count
-//        //as its a different kind of thing
-//    {
-//        var problem =
-//            new SqlRuleProblem(
-//                string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-//                , modelElement
-//                , sqlFragment);
 
-//        RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-//        problems.Add(problem);
-//    }
-//}
-//else
-//{
-//    var problem =
-//        new SqlRuleProblem(
-//            string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-//            , modelElement
-//            , sqlFragment);
-
-//    RuleUtils.UpdateProblemPosition(modelElement, problem, (Identifier)objects[key]);
-//    problems.Add(problem);
-//}
