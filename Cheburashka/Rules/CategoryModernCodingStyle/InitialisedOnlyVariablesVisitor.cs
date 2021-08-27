@@ -30,29 +30,29 @@ namespace Cheburashka
     internal class InitialisedOnlyVariablesVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
 
-        private readonly List<string> InputVariableNames;
+        private readonly List<string> _inputVariableNames;
 
-        public InitialisedOnlyVariablesVisitor(List<string> inputVariables) => InputVariableNames = inputVariables;
+        public InitialisedOnlyVariablesVisitor(List<string> inputVariables) => _inputVariableNames = inputVariables;
 
         // The declarations of variables with assigned values.
-        private readonly Dictionary<string, DeclareVariableElement> variableInitialisations = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, DeclareVariableElement> _variableInitialisations = new(SqlComparer.Comparer);
         // Any assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, string> invalidVariableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, string> _invalidVariableAssignments = new(SqlComparer.Comparer);
 
         //public InitialisedOnlyVariablesVisitor(List<VariableReference> variableReferences) => VariableReferences = variableReferences;
 
         public IList<DeclareVariableElement> InitialisedOnlyVariables()
         {
-            var variablesNamesFound = variableInitialisations.Keys;
-            var singleValidAssignments = variablesNamesFound.Where( V => !invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(V))).ToList();
+            var variablesNamesFound = _variableInitialisations.Keys;
+            var singleValidAssignments = variablesNamesFound.Where( v => !_invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(v))).ToList();
             //var variablesFound = variableInitialisations.Keys;
-            return singleValidAssignments.Select(varName => variableInitialisations[varName]).ToList();
+            return singleValidAssignments.Select(varName => _variableInitialisations[varName]).ToList();
         }
 
         public IList<string> InitialisedOnlyVariableNames()
         {
-            var variablesNamesFound = variableInitialisations.Keys;
-            var singleValidAssignments = variablesNamesFound.Where(V => !invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(V))).ToList();
+            var variablesNamesFound = _variableInitialisations.Keys;
+            var singleValidAssignments = variablesNamesFound.Where(v => !_invalidVariableAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(v))).ToList();
             return singleValidAssignments;
         }
 
@@ -146,14 +146,14 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(InputVariableNames)).ToList();
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(_inputVariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
-                // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
+                // if the scalar expression doesn't contain any variables it's safe to consider it to be an initialisation expression
                 if (!referencedVariables.Any() && !disallowedNonDeterministicFunctions.Any())
                 {
-                    if (!variableInitialisations.ContainsKey(var.Value))
+                    if (!_variableInitialisations.ContainsKey(var.Value))
                     {
-                        variableInitialisations.Add(var.Value, source);
+                        _variableInitialisations.Add(var.Value, source);
                     }
                     else
                     {
@@ -174,9 +174,9 @@ namespace Cheburashka
         private void AddVariableToListOfIgnoredVariables(string var)
         {
             if (var is null) return;
-            if (!invalidVariableAssignments.ContainsKey(var))
-                invalidVariableAssignments.Add(var,
-                    ""); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+            if (!_invalidVariableAssignments.ContainsKey(var))
+                _invalidVariableAssignments.Add(var,
+                    ""); // doesn't matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
     }
 }

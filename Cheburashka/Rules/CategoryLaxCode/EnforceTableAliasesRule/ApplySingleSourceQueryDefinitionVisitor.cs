@@ -41,7 +41,7 @@ namespace Cheburashka
                 if (node.SecondTableReference is QueryDerivedTable qdt)
                 {
                     List<QuerySpecification> querySpecifications = new();
-                    SQLGatherQuery.GetQuery(qdt.QueryExpression, ref querySpecifications);
+                    SqlGatherQuery.GetQuery(qdt.QueryExpression, ref querySpecifications);
                     ApplySingleSourceQueryDefinitions.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
                 }
             }

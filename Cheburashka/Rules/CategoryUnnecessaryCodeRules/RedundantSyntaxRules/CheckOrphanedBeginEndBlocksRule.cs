@@ -38,8 +38,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(CheckOrphanedBeginEndBlocksRule.RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckOrphanedBeginEndBlocks_RuleName,             // ID used to look up the display name inside the resources file
-        RuleConstants.CheckOrphanedBeginEndBlocks_ProblemDescription,   // ID used to look up the description inside the resources file
+        RuleConstants.CheckOrphanedBeginEndBlocksRuleName,             // ID used to look up the display name inside the resources file
+        RuleConstants.CheckOrphanedBeginEndBlocksProblemDescription,   // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryCode,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
     public sealed class CheckOrphanedBeginEndBlocksRule : SqlCodeAnalysisRule
@@ -50,7 +50,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0037: BEGIN/END blocks do not define a scope in T-SQL.  They have no use unless associated with a control construct e.g. IF or WHILE."
         /// </summary>
-        public const string RuleId = RuleConstants.CheckOrphanedBeginEndBlocks_RuleId;
+        public const string RuleId = RuleConstants.CheckOrphanedBeginEndBlocksRuleId;
 
         public CheckOrphanedBeginEndBlocksRule()
         {
@@ -81,7 +81,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             List<TSqlFragment> issues = new() ;
 

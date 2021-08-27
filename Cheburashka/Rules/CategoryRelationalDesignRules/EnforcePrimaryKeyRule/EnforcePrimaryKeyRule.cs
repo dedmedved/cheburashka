@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforcePrimaryKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforcePrimaryKey_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.EnforcePrimaryKey_ProblemDescription,              // ID used to look up the description inside the resources file
+        RuleConstants.EnforcePrimaryKeyRuleName,                        // ID used to look up the display name inside the resources file
+        RuleConstants.EnforcePrimaryKeyProblemDescription,              // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryRelationalDesignKeys,           // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforcePrimaryKeyRule: SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0011: Tables should normally have a Primary Key constraint defined."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforcePrimaryKey_RuleId;
+        public const string RuleId = RuleConstants.EnforcePrimaryKeyRuleId;
 
         public EnforcePrimaryKeyRule()
         {
@@ -76,7 +76,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 bool bFoundPrimaryKey = false;
@@ -100,20 +100,17 @@ namespace Cheburashka
                 // Get Database Schema and name of this model element.
                 var owningObject = modelElement;
 
-                DMVSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
 
                 var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
 
                 foreach (var thing in allPKs)
                 {
-                    if (!bFoundPrimaryKey)
+                    TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
+                    if (SqlRuleUtils.ObjectNameMatches(tab, owningObject))
                     {
-                        TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
-                        if (SqlRuleUtils.ObjectNameMatches(tab, owningObject))
-                        {
-                            bFoundPrimaryKey = true;
-                            //break;
-                        }
+                        bFoundPrimaryKey = true;
+                        break;
                     }
                 }
 

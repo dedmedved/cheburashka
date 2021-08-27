@@ -33,7 +33,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is an table in a model without a primary key.
+    /// whenever there is an table in a model with an INSTEAD OF trigger defined against it
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -43,8 +43,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckForInsteadOfTriggersOnTablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckForInsteadOfTriggersOnTables_RuleName,           // ID used to look up the display name inside the resources file
-        RuleConstants.CheckForInsteadOfTriggersOnTables_ProblemDescription, // ID used to look up the description inside the resources file
+        RuleConstants.CheckForInsteadOfTriggersOnTablesRuleName,            // ID used to look up the display name inside the resources file
+        RuleConstants.CheckForInsteadOfTriggersOnTablesProblemDescription,  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryRelationalDesignKeys,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class CheckForInsteadOfTriggersOnTablesRule: SqlCodeAnalysisRule
@@ -55,11 +55,11 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0052: Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views."
         /// </summary>
-        public const string RuleId = RuleConstants.CheckForInsteadOfTriggersOnTables_RuleId;
+        public const string RuleId = RuleConstants.CheckForInsteadOfTriggersOnTablesRuleId;
 
         public CheckForInsteadOfTriggersOnTablesRule()
         {
-           SupportedElementTypes = SqlRuleUtils.GetDMLTriggerClass();
+           SupportedElementTypes = SqlRuleUtils.GetDmlTriggerClass();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 bool bTriggerIsDefinedOnTable = false;
 
@@ -93,10 +93,10 @@ namespace Cheburashka
 
                 if (sqlFragment is CreateTriggerStatement {TriggerType: TriggerType.InsteadOf})
                 {
-                    DMVSettings.RefreshModelBuiltInCache(model);
-                    DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                    DmvSettings.RefreshModelBuiltInCache(model);
+                    DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
-                    var allTables = DMVSettings.GetTables;
+                    var allTables = DmvSettings.GetTables;
                     var table = modelElement.GetReferenced(DmlTrigger.TriggerObject).ToList()[0];
 
                     bTriggerIsDefinedOnTable =  allTables.Contains(table);

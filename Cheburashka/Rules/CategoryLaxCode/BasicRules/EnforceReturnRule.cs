@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceReturn_RuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceReturn_ProblemDescription,                 // ID used to look up the description inside the resources file
+        RuleConstants.EnforceReturnRuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceReturnProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,                // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
     public sealed class EnforceReturnRule : SqlCodeAnalysisRule
@@ -51,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0027: Stored Procedures need at least one Return statement."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceReturn_RuleId;
+        public const string RuleId = RuleConstants.EnforceReturnRuleId;
 
         public EnforceReturnRule()
         {
@@ -82,7 +82,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
             var code = createProcedureStatement?.StatementList;

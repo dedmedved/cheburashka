@@ -25,9 +25,9 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class Xact_StateVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class XactStateVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public Xact_StateVisitor()
+        public XactStateVisitor()
         {
             Expressions = new List<TSqlFragment>();
         }

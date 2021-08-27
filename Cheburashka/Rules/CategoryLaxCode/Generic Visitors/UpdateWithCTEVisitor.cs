@@ -27,9 +27,9 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
 
-    internal class UpdateWithCTEVisitor : TSqlConcreteFragmentVisitor
+    internal class UpdateWithCteVisitor : TSqlConcreteFragmentVisitor
     {
-        public UpdateWithCTEVisitor()
+        public UpdateWithCteVisitor()
         {
             CteUtilFragments = new List<CteUtil>();
         }

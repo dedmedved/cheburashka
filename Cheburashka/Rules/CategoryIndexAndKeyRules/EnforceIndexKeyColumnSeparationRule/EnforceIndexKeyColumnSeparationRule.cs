@@ -31,6 +31,7 @@ namespace Cheburashka
     /// <para>
     /// This is a SQL rule which returns a warning message 
     /// whenever there is a potential duplicate index or constraint in a model.
+    /// </para> 
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
     /// localized if resource files for different languages are used
@@ -39,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceIndexKeyColumnSeparationRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceIndexKeyColumnSeparation_RuleName,             // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceIndexKeyColumnSeparation_ProblemDescription,   // ID used to look up the description inside the resources file
+        RuleConstants.EnforceIndexKeyColumnSeparationRuleName,             // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceIndexKeyColumnSeparationProblemDescription,   // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class EnforceIndexKeyColumnSeparationRule : SqlCodeAnalysisRule
@@ -71,7 +72,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -83,10 +84,10 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
                 // Refresh cached index/constraints/tables lists from Model
                 //DMVSettings.RefreshColumnCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 string selfSchema = modelElement.Name.Parts[0];
                 string selfName = modelElement.Name.Parts[2]; //  is this right ?
@@ -185,11 +186,11 @@ namespace Cheburashka
             return problems;
         }
 
-        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<string> TheseKeysColumns, List<string> TheOtherKeysColumns)
+        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
         {
             bool foundIndexThatMatchesAKey = false;
 
-            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(TheseKeysColumns, TheOtherKeysColumns);
+            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(theseKeysColumns, theOtherKeysColumns);
             // matchedPos lists the columns in TheseKeysColumns that were actually found in TheseKeysColumns
             List<int> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
@@ -201,14 +202,14 @@ namespace Cheburashka
             // not quite sure about the included columns issue yet
             // if every key in this index was found in the corresponding position in the other index
             // its a problem
-            if (TheseKeysColumns.Count == TheOtherKeysColumns.Count
+            if (theseKeysColumns.Count == theOtherKeysColumns.Count
                 && allPos.Count == matchedPos.Count
                 && matchedPos.Count > 0
                 && matchedPos.Count - 1 == matchedPos.Max())
             {
                 foundIndexThatMatchesAKey = true;
             }
-            else if (TheseKeysColumns.Count < TheOtherKeysColumns.Count
+            else if (theseKeysColumns.Count < theOtherKeysColumns.Count
                 //everything returned was a match
                 && allPos.Count == matchedPos.Count
                 //there was a match

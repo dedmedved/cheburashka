@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidGotoRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidGoto_RuleName,                                   // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidGoto_ProblemDescription,                         // ID used to look up the description inside the resources file
+        RuleConstants.AvoidGotoRuleName,                                   // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidGotoProblemDescription,                         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidGotoRule : SqlCodeAnalysisRule
@@ -51,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0025: Avoid using Goto statements."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidGoto_RuleId;
+        public const string RuleId = RuleConstants.AvoidGotoRuleId;
 
         public AvoidGotoRule()
         {
@@ -82,7 +82,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of goto statements
             var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor());

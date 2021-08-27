@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceForeignKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceForeignKey_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceForeignKey_ProblemDescription,              // ID used to look up the description inside the resources file
+        RuleConstants.EnforceForeignKeyRuleName,                        // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceForeignKeyProblemDescription,              // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryRelationalDesignKeys,           // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforceForeignKeyRule: SqlCodeAnalysisRule
@@ -56,7 +56,7 @@ namespace Cheburashka
         /// shown as "DM0033: Tables should normally have a Foreign Key relationship with at least one other table."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceForeignKey_RuleId;
+        public const string RuleId = RuleConstants.EnforceForeignKeyRuleId;
 
         public EnforceForeignKeyRule()
         {
@@ -80,7 +80,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment))
                 {
@@ -98,20 +98,17 @@ namespace Cheburashka
                 // Get Database Schema and name of this model element.
                 var owningObject = modelElement;
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
-                var allFKs = DMVSettings.GetForeignKeys; 
+                var allFKs = DmvSettings.GetForeignKeys; 
 
                 bool bFoundForeignKey = false;
 
-                TSqlObject table = modelElement;
-
                 // Get a reference to the main temporal table. 
+                TSqlObject table = modelElement;
                 var mainTables = table.GetReferencing(Table.TemporalSystemVersioningHistoryTable).ToList();
-                //TSqlObject mainTable;
-                //string mainTableschema ;
-                //string mainTablename ;
+
                 // if there is a main table
                 // this is a history table and can be ignored 'ish
                 // for the purpose of fk rules
@@ -123,20 +120,17 @@ namespace Cheburashka
                 //object myObject = modelElement.GetType().GetField("ContextObject.TemporalSystemVersioningCurrentTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(modelElement);
                 foreach (var thing in allFKs)
                 {
-                    if (!bFoundForeignKey)
-                    {
-                        var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
-                        var foreignTable = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
+                    var host = thing.GetReferenced(ForeignKeyConstraint.Host).ToList();
+                    var foreignTable = thing.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
 
-                        if (host.Count > 0 && foreignTable.Count > 0)
+                    if (host.Count > 0 && foreignTable.Count > 0)
+                    {
+                        if (SqlRuleUtils.ObjectNameMatches(host[0], owningObject)
+                            || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObject)
+                        )
                         {
-                            if (SqlRuleUtils.ObjectNameMatches(host[0], owningObject)
-                                || SqlRuleUtils.ObjectNameMatches(foreignTable[0], owningObject)
-                            )
-                            {
-                                bFoundForeignKey = true;
-                                //break;
-                            }
+                            bFoundForeignKey = true;
+                            break;
                         }
                     }
                 }

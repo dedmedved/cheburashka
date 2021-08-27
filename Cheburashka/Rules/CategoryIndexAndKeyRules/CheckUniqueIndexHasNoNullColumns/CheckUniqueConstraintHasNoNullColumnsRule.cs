@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckUniqueConstraintHasNoNullColumnsRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckUniqueConstraintHasNoNullColumns_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.CheckUniqueConstraintHasNoNullColumns_ProblemDescription,         // ID used to look up the description inside the resources file
+        RuleConstants.CheckUniqueConstraintHasNoNullColumnsRuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUniqueConstraintHasNoNullColumnsProblemDescription,         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueConstraintHasNoNullColumnsRule: SqlCodeAnalysisRule
@@ -79,7 +79,7 @@ namespace Cheburashka
             List<SqlRuleProblem> problems = new();
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -91,8 +91,8 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 // visitor to get the columns
                 var indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckUniqueConstraintHasNoNullColumnsVisitor()).Cast<ColumnWithSortOrder>().ToList();
@@ -119,21 +119,24 @@ namespace Cheburashka
 
                     try
                     {
-                        var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                            .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                            .Select(n => n.ObjectName).ToList();
-
-                        if (tableColumns.Count != 0)
+                        if (table != null)
                         {
-                            IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                                from tCol in tableColumns
-                                where SqlComparer.SQLModel_StringCompareEqual(
-                                    iCOl.Column.MultiPartIdentifier
-                                        .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
-                                        .Value, tCol.Parts[2])
-                                select iCOl;
+                            var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+                                .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                                .Select(n => n.ObjectName).ToList();
 
-                            issues.AddRange(nullableIndexColumns);
+                            if (tableColumns.Count != 0)
+                            {
+                                IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                                    from tCol in tableColumns
+                                    where SqlComparer.SQLModel_StringCompareEqual(
+                                        iCOl.Column.MultiPartIdentifier
+                                            .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1]
+                                            .Value, tCol.Parts[2])
+                                    select iCOl;
+
+                                issues.AddRange(nullableIndexColumns);
+                            }
                         }
                     }
                     catch

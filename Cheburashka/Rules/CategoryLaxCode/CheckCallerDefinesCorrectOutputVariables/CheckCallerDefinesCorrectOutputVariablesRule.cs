@@ -41,8 +41,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckCallerDefinesCorrectOutputVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                             // Name of the resource file to look up display name and description in
-        RuleConstants.CheckCallerDefinesCorrectOutputVariables_RuleName,            // ID used to look up the display name inside the resources file
-        RuleConstants.CheckCallerDefinesCorrectOutputVariables_ProblemDescription,  // ID used to look up the description inside the resources file
+        RuleConstants.CheckCallerDefinesCorrectOutputVariablesRuleName,            // ID used to look up the display name inside the resources file
+        RuleConstants.CheckCallerDefinesCorrectOutputVariablesProblemDescription,  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,                      // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                          // This rule targets specific elements rather than the whole model
     public sealed class CheckCallerDefinesCorrectOutputVariablesRule : SqlCodeAnalysisRule
@@ -57,7 +57,7 @@ namespace Cheburashka
         /// shown as "DM0054: If an output parameter is defined, then ensure the parameter is passed as an output parameter."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckCallerDefinesCorrectOutputVariables_RuleId;
+        public const string RuleId = RuleConstants.CheckCallerDefinesCorrectOutputVariablesRuleId;
 
         public CheckCallerDefinesCorrectOutputVariablesRule()
         {
@@ -81,17 +81,17 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
-                DMVSettings.RefreshConstraintsAndIndexesCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshConstraintsAndIndexesCache(ruleExecutionContext.SchemaModel);
 
                 
-                var allProcedures = DMVSettings.GetProcedures;
+                var allProcedures = DmvSettings.GetProcedures;
                 var executeSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExecuteSpecificationVisitor()).Cast<ExecuteSpecification>().ToList();
                 foreach (var executeSpecification in executeSpecifications.Where( e => e.ExecutableEntity is ExecutableProcedureReference executableProcedureReference && executableProcedureReference.ProcedureReference is not null ))
                 {

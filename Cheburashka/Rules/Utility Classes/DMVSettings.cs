@@ -28,12 +28,12 @@ using Microsoft.SqlServer.Dac.Model;
 
 namespace Cheburashka
 {
-    static class DMVSettings
+    static class DmvSettings
     {
-        private const int _CacheRefreshIntervalSeconds = 15;
+        private const int CacheRefreshIntervalSeconds = 15;
 
-        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(_CacheRefreshIntervalSeconds+10)) ;
-        private static readonly DateTime        _lastInsertColumnCacheRefresh;
+        private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(CacheRefreshIntervalSeconds+10)) ;
+        private static readonly DateTime        LastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
         //public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
@@ -41,13 +41,13 @@ namespace Cheburashka
 
         //private static IEnumerable<TSqlObject>  _builtinDataTypes;
 
-        private static readonly IEnumerable<TSqlObject>              ts;
-        private static readonly IEnumerable<TSqlObject>              vs;
+        private static readonly IEnumerable<TSqlObject>              Ts;
+        private static readonly IEnumerable<TSqlObject>              Vs;
 
-        private static readonly IEnumerable<TSqlObject>              tables;
-        private static readonly IEnumerable<TSqlObject>              views;
+        private static readonly IEnumerable<TSqlObject>              Tables;
+        private static readonly IEnumerable<TSqlObject>              Views;
 
-        private static readonly Dictionary<string, List<TSqlObject>> _tablesColumnsCache;
+        private static readonly Dictionary<string, List<TSqlObject>> TablesColumnsCache;
 
         private static IList<TSqlObject>              _proceduresCache;
         private static IList<TSqlObject>              _tablesCache;
@@ -70,7 +70,7 @@ namespace Cheburashka
 
         public static void RefreshConstraintsAndIndexesCache(TSqlModel model)
         {
-            if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(_CacheRefreshIntervalSeconds)), DateTime.Now) == -1
+            if ( DateTime.Compare(_lastConstraintsAndIndexesCacheRefresh.Add(TimeSpan.FromSeconds(CacheRefreshIntervalSeconds)), DateTime.Now) == -1
                )
             {
                 IList<TSqlObject> prcs = model.GetObjects(DacQueryScopes.UserDefined, Procedure.TypeClass).ToList();
@@ -102,9 +102,9 @@ namespace Cheburashka
 
         public static IList<TSqlObject> TableColumns(string schemaAndTableName)
         {
-            if (_tablesColumnsCache.ContainsKey(schemaAndTableName))
+            if (TablesColumnsCache.ContainsKey(schemaAndTableName))
             {
-                return _tablesColumnsCache[schemaAndTableName].AsReadOnly();
+                return TablesColumnsCache[schemaAndTableName].AsReadOnly();
             }
             else
             {

@@ -38,8 +38,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceForeignKeyIsIndexedRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceForeignKeyIsIndexed_RuleName,  // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceForeignKeyIsIndexed_ProblemDescription,        // ID used to look up the description inside the resources file
+        RuleConstants.EnforceForeignKeyIsIndexedRuleName,  // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceForeignKeyIsIndexedProblemDescription,        // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class EnforceForeignKeyIsIndexedRule : SqlCodeAnalysisRule
@@ -63,7 +63,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DmvRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             // If we can't find the file then assume we're in a composite model
             // and the elements are defined there and
@@ -74,10 +74,10 @@ namespace Cheburashka
             }
             string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
-            DMVSettings.RefreshModelBuiltInCache(model);
-            DMVSettings.RefreshConstraintsAndIndexesCache(model);
+            DmvSettings.RefreshModelBuiltInCache(model);
+            DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
-            var ClusterColumns = new List<string>();
+            var clusterColumns = new List<string>();
 
             var fkTables = modelElement.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
             var hostTables = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
@@ -96,8 +96,8 @@ namespace Cheburashka
 
             List<string> x = hostColumns.Select(n => n.Name.Parts.Last().ToString()).ToList();
 
-            var ForeignKeyColumns = new List<string>();
-            ForeignKeyColumns.AddRange(x);
+            var foreignKeyColumns = new List<string>();
+            foreignKeyColumns.AddRange(x);
 
             var allIndexes = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
             var theseIndexes = new List<TSqlObject>();
@@ -121,55 +121,55 @@ namespace Cheburashka
                 {
                     var cols = index.GetReferencedRelationshipInstances(
                         Index.ColumnsRelationship.RelationshipClass, DacQueryScopes.UserDefined);
-                    ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
+                    clusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                 }
             }
 
             var allPKs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
-            var thesePK = new List<TSqlObject>();
+            var thesePKs = new List<TSqlObject>();
             foreach (var thing in allPKs)
             {
                 TSqlObject tab = thing.GetReferenced(PrimaryKeyConstraint.Host).ToList()[0];
                 if (SqlRuleUtils.ObjectNameMatches(tab, hostTable))
                 {
-                    thesePK.Add(thing);
+                    thesePKs.Add(thing);
                     break;
                 }
             }
             if (!clusteredIndexFound)
             {
-                foreach (var pk in thesePK)
+                foreach (var pk in thesePKs)
                 {
                     clusteredIndexFound = (bool) pk.GetProperty(PrimaryKeyConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
                         var cols = pk.GetReferencedRelationshipInstances(
                             PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
-                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
+                        clusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
                 }
             }
 
             var allUNs = model.GetObjects(DacQueryScopes.UserDefined, UniqueConstraint.TypeClass).ToList();
-            var theseUN = new List<TSqlObject>();
+            var theseUNs = new List<TSqlObject>();
             foreach (var thing in allUNs)
             {
                 TSqlObject tab = thing.GetReferenced(UniqueConstraint.Host).ToList()[0];
                 if (SqlRuleUtils.ObjectNameMatches(tab, hostTable))
                 {
-                    theseUN.Add(thing);
+                    theseUNs.Add(thing);
                 }
             }
             if (!clusteredIndexFound)
             {
-                foreach (var un in theseUN)
+                foreach (var un in theseUNs)
                 {
                     clusteredIndexFound = (bool)un.GetProperty(UniqueConstraint.Clustered);
                     if (clusteredIndexFound)
                     {
                         var cols = un.GetReferencedRelationshipInstances(
                             UniqueConstraint.Columns, DacQueryScopes.UserDefined);
-                        ClusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
+                        clusterColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
                     }
                 }
             }
@@ -183,7 +183,7 @@ namespace Cheburashka
                 List<string> leadingEdgeIndexColumns = new();
                 leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
-                foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(clusterColumns, foreignKeyColumns, clustered, leadingEdgeIndexColumns);
                 if (foundIndexThatMatchesAKey)
                 {
                     break;
@@ -191,7 +191,7 @@ namespace Cheburashka
             }
             if (!foundIndexThatMatchesAKey)
             {
-                foreach (var pk in thesePK)
+                foreach (var pk in thesePKs)
                 {
                     var cols = pk.GetReferencedRelationshipInstances(
                         PrimaryKeyConstraint.Columns, DacQueryScopes.UserDefined);
@@ -200,7 +200,7 @@ namespace Cheburashka
                     List<string> leadingEdgeIndexColumns = new();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
-                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(clusterColumns, foreignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
                     {
                         break;
@@ -209,7 +209,7 @@ namespace Cheburashka
             }
             if (!foundIndexThatMatchesAKey)
             {
-                foreach (var un in theseUN)
+                foreach (var un in theseUNs)
                 {
                     var cols = un.GetReferencedRelationshipInstances(
                         UniqueConstraint.Columns, DacQueryScopes.UserDefined);
@@ -218,7 +218,7 @@ namespace Cheburashka
                     List<string> leadingEdgeIndexColumns = new();
                     leadingEdgeIndexColumns.AddRange(cols.Select(v => v.ObjectName.Parts[2]));
 
-                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(ClusterColumns, ForeignKeyColumns, clustered, leadingEdgeIndexColumns);
+                    foundIndexThatMatchesAKey = CheckThatForeignKeysAreCoveredByIndex(clusterColumns, foreignKeyColumns, clustered, leadingEdgeIndexColumns);
                     if (foundIndexThatMatchesAKey)
                     {
                         break;
@@ -233,10 +233,10 @@ namespace Cheburashka
         }
 
 
-        private static bool CheckThatForeignKeysAreCoveredByIndex(List<string> ClusterColumns, List<string> ForeignKeyColumns, bool ThisIndexIsClustered, List<string> LeadingEdgeIndexColumns) {
+        private static bool CheckThatForeignKeysAreCoveredByIndex(List<string> clusterColumns, List<string> foreignKeyColumns, bool thisIndexIsClustered, List<string> leadingEdgeIndexColumns) {
             bool foundIndexThatMatchesAKey = false;
 
-            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(ForeignKeyColumns, LeadingEdgeIndexColumns);
+            List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(foreignKeyColumns, leadingEdgeIndexColumns);
             List<int> matchedPos = allPos.Where(n => n != -1).Select(n => n).ToList();
 
             // if every fk column was found in the index
@@ -252,16 +252,16 @@ namespace Cheburashka
             // else if *this* particular index is not clustered and there *are* clustered columns 
             // check that any remaining unmatched keys can be found in the included columns.
             // whilst ensuring all columns we have found live in the first n columns in the index.
-            else if (!ThisIndexIsClustered && ClusterColumns.Count > 0) {
+            else if (!thisIndexIsClustered && clusterColumns.Count > 0) {
                 // the leading edge columns must still have been found in the first n columns of the index
                 // and there must be no other trailing elements in the actual key of the index.
                 // and I'm still making these rules up on the fly.
                 // adjusted for 0-based arrays
-                if (matchedPos.Count == LeadingEdgeIndexColumns.Count
+                if (matchedPos.Count == leadingEdgeIndexColumns.Count
                     && matchedPos.Count > 0
                     && matchedPos.Count - 1 == matchedPos.Max()
                     ) {
-                    string[] arForeignKeyColumns = ForeignKeyColumns.ToArray();
+                    string[] arForeignKeyColumns = foreignKeyColumns.ToArray();
                     List<string> unMatchedForeignKeyColumns = new();
                     for (int i = 0; i < allPos.Count; i++) {
                         if (allPos[i] == -1) {
@@ -269,7 +269,7 @@ namespace Cheburashka
                         }
                     }
 
-                    List<int> remainingPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(unMatchedForeignKeyColumns, ClusterColumns);
+                    List<int> remainingPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(unMatchedForeignKeyColumns, clusterColumns);
                     List<int> remainingAndMatchedToClusteringKeyPos = remainingPos.Where(n => n != -1).Select(n => n).ToList();
 
                     // if we found all the unmatched columns in the cluster key we're home and dry !

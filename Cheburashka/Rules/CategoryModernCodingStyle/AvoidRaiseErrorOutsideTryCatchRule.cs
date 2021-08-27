@@ -40,8 +40,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidRaiseErrorOutsideTryCatchRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidRaiseErrorOutsideTryCatch_RuleName,              // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidRaiseErrorOutsideTryCatch_ProblemDescription,    // ID used to look up the description inside the resources file
+        RuleConstants.AvoidRaiseErrorOutsideTryCatchRuleName,               // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidRaiseErrorOutsideTryCatchProblemDescription,     // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidRaiseErrorOutsideTryCatchRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0050: Raiserror with level >10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidRaiseErrorOutsideTryCatch_RuleId;
+        public const string RuleId = RuleConstants.AvoidRaiseErrorOutsideTryCatchRuleId;
 
         public AvoidRaiseErrorOutsideTryCatchRule() {
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
@@ -82,7 +82,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             //Casting is rubbish - but safe
             List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();
@@ -112,9 +112,9 @@ namespace Cheburashka
                                                 .Where( n => onlyInitialisedVariableNames.Any( name => name.SQLModel_StringCompareEqual(((VariableReference)n.SecondParameter).Name)));
             var raiseErrorStatementsToCheck = raiseErrorStatements.Except(nonIssues).Cast<TSqlFragment>().ToList();
             // visitor to get the occurrences of try/catch blocks
-            var trycatchblocks = DmTSqlFragmentVisitor.Visit(sqlFragment, new TryCatchVisitor());
+            var tryCatchBlocks = DmTSqlFragmentVisitor.Visit(sqlFragment, new TryCatchVisitor());
             // any raiserror outside all try catch blocks is wrong
-            var issues = raiseErrorStatementsToCheck.Where( raiseErrorStatement => ! trycatchblocks.Any( trycatchblock => trycatchblock.SQLModel_Contains(raiseErrorStatement))).ToList();
+            var issues = raiseErrorStatementsToCheck.Where( raiseErrorStatement => ! tryCatchBlocks.Any( tryCatchBlock => tryCatchBlock.SQLModel_Contains(raiseErrorStatement))).ToList();
 
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);

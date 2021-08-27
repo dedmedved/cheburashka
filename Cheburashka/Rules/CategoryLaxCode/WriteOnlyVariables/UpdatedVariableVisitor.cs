@@ -32,16 +32,16 @@ namespace Cheburashka
     {
         public UpdatedVariableVisitor()
         {
-            SetVariables = new List<SQLExpressionDependency>();
+            SetVariables = new List<SqlExpressionDependency>();
         }
-        public IList<SQLExpressionDependency> SetVariables { get; }
-        public IList<SQLExpressionDependency> SQLExpressionDependencies() { return SetVariables; }
+        public IList<SqlExpressionDependency> SetVariables { get; }
+        public IList<SqlExpressionDependency> SqlExpressionDependencies() { return SetVariables; }
 
         public override void ExplicitVisit(SetVariableStatement node)
         {
 
             if (node.Variable is null  || node.Expression is null) return;
-            SQLExpressionDependency ed = new(node.Variable,node,node.ToString());
+            SqlExpressionDependency ed = new(node.Variable,node,node.ToString());
 
             //Get variable references in the expression.
             var usageVisitor = new VariableUsageVisitor();
@@ -55,7 +55,7 @@ namespace Cheburashka
         public override void ExplicitVisit(SelectSetVariable node)
         {
             if (node.Variable is null || node.Expression is null) return ;
-            SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
+            SqlExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
             VariableUsageVisitor usageVisitor = new();
@@ -74,7 +74,7 @@ namespace Cheburashka
             if (node.Variable is not null &&
                 !string.IsNullOrEmpty(node.Variable.Name))
             {
-                SQLExpressionDependency ed = new(node.Variable, node.Variable, node.Variable.ToString());
+                SqlExpressionDependency ed = new(node.Variable, node.Variable, node.Variable.ToString());
                 // there are no dependencies in the sense we are using them.
                 SetVariables.Add(ed);
             }
@@ -91,13 +91,13 @@ namespace Cheburashka
             {
                 if (node.ParameterValue is VariableReference referenced)
                 {
-                    var ed = new SQLExpressionDependency(referenced, node.ParameterValue, node.ParameterValue.ToString());
+                    var ed = new SqlExpressionDependency(referenced, node.ParameterValue, node.ParameterValue.ToString());
                     // there are no dependencies in the sense we are using them.
                     SetVariables.Add(ed);
                 }
                 else if (node.Variable is not null)
                 {
-                    var ed = new SQLExpressionDependency(node.Variable, node.Variable, node.Variable.ToString());
+                    var ed = new SqlExpressionDependency(node.Variable, node.Variable, node.Variable.ToString());
                     // there are no dependencies in the sense we are using them.
                     SetVariables.Add(ed);
                 }
@@ -107,7 +107,7 @@ namespace Cheburashka
         public override void ExplicitVisit(AssignmentSetClause node)
         {
             if (node.Variable is null ) return;
-            SQLExpressionDependency ed = new(node.Variable, node, node.ToString());
+            SqlExpressionDependency ed = new(node.Variable, node, node.ToString());
 
             //Get variable references in the expression.
             VariableUsageVisitor usageVisitor = new();
@@ -125,7 +125,7 @@ namespace Cheburashka
                 {
                     if (v is not null )
                     {
-                        SQLExpressionDependency ed = new(v, v, v.ToString());
+                        SqlExpressionDependency ed = new(v, v, v.ToString());
                         SetVariables.Add(ed);
                     }
                 }
@@ -135,7 +135,7 @@ namespace Cheburashka
         public override void ExplicitVisit(BeginDialogStatement node)
         {
             if (node.Handle is null || string.IsNullOrEmpty(node.Handle.Name)) return;
-            SQLExpressionDependency ed = new(node.Handle,node.Handle,node.Handle.ToString());
+            SqlExpressionDependency ed = new(node.Handle,node.Handle,node.Handle.ToString());
             SetVariables.Add(ed);
         }
         public override void ExplicitVisit(ReceiveStatement node)
@@ -145,7 +145,7 @@ namespace Cheburashka
             {
                 if (v is SelectSetVariable ssv)
                 {
-                    SQLExpressionDependency ed = new(ssv.Variable, ssv, ssv.ToString());
+                    SqlExpressionDependency ed = new(ssv.Variable, ssv, ssv.ToString());
                     //                    SetVariables.Add(ed);
 
                     //Get variable references in the expression.

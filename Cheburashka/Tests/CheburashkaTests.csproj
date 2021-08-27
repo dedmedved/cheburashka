@@ -1197,17 +1197,17 @@
     <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\TableTriggerWithSp_ReName.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule-Baseline.txt">
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\DisallowUseOfSpReNameRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\DatabaseTriggerWithSp_ReName.sql">
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\DatabaseTriggerWithSp_ReName.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\ProcWithSp_ReName.sql">
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\ProcWithSp_ReName.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\ServerTriggerWithSp_ReName.sql" />
-    <Content Include="TestScripts\DisallowUseOfSp_ReNameRule\TableTriggerWithSp_ReName.sql">
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\ServerTriggerWithSp_ReName.sql" />
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\TableTriggerWithSp_ReName.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceCaptureSPReturnStatusRule\DatabaseTriggerWithCaptureOfSPReturnStatus.sql">

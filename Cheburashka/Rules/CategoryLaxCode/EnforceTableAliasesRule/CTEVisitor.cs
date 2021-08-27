@@ -25,17 +25,17 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class CTEVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class CteVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public CTEVisitor()
+        public CteVisitor()
         {
-            CTES = new List<TSqlFragment>();
+            Ctes = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> CTES { get; }
-        public IList<TSqlFragment> SqlFragments() { return CTES.ToList(); }
+        public List<TSqlFragment> Ctes { get; }
+        public IList<TSqlFragment> SqlFragments() { return Ctes.ToList(); }
         public override void ExplicitVisit(CommonTableExpression node)
         {
-            CTES.Add(node);
+            Ctes.Add(node);
         }
     }
 }

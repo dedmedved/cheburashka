@@ -36,7 +36,7 @@ namespace Cheburashka
         public IList<TSqlFragment> SqlFragments() { return RaiseErrorStatements.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(RaiseErrorStatement node)
         {
-            // if the error level has been passed and its a literal int then check it's > 10
+            // if the error level has been passed and it's a literal int then check it's > 10
             if (node.SecondParameter is IntegerLiteral {LiteralType: LiteralType.Integer} literal)
             {
                 int.TryParse(literal.Value, out var litVal);

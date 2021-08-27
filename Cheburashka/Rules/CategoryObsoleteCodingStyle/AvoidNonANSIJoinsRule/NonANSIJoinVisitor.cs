@@ -25,9 +25,9 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class NonANSIJoinVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class NonAnsiJoinVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public NonANSIJoinVisitor()
+        public NonAnsiJoinVisitor()
         {
             TableReferences = new List<TableReference>();
         }

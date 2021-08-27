@@ -60,8 +60,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidWriteOnlyVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidWriteOnlyVariables_RuleName,                     // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidWriteOnlyVariables_ProblemDescription,           // ID used to look up the description inside the resources file
+        RuleConstants.AvoidWriteOnlyVariablesRuleName,                      // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidWriteOnlyVariablesProblemDescription,            // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidWriteOnlyVariablesRule : SqlCodeAnalysisRule
@@ -70,9 +70,9 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0023: Avoid using Return statements with no explicit return value in Stored Procedures."
+        /// shown as "DM0003: Variables whose values are set, but never used point to potential coding errors."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidWriteOnlyVariables_RuleId;
+        public const string RuleId = RuleConstants.AvoidWriteOnlyVariablesRuleId;
 
         public AvoidWriteOnlyVariablesRule()
         {
@@ -92,7 +92,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DmvRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -101,7 +101,7 @@ namespace Cheburashka
 
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the declarations of variables - the cast is ugly but accurate
             var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableDeclarationVisitor()).Cast<Identifier>().ToList();
@@ -120,14 +120,14 @@ namespace Cheburashka
             List<VariableReference> variableReferences = tmpVr.ToList();
 
             // remove all named parameters from the list of set variables
-            IEnumerable<SQLExpressionDependency> tmpSetVr =
+            IEnumerable<SqlExpressionDependency> tmpSetVr =
                         from varSetVar in allSetVariables
                         join varDeclaration in variableDeclarations
                         on 1 equals 1  // fake out the on clause
                         where SqlComparer.SQLModel_StringCompareEqual(varSetVar.Variable.Name, varDeclaration.Value) // real condition
                         select varSetVar;
 
-            List<SQLExpressionDependency> setVariables = tmpSetVr.ToList();
+            List<SqlExpressionDependency> setVariables = tmpSetVr.ToList();
 
             // find all non-assignment contexts of variable usage.  These OUGHT to be ALL the evidence we need to 
             // show that a variable isn't being needlessly computed.
@@ -208,22 +208,8 @@ namespace Cheburashka
                                                   .Select(n => n.Variable.Name)
                                                   .Distinct();
 
-            var objects = new Dictionary<string, Identifier>(SqlComparer.Comparer);
-            foreach (Identifier variableDeclaration in variableDeclarations)    // variable declarations are unique collation-wise so add will work w/o error
-            {
-                objects.Add(variableDeclaration.Value, variableDeclaration);
-            }
-
-            foreach (var v in unConsumedVariables)
-            {
-                SqlRuleProblem problem =
-                    new(string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
-                        , modelElement
-                        , sqlFragment);
-
-                RuleUtils.UpdateProblemPosition(modelElement, problem, objects[v]);
-                problems.Add(problem);
-            }
+            var problemDeclarations = variableDeclarations.Where(n => unConsumedVariables.Contains(n.Value, SqlComparer.Comparer)).Cast<TSqlFragment>().ToList();
+            RuleUtils.UpdateProblems(problems, modelElement, elementName, problemDeclarations, ruleDescriptor);
 
             return problems;
         }

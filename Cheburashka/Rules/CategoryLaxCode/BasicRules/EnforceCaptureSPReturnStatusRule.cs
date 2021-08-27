@@ -37,13 +37,13 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(EnforceCaptureSPReturnStatusRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(EnforceCaptureSpReturnStatusRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceCaptureSPReturnStatus_RuleName,                // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceCaptureSPReturnStatus_ProblemDescription,      // ID used to look up the description inside the resources file
+        RuleConstants.EnforceCaptureSpReturnStatusRuleName,                // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceCaptureSpReturnStatusProblemDescription,      // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,                    // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class EnforceCaptureSPReturnStatusRule : SqlCodeAnalysisRule
+    public sealed class EnforceCaptureSpReturnStatusRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
@@ -51,9 +51,9 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0026: Return status should always be retrieved.."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceCaptureSPReturnStatus_RuleId;
+        public const string RuleId = RuleConstants.EnforceCaptureSpReturnStatusRuleId;
 
-        public EnforceCaptureSPReturnStatusRule()
+        public EnforceCaptureSpReturnStatusRule()
         {
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
@@ -82,10 +82,10 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of execute statements
-            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceCaptureSPReturnStatusVisitor());
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceCaptureSpReturnStatusVisitor());
 
             // Create problems for each non-captured execute found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);

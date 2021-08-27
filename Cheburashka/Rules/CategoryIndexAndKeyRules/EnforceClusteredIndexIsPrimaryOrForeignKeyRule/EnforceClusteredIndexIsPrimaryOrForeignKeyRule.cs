@@ -41,8 +41,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceClusteredIndexIsPrimaryOrForeignKeyRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription,         // ID used to look up the description inside the resources file
+        RuleConstants.EnforceClusteredIndexIsPrimaryOrForeignKeyRuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceClusteredIndexIsPrimaryOrForeignKeyProblemDescription,         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class EnforceClusteredIndexIsPrimaryOrForeignKeyRule : SqlCodeAnalysisRule
@@ -87,7 +87,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -103,10 +103,10 @@ namespace Cheburashka
                 string owningObjectSchema = modelElement.Name.Parts[0];
                 string owningObjectTable = modelElement.Name.Parts[1];
 
-                DMVSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
 
                 // Refresh cached index/constraints/tables lists from Model
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
                 List<TSqlObject> clusteredpks =
@@ -212,14 +212,14 @@ namespace Cheburashka
                                     // consider a foreign key to be clustered if all its columns appear as the first n columns in a
                                     // clustered index, clustered unique constraint or clustered primary key constraint.
                                     // nb a primary key can be a foreign key too when modeling 1:1 relationships.
-                                    List<string> SortedForeignKeyColumns = columnSpecifications
+                                    List<string> sortedForeignKeyColumns = columnSpecifications
                                         .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                         .Select(n => n.ObjectName.Parts[2]).ToList();
-                                    if (sortedLeadingEdgeIndexColumns.Count >= SortedForeignKeyColumns.Count)
+                                    if (sortedLeadingEdgeIndexColumns.Count >= sortedForeignKeyColumns.Count)
                                     {
                                         List<string> leadingCols = sortedLeadingEdgeIndexColumns
-                                            .Take(SortedForeignKeyColumns.Count).ToList();
-                                        if (leadingCols.SequenceEqual(SortedForeignKeyColumns, SqlComparer.Comparer))
+                                            .Take(sortedForeignKeyColumns.Count).ToList();
+                                        if (leadingCols.SequenceEqual(sortedForeignKeyColumns, SqlComparer.Comparer))
                                         {
                                             match = true;
                                             break;

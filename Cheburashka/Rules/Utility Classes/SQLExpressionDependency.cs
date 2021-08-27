@@ -27,16 +27,16 @@ using System.Collections.ObjectModel;
 
 namespace Cheburashka
 {
-    public class SQLExpressionDependency
+    public class SqlExpressionDependency
     {
         private readonly List<VariableReference> _dependencies;
 
-        public SQLExpressionDependency()
+        public SqlExpressionDependency()
         {
             Variable = new VariableReference();
             _dependencies = new List<VariableReference>();
         }
-        public SQLExpressionDependency(VariableReference variable, TSqlFragment context = null, string contextClass = null)
+        public SqlExpressionDependency(VariableReference variable, TSqlFragment context = null, string contextClass = null)
         {
             Variable = variable ?? throw new ArgumentNullException(nameof(variable));
             _dependencies = new List<VariableReference>();

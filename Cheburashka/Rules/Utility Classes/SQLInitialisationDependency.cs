@@ -27,16 +27,16 @@ using System.Collections.ObjectModel;
 
 namespace Cheburashka
 {
-    public class SQLInitialisationDependency
+    public class SqlInitialisationDependency
     {
         private readonly List<VariableReference> _dependencies;
 
-        public SQLInitialisationDependency()
+        public SqlInitialisationDependency()
         {
             Variable = new VariableReference();
             _dependencies = new List<VariableReference>();
         }
-        public SQLInitialisationDependency(VariableReference variable, TSqlFragment context = null, string contextClass = null)
+        public SqlInitialisationDependency(VariableReference variable, TSqlFragment context = null, string contextClass = null)
         {
             Variable = variable ?? throw new ArgumentNullException(nameof(variable));
             _dependencies = new List<VariableReference>();

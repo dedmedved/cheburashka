@@ -36,7 +36,7 @@ namespace Cheburashka
         public override void ExplicitVisit(ScalarSubquery node)
         {
             List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(node, ref querySpecifications);
+            SqlGatherQuery.GetQuery(node, ref querySpecifications);
             SingleSourceSubQueryQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             //DEFINITELY NOT !!
             //node.AcceptChildren(this);

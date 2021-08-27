@@ -40,8 +40,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(PreferThrowToRaiserrorRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.PreferThrowToRaiserror_RuleName,                     // ID used to look up the display name inside the resources file
-        RuleConstants.PreferThrowToRaiserror_ProblemDescription,            // ID used to look up the description inside the resources file
+        RuleConstants.PreferThrowToRaiserrorRuleName,                     // ID used to look up the display name inside the resources file
+        RuleConstants.PreferThrowToRaiserrorProblemDescription,            // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class PreferThrowToRaiserrorRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0048: Prefer using Throw to Raiserror when raising an error."
         /// </summary>
-        public const string RuleId = RuleConstants.PreferThrowToRaiserror_RuleId;
+        public const string RuleId = RuleConstants.PreferThrowToRaiserrorRuleId;
 
         public PreferThrowToRaiserrorRule() {
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
@@ -82,7 +82,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             //Casting is rubbish - but safe
             List<DeclareVariableElement> initialisedVars = DmTSqlFragmentVisitor.Visit(sqlFragment, new InitialisationContextVisitor()).Cast<DeclareVariableElement>().ToList();

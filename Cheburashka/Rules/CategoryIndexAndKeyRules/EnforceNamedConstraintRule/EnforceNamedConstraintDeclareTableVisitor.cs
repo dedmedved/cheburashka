@@ -22,10 +22,11 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceNamedConstraintDeclareTableVisitor : TSqlConcreteFragmentVisitor
+    internal class EnforceNamedConstraintDeclareTableVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<TSqlFragment> _objects;
         
@@ -34,7 +35,7 @@ namespace Cheburashka
             _objects = new List<TSqlFragment>();
         }
         public List<TSqlFragment> Objects => _objects;
-
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(DeclareTableVariableStatement node)
         {
             _objects.Add(node);

@@ -27,11 +27,11 @@ using System.Linq;
 namespace Cheburashka
 {
 
-    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitorIncludedIndexColumns : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<Identifier> _objects;
 
-        public CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns()
+        public CheckClusteredKeyColumnsNotIncludedInIndexVisitorIncludedIndexColumns()
         {
             _objects = new List<Identifier>();
         }

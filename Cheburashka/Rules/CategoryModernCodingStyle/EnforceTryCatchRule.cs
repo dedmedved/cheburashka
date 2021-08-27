@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceTryCatchRule.RuleId,
         RuleConstants.ResourceBaseName,                             // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceTryCatch_RuleName,                     // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceTryCatch_ProblemDescription,           // ID used to look up the description inside the resources file
+        RuleConstants.EnforceTryCatchRuleName,                      // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceTryCatchProblemDescription,            // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,         // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                          // This rule targets specific elements rather than the whole model
     public sealed class EnforceTryCatchRule : SqlCodeAnalysisRule
@@ -51,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0028: Stored Procedures and Triggers need at least one Try/Catch block."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceTryCatch_RuleId;
+        public const string RuleId = RuleConstants.EnforceTryCatchRuleId;
 
         public EnforceTryCatchRule() {
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
@@ -81,7 +81,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of try/catch statements
             var tryCatchStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new TryCatchVisitor());

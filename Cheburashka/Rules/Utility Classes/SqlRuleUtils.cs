@@ -220,27 +220,27 @@ namespace Cheburashka
         {
             List<CteUtil> bits = new();
 
-            var svisitor = new SelectWithCTEVisitor();
+            var svisitor = new SelectWithCteVisitor();
             sqlFragment.Accept(svisitor);
             List<CteUtil> sCteUtilFragments = svisitor.CteUtilFragments;
             bits.AddRange(sCteUtilFragments);
 
-            var ivisitor = new InsertWithCTEVisitor();
+            var ivisitor = new InsertWithCteVisitor();
             sqlFragment.Accept(ivisitor);
             List<CteUtil> iCteUtilFragments = ivisitor.CteUtilFragments;
             bits.AddRange(iCteUtilFragments);
 
-            var uvisitor = new UpdateWithCTEVisitor();
+            var uvisitor = new UpdateWithCteVisitor();
             sqlFragment.Accept(uvisitor);
             List<CteUtil> uCteUtilFragments = uvisitor.CteUtilFragments;
             bits.AddRange(uCteUtilFragments);
 
-            var dvisitor = new DeleteWithCTEVisitor();
+            var dvisitor = new DeleteWithCteVisitor();
             sqlFragment.Accept(dvisitor);
             List<CteUtil> dCteUtilFragments = dvisitor.CteUtilFragments;
             bits.AddRange(dCteUtilFragments);
 
-            var mvisitor = new MergeWithCTEVisitor();
+            var mvisitor = new MergeWithCteVisitor();
             sqlFragment.Accept(mvisitor);
             List<CteUtil> mCteUtilFragments = mvisitor.CteUtilFragments;
             bits.AddRange(mCteUtilFragments);
@@ -387,7 +387,7 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetDMLTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetDmlTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
         {
             ModelSchema.DmlTrigger
         });

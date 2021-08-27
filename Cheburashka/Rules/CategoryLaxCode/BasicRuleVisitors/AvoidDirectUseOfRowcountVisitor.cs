@@ -36,14 +36,6 @@ namespace Cheburashka
         public IList<TSqlFragment> SqlFragments() { return GlobalVariableExpressions.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(GlobalVariableExpression node)
         {
-            //using (StreamWriter w = File.AppendText(@"c:\temp\blah.txt"))
-            //{
-
-            //    w.WriteLine(node.Name);
-            //}
-
-            //if (SqlComparer.SQLModel_StringCompareEqual(node.Name, "@@rowcount")
-            //    || SqlComparer.SQLModel_StringCompareEqual(node.Name, "@@error")
             if (node.Name.SQLModel_StringCompareEqual("@@rowcount")
                 || node.Name.SQLModel_StringCompareEqual("@@error")
                 )

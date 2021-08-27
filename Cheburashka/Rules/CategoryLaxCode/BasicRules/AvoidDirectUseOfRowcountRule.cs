@@ -40,8 +40,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidDirectUseOfRowcountRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidDirectUseOfRowcount_RuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidDirectUseOfRowcount_ProblemDescription,          // ID used to look up the description inside the resources file
+        RuleConstants.AvoidDirectUseOfRowcountRuleName,                    // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidDirectUseOfRowcountProblemDescription,          // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryBasics,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidDirectUseOfRowcountRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0024: @@rowcount and/or @@error should never be used directly."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidDirectUseOfRowcount_RuleId;
+        public const string RuleId = RuleConstants.AvoidDirectUseOfRowcountRuleId;
 
         public AvoidDirectUseOfRowcountRule()
         {
@@ -83,7 +83,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of @@rowcount
             var expressions = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidDirectUseOfRowcountVisitor());

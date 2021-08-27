@@ -39,20 +39,20 @@ namespace Cheburashka
 
 
         // The first assignment we find to a variable
-        private readonly Dictionary<string, TSqlFragment> variableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, TSqlFragment> _variableAssignments = new(SqlComparer.Comparer);
 //        private readonly Dictionary<string, VariableReference> variables = new(SqlComparer.Comparer);
         // The second assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, TSqlFragment> invalidVariableAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, TSqlFragment> _invalidVariableAssignments = new(SqlComparer.Comparer);
 
-        private bool ignoreAllVisitedVariables;
+        private bool _ignoreAllVisitedVariables;
 
         public Dictionary<string, TSqlFragment> VariablesAndValues()
         {
-            var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
+            var singleValidAssignmentKeys = _variableAssignments.Keys.Except(_invalidVariableAssignments.Keys, SqlComparer.Comparer);
             var x = new Dictionary<string, TSqlFragment>();
             foreach (var k in singleValidAssignmentKeys)
             {
-                x.Add(k, variableAssignments[k]);
+                x.Add(k, _variableAssignments[k]);
             }
 
             return x;
@@ -64,8 +64,8 @@ namespace Cheburashka
         //}
         public IList<TSqlFragment> VariableAssignments()
         {
-            var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
-            return singleValidAssignmentKeys.Select(v => variableAssignments[v]).ToList();
+            var singleValidAssignmentKeys = _variableAssignments.Keys.Except(_invalidVariableAssignments.Keys, SqlComparer.Comparer);
+            return singleValidAssignmentKeys.Select(v => _variableAssignments[v]).ToList();
         }
 
         public IList<TSqlFragment> SqlFragments()
@@ -89,15 +89,15 @@ namespace Cheburashka
             }
             else
             {
-                ignoreAllVisitedVariables = true;
+                _ignoreAllVisitedVariables = true;
                 node.AcceptChildren(this);
-                ignoreAllVisitedVariables = false;
+                _ignoreAllVisitedVariables = false;
             }
         }
 
         public override void ExplicitVisit(SelectSetVariable node)
         {
-            if (ignoreAllVisitedVariables)
+            if (_ignoreAllVisitedVariables)
                 //if the select statement has a from clause, ignore everything we meet.
                 //(so far that's the only condition triggering this logic)
                 AddVariableToListOfIgnoredVariables(node.Variable); 
@@ -178,13 +178,13 @@ namespace Cheburashka
             {
                 var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(VariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
-                // if the scalar expression doesnt contain any variables it's safe to consider it to be an initialisation expression
+                // if the scalar expression doesn't contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
                 {
-                    if (!variableAssignments.ContainsKey(var.Name))
+                    if (!_variableAssignments.ContainsKey(var.Name))
                     {
                         //variables.Add(var.Name, var);
-                        variableAssignments.Add(var.Name, source);
+                        _variableAssignments.Add(var.Name, source);
                     }
                     else
                     {
@@ -205,16 +205,16 @@ namespace Cheburashka
         private void AddVariableToListOfIgnoredVariables(VariableReference var)
         {
             if (var is null) return;
-            if (!invalidVariableAssignments.ContainsKey(var.Name))
-                invalidVariableAssignments.Add(var.Name,
-                    new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+            if (!_invalidVariableAssignments.ContainsKey(var.Name))
+                _invalidVariableAssignments.Add(var.Name,
+                    new StringLiteral()); // doesn't matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
         private void AddVariableToListOfIgnoredVariables(Identifier var)
         {
             if (var is null) return;
-            if (!invalidVariableAssignments.ContainsKey(var.Value))
-                invalidVariableAssignments.Add(var.Value,
-                    new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+            if (!_invalidVariableAssignments.ContainsKey(var.Value))
+                _invalidVariableAssignments.Add(var.Value,
+                    new StringLiteral()); // doesn't matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
     }
 }

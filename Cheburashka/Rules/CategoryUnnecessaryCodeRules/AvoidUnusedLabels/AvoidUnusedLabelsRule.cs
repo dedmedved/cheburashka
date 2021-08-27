@@ -40,8 +40,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidUnusedLabelsRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedLabels_RuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedLabels_ProblemDescription,                 // ID used to look up the description inside the resources file
+        RuleConstants.AvoidUnusedLabelsRuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUnusedLabelsProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidUnusedLabelsRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0042: Avoid unreferenced labels in code."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUnusedLabels_RuleId;
+        public const string RuleId = RuleConstants.AvoidUnusedLabelsRuleId;
 
         public AvoidUnusedLabelsRule()
         {
@@ -82,7 +82,7 @@ namespace Cheburashka
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of goto statements - the cast is ugly but safe
             var gotoLabels = DmTSqlFragmentVisitor.Visit(sqlFragment, new GotoVisitor()).Cast<GoToStatement>().Select(n => n.LabelName.Value).ToList();

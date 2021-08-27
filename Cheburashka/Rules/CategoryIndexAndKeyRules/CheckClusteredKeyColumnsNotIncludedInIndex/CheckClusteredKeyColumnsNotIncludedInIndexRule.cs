@@ -36,8 +36,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId,
         RuleConstants.ResourceBaseName, // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndex_RuleName, // ID used to look up the display name inside the resources file
-        RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription, // ID used to look up the description inside the resources file
+        RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndexRuleName, // ID used to look up the display name inside the resources file
+        RuleConstants.CheckClusteredKeyColumnsNotIncludedInIndexProblemDescription, // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures, // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)] // This rule targets specific elements rather than the whole model
     public sealed class CheckClusteredKeyColumnsNotIncludedInIndexRule : SqlCodeAnalysisRule
@@ -76,7 +76,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
@@ -89,14 +89,14 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 var createIndexStatement = sqlFragment as CreateIndexStatement ;
 
                 var isClustered = createIndexStatement is { Clustered: { } } && (bool)createIndexStatement.Clustered;
                 var isUnique = createIndexStatement is { Unique: true };
-                var includeColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns()).Cast<Identifier>().ToList();
+                var includeColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitorIncludedIndexColumns()).Cast<Identifier>().ToList();
 
                 //var issues = new List<String>();
                 var issueFound = false;
@@ -105,37 +105,36 @@ namespace Cheburashka
                 {
                     // visitor to get the occurrences of statements that create constraints etc where we need the parent object name
                     List<Identifier> indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckClusteredKeyColumnsNotIncludedInIndexVisitor()).Cast<Identifier>().ToList();
-
-                    CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor
-                        checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor = new();
-                    sqlFragment.Accept(checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor);
-                    var parentTable = checkClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.Objects;
-
-                    string owningObjectSchema = parentTable.SchemaIdentifier.Value;
-                    string owningObjectTable = parentTable.BaseIdentifier.Value;
-
-                    bool bFoundClusteredIndex =
-                        RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
-                            out _,
-                            out List<ObjectIdentifier> clusteredIndexColumns);
-                    if (bFoundClusteredIndex)
+                    if (createIndexStatement != null)
                     {
-                        List<string> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
-                        List<string> c2 = indexColumns.Select(n => n.Value).ToList();
-                        List<string> c2Include = includeColumns.Select(n => n.Value).ToList();
+                        var parentTable = createIndexStatement.OnName;
 
-                        //allow the lead column to be a clustered index member, as we need to be able to have
-                        //different indexes key on different leading edges
-                        //but then check the tail columns
-                        var (_, c2Tail) = c2; // uses ListUtil.Deconstruct - magic !
-                        //IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
-                        //IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
-                        //issues.AddRange(common);
-                        //issues.AddRange(common2);
-                        if (c1.Intersect(c2Tail, SqlComparer.Comparer).Any() ||
-                            c1.Intersect(c2Include, SqlComparer.Comparer).Any())
+                        string owningObjectSchema = parentTable.SchemaIdentifier.Value;
+                        string owningObjectTable = parentTable.BaseIdentifier.Value;
+
+                        bool bFoundClusteredIndex =
+                            RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable,
+                                out _,
+                                out List<ObjectIdentifier> clusteredIndexColumns);
+                        if (bFoundClusteredIndex)
                         {
-                            issueFound = true;
+                            List<string> c1 = clusteredIndexColumns.AsEnumerable().Select(n => n.Parts[2]).ToList();
+                            List<string> c2 = indexColumns.Select(n => n.Value).ToList();
+                            List<string> c2Include = includeColumns.Select(n => n.Value).ToList();
+
+                            //allow the lead column to be a clustered index member, as we need to be able to have
+                            //different indexes key on different leading edges
+                            //but then check the tail columns
+                            var (_, c2Tail) = c2; // uses ListUtil.Deconstruct - magic !
+                            //IEnumerable<String> common = c1.Intersect(c2_tail, SqlComparer.Comparer);
+                            //IEnumerable<String> common2 = c1.Intersect(c2_include, SqlComparer.Comparer);
+                            //issues.AddRange(common);
+                            //issues.AddRange(common2);
+                            if (c1.Intersect(c2Tail, SqlComparer.Comparer).Any() ||
+                                c1.Intersect(c2Include, SqlComparer.Comparer).Any())
+                            {
+                                issueFound = true;
+                            }
                         }
                     }
 

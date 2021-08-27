@@ -156,7 +156,6 @@
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
-    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexParentObjectVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\CreateIndexStatementVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
     <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAlterColumnStatementVisitor.cs" />
@@ -168,10 +167,9 @@
     <Compile Include="CategoryIndexAndKeyRules\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
     <Compile Include="CategoryRelationalDesignRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
-    <Compile Include="CategoryIndexAndKeyRules\StructureColumnsVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueKeysAreNotDuplicatedRule\StructureColumnsVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />
-    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintParentObjectVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsVisitor.cs" />
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule.cs" />

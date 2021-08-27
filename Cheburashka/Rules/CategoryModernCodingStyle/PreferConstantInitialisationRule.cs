@@ -30,8 +30,8 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a stored procedure or trigger uses raiserror rather than throw. 
-    /// This rule only applies to SQL stored procedures, and triggers.
+    /// whenever an assignment is detected which could be moved to the variable declaration
+    /// This rule only applies to SQL stored procedures, functions, and triggers.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -40,8 +40,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(PreferConstantInitialisationRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.PreferConstantInitialisation_RuleName,                // ID used to look up the display name inside the resources file
-        RuleConstants.PreferConstantInitialisation_ProblemDescription,      // ID used to look up the description inside the resources file
+        RuleConstants.PreferConstantInitialisationRuleName,                 // ID used to look up the display name inside the resources file
+        RuleConstants.PreferConstantInitialisationProblemDescription,       // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryModernCodingStyle,                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class PreferConstantInitialisationRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0049: Variables set to constant values and never reset, are best set on declaration."
         /// </summary>
-        public const string RuleId = RuleConstants.PreferConstantInitialisation_RuleId;
+        public const string RuleId = RuleConstants.PreferConstantInitialisationRuleId;
 
         public PreferConstantInitialisationRule() {
             SupportedElementTypes = SqlRuleUtils.GetCodeContainingClasses();
@@ -82,7 +82,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
 
             // anything with gotos is too hard to handle - skip for now
@@ -140,31 +140,31 @@ namespace Cheburashka
 
 
             // get all candidate initialisations
-            var candidateConstantAssigments = nonAssignedParametersAndVariablesNames;
+            var candidateConstantAssignments = nonAssignedParametersAndVariablesNames;
             var bAssignedConstantsStillToFind = true;
             var permissibleVariablesCount = nonAssignedParametersAndVariables.Count;
             var issues = new List<TSqlFragment>();
 
             while (bAssignedConstantsStillToFind)
             {
-                var singlySetLiteralVariableVisitor = new ConstantOnlyUpdatedVariableVisitor(candidateConstantAssigments);
+                var singlySetLiteralVariableVisitor = new ConstantOnlyUpdatedVariableVisitor(candidateConstantAssignments);
                 sqlFragment.Accept(singlySetLiteralVariableVisitor);
                 var singlySetLiteralVariableFragments = singlySetLiteralVariableVisitor.VariablesAndValues();
 
-                // check they aren't initialised in possibly unexecuted code.
+                // check they aren't initialised in possibly un-executed code.
                 foreach (var v in singlySetLiteralVariableFragments.Keys)
                 {
-                    var SQL = singlySetLiteralVariableFragments[v];
-                    IfFree(ifs, SQL, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
-                    if (ifFree && whileFree && catchFree && ! candidateConstantAssigments.Any(n => v.SQLModel_StringCompareEqual(n)))
+                    var sql = singlySetLiteralVariableFragments[v];
+                    IfFree(ifs, sql, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
+                    if (ifFree && whileFree && catchFree && ! candidateConstantAssignments.Any(n => v.SQLModel_StringCompareEqual(n)))
                     {
-                        issues.Add(SQL); // yep this is ugly as well
-                        candidateConstantAssigments.Add(v);
+                        issues.Add(sql); // yep this is ugly as well
+                        candidateConstantAssignments.Add(v);
                     }
                 }
-                bAssignedConstantsStillToFind = candidateConstantAssigments.Count != permissibleVariablesCount;
+                bAssignedConstantsStillToFind = candidateConstantAssignments.Count != permissibleVariablesCount;
 
-                permissibleVariablesCount = candidateConstantAssigments.Count;
+                permissibleVariablesCount = candidateConstantAssignments.Count;
             }
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
@@ -172,7 +172,7 @@ namespace Cheburashka
             return problems;
         }
 
-        static void IfFree(IEnumerable<TSqlFragment> sqlFragments, TSqlFragment v, IEnumerable<TSqlFragment> list, IEnumerable<StatementList> statementLists, out bool ifFree, out bool whileFree, out bool catchFree)
+        private static void IfFree(IEnumerable<TSqlFragment> sqlFragments, TSqlFragment v, IEnumerable<TSqlFragment> list, IEnumerable<StatementList> statementLists, out bool ifFree, out bool whileFree, out bool catchFree)
         {
             ifFree = !sqlFragments.Any(i => i.SQLModel_Contains(v));
             whileFree = !list.Any(i => i.SQLModel_Contains(v));

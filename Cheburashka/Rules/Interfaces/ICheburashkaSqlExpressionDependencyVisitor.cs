@@ -5,6 +5,6 @@ namespace Cheburashka
 {
     public interface ICheburashkaSqlExpressionDependencyVisitor
     {
-        public IList<SQLExpressionDependency> SQLExpressionDependencies();
+        public IList<SqlExpressionDependency> SqlExpressionDependencies();
     }
 }

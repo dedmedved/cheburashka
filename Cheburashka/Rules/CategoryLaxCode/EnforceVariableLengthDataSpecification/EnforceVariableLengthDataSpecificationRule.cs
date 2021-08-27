@@ -30,7 +30,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is au unused variable in a routine.
+    /// whenever there is a variable length data type used without a length specified.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceVariableLengthDataSpecificationRule.RuleId,
         RuleConstants.ResourceBaseName,                                             // Name of the resource file to look up display name and description in
-        RuleConstants.EnforceVariableLengthDataSpecification_RuleName,              // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceVariableLengthDataSpecification_ProblemDescription,    // ID used to look up the description inside the resources file
+        RuleConstants.EnforceVariableLengthDataSpecificationRuleName,              // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceVariableLengthDataSpecificationProblemDescription,    // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyleData,                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                          // This rule targets specific elements rather than the whole model
     public sealed class EnforceVariableLengthDataSpecificationRule : SqlCodeAnalysisRule
@@ -56,7 +56,7 @@ namespace Cheburashka
         /// shown as "DM0039: Don't rely on default values for variable length datatypes, other than DateTime2."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceVariableLengthDataSpecification_RuleId;
+        public const string RuleId = RuleConstants.EnforceVariableLengthDataSpecificationRuleId;
 
         public EnforceVariableLengthDataSpecificationRule()
         {
@@ -89,13 +89,13 @@ namespace Cheburashka
                 TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the occurrences of data declarations names
                 // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
-                var emptyvariableLengthDataSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableLengthDataSpecificationsVisitor());
+                var emptyVariableLengthDataSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableLengthDataSpecificationsVisitor());
 
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, emptyvariableLengthDataSpecifications, ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, emptyVariableLengthDataSpecifications, ruleDescriptor);
             }
             catch
             {

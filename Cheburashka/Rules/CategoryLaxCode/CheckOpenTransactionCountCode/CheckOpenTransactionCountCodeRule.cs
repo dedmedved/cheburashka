@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(CheckOpenTransactionCountCodeRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckOpenTransactionCountCode_RuleName,               // ID used to look up the display name inside the resources file
-        RuleConstants.CheckOpenTransactionCountCode_ProblemDescription,     // ID used to look up the description inside the resources file
+        RuleConstants.CheckOpenTransactionCountCodeRuleName,               // ID used to look up the display name inside the resources file
+        RuleConstants.CheckOpenTransactionCountCodeProblemDescription,     // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class CheckOpenTransactionCountCodeRule : SqlCodeAnalysisRule
@@ -51,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0045: Neither @@trancount not xact_state() by themselves give the full picture of the number of open transaction.  Check both."
         /// </summary>
-        public const string RuleId = RuleConstants.CheckOpenTransactionCountCode_RuleId;
+        public const string RuleId = RuleConstants.CheckOpenTransactionCountCodeRuleId;
 
         public CheckOpenTransactionCountCodeRule()
         {
@@ -81,7 +81,7 @@ namespace Cheburashka
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             var expressions = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckOpenTransactionCountCodeVisitor());
 
@@ -89,9 +89,9 @@ namespace Cheburashka
             foreach ( var expr in expressions) {
 
                 var trancounts = DmTSqlFragmentVisitor.Visit(expr, new TrancountVisitor());
-                var xacts = DmTSqlFragmentVisitor.Visit(expr, new Xact_StateVisitor());
+                var xacts = DmTSqlFragmentVisitor.Visit(expr, new XactStateVisitor());
 
-                // This is a really poor way of checking for epxressoin correctness - but in general its the best that can be done
+                // This is a really poor way of checking for expression correctness - but in general its the best that can be done
                 if (   (trancounts.Count >  0 && xacts.Count == 0)
                     || (trancounts.Count == 0 && xacts.Count >  0)
                     ) {

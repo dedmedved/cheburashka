@@ -42,8 +42,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidUnusedParameterRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedParameter_RuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedParameter_ProblemDescription,                  // ID used to look up the description inside the resources file
+        RuleConstants.AvoidUnusedParameterRuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUnusedParameterProblemDescription,                  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryVariables,                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class AvoidUnusedParameterRule : SqlCodeAnalysisRule
@@ -54,7 +54,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0005: Unused Parameters point to potential coding errors."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUnusedParameter_RuleId;
+        public const string RuleId = RuleConstants.AvoidUnusedParameterRuleId;
 
         public AvoidUnusedParameterRule()
         {
@@ -74,7 +74,7 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
 
-            DMVRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+            DmvRuleSetup.RuleSetup(ruleExecutionContext, out var problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -82,7 +82,7 @@ namespace Cheburashka
             // and a descriptor that lets us access rule metadata
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get wrappers for CLR code
             var clrWrappers = DmTSqlFragmentVisitor.Visit(sqlFragment, new ClrWrapperVisitor()).Cast<ProcedureStatementBodyBase>().ToList();

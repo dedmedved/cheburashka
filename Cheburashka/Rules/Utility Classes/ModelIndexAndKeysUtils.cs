@@ -31,13 +31,13 @@ namespace Cheburashka
     internal static class ModelIndexAndKeysUtils
     {
 
-        public static List<int> GetCorrespondingKeyPositions(List<string> SearchedForKeys, List<string> SearchedLocation)
+        public static List<int> GetCorrespondingKeyPositions(List<string> searchedForKeys, List<string> searchedLocation)
         {
             // Look for the columns in SearchedForKeys in the list of columns SearchedLocation.
-            string[] ar = SearchedLocation.ToArray();
+            string[] ar = searchedLocation.ToArray();
 
             List<int> res = new();
-            foreach (var sk in SearchedForKeys)
+            foreach (var sk in searchedForKeys)
             {
                 // if we find the col in the SearchedLocation, record its position (o-based) in res.
                 int pos = Array.FindIndex(ar, mem => SqlComparer.SQLModel_StringCompareEqual(sk, mem));
@@ -50,7 +50,7 @@ namespace Cheburashka
         public static List<TSqlObject> GetForeignKeys(string owningObjectSchema, string owningObjectTable)
         {
             var fks = new List<TSqlObject>();
-            foreach (var fk in DMVSettings.GetForeignKeys)
+            foreach (var fk in DmvSettings.GetForeignKeys)
             {
                 if (fk.IsLocalObject())
                 {
@@ -68,7 +68,7 @@ namespace Cheburashka
         public static List<TSqlObject> GetPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
-            foreach (var pk in DMVSettings.GetPrimaryKeys)
+            foreach (var pk in DmvSettings.GetPrimaryKeys)
             {
                 if (pk.IsLocalObject())
                 {
@@ -85,7 +85,7 @@ namespace Cheburashka
         public static List<TSqlObject> GetClusteredPrimaryKeys(string owningObjectSchema, string owningObjectTable)
         {
             var pks = new List<TSqlObject>();
-            foreach (var pk in DMVSettings.GetPrimaryKeys)
+            foreach (var pk in DmvSettings.GetPrimaryKeys)
             {
                 if (pk.IsLocalObject())
                 {
@@ -106,7 +106,7 @@ namespace Cheburashka
         public static List<TSqlObject> GetIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
-            foreach (var index in DMVSettings.GetIndexes)
+            foreach (var index in DmvSettings.GetIndexes)
             {
                 if (index.IsLocalObject())
                 {
@@ -122,7 +122,7 @@ namespace Cheburashka
         public static List<TSqlObject> GetClusteredIndexes(string owningObjectSchema, string owningObjectTable)
         {
             var indexes = new List<TSqlObject>();
-            foreach (var index in DMVSettings.GetIndexes)
+            foreach (var index in DmvSettings.GetIndexes)
             {
                 if (index.IsLocalObject())
                 {
@@ -140,37 +140,37 @@ namespace Cheburashka
 
         public static List<TSqlObject> GetUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
-            var unique_constraints = new List<TSqlObject>();
-            foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
+            var uniqueConstraints = new List<TSqlObject>();
+            foreach (var uniqueConstraint in DmvSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.IsLocalObject())
+                if (uniqueConstraint.IsLocalObject())
                 {
-                    TSqlObject definingTable = unique_constraint.GetParent();
+                    TSqlObject definingTable = uniqueConstraint.GetParent();
                     if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema))
                     {
-                        unique_constraints.Add(unique_constraint);
+                        uniqueConstraints.Add(uniqueConstraint);
                     }
                 }
             }
-            return unique_constraints;
+            return uniqueConstraints;
         }
         public static List<TSqlObject> GetClusteredUniqueConstraints(string owningObjectSchema, string owningObjectTable)
         {
-            var unique_constraints = new List<TSqlObject>();
-            foreach (var unique_constraint in DMVSettings.GetUniqueConstraints)
+            var uniqueConstraints = new List<TSqlObject>();
+            foreach (var uniqueConstraint in DmvSettings.GetUniqueConstraints)
             {
-                if (unique_constraint.IsLocalObject())
+                if (uniqueConstraint.IsLocalObject())
                 {
-                    TSqlObject definingTable = unique_constraint.GetParent();
+                    TSqlObject definingTable = uniqueConstraint.GetParent();
                     if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema)
-                    && (bool?)unique_constraint.GetProperty(UniqueConstraint.Clustered) == true
+                    && (bool?)uniqueConstraint.GetProperty(UniqueConstraint.Clustered) == true
                     )
                     {
-                        unique_constraints.Add(unique_constraint);
+                        uniqueConstraints.Add(uniqueConstraint);
                     }
                 }
             }
-            return unique_constraints;
+            return uniqueConstraints;
         }
 
         //public static List<String> getClusteredKeyColumns(string owningObjectSchema, string owningObjectTable)

@@ -31,8 +31,8 @@ namespace Cheburashka
         ICheburashkaTSqlConcreteFragmentVisitor
     {
 
-        private readonly Dictionary<string, List<VariableReference>> variableUsages = new(SqlComparer.Comparer);
-        private readonly Dictionary<string, int> variableCounts = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, List<VariableReference>> _variableUsages = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, int> _variableCounts = new(SqlComparer.Comparer);
 
         public MultipleOutputVariableAssignmentsVisitor()
         {
@@ -44,8 +44,8 @@ namespace Cheburashka
 
         public override void ExplicitVisit(ExecuteSpecification node)
         {
-            variableCounts.Clear();
-            variableUsages.Clear();
+            _variableCounts.Clear();
+            _variableUsages.Clear();
 
             if (node.Variable is not null)
             {
@@ -54,9 +54,9 @@ namespace Cheburashka
             // iterate over parameters
             node.AcceptChildren(this);
 
-            foreach (var key in variableCounts.Keys.Where(key => variableCounts[key] > 1))
+            foreach (var key in _variableCounts.Keys.Where(key => _variableCounts[key] > 1))
             {
-                foreach (var v in variableUsages[key])
+                foreach (var v in _variableUsages[key])
                 {
                     MultipleOutputVariables.Add(v);
                 }
@@ -72,15 +72,15 @@ namespace Cheburashka
 
         private void RecordDetailsOfUse(VariableReference vr)
         {
-            if (variableUsages.ContainsKey(vr.Name))
+            if (_variableUsages.ContainsKey(vr.Name))
             {
-                variableCounts[vr.Name]++;
-                variableUsages[vr.Name].Add(vr);
+                _variableCounts[vr.Name]++;
+                _variableUsages[vr.Name].Add(vr);
             }
             else
             {
-                variableCounts.Add(vr.Name, 1);
-                variableUsages.Add(vr.Name, new List<VariableReference> {vr});
+                _variableCounts.Add(vr.Name, 1);
+                _variableUsages.Add(vr.Name, new List<VariableReference> {vr});
             }
         }
     }

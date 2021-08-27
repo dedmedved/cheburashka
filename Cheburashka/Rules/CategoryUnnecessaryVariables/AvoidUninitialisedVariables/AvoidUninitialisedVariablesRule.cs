@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidUninitialisedVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUninitialisedVariables_RuleName,                 // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUninitialisedVariables_ProblemDescription,       // ID used to look up the description inside the resources file
+        RuleConstants.AvoidUninitialisedVariablesRuleName,                 // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUninitialisedVariablesProblemDescription,       // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryUnnecessaryVariables,              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidUninitialisedVariablesRule : SqlCodeAnalysisRule
@@ -52,7 +52,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0001: Variables whose value is never set will be null."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidUninitialisedVariables_RuleId;
+        public const string RuleId = RuleConstants.AvoidUninitialisedVariablesRuleId;
 
         public AvoidUninitialisedVariablesRule()
         {
@@ -73,7 +73,7 @@ namespace Cheburashka
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
             List<SqlRuleProblem> problems = new();
             try {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out _, out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -81,7 +81,7 @@ namespace Cheburashka
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the declarations of uninitialised variables
                 var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new UninitialisedVariableDeclarationVisitor()).Cast<Identifier>().ToList();

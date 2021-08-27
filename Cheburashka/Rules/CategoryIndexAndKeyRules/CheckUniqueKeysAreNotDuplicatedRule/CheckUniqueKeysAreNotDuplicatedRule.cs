@@ -30,8 +30,8 @@ namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(CheckUniqueKeysAreNotDuplicatedRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckUniqueKeysAreNotDuplicated_RuleName,                         // ID used to look up the display name inside the resources file
-        RuleConstants.CheckUniqueKeysAreNotDuplicated_ProblemDescription,               // ID used to look up the description inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicatedRuleName,                         // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicatedProblemDescription,               // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueKeysAreNotDuplicatedRule : SqlCodeAnalysisRule
@@ -70,7 +70,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -82,8 +82,8 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 // If this element is a nameless constraint, and we can't identify it by a position in a source file, there's nothing much we can do apart from return an empty list of problems.
                 if ((modelElement.ObjectType == UniqueConstraint.TypeClass ||
@@ -215,12 +215,11 @@ namespace Cheburashka
                                 List<string> sortedUniqueConstraintColumns = uniqueConstraintColumns
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> ConstraintLeadingEdgeIndexColumns = sortedUniqueConstraintColumns;// new();
-                                //ConstraintLeadingEdgeIndexColumns.AddRange(sortedUniqueConstraintColumns);
+                                List<string> constraintLeadingEdgeIndexColumns = sortedUniqueConstraintColumns;
 
                                 foundMoreConciseUniqueCondition =
                                     DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
-                                        ConstraintLeadingEdgeIndexColumns);
+                                        constraintLeadingEdgeIndexColumns);
                                 if (foundMoreConciseUniqueCondition)
                                 {
                                     break;

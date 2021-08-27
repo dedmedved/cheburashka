@@ -25,9 +25,9 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceCaptureSPReturnStatusVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class EnforceCaptureSpReturnStatusVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public EnforceCaptureSPReturnStatusVisitor()
+        public EnforceCaptureSpReturnStatusVisitor()
         {
             ExecuteSpecifications = new List<ExecuteSpecification>();
         }

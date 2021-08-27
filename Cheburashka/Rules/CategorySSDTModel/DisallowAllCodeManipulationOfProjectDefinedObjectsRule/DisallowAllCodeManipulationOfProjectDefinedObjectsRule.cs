@@ -31,9 +31,9 @@ namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId,
         RuleConstants.ResourceBaseName,                                                             // Name of the resource file to look up displayname and description in
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName,  // ID used to look up the display name inside the resources file
-        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription,        // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategorySSDTModel,                                                 // Rule category (e.g. "Design", "Naming")
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjectsRuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjectsProblemDescription,         // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategorySsdtModel,                                                 // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                                          // This rule targets specific elements rather than the whole model
     public sealed class DisallowAllCodeManipulationOfProjectDefinedObjectsRule : SqlCodeAnalysisRule
     {
@@ -47,7 +47,7 @@ namespace Cheburashka
         /// shown as "DM0031. Objects defined in the project should not be altered at run-time."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjects_RuleId;
+        public const string RuleId = RuleConstants.DisallowAllCodeManipulationOfProjectDefinedObjectsRuleId;
 
         public DisallowAllCodeManipulationOfProjectDefinedObjectsRule()
         {
@@ -63,7 +63,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -75,18 +75,11 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
-                AlterIndexStatementVisitor alterIndexStatementVisitor = new();
-                sqlFragment.Accept(alterIndexStatementVisitor);
-                List<AlterIndexStatement> alterIndexStatements = alterIndexStatementVisitor.Objects;
-
-                AlterTableConstraintModificationStatementVisitor alterTableConstraintModificationStatementVisitor = new();
-                sqlFragment.Accept(alterTableConstraintModificationStatementVisitor);
-                List<AlterTableConstraintModificationStatement> alterTableConstraintModificationStatements = alterTableConstraintModificationStatementVisitor.Objects;
+                var alterIndexStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterIndexStatementVisitor()).Cast<AlterIndexStatement>().ToList();
+                var alterTableConstraintModificationStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterTableConstraintModificationStatementVisitor()).Cast<AlterTableConstraintModificationStatement>().ToList();
 
                 AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor = new();
                 sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
@@ -103,9 +96,11 @@ namespace Cheburashka
                 CreateIndexStatementVisitor createIndexStatementVisitor = new();
                 sqlFragment.Accept(createIndexStatementVisitor);
                 List<CreateIndexStatement> createIndexStatements = createIndexStatementVisitor.Objects;
+
                 DropIndexStatementVisitor dropIndexStatementVisitor = new();
                 sqlFragment.Accept(dropIndexStatementVisitor);
                 List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
+
                 DropTableStatementVisitor dropTableStatementVisitor = new();
                 sqlFragment.Accept(dropTableStatementVisitor);
                 List<DropTableStatement> dropTableStatements = dropTableStatementVisitor.Objects;
@@ -116,12 +111,12 @@ namespace Cheburashka
                 List<TSqlFragment> issues = new();
                 // try to speed things up, by not retrieving element where we don't have an alter.
 
-                var allTables = DMVSettings.GetTables;
-                var allIndexes = DMVSettings.GetIndexes;
-                var allPrimaryKeys = DMVSettings.GetPrimaryKeys;
-                var allUniqueConstraints = DMVSettings.GetUniqueConstraints;
-                var allForeignKeys = DMVSettings.GetForeignKeys;
-                var allCheckConstraints = DMVSettings.GetCheckConstraints;
+                var allTables = DmvSettings.GetTables;
+                var allIndexes = DmvSettings.GetIndexes;
+                var allPrimaryKeys = DmvSettings.GetPrimaryKeys;
+                var allUniqueConstraints = DmvSettings.GetUniqueConstraints;
+                var allForeignKeys = DmvSettings.GetForeignKeys;
+                var allCheckConstraints = DmvSettings.GetCheckConstraints;
 
                 foreach (var dropTableStatement in dropTableStatements)
                 {
@@ -150,12 +145,12 @@ namespace Cheburashka
                             schemaObject = dic.Object;
                             indexName = dic.Index.Value;
                         }
-                        else if (dropIndexClause is BackwardsCompatibleDropIndexClause olddic)
+                        else if (dropIndexClause is BackwardsCompatibleDropIndexClause oldDic)
                         {
-//                          if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause olddic))
-                            processIndexDropStatement = olddic.Index.IsLocalObject();
-                            schemaObject = olddic.Index;
-                            indexName = olddic.Index.ChildIdentifier.Value;
+//                          if (!(dropIndexClause is not BackwardsCompatibleDropIndexClause oldDic))
+                            processIndexDropStatement = oldDic.Index.IsLocalObject();
+                            schemaObject = oldDic.Index;
+                            indexName = oldDic.Index.ChildIdentifier.Value;
                         }
 
                         if (processIndexDropStatement)

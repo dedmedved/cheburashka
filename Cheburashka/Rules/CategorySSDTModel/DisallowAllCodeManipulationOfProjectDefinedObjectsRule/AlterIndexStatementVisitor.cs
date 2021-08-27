@@ -22,34 +22,24 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class AlterIndexStatementVisitor : TSqlConcreteFragmentVisitor
+    internal class AlterIndexStatementVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<AlterIndexStatement> _objects;
 
-        #region ctor
         public AlterIndexStatementVisitor()
         {
             _objects = new List<AlterIndexStatement>();
         }
-        #endregion
 
-        #region properties
         public List<AlterIndexStatement> Objects => _objects;
-
-        #endregion
-
-        #region overrides
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(AlterIndexStatement node)
         {
             _objects.Add(node);
         }
-
-        #endregion
-
     }
-
-
 }

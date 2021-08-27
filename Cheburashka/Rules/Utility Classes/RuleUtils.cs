@@ -140,8 +140,8 @@ namespace Cheburashka
         public static bool ComputeLineColumn(string text, int offset, int length,
                                             out int startLine, out int startColumn, out int endLine, out int endColumn)
         {
-            const char LF = '\n';
-            const char CR = '\r';
+            const char lf = '\n';
+            const char cr = '\r';
 
             // Setting the initial value of line and column to 0 since VS auto-increments by 1.
             startLine = 0;
@@ -160,7 +160,7 @@ namespace Cheburashka
             {
                 char currentChar = text[charIndex];
                 bool afterOffset = charIndex >= offset;
-                if (currentChar == LF)
+                if (currentChar == lf)
                 {
                     ++endLine;
                     endColumn = 0;
@@ -170,10 +170,10 @@ namespace Cheburashka
                         startColumn = 0;
                     }
                 }
-                else if (currentChar == CR)
+                else if (currentChar == cr)
                 {
                     // CR/LF combination, consuming LF.
-                    if ((charIndex + 1 < textLength) && (text[charIndex + 1] == LF))
+                    if ((charIndex + 1 < textLength) && (text[charIndex + 1] == lf))
                     {
                         ++charIndex;
                     }

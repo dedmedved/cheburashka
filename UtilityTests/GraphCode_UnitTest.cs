@@ -15,7 +15,7 @@ using QuickGraph.Graphviz.Dot;
 namespace UtilityTests
 {
     [TestClass]
-    public class GraphCode_UnitTest
+    public class GraphCodeUnitTest
     {
         public sealed class FileDotEngine : IDotEngine
         {

@@ -29,7 +29,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a non NASI join expression appears inside a subroutine body. 
+    /// whenever a non ANSI join expression appears inside a subroutine body. 
     /// This rule only applies to SQL views, stored procedures, functions and triggers.
     /// </para>
     /// <para>
@@ -37,13 +37,13 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(AvoidNonANSIJoinsRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(AvoidNonAnsiJoinsRule.RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidNonANSIJoins_RuleName,                             // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidNonANSIJoins_ProblemDescription,                   // ID used to look up the description inside the resources file
+        RuleConstants.AvoidNonAnsiJoinsRuleName,                             // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNonAnsiJoinsProblemDescription,                   // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryObsoleteCodingStyle,           // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
-    public sealed class AvoidNonANSIJoinsRule : SqlCodeAnalysisRule
+    public sealed class AvoidNonAnsiJoinsRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
@@ -51,9 +51,9 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0043: Avoid non-ANSI joins.  Use ANSI syntax, or T-SQL Apply."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidNonANSIJoins_RuleId;
+        public const string RuleId = RuleConstants.AvoidNonAnsiJoinsRuleId;
 
-        public AvoidNonANSIJoinsRule()
+        public AvoidNonAnsiJoinsRule()
         {
             SupportedElementTypes = SqlRuleUtils.GetCodeAndViewContainingClasses();
         }
@@ -82,10 +82,10 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of non-ANSI join expressions
-            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonANSIJoinVisitor());
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonAnsiJoinVisitor());
             // Create problems for each non-ANSI join usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

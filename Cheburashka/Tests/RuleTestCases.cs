@@ -232,11 +232,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(EnforceCaptureSPReturnStatusRule),
+                nameof(EnforceCaptureSpReturnStatusRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(EnforceCaptureSPReturnStatusRule.RuleId);
+            test.RunTest(EnforceCaptureSpReturnStatusRule.RuleId);
         }
 
         /// <summary>
@@ -256,11 +256,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(EnforceCaptureSPReturnStatusRule),
+                nameof(EnforceCaptureSpReturnStatusRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(EnforceCaptureSPReturnStatusRule.RuleId);
+            test.RunTest(EnforceCaptureSpReturnStatusRule.RuleId);
         }
 
         /// <summary>
@@ -1540,11 +1540,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(DisallowUseOfSp_ReNameRule),
+                nameof(DisallowUseOfSpReNameRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(DisallowUseOfSp_ReNameRule.RuleId);
+            test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
 
         /// <summary>
@@ -1564,11 +1564,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(DisallowUseOfSp_ReNameRule),
+                nameof(DisallowUseOfSpReNameRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(DisallowUseOfSp_ReNameRule.RuleId);
+            test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
 
         /// <summary>
@@ -1592,7 +1592,7 @@ namespace Cheburashka.Tests
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(DisallowUseOfSp_ReNameRule.RuleId);
+            test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
 
         /// <summary>
@@ -2256,11 +2256,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(AvoidNonANSIJoinsRule),
+                nameof(AvoidNonAnsiJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(AvoidNonANSIJoinsRule.RuleId);
+            test.RunTest(AvoidNonAnsiJoinsRule.RuleId);
         }
 
         /// <summary>
@@ -2280,11 +2280,11 @@ namespace Cheburashka.Tests
         {
             using BaselinedRuleTest test = new BaselinedRuleTest(
                 TestContext,
-                nameof(AvoidNonANSIJoinsRule),
+                nameof(AvoidNonAnsiJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql100);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(AvoidNonANSIJoinsRule.RuleId);
+            test.RunTest(AvoidNonAnsiJoinsRule.RuleId);
         }
 
         /// <summary>

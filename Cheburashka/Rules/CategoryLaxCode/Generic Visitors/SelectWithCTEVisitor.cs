@@ -27,11 +27,11 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
 
-    internal class SelectWithCTEVisitor : TSqlConcreteFragmentVisitor
+    internal class SelectWithCteVisitor : TSqlConcreteFragmentVisitor
     {
         private readonly List<CteUtil> _targets;
 
-        public SelectWithCTEVisitor()
+        public SelectWithCteVisitor()
         {
             _targets = new List<CteUtil>();
         }

@@ -41,8 +41,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckDefaultsAreOnNotNullColumnsRule.RuleId,
         RuleConstants.ResourceBaseName,                                             // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckDefaultsAreOnNotNullColumns_RuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.CheckDefaultsAreOnNotNullColumns_ProblemDescription,          // ID used to look up the description inside the resources file
+        RuleConstants.CheckDefaultsAreOnNotNullColumnsRuleName,                    // ID used to look up the display name inside the resources file
+        RuleConstants.CheckDefaultsAreOnNotNullColumnsProblemDescription,          // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryRelationalDesignNull,                      // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                          // This rule targets specific elements rather than the whole model
     public sealed class CheckDefaultsAreOnNotNullColumnsRule: SqlCodeAnalysisRule
@@ -57,7 +57,7 @@ namespace Cheburashka
         /// shown as "DM0040: Default values make more sense on non-nullable columns."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckDefaultsAreOnNotNullColumns_RuleId;
+        public const string RuleId = RuleConstants.CheckDefaultsAreOnNotNullColumnsRuleId;
 
         public CheckDefaultsAreOnNotNullColumnsRule()
         {
@@ -80,7 +80,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 // If we can't find the file then assume we're in a composite model
                 // and the elements are defined there and
                 // should be analysed there
@@ -95,8 +95,8 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
                 
                 var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckDefaultsAreOnNotNullColumnsVisitor());
 

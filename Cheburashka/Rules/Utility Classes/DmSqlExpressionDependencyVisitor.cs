@@ -5,10 +5,10 @@ namespace Cheburashka
 {
     static class DmSqlExpressionDependencyVisitor
     {
-        public static IList<SQLExpressionDependency> Visit<T>( TSqlFragment sqlFragment, T visitor) where T : TSqlConcreteFragmentVisitor, ICheburashkaSqlExpressionDependencyVisitor
+        public static IList<SqlExpressionDependency> Visit<T>( TSqlFragment sqlFragment, T visitor) where T : TSqlConcreteFragmentVisitor, ICheburashkaSqlExpressionDependencyVisitor
         {
             sqlFragment.Accept(visitor);
-            return visitor.SQLExpressionDependencies();
+            return visitor.SqlExpressionDependencies();
         }
     }
 }

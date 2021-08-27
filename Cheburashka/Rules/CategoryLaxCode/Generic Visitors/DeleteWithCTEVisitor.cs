@@ -25,10 +25,10 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class DeleteWithCTEVisitor : TSqlConcreteFragmentVisitor
+    internal class DeleteWithCteVisitor : TSqlConcreteFragmentVisitor
     {
         #region ctor
-        public DeleteWithCTEVisitor()
+        public DeleteWithCteVisitor()
         {
             CteUtilFragments = new List<CteUtil>();
         }

@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidErrorNumberRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidErrorNumber_RuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidErrorNumber_ProblemDescription,                  // ID used to look up the description inside the resources file
+        RuleConstants.AvoidErrorNumberRuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidErrorNumberProblemDescription,                  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidErrorNumberRule : SqlCodeAnalysisRule
@@ -51,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0041: Avoid using @@ERROR.  Use Try/Catch."
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidErrorNumber_RuleId;
+        public const string RuleId = RuleConstants.AvoidErrorNumberRuleId;
 
         public AvoidErrorNumberRule()
         {
@@ -82,9 +82,9 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            // visitor to get the occurrences of @@errornumber
+            // visitor to get the occurrences of @@error
             var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidErrorNumberVisitor());
             // Create problems for each @@ERROR usage found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);

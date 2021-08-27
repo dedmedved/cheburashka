@@ -32,13 +32,13 @@ namespace Cheburashka
         // Restrict the search for non-updated 'variables' to the parameters for starters
         public List<ProcedureParameter> Parameters;
         // Any assignment we find to a variable, or an assignment we don't like
-        private readonly Dictionary<string, TSqlFragment> invalidparameterAssignments = new(SqlComparer.Comparer);
+        private readonly Dictionary<string, TSqlFragment> _invalidparameterAssignments = new(SqlComparer.Comparer);
 
         public NonUpdatedParameterVisitor(List<ProcedureParameter> parameters) => Parameters = parameters;
 
         public IList<ProcedureParameter> NonAssignedParameters()
         {
-            var singleValidAssignments = Parameters.Where( P => ! invalidparameterAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(P.VariableName.Value))).ToList();
+            var singleValidAssignments = Parameters.Where( p => ! _invalidparameterAssignments.Any(iva => iva.Key.SQLModel_StringCompareEqual(p.VariableName.Value))).ToList();
             return singleValidAssignments;
         }
 
@@ -115,9 +115,9 @@ namespace Cheburashka
         private void AddVariableToListOfIgnoredVariables(VariableReference var)
         {
             if (var is null) return;
-            if (!invalidparameterAssignments.ContainsKey(var.Name))
-                invalidparameterAssignments.Add(var.Name,
-                    new StringLiteral()); // doesnt matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
+            if (!_invalidparameterAssignments.ContainsKey(var.Name))
+                _invalidparameterAssignments.Add(var.Name,
+                    new StringLiteral()); // doesn't matter what kind of literal we add here, we just need to record a usage which breaks our limited criteria
         }
     }
 }

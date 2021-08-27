@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceNamedConstraintRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceNamedConstraint_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceNamedConstraint_ProblemDescription,         // ID used to look up the description inside the resources file
+        RuleConstants.EnforceNamedConstraintRuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceNamedConstraintProblemDescription,         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,             // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforceNamedConstraintRule: SqlCodeAnalysisRule
@@ -80,7 +80,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
 
                 // If we can't find the file then assume we're in a composite model
@@ -93,17 +93,11 @@ namespace Cheburashka
 
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
-                DMVSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
 
                 // visitor to get the occurrences of constraints we want to be named
-                EnforceNamedConstraintVisitor enforceNamedConstraintVisitor = new();
-                sqlFragment.Accept(enforceNamedConstraintVisitor);
-                List<TSqlFragment> constraints = enforceNamedConstraintVisitor.Constraints.Cast<TSqlFragment>().ToList();
-
-                // visitor to get the occurrences of table variable declarations we are not interested in 
-                EnforceNamedConstraintDeclareTableVisitor enforceNamedConstraintDeclareTableVisitor = new();
-                sqlFragment.Accept(enforceNamedConstraintDeclareTableVisitor);
-                List<TSqlFragment> tableDeclarations = enforceNamedConstraintDeclareTableVisitor.Objects;
+                var constraints = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceNamedConstraintVisitor());
+                var tableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceNamedConstraintDeclareTableVisitor());
 
                 // every unnamed constraint ( outside of table declaration ) is a problem.
                 List<TSqlFragment> issues = constraints

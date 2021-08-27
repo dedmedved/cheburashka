@@ -30,8 +30,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever @@rowcount or @@error appears to be used directly in production code.
-    /// This rule only applies to SQL stored procedures.
+    /// whenever an insert or merge insert appears without an explicit column list of columns to be inserted into.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -40,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(EnforceExplicitInsertColumnListRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceExplicitInsertColumnList_RuleName,                 // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceExplicitInsertColumnList_ProblemDescription,       // ID used to look up the description inside the resources file
+        RuleConstants.EnforceExplicitInsertColumnListRuleName,                 // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceExplicitInsertColumnListProblemDescription,       // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class EnforceExplicitInsertColumnListRule : SqlCodeAnalysisRule
@@ -52,7 +51,7 @@ namespace Cheburashka
         /// For this rule, it will be 
         /// shown as "DM0051: Insert statements and clauses should always have an explicit column list."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceExplicitInsertColumnList_RuleId;
+        public const string RuleId = RuleConstants.EnforceExplicitInsertColumnListRuleId;
 
         public EnforceExplicitInsertColumnListRule()
         {
@@ -80,7 +79,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of inserts without a target column list
             var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceExplicitInsertColumnListVisitor());

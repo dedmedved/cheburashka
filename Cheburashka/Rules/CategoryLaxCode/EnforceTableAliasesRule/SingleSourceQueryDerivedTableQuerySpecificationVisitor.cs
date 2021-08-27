@@ -37,7 +37,7 @@ namespace Cheburashka
         public override void ExplicitVisit(QueryDerivedTable node)
         {
             List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
+            SqlGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
             SingleSourceQueryDerivedTableQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
             node.AcceptChildren(this);
         }

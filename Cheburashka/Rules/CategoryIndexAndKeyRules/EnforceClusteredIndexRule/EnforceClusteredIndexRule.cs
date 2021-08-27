@@ -39,8 +39,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceClusteredIndexRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceClusteredIndex_RuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceClusteredIndex_ProblemDescription,          // ID used to look up the description inside the resources file
+        RuleConstants.EnforceClusteredIndexRuleName,                    // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceClusteredIndexProblemDescription,          // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,             // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforceClusteredIndexRule: SqlCodeAnalysisRule
@@ -55,7 +55,7 @@ namespace Cheburashka
         /// shown as "DM0012: Tables should normally be clustered and not heap."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceClusteredIndex_RuleId;
+        public const string RuleId = RuleConstants.EnforceClusteredIndexRuleId;
 
         public EnforceClusteredIndexRule()
         {
@@ -79,7 +79,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // If we can't find the file then assume we're in a composite model
@@ -103,7 +103,7 @@ namespace Cheburashka
                 string owningObjectSchema = modelElement.Name.Parts[0];
                 string owningObjectTable = modelElement.Name.Parts[1];
 
-                DMVSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
 
                 bool bFoundClusteredIndex = RuleUtils.FindClusteredIndex(model, owningObjectSchema, owningObjectTable, out _);
 

@@ -41,8 +41,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckUniqueIndexHasNoNullColumnsRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckUniqueIndexHasNoNullColumns_RuleName,                   // ID used to look up the display name inside the resources file
-        RuleConstants.CheckUniqueIndexHasNoNullColumns_ProblemDescription,         // ID used to look up the description inside the resources file
+        RuleConstants.CheckUniqueIndexHasNoNullColumnsRuleName,                   // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUniqueIndexHasNoNullColumnsProblemDescription,         // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueIndexHasNoNullColumnsRule : SqlCodeAnalysisRule
@@ -74,7 +74,7 @@ namespace Cheburashka
             List<SqlRuleProblem> problems = new();
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
@@ -86,15 +86,14 @@ namespace Cheburashka
                     return problems;
                 }
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
                 // Get Database Schema and name of this model element.
-                DMVRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
+                DmvRuleSetup.GetLocalObjectNameParts(modelElement, out string objectSchema, out string objectName);
 
                 // visitor to get the columns
                 var indexColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckUniqueIndexHasNoNullColumnsVisitor()).Cast<ColumnWithSortOrder>().ToList();
-
 
                 var issues = new List<TSqlFragment>();
 

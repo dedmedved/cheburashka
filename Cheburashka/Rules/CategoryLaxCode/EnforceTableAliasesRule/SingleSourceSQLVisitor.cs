@@ -25,15 +25,15 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class SingleSourceSQLVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class SingleSourceSqlVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public SingleSourceSQLVisitor()
+        public SingleSourceSqlVisitor()
         {
-            SingleSourceSQLs = new List<TSqlFragment>();
+            SingleSourceSqLs = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> SingleSourceSQLs { get; }
-        public IList<TSqlFragment> SqlFragments() { return SingleSourceSQLs.ToList(); }
+        public List<TSqlFragment> SingleSourceSqLs { get; }
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceSqLs.ToList(); }
         public override void ExplicitVisit(DeleteSpecification node)
         {
             HandleNode(node);
@@ -86,15 +86,15 @@ namespace Cheburashka
         {
             if (SqlCheck.HasAtMostOneTableSource(node))
             {
-                SingleSourceSQLs.Add(node);
+                SingleSourceSqLs.Add(node);
             }
             node.AcceptChildren(this);
         }
         void GatherTargets(QueryExpression queryExpression)
         {
             List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(queryExpression, ref querySpecifications);
-            SingleSourceSQLs.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            SqlGatherQuery.GetQuery(queryExpression, ref querySpecifications);
+            SingleSourceSqLs.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
         }
     }
 }

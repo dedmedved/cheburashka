@@ -30,7 +30,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is are two tables in a model linked by more than one foreign key.
+    /// whenever there is a table in a model with more than 5 'child' tables.
     /// It's not wrong to do this, but it might represent an inadequately normalised design.
     /// </para>
     /// <para>
@@ -41,8 +41,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckMultipleForeignKeysFromOneTableRule.RuleId,
         RuleConstants.ResourceBaseName,                                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckMultipleForeignKeysFromOneTable_RuleName,                        // ID used to look up the display name inside the resources file
-        RuleConstants.CheckMultipleForeignKeysFromOneTable_ProblemDescription,              // ID used to look up the description inside the resources file
+        RuleConstants.CheckMultipleForeignKeysFromOneTableRuleName,                         // ID used to look up the display name inside the resources file
+        RuleConstants.CheckMultipleForeignKeysFromOneTableProblemDescription,               // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryRelationalDesignKeys,                              // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                                  // This rule targets specific elements rather than the whole model
     public sealed class CheckMultipleForeignKeysFromOneTableRule: SqlCodeAnalysisRule
@@ -57,7 +57,7 @@ namespace Cheburashka
         /// shown as "DM0036: Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckMultipleForeignKeysFromOneTable_RuleId;
+        public const string RuleId = RuleConstants.CheckMultipleForeignKeysFromOneTableRuleId;
 
         public CheckMultipleForeignKeysFromOneTableRule()
         {
@@ -81,7 +81,7 @@ namespace Cheburashka
 
             try
             {
-                DMVRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
                     out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment))
@@ -101,19 +101,20 @@ namespace Cheburashka
                 //string owningObjectSchema = modelElement.Name.Parts[0];
                 //string owningObjectTable = modelElement.Name.Parts[1];
 
-                DMVSettings.RefreshModelBuiltInCache(model);
-                DMVSettings.RefreshConstraintsAndIndexesCache(model);
+                DmvSettings.RefreshModelBuiltInCache(model);
+                DmvSettings.RefreshConstraintsAndIndexesCache(model);
                 var allFKs =
-                    DMVSettings
+                    DmvSettings
                         .GetForeignKeys; 
 
-                TSqlObject table = modelElement;
 
                 // Get a reference to the main temporal table. 
+                TSqlObject table = modelElement;
                 var mainTables = table.GetReferencing(Table.TemporalSystemVersioningHistoryTable).ToList();
+
                 //TSqlObject mainTable;
-                //string mainTableschema ;
-                //string mainTablename ;
+                //string mainTableSchema ;
+                //string mainTableName ;
                 // if there is a main table
                 // this is a history table and can be ignored 'ish
                 // for the purpose of fk rules
@@ -125,15 +126,11 @@ namespace Cheburashka
                 var fksCount = 0  ;
 
                 var thisForeignTable = modelElement.GetReferenced(ForeignKeyConstraint.ForeignTable).ToList();
-                //var thisHostTable = modelElement.GetReferenced(ForeignKeyConstraint.Host).ToList();
 
-                var thisForeignTableschema = thisForeignTable[0].Name.Parts[0];
-                var thisForeignTablename = thisForeignTable[0].Name.Parts[1];
+                var thisForeignTableSchema = thisForeignTable[0].Name.Parts[0];
+                var thisForeignTableName = thisForeignTable[0].Name.Parts[1];
 
-                //var thisHostTableschema = thisHostTable[0].Name.Parts[0];
-                //var thisHostTablename = thisHostTable[0].Name.Parts[1];
-
-                bool multipleFKS = false;
+                bool multipleFks = false;
 
                 foreach (var thing in allFKs)
                 {
@@ -142,22 +139,17 @@ namespace Cheburashka
 
                     if (host.Count > 0 && foreignTable.Count > 0)
                     {
-                        //var hostschema = host[0].Name.Parts[0];
-                        //var hostname = host[0].Name.Parts[1];
+                        var foreignTableSchema = foreignTable[0].Name.Parts[0];
+                        var foreignTableName = foreignTable[0].Name.Parts[1];
 
-                        var foreignTableschema = foreignTable[0].Name.Parts[0];
-                        var foreignTablename = foreignTable[0].Name.Parts[1];
-
-                        if (/* hostname.SQLModel_StringCompareEqual(thisHostTablename)
-                            && hostschema.SQLModel_StringCompareEqual(thisHostTableschema)
-                            && */ foreignTablename.SQLModel_StringCompareEqual(thisForeignTablename)
-                            && foreignTableschema.SQLModel_StringCompareEqual(thisForeignTableschema)
+                        if (   foreignTableName.SQLModel_StringCompareEqual(thisForeignTableName)
+                            && foreignTableSchema.SQLModel_StringCompareEqual(thisForeignTableSchema)
                         )
                         { 
                             fksCount++;
                         }
                         if (fksCount > 5) {
-                            multipleFKS = true;
+                            multipleFks = true;
                             break;
                         }
                     }
@@ -166,7 +158,7 @@ namespace Cheburashka
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                RuleUtils.UpdateProblems(multipleFKS,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+                RuleUtils.UpdateProblems(multipleFks,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
             }
             catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 

@@ -22,34 +22,24 @@
 
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Linq;
 
 namespace Cheburashka
 {
-    internal class AlterTableDropTableElementStatementVisitor : TSqlConcreteFragmentVisitor
+    internal class AlterTableDropTableElementStatementVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<AlterTableDropTableElementStatement> _objects;
 
-        #region ctor
         public AlterTableDropTableElementStatementVisitor()
         {
             _objects = new List<AlterTableDropTableElementStatement>();
         }
-        #endregion
 
-        #region properties
         public List<AlterTableDropTableElementStatement> Objects => _objects;
-
-        #endregion
-
-        #region overrides
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(AlterTableDropTableElementStatement node)
         {
             _objects.Add(node);
         }
-
-        #endregion
-
     }
-
-
 }

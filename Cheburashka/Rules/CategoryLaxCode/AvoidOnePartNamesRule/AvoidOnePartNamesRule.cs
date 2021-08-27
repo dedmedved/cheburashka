@@ -42,8 +42,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up display name and description in
-        RuleConstants.AvoidOnePartNames_RuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidOnePartNames_ProblemDescription,                 // ID used to look up the description inside the resources file
+        RuleConstants.AvoidOnePartNamesRuleName,                           // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidOnePartNamesProblemDescription,                 // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyleNames,         // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidOnePartNamesRule : SqlCodeAnalysisRule
@@ -58,7 +58,7 @@ namespace Cheburashka
         /// shown as "DM0029: Always include the schema name when referencing an object."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidOnePartNames_RuleId;
+        public const string RuleId = RuleConstants.AvoidOnePartNamesRuleId;
 
         public AvoidOnePartNamesRule()
         {
@@ -91,7 +91,7 @@ namespace Cheburashka
                 TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the occurrences of single part table names
                 var onePartNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new AvoidOnePartNameVisitor());

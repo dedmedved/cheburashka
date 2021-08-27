@@ -26,25 +26,25 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
 
-    internal class DMLSQLVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class DmlsqlVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public DMLSQLVisitor()
+        public DmlsqlVisitor()
         {
-            DMLs = new List<TSqlFragment>();
+            DmLs = new List<TSqlFragment>();
         }
-        public List<TSqlFragment> DMLs { get; }
-        public IList<TSqlFragment> SqlFragments() { return DMLs.ToList(); }
+        public List<TSqlFragment> DmLs { get; }
+        public IList<TSqlFragment> SqlFragments() { return DmLs.ToList(); }
         public override void ExplicitVisit(DeleteStatement node)
         {
-            DMLs.Add(node);
+            DmLs.Add(node);
         }
         public override void ExplicitVisit(UpdateStatement node)
         {
-            DMLs.Add(node);
+            DmLs.Add(node);
         }
         public override void ExplicitVisit(MergeStatement node)
         {
-            DMLs.Add(node);
+            DmLs.Add(node);
         }
         public override void ExplicitVisit(InsertStatement node)
         {
@@ -54,15 +54,15 @@ namespace Cheburashka
             if (node.InsertSpecification.InsertSource is SelectInsertSource select)
             {
                 List<QuerySpecification> querySpecifications = new();
-                SQLGatherQuery.GetQuery(select.Select, ref querySpecifications);
-                DMLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
+                SqlGatherQuery.GetQuery(select.Select, ref querySpecifications);
+                DmLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
             }
             // if its a values clause it can contain scalar sub-queries (I suppose) - so don't return it an elimination context.
             else if (node.InsertSpecification.InsertSource is ValuesInsertSource) { }
             // give up - just add it in
             else
             {
-                DMLs.Add(node);
+                DmLs.Add(node);
             }
             node.AcceptChildren(this);
         }
@@ -72,8 +72,8 @@ namespace Cheburashka
             // We want to ignore select statements that don't select from anything.
             // Assignment selects has the same status for us here as do set = (subquery) 
             List<QuerySpecification> querySpecifications = new();
-            SQLGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
-            DMLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
+            SqlGatherQuery.GetQuery(node.QueryExpression, ref querySpecifications);
+            DmLs.AddRange(querySpecifications.FindAll(SqlCheck.HasFromClause));
         }
     }
 }

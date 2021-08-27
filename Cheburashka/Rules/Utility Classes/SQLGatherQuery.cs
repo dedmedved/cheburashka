@@ -25,35 +25,35 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 
 {
-    public static class SQLGatherQuery
+    public static class SqlGatherQuery
     {
         public static void GetQuery(QueryExpression node, ref List<QuerySpecification> nodes)
         {
-            if (node is QueryParenthesisExpression qp) { SQLGatherQuery.GetQuery(qp, ref nodes); }
-            else if (node is BinaryQueryExpression bqe) { SQLGatherQuery.GetQuery(bqe, ref nodes); }
-            else if (node is QuerySpecification qs) { SQLGatherQuery.GetQuery(qs, ref nodes); }
+            if (node is QueryParenthesisExpression qp) { SqlGatherQuery.GetQuery(qp, ref nodes); }
+            else if (node is BinaryQueryExpression bqe) { SqlGatherQuery.GetQuery(bqe, ref nodes); }
+            else if (node is QuerySpecification qs) { SqlGatherQuery.GetQuery(qs, ref nodes); }
         }
         public static void GetQuery(ScalarSubquery node, ref List<QuerySpecification> nodes)
         {
-            if (node.QueryExpression is QueryParenthesisExpression qp) { SQLGatherQuery.GetQuery(qp, ref nodes); }
-            else if (node.QueryExpression is BinaryQueryExpression bqe) { SQLGatherQuery.GetQuery(bqe, ref nodes); }
-            else if (node.QueryExpression is QuerySpecification qs) { SQLGatherQuery.GetQuery(qs, ref nodes); }
+            if (node.QueryExpression is QueryParenthesisExpression qp) { SqlGatherQuery.GetQuery(qp, ref nodes); }
+            else if (node.QueryExpression is BinaryQueryExpression bqe) { SqlGatherQuery.GetQuery(bqe, ref nodes); }
+            else if (node.QueryExpression is QuerySpecification qs) { SqlGatherQuery.GetQuery(qs, ref nodes); }
         }
         public static void GetQuery(QueryParenthesisExpression node, ref List<QuerySpecification> nodes)
         {
-            if (node.QueryExpression is QueryParenthesisExpression qp) { SQLGatherQuery.GetQuery(qp, ref nodes); }
-            else if (node.QueryExpression is BinaryQueryExpression bqe) { SQLGatherQuery.GetQuery(bqe, ref nodes); }
-            else if (node.QueryExpression is QuerySpecification qs) { SQLGatherQuery.GetQuery(qs, ref nodes); }
+            if (node.QueryExpression is QueryParenthesisExpression qp) { SqlGatherQuery.GetQuery(qp, ref nodes); }
+            else if (node.QueryExpression is BinaryQueryExpression bqe) { SqlGatherQuery.GetQuery(bqe, ref nodes); }
+            else if (node.QueryExpression is QuerySpecification qs) { SqlGatherQuery.GetQuery(qs, ref nodes); }
         }
         public static void GetQuery(BinaryQueryExpression node, ref List<QuerySpecification> nodes)
         {
-            if (node.FirstQueryExpression is QueryParenthesisExpression qp1) { SQLGatherQuery.GetQuery(qp1, ref nodes); }
-            else if (node.FirstQueryExpression is BinaryQueryExpression bqe1) { SQLGatherQuery.GetQuery(bqe1, ref nodes); }
-            else if (node.FirstQueryExpression is QuerySpecification qs1) { SQLGatherQuery.GetQuery(qs1, ref nodes); }
+            if (node.FirstQueryExpression is QueryParenthesisExpression qp1) { SqlGatherQuery.GetQuery(qp1, ref nodes); }
+            else if (node.FirstQueryExpression is BinaryQueryExpression bqe1) { SqlGatherQuery.GetQuery(bqe1, ref nodes); }
+            else if (node.FirstQueryExpression is QuerySpecification qs1) { SqlGatherQuery.GetQuery(qs1, ref nodes); }
 
-            if (node.SecondQueryExpression is QueryParenthesisExpression qp2) { SQLGatherQuery.GetQuery(qp2, ref nodes); }
-            else if (node.SecondQueryExpression is BinaryQueryExpression bqe2) { SQLGatherQuery.GetQuery(bqe2, ref nodes); }
-            else if (node.SecondQueryExpression is QuerySpecification qs2) { SQLGatherQuery.GetQuery(qs2, ref nodes); }
+            if (node.SecondQueryExpression is QueryParenthesisExpression qp2) { SqlGatherQuery.GetQuery(qp2, ref nodes); }
+            else if (node.SecondQueryExpression is BinaryQueryExpression bqe2) { SqlGatherQuery.GetQuery(bqe2, ref nodes); }
+            else if (node.SecondQueryExpression is QuerySpecification qs2) { SqlGatherQuery.GetQuery(qs2, ref nodes); }
         }
         public static void GetQuery(QuerySpecification node, ref List<QuerySpecification> nodes)
         {

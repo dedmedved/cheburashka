@@ -25,9 +25,9 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class DisallowUseOfSp_ReNameVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class DisallowUseOfSpReNameVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public DisallowUseOfSp_ReNameVisitor()
+        public DisallowUseOfSpReNameVisitor()
         {
             ExecuteSpecifications = new List<ExecuteSpecification>();
         }

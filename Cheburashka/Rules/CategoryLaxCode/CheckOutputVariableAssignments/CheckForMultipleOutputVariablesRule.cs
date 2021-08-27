@@ -40,8 +40,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckForMultipleOutputVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up display name and description in
-        RuleConstants.CheckForMultipleOutputVariables_RuleName,                 // ID used to look up the display name inside the resources file
-        RuleConstants.CheckForMultipleOutputVariables_ProblemDescription,       // ID used to look up the description inside the resources file
+        RuleConstants.CheckForMultipleOutputVariablesRuleName,                 // ID used to look up the display name inside the resources file
+        RuleConstants.CheckForMultipleOutputVariablesProblemDescription,       // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyle,                  // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class CheckForMultipleOutputVariablesRule : SqlCodeAnalysisRule
@@ -56,7 +56,7 @@ namespace Cheburashka
         /// shown as "DM0053: Don't use the same variable to receive multiple output or return values in a stored procedure call."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckForMultipleOutputVariables_RuleId;
+        public const string RuleId = RuleConstants.CheckForMultipleOutputVariablesRuleId;
 
         public CheckForMultipleOutputVariablesRule()
         {
@@ -89,7 +89,7 @@ namespace Cheburashka
                 TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-                DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
                 // visitor to get the occurrences of data declarations names
                 // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's

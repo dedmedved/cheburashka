@@ -27,7 +27,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    public static class DMVRuleSetup
+    public static class DmvRuleSetup
     {
 //        public static void RuleSetup(SqlRuleExecutionContext context, out List<SqlRuleProblem> problems, out SqlSchemaModel sqlSchemaModel, out TSqlObject sqlElement, out TSqlFragment sqlFragment)
         public static void RuleSetup(SqlRuleExecutionContext context, out List<SqlRuleProblem> problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement)

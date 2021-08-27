@@ -37,13 +37,13 @@ namespace Cheburashka
     /// localized if resource files for different languages are used
     /// </para>
     /// </summary>
-    [LocalizedExportCodeAnalysisRule(DisallowUseOfSp_ReNameRule.RuleId,
+    [LocalizedExportCodeAnalysisRule(DisallowUseOfSpReNameRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.DisallowUseOfSp_ReName_RuleName,                      // ID used to look up the display name inside the resources file
-        RuleConstants.DisallowUseOfSp_ReName_ProblemDescription,            // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategorySSDTModel,                         // Rule category (e.g. "Design", "Naming")
+        RuleConstants.DisallowUseOfSpReNameRuleName,                      // ID used to look up the display name inside the resources file
+        RuleConstants.DisallowUseOfSpReNameProblemDescription,            // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategorySsdtModel,                         // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
-    public sealed class DisallowUseOfSp_ReNameRule : SqlCodeAnalysisRule
+    public sealed class DisallowUseOfSpReNameRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// <para>
@@ -55,9 +55,9 @@ namespace Cheburashka
         /// shown as "DM0032: Database objects should not be renamed by code at runtime.."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.DisallowUseOfSp_ReName_RuleId;
+        public const string RuleId = RuleConstants.DisallowUseOfSpReNameRuleId;
 
-        public DisallowUseOfSp_ReNameRule()
+        public DisallowUseOfSpReNameRule()
         {
             SupportedElementTypes = SqlRuleUtils.GetStateAlteringContainingClasses();
         }
@@ -85,10 +85,10 @@ namespace Cheburashka
             // and a descriptor that lets us access rule metadata
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of sp_rename call statements
-            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new DisallowUseOfSp_ReNameVisitor());
+            var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new DisallowUseOfSpReNameVisitor());
             // Create problems for each sp_rename call statement found 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             return problems;

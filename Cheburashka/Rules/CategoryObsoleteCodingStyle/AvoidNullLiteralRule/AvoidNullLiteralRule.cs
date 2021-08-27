@@ -29,8 +29,8 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement without a return value appears inside a subroutine body. 
-    /// This rule only applies to SQL stored procedures.
+    /// whenever a value is explicitly compared to NULL 
+    /// This rule only applies to DML containing objects.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -39,8 +39,8 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(AvoidNullLiteralRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidNullLiteral_RuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidNullLiteral_ProblemDescription,                  // ID used to look up the description inside the resources file
+        RuleConstants.AvoidNullLiteralRuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidNullLiteralProblemDescription,                  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryObsoleteCodingStyle,               // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidNullLiteralRule : SqlCodeAnalysisRule
@@ -55,7 +55,7 @@ namespace Cheburashka
         /// shown as "DM0030: Avoid using Null literals in expressions and comparisons."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.AvoidNullLiteral_RuleId;
+        public const string RuleId = RuleConstants.AvoidNullLiteralRuleId;
 
         public AvoidNullLiteralRule()
         {
@@ -86,7 +86,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
 
-            DMVSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+            DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
             // visitor to get the occurrences of null literals
             var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new NullLiteralVisitor());
