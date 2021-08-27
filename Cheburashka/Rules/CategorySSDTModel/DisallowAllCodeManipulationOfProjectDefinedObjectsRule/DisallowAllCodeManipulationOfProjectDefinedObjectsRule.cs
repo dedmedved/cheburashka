@@ -80,30 +80,12 @@ namespace Cheburashka
 
                 var alterIndexStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterIndexStatementVisitor()).Cast<AlterIndexStatement>().ToList();
                 var alterTableConstraintModificationStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterTableConstraintModificationStatementVisitor()).Cast<AlterTableConstraintModificationStatement>().ToList();
-
-                AlterTableAddTableElementStatementVisitor alterTableAddTableElementStatementVisitor = new();
-                sqlFragment.Accept(alterTableAddTableElementStatementVisitor);
-                List<AlterTableAddTableElementStatement> alterTableAddTableElementStatements = alterTableAddTableElementStatementVisitor.Objects;
-
-                AlterTableAlterColumnStatementVisitor alterTableAlterColumnStatementVisitor = new();
-                sqlFragment.Accept(alterTableAlterColumnStatementVisitor);
-                List<AlterTableAlterColumnStatement> alterTableAlterColumnStatements = alterTableAlterColumnStatementVisitor.Objects;
-
-                AlterTableDropTableElementStatementVisitor alterTableDropTableElementStatementVisitor = new();
-                sqlFragment.Accept(alterTableDropTableElementStatementVisitor);
-                List<AlterTableDropTableElementStatement> alterTableDropTableElementStatements = alterTableDropTableElementStatementVisitor.Objects;
-
-                CreateIndexStatementVisitor createIndexStatementVisitor = new();
-                sqlFragment.Accept(createIndexStatementVisitor);
-                List<CreateIndexStatement> createIndexStatements = createIndexStatementVisitor.Objects;
-
-                DropIndexStatementVisitor dropIndexStatementVisitor = new();
-                sqlFragment.Accept(dropIndexStatementVisitor);
-                List<DropIndexStatement> dropIndexStatements = dropIndexStatementVisitor.Objects;
-
-                DropTableStatementVisitor dropTableStatementVisitor = new();
-                sqlFragment.Accept(dropTableStatementVisitor);
-                List<DropTableStatement> dropTableStatements = dropTableStatementVisitor.Objects;
+                var alterTableAddTableElementStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterTableAddTableElementStatementVisitor()).Cast<AlterTableAddTableElementStatement>().ToList();
+                var alterTableAlterColumnStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterTableAlterColumnStatementVisitor()).Cast<AlterTableAlterColumnStatement>().ToList();
+                var alterTableDropTableElementStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new AlterTableDropTableElementStatementVisitor()).Cast<AlterTableDropTableElementStatement>().ToList();
+                var createIndexStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new CreateIndexStatementVisitor()).Cast<CreateIndexStatement>().ToList();
+                var dropIndexStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new DropIndexStatementVisitor()).Cast<DropIndexStatement>().ToList();
+                var dropTableStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new DropTableStatementVisitor()).Cast<DropTableStatement>().ToList();
 
                 // some of this logic should be migrated into the visitors
                 // particularly the stuff re external names.
