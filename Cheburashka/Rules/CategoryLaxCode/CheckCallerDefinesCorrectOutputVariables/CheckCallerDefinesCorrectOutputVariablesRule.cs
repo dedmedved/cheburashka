@@ -90,7 +90,17 @@ namespace Cheburashka
                 DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
                 DmvSettings.RefreshConstraintsAndIndexesCache(ruleExecutionContext.SchemaModel);
 
-                
+                exec test1
+
+                --exec test1 @a=1, @b=2,3,4 bad
+
+
+                exec test1 1, 2,@c=3,@d=4
+
+
+                exec test1 1, 2,@c=3
+                    
+
                 var allProcedures = DmvSettings.GetProcedures;
                 var executeSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExecuteSpecificationVisitor()).Cast<ExecuteSpecification>().ToList();
                 foreach (var executeSpecification in executeSpecifications.Where( e => e.ExecutableEntity is ExecutableProcedureReference executableProcedureReference && executableProcedureReference.ProcedureReference is not null ))
@@ -102,6 +112,15 @@ namespace Cheburashka
                     var procedures = allProcedures.Where(p => SqlRuleUtils.ObjectNameMatches(p, name.BaseIdentifier.Value, name.SchemaIdentifier?.Value??"dbo")).ToList();
                     if (procedures.Count > 0)
                     {
+                        foreach (var proc in procedures)
+                        {
+                            //string createProc =  proc.GetScript(); //as CreateProcedureStatement;
+                            TSqlScript ast = proc.GetAst();
+                            var createProcedureStatement = ast.Batches[0].Statements[0] as CreateProcedureStatement;
+                            
+
+                        }
+                        var matchingProcedure = procedures.Where( n => n.)
                         var procedure = procedures[0];
                         var parameters = procedure.GetReferenced(Procedure.Parameters).ToList();
                         foreach (var parameter in parameters)
