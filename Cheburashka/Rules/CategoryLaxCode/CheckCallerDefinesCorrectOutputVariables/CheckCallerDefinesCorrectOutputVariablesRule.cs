@@ -90,16 +90,13 @@ namespace Cheburashka
                 DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
                 DmvSettings.RefreshConstraintsAndIndexesCache(ruleExecutionContext.SchemaModel);
 
-                exec test1
+                // valid combinations sample
+                //exec test1
+                //--exec test1 @a=1, @b=2,3,4 bad
+                //exec test1 1, 2,@c=3,@d=4
+                //exec test1 1, 2,@c=3
 
-                --exec test1 @a=1, @b=2,3,4 bad
-
-
-                exec test1 1, 2,@c=3,@d=4
-
-
-                exec test1 1, 2,@c=3
-                    
+                List<TSqlFragment> issues = new();
 
                 var allProcedures = DmvSettings.GetProcedures;
                 var executeSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExecuteSpecificationVisitor()).Cast<ExecuteSpecification>().ToList();
@@ -109,44 +106,61 @@ namespace Cheburashka
                     var name = executableProcedureReference?.ProcedureReference?.ProcedureReference?.Name;
                     var number = executableProcedureReference?.ProcedureReference?.ProcedureReference?.Number;
                     var callingParameters = executeSpecification.ExecutableEntity.Parameters;
-                    var procedures = allProcedures.Where(p => SqlRuleUtils.ObjectNameMatches(p, name.BaseIdentifier.Value, name.SchemaIdentifier?.Value??"dbo")).ToList();
-                    if (procedures.Count > 0)
+                    var procedures = allProcedures.Where(p => SqlRuleUtils.ObjectNameMatches(p, name?.BaseIdentifier?.Value, name?.SchemaIdentifier?.Value??"dbo")).ToList();
+
+                    // find procedure definition and get its parameter definitions
+                    // match them to the calling parameter values
+                    foreach (var proc in procedures)  // this will match at most one
                     {
-                        foreach (var proc in procedures)
+                        TSqlScript ast = proc.GetAst();
+                        var createProcedureStatement = ast.Batches[0].Statements[0] as CreateProcedureStatement;
+                        if (   (number is null     && createProcedureStatement?.ProcedureReference.Number is null)
+                            || (number is not null && createProcedureStatement?.ProcedureReference.Number is not null &&
+                                number == createProcedureStatement?.ProcedureReference.Number)
+                        )
                         {
-                            //string createProc =  proc.GetScript(); //as CreateProcedureStatement;
-                            TSqlScript ast = proc.GetAst();
-                            var createProcedureStatement = ast.Batches[0].Statements[0] as CreateProcedureStatement;
+                            string[] parameterNames = new string [] {};  
+                            bool[] parameterOutput = new bool [] {};  
                             
+                            // get defined parameters
+                            var parameters = proc.GetReferenced(Procedure.Parameters).ToList();
 
-                        }
-                        var matchingProcedure = procedures.Where( n => n.)
-                        var procedure = procedures[0];
-                        var parameters = procedure.GetReferenced(Procedure.Parameters).ToList();
-                        foreach (var parameter in parameters)
-                        {
-                            var paramName = parameter.Name.Parts[2];
-                            var isOutput = (bool)parameter.GetProperty(Parameter.IsOutput);
-                            if (isOutput)
+                            int i = 0;
+                            foreach (var parameter in parameters)
                             {
-                                var matchingVariable = callingParameters.Where(n=>n.Variable.Name.SQLModel_StringCompareEqual(paramName)).ToList();
-                                //if 
+                                var paramName = parameter.Name.Parts[2];
+                                parameterNames[i] = paramName;
+                                var isOutput = (bool)parameter.GetProperty(Parameter.IsOutput);
+                                parameterOutput[i] = isOutput;
+                                i++;
                             }
-                            var xy = 1;
-                        }
-                        var x = 1;
 
+                            int j = 0;
+                            foreach (var callingParameter in callingParameters)
+                            {
+                                if (callingParameter.Variable is null)
+                                {
+                                    var paramDefinedAsOutput = parameterOutput[j];
+                                    var paramUsedAsOutput = callingParameter.IsOutput;
+                                    if (paramDefinedAsOutput != paramUsedAsOutput)
+                                    {
+                                        issues.Add(callingParameter);
+                                    }
+                                }
+                                else
+                                {
+
+                                }
+
+                                j++ ;
+                            }
+
+                            break;
+                        }
                     }
                 }
 
-                //bTriggerIsDefinedOnTable = allTables.Contains(table);
-
-                // visitor to get the occurrences of data declarations names
-                // DataTypes names are also Microsoft.Data.Schema.ScriptDom.Sql.SchemaObjectName's
-                //var executeSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExecuteSpecificationVisitor()).Cast<ExecuteSpecification>().ToList();
-                
-
-//                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
             }
             catch
             {
