@@ -20,6 +20,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
@@ -79,8 +80,8 @@ namespace Cheburashka
 
             List<SqlRuleProblem> problems = new();
 
-            try
-            {
+            //try
+            //{
                 DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
@@ -100,7 +101,9 @@ namespace Cheburashka
 
                 var allProcedures = DmvSettings.GetProcedures;
                 var executeSpecifications = DmTSqlFragmentVisitor.Visit(sqlFragment, new ExecuteSpecificationVisitor()).Cast<ExecuteSpecification>().ToList();
-                foreach (var executeSpecification in executeSpecifications.Where( e => e.ExecutableEntity is ExecutableProcedureReference executableProcedureReference && executableProcedureReference.ProcedureReference is not null ))
+                foreach (var executeSpecification in executeSpecifications.Where( e => e.ExecutableEntity is ExecutableProcedureReference executableProcedureReference 
+                                                                                    && executableProcedureReference.ProcedureReference is not null )
+                )
                 {
                     var executableProcedureReference = executeSpecification.ExecutableEntity as ExecutableProcedureReference ;
                     var name = executableProcedureReference?.ProcedureReference?.ProcedureReference?.Name;
@@ -119,52 +122,76 @@ namespace Cheburashka
                                 number == createProcedureStatement?.ProcedureReference.Number)
                         )
                         {
-                            string[] parameterNames = new string [] {};  
-                            bool[] parameterOutput = new bool [] {};  
-                            
+                            ArrayList parameterNames = new();  
+                            ArrayList parameterOutput = new();  
+                            ArrayList parameterUsed = new();                             
                             // get defined parameters
-                            var parameters = proc.GetReferenced(Procedure.Parameters).ToList();
+                            var allDefinedParameters = proc.GetReferenced(Procedure.Parameters).ToList();
 
                             int i = 0;
-                            foreach (var parameter in parameters)
+                            foreach (var parameter in allDefinedParameters)
                             {
                                 var paramName = parameter.Name.Parts[2];
-                                parameterNames[i] = paramName;
+                                parameterNames.Add(paramName);
                                 var isOutput = (bool)parameter.GetProperty(Parameter.IsOutput);
-                                parameterOutput[i] = isOutput;
+                                parameterOutput.Add(isOutput);
+                                parameterUsed.Add(false);
                                 i++;
                             }
 
                             int j = 0;
                             foreach (var callingParameter in callingParameters)
                             {
+                                // handle unnamed - ie positional parameters
+                                var paramUsedAsOutput = callingParameter.IsOutput;
                                 if (callingParameter.Variable is null)
                                 {
-                                    var paramDefinedAsOutput = parameterOutput[j];
-                                    var paramUsedAsOutput = callingParameter.IsOutput;
+                                    var paramDefinedAsOutput = (bool)parameterOutput[j];
                                     if (paramDefinedAsOutput != paramUsedAsOutput)
                                     {
                                         issues.Add(callingParameter);
                                     }
+                                    parameterUsed[j] = true;
                                 }
+                                // handle named - ie non-positional parameters
                                 else
                                 {
-
+                                    for (int k = 0; k < callingParameters.Count; k++ )
+                                    {
+                                        if (SqlComparer.SQLModel_StringCompareEqual((string)parameterNames[k],callingParameter.Variable.Name) )
+                                        {
+                                            var paramDefinedAsOutput = (bool)parameterOutput[k];
+                                            if (paramDefinedAsOutput != paramUsedAsOutput)
+                                            {
+                                                issues.Add(callingParameter);
+                                            }
+                                            parameterUsed[k] = true;
+                                            break;
+                                        }
+                                    }
                                 }
 
-                                j++ ;
+                                j++;
                             }
-
+                            // if there are any unused output parameter definitions - does SQL Server even allow this ?
+                            // add a generic reference to the procedure call
+                            for (int l = 0 ; i< allDefinedParameters.Count; l++)
+                            {
+                                if (! (bool)parameterUsed[l] && (bool)parameterOutput[l])
+                                {
+                                    issues.Add(executeSpecification);
+                                }
+                            }
                             break;
                         }
                     }
                 }
 
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
-            }
-            catch
-            {
-            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            //}
+            //catch
+            //{
+            //} // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
             }

@@ -843,6 +843,24 @@
     <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithAllParametersOK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithAllParametersNotOK_CalledbyMix.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithAllParametersOK_CalledbyMix.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithAllParametersNotOK_CalledbyPosition.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithAllParametersOK_CalledbyPosition.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithNoLastParameterNotOK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckCallerDefinesCorrectOutputVariablesRule\ProcWithLastParametersNotOK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule\CheckClusteredKeyColumnsNotIncludedInIndexRule_Table_With_Clustered_Key_in_Index_IX_included_columns.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
