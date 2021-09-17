@@ -1,0 +1,2 @@
+﻿CREATE TABLE Table1(a INT, b INT);
+go

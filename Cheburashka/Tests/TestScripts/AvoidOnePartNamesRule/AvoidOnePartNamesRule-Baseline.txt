@@ -1,0 +1,270 @@
+﻿Problem description: Schema object with no schema name found in [DatabaseTriggerWithOnePartTableNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: DatabaseTriggerWithOnePartTableNameInSelect
+Script file: DatabaseTriggerWithOnePartTableNameInSelect.sql
+Start line: 5
+Start column: 19
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesObjectIdEtcWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Start line: 4
+Start column: 8
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesObjectIdEtcWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Start line: 5
+Start column: 8
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesObjectIdEtcWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Start line: 6
+Start column: 8
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 5
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 6
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 7
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 8
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 9
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 10
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 11
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 12
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 13
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 14
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 15
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 16
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 17
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 18
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcThatUsesSystemSPCallWithOnePartObjectName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Start line: 19
+Start column: 6
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcWithOnePartProcedureNameInDefinition].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcWithOnePartProcedureNameInDefinition
+Script file: ProcWithOnePartProcedureNameInDefinition.sql
+Start line: 2
+Start column: 18
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ProcWithOnePartTableNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ProcWithOnePartTableNameInSelect
+Script file: ProcWithOnePartTableNameInSelect.sql
+Start line: 5
+Start column: 19
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ScalarFunctionWithOnePartTableNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ScalarFunctionWithOnePartTableNameInSelect
+Script file: ScalarFunctionWithOnePartTableNameInSelect.sql
+Start line: 7
+Start column: 24
+========end of problem========
+
+Problem description: Schema object with no schema name found in [ServerDdlTriggerWithOnePartNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: ServerDdlTriggerWithOnePartNameInSelect
+Script file: ServerDdlTriggerWithOnePartNameInSelect.sql
+Start line: 5
+Start column: 19
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[Table4].[t4_ix1].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.Table4.t4_ix1
+Script file: Table4WithOnePartNameBasedIndex.sql
+Start line: 4
+Start column: 4
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[TableTriggerWithOnePartNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.TableTriggerWithOnePartNameInSelect
+Script file: TableTriggerWithOnePartNameInSelect.sql
+Start line: 4
+Start column: 19
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[TableTriggerWithOnePartTriggerNameAndTableName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.TableTriggerWithOnePartTriggerNameAndTableName
+Script file: TableTriggerWithOnePartTriggerNameAndTableName.sql
+Start line: 1
+Start column: 16
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[TableTriggerWithOnePartTriggerNameAndTableName].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.TableTriggerWithOnePartTriggerNameAndTableName
+Script file: TableTriggerWithOnePartTriggerNameAndTableName.sql
+Start line: 1
+Start column: 68
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[TableValuedFunctionWithOnePartTableNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithOnePartTableNameInSelect
+Script file: TableValuedFunctionWithOnePartTableNameInSelect.sql
+Start line: 7
+Start column: 20
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ViewWithOnePartTableNameInDefinition].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ViewWithOnePartTableNameInDefinition
+Script file: ViewWithOnePartTableNameInDefinition.sql
+Start line: 2
+Start column: 13
+========end of problem========
+
+Problem description: Schema object with no schema name found in [dbo].[ViewWithOnePartTableNameInSelect].
+FullID: Cheburashka.DM0029
+Severity: Warning
+Model element: dbo.ViewWithOnePartTableNameInSelect
+Script file: ViewWithOnePartTableNameInSelect.sql
+Start line: 4
+Start column: 15
+========end of problem========
+

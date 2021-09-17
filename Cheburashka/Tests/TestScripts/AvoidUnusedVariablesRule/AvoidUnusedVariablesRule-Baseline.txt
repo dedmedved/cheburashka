@@ -1,0 +1,54 @@
+﻿Problem description: Unused Variable found in [DatabaseTriggerWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: DatabaseTriggerWithUnusedVariable
+Script file: DatabaseTriggerWithUnusedVariable.sql
+Start line: 6
+Start column: 13
+========end of problem========
+
+Problem description: Unused Variable found in [dbo].[ProcWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: dbo.ProcWithUnusedVariable
+Script file: ProcWithUnusedVariable.sql
+Start line: 5
+Start column: 13
+========end of problem========
+
+Problem description: Unused Variable found in [dbo].[ScalarValuedFunctionWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: dbo.ScalarValuedFunctionWithUnusedVariable
+Script file: ScalarValuedFunctionWithUnusedVariable.sql
+Start line: 6
+Start column: 13
+========end of problem========
+
+Problem description: Unused Variable found in [ServerTriggerWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: ServerTriggerWithUnusedVariable
+Script file: ServerDdlTriggerWithUnusedVariable.sql
+Start line: 6
+Start column: 13
+========end of problem========
+
+Problem description: Unused Variable found in [dbo].[TableTriggerWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: dbo.TableTriggerWithUnusedVariable
+Script file: TableTriggerWithUnusedVariable.sql
+Start line: 5
+Start column: 13
+========end of problem========
+
+Problem description: Unused Variable found in [dbo].[TableValuedFunctionWithUnusedVariable].
+FullID: Cheburashka.DM0002
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithUnusedVariable
+Script file: TableValuedFunctionWithUnusedVariable.sql
+Start line: 6
+Start column: 13
+========end of problem========
+

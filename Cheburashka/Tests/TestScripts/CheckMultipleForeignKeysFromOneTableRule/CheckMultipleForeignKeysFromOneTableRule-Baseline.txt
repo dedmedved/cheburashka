@@ -1,0 +1,54 @@
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_1].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_1
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 6
+Start column: 3
+========end of problem========
+
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_2].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_2
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 10
+Start column: 3
+========end of problem========
+
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_3].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_3
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 14
+Start column: 3
+========end of problem========
+
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_4].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_4
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 18
+Start column: 3
+========end of problem========
+
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_5].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_5
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 22
+Start column: 3
+========end of problem========
+
+Problem description: Table with more than 5 Child Foreign Key relationships was found in [dbo].[FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_6].
+FullID: Cheburashka.DM0036
+Severity: Warning
+Model element: dbo.FK_CheckMultipleForeignKeysFromOneTablesRule_Table_With_6_FK_Child_6
+Script file: CheckMultipleForeignKeysFromOneTableRule_Table_With_6_FK.sql
+Start line: 26
+Start column: 3
+========end of problem========
+

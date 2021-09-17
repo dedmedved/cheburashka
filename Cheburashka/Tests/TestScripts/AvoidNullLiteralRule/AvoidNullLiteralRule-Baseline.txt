@@ -1,0 +1,99 @@
+Problem description: Null Literal was found in a comparison in [DatabaseTriggerWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: DatabaseTriggerWithNullLiteral
+Script file: DatabaseTriggerWithNullLiteral.sql
+Start line: 7
+Start column: 15
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteral
+Script file: ProcWithNullLiteral.sql
+Start line: 7
+Start column: 15
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteral_SimpleCase].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteral_SimpleCase
+Script file: ProcWithNullLiteral_SimpleCase.sql
+Start line: 8
+Start column: 12
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteralInIfClause_Equality_LHS].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteralInIfClause_Equality_LHS
+Script file: ProcWithNullLiteralInIfClause_Equality_LHS.sql
+Start line: 5
+Start column: 10
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteralInIfClause_Equality_RHS].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteralInIfClause_Equality_RHS
+Script file: ProcWithNullLiteralInIfClause_Equality_RHS.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteralInIfClause_InEquality_LHS].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteralInIfClause_InEquality_LHS
+Script file: ProcWithNullLiteralInIfClause_InEquality_LHS.sql
+Start line: 5
+Start column: 11
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ProcWithNullLiteralInIfClause_InEquality_RHS].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ProcWithNullLiteralInIfClause_InEquality_RHS
+Script file: ProcWithNullLiteralInIfClause_InEquality_RHS.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[ScalarFunctionWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.ScalarFunctionWithNullLiteral
+Script file: ScalarFunctionWithNullLiteral.sql
+Start line: 9
+Start column: 15
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [ServerTriggerWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: ServerTriggerWithNullLiteral
+Script file: ServerTriggerWithNullLiteral.sql
+Start line: 6
+Start column: 15
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[TableTriggerWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.TableTriggerWithNullLiteral
+Script file: TableTriggerWithNullLiteral.sql
+Start line: 6
+Start column: 15
+========end of problem========
+
+Problem description: Null Literal was found in a comparison in [dbo].[TableValuedFunctionWithNullLiteral].
+FullID: Cheburashka.DM0030
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithNullLiteral
+Script file: TableValuedFunctionWithNullLiteral.sql
+Start line: 9
+Start column: 15
+========end of problem========
+

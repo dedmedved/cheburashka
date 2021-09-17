@@ -1,0 +1,36 @@
+Problem description: Non-core SP is called without checking the return status in [DatabaseTriggerWithOutCaptureOfSPReturnStatus].
+FullID: Cheburashka.DM0026
+Severity: Warning
+Model element: DatabaseTriggerWithOutCaptureOfSPReturnStatus
+Script file: DatabaseTriggerWithoutCaptureOfSPReturnStatus.sql
+Start line: 6
+Start column: 7
+========end of problem========
+
+Problem description: Non-core SP is called without checking the return status in [dbo].[ProcWithOutCaptureOfSPReturnStatus].
+FullID: Cheburashka.DM0026
+Severity: Warning
+Model element: dbo.ProcWithOutCaptureOfSPReturnStatus
+Script file: ProcWithoutCaptureOfSPReturnStatus.sql
+Start line: 5
+Start column: 7
+========end of problem========
+
+Problem description: Non-core SP is called without checking the return status in [ServerTriggerWithOutCaptureOfSPReturnStatus].
+FullID: Cheburashka.DM0026
+Severity: Warning
+Model element: ServerTriggerWithOutCaptureOfSPReturnStatus
+Script file: ServerTriggerWithoutCaptureOfSPReturnStatus.sql
+Start line: 6
+Start column: 7
+========end of problem========
+
+Problem description: Non-core SP is called without checking the return status in [dbo].[TableTriggerWithOutCaptureOfSPReturnStatus].
+FullID: Cheburashka.DM0026
+Severity: Warning
+Model element: dbo.TableTriggerWithOutCaptureOfSPReturnStatus
+Script file: TableTriggerWithoutCaptureOfSPReturnStatus.sql
+Start line: 5
+Start column: 7
+========end of problem========
+
