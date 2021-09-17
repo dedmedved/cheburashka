@@ -175,7 +175,7 @@ namespace Cheburashka
                             }
                             // if there are any unused output parameter definitions - does SQL Server even allow this ?
                             // add a generic reference to the procedure call
-                            for (int l = 0 ; i< allDefinedParameters.Count; l++)
+                            for (int l = 0 ; l < allDefinedParameters.Count; l++)
                             {
                                 if (! (bool)parameterUsed[l] && (bool)parameterOutput[l])
                                 {

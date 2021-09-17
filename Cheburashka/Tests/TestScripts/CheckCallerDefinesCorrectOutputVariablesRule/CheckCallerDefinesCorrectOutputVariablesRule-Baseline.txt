@@ -43,3 +43,12 @@ Start line: 7
 Start column: 59
 ========end of problem========
 
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithNoLastParameterNotOK].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithNoLastParameterNotOK
+Script file: ProcWithNoLastParameterNotOK.sql
+Start line: 7
+Start column: 1
+========end of problem========
+
