@@ -1,0 +1,108 @@
+Problem description: @@rowcount and/or @@error was used directly in [DatabaseTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: DatabaseTriggerWithDirectUseOfRowcount
+Script file: DatabaseTriggerWithDirectUseOfRowcount.sql
+Start line: 6
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [DatabaseTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: DatabaseTriggerWithDirectUseOfRowcount
+Script file: DatabaseTriggerWithDirectUseOfRowcount.sql
+Start line: 7
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[ProcWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.ProcWithDirectUseOfRowcount
+Script file: ProcWithDirectUseOfRowcount.sql
+Start line: 5
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[ProcWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.ProcWithDirectUseOfRowcount
+Script file: ProcWithDirectUseOfRowcount.sql
+Start line: 6
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[ScalarFunctionWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.ScalarFunctionWithDirectUseOfRowcount
+Script file: ScalarFunctionWithDirectUseOfRowcount.sql
+Start line: 10
+Start column: 6
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[ScalarFunctionWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.ScalarFunctionWithDirectUseOfRowcount
+Script file: ScalarFunctionWithDirectUseOfRowcount.sql
+Start line: 11
+Start column: 6
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [ServerTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: ServerTriggerWithDirectUseOfRowcount
+Script file: ServerTriggerWithDirectUseOfRowcount.sql
+Start line: 6
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [ServerTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: ServerTriggerWithDirectUseOfRowcount
+Script file: ServerTriggerWithDirectUseOfRowcount.sql
+Start line: 7
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[TableTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.TableTriggerWithDirectUseOfRowcount
+Script file: TableTriggerWithDirectUseOfRowcount.sql
+Start line: 5
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[TableTriggerWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.TableTriggerWithDirectUseOfRowcount
+Script file: TableTriggerWithDirectUseOfRowcount.sql
+Start line: 6
+Start column: 10
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[TableValuedFunctionWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithDirectUseOfRowcount
+Script file: TableValuedFunctionWithDirectUseOfRowcount.sql
+Start line: 14
+Start column: 14
+========end of problem========
+
+Problem description: @@rowcount and/or @@error was used directly in [dbo].[TableValuedFunctionWithDirectUseOfRowcount].  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.
+FullID: Cheburashka.DM0024
+Severity: Warning
+Model element: dbo.TableValuedFunctionWithDirectUseOfRowcount
+Script file: TableValuedFunctionWithDirectUseOfRowcount.sql
+Start line: 14
+Start column: 31
+========end of problem========
+

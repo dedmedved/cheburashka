@@ -1,0 +1,10 @@
+
+CREATE PROCEDURE dbo.ProcWithNestedBeginEndAtomic
+AS 
+BEGIN ATOMIC 
+WITH (TRANSACTION ISOLATION LEVEL = SNAPSHOT, LANGUAGE = N'us_english', DELAYED_DURABILITY = ON)  
+BEGIN
+    declare @RC INT;
+    return;
+END;
+END;

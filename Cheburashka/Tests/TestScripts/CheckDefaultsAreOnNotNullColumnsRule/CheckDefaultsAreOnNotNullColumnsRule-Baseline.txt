@@ -1,0 +1,9 @@
+Problem description: Default found on nullable column in [dbo].[CheckDefaultsAreOnNotNullColumnsRule_Table].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.CheckDefaultsAreOnNotNullColumnsRule_Table
+Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.sql
+Start line: 3
+Start column: 9
+========end of problem========
+

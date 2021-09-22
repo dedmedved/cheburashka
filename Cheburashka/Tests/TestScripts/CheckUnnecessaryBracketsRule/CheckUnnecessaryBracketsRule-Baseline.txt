@@ -1,0 +1,540 @@
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 15
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 16
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 16
+Start column: 41
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 17
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 18
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 18
+Start column: 55
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 19
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 20
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 20
+Start column: 41
+========end of problem========
+
+Problem description: Unnecessary brackets found in [DatabaseTriggerWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: DatabaseTriggerWithDoubledBrackets
+Script file: DatabaseTriggerWithDoubledBrackets.sql
+Start line: 22
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 14
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 15
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 15
+Start column: 41
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 16
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 17
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 17
+Start column: 55
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 18
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 19
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 19
+Start column: 41
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithDoubledBrackets
+Script file: ProcedureWithDoubledBrackets.sql
+Start line: 21
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 5
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 6
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 6
+Start column: 12
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 8
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 8
+Start column: 22
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 9
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 9
+Start column: 12
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 9
+Start column: 22
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 9
+Start column: 23
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 11
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 11
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 12
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 12
+Start column: 12
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 12
+Start column: 40
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 12
+Start column: 41
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 15
+Start column: 14
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 15
+Start column: 37
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 16
+Start column: 14
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 16
+Start column: 15
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 16
+Start column: 37
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 16
+Start column: 38
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 19
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 19
+Start column: 36
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 19
+Start column: 56
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 12
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 36
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 37
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 56
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithIfAndWhileWithBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithIfAndWhileWithBrackets
+Script file: ProcedureWithIfAndWhileWithBrackets.sql
+Start line: 20
+Start column: 57
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 12
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 13
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 13
+Start column: 48
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 14
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 15
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 15
+Start column: 62
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 16
+Start column: 54
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 17
+Start column: 47
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 17
+Start column: 48
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ViewWithDoubledBrackets].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ViewWithDoubledBrackets
+Script file: ViewWithDoubledBrackets.sql
+Start line: 19
+Start column: 47
+========end of problem========
+

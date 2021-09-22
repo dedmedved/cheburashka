@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18E096E9-6A3D-4124-B908-9C39A425F7BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cheburashka</RootNamespace>
+    <AssemblyName>Cheburashka</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Cheburashka.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.DacFx.150.5164.1\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\AvoidOnePartNamesRule.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\AvoidOnePartNameVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\DeleteStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\ExcludedTwoPartNamesContextsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\MergeStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckCallerDefinesCorrectOutputVariables\CheckCallerDefinesCorrectOutputVariablesRule.cs" />
+    <Compile Include="CategoryLaxCode\CheckOutputVariableAssignments\CheckForMultipleOutputVariablesRule.cs" />
+    <Compile Include="CategoryLaxCode\CheckOutputVariableAssignments\MultipleOutputVariableAssignmentsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceExplicitInsertColumnListRule\EnforceExplicitInsertColumnListRule.cs" />
+    <Compile Include="CategoryLaxCode\EnforceExplicitInsertColumnListRule\EnforceExplicitInsertColumnListVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\ApplySingleSourceQueryDefinitionVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\ApplyTableSourceVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\CTEVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\DMLSQLVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasRule.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasExcludedContextsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\EnforceTableAliasVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceQueryDerivedTableQuerySpecificationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSQLVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceTableAliasesRule\SingleSourceSubQueryQuerySpecificationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\SubQueryVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\InitialisedOnlyVariablesVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\NonUpdatedParameterVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferConstantInitialisationRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\AvoidRaiseErrorOutsideTryCatchRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferThrowToRaiserrorRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\NonDeterministicSystemFunctionVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\RaiserrorVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\ConstantOnlyUpdatedVariableVisitor.cs" />
+    <Compile Include="CategoryRelationalDesignRules\CheckForInsteadOfTriggersOnTablesRule\CheckForInsteadOfTriggersOnTablesRule.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\AvoidUnusedLabelsRule.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\AvoidUnusedLabels\LabelVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidNullLiteralRule\AvoidNullLiteralVisitor.cs" />
+    <Compile Include="CategoryLaxCode\BasicRuleVisitors\BareReturnVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsRule.cs" />
+    <Compile Include="CategoryLaxCode\CheckDefaultsAreOnNotNullColumns\CheckDefaultsAreOnNotNullColumnsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\CheckOpenTransactionCountCodeRule.cs" />
+    <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\Xact_stateVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\TrancountVisitor.cs" />
+    <Compile Include="CategoryLaxCode\CheckOpenTransactionCountCode\CheckOpenTransactionCountCodeVisitor.cs" />
+    <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\EnforceVariableLengthDataSpecificationRule.cs" />
+    <Compile Include="CategoryLaxCode\EnforceVariableLengthDataSpecification\VariableLengthDataSpecificationsVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidErrorNumberRule\AvoidErrorNumberVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidNonANSIJoinsRule\NonANSIJoinVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidNonANSIJoinsRule\AvoidNonANSIJoinsRule.cs" />
+    <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysFromOneTableRule\CheckMultipleForeignKeysFromOneTableRule.cs" />
+    <Compile Include="CategoryRelationalDesignRules\CheckMultipleForeignKeysBetweenSameTableRule\CheckMultipleForeignKeysBetweenSameTableRule.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropTableStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameRule.cs" />
+    <Compile Include="CategorySSDTModel\DisallowUseOfSp_ReNameRule\DisallowUseOfSp_ReNameVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\ClrWrapperVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\InitialisationContextVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\ParameterDeclarationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\TableVariableDeclarationVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\VariableDeclarationElementVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\VariableTableReferenceVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedParameterRule.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedTableVariableRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor_IncludedIndexColumns.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckClusteredKeyColumnsNotIncludedInIndex\CheckClusteredKeyColumnsNotIncludedInIndexVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\CreateIndexStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterIndexStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAlterColumnStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableConstraintModificationStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableAddTableElementStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\AlterTableDropTableElementStatementVisitor.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule.cs" />
+    <Compile Include="CategorySSDTModel\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DropIndexStatementVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceForeignKeyIsUniquelyIndexedRule\EnforceForeignKeyIsUniquelyIndexedRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule.cs" />
+    <Compile Include="CategoryRelationalDesignRules\EnforceForeignKeyRule\EnforceForeignKeyRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueKeysAreNotDuplicatedRule\StructureColumnsVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueConstraintHasNoNullColumnsVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueIndexHasNoNullColumns\CheckUniqueIndexHasNoNullColumnsVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceClusteredIndexIsPrimaryOrForeignKeyRule\EnforceClusteredIndexIsPrimaryOrForeignKeyRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceClusteredIndexRule\EnforceClusteredIndexRule.cs" />
+    <None Include="app.config" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintDeclareTableVisitor.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintRule.cs" />
+    <Compile Include="CategoryIndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintVisitor.cs" />
+    <Compile Include="CategoryRelationalDesignRules\EnforcePrimaryKeyRule\EnforcePrimaryKeyRule.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="Generic Visitors\ExecuteSpecification.cs" />
+    <Compile Include="Generic Visitors\VariableReferenceVisitor.cs" />
+    <Compile Include="Generic Visitors\CatchStatementVisitor.cs" />
+    <Compile Include="Generic Visitors\WhileStatementVisitor.cs" />
+    <Compile Include="Generic Visitors\IfStatementVisitor.cs" />
+    <Compile Include="Interfaces\ICheburashkaSqlExpressionDependencyVisitor.cs" />
+    <Compile Include="Interfaces\ICheburashkaTSqlConcreteFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\DmSqlExpressionDependencyVisitor.cs" />
+    <Compile Include="Utility Classes\DmTSqlFragmentVisitor.cs" />
+    <Compile Include="Utility Classes\SQLInitialisationDependency.cs" />
+    <Compile Include="VariableVisitors\SelectSetVariableVisitor.cs" />
+    <Compile Include="CategoryLaxCode\BasicRules\AvoidBareReturnRule.cs" />
+    <Compile Include="CategoryLaxCode\BasicRules\AvoidDirectUseOfRowcountRule.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoRule.cs" />
+    <Compile Include="CategoryLaxCode\BasicRules\EnforceCaptureSPReturnStatusRule.cs" />
+    <Compile Include="CategoryLaxCode\BasicRules\EnforceReturnRule.cs" />
+    <Compile Include="CategoryModernCodingStyle\EnforceTryCatchRule.cs" />
+    <Compile Include="CategoryLaxCode\BasicRuleVisitors\AvoidDirectUseOfRowcountVisitor.cs" />
+    <Compile Include="CategoryObsoleteCodingStyle\AvoidGotoRule\AvoidGotoVisitor.cs" />
+    <Compile Include="CategoryLaxCode\BasicRuleVisitors\EnforceCaptureSPReturnStatusVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\TryCatchVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\DataTypeVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\DeleteWithCTEVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\InsertWithCTEVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\MergeWithCTEVisitor.cs" />
+    <Compile Include="Plugins\Initialisers.cs" />
+    <Compile Include="Utility Classes\ListUtil.cs" />
+    <Compile Include="Utility Classes\CteUtil.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\SelectWithCTEVisitor.cs" />
+    <Compile Include="Utility Classes\DMVRuleSetup.cs" />
+    <Compile Include="Utility Classes\DMVSettings.cs" />
+    <Compile Include="Utility Classes\GraphCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility Classes\ModelIndexAndKeysUtils.cs" />
+    <Compile Include="Utility Classes\SqlCheck.cs" />
+    <Compile Include="Utility Classes\SQLGatherQuery.cs" />
+    <Compile Include="Utility Classes\SQLObjectFragment.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\UpdateWithCTEVisitor.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\VariableUsageVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUninitialisedVariables\AvoidUninitialisedVariablesRule.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUninitialisedVariables\UninitialisedVariableDeclarationVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryVariables\AvoidUnusedVariables\AvoidUnusedVariableRule.cs" />
+    <Compile Include="CategoryLaxCode\WriteOnlyVariables\AvoidWriteOnlyVariablesRule.cs" />
+    <Compile Include="CategoryLaxCode\WriteOnlyVariables\NamedParameterUsageVisitor.cs" />
+    <Compile Include="CategoryLaxCode\WriteOnlyVariables\UpdatedVariableVisitor.cs" />
+    <Compile Include="LocalizedExportCodeAnalysisRuleAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VariableVisitors\SetVariableStatementVisitor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleConstants.cs" />
+    <Compile Include="RuleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RuleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility Classes\DictionaryAutoIncrement.cs" />
+    <Compile Include="Utility Classes\RuleUtils.cs" />
+    <Compile Include="Utility Classes\SQLExpressionDependency.cs" />
+    <Compile Include="Utility Classes\SqlComparer.cs" />
+    <Compile Include="Utility Classes\SqlComparisonUtils.cs" />
+    <Compile Include="Utility Classes\SqlPrint.cs" />
+    <Compile Include="Utility Classes\SqlRuleUtils.cs" />
+    <Compile Include="CategoryLaxCode\Generic Visitors\VariableDeclarationVisitor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RuleResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Cheburashka.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rem copy "$(TargetDir)$(TargetName)$(TargetExt)" "$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\Extensions\$(TargetName)$(TargetExt)" /y 
+rem copy "$(TargetDir)$(TargetName)$(TargetExt)" "$(ProgramFiles)\Microsoft Visual Studio 11.0\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\120\$(TargetName)$(TargetExt)" /y 
+rem copy "$(TargetDir)$(TargetName).pdb" "$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\Extensions\$(TargetName).pdb" /y 
+rem copy "$(TargetDir)$(TargetName)$(TargetExt)" "$(DevEnvDir)Extensions\Microsoft\SQLDB\DAC\150\$(TargetName)$(TargetExt)" /y 
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

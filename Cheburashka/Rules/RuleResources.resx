@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AvoidBareReturn_ProblemDescription" xml:space="preserve">
+    <value>RETURN statement without return value was found in {0}.</value>
+  </data>
+  <data name="AvoidBareReturn_RuleName" xml:space="preserve">
+    <value>Avoid using Return statements with no explicit return value in Stored Procedures.</value>
+  </data>
+  <data name="AvoidDirectUseOfRowcount_ProblemDescription" xml:space="preserve">
+    <value>@@rowcount and/or @@error was used directly in {0}.  @@rowcount/@@error should always be captured by a SET @variable statement, or safe selection assignment statement before use.</value>
+  </data>
+  <data name="AvoidDirectUseOfRowcount_RuleName" xml:space="preserve">
+    <value>@@rowcount and/or @@error should never be used directly.</value>
+  </data>
+  <data name="AvoidErrorNumber_ProblemDescription" xml:space="preserve">
+    <value>@@error global variable usage found in {0}.</value>
+  </data>
+  <data name="AvoidErrorNumber_RuleName" xml:space="preserve">
+    <value>Avoid using @error.  Use Try/Catch.</value>
+  </data>
+  <data name="AvoidGoto_ProblemDescription" xml:space="preserve">
+    <value>GOTO statement was found in {0}.</value>
+  </data>
+  <data name="AvoidGoto_RuleName" xml:space="preserve">
+    <value>Avoid using Goto statements.</value>
+  </data>
+  <data name="AvoidNonANSIJoins_ProblemDescription" xml:space="preserve">
+    <value>Old style join found in {0}.</value>
+  </data>
+  <data name="AvoidNonANSIJoins_RuleName" xml:space="preserve">
+    <value>Avoid non-ANSI joins.  Use ANSI syntax, or T-SQL Apply.</value>
+  </data>
+  <data name="AvoidNullLiteral_ProblemDescription" xml:space="preserve">
+    <value>Null Literal was found in a comparison in {0}.</value>
+  </data>
+  <data name="AvoidNullLiteral_RuleName" xml:space="preserve">
+    <value>Null is not a valid value to compare to.</value>
+  </data>
+  <data name="AvoidOnePartNames_ProblemDescription" xml:space="preserve">
+    <value>Schema object with no schema name found in {0}.</value>
+  </data>
+  <data name="AvoidOnePartNames_RuleName" xml:space="preserve">
+    <value>Always include the schema name when referencing an object.</value>
+  </data>
+  <data name="AvoidRaiseErrorOutsideTryCatch_ProblemDescription" xml:space="preserve">
+    <value>Raiserror found outside TRY/CATCH block in {0}.</value>
+  </data>
+  <data name="AvoidRaiseErrorOutsideTryCatch_RuleName" xml:space="preserve">
+    <value>Raiserror with level &gt;10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller.</value>
+  </data>
+  <data name="AvoidUninitialisedVariables_ProblemDescription" xml:space="preserve">
+    <value>Uninitialised variable found in {0}.</value>
+  </data>
+  <data name="AvoidUninitialisedVariables_RuleName" xml:space="preserve">
+    <value>Variables whose value is never set will be null.</value>
+  </data>
+  <data name="AvoidUnusedLabels_ProblemDescription" xml:space="preserve">
+    <value>Unreferenced label found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedLabels_RuleName" xml:space="preserve">
+    <value>Avoid unreferenced labels in code.</value>
+  </data>
+  <data name="AvoidUnusedParameter_ProblemDescription" xml:space="preserve">
+    <value>Unused Parameter found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedParameter_RuleName" xml:space="preserve">
+    <value>Unused Parameters point to potential coding errors.</value>
+  </data>
+  <data name="AvoidUnusedTableVariable_ProblemDescription" xml:space="preserve">
+    <value>Unused Table Variable found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedTableVariable_RuleName" xml:space="preserve">
+    <value>Unused Table Variables point to potential coding errors.</value>
+  </data>
+  <data name="AvoidUnusedVariables_ProblemDescription" xml:space="preserve">
+    <value>Unused Variable found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedVariables_RuleName" xml:space="preserve">
+    <value>Unused Variables point to potential coding errors.</value>
+  </data>
+  <data name="AvoidWriteOnlyVariables_ProblemDescription" xml:space="preserve">
+    <value>Write-only Variable found in {0}.</value>
+  </data>
+  <data name="AvoidWriteOnlyVariables_RuleName" xml:space="preserve">
+    <value>Variables whose values are set, but never used point to potential coding errors.</value>
+  </data>
+  <data name="CannotCreateResourceManager" xml:space="preserve">
+    <value>Can't create ResourceManager for {0} from {1}.</value>
+  </data>
+  <data name="CategorySamples" xml:space="preserve">
+    <value>SamplesCategory</value>
+  </data>
+  <data name="CheckCallerDefinesCorrectOutputVariables_ProblemDescription" xml:space="preserve">
+    <value>Non-output variable found in an output parameter position in {0}.</value>
+  </data>
+  <data name="CheckCallerDefinesCorrectOutputVariables_RuleName" xml:space="preserve">
+    <value>If an output parameter is defined, then ensure the parameter is passed as an output parameter.</value>
+  </data>
+  <data name="CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription" xml:space="preserve">
+    <value>Clustered Key Column found in non-unique Index on a Clustered Table in {0}.</value>
+  </data>
+  <data name="CheckClusteredKeyColumnsNotIncludedInIndex_RuleName" xml:space="preserve">
+    <value>Clustered Key Columns need not be explicitly included in a non-unique Index on a Clustered Table.  The clustering columns are already added to the end of the index leaf entry.</value>
+  </data>
+  <data name="CheckDefaultsAreOnNotNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Default found on nullable column in {0}.</value>
+  </data>
+  <data name="CheckDefaultsAreOnNotNullColumns_RuleName" xml:space="preserve">
+    <value>Default values make more sense on non-nullable columns.</value>
+  </data>
+  <data name="CheckForInsteadOfTriggersOnTables_ProblemDescription" xml:space="preserve">
+    <value>Instead-of Trigger found on a table rather than a view in {0}.</value>
+  </data>
+  <data name="CheckForInsteadOfTriggersOnTables_RuleName" xml:space="preserve">
+    <value>Instead-of triggers on tables subvert the meaning of normal DML operations.  Restrict them to views.</value>
+  </data>
+  <data name="CheckForMultipleOutputVariables_ProblemDescription" xml:space="preserve">
+    <value>Same variable used in different output positions in procedure call in {0}.</value>
+  </data>
+  <data name="CheckForMultipleOutputVariables_RuleName" xml:space="preserve">
+    <value>Don't use the same variable to receive multiple output or return values in a stored procedure call.</value>
+  </data>
+  <data name="CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription" xml:space="preserve">
+    <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
+  </data>
+  <data name="CheckMultipleForeignKeysBetweenTheSameTable_RuleName" xml:space="preserve">
+    <value>Apart from tables modeling graph structures, and role-playing tables, it's unusual to find multiple relationships between two tables.  It may indicate a non-normal database design.</value>
+  </data>
+  <data name="CheckMultipleForeignKeysFromOneTable_ProblemDescription" xml:space="preserve">
+    <value>Table with more than 5 Child Foreign Key relationships was found in {0}.</value>
+  </data>
+  <data name="CheckMultipleForeignKeysFromOneTable_RuleName" xml:space="preserve">
+    <value>Multiple FK relationships from one table may indicate an overly general design and/or a lack of normalisation.</value>
+  </data>
+  <data name="CheckOpenTransactionCountCode_ProblemDescription" xml:space="preserve">
+    <value>Code found checking @@trancount but not xact_state() or vice-versa in {0}.</value>
+  </data>
+  <data name="CheckOpenTransactionCountCode_RuleName" xml:space="preserve">
+    <value>Neither @@trancount not xact_state() by themselves give the full picture of the number of open transaction.  Check both.</value>
+  </data>
+  <data name="CheckOrphanedBeginEndBlocks_ProblemDescription" xml:space="preserve">
+    <value>Unattached BEGIN/END block found in {0}.</value>
+  </data>
+  <data name="CheckOrphanedBeginEndBlocks_RuleName" xml:space="preserve">
+    <value>BEGIN/END blocks do not define a scope in T-SQL.  They have no use unless associated with a control construct e.g. IF or WHILE.</value>
+  </data>
+  <data name="CheckUniqueConstraintHasNoNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Unique constraint found with nullable columns in {0}.  You should probably make the columns non-nullable.</value>
+  </data>
+  <data name="CheckUniqueConstraintHasNoNullColumns_RuleName" xml:space="preserve">
+    <value>Unique constraints generally should not have nullable columns.</value>
+  </data>
+  <data name="CheckUniqueIndexHasNoNullColumns_ProblemDescription" xml:space="preserve">
+    <value>Unique, non-filtered index found with nullable columns in {0}.  You should probably make the columns non-nullable, or make the index filtered to exclude nulls.</value>
+  </data>
+  <data name="CheckUniqueIndexHasNoNullColumns_RuleName" xml:space="preserve">
+    <value>Unique indexes generally should not have nullable columns unless the index is filtered to remove them.</value>
+  </data>
+  <data name="CheckUniqueKeysAreNotDuplicated_ProblemDescription" xml:space="preserve">
+    <value>Unique constraint or index found where another unique constraint has already been defined over a subset of the columns in {0}.</value>
+  </data>
+  <data name="CheckUniqueKeysAreNotDuplicated_RuleName" xml:space="preserve">
+    <value>Unique constraints and indexes shouldn't be over-constrained.</value>
+  </data>
+  <data name="CheckUnnecessaryBrackets_ProblemDescription" xml:space="preserve">
+    <value>Unnecessary brackets found in {0}.</value>
+  </data>
+  <data name="CheckUnnecessaryBrackets_RuleName" xml:space="preserve">
+    <value>Unnecessary bracketing.</value>
+  </data>
+  <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription" xml:space="preserve">
+    <value>Permanent, statically defined table, constraint or index is altered by code in {0}.This may make the database inconsistent with the project.</value>
+  </data>
+  <data name="DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName" xml:space="preserve">
+    <value>Permanent, statically defined objects should not be altered by code.</value>
+  </data>
+  <data name="DisallowUseOfSp_ReName_ProblemDescription" xml:space="preserve">
+    <value>An object is being renamed in {0}.  This may make the database inconsistent with the project.</value>
+  </data>
+  <data name="DisallowUseOfSp_ReName_RuleName" xml:space="preserve">
+    <value>Database objects should not be renamed by code at runtime.</value>
+  </data>
+  <data name="EnforceCaptureSPReturnStatus_ProblemDescription" xml:space="preserve">
+    <value>Non-core SP is called without checking the return status in {0}.</value>
+  </data>
+  <data name="EnforceCaptureSPReturnStatus_RuleName" xml:space="preserve">
+    <value>Return status should always be retrieved.</value>
+  </data>
+  <data name="EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription" xml:space="preserve">
+    <value>Table in {0} has a clustered index or Unique Constraint that is not the Primary Key or a Foreign Key.</value>
+  </data>
+  <data name="EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName" xml:space="preserve">
+    <value>Tables should normally be clustered on the Primary Key, or a Foreign Key.</value>
+  </data>
+  <data name="EnforceClusteredIndex_ProblemDescription" xml:space="preserve">
+    <value>Table with heap structure was found in {0}.</value>
+  </data>
+  <data name="EnforceClusteredIndex_RuleName" xml:space="preserve">
+    <value>Tables should normally be clustered and not heap.</value>
+  </data>
+  <data name="EnforceExplicitInsertColumnList_ProblemDescription" xml:space="preserve">
+    <value>Insert statement or clause without column list found in {0}.</value>
+  </data>
+  <data name="EnforceExplicitInsertColumnList_RuleName" xml:space="preserve">
+    <value>Insert statements and clauses should always have an explicit column list.</value>
+  </data>
+  <data name="EnforceForeignKeyIsIndexed_ProblemDescription" xml:space="preserve">
+    <value>Foreign Key with no supporting index found in {0}.</value>
+  </data>
+  <data name="EnforceForeignKeyIsIndexed_RuleName" xml:space="preserve">
+    <value>Foreign Keys should be supported by an appropriate index.  Otherwise table scans/locks will be taken.</value>
+  </data>
+  <data name="EnforceForeignKeyIsUniquelyIndexed_ProblemDescription" xml:space="preserve">
+    <value>Foreign Key with no supporting unique index found in {0}.</value>
+  </data>
+  <data name="EnforceForeignKeyIsUniquelyIndexed_RuleName" xml:space="preserve">
+    <value>Foreign Keys should be supported by an appropriate unique index.  Each combination of the Foreign Key columns defines a unique subset of the data in the table.</value>
+  </data>
+  <data name="EnforceForeignKey_ProblemDescription" xml:space="preserve">
+    <value>Table with no Foreign Key relationships was found in {0}.</value>
+  </data>
+  <data name="EnforceForeignKey_RuleName" xml:space="preserve">
+    <value>Tables should normally have a Foreign Key relationship with at least one other table.</value>
+  </data>
+  <data name="EnforceIndexKeyColumnSeparation_ProblemDescription" xml:space="preserve">
+    <value>Index with a key that is just a subset or permutation of another key  found in {0}.</value>
+  </data>
+  <data name="EnforceIndexKeyColumnSeparation_RuleName" xml:space="preserve">
+    <value>Avoid indexes with keys that are just a permutation of another key, or form the leading edge of another key.</value>
+  </data>
+  <data name="EnforceNamedConstraint_ProblemDescription" xml:space="preserve">
+    <value>Unnamed constraint found in {0}.  Unnamed constraints make it difficult to perform database comparisons, and force redundant operations during code deployments.</value>
+  </data>
+  <data name="EnforceNamedConstraint_RuleName" xml:space="preserve">
+    <value>Avoid unnamed constraints.  These are assigned meaningless system-generated names at time of deployment.</value>
+  </data>
+  <data name="EnforcePrimaryKey_ProblemDescription" xml:space="preserve">
+    <value>Table with no Primary Key was found in {0}.</value>
+  </data>
+  <data name="EnforcePrimaryKey_RuleName" xml:space="preserve">
+    <value>Tables should normally have a Primary Key constraint defined.</value>
+  </data>
+  <data name="EnforceReturn_ProblemDescription" xml:space="preserve">
+    <value>Stored Procedure found without Return as the final executable statement in {0}.</value>
+  </data>
+  <data name="EnforceReturn_RuleName" xml:space="preserve">
+    <value>Stored Procedures have Return as the final executable statement.</value>
+  </data>
+  <data name="EnforceTableAlias_ProblemDescription" xml:space="preserve">
+    <value>Data Source found without an alias in {0}.</value>
+  </data>
+  <data name="EnforceTableAlias_RuleName" xml:space="preserve">
+    <value>Tables, views and other data sources in DML need aliases where disambiguation is necessary.</value>
+  </data>
+  <data name="EnforceTryCatch_ProblemDescription" xml:space="preserve">
+    <value>Code found without Try/Catch in {0}.</value>
+  </data>
+  <data name="EnforceTryCatch_RuleName" xml:space="preserve">
+    <value>Triggers and non-simple Stored Procedures need at least one Try/Catch block.</value>
+  </data>
+  <data name="EnforceVariableLengthDataSpecification_ProblemDescription" xml:space="preserve">
+    <value>Variable length datatype found with no length specification in {0}.</value>
+  </data>
+  <data name="EnforceVariableLengthDataSpecification_RuleName" xml:space="preserve">
+    <value>Don't rely on default lengths for variable length datatypes, other than DateTime2. </value>
+  </data>
+  <data name="PreferConstantInitialisation_ProblemDescription" xml:space="preserve">
+    <value>Constant set but not by an initialiser in {0}</value>
+  </data>
+  <data name="PreferConstantInitialisation_RuleName" xml:space="preserve">
+    <value>Variables set to constant values and never reset, are best set on declaration.</value>
+  </data>
+  <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
+    <value>Raiserror found in {0}.</value>
+  </data>
+  <data name="PreferThrowToRaiserror_RuleName" xml:space="preserve">
+    <value>Prefer using Throw to Raiserror when raising an error.</value>
+  </data>
+</root>

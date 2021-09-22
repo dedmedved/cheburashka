@@ -1,0 +1,108 @@
+Problem description: Constant set but not by an initialiser in [dbo].[FunctionWithSingleVariableSetToIntLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.FunctionWithSingleVariableSetToIntLiteral
+Script file: FunctionWithSingleVariableSetToIntLiteral.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[FunctionWithSingleVariableSetToIntParameter]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.FunctionWithSingleVariableSetToIntParameter
+Script file: FunctionWithSingleVariableSetToIntParameter.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSelectSetToIntLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSelectSetToIntLiteral
+Script file: ProcWithSingleVariableSelectSetToIntLiteral.sql
+Start line: 5
+Start column: 12
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToDateFunction]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToDateFunction
+Script file: ProcWithSingleVariableSetToDateFunction.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToDateLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToDateLiteral
+Script file: ProcWithSingleVariableSetToDateLiteral.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToInitialisedInt]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToInitialisedInt
+Script file: ProcWithSingleVariableSetToInitialisedInt.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToIntExpression]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToIntExpression
+Script file: ProcWithSingleVariableSetToIntExpression.sql
+Start line: 5
+Start column: 4
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToIntLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToIntLiteral
+Script file: ProcWithSingleVariableSetToIntLiteral.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToIntParameter]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToIntParameter
+Script file: ProcWithSingleVariableSetToIntParameter.sql
+Start line: 5
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToSecondSetInt]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToSecondSetInt
+Script file: ProcWithSingleVariableSetToSecondSetInt.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSingleVariableSetToSecondSetInt]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.ProcWithSingleVariableSetToSecondSetInt
+Script file: ProcWithSingleVariableSetToSecondSetInt.sql
+Start line: 7
+Start column: 5
+========end of problem========
+
+Problem description: Constant set but not by an initialiser in [dbo].[TriggerWithSingleVariableSetToIntLiteral]
+FullID: Cheburashka.DM0049
+Severity: Warning
+Model element: dbo.TriggerWithSingleVariableSetToIntLiteral
+Script file: TriggerWithSingleVariableSetToIntLiteral.sql
+Start line: 7
+Start column: 5
+========end of problem========
+

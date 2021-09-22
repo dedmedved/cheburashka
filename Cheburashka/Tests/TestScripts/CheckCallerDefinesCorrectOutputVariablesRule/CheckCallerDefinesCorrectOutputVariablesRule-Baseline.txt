@@ -1,0 +1,54 @@
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithAllParametersNotOK_CalledbyMix].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithAllParametersNotOK_CalledbyMix
+Script file: ProcWithAllParametersNotOK_CalledbyMix.sql
+Start line: 9
+Start column: 72
+========end of problem========
+
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithAllParametersNotOK_CalledbyMix].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithAllParametersNotOK_CalledbyMix
+Script file: ProcWithAllParametersNotOK_CalledbyMix.sql
+Start line: 9
+Start column: 84
+========end of problem========
+
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithAllParametersNotOK_CalledbyPosition].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithAllParametersNotOK_CalledbyPosition
+Script file: ProcWithAllParametersNotOK_CalledbyPosition.sql
+Start line: 7
+Start column: 56
+========end of problem========
+
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithAllParametersNotOK_CalledbyPosition].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithAllParametersNotOK_CalledbyPosition
+Script file: ProcWithAllParametersNotOK_CalledbyPosition.sql
+Start line: 7
+Start column: 61
+========end of problem========
+
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithLastParametersNotOK].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithLastParametersNotOK
+Script file: ProcWithLastParametersNotOK.sql
+Start line: 7
+Start column: 59
+========end of problem========
+
+Problem description: Non-output variable found in an output parameter position in [dbo].[ProcWithNoLastParameterNotOK].
+FullID: Cheburashka.DM0054
+Severity: Warning
+Model element: dbo.ProcWithNoLastParameterNotOK
+Script file: ProcWithNoLastParameterNotOK.sql
+Start line: 7
+Start column: 1
+========end of problem========
+

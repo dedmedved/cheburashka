@@ -1,0 +1,63 @@
+Problem description: Code found without Try/Catch in [DatabaseTriggerWithOutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: DatabaseTriggerWithOutTryCatch
+Script file: DatabaseTriggerWithoutTryCatch.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [dbo].[ProcSelectInsideIfBeginWithoutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.ProcSelectInsideIfBeginWithoutTryCatch
+Script file: ProcSelectInsideIfBeginWithoutTryCatch.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [dbo].[ProcSelectIntoWithoutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.ProcSelectIntoWithoutTryCatch
+Script file: ProcSelectIntoWithoutTryCatch.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [dbo].[ProcSelectX2OnlyWithoutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.ProcSelectX2OnlyWithoutTryCatch
+Script file: ProcSelectX2OnlyWithoutTryCatch.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [dbo].[ProcWithOutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.ProcWithOutTryCatch
+Script file: ProcWithoutTryCatch.sql
+Start line: 2
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [ServerTriggerWithOutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: ServerTriggerWithOutTryCatch
+Script file: ServerTriggerWithoutTryCatch.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
+Problem description: Code found without Try/Catch in [dbo].[TableTriggerWithOutTryCatch].
+FullID: Cheburashka.DM0028
+Severity: Warning
+Model element: dbo.TableTriggerWithOutTryCatch
+Script file: TableTriggerWithoutTryCatch.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
