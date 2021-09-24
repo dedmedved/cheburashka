@@ -20,7 +20,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;

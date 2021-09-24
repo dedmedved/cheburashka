@@ -108,20 +108,23 @@ namespace Cheburashka
 
                 try
                 {
-                    var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
-                        .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
-                        .Select(n => n.ObjectName).ToList();
-
-                    if (tableColumns.Count != 0)
+                    if (table != null)
                     {
-                        IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
-                            from tCol in tableColumns
-                            where SqlComparer.SQLModel_StringCompareEqual(
-                                iCOl.Column.MultiPartIdentifier
-                                    .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value,
-                                tCol.Parts[2])
-                            select iCOl;
-                        issues.AddRange(nullableIndexColumns);
+                        var tableColumns = table.GetReferencedRelationshipInstances(Table.Columns)
+                            .Where(n => n.Object.GetProperty<bool?>(Column.Nullable) == true)
+                            .Select(n => n.ObjectName).ToList();
+
+                        if (tableColumns.Count != 0)
+                        {
+                            IEnumerable<ColumnWithSortOrder> nullableIndexColumns = from iCOl in indexColumns
+                                from tCol in tableColumns
+                                where SqlComparer.SQLModel_StringCompareEqual(
+                                    iCOl.Column.MultiPartIdentifier
+                                        .Identifiers[iCOl.Column.MultiPartIdentifier.Identifiers.Count - 1].Value,
+                                    tCol.Parts[2])
+                                select iCOl;
+                            issues.AddRange(nullableIndexColumns);
+                        }
                     }
                 }
                 catch

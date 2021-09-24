@@ -1,0 +1,15 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# 'Publish' Rules from '5.0' release with 'None' analysis mode
+# Description: 'Publish' Rules with enabled-by-default state from '5.0' release with 'None' analysis mode. Rules that are first released in a version later than '5.0' are disabled.
+
+is_global = true
+
+global_level = -1
+
+
+# IL3000: Avoid using accessing Assembly file path when publishing as a single-file
+dotnet_diagnostic.IL3000.severity = none
+
+# IL3001: Avoid using accessing Assembly file path when publishing as a single-file
+dotnet_diagnostic.IL3001.severity = none

@@ -33,7 +33,7 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> NonDeterministicSystemFunctions { get; }
-        public IList<TSqlFragment> SqlFragments() { return NonDeterministicSystemFunctions.Cast<TSqlFragment>().ToList(); }
+        public IList<TSqlFragment> SqlFragments() { return NonDeterministicSystemFunctions.ToList(); }
         public override void ExplicitVisit(FunctionCall node)
         {
             // This list is a bit hap-hazard

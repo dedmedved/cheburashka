@@ -109,6 +109,7 @@ namespace Cheburashka
                     {   // can only be true at first level of code in an sp, but that will do.
                         BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
                         BeginEndBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                        TryCatchStatement statement => InvalidUseOfReturn(statement.TryStatements),
                         ReturnStatement => false,
                         _ => true
                     };

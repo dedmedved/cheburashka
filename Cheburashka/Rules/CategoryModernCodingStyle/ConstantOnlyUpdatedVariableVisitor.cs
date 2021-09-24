@@ -127,7 +127,7 @@ namespace Cheburashka
                 AddVariableToListOfIgnoredVariables(node.Variable);
         }
         //can't be a fetch clause - the fetch might not return anything
-        //and assigning constants to variable in a fetch will be a target of anothert rule
+        //and assigning constants to variable in a fetch will be a target of another rule
         public override void ExplicitVisit(FetchCursorStatement node)
         {
             if (node.IntoVariables is not null)
