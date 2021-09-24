@@ -7,6 +7,15 @@ Start line: 2
 Start column: 1
 ========end of problem========
 
+Problem description: Stored Procedure found without Return as the final executable statement in [dbo].[ProcWithBeginWithReturnInBeginTryStatementBlockInWrongPlace].
+FullID: Cheburashka.DM0027
+Severity: Warning
+Model element: dbo.ProcWithBeginWithReturnInBeginTryStatementBlockInWrongPlace
+Script file: ProcWithBeginWithReturnInBeginTryStatementBlockInWrongPlace.sql
+Start line: 1
+Start column: 1
+========end of problem========
+
 Problem description: Stored Procedure found without Return as the final executable statement in [dbo].[ProcWithBeginWithReturnInIfStatementBlock].
 FullID: Cheburashka.DM0027
 Severity: Warning

@@ -35,7 +35,7 @@ namespace Cheburashka
             _objects = new List<TSqlFragment>();
         }
         public List<TSqlFragment> Objects => _objects;
-        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
+        public IList<TSqlFragment> SqlFragments() { return Objects.ToList(); }
         public override void ExplicitVisit(DeclareTableVariableStatement node)
         {
             _objects.Add(node);

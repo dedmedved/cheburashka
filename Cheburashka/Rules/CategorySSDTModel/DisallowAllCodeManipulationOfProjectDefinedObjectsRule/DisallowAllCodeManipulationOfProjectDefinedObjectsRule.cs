@@ -218,7 +218,7 @@ namespace Cheburashka
             }
 
         }
-        // making this a function breaks all kinds of rules but it needs to short-cicuit further executoin for the sake of efficiency
+        // making this a function breaks all kinds of rules but it needs to short-circuit further execution for the sake of efficiency
         private static bool CheckAlterTableStatement(IList<TSqlObject> allObjectsToMatch, List<TSqlFragment> issues, AlterTableStatement alterTableStatement, Identifier alteredElement)
         {
             List<TSqlObject> objs = allObjectsToMatch

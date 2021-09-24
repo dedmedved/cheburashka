@@ -283,7 +283,7 @@ namespace Cheburashka
         }
 
 
-        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[7]
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
@@ -293,14 +293,14 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetParameterizedCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[4]
+        public static ReadOnlyCollection<ModelTypeClass> GetParameterizedCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
                 ModelSchema.TableValuedFunction,
                 ModelSchema.ScalarFunction,
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetCodeAndViewContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[8]
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeAndViewContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.View,
                 ModelSchema.ExtendedProcedure,
@@ -313,7 +313,7 @@ namespace Cheburashka
         });
         //ModelSchema.ExtendedProcedure,
 
-        public static ReadOnlyCollection<ModelTypeClass> GetDataTypeUsingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[9]
+        public static ReadOnlyCollection<ModelTypeClass> GetDataTypeUsingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.Table,
                 ModelSchema.View,
@@ -326,13 +326,13 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetProcedureClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[2]
+        public static ReadOnlyCollection<ModelTypeClass> GetProcedureClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
@@ -341,31 +341,31 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.PrimaryKeyConstraint
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.ForeignKeyConstraint
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.Table
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.Index
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[3]
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.PrimaryKeyConstraint,
                 ModelSchema.Index,
                 ModelSchema.UniqueConstraint
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetConstraintDefiningClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[6]
+        public static ReadOnlyCollection<ModelTypeClass> GetConstraintDefiningClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.Table,
                 ModelSchema.ExtendedProcedure,
@@ -375,7 +375,7 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[9]
+        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
                 ModelSchema.Table,
                 ModelSchema.View,
@@ -387,7 +387,7 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetDmlTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[1]
+        public static ReadOnlyCollection<ModelTypeClass> GetDmlTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         {
             ModelSchema.DmlTrigger
         });
@@ -407,7 +407,7 @@ namespace Cheburashka
         ///// a source for this
         ///// </summary>
         ///// <returns>The <see cref="T:Microsoft.SqlServer.Dac.Model.ModelTypeClass" />es representing view, subroutines and triggers</returns>
-        //public static ReadOnlyCollection<ModelTypeClass> GetColumnSourceClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[5]
+        //public static ReadOnlyCollection<ModelTypeClass> GetColumnSourceClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
         //{
         //    ModelSchema.Table,
         //    ModelSchema.FileTable,

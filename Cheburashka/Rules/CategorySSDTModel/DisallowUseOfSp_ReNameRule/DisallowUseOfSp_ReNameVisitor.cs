@@ -38,8 +38,7 @@ namespace Cheburashka
         {
         // TODO - look inside dynamic sql strings
         // TODO - check for simple variable usage where procedure reference is a variable
-            if (node.ExecutableEntity is ExecutableProcedureReference reference &&
-                    reference.ProcedureReference is not null)
+            if (node.ExecutableEntity is ExecutableProcedureReference { ProcedureReference: { } } reference)
             {
                 TSqlFragment pr = reference.ProcedureReference;
                 string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;

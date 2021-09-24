@@ -41,7 +41,8 @@ namespace Cheburashka.Utility_Classes
             var transitiveClosure = inputGraph.Clone();
 
             var vertices = inputGraph.Vertices;
-            var vertexStillChanging = vertices.ToDictionary((n => n), (n => true), comparer);        // create a dictionary of work-still-to-do by vertex
+            var enumerable = vertices.ToList();
+            var vertexStillChanging = enumerable.ToDictionary((n => n), (n => true), comparer);        // create a dictionary of work-still-to-do by vertex
 
             var e = inputGraph.Edges;
 
@@ -73,7 +74,7 @@ namespace Cheburashka.Utility_Classes
                                 // We need to lookup the canonical vertex name from vertices, and use that in the inserted edge, as using the differently-cased version in the
                                 // edges definition causes the edge insertion to fail (even though it shouldn't)
                                 // consider it a bug in the Graph library.
-                                var lookedUpAdditionalVertex = vertices.Where(n => comparer.Equals(n, additionalVertex)).Select(n => n).First();
+                                var lookedUpAdditionalVertex = enumerable.Where(n => comparer.Equals(n, additionalVertex)).Select(n => n).First();
                                 newEdges.Add(new Edge<string>(thisVertex, lookedUpAdditionalVertex));
                             }
                         }
