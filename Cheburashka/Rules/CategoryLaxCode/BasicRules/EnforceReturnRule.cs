@@ -106,8 +106,7 @@ namespace Cheburashka
                 {
                     var lastStatementIdx = cnt - 1;
                     return code.Statements[lastStatementIdx] switch
-                    {   // can only be true at first level of code in an sp, but that will do.
-                        BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
+                    {   BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList), // can only be true at first level of code in an sp, but that will do.
                         BeginEndBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
                         TryCatchStatement statement => InvalidUseOfReturn(statement.TryStatements),
                         ReturnStatement => false,
