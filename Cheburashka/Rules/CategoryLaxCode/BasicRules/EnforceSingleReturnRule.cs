@@ -21,6 +21,7 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -87,9 +88,12 @@ namespace Cheburashka
             var returnStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new ReturnStatementVisitor());
             var catchStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new CatchStatementVisitor());
 
-
-            // Create problems for each return not found 
-            RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+            var nonCatchReturns = returnStatements.Where(ret => ! catchStatements.Any(cat => cat.SQLModel_Contains(ret))).ToList();
+            if (nonCatchReturns.Count > 1)
+            {
+                // Create problems for each return found 
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, nonCatchReturns, ruleDescriptor);
+            }
 
             return problems;
         }
