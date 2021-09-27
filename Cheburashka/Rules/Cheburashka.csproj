@@ -99,6 +99,7 @@
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\BasicRules\EnforceSingleReturnRule.cs" />
     <Compile Include="CategoryLaxCode\CheckCallerDefinesCorrectOutputVariables\CheckCallerDefinesCorrectOutputVariablesRule.cs" />
     <Compile Include="CategoryLaxCode\CheckOutputVariableAssignments\CheckForMultipleOutputVariablesRule.cs" />
     <Compile Include="CategoryLaxCode\CheckOutputVariableAssignments\MultipleOutputVariableAssignmentsVisitor.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessaryParenthesisVisitor.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckUnnecessaryBracketsRule.cs" />
     <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxRules\CheckOrphanedBeginEndBlocksRule.cs" />
+    <Compile Include="Generic Visitors\ReturnStatementVisitor.cs" />
     <Compile Include="Generic Visitors\ExecuteSpecification.cs" />
     <Compile Include="Generic Visitors\VariableReferenceVisitor.cs" />
     <Compile Include="Generic Visitors\CatchStatementVisitor.cs" />

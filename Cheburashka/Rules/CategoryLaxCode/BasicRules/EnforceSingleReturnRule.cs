@@ -21,6 +21,7 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -29,7 +30,7 @@ namespace Cheburashka
 {
     /// <summary>
     /// <para>This is a SQL rule which returns a warning message 
-    /// whenever a RETURN statement is not found in a subroutine body. 
+    /// whenever multiple RETURN statements are found in a subroutine body. 
     /// This rule only applies to SQL stored procedures.
     /// </para>
     /// <para>
@@ -39,21 +40,21 @@ namespace Cheburashka
     /// </summary>
     [LocalizedExportCodeAnalysisRule(RuleId,
         RuleConstants.ResourceBaseName,                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceReturnRuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceReturnProblemDescription,                 // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryNonStrictCodingStyle,                // Rule category (e.g. "Design", "Naming")
+        RuleConstants.EnforceSingleReturnRuleName,                      // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceSingleReturnProblemDescription,            // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryNonStrictCodingStyle,          // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                              // This rule targets specific elements rather than the whole model
-    public sealed class EnforceReturnRule : SqlCodeAnalysisRule
+    public sealed class EnforceSingleReturnRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0027: Stored Procedures need at least one Return statement."
+        /// shown as "DM0006: Code should only contain one Return statement outside of Catch blocks."
         /// </summary>
-        public const string RuleId = RuleConstants.EnforceReturnRuleId;
+        public const string RuleId = RuleConstants.EnforceSingleReturnRuleId;
 
-        public EnforceReturnRule()
+        public EnforceSingleReturnRule()
         {
             SupportedElementTypes = SqlRuleUtils.GetProcedureClasses();
         }
@@ -84,36 +85,18 @@ namespace Cheburashka
 
             DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            var createProcedureStatement = sqlFragment as CreateProcedureStatement; //should always work fingers crossed.
-            var code = createProcedureStatement?.StatementList;
-            var problemExists = code is null || InvalidUseOfReturn(code);
+            var returnStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new ReturnStatementVisitor());
+            var catchStatements = DmTSqlFragmentVisitor.Visit(sqlFragment, new CatchStatementVisitor());
 
-            // Create problems for each return not found 
-            RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
+            var nonCatchReturns = returnStatements.Where(ret => ! catchStatements.Any(cat => cat.SQLModel_Contains(ret))).ToList();
+            if (nonCatchReturns.Count > 1)
+            {
+                // Create problems for each return found 
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, nonCatchReturns, ruleDescriptor);
+            }
 
             return problems;
         }
 
-        private bool InvalidUseOfReturn(StatementList code)
-        {
-            var cnt = code.Statements.Count;
-
-            switch (cnt)
-            {
-                case 0:
-                    return true;
-                default:
-                {
-                    var lastStatementIdx = cnt - 1;
-                    return code.Statements[lastStatementIdx] switch
-                    {   BeginEndAtomicBlockStatement statement => InvalidUseOfReturn(statement.StatementList), // can only be true at first level of code in an sp, but that will do.
-                        BeginEndBlockStatement statement => InvalidUseOfReturn(statement.StatementList),
-                        TryCatchStatement statement => InvalidUseOfReturn(statement.TryStatements),
-                        ReturnStatement => false,
-                        _ => true
-                    };
-                }
-            }
-        }
     }
 }

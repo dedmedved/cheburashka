@@ -34,20 +34,21 @@ namespace Cheburashka
         public const string AvoidWriteOnlyVariablesRuleId                      = "Cheburashka.DM0003";
         public const string AvoidUnusedTableVariableRuleId                     = "Cheburashka.DM0004";
         public const string AvoidUnusedParameterRuleId                         = "Cheburashka.DM0005";
+        public const string EnforceSingleReturnRuleId                          = "Cheburashka.DM0006";
 
         public const string EnforcePrimaryKeyRuleId                            = "Cheburashka.DM0011";
         public const string EnforceClusteredIndexRuleId                        = "Cheburashka.DM0012";
-        public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId    = "Cheburashka.DM0013";
-        public const string EnforceForeignKeyIsIndexedRuleId                    = "Cheburashka.DM0014";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId   = "Cheburashka.DM0013";
+        public const string EnforceForeignKeyIsIndexedRuleId                   = "Cheburashka.DM0014";
         //        public const string CheckForDuplicatedColumnsInIndexOrConstraintRuleId  = "Cheburashka.DM0015";
-        public const string EnforceIndexKeyColumnSeparationRuleId               = "Cheburashka.DM0016";
+        public const string EnforceIndexKeyColumnSeparationRuleId              = "Cheburashka.DM0016";
 
-        public const string CheckUniqueIndexHasNoNullColumnsRuleId              = "Cheburashka.DM0017";
-        public const string CheckUniqueConstraintHasNoNullColumnsRuleId         = "Cheburashka.DM0018";
-        public const string CheckUniqueKeysAreNotDuplicatedRuleId               = "Cheburashka.DM0019";
-        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId    = "Cheburashka.DM0020";
+        public const string CheckUniqueIndexHasNoNullColumnsRuleId             = "Cheburashka.DM0017";
+        public const string CheckUniqueConstraintHasNoNullColumnsRuleId        = "Cheburashka.DM0018";
+        public const string CheckUniqueKeysAreNotDuplicatedRuleId              = "Cheburashka.DM0019";
+        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId   = "Cheburashka.DM0020";
 
-        public const string EnforceNamedConstraintRuleId                        = "Cheburashka.DM0022";
+        public const string EnforceNamedConstraintRuleId                       = "Cheburashka.DM0022";
 
         public const string AvoidBareReturnRuleId                              = "Cheburashka.DM0023";
         public const string AvoidDirectUseOfRowcountRuleId                     = "Cheburashka.DM0024";
@@ -60,7 +61,7 @@ namespace Cheburashka
 
         public const string AvoidNullLiteralRuleId                                     = "Cheburashka.DM0030";
         public const string DisallowAllCodeManipulationOfProjectDefinedObjectsRuleId   = "Cheburashka.DM0031";
-        public const string DisallowUseOfSpReNameRuleId                               = "Cheburashka.DM0032";
+        public const string DisallowUseOfSpReNameRuleId                                = "Cheburashka.DM0032";
         public const string EnforceForeignKeyRuleId                                    = "Cheburashka.DM0033";
         public const string EnforceForeignKeyIsUniquelyIndexedRuleId                   = "Cheburashka.DM0034";
         public const string CheckMultipleForeignKeysBetweenTheSameTableRuleId          = "Cheburashka.DM0035";
@@ -101,6 +102,10 @@ namespace Cheburashka
         public const string AvoidUnusedParameterRuleName                               = "AvoidUnusedParameter_RuleName";
         public const string AvoidUnusedParameterProblemDescription                     = "AvoidUnusedParameter_ProblemDescription";
 
+        public const string EnforceSingleReturnRuleName                                = "EnforceSingleReturn_RuleName";
+        public const string EnforceSingleReturnProblemDescription                      = "EnforceSingleReturn_ProblemDescription";
+
+ 
         public const string EnforcePrimaryKeyRuleName                                      = "EnforcePrimaryKey_RuleName";
         public const string EnforcePrimaryKeyProblemDescription                            = "EnforcePrimaryKey_ProblemDescription";
 

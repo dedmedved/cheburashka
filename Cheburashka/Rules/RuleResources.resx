@@ -363,6 +363,12 @@
   <data name="EnforceReturn_RuleName" xml:space="preserve">
     <value>Stored Procedures have Return as the final executable statement.</value>
   </data>
+  <data name="EnforceSingleReturn_ProblemDescription" xml:space="preserve">
+    <value>More than one Return statement found in {0}.</value>
+  </data>
+  <data name="EnforceSingleReturn_RuleName" xml:space="preserve">
+    <value>Code should only contain one Return statement outside of Catch blocks.</value>
+  </data>
   <data name="EnforceTableAlias_ProblemDescription" xml:space="preserve">
     <value>Data Source found without an alias in {0}.</value>
   </data>

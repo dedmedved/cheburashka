@@ -799,6 +799,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More than one Return statement found in {0}..
+        /// </summary>
+        internal static string EnforceSingleReturn_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceSingleReturn_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code should only contain one Return statement outside of Catch blocks..
+        /// </summary>
+        internal static string EnforceSingleReturn_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceSingleReturn_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Source found without an alias in {0}..
         /// </summary>
         internal static string EnforceTableAlias_ProblemDescription {
