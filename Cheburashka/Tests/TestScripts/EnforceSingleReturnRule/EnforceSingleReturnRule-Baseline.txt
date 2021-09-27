@@ -1,0 +1,54 @@
+Problem description: More than one Return statement found in [dbo].[ProcWith2Returns].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith2Returns
+Script file: ProcWith2Returns.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: More than one Return statement found in [dbo].[ProcWith2Returns].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith2Returns
+Script file: ProcWith2Returns.sql
+Start line: 8
+Start column: 5
+========end of problem========
+
+Problem description: More than one Return statement found in [dbo].[ProcWith3Returns1InCatchBlock].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith3Returns1InCatchBlock
+Script file: ProcWith3Returns1InCatchBlock.sql
+Start line: 6
+Start column: 5
+========end of problem========
+
+Problem description: More than one Return statement found in [dbo].[ProcWith3Returns1InCatchBlock].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith3Returns1InCatchBlock
+Script file: ProcWith3Returns1InCatchBlock.sql
+Start line: 9
+Start column: 5
+========end of problem========
+
+Problem description: More than one Return statement found in [dbo].[ProcWith3Returns1InCatchBlock1OutsideTryBlock].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith3Returns1InCatchBlock1OutsideTryBlock
+Script file: ProcWith3Returns1InCatchBlock1OutsideTryBlock.sql
+Start line: 8
+Start column: 5
+========end of problem========
+
+Problem description: More than one Return statement found in [dbo].[ProcWith3Returns1InCatchBlock1OutsideTryBlock].
+FullID: Cheburashka.DM0006
+Severity: Warning
+Model element: dbo.ProcWith3Returns1InCatchBlock1OutsideTryBlock
+Script file: ProcWith3Returns1InCatchBlock1OutsideTryBlock.sql
+Start line: 13
+Start column: 1
+========end of problem========
+
