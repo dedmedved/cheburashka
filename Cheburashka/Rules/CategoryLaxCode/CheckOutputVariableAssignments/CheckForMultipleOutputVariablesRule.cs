@@ -40,9 +40,9 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(CheckForMultipleOutputVariablesRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up display name and description in
-        RuleConstants.CheckForMultipleOutputVariablesRuleName,                 // ID used to look up the display name inside the resources file
-        RuleConstants.CheckForMultipleOutputVariablesProblemDescription,       // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryNonStrictCodingStyle,                  // Rule category (e.g. "Design", "Naming")
+        RuleConstants.CheckForMultipleOutputVariablesRuleName,                  // ID used to look up the display name inside the resources file
+        RuleConstants.CheckForMultipleOutputVariablesProblemDescription,        // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryParameters,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class CheckForMultipleOutputVariablesRule : SqlCodeAnalysisRule
     {

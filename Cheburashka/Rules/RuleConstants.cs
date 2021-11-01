@@ -267,6 +267,8 @@ namespace Cheburashka
         public const string CategoryUnnecessaryCode             = "Code.Redundant.UnnecessaryCode";
         public const string CategoryUnnecessaryVariables        = "Code.Redundant.UnusedObjects";
 
+        public const string CategoryParameters                  = "Code.Parameter.Issues";
+
 
         public const string CategoryDataTypes                   = "CategoryDataTypes";
         public const string CategoryDates                       = "CategoryDates";
