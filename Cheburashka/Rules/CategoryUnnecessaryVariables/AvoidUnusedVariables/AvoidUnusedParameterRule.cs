@@ -42,9 +42,9 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidUnusedParameterRule.RuleId,
         RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up displayname and description in
-        RuleConstants.AvoidUnusedParameterRuleName,                            // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidUnusedParameterProblemDescription,                  // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryUnnecessaryVariables,                  // Rule category (e.g. "Design", "Naming")
+        RuleConstants.AvoidUnusedParameterRuleName,                             // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidUnusedParameterProblemDescription,                   // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryParameters,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
     public sealed class AvoidUnusedParameterRule : SqlCodeAnalysisRule
     {
