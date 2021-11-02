@@ -1143,56 +1143,6 @@ namespace Cheburashka.Tests
 
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule" folder and compares the
-        /// results to the "CheckClusteredKeyColumnsNotIncludedInIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
-        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
-        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// </para>
-        /// <para>
-        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
-        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
-        /// </para>
-        /// </summary>
-        [TestMethod]
-        public void CheckClusteredKeyColumnsNotIncludedInIndex_BIN()
-        {
-            using BaselinedRuleTest test = new BaselinedRuleTest(
-                TestContext,
-                nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql110
-                );
-            // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId);
-        }
-
-        /// <summary>
-        /// <para>
-        /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndexRule" folder and compares the
-        /// results to the "CheckClusteredKeyColumnsNotIncludedInIndexRule-Baseline.txt file in that directory. If you wanted to add extra test cases
-        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
-        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// </para>
-        /// <para>
-        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
-        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
-        /// </para>
-        /// </summary>
-        [TestMethod]
-        public void CheckClusteredKeyColumnsNotIncludedInIndex_CI_AI()
-        {
-            using BaselinedRuleTest test = new BaselinedRuleTest(
-                TestContext,
-                nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql110
-                );
-            // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId);
-        }
-
-        /// <summary>
-        /// <para>
         /// This test uses input scripts saved in the "TestScripts\CheckUniqueKeysAreNotDuplicatedRule" folder and compares the
         /// results to the "CheckUniqueKeysAreNotDuplicatedRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
@@ -1342,32 +1292,6 @@ namespace Cheburashka.Tests
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceIndexKeyColumnSeparationRule.RuleId);
-        }
-
-        /// <summary>
-        /// <para>
-        /// This test uses input scripts saved in the "TestScripts\CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule" folder and compares the
-        /// results to the "CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule-Baseline.txt file in that directory. If you wanted to add extra test cases
-        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
-        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
-        /// </para>
-        /// <para>
-        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
-        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
-        /// </para>
-        /// </summary>
-        [TestMethod]
-        public void CheckClusteredKeyColumnsNotIncludedInIndex_MixedCase_CI_AI()
-        {
-            using BaselinedRuleTest test = new BaselinedRuleTest(
-                TestContext,
-                //nameof(CheckClusteredKeyColumnsNotIncludedInIndexRule),
-                "CheckClusteredKeyColumnsNotIncludedInIndex_MixedCaseRule",
-                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql110
-                );
-            // Since this test verifies results against a baseline file, we don't need to do any extra verification
-            test.RunTest(CheckClusteredKeyColumnsNotIncludedInIndexRule.RuleId);
         }
 
         /// <summary>
