@@ -46,7 +46,7 @@ namespace Cheburashka
         public const string CheckUniqueIndexHasNoNullColumnsRuleId             = "Cheburashka.DM0017";
         public const string CheckUniqueConstraintHasNoNullColumnsRuleId        = "Cheburashka.DM0018";
         public const string CheckUniqueKeysAreNotDuplicatedRuleId              = "Cheburashka.DM0019";
-        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId   = "Cheburashka.DM0020";
+        //public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId   = "Cheburashka.DM0020";
 
         public const string EnforceNamedConstraintRuleId                       = "Cheburashka.DM0022";
 

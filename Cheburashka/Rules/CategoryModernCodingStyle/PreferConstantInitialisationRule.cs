@@ -105,9 +105,18 @@ namespace Cheburashka
                 _ => new List<ProcedureParameter>()
             };
 
+            // Two-step process
+
+            // 1.  Find everything that is constant throughout the execution of the procedure.
+
+            // 1.a Find all parameters that are never assigned
             // find all unset parameters -- these feed into our list of permitted variable 'things'
             var nonAssignedParametersAndVariables = DmTSqlFragmentVisitor.Visit(sqlFragment, new NonUpdatedParameterVisitor(parameters))
                                                                           .Cast<ProcedureParameter>().ToList();
+
+            // 1.b Find all declared variables that have an initialiser and are never set to anything else.
+            //      Question if never set at all - ie are null - should they also be permitted ?
+
             // find all initialised-only variables -- these feed into our list of permitted variable 'things'
             // only allow variables initialised from literal expressions and parameters ( for now ) - we might get our heads around the full chaining of initialisers
             // again disallow anything initialised in a control structure - yeah.
@@ -120,8 +129,8 @@ namespace Cheburashka
                 var initialisedOnlyVariables = DmTSqlFragmentVisitor.Visit(sqlFragment
                                                                           , new InitialisedOnlyVariablesVisitor(nonAssignedParametersAndVariablesNames))
                                                                     .Cast<DeclareVariableElement>().ToList();
-                // check they aren't initialised in possibly un-executed code.
-                //nonAssignedParametersAndVariablesNames = initialisedOnlyVariables.Select(n => n.VariableName.Value).ToList();
+                // check they aren't initialised in possibly un-executed code, or re-executed code.
+                // nonAssignedParametersAndVariablesNames = initialisedOnlyVariables.Select(n => n.VariableName.Value).ToList();
                 foreach (var v in initialisedOnlyVariables)
                 {
                     // improve the add if missing logic - currently it sucks but most variable lists are short anyway
@@ -131,19 +140,41 @@ namespace Cheburashka
                         nonAssignedParametersAndVariablesNames.Add(v.VariableName.Value);
                     }
                 }
-
                 bInitialisedVariableStillToFind = nonAssignedParametersAndVariablesNames.Count != initialisedOnlyVariablesCount;
-
                 initialisedOnlyVariablesCount = nonAssignedParametersAndVariablesNames.Count;
-
             }
 
+            // 2. Find anything that is set via a single set statement which only uses literals, functions, and variables we've
+            //    already identified as un-changing.
 
             // get all candidate initialisations
             var candidateConstantAssignments = nonAssignedParametersAndVariablesNames;
             var bAssignedConstantsStillToFind = true;
             var permissibleVariablesCount = nonAssignedParametersAndVariables.Count;
             var issues = new List<TSqlFragment>();
+
+            // get all variable declarations and plonk them in an indexed array 
+            var variableDeclarations = DmTSqlFragmentVisitor.Visit(sqlFragment, new DeclareVariableVisitor()).Cast<DeclareVariableElement>().ToList();
+            Dictionary<string,DeclareVariableElement> indexedVariableDeclarations = new(SqlComparer.Comparer);
+            foreach (var variableDeclaration in variableDeclarations)
+            {
+                indexedVariableDeclarations[variableDeclaration.VariableName.Value] = variableDeclaration;
+            }
+
+            Dictionary<string, List<VariableReference>> indexedVariableReferences = new(SqlComparer.Comparer);
+            {  // create tmp scope
+               // get all variable references and plonk them in an indexed array of lists of var references
+                var variableReferences = DmTSqlFragmentVisitor.Visit(sqlFragment, new VariableReferenceVisitor()).Cast<VariableReference>().ToList();
+                foreach (var v_ref in variableReferences)
+                {
+                    // for each name - add a list of references - ordered by startpos ?
+                    if (! indexedVariableReferences.ContainsKey(v_ref.Name))
+                    {
+                        indexedVariableReferences[v_ref.Name] = new List<VariableReference>();
+                    }
+                    indexedVariableReferences[v_ref.Name].Add(v_ref);
+                }
+            }
 
             while (bAssignedConstantsStillToFind)
             {
@@ -152,14 +183,28 @@ namespace Cheburashka
                 var singlySetLiteralVariableFragments = singlySetLiteralVariableVisitor.VariablesAndValues();
 
                 // check they aren't initialised in possibly un-executed code.
+                // and that there are no references to the variable between declaration and assignment
                 foreach (var v in singlySetLiteralVariableFragments.Keys)
                 {
                     var sql = singlySetLiteralVariableFragments[v];
                     IfFree(ifs, sql, whiles, catchLists, out var ifFree, out var whileFree, out var catchFree);
+
+                    // check they haven't been referenced in code between the declaration and the 'single' assignment
+                    // find the line of the declaration, and the line of the assigment and look for any references in between.
+                    // if there are none -> i.e. !Any
+                    // add it to the list of init expressions we can report on.
                     if (ifFree && whileFree && catchFree && ! candidateConstantAssignments.Any(n => v.SQLModel_StringCompareEqual(n)))
                     {
-                        issues.Add(sql); // yep this is ugly as well
-                        candidateConstantAssignments.Add(v);
+                        // is it free of references between the declaration and this initial/only set statement ?
+                        var variableDeclaration = indexedVariableDeclarations[v];
+                        var variableReferences = indexedVariableReferences[v];
+
+                        if (!variableReferences.Any(vr => vr.StartOffset > variableDeclaration.StartOffset
+                                                 && vr.StartOffset < sql.StartOffset) 
+                                                     ) {
+                            issues.Add(sql); // yep this is ugly as well
+                            candidateConstantAssignments.Add(v);
+                        }
                     }
                 }
                 bAssignedConstantsStillToFind = candidateConstantAssignments.Count != permissibleVariablesCount;
@@ -172,18 +217,11 @@ namespace Cheburashka
             return problems;
         }
 
-        private static void IfFree(IEnumerable<TSqlFragment> sqlFragments, TSqlFragment v, IEnumerable<TSqlFragment> list, IEnumerable<StatementList> statementLists, out bool ifFree, out bool whileFree, out bool catchFree)
+        private static void IfFree(IEnumerable<TSqlFragment> ifStatements, TSqlFragment setStatement, IEnumerable<TSqlFragment> whileStatements, IEnumerable<StatementList> catchStatementBlocksContents, out bool ifFree, out bool whileFree, out bool catchFree)
         {
-            ifFree = !sqlFragments.Any(i => i.SQLModel_Contains(v));
-            whileFree = !list.Any(i => i.SQLModel_Contains(v));
-            catchFree = true;
-            foreach (var statementList in statementLists)
-            {
-                var thisCatchIsFree = !statementList.Statements.Any(i => i.SQLModel_Contains(v));
-                if (thisCatchIsFree) continue;
-                catchFree = false;
-                break;
-            }
+            ifFree    = !ifStatements.Any(i => i.SQLModel_Contains(setStatement));
+            whileFree = !whileStatements.Any(i => i.SQLModel_Contains(setStatement));
+            catchFree = !catchStatementBlocksContents.Any(catchBlock => catchBlock.Statements.Any(i => i.SQLModel_Contains(setStatement)));
         }
 
     }

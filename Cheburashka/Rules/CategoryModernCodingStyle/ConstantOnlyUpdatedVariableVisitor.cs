@@ -57,11 +57,7 @@ namespace Cheburashka
 
             return x;
         }
-        //public IList<VariableReference> Variables()
-        //{
-        //    var singleValidAssignmentKeys = variableAssignments.Keys.Except(invalidVariableAssignments.Keys, SqlComparer.Comparer);
-        //    return singleValidAssignmentKeys.Select(v => variables[v]).ToList();
-        //}
+
         public IList<TSqlFragment> VariableAssignments()
         {
             var singleValidAssignmentKeys = _variableAssignments.Keys.Except(_invalidVariableAssignments.Keys, SqlComparer.Comparer);
@@ -176,7 +172,7 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(VariableNames)).ToList();
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new DisAllowedVariableReferenceVisitor(VariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
                 // if the scalar expression doesn't contain any variables it's safe to consider it to be an initialisation expression
                 if ( ! referencedVariables.Any() && ! disallowedNonDeterministicFunctions.Any() )
