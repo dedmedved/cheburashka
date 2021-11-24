@@ -25,14 +25,19 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class VariableReferenceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class DisAllowedVariableReferenceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public VariableReferenceVisitor() {}
+        public List<string> AllowedVariableNames = new();
+        public DisAllowedVariableReferenceVisitor() {}
+        public DisAllowedVariableReferenceVisitor(List<string> allowedVariableNames) => AllowedVariableNames = allowedVariableNames;
         public List<VariableReference> VariableReferences { get; } = new();
         public IList<TSqlFragment> SqlFragments() { return VariableReferences.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(VariableReference node)
         {
-            VariableReferences.Add(node);
+            if ( !AllowedVariableNames.Any( n => n.SQLModel_StringCompareEqual(node.Name)))
+            {
+                VariableReferences.Add(node);
+            }
         }
     }
 }

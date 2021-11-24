@@ -146,7 +146,7 @@ namespace Cheburashka
             if (assignment == AssignmentKind.Equals
             )
             {
-                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new VariableReferenceVisitor(_inputVariableNames)).ToList();
+                var referencedVariables = DmTSqlFragmentVisitor.Visit(expression, new DisAllowedVariableReferenceVisitor(_inputVariableNames)).ToList();
                 var disallowedNonDeterministicFunctions = DmTSqlFragmentVisitor.Visit(expression, new NonDeterministicSystemFunctionVisitor());
                 // if the scalar expression doesn't contain any variables it's safe to consider it to be an initialisation expression
                 if (!referencedVariables.Any() && !disallowedNonDeterministicFunctions.Any())

@@ -1,4 +1,4 @@
-Problem description: Raiserror found in [dbo].[ProcWithRaiserror].
+Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserror].
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserror
@@ -7,7 +7,7 @@ Start line: 7
 Start column: 9
 ========end of problem========
 
-Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow].
+Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow].
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow
@@ -16,7 +16,7 @@ Start line: 8
 Start column: 9
 ========end of problem========
 
-Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation].
+Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation].
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation
@@ -25,7 +25,7 @@ Start line: 8
 Start column: 9
 ========end of problem========
 
-Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVar].
+Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVar].
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVar
@@ -34,7 +34,7 @@ Start line: 7
 Start column: 9
 ========end of problem========
 
-Problem description: Raiserror found in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow].
+Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow].
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow

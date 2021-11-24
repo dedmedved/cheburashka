@@ -1,4 +1,4 @@
-﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
@@ -23,16 +23,29 @@ using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
 
+
 namespace Cheburashka
 {
-    internal class VariableReferenceVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+
+    internal class CheckClusteredKeyColumnsNotIncludedInIndexVisitorIncludedIndexColumns : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public VariableReferenceVisitor() {}
-        public List<VariableReference> VariableReferences { get; } = new();
-        public IList<TSqlFragment> SqlFragments() { return VariableReferences.Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(VariableReference node)
+        private readonly List<Identifier> _objects;
+
+        public CheckClusteredKeyColumnsNotIncludedInIndexVisitorIncludedIndexColumns()
         {
-            VariableReferences.Add(node);
+            _objects = new List<Identifier>();
+        }
+        public List<Identifier>  Objects => _objects;
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
+
+        public override void ExplicitVisit(CreateIndexStatement node)
+        {
+            foreach (var v in node.IncludeColumns)
+            {
+                _objects.Add(v.MultiPartIdentifier.Identifiers[0]);
+            }
         }
     }
+
+
 }
