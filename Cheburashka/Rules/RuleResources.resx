@@ -315,6 +315,12 @@
   <data name="EnforceClusteredIndex_RuleName" xml:space="preserve">
     <value>Tables should normally be clustered and not heap.</value>
   </data>
+  <data name="EnforceColumnPrefix_ProblemDescription" xml:space="preserve">
+    <value>Column name found without a prefix in {0}.</value>
+  </data>
+  <data name="EnforceColumnPrefix_RuleName" xml:space="preserve">
+    <value>Columns should be prefixed with the alias of the source where disambiguation is required.</value>
+  </data>
   <data name="EnforceExplicitInsertColumnList_ProblemDescription" xml:space="preserve">
     <value>Insert statement or clause without column list found in {0}.</value>
   </data>

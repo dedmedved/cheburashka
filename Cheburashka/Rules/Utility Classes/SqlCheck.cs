@@ -93,8 +93,8 @@ namespace Cheburashka
         //}
         //public static bool HasOneFromClauseSource(QuerySpecification node)
         //{
-        //    return( ( node.FromClauses is not null ) && 
-        //            ( node.FromClauses.Count == 1 )
+        //    return( ( node.FromClause is not null ) && 
+        //            ( node.FromClause.TableReferences.Count == 1 )
         //          );
         //}
 
@@ -138,26 +138,6 @@ namespace Cheburashka
         //Microsoft.SqlServer.TransactSql.ScriptDom.MergeSpecification
         //    Microsoft.SqlServer.TransactSql.ScriptDom.UpdateDeleteSpecificationBase
 
-        // For this helper method - at most means any table source at all
-        // Semantics are shite aren't they
-        public static bool HasAtMostOneTableSource(MergeSpecification node)
-        {
-            //silence compiler warnings 
-            if (node.FirstTokenIndex == 0) { }
-            //return (node.TableSource is not null);
-            return false;
-        }
-
-        // tricky if there is no from clause there is still exactly one table involved
-        public static bool HasAtMostOneTableSource(UpdateDeleteSpecificationBase node)
-        {
-            return node.FromClause is null
-                   ||
-                   node.FromClause.TableReferences.Count == 0
-                   ||
-                   node.FromClause.TableReferences.Count == 1 &&
-                   node.FromClause.TableReferences[0] is TableReferenceWithAlias;
-        }
         //// tricky if there is no from clause there is still exactly one table involved
         //public static bool HasAtMostOneTableSource(UpdateSpecification node)
         //{
@@ -179,6 +159,26 @@ namespace Cheburashka
                         node.FromClause.TableReferences[0] is TableReferenceWithAlias
                   ;
         }
+        // For this helper method - at most means any table source at all
+        // Semantics are shite aren't they
+        public static bool HasAtMostOneTableSource(MergeSpecification node)
+        {
+            //silence compiler warnings 
+            if (node.FirstTokenIndex == 0) { }
+            //return (node.TableSource is not null);
+            return false;
+        }
+        // tricky if there is no from clause there is still exactly one table involved
+        public static bool HasAtMostOneTableSource(UpdateDeleteSpecificationBase node)
+        {
+            return node.FromClause is null
+                   ||
+                   node.FromClause.TableReferences.Count == 0
+                   ||
+                   node.FromClause.TableReferences.Count == 1 &&
+                   node.FromClause.TableReferences[0] is TableReferenceWithAlias;
+        }
+
 
         ////////////////////////////
 

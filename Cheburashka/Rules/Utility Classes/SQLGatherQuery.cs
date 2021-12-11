@@ -57,45 +57,7 @@ namespace Cheburashka
         }
         public static void GetQuery(QuerySpecification node, ref List<QuerySpecification> nodes)
         {
-            //var fromClauseTableReferences = node?.FromClause?.TableReferences;
-            //// Handle the special case of a DML Output as a data source - these only occur inside insert statements ?
-            //// And can't be joined to or have an apply clause
-            //if (fromClauseTableReferences?.Count == 1 && fromClauseTableReferences[0] is DataModificationTableReference)
-            //{
-            //    var x = fromClauseTableReferences[0] as DataModificationTableReference;
-            //    switch (x?.DataModificationSpecification)
-            //    {
-            //        case InsertSpecification insertSpecification:
-            //        {
-            //            if (insertSpecification?.InsertSource is SelectInsertSource select)
-            //            {
-            //                SQLGatherQuery.GetQuery(select.Select, ref nodes);
-            //            }
-            //            break;
-            //        }
-            //        case MergeSpecification mergeSpecification:
-            //        {
-            //            SQLGatherQuery.GetQuery(mergeSpecification, ref nodes);
-            //            break;
-            //        }
-            //        case UpdateSpecification updateSpecification:
-            //        {
-            //            SQLGatherQuery.GetQuery(updateSpecification.FromClause.TableReferences, ref nodes);
-            //            break;
-            //        }
-            //        case DeleteSpecification deleteSpecification:
-            //        {
-            //            SQLGatherQuery.GetQuery(deleteSpecification.FromClause.TableReferences, ref nodes);
-            //            break;
-            //        }
-            //    }
-            //}
-            //// otherwise use existing gather query logic to pull out the query specifications 
-            //else
-            //{
-                nodes.Add(node);
-            //}
-
+            nodes.Add(node);
         }
     }
 }

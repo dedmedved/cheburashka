@@ -50,7 +50,7 @@ namespace Cheburashka
         /// The Rule ID should resemble a fully-qualified class name. In the Visual Studio UI
         /// rules are grouped by "Namespace + Category", and each rule is shown using "Short ID: DisplayName".
         /// For this rule, it will be 
-        /// shown as "DM0047: "
+        /// shown as "DM0047: Tables, views and other data sources in DML need aliases where disambiguation is necessary."
         /// </summary>
         public const string RuleId = RuleConstants.EnforceTableAliasRuleId;
 

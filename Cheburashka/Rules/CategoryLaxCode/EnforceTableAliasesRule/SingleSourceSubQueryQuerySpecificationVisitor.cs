@@ -37,9 +37,17 @@ namespace Cheburashka
         {
             List<QuerySpecification> querySpecifications = new();
             SqlGatherQuery.GetQuery(node, ref querySpecifications);
-            SingleSourceSubQueryQuerySpecifications.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
-            //DEFINITELY NOT !!
-            //node.AcceptChildren(this);
+            //// Guard against this case where the top level sqlfragment is an empty (select ......) 
+            //// declare @product varchar(10) = (select(((SELECT a FROM (SELECT 1 as a)p))));
+            //// declare @product varchar(10) = (select(((SELECT a FROM (SELECT 1 as a)p1 cross join (select 2 as b)p2))));
+            foreach (var querySpecification in querySpecifications.Where(SqlCheck.HasExactlyOneFromClauseTableSource))
+            {
+                SingleSourceSubQueryQuerySpecifications.Add(querySpecification);                
+            }
+            foreach (var querySpecification in querySpecifications.Where(SqlCheck.HasNoFromClause))
+            {
+                querySpecification.AcceptChildren(this);
+            }
         }
     }
 }

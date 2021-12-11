@@ -27,6 +27,15 @@ namespace Cheburashka
 {
     public static class SqlPrint
     {
+        public static string SQLModel_AsText(this TSqlFragment element)
+        {
+            string Sql = "";
+            for (int i = element.FirstTokenIndex; i <= element.LastTokenIndex; i++)
+            {
+                Sql += element.ScriptTokenStream[i].Text +" ";
+            }
+            return Sql;
+        }
         public static void SQLModel_DebugPrint(this TSqlFragment element, string filespec, bool overwrite = false)
         {
             if (overwrite)

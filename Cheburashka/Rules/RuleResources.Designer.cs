@@ -19,7 +19,7 @@ namespace Cheburashka {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RuleResources {
@@ -651,6 +651,24 @@ namespace Cheburashka {
         internal static string EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName {
             get {
                 return ResourceManager.GetString("EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column name found without a prefix in {0}..
+        /// </summary>
+        internal static string EnforceColumnPrefix_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceColumnPrefix_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns should be prefixed with the alias of the source where disambiguation is required..
+        /// </summary>
+        internal static string EnforceColumnPrefix_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceColumnPrefix_RuleName", resourceCulture);
             }
         }
         
