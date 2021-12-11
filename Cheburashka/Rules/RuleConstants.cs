@@ -76,6 +76,7 @@ namespace Cheburashka
 
         public const string CheckOpenTransactionCountCodeRuleId                        = "Cheburashka.DM0045";
         
+        public const string EnforceColumnPrefixRuleId                                  = "Cheburashka.DM0046";
         public const string EnforceTableAliasRuleId                                    = "Cheburashka.DM0047";
         public const string PreferThrowToRaiserrorRuleId                               = "Cheburashka.DM0048";
         public const string PreferConstantInitialisationRuleId                         = "Cheburashka.DM0049";
@@ -204,6 +205,9 @@ namespace Cheburashka
 
         public const string CheckOpenTransactionCountCodeRuleName                                  = "CheckOpenTransactionCountCode_RuleName";
         public const string CheckOpenTransactionCountCodeProblemDescription                        = "CheckOpenTransactionCountCode_ProblemDescription";
+
+        public const string EnforceColumnPrefixRuleName                                            = "EnforceColumnPrefix_RuleName";
+        public const string EnforceColumnPrefixProblemDescription                                  = "EnforceColumnPrefix_ProblemDescription";
 
         public const string EnforceTableAliasRuleName                                              = "EnforceTableAlias_RuleName";
         public const string EnforceTableAliasProblemDescription                                    = "EnforceTableAlias_ProblemDescription";

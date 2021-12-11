@@ -32,7 +32,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is au unused variable in a routine.
+    /// whenever there is a schema object referred to without the schema name.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -42,8 +42,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(AvoidOnePartNamesRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up display name and description in
-        RuleConstants.AvoidOnePartNamesRuleName,                           // ID used to look up the display name inside the resources file
-        RuleConstants.AvoidOnePartNamesProblemDescription,                 // ID used to look up the description inside the resources file
+        RuleConstants.AvoidOnePartNamesRuleName,                            // ID used to look up the display name inside the resources file
+        RuleConstants.AvoidOnePartNamesProblemDescription,                  // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryNonStrictCodingStyleNames,         // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class AvoidOnePartNamesRule : SqlCodeAnalysisRule

@@ -29,11 +29,29 @@ namespace Cheburashka
     {
         public SingleSourceSqlVisitor()
         {
-            SingleSourceSqLs = new List<TSqlFragment>();
+            SingleSourceSqls = new List<TSqlFragment>();
         }
 
-        public List<TSqlFragment> SingleSourceSqLs { get; }
-        public IList<TSqlFragment> SqlFragments() { return SingleSourceSqLs.ToList(); }
+        public List<TSqlFragment> SingleSourceSqls { get; }
+        public IList<TSqlFragment> SqlFragments() { return SingleSourceSqls.ToList(); }
+
+        //public override void ExplicitVisit(DataModificationTableReference node)
+        //{
+        //    //if (node.DataModificationSpecification is not MergeSpecification)
+        //    //{
+        //    //    if (node.DataModificationSpecification.Target is not null)
+        //    //    {
+        //    //        ExcludedFragments.Add(node.DataModificationSpecification.Target);
+        //    //    }
+        //    //}
+        //    ////if (node.DataModificationSpecification.Target is not null)
+        //    ////{
+        //    ////    _excludedFragments.Add(node.DataModificationSpecification.Target);
+        //    ////}
+        //    node.AcceptChildren(this);
+        //}
+
+        
         public override void ExplicitVisit(DeleteSpecification node)
         {
             HandleNode(node);
@@ -86,7 +104,7 @@ namespace Cheburashka
         {
             if (SqlCheck.HasAtMostOneTableSource(node))
             {
-                SingleSourceSqLs.Add(node);
+                SingleSourceSqls.Add(node);
             }
             node.AcceptChildren(this);
         }
@@ -94,7 +112,7 @@ namespace Cheburashka
         {
             List<QuerySpecification> querySpecifications = new();
             SqlGatherQuery.GetQuery(queryExpression, ref querySpecifications);
-            SingleSourceSqLs.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
+            SingleSourceSqls.AddRange(querySpecifications.Where(SqlCheck.HasAtMostOneTableSource));
         }
     }
 }

@@ -2547,6 +2547,29 @@ namespace Cheburashka.Tests
             test.RunTest(EnforceSingleReturnRule.RuleId);
         }
 
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\EnforceColumnPrefixRule" folder and compares the
+        /// results to the "EnforceColumnPrefixRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void EnforceColumnPrefix_CI_AI()
+        {
+            using BaselinedRuleTest test = new BaselinedRuleTest(
+                TestContext,
+                nameof(EnforceColumnPrefixRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql100);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(EnforceColumnPrefixRule.RuleId);
+        }
 
     }
 }

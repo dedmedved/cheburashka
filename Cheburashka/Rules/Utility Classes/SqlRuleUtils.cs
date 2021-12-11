@@ -54,8 +54,10 @@ namespace Cheburashka
 
         private static List<string> _builtinDataTypes = new();
 
+        //TODO split these out by version - can we get model version at runtime ?
         private static readonly List<string> BuiltinAggregateFunctions = new()
-        {"avg"
+        {"approx_count_distinct"
+        ,"avg"
         ,"min"
         ,"max"
         ,"checksum_agg"
@@ -64,6 +66,7 @@ namespace Cheburashka
         ,"count_big"
         ,"stdev"
         ,"stdevp"
+        ,"string_agg"
         ,"grouping"
         ,"var"
         ,"varp"
@@ -283,7 +286,7 @@ namespace Cheburashka
         }
 
 
-        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
@@ -293,14 +296,14 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetParameterizedCodeContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetParameterizedCodeContainingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
                 ModelSchema.TableValuedFunction,
                 ModelSchema.ScalarFunction,
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetCodeAndViewContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetCodeAndViewContainingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.View,
                 ModelSchema.ExtendedProcedure,
@@ -313,7 +316,7 @@ namespace Cheburashka
         });
         //ModelSchema.ExtendedProcedure,
 
-        public static ReadOnlyCollection<ModelTypeClass> GetDataTypeUsingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetDataTypeUsingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Table,
                 ModelSchema.View,
@@ -326,13 +329,13 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetProcedureClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetProcedureClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetStateAlteringContainingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ExtendedProcedure,
                 ModelSchema.Procedure,
@@ -341,31 +344,31 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetPrimaryKeyConstraintClass() => Array.AsReadOnly(new[]
         {
                 ModelSchema.PrimaryKeyConstraint
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetForeignKeyConstraintClass() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ForeignKeyConstraint
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetTableClass() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Table
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexClass() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Index
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetIndexLikeClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.PrimaryKeyConstraint,
                 ModelSchema.Index,
                 ModelSchema.UniqueConstraint
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetConstraintDefiningClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetConstraintDefiningClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Table,
                 ModelSchema.ExtendedProcedure,
@@ -375,7 +378,7 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
-        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Table,
                 ModelSchema.View,
@@ -387,7 +390,7 @@ namespace Cheburashka
                 ModelSchema.DmlTrigger,
                 ModelSchema.ServerDdlTrigger
         });
-        public static ReadOnlyCollection<ModelTypeClass> GetDmlTriggerClass() => Array.AsReadOnly<ModelTypeClass>(new ModelTypeClass[]
+        public static ReadOnlyCollection<ModelTypeClass> GetDmlTriggerClass() => Array.AsReadOnly(new[]
         {
             ModelSchema.DmlTrigger
         });
