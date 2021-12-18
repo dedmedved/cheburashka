@@ -898,7 +898,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avoiding using the same table alias multiple times in a single SQL statement..
+        ///   Looks up a localized string similar to Avoid using the same table alias multiple times in a single SQL statement..
         /// </summary>
         internal static string EnforceUniqueTableAlias_RuleName {
             get {
