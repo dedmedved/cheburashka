@@ -86,34 +86,28 @@ namespace Cheburashka
 //        public override void ExplicitVisit(UpdateStatement node)
         public override void ExplicitVisit(UpdateSpecification node)
         {
-            foreach (var setClause in node.SetClauses)
-            {
-                var setColumnClause = setClause as AssignmentSetClause;
-                if (setColumnClause?.Column is not null)
-                {
-                    _columns.Add(setColumnClause.Column);
-                }
-            }
+            _columns.AddRange(node.SetClauses.Where( sc => sc is AssignmentSetClause assignment)// && assignment.Column is not null)
+                .Cast<AssignmentSetClause>()
+                .ToList()
+                .Select( n => n.Column));
+            //foreach (var setClause in node.SetClauses)
+            //{
+            //    var setColumnClause = setClause as AssignmentSetClause;
+            //    if (setColumnClause?.Column is not null)
+            //    {
+            //        _columns.Add(setColumnClause.Column);
+            //    }
+            //}
             node.AcceptChildren(this);
         }
 
         public override void ExplicitVisit(InsertMergeAction node)
         {
-            foreach (var col in node.Columns)
-            {
-                _columns.Add(col);
-            }
-
+            _columns.AddRange(node.Columns);
             if (node.Source.RowValues != null)
                 foreach (var rv in node.Source.RowValues)
                 {
-                    foreach (var cv in rv.ColumnValues)
-                    {
-                        if (cv is ColumnReferenceExpression colRef)
-                        {
-                            _columns.Add(colRef);
-                        }
-                    }
+                    _columns.AddRange(rv.ColumnValues.Where( cv => cv is ColumnReferenceExpression).ToList());
                 }
             node.AcceptChildren(this);
         }

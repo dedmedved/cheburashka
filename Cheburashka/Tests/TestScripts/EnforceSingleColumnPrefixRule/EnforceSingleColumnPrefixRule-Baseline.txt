@@ -1,0 +1,18 @@
+Problem description: Column name found without a prefix in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
+FullID: Cheburashka.DM0055
+Severity: Warning
+Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable
+Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.sql
+Start line: 4
+Start column: 9
+========end of problem========
+
+Problem description: Column name found without a prefix in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
+FullID: Cheburashka.DM0055
+Severity: Warning
+Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable
+Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.sql
+Start line: 4
+Start column: 27
+========end of problem========
+

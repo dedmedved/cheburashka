@@ -817,6 +817,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multi-element column prefix found in {0}..
+        /// </summary>
+        internal static string EnforceSingleColumnPrefix_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceSingleColumnPrefix_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid using fully-qualified column names in SQL, use a table alias or the table name only..
+        /// </summary>
+        internal static string EnforceSingleColumnPrefix_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceSingleColumnPrefix_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to More than one Return statement found in {0}..
         /// </summary>
         internal static string EnforceSingleReturn_ProblemDescription {
@@ -867,6 +885,24 @@ namespace Cheburashka {
         internal static string EnforceTryCatch_RuleName {
             get {
                 return ResourceManager.GetString("EnforceTryCatch_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The same table alias is used elsewhere in this statement {0}..
+        /// </summary>
+        internal static string EnforceUniqueTableAlias_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceUniqueTableAlias_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoiding using the same table alias multiple times in a single SQL statement..
+        /// </summary>
+        internal static string EnforceUniqueTableAlias_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceUniqueTableAlias_RuleName", resourceCulture);
             }
         }
         

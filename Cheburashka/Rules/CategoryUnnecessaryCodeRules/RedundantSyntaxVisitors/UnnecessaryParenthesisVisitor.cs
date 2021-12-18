@@ -53,6 +53,31 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        
+        public override void ExplicitVisit(AssignmentSetClause node)
+        {
+            if (node.NewValue is ParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.NewValue);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(SetVariableStatement node)
+        {
+            if (node.Expression is ParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.Expression);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(DeclareVariableElement node)
+        {
+            if (node.Value is ParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.Value);
+            }
+            node.AcceptChildren(this);
+        }
         public override void ExplicitVisit(WhileStatement node)
         {
             if (node.Predicate is BooleanParenthesisExpression)

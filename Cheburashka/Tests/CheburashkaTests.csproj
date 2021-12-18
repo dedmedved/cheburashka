@@ -1085,6 +1085,9 @@
     <Content Include="TestScripts\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoSeparateUniqueIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedAssignments.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithIfAndWhileWithBrackets.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1240,6 +1243,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceSingleColumnPrefixRule\EnforceSingleColumnPrefixRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceSingleColumnPrefixRule\EnforceSingleColumnPrefix_Proc_UpdatingTable2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceSingleColumnPrefixRule\EnforceSingleColumnPrefix_Proc_UpdatingTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceSingleColumnPrefixRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceSingleColumnPrefixRule\Table2.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceColumnPrefixRule\DMLTargetAndOutputInto_proc.sql">
@@ -1609,6 +1627,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceSingleReturnRule\ProcWithReturn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceUniqueTableAliasRule\EnforceUniqueTableAliasRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceUniqueTableAliasRule\onelevelinlinequerieswithsubqueries_proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceUniqueTableAliasRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceUniqueTableAliasRule\Table2.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceTableAliasRule\EnforceTableAliasRule-Baseline.txt">
