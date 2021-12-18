@@ -34,7 +34,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is an unprefixed column in a statement where disambigutaion is required.
+    /// whenever there is an unprefixed column in a statement where disambiguation is required.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -80,7 +80,6 @@ namespace Cheburashka
             var sql = sqlFragment.SQLModel_AsText();
 
             // visitor to get the ocurrences of unaliased column names
- //           WHERE upd_tmst = (SELECT MAX(upd_tmst) FROM transit.vehicle v1 WHERE v.asset_ref_nr = v1.asset_ref_nr)           
             var allUnaliasedColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceColumnAliasPrefixVisitor()).Cast<ColumnReferenceExpression>().ToList();
 
             //Check things we don't want to look inside (target columns), output into clauses, index creation etc
@@ -102,7 +101,6 @@ namespace Cheburashka
             //Now find all Subqueries not in another subquery that have no more than one data source -- obsolete thinking
             //Now find all Subqueries not in another subquery that have just one data source -- scalar expressions that just wrap an expression with (select ... )
             //should be ignored.
-            //TODO !!!!!
             var singleSourceSubQueries = DmTSqlFragmentVisitor.Visit(sqlFragment, new SingleSourceSubQueryQuerySpecificationVisitor());
 
             //Eliminate any that are within the scope of an DML statement.
@@ -136,6 +134,7 @@ namespace Cheburashka
             //Check things we DO want to look inside (columns in any subquery) and other inline queries
             // Now we need to gather all subqueries.
             var subQuerys = DmTSqlFragmentVisitor.Visit(sqlFragment, new SubQueryVisitor()).Cast<ScalarSubquery>().ToList();
+
             // find all aggregate functions in subqueries
             // we can ignore column references in them where there is only a single source
             // so long as there is only one DISTINCT column reference in the parameters

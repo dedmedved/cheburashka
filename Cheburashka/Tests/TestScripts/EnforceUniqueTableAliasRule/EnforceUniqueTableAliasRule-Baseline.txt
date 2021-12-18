@@ -1,0 +1,270 @@
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 9
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 10
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 18
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 19
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 31
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 32
+Start column: 47
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 33
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 39
+Start column: 39
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 40
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 41
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 47
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 49
+Start column: 12
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 57
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 60
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 61
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 66
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 67
+Start column: 47
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 70
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 71
+Start column: 47
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 72
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 77
+Start column: 39
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 78
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 81
+Start column: 39
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 82
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 83
+Start column: 11
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 89
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 90
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 94
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 95
+Start column: 24
+========end of problem========
+
+Problem description: The same table alias is used elsewhere in this statement [dbo].[onelevelinlinequerieswithsubqueries].
+FullID: Cheburashka.DM0056
+Severity: Warning
+Model element: dbo.onelevelinlinequerieswithsubqueries
+Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Start line: 96
+Start column: 13
+========end of problem========
+

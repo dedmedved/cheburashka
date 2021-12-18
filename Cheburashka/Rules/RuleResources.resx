@@ -369,6 +369,12 @@
   <data name="EnforceReturn_RuleName" xml:space="preserve">
     <value>Stored Procedures have Return as the final executable statement.</value>
   </data>
+  <data name="EnforceSingleColumnPrefix_ProblemDescription" xml:space="preserve">
+    <value>Multi-element column prefix found in {0}.</value>
+  </data>
+  <data name="EnforceSingleColumnPrefix_RuleName" xml:space="preserve">
+    <value>Avoid using fully-qualified column names in SQL, use a table alias or the table name only.</value>
+  </data>
   <data name="EnforceSingleReturn_ProblemDescription" xml:space="preserve">
     <value>More than one Return statement found in {0}.</value>
   </data>
@@ -386,6 +392,12 @@
   </data>
   <data name="EnforceTryCatch_RuleName" xml:space="preserve">
     <value>Triggers and non-simple Stored Procedures need at least one Try/Catch block.</value>
+  </data>
+  <data name="EnforceUniqueTableAlias_ProblemDescription" xml:space="preserve">
+    <value>The same table alias is used elsewhere in this statement {0}.</value>
+  </data>
+  <data name="EnforceUniqueTableAlias_RuleName" xml:space="preserve">
+    <value>Avoiding using the same table alias multiple times in a single SQL statement.</value>
   </data>
   <data name="EnforceVariableLengthDataSpecification_ProblemDescription" xml:space="preserve">
     <value>Variable length datatype found with no length specification in {0}.</value>

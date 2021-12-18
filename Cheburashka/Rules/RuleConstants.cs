@@ -87,6 +87,9 @@ namespace Cheburashka
         public const string CheckForMultipleOutputVariablesRuleId                      = "Cheburashka.DM0053";
         public const string CheckCallerDefinesCorrectOutputVariablesRuleId             = "Cheburashka.DM0054";
 
+        public const string EnforceSingleColumnPrefixRuleId                            = "Cheburashka.DM0055";
+        public const string EnforceUniqueTableAliasRuleId                              = "Cheburashka.DM0056";
+
 
         public const string AvoidUnusedVariablesRuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -232,6 +235,12 @@ namespace Cheburashka
 
         public const string CheckCallerDefinesCorrectOutputVariablesRuleName                       = "CheckCallerDefinesCorrectOutputVariables_RuleName";
         public const string CheckCallerDefinesCorrectOutputVariablesProblemDescription             = "CheckCallerDefinesCorrectOutputVariables_ProblemDescription";
+
+        public const string EnforceSingleColumnPrefixRuleName                                      = "EnforceSingleColumnPrefix_RuleName";
+        public const string EnforceSingleColumnPrefixProblemDescription                            = "EnforceSingleColumnPrefix_ProblemDescription";
+
+        public const string EnforceUniqueTableAliasRuleName                                        = "EnforceUniqueTableAlias_RuleName";
+        public const string EnforceUniqueTableAliasProblemDescription                              = "EnforceUniqueTableAlias_ProblemDescription";
 
 
         /// <summary>

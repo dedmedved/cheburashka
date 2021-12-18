@@ -26,9 +26,6 @@ namespace Cheburashka
 {
     internal static class Initialisers
     {
-        public static List<string> IgnorableReturnStatusStoredProcedures()
-        {
-            return new();
-        }
+        public static List<string> IgnorableReturnStatusStoredProcedures() => new();
     }
 }

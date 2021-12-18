@@ -17,7 +17,7 @@ CREATE proc dbo.ProcedureWithDoubledBrackets
         SELECT 1 FROM dbo.Table4 WHERE (1=1) AND a = (((b + a )) + a)                   --bad
         SELECT 1 FROM dbo.Table4 WHERE EXISTS ((SELECT 1 FROM dbo.Table4))              --bad
         SELECT 1 FROM dbo.Table4 WHERE ((EXISTS (SELECT 1 FROM dbo.Table4)))            --bad
-        SELECT 1 FROM dbo.Table4 WHERE (1=1 and EXISTS (SELECT 1 FROM dbo.Table43))
+        SELECT 1 FROM dbo.Table4 WHERE (1=1 and EXISTS (SELECT 1 FROM dbo.Table4))
         SELECT 1 FROM dbo.Table4 WHERE (EXISTS (SELECT 1 FROM dbo.Table4))
     END
 go

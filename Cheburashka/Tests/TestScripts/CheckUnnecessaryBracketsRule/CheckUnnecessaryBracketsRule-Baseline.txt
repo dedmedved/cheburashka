@@ -88,6 +88,60 @@ Start line: 22
 Start column: 40
 ========end of problem========
 
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 14
+Start column: 19
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 15
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 17
+Start column: 19
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 18
+Start column: 11
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 20
+Start column: 14
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedAssignments
+Script file: ProcedureWithBracketedAssignments.sql
+Start line: 23
+Start column: 7
+========end of problem========
+
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].
 FullID: Cheburashka.DM0038
 Severity: Warning
