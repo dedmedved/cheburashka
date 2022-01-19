@@ -25,22 +25,15 @@ using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceColumnAliasPrefixVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
-    {
-        public EnforceColumnAliasPrefixVisitor()
-        {
-            Columns = new List<ColumnReferenceExpression>();
-        }
 
-        public List<ColumnReferenceExpression> Columns { get; }
-        public IList<TSqlFragment> SqlFragments() { return Columns.ToList().Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnReferenceExpression  node)
+    internal class AggregateFunctionFilterVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    {
+        public IList<FunctionCall> FunctionCalls { get; } = new List<FunctionCall>();
+
+        public IList<TSqlFragment> SqlFragments() { return FunctionCalls.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(FunctionCall node)
         {
-            if (node.ColumnType == ColumnType.Regular && node.MultiPartIdentifier.Count == 1)
-            {
-                Columns.Add(node);
-            }
-            node.AcceptChildren(this);
+            if (  SqlRuleUtils.IsBuiltInAggregateFunction(node.FunctionName.Value ) ) { FunctionCalls.Add(node); }
         }
     }
 }

@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.Dac.Model;
-
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
@@ -112,6 +112,24 @@ namespace Cheburashka
                 {
                     TSqlObject definingTable = index.GetParent();
                     if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema))
+                    {
+                        indexes.Add(index);
+                    }
+                }
+            }
+            return indexes;
+        }
+        public static List<TSqlObject> GetUniqueIndexes(string owningObjectSchema, string owningObjectTable)
+        {
+            var indexes = new List<TSqlObject>();
+            foreach (var index in DmvSettings.GetIndexes)
+            {
+                if (index.IsLocalObject())
+                {
+                    TSqlObject definingTable = index.GetParent();
+                    if (SqlRuleUtils.ObjectNameMatches(definingTable, owningObjectTable, owningObjectSchema)
+                        && (bool?) index.GetProperty(Index.Unique) == true
+                    )
                     {
                         indexes.Add(index);
                     }
@@ -265,4 +283,10 @@ public static class ExternalNameExtensions
     {
         return (obj.Name.ExternalParts?.Count ?? 0) == 0;
     }
+    public static bool IsLocalObject(this NamedTableReference obj)
+    {
+        return obj.SchemaObject.ServerIdentifier is null && obj.SchemaObject.DatabaseIdentifier is null;
+    }
 }
+
+

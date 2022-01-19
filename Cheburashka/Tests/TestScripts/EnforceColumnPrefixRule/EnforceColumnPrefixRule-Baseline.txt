@@ -70,6 +70,15 @@ Start line: 25
 Start column: 51
 ========end of problem========
 
+Problem description: Column name found without a prefix in [dbo].[EnforceColumnPrefix_InlineFunctionWithAggregateFunctions].
+FullID: Cheburashka.DM0046
+Severity: Warning
+Model element: dbo.EnforceColumnPrefix_InlineFunctionWithAggregateFunctions
+Script file: EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.sql
+Start line: 7
+Start column: 17
+========end of problem========
+
 Problem description: Column name found without a prefix in [dbo].[EnforceColumnPrefix_Proc_MultiTableSubQuery_Inside_FromLess_Select_Expression].
 FullID: Cheburashka.DM0046
 Severity: Warning

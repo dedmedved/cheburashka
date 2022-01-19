@@ -103,9 +103,7 @@ namespace Cheburashka
 
                 DmvSettings.RefreshModelBuiltInCache(model);
                 DmvSettings.RefreshConstraintsAndIndexesCache(model);
-                var allFKs =
-                    DmvSettings
-                        .GetForeignKeys; 
+                var allFKs = DmvSettings.GetForeignKeys; 
 
 
                 // Get a reference to the main temporal table. 

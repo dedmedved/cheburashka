@@ -267,6 +267,12 @@
   <data name="CheckUniqueConstraintHasNoNullColumns_RuleName" xml:space="preserve">
     <value>Unique constraints generally should not have nullable columns.</value>
   </data>
+  <data name="CheckUniqueConstraintImpliedBySubQuery_ProblemDescription" xml:space="preserve">
+    <value>Sub-query implies a unique constraint which is not present, here {0}.</value>
+  </data>
+  <data name="CheckUniqueConstraintImpliedBySubQuery_RuleName" xml:space="preserve">
+    <value>Single table sub-queries with and-ed equality filters imply a unique constraint on the source data.</value>
+  </data>
   <data name="CheckUniqueIndexHasNoNullColumns_ProblemDescription" xml:space="preserve">
     <value>Unique, non-filtered index found with nullable columns in {0}.  You should probably make the columns non-nullable, or make the index filtered to exclude nulls.</value>
   </data>
@@ -397,7 +403,7 @@
     <value>The same table alias is used elsewhere in this statement {0}.</value>
   </data>
   <data name="EnforceUniqueTableAlias_RuleName" xml:space="preserve">
-    <value>Avoid using the same table alias multiple times in a single SQL statement.</value>
+    <value>Avoiding using the same table alias multiple times in a single SQL statement.</value>
   </data>
   <data name="EnforceVariableLengthDataSpecification_ProblemDescription" xml:space="preserve">
     <value>Variable length datatype found with no length specification in {0}.</value>

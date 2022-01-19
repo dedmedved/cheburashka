@@ -1,4 +1,4 @@
-﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
@@ -19,28 +19,36 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
 
+
 namespace Cheburashka
 {
-    internal class EnforceColumnAliasPrefixVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
-    {
-        public EnforceColumnAliasPrefixVisitor()
-        {
-            Columns = new List<ColumnReferenceExpression>();
-        }
 
-        public List<ColumnReferenceExpression> Columns { get; }
-        public IList<TSqlFragment> SqlFragments() { return Columns.ToList().Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnReferenceExpression  node)
+    internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    {
+        private readonly List<ColumnWithSortOrder> _objects;
+
+        public CheckUniqueConstraintHasNoNullColumnsVisitor()
         {
-            if (node.ColumnType == ColumnType.Regular && node.MultiPartIdentifier.Count == 1)
+            _objects = new List<ColumnWithSortOrder>();
+        }
+        public List<ColumnWithSortOrder> Objects => _objects;
+        public IList<TSqlFragment> SqlFragments() { return Objects.Cast<TSqlFragment>().ToList(); }
+
+        public override void ExplicitVisit(UniqueConstraintDefinition node)
+        {
+            // primary key unique constraints by definition have no nullable columns
+            if (!node.IsPrimaryKey)
             {
-                Columns.Add(node);
+                foreach (var v in node.Columns)
+                {
+                    _objects.Add(v);
+                }
             }
-            node.AcceptChildren(this);
         }
     }
 }

@@ -511,6 +511,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sub-query implies a unique constraint which is not present, here {0}..
+        /// </summary>
+        internal static string CheckUniqueConstraintImpliedBySubQuery_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckUniqueConstraintImpliedBySubQuery_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single table sub-queries with and-ed equality filters imply a unique constraint on the source data..
+        /// </summary>
+        internal static string CheckUniqueConstraintImpliedBySubQuery_RuleName {
+            get {
+                return ResourceManager.GetString("CheckUniqueConstraintImpliedBySubQuery_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unique, non-filtered index found with nullable columns in {0}.  You should probably make the columns non-nullable, or make the index filtered to exclude nulls..
         /// </summary>
         internal static string CheckUniqueIndexHasNoNullColumns_ProblemDescription {
@@ -898,7 +916,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avoid using the same table alias multiple times in a single SQL statement..
+        ///   Looks up a localized string similar to Avoiding using the same table alias multiple times in a single SQL statement..
         /// </summary>
         internal static string EnforceUniqueTableAlias_RuleName {
             get {
