@@ -90,6 +90,7 @@ namespace Cheburashka
         public const string EnforceSingleColumnPrefixRuleId                            = "Cheburashka.DM0055";
         public const string EnforceUniqueTableAliasRuleId                              = "Cheburashka.DM0056";
 
+        public const string CheckUniqueConstraintImpliedBySubQueryRuleId               = "Cheburashka.DM0057";
 
         public const string AvoidUnusedVariablesRuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -242,6 +243,11 @@ namespace Cheburashka
         public const string EnforceUniqueTableAliasRuleName                                        = "EnforceUniqueTableAlias_RuleName";
         public const string EnforceUniqueTableAliasProblemDescription                              = "EnforceUniqueTableAlias_ProblemDescription";
 
+        public const string CheckUniqueConstraintImpliedBySubQueryRuleName                         = "CheckUniqueConstraintImpliedBySubQuery_RuleName";
+        public const string CheckUniqueConstraintImpliedBySubQueryProblemDescription               = "CheckUniqueConstraintImpliedBySubQuery_ProblemDescription";
+
+        
+
 
         /// <summary>
         /// The design category (should not be localized)
@@ -281,6 +287,8 @@ namespace Cheburashka
         public const string CategoryUnnecessaryVariables        = "Code.Redundant.UnusedObjects";
 
         public const string CategoryParameters                  = "Code.Parameter.Issues";
+
+        public const string CategoryMissingDerivedConstraints   = "Data.Database.Constraints";
 
 
         public const string CategoryDataTypes                   = "CategoryDataTypes";

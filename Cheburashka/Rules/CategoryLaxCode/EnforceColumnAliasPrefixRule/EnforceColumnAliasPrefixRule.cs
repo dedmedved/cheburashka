@@ -66,9 +66,11 @@ namespace Cheburashka
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
         {
 
+        List<SqlRuleProblem> problems = new();
+
+        try{
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
-            List<SqlRuleProblem> problems = new();
             TSqlObject modelElement = ruleExecutionContext.ModelElement;
 
             string elementName = RuleUtils.GetElementName(ruleExecutionContext);
@@ -77,7 +79,7 @@ namespace Cheburashka
             TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
             DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            var sql = sqlFragment.SQLModel_AsText();
+            //var sql = sqlFragment.SQLModel_AsText();
 
             // visitor to get the ocurrences of unaliased column names
             var allUnaliasedColumns = DmTSqlFragmentVisitor.Visit(sqlFragment, new EnforceColumnAliasPrefixVisitor()).Cast<ColumnReferenceExpression>().ToList();
@@ -148,7 +150,7 @@ namespace Cheburashka
                     )
                 {
                     var functionCalls = DmTSqlFragmentVisitor.Visit(subQuery, new AggregateFunctionVisitor()).Cast<FunctionCall>().ToList();
-                    var fc_sql = functionCalls.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+                    //var fc_sql = functionCalls.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
 
                     //all aggregate functions have one argument except "grouping_id" and we just aren't going to entertain that edge case
                     foreach (var functionCall in functionCalls.Where( f => ! f.FunctionName.Value.SQLModel_StringCompareEqual("grouping_id")))
@@ -158,7 +160,7 @@ namespace Cheburashka
                         // (otherwise its not vaild SQL)
                         var param = functionCall.Parameters[0];
                         var allColumnReferencesInAggregateQuery = DmTSqlFragmentVisitor.Visit(param, new EnforceColumnAliasPrefixVisitor()).Cast<ColumnReferenceExpression>().ToList();
-                        var allColumnReferencesInAggregateQuerysql = allColumnReferencesInAggregateQuery.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+                        //var allColumnReferencesInAggregateQuerysql = allColumnReferencesInAggregateQuery.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
                         if ( ! allColumnReferencesInAggregateQuery.Any(c => c.ColumnType != ColumnType.Regular || c.MultiPartIdentifier.Count > 1)
                             && (allColumnReferencesInAggregateQuery.Select(n=>n.MultiPartIdentifier[n.MultiPartIdentifier.Count-1].Value).Distinct().Count() == 1)
                            )
@@ -168,12 +170,12 @@ namespace Cheburashka
                     }
                 }
             }
-            var ccs = aggregateFunctionCallsInSubQueriesWithOneUnaliasedColumnReference.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+            //var ccs = aggregateFunctionCallsInSubQueriesWithOneUnaliasedColumnReference.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
 
 
-            var ssqSql = subQuerys.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
-            var allSkippedColumnsSql = allSkippedColumns.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
-            var allColumnsSql = allUnaliasedColumns.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+            //var ssqSql = subQuerys.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+            //var allSkippedColumnsSql = allSkippedColumns.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
+            //var allColumnsSql = allUnaliasedColumns.Cast<TSqlFragment>().Select(n => n.SQLModel_AsText()).ToList();
 
             // Now we need to gather all applies.
             var applyTableSources2 = DmTSqlFragmentVisitor.Visit(sqlFragment, new ApplyTableSourceVisitor());
@@ -181,7 +183,7 @@ namespace Cheburashka
             // Create problems for each unaliased column name found 
             foreach (ColumnReferenceExpression unaliasedColumn in allUnaliasedColumns)
             {
-                var columnName = unaliasedColumn.SQLModel_AsText();
+                //var columnName = unaliasedColumn.SQLModel_AsText();
 
                 // Check the name isn't a target column
                 bool ignoreThisColumnHere = allSkippedColumns.Any(sc => sc.SQLModel_Contains(unaliasedColumn));
@@ -205,7 +207,7 @@ namespace Cheburashka
                     // what is it inside.
                     List<TSqlFragment> allContainingSingleSourceStatementsAndCtes = allSingleSourceStatements.FindAll(n => n.SQLModel_Contains(unaliasedColumn));
 
-                    var allContainingSingleSourceStatementsAndCtesSQL = allContainingSingleSourceStatementsAndCtes.Select(n => n.SQLModel_AsText()).ToList();
+                    //var allContainingSingleSourceStatementsAndCtesSQL = allContainingSingleSourceStatementsAndCtes.Select(n => n.SQLModel_AsText()).ToList();
 
                     
                     // which is it most tightly inside ?
@@ -217,7 +219,7 @@ namespace Cheburashka
                         TSqlFragment mostImmediateContainingSqlFragment = allContainingSingleSourceStatementsAndCtes[0];
                         foreach (var location in allContainingSingleSourceStatementsAndCtes)
                         {
-                            var locnSQL = location.SQLModel_AsText();
+                            //var locnSQL = location.SQLModel_AsText();
                             if (mostImmediateContainingSqlFragment.SQLModel_Contains(location))
                             {
                                 mostImmediateContainingSqlFragment = location;
@@ -225,7 +227,7 @@ namespace Cheburashka
                             }
                         }
 
-                        var mostImmediateContainingSqlFragmentSQL = mostImmediateContainingSqlFragment.SQLModel_AsText();
+                        //var mostImmediateContainingSqlFragmentSQL = mostImmediateContainingSqlFragment.SQLModel_AsText();
                         if (!subQuerys.Any(subQuery =>
                                 mostImmediateContainingSqlFragment.SQLModel_Contains(subQuery)
                                 && subQuery.SQLModel_Contains(unaliasedColumn)
@@ -243,6 +245,12 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 RuleUtils.UpdateProblems(!ignoreThisColumnHere, problems, modelElement, elementName, unaliasedColumn, ruleDescriptor);
             }
+            }
+            catch (System.Exception e) {
+   
+            }
+            finally {}
+
             return problems;
         }
     }

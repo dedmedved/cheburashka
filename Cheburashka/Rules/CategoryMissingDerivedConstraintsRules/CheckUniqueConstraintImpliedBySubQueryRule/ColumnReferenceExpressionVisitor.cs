@@ -19,28 +19,20 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
 
 namespace Cheburashka
 {
-    internal class EnforceColumnAliasPrefixVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class ColumnReferenceExpressionVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public EnforceColumnAliasPrefixVisitor()
+        public IList<ColumnReferenceExpression> ColumnReferenceExpressions { get; } = new List<ColumnReferenceExpression>();
+        public IList<TSqlFragment> SqlFragments() { return ColumnReferenceExpressions.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(ColumnReferenceExpression node)
         {
-            Columns = new List<ColumnReferenceExpression>();
-        }
-
-        public List<ColumnReferenceExpression> Columns { get; }
-        public IList<TSqlFragment> SqlFragments() { return Columns.ToList().Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnReferenceExpression  node)
-        {
-            if (node.ColumnType == ColumnType.Regular && node.MultiPartIdentifier.Count == 1)
-            {
-                Columns.Add(node);
-            }
-            node.AcceptChildren(this);
+            ColumnReferenceExpressions.Add(node);
         }
     }
 }

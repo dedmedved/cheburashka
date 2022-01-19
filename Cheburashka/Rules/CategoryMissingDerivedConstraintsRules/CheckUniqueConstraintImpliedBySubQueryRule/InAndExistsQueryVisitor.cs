@@ -20,27 +20,39 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Cheburashka
 {
-    internal class EnforceColumnAliasPrefixVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class InAndExistsQueryVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public EnforceColumnAliasPrefixVisitor()
+        public InAndExistsQueryVisitor()
         {
-            Columns = new List<ColumnReferenceExpression>();
+            InAnyAndExistsQuerys = new List<ScalarSubquery>();
         }
+        public List<ScalarSubquery> InAnyAndExistsQuerys { get; }
+        public IList<TSqlFragment> SqlFragments() { return InAnyAndExistsQuerys.Cast<TSqlFragment>().ToList(); }
 
-        public List<ColumnReferenceExpression> Columns { get; }
-        public IList<TSqlFragment> SqlFragments() { return Columns.ToList().Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnReferenceExpression  node)
+        public override void ExplicitVisit(ExistsPredicate node)
         {
-            if (node.ColumnType == ColumnType.Regular && node.MultiPartIdentifier.Count == 1)
+            InAnyAndExistsQuerys.Add(node.Subquery);
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(InPredicate node)
+        {
+            InAnyAndExistsQuerys.Add(node.Subquery);
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(SubqueryComparisonPredicate node)
+        {
+            // ANY/ALL imply multiple possible return values
+            if (node.SubqueryComparisonPredicateType != SubqueryComparisonPredicateType.None)
             {
-                Columns.Add(node);
+                InAnyAndExistsQuerys.Add(node.Subquery);
             }
             node.AcceptChildren(this);
         }
+        
     }
 }

@@ -1,0 +1,216 @@
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 5
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 10
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 11
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 11
+Start column: 54
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 26
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 27
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 28
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 29
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 43
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 45
+Start column: 46
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 46
+Start column: 47
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 47
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 47
+Start column: 46
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 48
+Start column: 47
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 49
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 49
+Start column: 51
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignments].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignments
+Script file: ProcedureWithSubQueryAssignments.sql
+Start line: 50
+Start column: 46
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 12
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 15
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 15
+Start column: 53
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 16
+Start column: 54
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 17
+Start column: 10
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 17
+Start column: 58
+========end of problem========
+
+Problem description: Sub-query implies a unique constraint which is not present, here [dbo].[ProcedureWithSubQueryAssignmentsWithIndexes].
+FullID: Cheburashka.DM0057
+Severity: Warning
+Model element: dbo.ProcedureWithSubQueryAssignmentsWithIndexes
+Script file: ProcedureWithSubQueryAssignmentsWithIndexes.sql
+Start line: 18
+Start column: 53
+========end of problem========
+

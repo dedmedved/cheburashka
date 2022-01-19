@@ -1,4 +1,4 @@
-Problem description: Column name found without a prefix in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
+Problem description: Multi-element column prefix found in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
 FullID: Cheburashka.DM0055
 Severity: Warning
 Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable
@@ -7,7 +7,7 @@ Start line: 4
 Start column: 9
 ========end of problem========
 
-Problem description: Column name found without a prefix in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
+Problem description: Multi-element column prefix found in [dbo].[EnforceSingleColumnPrefix_Proc_UpdatingTable].
 FullID: Cheburashka.DM0055
 Severity: Warning
 Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable

@@ -1001,6 +1001,27 @@
     <Content Include="TestScripts\CheckUniqueConstraintHasNoNullColumns_MixedCaseRule\CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\CheckUniqueConstraintImpliedBySubQueryRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\ProcedureWithSubQueryAssignmentsWithIndexes.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\ProcedureWithSubQueryAssignments.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\Table2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\View1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUniqueConstraintImpliedBySubQueryRule\indexedTable1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUniqueIndexHasNoNullColumnsRule\CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column_schemaName_omitted.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1175,6 +1196,9 @@
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\DisallowUseOfSpReNameRule\sp_rename.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\DatabaseTriggerWithSp_ReName.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1185,6 +1209,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\ServerTriggerWithSp_ReName.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\sp_rename.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\DisallowUseOfSp_ReName_MixedCaseRule\TableTriggerWithSp_ReName.sql">
@@ -1243,6 +1270,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceColumnPrefixRule\EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceSingleColumnPrefixRule\EnforceSingleColumnPrefixRule-Baseline.txt">
