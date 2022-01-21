@@ -961,6 +961,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plain DROP used in {0}..
+        /// </summary>
+        internal static string PreferDropIfExists_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferDropIfExists_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For SQL Server 2016 onwards use DROP IF EXISTS rather than plain DROP..
+        /// </summary>
+        internal static string PreferDropIfExists_Rulename {
+            get {
+                return ResourceManager.GetString("PreferDropIfExists_Rulename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raiserror found instead of Throw in {0}..
         /// </summary>
         internal static string PreferThrowToRaiserror_ProblemDescription {

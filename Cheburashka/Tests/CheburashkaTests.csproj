@@ -1943,6 +1943,18 @@
     <Content Include="TestScripts\PreferConstantInitialisationRule\ProcWithSingleVariableSetToIntLiteral.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferDropIfExistsRule\PreferDropIfExistsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferDropIfExistsRule\PreferDropIfExistsRule_ProcWithDropIfExists.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferDropIfExistsRule\PreferDropIfExistsRule_ProcWithPlainOldDrops.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferDropIfExistsRule\PreferDropIfExistsRule_SetupObjects.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferThrowToRaiserrorRule\PreferThrowToRaiserrorRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

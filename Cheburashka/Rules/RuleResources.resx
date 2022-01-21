@@ -417,6 +417,12 @@
   <data name="PreferConstantInitialisation_RuleName" xml:space="preserve">
     <value>Variables set to constant values and never reset, are best set on declaration.</value>
   </data>
+  <data name="PreferDropIfExists_ProblemDescription" xml:space="preserve">
+    <value>Plain DROP used in {0}.</value>
+  </data>
+  <data name="PreferDropIfExists_Rulename" xml:space="preserve">
+    <value>For SQL Server 2016 onwards use DROP IF EXISTS rather than plain DROP.</value>
+  </data>
   <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
     <value>Raiserror found instead of Throw in {0}.</value>
   </data>
