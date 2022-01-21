@@ -147,6 +147,8 @@
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\BooleanExpressionEqualityFilterVisitor.cs" />
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\InAndExistsQueryVisitor.cs" />
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\SingleSourceSubQueryEqualityConjunctionVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PlainDropStatementVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferDropIfExistsRule.cs" />
     <Compile Include="Generic Visitors\DMLSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasExcludedContextsVisitor.cs" />

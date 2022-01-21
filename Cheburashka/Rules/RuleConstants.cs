@@ -91,6 +91,8 @@ namespace Cheburashka
         public const string EnforceUniqueTableAliasRuleId                              = "Cheburashka.DM0056";
 
         public const string CheckUniqueConstraintImpliedBySubQueryRuleId               = "Cheburashka.DM0057";
+        public const string PreferDropIfExistsRuleId                                   = "Cheburashka.DM0058";
+
 
         public const string AvoidUnusedVariablesRuleName                               = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
@@ -246,7 +248,8 @@ namespace Cheburashka
         public const string CheckUniqueConstraintImpliedBySubQueryRuleName                         = "CheckUniqueConstraintImpliedBySubQuery_RuleName";
         public const string CheckUniqueConstraintImpliedBySubQueryProblemDescription               = "CheckUniqueConstraintImpliedBySubQuery_ProblemDescription";
 
-        
+        public const string PreferDropIfExistsRuleName                                             = "PreferDropIfExists_Rulename";
+        public const string PreferDropIfExistsProblemDescription                                   = "PreferDropIfExists_ProblemDescription";
 
 
         /// <summary>
