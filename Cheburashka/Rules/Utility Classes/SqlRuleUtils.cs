@@ -378,6 +378,16 @@ namespace Cheburashka
                 ModelSchema.ServerDdlTrigger
         });
 
+        public static ReadOnlyCollection<ModelTypeClass> GetTableDefiningClasses() => Array.AsReadOnly(new[]
+        {
+                ModelSchema.Table,
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
+
         public static ReadOnlyCollection<ModelTypeClass> GetPotentialSchemaLessNameContextClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.Table,

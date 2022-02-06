@@ -1,0 +1,2 @@
+﻿CREATE proc dbo.EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_Invalid as
+select 1 as a

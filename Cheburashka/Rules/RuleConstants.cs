@@ -29,88 +29,97 @@ namespace Cheburashka
         /// </summary>
         public const string ResourceBaseName = "Cheburashka.RuleResources";
 
-        public const string AvoidUninitialisedVariablesRuleId                  = "Cheburashka.DM0001";
-        public const string AvoidUnusedVariablesRuleId                         = "Cheburashka.DM0002";
-        public const string AvoidWriteOnlyVariablesRuleId                      = "Cheburashka.DM0003";
-        public const string AvoidUnusedTableVariableRuleId                     = "Cheburashka.DM0004";
-        public const string AvoidUnusedParameterRuleId                         = "Cheburashka.DM0005";
-        public const string EnforceSingleReturnRuleId                          = "Cheburashka.DM0006";
+        public const string AvoidUninitialisedVariablesRuleId                           = "Cheburashka.DM0001";
+        public const string AvoidUnusedVariablesRuleId                                  = "Cheburashka.DM0002";
+        public const string AvoidWriteOnlyVariablesRuleId                               = "Cheburashka.DM0003";
+        public const string AvoidUnusedTableVariableRuleId                              = "Cheburashka.DM0004";
+        public const string AvoidUnusedParameterRuleId                                  = "Cheburashka.DM0005";
+        public const string EnforceSingleReturnRuleId                                   = "Cheburashka.DM0006";
 
-        public const string EnforcePrimaryKeyRuleId                            = "Cheburashka.DM0011";
-        public const string EnforceClusteredIndexRuleId                        = "Cheburashka.DM0012";
-        public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId   = "Cheburashka.DM0013";
-        public const string EnforceForeignKeyIsIndexedRuleId                   = "Cheburashka.DM0014";
-        //        public const string CheckForDuplicatedColumnsInIndexOrConstraintRuleId  = "Cheburashka.DM0015";
-        public const string EnforceIndexKeyColumnSeparationRuleId              = "Cheburashka.DM0016";
+        public const string EnforcePrimaryKeyRuleId                                     = "Cheburashka.DM0011";
+        public const string EnforceClusteredIndexRuleId                                 = "Cheburashka.DM0012";
+        public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleId            = "Cheburashka.DM0013";
+        public const string EnforceForeignKeyIsIndexedRuleId                            = "Cheburashka.DM0014";
 
-        public const string CheckUniqueIndexHasNoNullColumnsRuleId             = "Cheburashka.DM0017";
-        public const string CheckUniqueConstraintHasNoNullColumnsRuleId        = "Cheburashka.DM0018";
-        public const string CheckUniqueKeysAreNotDuplicatedRuleId              = "Cheburashka.DM0019";
-        //public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleId   = "Cheburashka.DM0020";
+        public const string EnforceIndexKeyColumnSeparationRuleId                       = "Cheburashka.DM0016";
 
-        public const string EnforceNamedConstraintRuleId                       = "Cheburashka.DM0022";
+        public const string CheckUniqueIndexHasNoNullColumnsRuleId                      = "Cheburashka.DM0017";
+        public const string CheckUniqueConstraintHasNoNullColumnsRuleId                 = "Cheburashka.DM0018";
+        public const string CheckUniqueKeysAreNotDuplicatedRuleId                       = "Cheburashka.DM0019";
 
-        public const string AvoidBareReturnRuleId                              = "Cheburashka.DM0023";
-        public const string AvoidDirectUseOfRowcountRuleId                     = "Cheburashka.DM0024";
-        public const string AvoidGotoRuleId                                    = "Cheburashka.DM0025";
-        public const string EnforceCaptureSpReturnStatusRuleId                 = "Cheburashka.DM0026";
-        public const string EnforceReturnRuleId                                = "Cheburashka.DM0027";
-        public const string EnforceTryCatchRuleId                              = "Cheburashka.DM0028";
 
-        public const string AvoidOnePartNamesRuleId                            = "Cheburashka.DM0029";
+        public const string PreferExplicitNullInColumnDefinitionRuleId                  = "Cheburashka.DM0020";
+        public const string AvoidExplicitCollateInDefinitionRuleId                      = "Cheburashka.DM0021";
 
-        public const string AvoidNullLiteralRuleId                                     = "Cheburashka.DM0030";
-        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsRuleId   = "Cheburashka.DM0031";
-        public const string DisallowUseOfSpReNameRuleId                                = "Cheburashka.DM0032";
-        public const string EnforceForeignKeyRuleId                                    = "Cheburashka.DM0033";
-        public const string EnforceForeignKeyIsUniquelyIndexedRuleId                   = "Cheburashka.DM0034";
-        public const string CheckMultipleForeignKeysBetweenTheSameTableRuleId          = "Cheburashka.DM0035";
-        public const string CheckMultipleForeignKeysFromOneTableRuleId                 = "Cheburashka.DM0036";
-        public const string CheckOrphanedBeginEndBlocksRuleId                          = "Cheburashka.DM0037";
-        public const string CheckUnnecessaryBracketsRuleId                             = "Cheburashka.DM0038";
-        public const string EnforceVariableLengthDataSpecificationRuleId               = "Cheburashka.DM0039";
-        public const string CheckDefaultsAreOnNotNullColumnsRuleId                     = "Cheburashka.DM0040";
-        public const string AvoidErrorNumberRuleId                                     = "Cheburashka.DM0041";
-        public const string AvoidUnusedLabelsRuleId                                    = "Cheburashka.DM0042";
-        public const string AvoidNonAnsiJoinsRuleId                                    = "Cheburashka.DM0043";
 
-        public const string CheckOpenTransactionCountCodeRuleId                        = "Cheburashka.DM0045";
+        public const string EnforceNamedConstraintRuleId                                = "Cheburashka.DM0022";
+
+        public const string AvoidBareReturnRuleId                                       = "Cheburashka.DM0023";
+        public const string AvoidDirectUseOfRowcountRuleId                              = "Cheburashka.DM0024";
+        public const string AvoidGotoRuleId                                             = "Cheburashka.DM0025";
+        public const string EnforceCaptureSpReturnStatusRuleId                          = "Cheburashka.DM0026";
+        public const string EnforceReturnRuleId                                         = "Cheburashka.DM0027";
+        public const string EnforceTryCatchRuleId                                       = "Cheburashka.DM0028";
+
+        public const string AvoidOnePartNamesRuleId                                     = "Cheburashka.DM0029";
+
+        public const string AvoidNullLiteralRuleId                                      = "Cheburashka.DM0030";
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsRuleId    = "Cheburashka.DM0031";
+        public const string DisallowUseOfSpReNameRuleId                                 = "Cheburashka.DM0032";
+        public const string EnforceForeignKeyRuleId                                     = "Cheburashka.DM0033";
+        public const string EnforceForeignKeyIsUniquelyIndexedRuleId                    = "Cheburashka.DM0034";
+        public const string CheckMultipleForeignKeysBetweenTheSameTableRuleId           = "Cheburashka.DM0035";
+        public const string CheckMultipleForeignKeysFromOneTableRuleId                  = "Cheburashka.DM0036";
+        public const string CheckOrphanedBeginEndBlocksRuleId                           = "Cheburashka.DM0037";
+        public const string CheckUnnecessaryBracketsRuleId                              = "Cheburashka.DM0038";
+        public const string EnforceVariableLengthDataSpecificationRuleId                = "Cheburashka.DM0039";
+        public const string CheckDefaultsAreOnNotNullColumnsRuleId                      = "Cheburashka.DM0040";
+        public const string AvoidErrorNumberRuleId                                      = "Cheburashka.DM0041";
+        public const string AvoidUnusedLabelsRuleId                                     = "Cheburashka.DM0042";
+        public const string AvoidNonAnsiJoinsRuleId                                     = "Cheburashka.DM0043";
+
+        public const string CheckOpenTransactionCountCodeRuleId                         = "Cheburashka.DM0045";
         
-        public const string EnforceColumnPrefixRuleId                                  = "Cheburashka.DM0046";
-        public const string EnforceTableAliasRuleId                                    = "Cheburashka.DM0047";
-        public const string PreferThrowToRaiserrorRuleId                               = "Cheburashka.DM0048";
-        public const string PreferConstantInitialisationRuleId                         = "Cheburashka.DM0049";
-        public const string AvoidRaiseErrorOutsideTryCatchRuleId                       = "Cheburashka.DM0050";
+        public const string EnforceColumnPrefixRuleId                                   = "Cheburashka.DM0046";
+        public const string EnforceTableAliasRuleId                                     = "Cheburashka.DM0047";
+        public const string PreferThrowToRaiserrorRuleId                                = "Cheburashka.DM0048";
+        public const string PreferConstantInitialisationRuleId                          = "Cheburashka.DM0049";
+        public const string AvoidRaiseErrorOutsideTryCatchRuleId                        = "Cheburashka.DM0050";
 
-        public const string EnforceExplicitInsertColumnListRuleId                      = "Cheburashka.DM0051";
-        public const string CheckForInsteadOfTriggersOnTablesRuleId                    = "Cheburashka.DM0052";
-        public const string CheckForMultipleOutputVariablesRuleId                      = "Cheburashka.DM0053";
-        public const string CheckCallerDefinesCorrectOutputVariablesRuleId             = "Cheburashka.DM0054";
+        public const string EnforceExplicitInsertColumnListRuleId                       = "Cheburashka.DM0051";
+        public const string CheckForInsteadOfTriggersOnTablesRuleId                     = "Cheburashka.DM0052";
+        public const string CheckForMultipleOutputVariablesRuleId                       = "Cheburashka.DM0053";
+        public const string CheckCallerDefinesCorrectOutputVariablesRuleId              = "Cheburashka.DM0054";
 
-        public const string EnforceSingleColumnPrefixRuleId                            = "Cheburashka.DM0055";
-        public const string EnforceUniqueTableAliasRuleId                              = "Cheburashka.DM0056";
+        public const string EnforceSingleColumnPrefixRuleId                             = "Cheburashka.DM0055";
+        public const string EnforceUniqueTableAliasRuleId                               = "Cheburashka.DM0056";
 
-        public const string CheckUniqueConstraintImpliedBySubQueryRuleId               = "Cheburashka.DM0057";
-        public const string PreferDropIfExistsRuleId                                   = "Cheburashka.DM0058";
+        public const string CheckUniqueConstraintImpliedBySubQueryRuleId                = "Cheburashka.DM0057";
+        public const string PreferDropIfExistsRuleId                                    = "Cheburashka.DM0058";
+
+        public const string AvoidSelectIntoRuleId                                       = "Cheburashka.DM0059";
+        public const string EnforceNoCountXactAbortRuleId                               = "Cheburashka.DM0060";
+
+        public const string CheckMissingInsertColumnsRuleId                             = "Cheburashka.DM0061";
 
 
-        public const string AvoidUnusedVariablesRuleName                               = "AvoidUnusedVariables_RuleName";
-        public const string AvoidUnusedVariablesProblemDescription                     = "AvoidUnusedVariables_ProblemDescription";
+        public const string AvoidUnusedVariablesRuleName                                = "AvoidUnusedVariables_RuleName";
+        public const string AvoidUnusedVariablesProblemDescription                      = "AvoidUnusedVariables_ProblemDescription";
 
-        public const string AvoidWriteOnlyVariablesRuleName                            = "AvoidWriteOnlyVariables_RuleName";
-        public const string AvoidWriteOnlyVariablesProblemDescription                  = "AvoidWriteOnlyVariables_ProblemDescription";
+        public const string AvoidWriteOnlyVariablesRuleName                             = "AvoidWriteOnlyVariables_RuleName";
+        public const string AvoidWriteOnlyVariablesProblemDescription                   = "AvoidWriteOnlyVariables_ProblemDescription";
 
-        public const string AvoidUnusedTableVariableRuleName                           = "AvoidUnusedTableVariable_RuleName";
-        public const string AvoidUnusedTableVariableProblemDescription                 = "AvoidUnusedTableVariable_ProblemDescription";
+        public const string AvoidUnusedTableVariableRuleName                            = "AvoidUnusedTableVariable_RuleName";
+        public const string AvoidUnusedTableVariableProblemDescription                  = "AvoidUnusedTableVariable_ProblemDescription";
 
-        public const string AvoidUninitialisedVariablesRuleName                        = "AvoidUninitialisedVariables_RuleName";
-        public const string AvoidUninitialisedVariablesProblemDescription              = "AvoidUninitialisedVariables_ProblemDescription";
+        public const string AvoidUninitialisedVariablesRuleName                         = "AvoidUninitialisedVariables_RuleName";
+        public const string AvoidUninitialisedVariablesProblemDescription               = "AvoidUninitialisedVariables_ProblemDescription";
 
-        public const string AvoidUnusedParameterRuleName                               = "AvoidUnusedParameter_RuleName";
-        public const string AvoidUnusedParameterProblemDescription                     = "AvoidUnusedParameter_ProblemDescription";
+        public const string AvoidUnusedParameterRuleName                                = "AvoidUnusedParameter_RuleName";
+        public const string AvoidUnusedParameterProblemDescription                      = "AvoidUnusedParameter_ProblemDescription";
 
-        public const string EnforceSingleReturnRuleName                                = "EnforceSingleReturn_RuleName";
-        public const string EnforceSingleReturnProblemDescription                      = "EnforceSingleReturn_ProblemDescription";
+        public const string EnforceSingleReturnRuleName                                 = "EnforceSingleReturn_RuleName";
+        public const string EnforceSingleReturnProblemDescription                       = "EnforceSingleReturn_ProblemDescription";
 
  
         public const string EnforcePrimaryKeyRuleName                                      = "EnforcePrimaryKey_RuleName";
@@ -125,8 +134,13 @@ namespace Cheburashka
         public const string EnforceClusteredIndexIsPrimaryOrForeignKeyRuleName             = "EnforceClusteredIndexIsPrimaryOrForeignKey_RuleName";
         public const string EnforceClusteredIndexIsPrimaryOrForeignKeyProblemDescription   = "EnforceClusteredIndexIsPrimaryOrForeignKey_ProblemDescription";
 
-        //public const string CheckForDuplicatedColumnsInIndexOrConstraint_RuleName           = "CheckForDuplicatedColumnsInIndexOrConstraint_RuleName";
-        //public const string CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription = "CheckForDuplicatedColumnsInIndexOrConstraint_ProblemDescription";
+
+        public const string PreferExplicitNullInColumnDefinitionRuleName                   = "PreferExplicitNullInColumnDefinition_RuleName";
+        public const string PreferExplicitNullInColumnDefinitionProblemDescription         = "PreferExplicitNullInColumnDefinition_ProblemDescription";
+        public const string AvoidExplicitCollateInDefinitionRuleName                       = "AvoidExplicitCollateInDefinition_RuleName";
+        public const string AvoidExplicitCollateInDefinitionProblemDescription             = "AvoidExplicitCollateInDefinition_ProblemDescription";
+
+
 
         public const string CheckUniqueKeysAreNotDuplicatedRuleName                        = "CheckUniqueKeysAreNotDuplicated_RuleName";
         public const string CheckUniqueKeysAreNotDuplicatedProblemDescription              = "CheckUniqueKeysAreNotDuplicated_ProblemDescription";
@@ -170,86 +184,95 @@ namespace Cheburashka
         public const string AvoidOnePartNamesRuleName                                      = "AvoidOnePartNames_RuleName";
         public const string AvoidOnePartNamesProblemDescription                            = "AvoidOnePartNames_ProblemDescription";
 
-        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsRuleName             = "DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName";
-        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsProblemDescription   = "DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription";
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsRuleName              = "DisallowAllCodeManipulationOfProjectDefinedObjects_RuleName";
+        public const string DisallowAllCodeManipulationOfProjectDefinedObjectsProblemDescription    = "DisallowAllCodeManipulationOfProjectDefinedObjects_ProblemDescription";
 
-        public const string DisallowUseOfSpReNameRuleName                                         = "DisallowUseOfSp_ReName_RuleName";
-        public const string DisallowUseOfSpReNameProblemDescription                               = "DisallowUseOfSp_ReName_ProblemDescription";
+        public const string DisallowUseOfSpReNameRuleName                                           = "DisallowUseOfSp_ReName_RuleName";
+        public const string DisallowUseOfSpReNameProblemDescription                                 = "DisallowUseOfSp_ReName_ProblemDescription";
 
-        public const string EnforceForeignKeyRuleName                                              = "EnforceForeignKey_RuleName";
-        public const string EnforceForeignKeyProblemDescription                                    = "EnforceForeignKey_ProblemDescription";
+        public const string EnforceForeignKeyRuleName                                               = "EnforceForeignKey_RuleName";
+        public const string EnforceForeignKeyProblemDescription                                     = "EnforceForeignKey_ProblemDescription";
 
-        public const string EnforceForeignKeyIsUniquelyIndexedRuleName                             = "EnforceForeignKeyIsUniquelyIndexed_RuleName";
-        public const string EnforceForeignKeyIsUniquelyIndexedProblemDescription                   = "EnforceForeignKeyIsUniquelyIndexed_ProblemDescription";
+        public const string EnforceForeignKeyIsUniquelyIndexedRuleName                              = "EnforceForeignKeyIsUniquelyIndexed_RuleName";
+        public const string EnforceForeignKeyIsUniquelyIndexedProblemDescription                    = "EnforceForeignKeyIsUniquelyIndexed_ProblemDescription";
 
-        public const string CheckMultipleForeignKeysBetweenTheSameTableRuleName                    = "CheckMultipleForeignKeysBetweenTheSameTable_RuleName";
-        public const string CheckMultipleForeignKeysBetweenTheSameTableProblemDescription          = "CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription";
+        public const string CheckMultipleForeignKeysBetweenTheSameTableRuleName                     = "CheckMultipleForeignKeysBetweenTheSameTable_RuleName";
+        public const string CheckMultipleForeignKeysBetweenTheSameTableProblemDescription           = "CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription";
 
-        public const string CheckMultipleForeignKeysFromOneTableRuleName                           = "CheckMultipleForeignKeysFromOneTable_RuleName";
-        public const string CheckMultipleForeignKeysFromOneTableProblemDescription                 = "CheckMultipleForeignKeysFromOneTable_ProblemDescription";
+        public const string CheckMultipleForeignKeysFromOneTableRuleName                            = "CheckMultipleForeignKeysFromOneTable_RuleName";
+        public const string CheckMultipleForeignKeysFromOneTableProblemDescription                  = "CheckMultipleForeignKeysFromOneTable_ProblemDescription";
 
-        public const string CheckOrphanedBeginEndBlocksRuleName                                    = "CheckOrphanedBeginEndBlocks_RuleName";
-        public const string CheckOrphanedBeginEndBlocksProblemDescription                          = "CheckOrphanedBeginEndBlocks_ProblemDescription";
+        public const string CheckOrphanedBeginEndBlocksRuleName                                     = "CheckOrphanedBeginEndBlocks_RuleName";
+        public const string CheckOrphanedBeginEndBlocksProblemDescription                           = "CheckOrphanedBeginEndBlocks_ProblemDescription";
 
-        public const string CheckUnnecessaryBracketsRuleName                                       = "CheckUnnecessaryBrackets_RuleName";
-        public const string CheckUnnecessaryBracketsProblemDescription                             = "CheckUnnecessaryBrackets_ProblemDescription";
+        public const string CheckUnnecessaryBracketsRuleName                                        = "CheckUnnecessaryBrackets_RuleName";
+        public const string CheckUnnecessaryBracketsProblemDescription                              = "CheckUnnecessaryBrackets_ProblemDescription";
 
-        public const string EnforceVariableLengthDataSpecificationRuleName                         = "EnforceVariableLengthDataSpecification_RuleName";
-        public const string EnforceVariableLengthDataSpecificationProblemDescription               = "EnforceVariableLengthDataSpecification_ProblemDescription";
+        public const string EnforceVariableLengthDataSpecificationRuleName                          = "EnforceVariableLengthDataSpecification_RuleName";
+        public const string EnforceVariableLengthDataSpecificationProblemDescription                = "EnforceVariableLengthDataSpecification_ProblemDescription";
 
-        public const string CheckDefaultsAreOnNotNullColumnsRuleName                               = "CheckDefaultsAreOnNotNullColumns_RuleName";
-        public const string CheckDefaultsAreOnNotNullColumnsProblemDescription                     = "CheckDefaultsAreOnNotNullColumns_ProblemDescription";
+        public const string CheckDefaultsAreOnNotNullColumnsRuleName                                = "CheckDefaultsAreOnNotNullColumns_RuleName";
+        public const string CheckDefaultsAreOnNotNullColumnsProblemDescription                      = "CheckDefaultsAreOnNotNullColumns_ProblemDescription";
 
-        public const string AvoidErrorNumberRuleName                                               = "AvoidErrorNumber_RuleName";
-        public const string AvoidErrorNumberProblemDescription                                     = "AvoidErrorNumber_ProblemDescription";
+        public const string AvoidErrorNumberRuleName                                                = "AvoidErrorNumber_RuleName";
+        public const string AvoidErrorNumberProblemDescription                                      = "AvoidErrorNumber_ProblemDescription";
 
-        public const string AvoidUnusedLabelsRuleName                                              = "AvoidUnusedLabels_RuleName";
-        public const string AvoidUnusedLabelsProblemDescription                                    = "AvoidUnusedLabels_ProblemDescription";
+        public const string AvoidUnusedLabelsRuleName                                               = "AvoidUnusedLabels_RuleName";
+        public const string AvoidUnusedLabelsProblemDescription                                     = "AvoidUnusedLabels_ProblemDescription";
 
-        public const string AvoidNonAnsiJoinsRuleName                                              = "AvoidNonANSIJoins_RuleName";
-        public const string AvoidNonAnsiJoinsProblemDescription                                    = "AvoidNonANSIJoins_ProblemDescription";
+        public const string AvoidNonAnsiJoinsRuleName                                               = "AvoidNonANSIJoins_RuleName";
+        public const string AvoidNonAnsiJoinsProblemDescription                                     = "AvoidNonANSIJoins_ProblemDescription";
 
-        public const string CheckOpenTransactionCountCodeRuleName                                  = "CheckOpenTransactionCountCode_RuleName";
-        public const string CheckOpenTransactionCountCodeProblemDescription                        = "CheckOpenTransactionCountCode_ProblemDescription";
+        public const string CheckOpenTransactionCountCodeRuleName                                   = "CheckOpenTransactionCountCode_RuleName";
+        public const string CheckOpenTransactionCountCodeProblemDescription                         = "CheckOpenTransactionCountCode_ProblemDescription";
 
-        public const string EnforceColumnPrefixRuleName                                            = "EnforceColumnPrefix_RuleName";
-        public const string EnforceColumnPrefixProblemDescription                                  = "EnforceColumnPrefix_ProblemDescription";
+        public const string EnforceColumnPrefixRuleName                                             = "EnforceColumnPrefix_RuleName";
+        public const string EnforceColumnPrefixProblemDescription                                   = "EnforceColumnPrefix_ProblemDescription";
 
-        public const string EnforceTableAliasRuleName                                              = "EnforceTableAlias_RuleName";
-        public const string EnforceTableAliasProblemDescription                                    = "EnforceTableAlias_ProblemDescription";
+        public const string EnforceTableAliasRuleName                                               = "EnforceTableAlias_RuleName";
+        public const string EnforceTableAliasProblemDescription                                     = "EnforceTableAlias_ProblemDescription";
 
-        public const string PreferThrowToRaiserrorRuleName                                         = "PreferThrowToRaiserror_RuleName";
-        public const string PreferThrowToRaiserrorProblemDescription                               = "PreferThrowToRaiserror_ProblemDescription";
+        public const string PreferThrowToRaiserrorRuleName                                          = "PreferThrowToRaiserror_RuleName";
+        public const string PreferThrowToRaiserrorProblemDescription                                = "PreferThrowToRaiserror_ProblemDescription";
 
-        public const string PreferConstantInitialisationRuleName                                   = "PreferConstantInitialisation_RuleName";
-        public const string PreferConstantInitialisationProblemDescription                         = "PreferConstantInitialisation_ProblemDescription";
+        public const string PreferConstantInitialisationRuleName                                    = "PreferConstantInitialisation_RuleName";
+        public const string PreferConstantInitialisationProblemDescription                          = "PreferConstantInitialisation_ProblemDescription";
 
-        public const string AvoidRaiseErrorOutsideTryCatchRuleName                                 = "AvoidRaiseErrorOutsideTryCatch_RuleName";
-        public const string AvoidRaiseErrorOutsideTryCatchProblemDescription                       = "AvoidRaiseErrorOutsideTryCatch_ProblemDescription";
+        public const string AvoidRaiseErrorOutsideTryCatchRuleName                                  = "AvoidRaiseErrorOutsideTryCatch_RuleName";
+        public const string AvoidRaiseErrorOutsideTryCatchProblemDescription                        = "AvoidRaiseErrorOutsideTryCatch_ProblemDescription";
 
-        public const string EnforceExplicitInsertColumnListRuleName                                = "EnforceExplicitInsertColumnList_RuleName";
-        public const string EnforceExplicitInsertColumnListProblemDescription                      = "EnforceExplicitInsertColumnList_ProblemDescription";
+        public const string EnforceExplicitInsertColumnListRuleName                                 = "EnforceExplicitInsertColumnList_RuleName";
+        public const string EnforceExplicitInsertColumnListProblemDescription                       = "EnforceExplicitInsertColumnList_ProblemDescription";
 
-        public const string CheckForInsteadOfTriggersOnTablesRuleName                              = "CheckForInsteadOfTriggersOnTables_RuleName";
-        public const string CheckForInsteadOfTriggersOnTablesProblemDescription                    = "CheckForInsteadOfTriggersOnTables_ProblemDescription";
+        public const string CheckForInsteadOfTriggersOnTablesRuleName                               = "CheckForInsteadOfTriggersOnTables_RuleName";
+        public const string CheckForInsteadOfTriggersOnTablesProblemDescription                     = "CheckForInsteadOfTriggersOnTables_ProblemDescription";
 
-        public const string CheckForMultipleOutputVariablesRuleName                                = "CheckForMultipleOutputVariables_RuleName";
-        public const string CheckForMultipleOutputVariablesProblemDescription                      = "CheckForMultipleOutputVariables_ProblemDescription";
+        public const string CheckForMultipleOutputVariablesRuleName                                 = "CheckForMultipleOutputVariables_RuleName";
+        public const string CheckForMultipleOutputVariablesProblemDescription                       = "CheckForMultipleOutputVariables_ProblemDescription";
 
-        public const string CheckCallerDefinesCorrectOutputVariablesRuleName                       = "CheckCallerDefinesCorrectOutputVariables_RuleName";
-        public const string CheckCallerDefinesCorrectOutputVariablesProblemDescription             = "CheckCallerDefinesCorrectOutputVariables_ProblemDescription";
+        public const string CheckCallerDefinesCorrectOutputVariablesRuleName                        = "CheckCallerDefinesCorrectOutputVariables_RuleName";
+        public const string CheckCallerDefinesCorrectOutputVariablesProblemDescription              = "CheckCallerDefinesCorrectOutputVariables_ProblemDescription";
 
-        public const string EnforceSingleColumnPrefixRuleName                                      = "EnforceSingleColumnPrefix_RuleName";
-        public const string EnforceSingleColumnPrefixProblemDescription                            = "EnforceSingleColumnPrefix_ProblemDescription";
+        public const string EnforceSingleColumnPrefixRuleName                                       = "EnforceSingleColumnPrefix_RuleName";
+        public const string EnforceSingleColumnPrefixProblemDescription                             = "EnforceSingleColumnPrefix_ProblemDescription";
 
-        public const string EnforceUniqueTableAliasRuleName                                        = "EnforceUniqueTableAlias_RuleName";
-        public const string EnforceUniqueTableAliasProblemDescription                              = "EnforceUniqueTableAlias_ProblemDescription";
+        public const string EnforceUniqueTableAliasRuleName                                         = "EnforceUniqueTableAlias_RuleName";
+        public const string EnforceUniqueTableAliasProblemDescription                               = "EnforceUniqueTableAlias_ProblemDescription";
 
-        public const string CheckUniqueConstraintImpliedBySubQueryRuleName                         = "CheckUniqueConstraintImpliedBySubQuery_RuleName";
-        public const string CheckUniqueConstraintImpliedBySubQueryProblemDescription               = "CheckUniqueConstraintImpliedBySubQuery_ProblemDescription";
+        public const string CheckUniqueConstraintImpliedBySubQueryRuleName                          = "CheckUniqueConstraintImpliedBySubQuery_RuleName";
+        public const string CheckUniqueConstraintImpliedBySubQueryProblemDescription                = "CheckUniqueConstraintImpliedBySubQuery_ProblemDescription";
 
-        public const string PreferDropIfExistsRuleName                                             = "PreferDropIfExists_Rulename";
-        public const string PreferDropIfExistsProblemDescription                                   = "PreferDropIfExists_ProblemDescription";
+        public const string PreferDropIfExistsRuleName                                              = "PreferDropIfExists_Rulename";
+        public const string PreferDropIfExistsProblemDescription                                    = "PreferDropIfExists_ProblemDescription";
+
+        public const string AvoidSelectIntoRuleName                                                 = "AvoidSelectInto_RuleName";
+        public const string AvoidSelectIntoProblemDescription                                       = "AvoidSelectInto_ProblemDescription";
+
+        public const string EnforceNoCountXactAbortRuleName                                         = "EnforceNoCountXactAbort_RuleName";
+        public const string EnforceNoCountXactAbortProblemDescription                               = "EnforceNoCountXactAbort_ProblemDescription";
+
+        public const string CheckMissingInsertColumnsRuleName                                       = "CheckMissingInsertColumns_RuleName";
+        public const string CheckMissingInsertColumnsProblemDescription                             = "CheckMissingInsertColumns_ProblemDescription";
 
 
         /// <summary>
@@ -265,15 +288,15 @@ namespace Cheburashka
         public const string CategoryPerformance                 = "CategoryPerformance";
         public const string CategoryNaming                      = "CategoryNaming";
 
-        public const string CategoryBasics                      = "CategoryBasics";
-        public const string CategoryModel                       = "CategoryModel";
-        public const string CategoryBatch                       = "CategoryBatch";
-        public const string CategoryOnline                      = "CategoryOnline";
-        public const string CategoryDatabaseSettings            = "CategoryDatabaseSettings";
-        public const string CategoryEfficiency                  = "CategoryEfficiency";
-        public const string CategoryStyle                       = "CategoryStyle";
-        public const string CategoryTemporaryTables             = "CategoryTemporaryTables";
-        public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";
+        //public const string CategoryBasics                      = "CategoryBasics";
+        //public const string CategoryModel                       = "CategoryModel";
+        //public const string CategoryBatch                       = "CategoryBatch";
+        //public const string CategoryOnline                      = "CategoryOnline";
+        //public const string CategoryDatabaseSettings            = "CategoryDatabaseSettings";
+        //public const string CategoryEfficiency                  = "CategoryEfficiency";
+        //public const string CategoryStyle                       = "CategoryStyle";
+        //public const string CategoryTemporaryTables             = "CategoryTemporaryTables";
+        //public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";
 
         public const string CategoryDatabaseStructures          = "Data.Database.PhysicalStructure";
         public const string CategoryRelationalDesignKeys        = "Data.Database.Keys";
@@ -294,9 +317,9 @@ namespace Cheburashka
         public const string CategoryMissingDerivedConstraints   = "Data.Database.Constraints";
 
 
-        public const string CategoryDataTypes                   = "CategoryDataTypes";
-        public const string CategoryDates                       = "CategoryDates";
-        public const string CategoryRegionalisation             = "CategoryRegionalisation";
+        //public const string CategoryDataTypes                   = "CategoryDataTypes";
+        //public const string CategoryDates                       = "CategoryDates";
+        //public const string CategoryRegionalisation             = "CategoryRegionalisation";
 
     }
 }

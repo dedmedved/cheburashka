@@ -20,17 +20,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using System.Collections.Generic;
 
 namespace Cheburashka
 {
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there default value on a nullable column.
+    /// whenever there is a schema object referred to without the schema name.
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -38,13 +40,13 @@ namespace Cheburashka
     /// </para>
     /// </summary>
 
-    [LocalizedExportCodeAnalysisRule(CheckDefaultsAreOnNotNullColumnsRule.RuleId,
-        RuleConstants.ResourceBaseName,                                             // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckDefaultsAreOnNotNullColumnsRuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.CheckDefaultsAreOnNotNullColumnsProblemDescription,          // ID used to look up the description inside the resources file
-        Category = RuleConstants.CategoryRelationalDesignNull,                      // Rule category (e.g. "Design", "Naming")
-        RuleScope = SqlRuleScope.Element)]                                          // This rule targets specific elements rather than the whole model
-    public sealed class CheckDefaultsAreOnNotNullColumnsRule: SqlCodeAnalysisRule
+    [LocalizedExportCodeAnalysisRule(PreferExplicitNullInColumnDefinitionRule.RuleId,
+        RuleConstants.ResourceBaseName,                                         // Name of the resource file to look up display name and description in
+        RuleConstants.PreferExplicitNullInColumnDefinitionRuleName,             // ID used to look up the display name inside the resources file
+        RuleConstants.PreferExplicitNullInColumnDefinitionProblemDescription,   // ID used to look up the description inside the resources file
+        Category = RuleConstants.CategoryNonStrictCodingStyle,                  // Rule category (e.g. "Design", "Naming")
+        RuleScope = SqlRuleScope.Element)]                                      // This rule targets specific elements rather than the whole model
+    public sealed class PreferExplicitNullInColumnDefinitionRule : SqlCodeAnalysisRule
     {
         /// <summary>
         /// <para>
@@ -53,12 +55,12 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0040: Default values make more sense on non-nullable columns."
+        /// shown as "DM0020: Always specify the nullability of columns when defining tables."
         /// </para>
         /// </summary>
-        public const string RuleId = RuleConstants.CheckDefaultsAreOnNotNullColumnsRuleId;
+        public const string RuleId = RuleConstants.PreferExplicitNullInColumnDefinitionRuleId;
 
-        public CheckDefaultsAreOnNotNullColumnsRule()
+        public PreferExplicitNullInColumnDefinitionRule()
         {
             SupportedElementTypes = SqlRuleUtils.GetTableDefiningClasses();
         }
@@ -76,37 +78,24 @@ namespace Cheburashka
             // Get Model collation 
             SqlComparer.Comparer = ruleExecutionContext.SchemaModel.CollationComparer;
             List<SqlRuleProblem> problems = new();
-
             try
             {
-                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
-                // If we can't find the file then assume we're in a composite model
-                // and the elements are defined there and
-                // should be analysed there
-                if (modelElement.GetSourceInformation() is null)
-                {
-                    return problems;
-                }
-
+                TSqlObject modelElement = ruleExecutionContext.ModelElement;
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
-                if (SqlRuleUtils.IsNonStandardTableCreateStatement(sqlFragment))
-                {
-                    return problems;
-                }
-
-                DmvSettings.RefreshModelBuiltInCache(model);
-                DmvSettings.RefreshConstraintsAndIndexesCache(model);
-                
-                var issues = DmTSqlFragmentVisitor.Visit(sqlFragment, new CheckDefaultsAreOnNotNullColumnsVisitor());
-
                 // The rule execution context has all the objects we'll need, including the fragment representing the object,
                 // and a descriptor that lets us access rule metadata
+                TSqlFragment sqlFragment = ruleExecutionContext.ScriptFragment;
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-                RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
+                DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
+                // visitor to get the occurrences of single part table names
+                var selectIntoFragements = DmTSqlFragmentVisitor.Visit(sqlFragment, new ColumnWithoutNullDefinitionVisitor());
+                RuleUtils.UpdateProblems(problems, modelElement, elementName, selectIntoFragements, ruleDescriptor);
             }
-            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            catch
+            {
+            } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
-        }
+            }
     }
 }

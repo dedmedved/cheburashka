@@ -1,0 +1,54 @@
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.sql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.sql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.sql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingMergeInsertColumns_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingMergeInsertColumns_NULL
+Script file: ProcedureWithMissingMergeInsertColumns_NULL.sql
+Start line: 3
+Start column: 1
+========end of problem========
+

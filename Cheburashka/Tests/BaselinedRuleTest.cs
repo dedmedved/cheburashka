@@ -109,7 +109,7 @@ namespace Cheburashka.Tests
         {
             // Load all files ending in ".sql". Note that due to strange Win32 behavior we need to double check the
             // file name actually ends in ".sql" since suffixes like ".sqlOther" would also be included in the results
-            DirectoryInfo di = new DirectoryInfo(ScriptsFolder);
+            var di = new DirectoryInfo(ScriptsFolder);
             var scriptFilepaths = from file in di.GetFiles("*" + SqlExt)
                                   where SqlExt.Equals(file.Extension, StringComparison.OrdinalIgnoreCase)
                                   select file.FullName;
@@ -164,7 +164,7 @@ namespace Cheburashka.Tests
 
         private string ListScriptFilenames()
         {
-            StringBuilder loadedTestScriptFilesStringBuilder = new StringBuilder();
+            var loadedTestScriptFilesStringBuilder = new StringBuilder();
             foreach (var scriptInfo in TestScripts)
             {
                 string scriptFilepath = scriptInfo.Item2;

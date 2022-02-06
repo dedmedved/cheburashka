@@ -1,0 +1,36 @@
+Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 6
+Start column: 9
+========end of problem========
+
+Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 12
+Start column: 9
+========end of problem========
+
+Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 18
+Start column: 9
+========end of problem========
+
+Problem description: Explicit collation given in [dbo].[TableA].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.TableA
+Script file: TableA.sql
+Start line: 3
+Start column: 9
+========end of problem========
+

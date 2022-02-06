@@ -19,32 +19,28 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
-
-    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class OutputIntoClauseVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public CheckDefaultsAreOnNotNullColumnsVisitor()
+        public OutputIntoClauseVisitor()
         {
-            ColumnDefinitions = new List<ColumnDefinition>();
+            OutputIntoClauses = new List<OutputIntoClause>();
         }
-
-        public IList<ColumnDefinition> ColumnDefinitions { get; }
-        public IList<TSqlFragment> SqlFragments() { return ColumnDefinitions.Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnDefinition node)
+        public IList<OutputIntoClause> OutputIntoClauses { get; }
+        public IList<TSqlFragment> SqlFragments() { return OutputIntoClauses.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(OutputIntoClause node)
         {
-            var nullables = node.Constraints.Where(n => n is NullableConstraintDefinition).ToList();
-            //If there is no Nullable constraint defined assume column is Nullable, else check its actual value for Nullability
-            //And we have a default constraint then flag as a problem
-            if ( node.DefaultConstraint is not null && (nullables.Count == 0 || (nullables.Count > 0 && nullables[0] is NullableConstraintDefinition {Nullable: true})))
-            {
-                ColumnDefinitions.Add(node);
-            }
+            if (node.IntoTableColumns.Count > 0)
+                OutputIntoClauses.Add(node);
+            node.AcceptChildren(this);
         }
     }
 }
+
+

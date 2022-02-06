@@ -1,0 +1,36 @@
+Problem description: Column definition without NULL/NOT NULL found in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Column definition without NULL/NOT NULL found in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 13
+Start column: 9
+========end of problem========
+
+Problem description: Column definition without NULL/NOT NULL found in [dbo].[ProcWithTableDefinitions].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.ProcWithTableDefinitions
+Script file: ProcWithTableDefinitions.sql
+Start line: 19
+Start column: 9
+========end of problem========
+
+Problem description: Column definition without NULL/NOT NULL found in [dbo].[TableA].
+FullID: Cheburashka.DM0020
+Severity: Warning
+Model element: dbo.TableA
+Script file: TableA.sql
+Start line: 4
+Start column: 9
+========end of problem========
+

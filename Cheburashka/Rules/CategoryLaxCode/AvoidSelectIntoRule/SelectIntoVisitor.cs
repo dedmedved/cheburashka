@@ -19,32 +19,25 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
-
-    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class SelectIntoVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public CheckDefaultsAreOnNotNullColumnsVisitor()
+        public SelectIntoVisitor()
         {
-            ColumnDefinitions = new List<ColumnDefinition>();
+            IntoNames = new List<SchemaObjectName>();
         }
-
-        public IList<ColumnDefinition> ColumnDefinitions { get; }
-        public IList<TSqlFragment> SqlFragments() { return ColumnDefinitions.Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnDefinition node)
+        public IList<SchemaObjectName> IntoNames { get; }
+        public IList<TSqlFragment> SqlFragments() { return IntoNames.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(SelectStatement node)
         {
-            var nullables = node.Constraints.Where(n => n is NullableConstraintDefinition).ToList();
-            //If there is no Nullable constraint defined assume column is Nullable, else check its actual value for Nullability
-            //And we have a default constraint then flag as a problem
-            if ( node.DefaultConstraint is not null && (nullables.Count == 0 || (nullables.Count > 0 && nullables[0] is NullableConstraintDefinition {Nullable: true})))
-            {
-                ColumnDefinitions.Add(node);
-            }
+            if ( node.Into is not null )
+                IntoNames.Add(node.Into);
         }
     }
 }
