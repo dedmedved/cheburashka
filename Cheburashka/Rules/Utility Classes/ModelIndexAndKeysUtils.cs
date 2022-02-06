@@ -276,17 +276,19 @@ namespace Cheburashka
         //}
 
     }
-}
-public static class ExternalNameExtensions
-{
-    public static bool IsLocalObject(this TSqlObject obj)
+    public static class ExternalNameExtensions
     {
-        return (obj.Name.ExternalParts?.Count ?? 0) == 0;
-    }
-    public static bool IsLocalObject(this NamedTableReference obj)
-    {
-        return obj.SchemaObject.ServerIdentifier is null && obj.SchemaObject.DatabaseIdentifier is null;
+        public static bool IsLocalObject(this TSqlObject obj)
+        {
+            return (obj.Name.ExternalParts?.Count ?? 0) == 0;
+        }
+        public static bool IsLocalObject(this NamedTableReference obj)
+        {
+            return obj.SchemaObject.ServerIdentifier is null && obj.SchemaObject.DatabaseIdentifier is null;
+        }
+
     }
 }
+
 
 

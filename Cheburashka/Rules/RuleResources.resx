@@ -135,6 +135,12 @@
   <data name="AvoidErrorNumber_RuleName" xml:space="preserve">
     <value>Avoid using @error.  Use Try/Catch.</value>
   </data>
+  <data name="AvoidExplicitCollateInDefinition_ProblemDescription" xml:space="preserve">
+    <value>Explicit collation given in {0}.</value>
+  </data>
+  <data name="AvoidExplicitCollateInDefinition_RuleName" xml:space="preserve">
+    <value>Avoid specifying collations unless absolutely necessary.  Rely on the collation defined in the project or target database.</value>
+  </data>
   <data name="AvoidGoto_ProblemDescription" xml:space="preserve">
     <value>GOTO statement was found in {0}.</value>
   </data>
@@ -164,6 +170,12 @@
   </data>
   <data name="AvoidRaiseErrorOutsideTryCatch_RuleName" xml:space="preserve">
     <value>Raiserror with level &gt;10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller.</value>
+  </data>
+  <data name="AvoidSelectInto_ProblemDescription" xml:space="preserve">
+    <value>SELECT .. INTO found in {0}.</value>
+  </data>
+  <data name="AvoidSelectInto_RuleName" xml:space="preserve">
+    <value>Avoid using SELECT .. INTO ...  (Advantages vs disadvantages vary between SQL Server versions, and use-cases.)</value>
   </data>
   <data name="AvoidUninitialisedVariables_ProblemDescription" xml:space="preserve">
     <value>Uninitialised variable found in {0}.</value>
@@ -236,6 +248,12 @@
   </data>
   <data name="CheckForMultipleOutputVariables_RuleName" xml:space="preserve">
     <value>Don't use the same variable to receive multiple output or return values in a stored procedure call.</value>
+  </data>
+  <data name="CheckMissingInsertColumns_ProblemDescription" xml:space="preserve">
+    <value>Mandatory column missing from insert list in {0}.</value>
+  </data>
+  <data name="CheckMissingInsertColumns_RuleName" xml:space="preserve">
+    <value>Columns without a default or other system supplied value need a value specifying in Inserts.</value>
   </data>
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription" xml:space="preserve">
     <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
@@ -363,6 +381,12 @@
   <data name="EnforceNamedConstraint_RuleName" xml:space="preserve">
     <value>Avoid unnamed constraints.  These are assigned meaningless system-generated names at time of deployment.</value>
   </data>
+  <data name="EnforceNoCountXactAbort_ProblemDescription" xml:space="preserve">
+    <value>Set NoCount On/Xact_Abort On not found at start of code in {0}.</value>
+  </data>
+  <data name="EnforceNoCountXactAbort_RuleName" xml:space="preserve">
+    <value>NoCount On and Xact_Abort On should be set at the start of Procedures and Triggers.</value>
+  </data>
   <data name="EnforcePrimaryKey_ProblemDescription" xml:space="preserve">
     <value>Table with no Primary Key was found in {0}.</value>
   </data>
@@ -422,6 +446,12 @@
   </data>
   <data name="PreferDropIfExists_Rulename" xml:space="preserve">
     <value>For SQL Server 2016 onwards use DROP IF EXISTS rather than plain DROP.</value>
+  </data>
+  <data name="PreferExplicitNullInColumnDefinition_ProblemDescription" xml:space="preserve">
+    <value>Column definition without NULL/NOT NULL found in {0}.</value>
+  </data>
+  <data name="PreferExplicitNullInColumnDefinition_RuleName" xml:space="preserve">
+    <value>Always specify the nullability of columns when defining tables.</value>
   </data>
   <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
     <value>Raiserror found instead of Throw in {0}.</value>

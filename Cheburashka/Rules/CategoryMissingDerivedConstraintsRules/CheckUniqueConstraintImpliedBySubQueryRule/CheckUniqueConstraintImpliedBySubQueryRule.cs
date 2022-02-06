@@ -21,13 +21,10 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using ColumnType = Microsoft.SqlServer.TransactSql.ScriptDom.ColumnType;
-
 
 namespace Cheburashka
 {
@@ -63,13 +60,7 @@ namespace Cheburashka
             SupportedElementTypes = SqlRuleUtils.GetCodeAndViewContainingClasses();
         }
 
-        struct ColumnDetails {
-            public string Name;
-            public ObjectIdentifier DataType;
-            public bool Nullable;
-            //public int Length;
-            //public int Precision;
-        }
+
 
         private static bool ProcessCondition(int NestedNotCount, SchemaObjectName tableName, Identifier tableAlias, BooleanExpression condition,List<ColumnDetails> allColumns, ref List<ColumnDetails> tableColumns)
         {
@@ -415,7 +406,7 @@ namespace Cheburashka
                         var columns = tbl.GetReferenced().Where(x => x.ObjectType == ModelSchema.Column).ToList();
                         //var columnTypes = columns.Select( n => n.GetReferenced(Column.DataType).FirstOrDefault().Name).ToList();
                         //var columnNulls = columns.Select( n => n.GetProperty(Column.Nullable)).ToList();
-                        var columnSpecifications = columns.Select( n => new ColumnDetails { Name = n.Name.Parts.Last(), DataType = n.GetReferenced(Column.DataType).FirstOrDefault().Name, Nullable = (bool)n.GetProperty(Column.Nullable)}).ToList();
+                        var columnSpecifications = columns.Select( n => new ColumnDetails { Name = n.Name.Parts.Last(), DataType = n.GetReferenced(Column.DataType).FirstOrDefault()?.Name, Nullable = (bool)n.GetProperty(Column.Nullable)}).ToList();
 
                         var condition = query.WhereClause.SearchCondition;
 

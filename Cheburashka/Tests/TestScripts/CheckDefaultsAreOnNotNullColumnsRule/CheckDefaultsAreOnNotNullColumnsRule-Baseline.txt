@@ -7,3 +7,66 @@ Start line: 3
 Start column: 9
 ========end of problem========
 
+Problem description: Default found on nullable column in [dbo].[CheckDefaultsAreOnNotNullColumnsRule_Table].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.CheckDefaultsAreOnNotNullColumnsRule_Table
+Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.sql
+Start line: 6
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 5
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 8
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 12
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 15
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 19
+Start column: 9
+========end of problem========
+
+Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDefaultsAreOnNotNullColumnsRule].
+FullID: Cheburashka.DM0040
+Severity: Warning
+Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Start line: 22
+Start column: 9
+========end of problem========
+

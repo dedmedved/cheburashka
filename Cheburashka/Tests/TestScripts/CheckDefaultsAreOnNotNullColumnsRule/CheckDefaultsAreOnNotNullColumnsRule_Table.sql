@@ -3,5 +3,6 @@
 ,       b int     NULL DEFAULT (0)
 ,       c int NOT null DEFAULT (0)
 ,       d int     null
+,       e int          DEFAULT (0)
 ) ;
 GO

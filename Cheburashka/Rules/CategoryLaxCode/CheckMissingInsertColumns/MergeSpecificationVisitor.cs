@@ -19,32 +19,28 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
-
-    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class MergeSpecificationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public CheckDefaultsAreOnNotNullColumnsVisitor()
+        public MergeSpecificationVisitor()
         {
-            ColumnDefinitions = new List<ColumnDefinition>();
+            MergeSpecifications = new List<MergeSpecification>();
         }
-
-        public IList<ColumnDefinition> ColumnDefinitions { get; }
-        public IList<TSqlFragment> SqlFragments() { return ColumnDefinitions.Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnDefinition node)
+        public IList<MergeSpecification> MergeSpecifications { get; }
+        public IList<TSqlFragment> SqlFragments() { return MergeSpecifications.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(MergeSpecification node)
         {
-            var nullables = node.Constraints.Where(n => n is NullableConstraintDefinition).ToList();
-            //If there is no Nullable constraint defined assume column is Nullable, else check its actual value for Nullability
-            //And we have a default constraint then flag as a problem
-            if ( node.DefaultConstraint is not null && (nullables.Count == 0 || (nullables.Count > 0 && nullables[0] is NullableConstraintDefinition {Nullable: true})))
-            {
-                ColumnDefinitions.Add(node);
-            }
+            if (node.ActionClauses.Any( n => n.Action is InsertMergeAction insertMergeAction && insertMergeAction.Columns.Count > 0))
+                MergeSpecifications.Add(node);
+            node.AcceptChildren(this);
         }
     }
 }
+
+

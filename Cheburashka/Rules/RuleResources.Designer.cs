@@ -115,6 +115,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Explicit collation given in {0}..
+        /// </summary>
+        internal static string AvoidExplicitCollateInDefinition_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollateInDefinition_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid specifying collations unless absolutely necessary.  Rely on the collation defined in the project or target database..
+        /// </summary>
+        internal static string AvoidExplicitCollateInDefinition_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollateInDefinition_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GOTO statement was found in {0}..
         /// </summary>
         internal static string AvoidGoto_ProblemDescription {
@@ -201,6 +219,24 @@ namespace Cheburashka {
         internal static string AvoidRaiseErrorOutsideTryCatch_RuleName {
             get {
                 return ResourceManager.GetString("AvoidRaiseErrorOutsideTryCatch_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT .. INTO found in {0}..
+        /// </summary>
+        internal static string AvoidSelectInto_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidSelectInto_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid using SELECT .. INTO ...  (Advantages vs disadvantages vary between SQL Server versions, and use-cases.).
+        /// </summary>
+        internal static string AvoidSelectInto_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidSelectInto_RuleName", resourceCulture);
             }
         }
         
@@ -417,6 +453,24 @@ namespace Cheburashka {
         internal static string CheckForMultipleOutputVariables_RuleName {
             get {
                 return ResourceManager.GetString("CheckForMultipleOutputVariables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mandatory column missing from insert list in {0}..
+        /// </summary>
+        internal static string CheckMissingInsertColumns_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckMissingInsertColumns_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns without a default or other system supplied value need a value specifying in Inserts..
+        /// </summary>
+        internal static string CheckMissingInsertColumns_RuleName {
+            get {
+                return ResourceManager.GetString("CheckMissingInsertColumns_RuleName", resourceCulture);
             }
         }
         
@@ -799,6 +853,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set NoCount On/Xact_Abort On not found at start of code in {0}..
+        /// </summary>
+        internal static string EnforceNoCountXactAbort_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceNoCountXactAbort_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NoCount On and Xact_Abort On should be set at the start of Procedures and Triggers..
+        /// </summary>
+        internal static string EnforceNoCountXactAbort_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceNoCountXactAbort_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table with no Primary Key was found in {0}..
         /// </summary>
         internal static string EnforcePrimaryKey_ProblemDescription {
@@ -975,6 +1047,24 @@ namespace Cheburashka {
         internal static string PreferDropIfExists_Rulename {
             get {
                 return ResourceManager.GetString("PreferDropIfExists_Rulename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column definition without NULL/NOT NULL found in {0}..
+        /// </summary>
+        internal static string PreferExplicitNullInColumnDefinition_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferExplicitNullInColumnDefinition_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always specify the nullability of columns when defining tables..
+        /// </summary>
+        internal static string PreferExplicitNullInColumnDefinition_RuleName {
+            get {
+                return ResourceManager.GetString("PreferExplicitNullInColumnDefinition_RuleName", resourceCulture);
             }
         }
         

@@ -19,32 +19,28 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-
 namespace Cheburashka
 {
-
-    internal class CheckDefaultsAreOnNotNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
+    internal class InsertSpecificationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public CheckDefaultsAreOnNotNullColumnsVisitor()
+        public InsertSpecificationVisitor()
         {
-            ColumnDefinitions = new List<ColumnDefinition>();
+            InsertSpecifications = new List<InsertSpecification>();
         }
-
-        public IList<ColumnDefinition> ColumnDefinitions { get; }
-        public IList<TSqlFragment> SqlFragments() { return ColumnDefinitions.Cast<TSqlFragment>().ToList(); }
-        public override void ExplicitVisit(ColumnDefinition node)
+        public IList<InsertSpecification> InsertSpecifications { get; }
+        public IList<TSqlFragment> SqlFragments() { return InsertSpecifications.Cast<TSqlFragment>().ToList(); }
+        public override void ExplicitVisit(InsertStatement node)
         {
-            var nullables = node.Constraints.Where(n => n is NullableConstraintDefinition).ToList();
-            //If there is no Nullable constraint defined assume column is Nullable, else check its actual value for Nullability
-            //And we have a default constraint then flag as a problem
-            if ( node.DefaultConstraint is not null && (nullables.Count == 0 || (nullables.Count > 0 && nullables[0] is NullableConstraintDefinition {Nullable: true})))
-            {
-                ColumnDefinitions.Add(node);
-            }
+            if (node.InsertSpecification.Columns.Count > 0) 
+                InsertSpecifications.Add(node.InsertSpecification);
+            node.AcceptChildren(this);  // there may be a contained merge statement with an output clause feeding this insert
         }
     }
 }
+
+

@@ -1,0 +1,9 @@
+Problem description: SELECT .. INTO found in [dbo].[ProcWithSelectInto].
+FullID: Cheburashka.DM0059
+Severity: Warning
+Model element: dbo.ProcWithSelectInto
+Script file: ProcWithSelectInto.sql
+Start line: 5
+Start column: 15
+========end of problem========
+
