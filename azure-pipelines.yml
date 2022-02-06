@@ -35,3 +35,7 @@ steps:
     codeCoverageEnabled: True # Optional
 
 
+- task: codecoveragecomparerbt@1
+  inputs:
+    codecoveragetarget: '80'
+    codecoveragemeasurementmethod: 'Blocks'
