@@ -1,0 +1,6 @@
+﻿<ModulePaths>
+	<Include>
+		<ModulePath>.*cheburashka.dll</ModulePath>
+		<!-- Add more ModulePath nodes here. -->
+	</Include>
+</ModulePaths>
