@@ -443,6 +443,18 @@ namespace Cheburashka
             }
             return false;
         }
-
+    }
+    public static class TempTableExtensions
+    {
+        public static bool IsLocalTempTableName(this SchemaObjectName obj)
+        {
+            return  obj.BaseIdentifier.Value.StartsWith("#")
+            && !obj.BaseIdentifier.Value.StartsWith("##");
+        }
+        public static bool IsLocalTempTableName(this NamedTableReference obj)
+        {
+            return  obj.SchemaObject.BaseIdentifier.Value.StartsWith("#")
+            && !obj.SchemaObject.BaseIdentifier.Value.StartsWith("##");
+        }
     }
 }

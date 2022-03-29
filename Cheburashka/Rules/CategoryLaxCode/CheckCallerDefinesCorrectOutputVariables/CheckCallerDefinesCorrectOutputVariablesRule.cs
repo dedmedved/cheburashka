@@ -119,7 +119,7 @@ namespace Cheburashka
                         var createProcedureStatement = ast.Batches[0].Statements[0] as CreateProcedureStatement;
                         if (   (number is null     && createProcedureStatement?.ProcedureReference.Number is null)
                             || (number is not null && createProcedureStatement?.ProcedureReference.Number is not null &&
-                                number == createProcedureStatement?.ProcedureReference.Number)
+                                number == createProcedureStatement.ProcedureReference.Number)
                         )
                         {
                             ArrayList parameterNames = new();  

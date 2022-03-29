@@ -276,6 +276,14 @@
     <Compile Include="CategoryModernCodingStyle\PreferDropIfExistsRule.cs" />
     <Compile Include="CategorySSDTModelRules\AvoidExplicitCollateInDefinitionRule\ColumnWithExplicitCollateDefinitionVisitor.cs" />
     <Compile Include="CategorySSDTModelRules\AvoidExplicitCollateInDefinitionRule\AvoidExplicitCollateInDefinitionRule.cs" />
+    <Compile Include="CategoryTempTables\AvoidDroppingTempTableRule\AvoidDroppingTempTableRule.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableInsertVisitor.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableDropVisitor.cs" />
+    <Compile Include="CategoryTempTables\AvoidReadOnlyTempTableRule\AvoidReadOnlyTempTableRule.cs" />
+    <Compile Include="CategoryTempTables\AvoidUsingNonLocalTempTable\AvoidUsingNonLocalTempTableRule.cs" />
+    <Compile Include="CategoryTempTables\AvoidUnusedTempTableRule\AvoidUnusedTempTableRule.cs" />
+    <Compile Include="CategoryTempTables\TempTableUsageVisitor.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableCreationVisitor.cs" />
     <Compile Include="Generic Visitors\DMLSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasExcludedContextsVisitor.cs" />
@@ -438,7 +446,13 @@
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CategoryRelationalDesignRules\AvoidForeignKeysToSeparateUniqueConstraints\" />
+    <Folder Include="CategoryRelationalDesignRules\PreferForeignKeyLinkedToPrimaryKey\" />
+    <Folder Include="CategoryTempTables\AvoidWriteOnlyTempTableRule\" />
+    <Folder Include="CategoryUnnecessaryVariablesRules\AvoidReadOnlyTableVariableRule\" />
+    <Folder Include="CategoryUnnecessaryVariablesRules\AvoidWriteOnlyTableVariableRule\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem copy "$(TargetDir)$(TargetName)$(TargetExt)" "$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\Extensions\$(TargetName)$(TargetExt)" /y 

@@ -56,7 +56,7 @@ namespace Cheburashka
 
         public static bool HasFromClause(MergeSpecification node)
         {
-            return !HasNoFromClause(node);
+            return !HasNoFromClause(node); //-V3022
         }
         public static bool HasFromClause(DeleteSpecification node)
         {

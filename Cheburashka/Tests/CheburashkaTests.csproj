@@ -290,6 +290,15 @@
     <Content Include="TestScripts\AvoidDirectUseOfRowcountRule\TableValuedFunctionWithInDirectUseOfRowcount.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidDroppingTempTableRule\AvoidDroppingTempTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDroppingTempTableRule\ProcThatDropsTempTablesItCreates.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidDroppingTempTableRule\ProcThatDropsTempTableItDidntCreate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidErrorNumberRule\AvoidErrorNumberRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -479,6 +488,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidRaiseErrorOutsideTryCatchRule\ProcRaiseErrorOutsideTryCatchErrorLevel16.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidReadOnlyTempTableRule\AvoidReadOnlyTempTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidReadOnlyTempTableRule\ProcWithUnInitialisedTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidReadOnlyTempTableRule\ProcWithUnInitialsiedTempTableCreatedBySelectInto.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidSelectIntoRule\AvoidSelectIntoRule-Baseline.txt">
@@ -767,6 +785,51 @@
     <Content Include="TestScripts\AvoidUnusedTableVariableRule\TableValuedFunctionWithUnusedTableVariable.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\AvoidUsingNonLocalTempTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\DatabaseTriggerWithNonLocalTempTableRule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\ProcWithNonLocalTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\ProcWithLocalTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\ServerDdlTriggerWithNonLocalTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\TableTriggerWithNonLocalTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\AvoidUnusedTempTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\DatabaseTriggerWithUnusedTempTableRule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\ProcWithUnusedTempTableCreatedBySelectInto.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\ProcWithUnusedTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\ProcWithUsedTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\ServerDdlTriggerWithUnusedTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUnusedTempTableRule\TableTriggerWithUnusedTempTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidUnusedVariables_MixedCaseVariableNamesRule\AvoidUnusedVariables_MixedCaseVariableNamesRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -819,6 +882,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidUnusedVariablesRule\TableValuedFunctionWithUnusedVariable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\ProcCreateTempTables.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt">
@@ -1442,6 +1508,18 @@
     <Content Include="TestScripts\EnforceColumnPrefixRule\EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithIncompatibleCoveringIndexes_NotSubSettable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithClusteredIndexAndNonSimilarCoveringIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithClusteredIndexAndSimilarCoveringIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceNoCountXactAbortRule\EnforceNoCountXactAbortRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1685,7 +1763,7 @@
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoSperateIndexes.sql">
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoSeparateIndexes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparation_MixedCaseRule\EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql">

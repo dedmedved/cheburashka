@@ -1,0 +1,45 @@
+﻿Problem description: Temp table created but not used locally in [DatabaseTriggerWithUnusedTempTable].
+FullID: Cheburashka.DM0062
+Severity: Warning
+Model element: DatabaseTriggerWithUnusedTempTable
+Script file: DatabaseTriggerWithUnusedTempTableRule.sql
+Start line: 6
+Start column: 18
+========end of problem========
+
+Problem description: Temp table created but not used locally in [dbo].[ProcWithUnusedTempTable].
+FullID: Cheburashka.DM0062
+Severity: Warning
+Model element: dbo.ProcWithUnusedTempTable
+Script file: ProcWithUnusedTempTable.sql
+Start line: 5
+Start column: 18
+========end of problem========
+
+Problem description: Temp table created but not used locally in [dbo].[ProcWithUnusedTempTableCreatedBySelectInto].
+FullID: Cheburashka.DM0062
+Severity: Warning
+Model element: dbo.ProcWithUnusedTempTableCreatedBySelectInto
+Script file: ProcWithUnusedTempTableCreatedBySelectInto.sql
+Start line: 5
+Start column: 19
+========end of problem========
+
+Problem description: Temp table created but not used locally in [ServerTriggerWithUnusedTableVariable].
+FullID: Cheburashka.DM0062
+Severity: Warning
+Model element: ServerTriggerWithUnusedTableVariable
+Script file: ServerDdlTriggerWithUnusedTempTable.sql
+Start line: 6
+Start column: 18
+========end of problem========
+
+Problem description: Temp table created but not used locally in [dbo].[TableTriggerWithUnusedTableVariable].
+FullID: Cheburashka.DM0062
+Severity: Warning
+Model element: dbo.TableTriggerWithUnusedTableVariable
+Script file: TableTriggerWithUnusedTempTable.sql
+Start line: 5
+Start column: 18
+========end of problem========
+

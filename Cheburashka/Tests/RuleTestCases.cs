@@ -64,7 +64,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidBareReturnRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidBareReturnRule.RuleId);
         }
@@ -88,7 +88,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidBareReturnRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             using var test = baselinedRuleTest;
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidBareReturnRule.RuleId);
@@ -113,7 +113,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidBareReturnRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             using var test = baselinedRuleTest;
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidBareReturnRule.RuleId);
@@ -138,7 +138,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidGotoRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidGotoRule.RuleId);
         }
@@ -162,7 +162,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidGotoRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidGotoRule.RuleId);
         }
@@ -234,7 +234,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceCaptureSpReturnStatusRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceCaptureSpReturnStatusRule.RuleId);
         }
@@ -258,7 +258,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceCaptureSpReturnStatusRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceCaptureSpReturnStatusRule.RuleId);
         }
@@ -474,7 +474,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidUnusedTableVariableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidUnusedTableVariableRule.RuleId);
         }
@@ -498,7 +498,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidUnusedTableVariableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidUnusedTableVariableRule.RuleId);
         }
@@ -523,7 +523,7 @@ namespace Cheburashka.Tests
                 //                nameof(AvoidUnusedTableVariableRule),
                 "AvoidUnusedTableVariable_MixedCaseVariableNamesRule",
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" }, // no BIN case for obvious reasons
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidUnusedTableVariableRule.RuleId);
         }
@@ -619,7 +619,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidWriteOnlyVariablesRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidWriteOnlyVariablesRule.RuleId);
         }
@@ -643,7 +643,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidWriteOnlyVariablesRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidWriteOnlyVariablesRule.RuleId);
         }
@@ -668,7 +668,7 @@ namespace Cheburashka.Tests
                 //nameof(AvoidWriteOnlyVariablesRule),
                 "AvoidWriteOnlyVariables_MixedCaseVariableNamesRule",
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },  // obviously can't test the BIN case
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidWriteOnlyVariablesRule.RuleId);
         }
@@ -1361,7 +1361,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(DisallowAllCodeManipulationOfProjectDefinedObjectsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql120);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowAllCodeManipulationOfProjectDefinedObjectsRule.RuleId);
         }
@@ -1466,7 +1466,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(DisallowUseOfSpReNameRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
@@ -1490,7 +1490,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(DisallowUseOfSpReNameRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
@@ -1514,7 +1514,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 "DisallowUseOfSp_ReName_MixedCaseRule",
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(DisallowUseOfSpReNameRule.RuleId);
         }
@@ -1538,7 +1538,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyRule.RuleId);
@@ -1563,7 +1563,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyRule.RuleId);
@@ -1638,7 +1638,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyIsIndexedRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyIsIndexedRule.RuleId);
@@ -1663,7 +1663,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyIsIndexedRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyIsIndexedRule.RuleId);
@@ -1738,7 +1738,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyIsUniquelyIndexedRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyIsUniquelyIndexedRule.RuleId);
@@ -1763,7 +1763,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceForeignKeyIsUniquelyIndexedRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceForeignKeyIsUniquelyIndexedRule.RuleId);
@@ -1788,7 +1788,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckMultipleForeignKeysBetweenSameTableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMultipleForeignKeysBetweenSameTableRule.RuleId);
@@ -1813,7 +1813,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckMultipleForeignKeysBetweenSameTableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMultipleForeignKeysBetweenSameTableRule.RuleId);
@@ -1838,7 +1838,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckMultipleForeignKeysFromOneTableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMultipleForeignKeysFromOneTableRule.RuleId);
@@ -1863,7 +1863,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckMultipleForeignKeysFromOneTableRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100
+                SqlServerVersion.Sql90
                 );
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMultipleForeignKeysFromOneTableRule.RuleId);
@@ -2086,7 +2086,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidErrorNumberRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidErrorNumberRule.RuleId);
         }
@@ -2104,13 +2104,13 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void AvoidErrorNumbero_CI_AI()
+        public void AvoidErrorNumber_CI_AI()
         {
             using var test = new BaselinedRuleTest(
                 TestContext,
                 nameof(AvoidErrorNumberRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidErrorNumberRule.RuleId);
         }
@@ -2134,7 +2134,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidUnusedLabelsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidUnusedLabelsRule.RuleId);
         }
@@ -2158,7 +2158,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidUnusedLabelsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidUnusedLabelsRule.RuleId);
         }
@@ -2182,7 +2182,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidNonAnsiJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidNonAnsiJoinsRule.RuleId);
         }
@@ -2206,7 +2206,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(AvoidNonAnsiJoinsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidNonAnsiJoinsRule.RuleId);
         }
@@ -2230,7 +2230,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckOpenTransactionCountCodeRule),
                 new TSqlModelOptions { Collation = "Latin1_General_BIN" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckOpenTransactionCountCodeRule.RuleId);
         }
@@ -2254,7 +2254,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckOpenTransactionCountCodeRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckOpenTransactionCountCodeRule.RuleId);
         }
@@ -2470,7 +2470,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckForInsteadOfTriggersOnTablesRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckForInsteadOfTriggersOnTablesRule.RuleId);
         }
@@ -2542,7 +2542,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceSingleReturnRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceSingleReturnRule.RuleId);
         }
@@ -2590,7 +2590,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(EnforceSingleColumnPrefixRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(EnforceSingleColumnPrefixRule.RuleId);
 
@@ -2638,7 +2638,7 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckUniqueConstraintImpliedBySubQueryRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckUniqueConstraintImpliedBySubQueryRule.RuleId);
         }
@@ -2759,7 +2759,98 @@ namespace Cheburashka.Tests
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMissingInsertColumnsRule.RuleId);
         }
-
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\CheckMissingInsertColumnsRule" folder and compares the
+        /// results to the "CheckMissingInsertColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidUnusedTempTableRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUnusedTempTableRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidUnusedTempTableRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidUsingNonLocalTempTableRule" folder and compares the
+        /// results to the "AvoidUsingNonLocalTempTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidUsingNonLocalTempTableRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUsingNonLocalTempTableRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidUsingNonLocalTempTableRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidDroppingTempTableRule" folder and compares the
+        /// results to the "AvoidDroppingTempTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidDroppingTempTableRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidDroppingTempTableRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidDroppingTempTableRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidReadOnlyTempTableRule" folder and compares the
+        /// results to the "AvoidReadOnlyTempTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidReadOnlyTempTableRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidReadOnlyTempTableRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidReadOnlyTempTableRule.RuleId);
+        }
         
     }
 }

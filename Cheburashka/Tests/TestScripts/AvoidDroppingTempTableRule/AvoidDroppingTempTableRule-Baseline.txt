@@ -1,0 +1,18 @@
+﻿Problem description: Temp table created in this code is dropped here [dbo].[ProcThatDropsTempTablesItCreates].
+FullID: Cheburashka.DM0064
+Severity: Warning
+Model element: dbo.ProcThatDropsTempTablesItCreates
+Script file: ProcThatDropsTempTablesItCreates.sql
+Start line: 8
+Start column: 16
+========end of problem========
+
+Problem description: Temp table created in this code is dropped here [dbo].[ProcThatDropsTempTablesItCreates].
+FullID: Cheburashka.DM0064
+Severity: Warning
+Model element: dbo.ProcThatDropsTempTablesItCreates
+Script file: ProcThatDropsTempTablesItCreates.sql
+Start line: 9
+Start column: 16
+========end of problem========
+

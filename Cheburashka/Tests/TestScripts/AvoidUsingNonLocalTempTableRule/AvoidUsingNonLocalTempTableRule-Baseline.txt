@@ -1,0 +1,36 @@
+﻿Problem description: Temp Table used but not created by this code found here [DatabaseTriggerWithNonLocalTempTable].
+FullID: Cheburashka.DM0063
+Severity: Warning
+Model element: DatabaseTriggerWithNonLocalTempTable
+Script file: DatabaseTriggerWithNonLocalTempTableRule.sql
+Start line: 8
+Start column: 20
+========end of problem========
+
+Problem description: Temp Table used but not created by this code found here [dbo].[ProcWithNonLocalTempTable].
+FullID: Cheburashka.DM0063
+Severity: Warning
+Model element: dbo.ProcWithNonLocalTempTable
+Script file: ProcWithNonLocalTempTable.sql
+Start line: 5
+Start column: 20
+========end of problem========
+
+Problem description: Temp Table used but not created by this code found here [ServerTriggerWithNonLocalTableVariable].
+FullID: Cheburashka.DM0063
+Severity: Warning
+Model element: ServerTriggerWithNonLocalTableVariable
+Script file: ServerDdlTriggerWithNonLocalTempTable.sql
+Start line: 6
+Start column: 20
+========end of problem========
+
+Problem description: Temp Table used but not created by this code found here [dbo].[TableTriggerWithNonLocalTableVariable].
+FullID: Cheburashka.DM0063
+Severity: Warning
+Model element: dbo.TableTriggerWithNonLocalTableVariable
+Script file: TableTriggerWithNonLocalTempTable.sql
+Start line: 5
+Start column: 20
+========end of problem========
+
