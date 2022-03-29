@@ -1,4 +1,13 @@
-Problem description: Index with a key that is just a subset or permutation of another key  found in [dbo].[EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b].
+Problem description: Index with a key that is just a subset or permutation of another key found in [dbo].[EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex].[ix_EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex_a].
+FullID: Cheburashka.DM0016
+Severity: Warning
+Model element: dbo.EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex.ix_EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex_a
+Script file: EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex.sql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Index with a key that is just a subset or permutation of another key found in [dbo].[EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b].
 FullID: Cheburashka.DM0016
 Severity: Warning
 Model element: dbo.EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b
@@ -7,7 +16,7 @@ Start line: 9
 Start column: 1
 ========end of problem========
 
-Problem description: Index with a key that is just a subset or permutation of another key  found in [dbo].[EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a].
+Problem description: Index with a key that is just a subset or permutation of another key found in [dbo].[EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes].[ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a].
 FullID: Cheburashka.DM0016
 Severity: Warning
 Model element: dbo.EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a

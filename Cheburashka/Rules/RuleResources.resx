@@ -129,6 +129,12 @@
   <data name="AvoidDirectUseOfRowcount_RuleName" xml:space="preserve">
     <value>@@rowcount and/or @@error should never be used directly.</value>
   </data>
+  <data name="AvoidDroppingTempTable_ProblemDescription" xml:space="preserve">
+    <value>Temp table created in this code is dropped here {0}.</value>
+  </data>
+  <data name="AvoidDroppingTempTable_RuleName" xml:space="preserve">
+    <value>It's not necessary and can be counter-productive to drop temp tables created by the same code object.</value>
+  </data>
   <data name="AvoidErrorNumber_ProblemDescription" xml:space="preserve">
     <value>@@error global variable usage found in {0}.</value>
   </data>
@@ -171,6 +177,12 @@
   <data name="AvoidRaiseErrorOutsideTryCatch_RuleName" xml:space="preserve">
     <value>Raiserror with level &gt;10 or unknown found outside a TRY/CATCH block.  This may not cause a transfer of execution to the caller.</value>
   </data>
+  <data name="AvoidReadOnlyTempTable_ProblemDescription" xml:space="preserve">
+    <value>Temp Table is never populated in {0}.</value>
+  </data>
+  <data name="AvoidReadOnlyTempTable_RuleName" xml:space="preserve">
+    <value>Temp Tables should be populated with data.</value>
+  </data>
   <data name="AvoidSelectInto_ProblemDescription" xml:space="preserve">
     <value>SELECT .. INTO found in {0}.</value>
   </data>
@@ -201,11 +213,23 @@
   <data name="AvoidUnusedTableVariable_RuleName" xml:space="preserve">
     <value>Unused Table Variables point to potential coding errors.</value>
   </data>
+  <data name="AvoidUnusedTempTable_ProblemDescription" xml:space="preserve">
+    <value>Temp table created but not used locally in {0}.</value>
+  </data>
+  <data name="AvoidUnusedTempTable_RuleName" xml:space="preserve">
+    <value>Temp tables are best used by the creating code.  Try not to create temp tables for use in other procedures.</value>
+  </data>
   <data name="AvoidUnusedVariables_ProblemDescription" xml:space="preserve">
     <value>Unused Variable found in {0}.</value>
   </data>
   <data name="AvoidUnusedVariables_RuleName" xml:space="preserve">
     <value>Unused Variables point to potential coding errors.</value>
+  </data>
+  <data name="AvoidUsingNonLocalTempTable_ProblemDescription" xml:space="preserve">
+    <value>Temp Table used but not created by this code found here {0}.</value>
+  </data>
+  <data name="AvoidUsingNonLocalTempTable_RuleName" xml:space="preserve">
+    <value>It's best to only use temp tables created and disposed of in the same block of code.</value>
   </data>
   <data name="AvoidWriteOnlyVariables_ProblemDescription" xml:space="preserve">
     <value>Write-only Variable found in {0}.</value>
@@ -370,7 +394,7 @@
     <value>Tables should normally have a Foreign Key relationship with at least one other table.</value>
   </data>
   <data name="EnforceIndexKeyColumnSeparation_ProblemDescription" xml:space="preserve">
-    <value>Index with a key that is just a subset or permutation of another key  found in {0}.</value>
+    <value>Index with a key that is just a subset or permutation of another key found in {0}.</value>
   </data>
   <data name="EnforceIndexKeyColumnSeparation_RuleName" xml:space="preserve">
     <value>Avoid indexes with keys that are just a permutation of another key, or form the leading edge of another key.</value>

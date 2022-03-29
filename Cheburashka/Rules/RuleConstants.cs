@@ -101,7 +101,11 @@ namespace Cheburashka
         public const string EnforceNoCountXactAbortRuleId                               = "Cheburashka.DM0060";
 
         public const string CheckMissingInsertColumnsRuleId                             = "Cheburashka.DM0061";
-
+        public const string AvoidUnusedTempTableRuleId                                  = "Cheburashka.DM0062";
+        public const string AvoidUsingNonLocalTempTableRuleId                           = "Cheburashka.DM0063";
+        public const string AvoidDroppingTempTableRuleId                                = "Cheburashka.DM0064";
+        public const string AvoidReadOnlyTempTableRuleId                                = "Cheburashka.DM0065";
+        
 
         public const string AvoidUnusedVariablesRuleName                                = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                      = "AvoidUnusedVariables_ProblemDescription";
@@ -274,6 +278,18 @@ namespace Cheburashka
         public const string CheckMissingInsertColumnsRuleName                                       = "CheckMissingInsertColumns_RuleName";
         public const string CheckMissingInsertColumnsProblemDescription                             = "CheckMissingInsertColumns_ProblemDescription";
 
+        public const string AvoidUnusedTempTableRuleName                                            = "AvoidUnusedTempTable_RuleName";
+        public const string AvoidUnusedTempTableProblemDescription                                  = "AvoidUnusedTempTable_ProblemDescription";
+
+        public const string AvoidUsingNonLocalTempTableRuleName                                     = "AvoidUsingNonLocalTempTable_RuleName";
+        public const string AvoidUsingNonLocalTempTableProblemDescription                           = "AvoidUsingNonLocalTempTable_ProblemDescription";
+
+        public const string AvoidDroppingTempTableRuleName                                          = "AvoidDroppingTempTable_RuleName";
+        public const string AvoidDroppingTempTableProblemDescription                                = "AvoidDroppingTempTable_ProblemDescription";
+
+        public const string AvoidReadOnlyTempTableRuleName                                          = "AvoidReadOnlyTempTable_RuleName";
+        public const string AvoidReadOnlyTempTableProblemDescription                                = "AvoidReadOnlyTempTable_ProblemDescription";
+
 
         /// <summary>
         /// The design category (should not be localized)
@@ -301,6 +317,7 @@ namespace Cheburashka
         public const string CategoryDatabaseStructures          = "Data.Database.PhysicalStructure";
         public const string CategoryRelationalDesignKeys        = "Data.Database.Keys";
         public const string CategoryRelationalDesignNull        = "Data.Database.Nulls";
+        public const string CategoryTempTables                  = "Data.Database.TempTables";
 
         public const string CategorySsdtModel                   = "Data.SSDT.Model";
         public const string CategoryObsoleteCodingStyle         = "Code.ObsoleteStyle.Code";
@@ -309,11 +326,11 @@ namespace Cheburashka
         public const string CategoryNonStrictCodingStyle        = "Code.LaxCode.StoredProcedures";
         public const string CategoryNonStrictCodingStyleNames   = "Code.LaxCode.Naming";
         public const string CategoryNonStrictCodingStyleData    = "Code.LaxCode.Data";
+
         public const string CategoryUnnecessaryCode             = "Code.Redundant.UnnecessaryCode";
         public const string CategoryUnnecessaryVariables        = "Code.Redundant.UnusedObjects";
 
         public const string CategoryParameters                  = "Code.Parameter.Issues";
-
         public const string CategoryMissingDerivedConstraints   = "Data.Database.Constraints";
 
 

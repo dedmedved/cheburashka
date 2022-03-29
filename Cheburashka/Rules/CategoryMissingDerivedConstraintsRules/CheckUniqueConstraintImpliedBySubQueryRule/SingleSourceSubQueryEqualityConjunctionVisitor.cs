@@ -64,7 +64,7 @@ namespace Cheburashka
                 var noAggregateFunctions = allAggregateFunctionFilterVisitor.FunctionCalls.Count == 0;
 
                 var booleanVisitor = new BooleanExpressionEqualityFilterVisitor();
-                query.WhereClause?.SearchCondition.Accept(booleanVisitor);
+                query.WhereClause.SearchCondition.Accept(booleanVisitor);
                 var validWhereClause = booleanVisitor.ValidAndedEqualityBooleanExpression;
                 if (validWhereClause && noAggregateFunctions)
                 {

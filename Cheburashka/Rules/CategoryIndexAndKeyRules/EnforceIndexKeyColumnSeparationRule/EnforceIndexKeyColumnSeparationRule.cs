@@ -19,6 +19,8 @@
 //   limitations under the License.
 // </copyright>
 //------------------------------------------------------------------------------
+
+using System;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
@@ -40,8 +42,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceIndexKeyColumnSeparationRule.RuleId,
         RuleConstants.ResourceBaseName,                                     // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceIndexKeyColumnSeparationRuleName,             // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceIndexKeyColumnSeparationProblemDescription,   // ID used to look up the description inside the resources file
+        RuleConstants.EnforceIndexKeyColumnSeparationRuleName,              // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceIndexKeyColumnSeparationProblemDescription,    // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                  // This rule targets specific elements rather than the whole model
     public sealed class EnforceIndexKeyColumnSeparationRule : SqlCodeAnalysisRule
@@ -72,8 +74,7 @@ namespace Cheburashka
 
             try
             {
-                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model,
-                    out TSqlFragment sqlFragment, out TSqlObject modelElement);
+                DmvRuleSetup.RuleSetup(ruleExecutionContext, out problems, out TSqlModel model, out TSqlFragment sqlFragment, out TSqlObject modelElement);
                 string elementName = RuleUtils.GetElementName(ruleExecutionContext);
 
                 // If we can't find the file then assume we're in a composite model
@@ -85,109 +86,137 @@ namespace Cheburashka
                 }
 
                 DmvSettings.RefreshModelBuiltInCache(model);
-                // Refresh cached index/constraints/tables lists from Model
-                //DMVSettings.RefreshColumnCache(model);
                 DmvSettings.RefreshConstraintsAndIndexesCache(model);
 
-                string selfSchema = modelElement.Name.Parts[0];
-                string selfName = modelElement.Name.Parts[2]; //  is this right ?
+                string indexSchema = modelElement.Name.Parts[0];
+                string indexName = modelElement.Name.Parts[2]; 
 
                 var owningObject = modelElement.GetParent(DacQueryScopes.All);
                 var owningObjectSchema = owningObject.Name.Parts[0];
                 var owningObjectTable = owningObject.Name.Parts[1];
 
-                List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(owningObjectSchema, owningObjectTable);
-                List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
+                var pks = ModelIndexAndKeysUtils.GetPrimaryKeys(owningObjectSchema, owningObjectTable);
+                var indexes = ModelIndexAndKeysUtils.GetIndexes(owningObjectSchema, owningObjectTable);
+                var uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(owningObjectSchema, owningObjectTable);
 
-                List<string> leadingEdgeIndexColumns = new();
-                var columns = modelElement.GetReferenced(Index.Columns);
-                List<string> x = columns.Select(n => n.Name.Parts.Last()).ToList();
-                leadingEdgeIndexColumns.AddRange(x);
+                var indexColumns = modelElement.GetReferenced(Index.Columns).Select(n => n.Name.Parts.Last()).ToList();
 
-                bool foundMoreInclusiveIndex = false;
-                foreach (var v in pks)
-                {
-                    // if this 'index' isn't the index underlying the pk, check it.
-                    // is this right/needed/wasted effort ?
-                    if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObject))
-                    {
-                        var pkColumns = v.GetReferenced(PrimaryKeyConstraint.Columns);
-                        List<string> pkLeadingEdgeIndexColumns = pkColumns.Select(c => c.Name.Parts.Last()).ToList();
+                var thisIndexHasIncludedColumns = modelElement.GetReferenced(Index.IncludedColumns).Any();
+                var thisIndexIncludedColumns = modelElement.GetReferenced(Index.IncludedColumns).Select(n => n.Name.Parts.Last()).ToList();;
 
-                        foundMoreInclusiveIndex =
-                            DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
-                                pkLeadingEdgeIndexColumns);
-                        if (foundMoreInclusiveIndex)
-                        {
-                            break;
-                        }
-                    }
-                }
+                List<string> clusteringIndexColumns = new();
 
-                if (!foundMoreInclusiveIndex)
-                {
-                    foreach (var v in indexes)
-                    {
-                        // if this 'index' isn't the index we're checking - check it.
-                        if (!(SqlRuleUtils.ObjectNameMatches(v, owningObjectTable, selfSchema) // this static method only partially matches what we want to check but use it anyway
-                              && SqlComparer.SQLModel_StringCompareEqual(v.Name.Parts[2], selfName)
-                            )
-                        )
-                        {
-                            var idxColumns = v.GetReferenced(Index.Columns);
-                            List<string> otherLeadingEdgeIndexColumns = idxColumns.Select(c => c.Name.Parts.Last()).ToList();
+                TSqlObject clusteredObject; // create dummy tsqlobject
+                var    tableIsClustered = ExtractClusteredDetails(pks,PrimaryKeyConstraint.Clustered,PrimaryKeyConstraint.Columns,out clusteredObject, ref clusteringIndexColumns);
+                if (!tableIsClustered) 
+                    tableIsClustered = ExtractClusteredDetails(indexes,Index.Clustered,Index.Columns, out clusteredObject, ref clusteringIndexColumns);
+                if (!tableIsClustered) 
+                    tableIsClustered = ExtractClusteredDetails(uniqueConstraints,UniqueConstraint.Clustered,UniqueConstraint.Columns, out clusteredObject, ref clusteringIndexColumns);
+                
+                TSqlObject MoreGeneralIndexDefinition = owningObject; // create a dummy object to receive index definition - clone from a random other TSqlObject
+                                                               // probably ver ver very bad practice
 
-                            foundMoreInclusiveIndex =
-                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
-                                    otherLeadingEdgeIndexColumns);
-                            if (foundMoreInclusiveIndex)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
+                var foundMoreGeneralIndex = FindMoreGeneralIndex(owningObject, indexColumns, pks, PrimaryKeyConstraint.Columns, ref MoreGeneralIndexDefinition,thisIndexIncludedColumns);
+                if (!foundMoreGeneralIndex)
+                    foundMoreGeneralIndex = FindMoreGeneralIndex(owningObject, indexColumns, indexes, Index.Columns, ref MoreGeneralIndexDefinition,thisIndexIncludedColumns,indexSchema,indexName);
+                if (!foundMoreGeneralIndex)
+                    foundMoreGeneralIndex = FindMoreGeneralIndex(owningObject, indexColumns, uniqueConstraints, UniqueConstraint.Columns, ref MoreGeneralIndexDefinition,thisIndexIncludedColumns);
 
-                if (!foundMoreInclusiveIndex)
-                {
-                    foreach (var v in uniqueConstraints)
-                    {
-                        // if this 'index' isn't the index we're checking - check it.
-                        if (!v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, selfName, selfSchema))
-                        {
-                            var unColumns = v.GetReferenced(UniqueConstraint.Columns);
-                            List<string> constraintLeadingEdgeIndexColumns = unColumns.Select(c => c.Name.Parts.Last()).ToList();
-
-                            foundMoreInclusiveIndex =
-                                DetermineIfThisIndexIsSubsumedByTheOtherIndex(leadingEdgeIndexColumns,
-                                    constraintLeadingEdgeIndexColumns);
-                            if (foundMoreInclusiveIndex)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
+                var clusteredIndexIsASupersetOfThisIndex = tableIsClustered && ThisIndexIsContainedByTheOtherIndex(indexColumns, clusteringIndexColumns);
 
                 var issues = new List<TSqlFragment>();
-
-                if (foundMoreInclusiveIndex)
-                {
+                // is this right ? - it always makes my head hurt
+                if (foundMoreGeneralIndex && ! ( clusteredIndexIsASupersetOfThisIndex && thisIndexHasIncludedColumns && Equals(MoreGeneralIndexDefinition, clusteredObject)) )
                     issues.Add(sqlFragment);
-                }
+
 
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 RuleUtils.UpdateProblems(problems, modelElement, elementName, issues, ruleDescriptor);
 
             }
-            catch { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
+            catch (Exception e)
+            { } // DMVRuleSetup.RuleSetup barfs on 'hidden' temporal history tables 'defined' in sub-projects
 
             return problems;
         }
 
-        private static bool DetermineIfThisIndexIsSubsumedByTheOtherIndex(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
+        private static bool ExtractClusteredDetails(List<TSqlObject> sqlObjects, ModelPropertyClass modelPropertyClass, ModelRelationshipClass modelRelationshipClass, out TSqlObject clusteredObject, ref List<string> clusteringIndexColumns)
         {
+            var tableIsClustered = sqlObjects.Any(n => (bool)n.GetProperty(modelPropertyClass));
+            clusteredObject = sqlObjects.FirstOrDefault(n => (bool)n.GetProperty(modelPropertyClass));
+            // sweep these up into a common method (eventually)
+            if (tableIsClustered && clusteredObject != null)
+            {
+                var structureObjColumns = clusteredObject.GetReferenced(modelRelationshipClass);
+                clusteringIndexColumns = structureObjColumns.Select(c => c.Name.Parts.Last()).ToList();
+            }
+
+            return tableIsClustered;
+        }
+
+        private static bool FindMoreGeneralIndex(TSqlObject owningObject, List<string> thisIndexesLeadingEdgeColumns, List<TSqlObject> otherStructureObjects, ModelRelationshipClass modelRelationshipClass, ref TSqlObject IndexDefinition, List<string> IndexIncludedColumns, string indexSchema = null, string indexName = null)
+        {
+            var foundMoreGeneralIndex = false;
+            foreach (var v in otherStructureObjects)
+            {
+                // have to handle indexes differently to pks/uniq constraints - in a separate sub-clause in the IF
+                // due to differently implemented naming conventions/ structures
+                if (modelRelationshipClass == Index.Columns && !(SqlRuleUtils.ObjectNameMatches(v, owningObject.Name.Parts[1], indexSchema)
+                                                                 && indexName.SQLModel_StringCompareEqual(v.Name.Parts[2])
+                        )
+                || !v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObject)
+               )
+                {
+                    var structureObjColumns = v.GetReferenced(modelRelationshipClass);//;
+                    List<string> structureObjLeadingEdgeColumns = structureObjColumns.Select(c => c.Name.Parts.Last()).ToList();
+
+                    if (modelRelationshipClass == Index.Columns) // and of course only indexes have included columns
+                                                                 // and we can't handle PK/UN as if they were special indexes without included columns
+                                                                 // we get an exception
+                    {
+                        var structureObjIncludedColumns = v.GetReferenced(Index.IncludedColumns);
+                        List<string> structureObjIncludedColumnNames = structureObjIncludedColumns.Select(c => c.Name.Parts.Last()).ToList();
+
+                        // if we're processing indexes and this index has included columns
+                        // then a more general index has to have a super set of those included columns
+                        foundMoreGeneralIndex = structureObjIncludedColumnNames.Any() 
+                            ? ThisIndexIsContainedByTheOtherIndex(thisIndexesLeadingEdgeColumns, structureObjLeadingEdgeColumns, IndexIncludedColumns, structureObjIncludedColumnNames) 
+                            : ThisIndexIsContainedByTheOtherIndex(thisIndexesLeadingEdgeColumns, structureObjLeadingEdgeColumns);
+                        if (foundMoreGeneralIndex)
+                        {
+                            IndexDefinition = v;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        foundMoreGeneralIndex = ThisIndexIsContainedByTheOtherIndex(thisIndexesLeadingEdgeColumns, structureObjLeadingEdgeColumns);
+                        if (foundMoreGeneralIndex)
+                        {
+                            IndexDefinition = v;
+                            break;
+                        }
+
+                    }
+                }
+            }
+            return foundMoreGeneralIndex;
+        }
+        private static bool ThisIndexIsContainedByTheOtherIndex(List<string> theseKeysColumns, List<string> theOtherKeysColumns,List<string>theseIncludedColumns,List<string>otherIncludedColumns)
+        {
+            var foundIndexThatMatchesAKey = ThisIndexIsContainedByTheOtherIndex(theseKeysColumns,theOtherKeysColumns)
+                                            // && all these included columns are in the other indexe's included columns
+                                            // LETS (for now) NOT go down the path of checking they might be in the more general indexe's keys as well
+                                            && theseIncludedColumns.All(thisIncludedColumn => otherIncludedColumns.Exists( otherIncludedColumn => otherIncludedColumn.SQLModel_StringCompareEqual(thisIncludedColumn ))) ;
+            return foundIndexThatMatchesAKey;
+        }
+
+        private static bool ThisIndexIsContainedByTheOtherIndex(List<string> theseKeysColumns, List<string> theOtherKeysColumns)
+        {
+            // exclusions - 
+            // an index isn't subsumed by another index if -
+            // this index is a covering index ( has included colums )
+            // the other index is a clustered index
             bool foundIndexThatMatchesAKey = false;
 
             List<int> allPos = ModelIndexAndKeysUtils.GetCorrespondingKeyPositions(theseKeysColumns, theOtherKeysColumns);
@@ -197,7 +226,7 @@ namespace Cheburashka
             // If this index is just a restatement of another index 
             // same columns in potentially different order
             // it's irrelevant
-            // else if its a a strict sublist of another index 
+            // else if its a strict sublist of another index 
             // it's irrelevant
             // not quite sure about the included columns issue yet
             // if every key in this index was found in the corresponding position in the other index
@@ -218,15 +247,7 @@ namespace Cheburashka
                 && matchedPos.Count - 1 == matchedPos.Max()
                 )
             {
-                const bool matchedOneForOne = true;
-                //for (int i = 0; i < allPos.Count; i++)
-                //{
-                //    if ( allPos[i] != i) {
-                //        matchedOneForOne = false ;
-                //        break ;
-                //    }
-                //}
-                foundIndexThatMatchesAKey = matchedOneForOne;
+                foundIndexThatMatchesAKey = true;
             }
 
             return foundIndexThatMatchesAKey;

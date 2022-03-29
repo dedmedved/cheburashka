@@ -184,7 +184,7 @@ namespace Cheburashka
                             bool match = false;
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
-                                List<string> sortedLeadingEdgeIndexColumns;
+                                List<string> sortedLeadingEdgeIndexColumns = new();
 
                                 {
                                     ModelRelationshipClass modelRelationshipClass = (clusteredindexExists) ? Index.ColumnsRelationship.RelationshipClass
@@ -198,8 +198,10 @@ namespace Cheburashka
                                     : null
                                     ;
 
-                                    IEnumerable<ModelRelationshipInstance> columnSpecifications = idxOrConstraint.GetReferencedRelationshipInstances(modelRelationshipClass, DacQueryScopes.UserDefined);
-                                    sortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
+                                    IEnumerable<ModelRelationshipInstance> columnSpecifications = idxOrConstraint?.GetReferencedRelationshipInstances(modelRelationshipClass, DacQueryScopes.UserDefined);
+                                    if (columnSpecifications is not null){
+                                        sortedLeadingEdgeIndexColumns = ExtractLeadingEdgeColumns(columnSpecifications);
+                                    }
                                 }
 
                                 //We might have a clustered index etc on the same columns as a primary key.

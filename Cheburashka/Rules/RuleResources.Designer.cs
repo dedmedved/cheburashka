@@ -97,6 +97,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temp table created in this code is dropped here {0}..
+        /// </summary>
+        internal static string AvoidDroppingTempTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidDroppingTempTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s not necessary and can be counter-productive to drop temp tables created by the same code object..
+        /// </summary>
+        internal static string AvoidDroppingTempTable_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidDroppingTempTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @@error global variable usage found in {0}..
         /// </summary>
         internal static string AvoidErrorNumber_ProblemDescription {
@@ -223,6 +241,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temp Table is never populated in {0}..
+        /// </summary>
+        internal static string AvoidReadOnlyTempTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidReadOnlyTempTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp Tables should be populated with data..
+        /// </summary>
+        internal static string AvoidReadOnlyTempTable_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidReadOnlyTempTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT .. INTO found in {0}..
         /// </summary>
         internal static string AvoidSelectInto_ProblemDescription {
@@ -313,6 +349,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temp table created but not used locally in {0}..
+        /// </summary>
+        internal static string AvoidUnusedTempTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidUnusedTempTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp tables are best used by the creating code.  Try not to create temp tables for use in other procedures..
+        /// </summary>
+        internal static string AvoidUnusedTempTable_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidUnusedTempTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unused Variable found in {0}..
         /// </summary>
         internal static string AvoidUnusedVariables_ProblemDescription {
@@ -327,6 +381,24 @@ namespace Cheburashka {
         internal static string AvoidUnusedVariables_RuleName {
             get {
                 return ResourceManager.GetString("AvoidUnusedVariables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp Table used but not created by this code found here {0}..
+        /// </summary>
+        internal static string AvoidUsingNonLocalTempTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidUsingNonLocalTempTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s best to only use temp tables created and disposed of in the same block of code..
+        /// </summary>
+        internal static string AvoidUsingNonLocalTempTable_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidUsingNonLocalTempTable_RuleName", resourceCulture);
             }
         }
         
@@ -817,7 +889,7 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Index with a key that is just a subset or permutation of another key  found in {0}..
+        ///   Looks up a localized string similar to Index with a key that is just a subset or permutation of another key found in {0}..
         /// </summary>
         internal static string EnforceIndexKeyColumnSeparation_ProblemDescription {
             get {
