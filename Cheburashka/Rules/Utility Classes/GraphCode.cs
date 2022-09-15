@@ -42,7 +42,7 @@ namespace Cheburashka.Utility_Classes
 
             var vertices = inputGraph.Vertices;
             var enumerable = vertices.ToList();
-            var vertexStillChanging = enumerable.ToDictionary((n => n), (n => true), comparer);        // create a dictionary of work-still-to-do by vertex
+            var vertexStillChanging = enumerable.ToDictionary(n => n, _ => true, comparer);        // create a dictionary of work-still-to-do by vertex
 
             var e = inputGraph.Edges;
 
@@ -89,7 +89,7 @@ namespace Cheburashka.Utility_Classes
 
                     }
                 }
-                graphStillChanging = vertexStillChanging.Aggregate(false, (sum, n) => (sum == true || (n.Value)));
+                graphStillChanging = vertexStillChanging.Aggregate(false, (sum, n) => sum || (n.Value));
             }
             return transitiveClosure;
         }
@@ -100,9 +100,9 @@ namespace Cheburashka.Utility_Classes
             var transitiveClosure = inputGraph.Clone();
 
             var vertices = inputGraph.Vertices;
-            var vertexStillChanging = vertices.ToDictionary((n => n), (n => true));        // create a dictionary of work-still-to-do by vertex
+            var vertexStillChanging = vertices.ToDictionary(n => n, _ => true);        // create a dictionary of work-still-to-do by vertex
 
-            var e = inputGraph.Edges;
+            var edges = inputGraph.Edges;
 
             bool graphStillChanging = true;
             while (graphStillChanging)
@@ -140,10 +140,9 @@ namespace Cheburashka.Utility_Classes
                         {
                             vertexStillChanging[thisVertex] = false;
                         }
-
                     }
                 }
-                graphStillChanging = vertexStillChanging.Aggregate(false, (sum, n) => (sum == true || (n.Value)));
+                graphStillChanging = vertexStillChanging.Aggregate(false, (sum, n) => sum || n.Value);
             }
 
             return transitiveClosure;

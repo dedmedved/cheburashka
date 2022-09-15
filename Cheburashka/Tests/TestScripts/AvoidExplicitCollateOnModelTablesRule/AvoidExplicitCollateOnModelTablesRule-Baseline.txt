@@ -1,0 +1,27 @@
+﻿Problem description: Explicit COLLATE expression found in table definition in [dbo].[ProcWithAlterTableStatement].
+FullID: Cheburashka.DM0068
+Severity: Warning
+Model element: dbo.ProcWithAlterTableStatement
+Script file: ProcWithAlterTableStatement.sql
+Start line: 5
+Start column: 1
+========end of problem========
+
+Problem description: Explicit COLLATE expression found in table definition in [dbo].[ProcWithCreateTableStatement].
+FullID: Cheburashka.DM0068
+Severity: Warning
+Model element: dbo.ProcWithCreateTableStatement
+Script file: ProcWithCreateTableStatement.sql
+Start line: 4
+Start column: 21
+========end of problem========
+
+Problem description: Explicit COLLATE expression found in table definition in [dbo].[Table1].
+FullID: Cheburashka.DM0068
+Severity: Warning
+Model element: dbo.Table1
+Script file: Table1.sql
+Start line: 1
+Start column: 23
+========end of problem========
+

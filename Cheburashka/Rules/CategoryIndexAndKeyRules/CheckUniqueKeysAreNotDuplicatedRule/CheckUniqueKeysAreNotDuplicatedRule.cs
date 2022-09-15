@@ -30,8 +30,8 @@ namespace Cheburashka
 {
     [LocalizedExportCodeAnalysisRule(CheckUniqueKeysAreNotDuplicatedRule.RuleId,
         RuleConstants.ResourceBaseName,                                                 // Name of the resource file to look up displayname and description in
-        RuleConstants.CheckUniqueKeysAreNotDuplicatedRuleName,                         // ID used to look up the display name inside the resources file
-        RuleConstants.CheckUniqueKeysAreNotDuplicatedProblemDescription,               // ID used to look up the description inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicatedRuleName,                          // ID used to look up the display name inside the resources file
+        RuleConstants.CheckUniqueKeysAreNotDuplicatedProblemDescription,                // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,                            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                                              // This rule targets specific elements rather than the whole model
     public sealed class CheckUniqueKeysAreNotDuplicatedRule : SqlCodeAnalysisRule
@@ -126,9 +126,7 @@ namespace Cheburashka
 
                 if (unique)
                 {
-                    //List<TSqlFragment> issues = new();
-                    List<string> leadingEdgeIndexColumns = thisIndexOrConstraintColumns;//new();
-                    //leadingEdgeIndexColumns.AddRange(thisIndexOrConstraintColumns);
+                    List<string> leadingEdgeIndexColumns = thisIndexOrConstraintColumns;
 
                     List<TSqlObject> pks = ModelIndexAndKeysUtils.GetPrimaryKeys(parentObjectSchema, parentObjectName);
                     List<TSqlObject> indexes = ModelIndexAndKeysUtils.GetIndexes(parentObjectSchema, parentObjectName);
@@ -147,8 +145,7 @@ namespace Cheburashka
                             List<string> sortedPrimaryKeyColumns = columnSpecifications
                                 .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                 .Select(n => n.ObjectName.Parts[2]).ToList();
-                            List<string> pkLeadingEdgeIndexColumns = sortedPrimaryKeyColumns;// new();
-                            //pkLeadingEdgeIndexColumns.AddRange(sortedPrimaryKeyColumns);
+                            List<string> pkLeadingEdgeIndexColumns = sortedPrimaryKeyColumns;
 
                             foundMoreConciseUniqueCondition =
                                 DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
@@ -179,8 +176,7 @@ namespace Cheburashka
                                 List<string> sortedUniqueIndexColumns = columnSpecifications
                                     .OrderBy(col => col.ObjectName.Parts[2], SqlComparer.Comparer)
                                     .Select(n => n.ObjectName.Parts[2]).ToList();
-                                List<string> otherLeadingEdgeIndexColumns = sortedUniqueIndexColumns;//new();
-                                //otherLeadingEdgeIndexColumns.AddRange(sortedUniqueIndexColumns);
+                                List<string> otherLeadingEdgeIndexColumns = sortedUniqueIndexColumns;
 
                                 foundMoreConciseUniqueCondition =
                                     DetermineIfThisConstraintIsImpliedByTheOtherConstraint(leadingEdgeIndexColumns,
@@ -202,8 +198,8 @@ namespace Cheburashka
                             //so do  the columns checks.
                             if (modelElement.ObjectType == PrimaryKeyConstraint.TypeClass ||
                                 modelElement.ObjectType == Index.TypeClass
-                                || ((modelElement.ObjectType == UniqueConstraint.TypeClass &&
-                                     v.ObjectType == UniqueConstraint.TypeClass)
+                                || (modelElement.ObjectType == UniqueConstraint.TypeClass &&
+                                     v.ObjectType == UniqueConstraint.TypeClass
                                     && (!modelElement.Name.ToString().SQLModel_StringCompareEqual(v.Name.ToString())
                                     )
                                 )

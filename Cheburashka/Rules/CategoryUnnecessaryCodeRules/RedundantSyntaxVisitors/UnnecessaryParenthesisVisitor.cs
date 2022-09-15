@@ -94,6 +94,46 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        public override void ExplicitVisit(QualifiedJoin node)
+        {
+            if (node.SearchCondition is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SearchCondition);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(WhereClause node)
+        {
+            if (node.SearchCondition is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SearchCondition);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(HavingClause node)
+        {
+            if (node.SearchCondition is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SearchCondition);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(MergeActionClause node)
+        {
+            if (node.SearchCondition is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SearchCondition);
+            }
+            node.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(MergeSpecification node)
+        {
+            if (node.SearchCondition is BooleanParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SearchCondition);
+            }
+            node.AcceptChildren(this);
+        }
         public override void ExplicitVisit(QueryParenthesisExpression node)
         {
             if (node.QueryExpression is QueryParenthesisExpression)

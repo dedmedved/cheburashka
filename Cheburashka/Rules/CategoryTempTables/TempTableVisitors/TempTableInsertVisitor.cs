@@ -38,8 +38,7 @@ namespace Cheburashka
 
         public override void ExplicitVisit(SelectStatement node)
         {
-            if (  node.Into is not null
-            && TempTableExtensions.IsLocalTempTableName(node.Into)
+            if (node.Into?.IsLocalTempTableName() == true
             )
             {
                 InsertedTempTableNames.Add(node.Into.BaseIdentifier);
@@ -48,7 +47,7 @@ namespace Cheburashka
         public override void ExplicitVisit(InsertStatement node)
         {
             if (node.InsertSpecification.Target is NamedTableReference insertTableReference
-            && TempTableExtensions.IsLocalTempTableName(insertTableReference))
+            && insertTableReference.IsLocalTempTableName())
             {
                 InsertedTempTableNames.Add(insertTableReference.SchemaObject.BaseIdentifier);
             }
@@ -57,7 +56,7 @@ namespace Cheburashka
         public override void ExplicitVisit(MergeSpecification node)
         {
             if (node.Target is NamedTableReference mergeTargetTableReference
-            && TempTableExtensions.IsLocalTempTableName(mergeTargetTableReference)
+            && mergeTargetTableReference.IsLocalTempTableName()
             && node.ActionClauses.Any(n => n.Action is InsertMergeAction insetMergeAction)
             )
             {
@@ -68,7 +67,7 @@ namespace Cheburashka
         public override void ExplicitVisit(OutputIntoClause node)
         {
             if (node.IntoTable is NamedTableReference outputIntoTableReference
-            && TempTableExtensions.IsLocalTempTableName(outputIntoTableReference)
+            && outputIntoTableReference.IsLocalTempTableName()
             )
             {
                 InsertedTempTableNames.Add(outputIntoTableReference.SchemaObject.BaseIdentifier);

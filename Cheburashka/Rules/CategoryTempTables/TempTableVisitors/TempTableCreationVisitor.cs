@@ -28,17 +28,12 @@ namespace Cheburashka
 
     internal class TempTableCreationVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
-        public TempTableCreationVisitor()
-        {
-            CreatedTempTableNames = new List<Identifier>();
-        }
-
+        public TempTableCreationVisitor() => CreatedTempTableNames = new List<Identifier>();
         public IList<Identifier> CreatedTempTableNames { get; }
         public IList<TSqlFragment> SqlFragments() { return CreatedTempTableNames.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(CreateTableStatement node)
         {
-            if (  node.SchemaObjectName.BaseIdentifier.Value.StartsWith("#")
-             && !node.SchemaObjectName.BaseIdentifier.Value.StartsWith("##")
+            if ( node.SchemaObjectName.IsLocalTempTableName()
             )
             {
                 CreatedTempTableNames.Add(node.SchemaObjectName.BaseIdentifier);
@@ -46,8 +41,7 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(SelectStatement node)
         {
-            if (  node.Into is not null && node.Into.BaseIdentifier.Value.StartsWith("#")
-             && !node.Into.BaseIdentifier.Value.StartsWith("##")
+            if (node.Into?.IsLocalTempTableName() == true
             )
             {
                 CreatedTempTableNames.Add(node.Into.BaseIdentifier);

@@ -81,7 +81,7 @@ namespace Cheburashka
 
             var createdTempTableNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new TempTableCreationVisitor()).Cast<Identifier>().ToList();
             var tempTableUsages = DmTSqlFragmentVisitor.Visit(sqlFragment, new TempTableUsageVisitor()).Cast<Identifier>().ToList();
-            var nonLocalUsedTempTables = tempTableUsages.Where(ct => !createdTempTableNames.Any(usg => SqlComparer.SQLModel_StringCompareEqual(usg.Value, ct.Value))).Cast<TSqlFragment>().ToList();
+            var nonLocalUsedTempTables = tempTableUsages.Where(ct => !createdTempTableNames.Any(usg => usg.Value.SQLModel_StringCompareEqual(ct.Value))).Cast<TSqlFragment>().ToList();
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, nonLocalUsedTempTables, ruleDescriptor);
 

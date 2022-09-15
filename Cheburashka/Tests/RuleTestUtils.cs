@@ -49,7 +49,7 @@ namespace Cheburashka.Tests
 
         public static string ReadFileToString(string filePath)
         {
-            using StreamReader reader = new StreamReader(filePath);
+            using StreamReader reader = new(filePath);
             return reader.ReadToEnd();
         }
     }

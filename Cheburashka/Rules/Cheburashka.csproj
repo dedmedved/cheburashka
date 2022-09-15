@@ -232,6 +232,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryCollation\AvoidExplicitCollateOnModelTablesRule\AvoidExplicitCollateOnModelTablesRule.cs" />
+    <Compile Include="CategoryCollation\AvoidExplicitCollateOnModelTablesRule\AvoidExplicitCollateOnModelTablesVisitor.cs" />
+    <Compile Include="CategoryCollation\AvoidExplicitCollateOnModelTablesRule\TableAlterStatementVisitor.cs" />
+    <Compile Include="CategoryCollation\AvoidExplicitCollateOnModelTablesRule\TableCreateStatementVisitor.cs" />
+    <Compile Include="CategoryCollation\EnforceDatabaseCollationOnTempTablesRule\EnforceDatabaseCollationOnTempTablesRule.cs" />
+    <Compile Include="CategoryCollation\EnforceDatabaseCollationOnTempTablesRule\SelectIntoColumnExpressionVisitor.cs" />
+    <Compile Include="CategoryCollation\EnforceDatabaseCollationOnTempTablesRule\EnforceDatabaseCollationOnTempTablesVisitor.cs" />
+    <Compile Include="CategoryCollation\EnforceDatabaseCollationOnTempTablesRule\TempTableAlterStatementVisitor.cs" />
+    <Compile Include="CategoryCollation\EnforceDatabaseCollationOnTempTablesRule\TempTableCreateStatementVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\AvoidOnePartNamesRule.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\AvoidOnePartNameVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\DeleteStatementForTargetVisitor.cs" />
@@ -240,6 +249,9 @@
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingFunctionsVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\SchemaNameAcceptingProceduresVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidOnePartNamesRule\UpdateStatementForTargetVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidProcessingHintsRule\NamedTableReferenceWithHintsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidProcessingHintsRule\JoinHintsVisitor.cs" />
+    <Compile Include="CategoryLaxCode\AvoidProcessingHintsRule\AvoidProcessingHintsRule.cs" />
     <Compile Include="CategoryLaxCode\AvoidSelectIntoRule\SelectIntoVisitor.cs" />
     <Compile Include="CategoryLaxCode\AvoidSelectIntoRule\AvoidSelectIntoRule.cs" />
     <Compile Include="CategoryLaxCode\BasicRules\EnforceNoCountXactAbortRule.cs" />
@@ -272,11 +284,17 @@
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\BooleanExpressionEqualityFilterVisitor.cs" />
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\InAndExistsQueryVisitor.cs" />
     <Compile Include="CategoryMissingDerivedConstraintsRules\CheckUniqueConstraintImpliedBySubQueryRule\SingleSourceSubQueryEqualityConjunctionVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\SelfAssignedVariablesVisitor.cs" />
+    <Compile Include="CategoryModernCodingStyle\PreferSelfAssignmentOperatorsRule.cs" />
     <Compile Include="CategoryModernCodingStyle\PlainDropStatementVisitor.cs" />
     <Compile Include="CategoryModernCodingStyle\PreferDropIfExistsRule.cs" />
-    <Compile Include="CategorySSDTModelRules\AvoidExplicitCollateInDefinitionRule\ColumnWithExplicitCollateDefinitionVisitor.cs" />
-    <Compile Include="CategorySSDTModelRules\AvoidExplicitCollateInDefinitionRule\AvoidExplicitCollateInDefinitionRule.cs" />
+    <Compile Include="CategoryCollation\AvoidExplicitCollateInDefinitionRule\AvoidExplicitCollateInDefinitionRule.cs" />
+    <Compile Include="CategoryCollation\AvoidExplicitCollateInDefinitionRule\AvoidExplicitCollateVisitor.cs" />
     <Compile Include="CategoryTempTables\AvoidDroppingTempTableRule\AvoidDroppingTempTableRule.cs" />
+    <None Include="CategoryTempTables\AvoidWriteOnlyTempTableRule\AvoidWriteOnlyTempTableRule.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableMergeIntoVisitor.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableDeleteVisitor.cs" />
+    <Compile Include="CategoryTempTables\TempTableVisitors\TempTableUpdateVisitor.cs" />
     <Compile Include="CategoryTempTables\TempTableVisitors\TempTableInsertVisitor.cs" />
     <Compile Include="CategoryTempTables\TempTableVisitors\TempTableDropVisitor.cs" />
     <Compile Include="CategoryTempTables\AvoidReadOnlyTempTableRule\AvoidReadOnlyTempTableRule.cs" />
@@ -284,6 +302,7 @@
     <Compile Include="CategoryTempTables\AvoidUnusedTempTableRule\AvoidUnusedTempTableRule.cs" />
     <Compile Include="CategoryTempTables\TempTableUsageVisitor.cs" />
     <Compile Include="CategoryTempTables\TempTableVisitors\TempTableCreationVisitor.cs" />
+    <Compile Include="CategoryUnnecessaryCodeRules\RedundantSyntaxVisitors\UnnecessarilyBracketedJoinExpressionVisitor.cs" />
     <Compile Include="Generic Visitors\DMLSQLVisitor.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasRule.cs" />
     <Compile Include="CategoryLaxCode\EnforceTableAliasRule\EnforceTableAliasExcludedContextsVisitor.cs" />
@@ -352,6 +371,9 @@
     <Compile Include="CategoryIndexAndKeyRules\CheckUniqueKeysAreNotDuplicatedRule\CheckUniqueKeysAreNotDuplicatedRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\EnforceClusteredIndexIsPrimaryOrForeignKeyRule\EnforceClusteredIndexIsPrimaryOrForeignKeyRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\EnforceClusteredIndexRule\EnforceClusteredIndexRule.cs" />
+    <None Include="..\..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.config" />
     <Compile Include="CategoryIndexAndKeyRules\EnforceForeignKeyIsIndexedRule\EnforceForeignKeyIsIndexedRule.cs" />
     <Compile Include="CategoryIndexAndKeyRules\EnforceNamedConstraintRule\EnforceNamedConstraintDeclareTableVisitor.cs" />
@@ -449,7 +471,6 @@
   <ItemGroup>
     <Folder Include="CategoryRelationalDesignRules\AvoidForeignKeysToSeparateUniqueConstraints\" />
     <Folder Include="CategoryRelationalDesignRules\PreferForeignKeyLinkedToPrimaryKey\" />
-    <Folder Include="CategoryTempTables\AvoidWriteOnlyTempTableRule\" />
     <Folder Include="CategoryUnnecessaryVariablesRules\AvoidReadOnlyTableVariableRule\" />
     <Folder Include="CategoryUnnecessaryVariablesRules\AvoidWriteOnlyTableVariableRule\" />
   </ItemGroup>

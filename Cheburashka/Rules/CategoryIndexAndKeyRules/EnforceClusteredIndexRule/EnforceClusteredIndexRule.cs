@@ -39,8 +39,8 @@ namespace Cheburashka
 
     [LocalizedExportCodeAnalysisRule(EnforceClusteredIndexRule.RuleId,
         RuleConstants.ResourceBaseName,                                  // Name of the resource file to look up displayname and description in
-        RuleConstants.EnforceClusteredIndexRuleName,                    // ID used to look up the display name inside the resources file
-        RuleConstants.EnforceClusteredIndexProblemDescription,          // ID used to look up the description inside the resources file
+        RuleConstants.EnforceClusteredIndexRuleName,                     // ID used to look up the display name inside the resources file
+        RuleConstants.EnforceClusteredIndexProblemDescription,           // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDatabaseStructures,             // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                               // This rule targets specific elements rather than the whole model
     public sealed class EnforceClusteredIndexRule: SqlCodeAnalysisRule

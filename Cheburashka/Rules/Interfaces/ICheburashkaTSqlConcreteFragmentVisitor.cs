@@ -5,6 +5,7 @@ namespace Cheburashka
 {
     public interface ICheburashkaTSqlConcreteFragmentVisitor
     {
+        void ExplicitVisit(SelectScalarExpression node);
         public IList<TSqlFragment> SqlFragments();
     }
 }

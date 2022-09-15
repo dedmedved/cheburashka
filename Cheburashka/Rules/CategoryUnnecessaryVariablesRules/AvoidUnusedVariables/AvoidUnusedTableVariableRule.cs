@@ -101,12 +101,10 @@ namespace Cheburashka
                 objects.Add(variableDeclaration.Value, variableDeclaration);
             }
 
-            foreach (VariableReference variableReference in variableReferences)
+            foreach (var variableReference in variableReferences.Where(variableReference => !counts.ContainsKey(variableReference.Name)// only need to notice the first occurrence
+            ))
             {
-                if (!counts.ContainsKey(variableReference.Name))// only need to notice the first occurrence
-                {
-                    counts.Add(variableReference.Name, 1);
-                }
+                counts.Add(variableReference.Name, 1);
             }
 
             foreach (var key in objects.Keys)

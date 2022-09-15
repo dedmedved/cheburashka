@@ -24,10 +24,8 @@ using System.Collections.Generic;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Linq;
 
-
 namespace Cheburashka
 {
-
     internal class CheckUniqueConstraintHasNoNullColumnsVisitor : TSqlConcreteFragmentVisitor, ICheburashkaTSqlConcreteFragmentVisitor
     {
         private readonly List<ColumnWithSortOrder> _objects;

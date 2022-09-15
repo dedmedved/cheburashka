@@ -1,0 +1,45 @@
+Problem description: Temp table without COLLATE DATABASE_DEFAULT found in [dbo].[ProcWithAlterTempTableStatement].
+FullID: Cheburashka.DM0069
+Severity: Warning
+Model element: dbo.ProcWithAlterTempTableStatement
+Script file: ProcWithAlterTempTableStatement.sql
+Start line: 5
+Start column: 32
+========end of problem========
+
+Problem description: Temp table without COLLATE DATABASE_DEFAULT found in [dbo].[ProcWithAlterTempTableStatement].
+FullID: Cheburashka.DM0069
+Severity: Warning
+Model element: dbo.ProcWithAlterTempTableStatement
+Script file: ProcWithAlterTempTableStatement.sql
+Start line: 6
+Start column: 32
+========end of problem========
+
+Problem description: Temp table without COLLATE DATABASE_DEFAULT found in [dbo].[ProcWithCreateTempTableStatement].
+FullID: Cheburashka.DM0069
+Severity: Warning
+Model element: dbo.ProcWithCreateTempTableStatement
+Script file: ProcWithCreateTempTableStatement.sql
+Start line: 4
+Start column: 22
+========end of problem========
+
+Problem description: Temp table without COLLATE DATABASE_DEFAULT found in [dbo].[ProcWithCreateTempTableStatement].
+FullID: Cheburashka.DM0069
+Severity: Warning
+Model element: dbo.ProcWithCreateTempTableStatement
+Script file: ProcWithCreateTempTableStatement.sql
+Start line: 5
+Start column: 22
+========end of problem========
+
+Problem description: Temp table without COLLATE DATABASE_DEFAULT found in [dbo].[ProcWithSelectIntoTempTableStatement].
+FullID: Cheburashka.DM0069
+Severity: Warning
+Model element: dbo.ProcWithSelectIntoTempTableStatement
+Script file: ProcWithSelectIntoTempTableStatement.sql
+Start line: 5
+Start column: 11
+========end of problem========
+

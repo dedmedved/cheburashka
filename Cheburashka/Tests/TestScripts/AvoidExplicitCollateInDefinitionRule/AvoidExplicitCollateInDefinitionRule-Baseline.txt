@@ -1,4 +1,31 @@
-Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithAlterTableStatement].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithAlterTableStatement
+Script file: ProcWithAlterTableStatement.sql
+Start line: 5
+Start column: 1
+========end of problem========
+
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithCreateTableStatement].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithCreateTableStatement
+Script file: ProcWithCreateTableStatement.sql
+Start line: 4
+Start column: 21
+========end of problem========
+
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithExplicitCollate].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.ProcWithExplicitCollate
+Script file: ProcWithExplicitCollate.sql
+Start line: 4
+Start column: 28
+========end of problem========
+
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDefinitions].
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
@@ -7,7 +34,7 @@ Start line: 6
 Start column: 9
 ========end of problem========
 
-Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDefinitions].
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
@@ -16,7 +43,7 @@ Start line: 12
 Start column: 9
 ========end of problem========
 
-Problem description: Explicit collation given in [dbo].[ProcWithTableDefinitions].
+Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDefinitions].
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
@@ -25,12 +52,21 @@ Start line: 18
 Start column: 9
 ========end of problem========
 
-Problem description: Explicit collation given in [dbo].[TableA].
+Problem description: Explicit COLLATE expression given in [dbo].[Table1].
 FullID: Cheburashka.DM0021
 Severity: Warning
-Model element: dbo.TableA
-Script file: TableA.sql
+Model element: dbo.Table1
+Script file: Table1.sql
+Start line: 1
+Start column: 23
+========end of problem========
+
+Problem description: Explicit COLLATE expression given in [dbo].[View1].
+FullID: Cheburashka.DM0021
+Severity: Warning
+Model element: dbo.View1
+Script file: View1.sql
 Start line: 3
-Start column: 9
+Start column: 8
 ========end of problem========
 

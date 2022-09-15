@@ -106,6 +106,13 @@ namespace Cheburashka
         public const string AvoidDroppingTempTableRuleId                                = "Cheburashka.DM0064";
         public const string AvoidReadOnlyTempTableRuleId                                = "Cheburashka.DM0065";
         
+       // public const string AvoidWriteOnlyTempTableRuleId                               = "Cheburashka.DM0066";
+
+        public const string PreferSelfAssignmentOperatorsRuleId                         = "Cheburashka.DM0067";
+        public const string AvoidExplicitCollateOnModelTablesRuleId                     = "Cheburashka.DM0068";
+        public const string EnforceDatabaseCollationOnTempTablesRuleId                  = "Cheburashka.DM0069";
+
+        public const string AvoidProcessingHintsRuleId                                  = "Cheburashka.DM0070";
 
         public const string AvoidUnusedVariablesRuleName                                = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                      = "AvoidUnusedVariables_ProblemDescription";
@@ -290,6 +297,21 @@ namespace Cheburashka
         public const string AvoidReadOnlyTempTableRuleName                                          = "AvoidReadOnlyTempTable_RuleName";
         public const string AvoidReadOnlyTempTableProblemDescription                                = "AvoidReadOnlyTempTable_ProblemDescription";
 
+       // public const string AvoidWriteOnlyTempTableRuleName                                         = "AvoidWriteOnlyTempTable_RuleName";
+      //  public const string AvoidWriteOnlyTempTableProblemDescription                               = "AvoidWriteOnlyTempTable_ProblemDescription";
+
+        public const string PreferSelfAssignmentOperatorsRuleName                                   = "PreferSelfAssignmentOperators_RuleName";
+        public const string PreferSelfAssignmentOperatorsProblemDescription                         = "PreferSelfAssignmentOperators_ProblemDescription";
+
+        public const string AvoidExplicitCollateRuleName                                            = "AvoidExplicitCollate_RuleName";
+        public const string AvoidExplicitCollateProblemDescription                                  = "AvoidExplicitCollate_ProblemDescription";
+        public const string AvoidExplicitCollateOnModelTablesRuleName                               = "AvoidExplicitCollateOnModelTables_RuleName";
+        public const string AvoidExplicitCollateOnModelTablesProblemDescription                     = "AvoidExplicitCollateOnModelTables_ProblemDescription";
+        public const string EnforceDatabaseCollationOnTempTablesRuleName                            = "EnforceDatabaseCollationOnTempTables_RuleName";
+        public const string EnforceDatabaseCollationOnTempTablesProblemDescription                  = "EnforceDatabaseCollationOnTempTables_ProblemDescription";
+                                                                                                    
+        public const string AvoidProcessingHintsRuleName                                            = "AvoidProcessingHints_RuleName";
+        public const string AvoidProcessingHintsProblemDescription                                  = "AvoidProcessingHints_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)
@@ -333,6 +355,8 @@ namespace Cheburashka
         public const string CategoryParameters                  = "Code.Parameter.Issues";
         public const string CategoryMissingDerivedConstraints   = "Data.Database.Constraints";
 
+        public const string CategoryCollation                   = "Data.Database.Collation";
+        
 
         //public const string CategoryDataTypes                   = "CategoryDataTypes";
         //public const string CategoryDates                       = "CategoryDates";

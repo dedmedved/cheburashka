@@ -81,7 +81,7 @@ namespace Cheburashka
 
             var createdTempTableNames = DmTSqlFragmentVisitor.Visit(sqlFragment, new TempTableCreationVisitor()).Cast<Identifier>().ToList();
             var tempTableDrops = DmTSqlFragmentVisitor.Visit(sqlFragment, new TempTableDropVisitor()).Cast<Identifier>().ToList();
-            var droppedTempTables = tempTableDrops.Where(ct => createdTempTableNames.Any(usg => SqlComparer.SQLModel_StringCompareEqual(usg.Value, ct.Value))).Cast<TSqlFragment>().ToList();
+            var droppedTempTables = tempTableDrops.Where(ct => createdTempTableNames.Any(usg => usg.Value.SQLModel_StringCompareEqual(ct.Value))).Cast<TSqlFragment>().ToList();
 
             RuleUtils.UpdateProblems(problems, modelElement, elementName, droppedTempTables, ruleDescriptor);
 

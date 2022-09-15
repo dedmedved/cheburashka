@@ -165,15 +165,13 @@ namespace Cheburashka
 
             foreach (var setVariable in setVariables)
             {
-                foreach (var dependency in setVariable.Dependencies)
+                foreach (var (freeVariable, dependentVariable) in from dependency in setVariable.Dependencies// only add the dependency if it is an actual variable -- looks like our code picks up *everything* syntactically like a variable.
+                                                                  where variableReferences.Contains(dependency)
+                                                                  let freeVariable = setVariable.Variable.Name
+                                                                  let dependentVariable = dependency.Name
+                                                                  select (freeVariable, dependentVariable))
                 {
-                    // only add the dependency if it is an actual variable -- looks like our code picks up *everything* syntactically like a variable.
-                    if (variableReferences.Contains(dependency))
-                    {
-                        var freeVariable = setVariable.Variable.Name;
-                        var dependentVariable = dependency.Name;
-                        writeDependencies.AddEdge(new Edge<string>(dependentVariable, freeVariable));
-                    }
+                    writeDependencies.AddEdge(new Edge<string>(dependentVariable, freeVariable));
                 }
             }
             // compute transitive dependencies
@@ -201,7 +199,7 @@ namespace Cheburashka
             List<string> consumedVariables = (from edge in writeDependencies.Edges 
                                               where edge.Target == terminate 
                                               select edge.Source
-                                              ).ToList().Distinct().ToList();
+                                              ).Distinct().ToList();
 
             var unConsumedVariables = setVariables.Where(n => ! consumedVariables.Contains(n.Variable.Name, SqlComparer.Comparer))
                                                   .Select(n => n.Variable.Name)

@@ -133,7 +133,25 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explicit collation given in {0}..
+        ///   Looks up a localized string similar to Explicit COLLATE expression found in {0}..
+        /// </summary>
+        internal static string AvoidExplicitCollate_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollate_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid explicitly using COLLATE expression.  Rely on the default collation..
+        /// </summary>
+        internal static string AvoidExplicitCollate_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollate_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explicit COLLATE expression given in {0}..
         /// </summary>
         internal static string AvoidExplicitCollateInDefinition_ProblemDescription {
             get {
@@ -147,6 +165,24 @@ namespace Cheburashka {
         internal static string AvoidExplicitCollateInDefinition_RuleName {
             get {
                 return ResourceManager.GetString("AvoidExplicitCollateInDefinition_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explicit COLLATE expression found in table definition in {0}..
+        /// </summary>
+        internal static string AvoidExplicitCollateOnModelTables_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollateOnModelTables_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid explicitly using COLLATE expression inside a table definition.  Rely on the default collation..
+        /// </summary>
+        internal static string AvoidExplicitCollateOnModelTables_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidExplicitCollateOnModelTables_RuleName", resourceCulture);
             }
         }
         
@@ -219,6 +255,24 @@ namespace Cheburashka {
         internal static string AvoidOnePartNames_RuleName {
             get {
                 return ResourceManager.GetString("AvoidOnePartNames_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQL query hint found in {0}..
+        /// </summary>
+        internal static string AvoidProcessingHints_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidProcessingHints_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid providing explicit SQL query hints to the optimiser..
+        /// </summary>
+        internal static string AvoidProcessingHints_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidProcessingHints_RuleName", resourceCulture);
             }
         }
         
@@ -399,6 +453,24 @@ namespace Cheburashka {
         internal static string AvoidUsingNonLocalTempTable_RuleName {
             get {
                 return ResourceManager.GetString("AvoidUsingNonLocalTempTable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write-only Temp table found in {0}..
+        /// </summary>
+        internal static string AvoidWriteOnlyTempTable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidWriteOnlyTempTable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp tables should be referenced by a read context of some kind, not just written to..
+        /// </summary>
+        internal static string AvoidWriteOnlyTempTable_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidWriteOnlyTempTable_RuleName", resourceCulture);
             }
         }
         
@@ -817,6 +889,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temp table without COLLATE DATABASE_DEFAULT found in {0}..
+        /// </summary>
+        internal static string EnforceDatabaseCollationOnTempTables_ProblemDescription {
+            get {
+                return ResourceManager.GetString("EnforceDatabaseCollationOnTempTables_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp tables should have the collation tied to the database collation..
+        /// </summary>
+        internal static string EnforceDatabaseCollationOnTempTables_RuleName {
+            get {
+                return ResourceManager.GetString("EnforceDatabaseCollationOnTempTables_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert statement or clause without column list found in {0}..
         /// </summary>
         internal static string EnforceExplicitInsertColumnList_ProblemDescription {
@@ -1137,6 +1227,24 @@ namespace Cheburashka {
         internal static string PreferExplicitNullInColumnDefinition_RuleName {
             get {
                 return ResourceManager.GetString("PreferExplicitNullInColumnDefinition_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self-assignment operator eg+= can be used here {0}..
+        /// </summary>
+        internal static string PreferSelfAssignmentOperators_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferSelfAssignmentOperators_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For SQL Server 2014 onwards use self-assignment eg set @a+=1, not set@a=@a+1..
+        /// </summary>
+        internal static string PreferSelfAssignmentOperators_RuleName {
+            get {
+                return ResourceManager.GetString("PreferSelfAssignmentOperators_RuleName", resourceCulture);
             }
         }
         

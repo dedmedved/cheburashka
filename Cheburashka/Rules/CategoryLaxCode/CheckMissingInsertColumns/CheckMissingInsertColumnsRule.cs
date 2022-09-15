@@ -107,7 +107,7 @@ namespace Cheburashka
                 foreach (var fragment in InsertMergeFragments)
                 {
                     var insertFragment = fragment.ActionClauses.Where(n => n.Action is InsertMergeAction).Select(n => n.Action).FirstOrDefault() as InsertMergeAction;
-                    var insertcolumns = insertFragment?.Columns.ToList();//.Select();// n=> n.MultiPartIdentifier.Identifiers.Last().Value).ToList();
+                    var insertcolumns = insertFragment?.Columns.ToList();
                     // todo need to handle other types somehow
                     if (insertFragment is not null && fragment.Target is NamedTableReference table && table.IsLocalObject())
                     {
@@ -146,7 +146,7 @@ namespace Cheburashka
                             && n.Name.Parts[1].SQLModel_StringCompareEqual(objectName)
                 )
                 .Select(n => n).ToList();
-            if (objs.Count <= 0) return;
+            if (objs.Count == 0) return;
 
 
             var tbl = objs[0];
