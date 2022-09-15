@@ -2851,7 +2851,122 @@ namespace Cheburashka.Tests
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(AvoidReadOnlyTempTableRule.RuleId);
         }
-        
+        ///// <summary>
+        ///// <para>
+        ///// This test uses input scripts saved in the "TestScripts\AvoidWriteOnlyTempTableRule" folder and compares the
+        ///// results to the "AvoidWriteOnlyTempTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        ///// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        ///// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        ///// </para>
+        ///// <para>
+        ///// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        ///// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        ///// </para>
+        ///// </summary>
+        //[TestMethod]
+        //public void AvoidWriteOnlyTempTableRule_CI_AI()
+        //{
+        //    using var test = new BaselinedRuleTest(
+        //        TestContext,
+        //        nameof(AvoidWriteOnlyTempTableRule),
+        //        new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+        //        SqlServerVersion.Sql90);
+        //    // Since this test verifies results against a baseline file, we don't need to do any extra verification
+        //    test.RunTest(AvoidWriteOnlyTempTableRule.RuleId);
+        //}
+
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\EnforceDatabaseCollationOnTempTablesRule" folder and compares the
+        /// results to the "EnforceDatabaseCollationOnTempTablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void EnforceDatabaseCollationOnTempTablesRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(EnforceDatabaseCollationOnTempTablesRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(EnforceDatabaseCollationOnTempTablesRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidExplicitCollateOnModelTablesRule" folder and compares the
+        /// results to the "AvoidExplicitCollateOnModelTablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidExplicitCollateOnModelTablesRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidExplicitCollateOnModelTablesRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql90);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidExplicitCollateOnModelTablesRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidExplicitCollateOnModelTablesRule" folder and compares the
+        /// results to the "AvoidExplicitCollateOnModelTablesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidProcessingHintsRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidProcessingHintsRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql140);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidProcessingHintsRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\PreferSelfAssignmentOperatorsRule" folder and compares the
+        /// results to the "PreferSelfAssignmentOperatorsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void PreferSelfAssignmentOperatorsRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(PreferSelfAssignmentOperatorsRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AS" },
+                SqlServerVersion.Sql140);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(PreferSelfAssignmentOperatorsRule.RuleId);
+        }
     }
 }
 

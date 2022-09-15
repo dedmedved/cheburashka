@@ -230,7 +230,7 @@ namespace Cheburashka
             if (tableAlias is not null)
             {
                 if ( // 1)
-                    colRef.Count == 2 && colRef[1].Value.SQLModel_StringCompareEqual(tableAlias.Value)
+                    (colRef.Count == 2 && colRef[1].Value.SQLModel_StringCompareEqual(tableAlias.Value))
                     // 2)
                     || colRef.Count == 1
                 )
@@ -250,8 +250,7 @@ namespace Cheburashka
                     singleMatch = SingleMatch(allColumns, colNameToMatch, out match);
                 }
                 else if ( // 3)
-                    colRef.Count == 2 && tableRef is not null
-                                        && tableRef.Value.SQLModel_StringCompareEqual(colRef[0].Value)
+                    colRef.Count == 2 && tableRef?.Value.SQLModel_StringCompareEqual(colRef[0].Value) == true
                 )
                 {
                     singleMatch = SingleMatch(allColumns, colNameToMatch, out match);
@@ -289,7 +288,7 @@ namespace Cheburashka
                     if (tableAlias is not null)
                     {
                         if ( // 1)
-                            identifier.Count == 2 && identifier[1].Value.SQLModel_StringCompareEqual(tableAlias.Value)
+                            (identifier.Count == 2 && identifier[1].Value.SQLModel_StringCompareEqual(tableAlias.Value))
                             // 2)
                             || identifier.Count == 1
                         )
@@ -309,8 +308,7 @@ namespace Cheburashka
                             singleMatch = SingleMatch(allColumns, colNameToMatch, out _);
                         }
                         else if ( // 3)
-                            identifier.Count == 2 && tableRef is not null
-                                                  && tableRef.Value.SQLModel_StringCompareEqual(identifier[0].Value)
+                            identifier.Count == 2 && tableRef?.Value.SQLModel_StringCompareEqual(identifier[0].Value) == true
                         )
                         {
                             singleMatch = SingleMatch(allColumns, colNameToMatch, out _);
@@ -427,8 +425,7 @@ namespace Cheburashka
                         List<TSqlObject> uniqueConstraints = ModelIndexAndKeysUtils.GetUniqueConstraints(objectSchema, objectName);
 
                         if (tableColumns.Count> 0) {
-                            var foundAUniqueConstraintForEqualityColumns = false;
-                            foundAUniqueConstraintForEqualityColumns = FindAUniqueConstraintForEqualityColumns(pks, distinctColumnNames, PrimaryKeyConstraint.Columns);
+                            var foundAUniqueConstraintForEqualityColumns = FindAUniqueConstraintForEqualityColumns(pks, distinctColumnNames, PrimaryKeyConstraint.Columns);
                             if (!foundAUniqueConstraintForEqualityColumns) 
                                 foundAUniqueConstraintForEqualityColumns = FindAUniqueConstraintForEqualityColumns(uniqueIndexes, distinctColumnNames, Index.Columns);
                             if (!foundAUniqueConstraintForEqualityColumns) 

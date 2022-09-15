@@ -42,47 +42,39 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(CreateTableStatement node)
         {
-            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith(@"#"))
+            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith("#"))
             {
                 _objects.Add(node);
             }
         }
         public override void ExplicitVisit(AlterTableAddTableElementStatement node)
         {
-            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith(@"#"))
+            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith("#"))
             {
                 _objects.Add(node);
             }
         }
         public override void ExplicitVisit(AlterTableConstraintModificationStatement node)
         {
-            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith(@"#"))
+            if (node.SchemaObjectName.BaseIdentifier.Value.StartsWith("#"))
             {
                 _objects.Add(node);
             }
         }
         public override void ExplicitVisit(CreateFunctionStatement node)
         {
-            if (node.ReturnType is not null)
+            if (node.ReturnType is not null && (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType))
             {
-                if (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType)
-                {
-                    _objects.Add(node.ReturnType);
-                }
+                _objects.Add(node.ReturnType);
             }
         }
         public override void ExplicitVisit(AlterFunctionStatement node)
         {
-            if (node.ReturnType is not null)
+            if (node.ReturnType is not null && (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType))
             {
-                if (node.ReturnType is TableValuedFunctionReturnType || node.ReturnType is SelectFunctionReturnType)
-                {
-                    _objects.Add(node.ReturnType);
-                }
+                _objects.Add(node.ReturnType);
             }
         }
-
     }
-
 }
 

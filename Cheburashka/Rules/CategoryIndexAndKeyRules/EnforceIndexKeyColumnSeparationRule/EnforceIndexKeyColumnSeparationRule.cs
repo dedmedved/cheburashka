@@ -102,7 +102,7 @@ namespace Cheburashka
                 var indexColumns = modelElement.GetReferenced(Index.Columns).Select(n => n.Name.Parts.Last()).ToList();
 
                 var thisIndexHasIncludedColumns = modelElement.GetReferenced(Index.IncludedColumns).Any();
-                var thisIndexIncludedColumns = modelElement.GetReferenced(Index.IncludedColumns).Select(n => n.Name.Parts.Last()).ToList();;
+                var thisIndexIncludedColumns = modelElement.GetReferenced(Index.IncludedColumns).Select(n => n.Name.Parts.Last()).ToList();
 
                 List<string> clusteringIndexColumns = new();
 
@@ -161,13 +161,13 @@ namespace Cheburashka
             {
                 // have to handle indexes differently to pks/uniq constraints - in a separate sub-clause in the IF
                 // due to differently implemented naming conventions/ structures
-                if (modelRelationshipClass == Index.Columns && !(SqlRuleUtils.ObjectNameMatches(v, owningObject.Name.Parts[1], indexSchema)
+                if ((modelRelationshipClass == Index.Columns && !(SqlRuleUtils.ObjectNameMatches(v, owningObject.Name.Parts[1], indexSchema)
                                                                  && indexName.SQLModel_StringCompareEqual(v.Name.Parts[2])
-                        )
+                        ))
                 || !v.Name.HasName || !SqlRuleUtils.ObjectNameMatches(v, owningObject)
                )
                 {
-                    var structureObjColumns = v.GetReferenced(modelRelationshipClass);//;
+                    var structureObjColumns = v.GetReferenced(modelRelationshipClass);
                     List<string> structureObjLeadingEdgeColumns = structureObjColumns.Select(c => c.Name.Parts.Last()).ToList();
 
                     if (modelRelationshipClass == Index.Columns) // and of course only indexes have included columns
@@ -236,7 +236,7 @@ namespace Cheburashka
                 && matchedPos.Count > 0
                 && matchedPos.Count - 1 == matchedPos.Max())
             {
-                foundIndexThatMatchesAKey = true;
+                return true;
             }
             else if (theseKeysColumns.Count < theOtherKeysColumns.Count
                 //everything returned was a match
@@ -247,7 +247,7 @@ namespace Cheburashka
                 && matchedPos.Count - 1 == matchedPos.Max()
                 )
             {
-                foundIndexThatMatchesAKey = true;
+                return true;
             }
 
             return foundIndexThatMatchesAKey;

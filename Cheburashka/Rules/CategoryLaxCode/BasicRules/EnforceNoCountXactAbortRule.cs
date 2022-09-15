@@ -85,16 +85,16 @@ namespace Cheburashka
 
             DmvSettings.RefreshModelBuiltInCache(ruleExecutionContext.SchemaModel);
 
-            var code = sqlFragment is CreateProcedureStatement createProcedureStatement 
+            var code = sqlFragment is CreateProcedureStatement createProcedureStatement
                     ? createProcedureStatement.StatementList
-                        : sqlFragment is CreateTriggerStatement createTriggerStatement && 
-                          createTriggerStatement.TriggerObject.TriggerScope == TriggerScope.Normal 
-                    ? createTriggerStatement.StatementList 
+                        : sqlFragment is CreateTriggerStatement createTriggerStatement &&
+                          createTriggerStatement.TriggerObject.TriggerScope == TriggerScope.Normal
+                    ? createTriggerStatement.StatementList
                             : null;
 
             var seenXactAbortOn = false;
             var seenNoCountOn = false;
-            var problemExists = code is not null && code.Statements.Count > 0 && ! CheckXactAbortAndNoCountAreInFirst2Statements(code, ref seenXactAbortOn, ref seenNoCountOn);
+            var problemExists = code?.Statements.Count > 0 && ! CheckXactAbortAndNoCountAreInFirst2Statements(code, ref seenXactAbortOn, ref seenNoCountOn);
             RuleUtils.UpdateProblems(problemExists,problems, modelElement, elementName, sqlFragment, ruleDescriptor);
 
             return problems;
@@ -168,7 +168,7 @@ namespace Cheburashka
                             statementIdx++;
                         }
 
-                        return (seenXactAbort && seenNoCount); // if we run out of suitable statements to process return the final individual values as a measure of success.
+                        return seenXactAbort && seenNoCount; // if we run out of suitable statements to process return the final individual values as a measure of success.
 
                     }
             }

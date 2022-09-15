@@ -20,7 +20,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using Microsoft.SqlServer.Dac.Model;
-
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 namespace Cheburashka
 {
     public static class SqlComparer
@@ -31,6 +31,33 @@ namespace Cheburashka
         {
             return Comparer.Compare(arg1, arg2) == 0;
         }
+        public static bool SQLModel_StringCompareEqual(this Identifier arg1, Identifier arg2)
+        {
+            return Comparer.Compare(arg1.Value, arg2.Value) == 0;
+        }
+        public static bool SQLModel_StringCompareEqual(this string arg1, Identifier arg2)
+        {
+            return Comparer.Compare(arg1, arg2.Value) == 0;
+        }
+        public static bool SQLModel_StringCompareEqual(this Identifier arg1, string arg2)
+        {
+            return Comparer.Compare(arg1.Value, arg2) == 0;
+        }
+
+        public static bool SQLModel_StringCompareEqual(this VariableReference arg1, VariableReference arg2)
+        {
+            return Comparer.Compare(arg1.Name, arg2.Name) == 0;
+        }
+        public static bool SQLModel_StringCompareEqual(this string arg1, VariableReference arg2)
+        {
+            return Comparer.Compare(arg1, arg2.Name) == 0;
+        }
+        public static bool SQLModel_StringCompareEqual(this VariableReference arg1, string arg2)
+        {
+            return Comparer.Compare(arg1.Name, arg2) == 0;
+        }
+
+
     }
 }
 

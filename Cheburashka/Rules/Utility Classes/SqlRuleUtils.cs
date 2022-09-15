@@ -286,6 +286,18 @@ namespace Cheburashka
         }
 
 
+        public static ReadOnlyCollection<ModelTypeClass> GetExpressionContainingClasses() => Array.AsReadOnly(new[]
+        {
+                ModelSchema.Table,
+                ModelSchema.View,
+                ModelSchema.ExtendedProcedure,
+                ModelSchema.Procedure,
+                ModelSchema.TableValuedFunction,
+                ModelSchema.ScalarFunction,
+                ModelSchema.DatabaseDdlTrigger,
+                ModelSchema.DmlTrigger,
+                ModelSchema.ServerDdlTrigger
+        });
         public static ReadOnlyCollection<ModelTypeClass> GetCodeContainingClasses() => Array.AsReadOnly(new[]
         {
                 ModelSchema.ExtendedProcedure,

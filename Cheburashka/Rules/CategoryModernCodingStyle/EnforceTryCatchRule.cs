@@ -124,7 +124,10 @@ namespace Cheburashka
                             {
                                 selectCount++; continue;
                             }
-                            else return false;
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else { return false; }
 

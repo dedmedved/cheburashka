@@ -142,10 +142,22 @@
     <value>Avoid using @error.  Use Try/Catch.</value>
   </data>
   <data name="AvoidExplicitCollateInDefinition_ProblemDescription" xml:space="preserve">
-    <value>Explicit collation given in {0}.</value>
+    <value>Explicit COLLATE expression given in {0}.</value>
   </data>
   <data name="AvoidExplicitCollateInDefinition_RuleName" xml:space="preserve">
     <value>Avoid specifying collations unless absolutely necessary.  Rely on the collation defined in the project or target database.</value>
+  </data>
+  <data name="AvoidExplicitCollateOnModelTables_ProblemDescription" xml:space="preserve">
+    <value>Explicit COLLATE expression found in table definition in {0}.</value>
+  </data>
+  <data name="AvoidExplicitCollateOnModelTables_RuleName" xml:space="preserve">
+    <value>Avoid explicitly using COLLATE expression inside a table definition.  Rely on the default collation.</value>
+  </data>
+  <data name="AvoidExplicitCollate_ProblemDescription" xml:space="preserve">
+    <value>Explicit COLLATE expression found in {0}.</value>
+  </data>
+  <data name="AvoidExplicitCollate_RuleName" xml:space="preserve">
+    <value>Avoid explicitly using COLLATE expression.  Rely on the default collation.</value>
   </data>
   <data name="AvoidGoto_ProblemDescription" xml:space="preserve">
     <value>GOTO statement was found in {0}.</value>
@@ -170,6 +182,12 @@
   </data>
   <data name="AvoidOnePartNames_RuleName" xml:space="preserve">
     <value>Always include the schema name when referencing an object.</value>
+  </data>
+  <data name="AvoidProcessingHints_ProblemDescription" xml:space="preserve">
+    <value>SQL query hint found in {0}.</value>
+  </data>
+  <data name="AvoidProcessingHints_RuleName" xml:space="preserve">
+    <value>Avoid providing explicit SQL query hints to the optimiser.</value>
   </data>
   <data name="AvoidRaiseErrorOutsideTryCatch_ProblemDescription" xml:space="preserve">
     <value>Raiserror found outside TRY/CATCH block in {0}.</value>
@@ -230,6 +248,12 @@
   </data>
   <data name="AvoidUsingNonLocalTempTable_RuleName" xml:space="preserve">
     <value>It's best to only use temp tables created and disposed of in the same block of code.</value>
+  </data>
+  <data name="AvoidWriteOnlyTempTable_ProblemDescription" xml:space="preserve">
+    <value>Write-only Temp table found in {0}.</value>
+  </data>
+  <data name="AvoidWriteOnlyTempTable_RuleName" xml:space="preserve">
+    <value>Temp tables should be referenced by a read context of some kind, not just written to.</value>
   </data>
   <data name="AvoidWriteOnlyVariables_ProblemDescription" xml:space="preserve">
     <value>Write-only Variable found in {0}.</value>
@@ -369,6 +393,12 @@
   <data name="EnforceColumnPrefix_RuleName" xml:space="preserve">
     <value>Columns should be prefixed with the alias of the source where disambiguation is required.</value>
   </data>
+  <data name="EnforceDatabaseCollationOnTempTables_ProblemDescription" xml:space="preserve">
+    <value>Temp table without COLLATE DATABASE_DEFAULT found in {0}.</value>
+  </data>
+  <data name="EnforceDatabaseCollationOnTempTables_RuleName" xml:space="preserve">
+    <value>Temp tables should have the collation tied to the database collation.</value>
+  </data>
   <data name="EnforceExplicitInsertColumnList_ProblemDescription" xml:space="preserve">
     <value>Insert statement or clause without column list found in {0}.</value>
   </data>
@@ -476,6 +506,12 @@
   </data>
   <data name="PreferExplicitNullInColumnDefinition_RuleName" xml:space="preserve">
     <value>Always specify the nullability of columns when defining tables.</value>
+  </data>
+  <data name="PreferSelfAssignmentOperators_ProblemDescription" xml:space="preserve">
+    <value>Self-assignment operator eg+= can be used here {0}.</value>
+  </data>
+  <data name="PreferSelfAssignmentOperators_RuleName" xml:space="preserve">
+    <value>For SQL Server 2014 onwards use self-assignment eg set @a+=1, not set@a=@a+1.</value>
   </data>
   <data name="PreferThrowToRaiserror_ProblemDescription" xml:space="preserve">
     <value>Raiserror found instead of Throw in {0}.</value>

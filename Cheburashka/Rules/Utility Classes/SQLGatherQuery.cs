@@ -59,6 +59,45 @@ namespace Cheburashka
         {
             nodes.Add(node);
         }
+
+        public static List<(SchemaObjectName,Identifier)> GetSpecificationSchemaTableReferences(IList<TableReference> TableReferences){
+            List<(SchemaObjectName,Identifier)> values = new();
+            foreach (var tableReference in TableReferences)
+            {
+                if ( tableReference is JoinParenthesisTableReference joinParenthesisTableReference) 
+                {
+                    List<TableReference> localTables = new() { joinParenthesisTableReference.Join };
+                    values.AddRange(GetSpecificationSchemaTableReferences(localTables));
+                }
+                else if ( tableReference is JoinTableReference joinTableReference) // might need to subclass down to UnqualifiedJoin and QualifiedJoin
+                {
+                    List<TableReference> localTables = new() { joinTableReference.FirstTableReference, joinTableReference.SecondTableReference };
+                    values.AddRange(GetSpecificationSchemaTableReferences(localTables));
+                }
+                else if ( tableReference is NamedTableReference /*TableReferenceWithAlias*/ namedTableReference) 
+                {
+                    values.Add((namedTableReference.SchemaObject,namedTableReference.Alias));
+                }
+                else if ( tableReference is TableReferenceWithAliasAndColumns /*TableReferenceWithAlias*/ tableReferenceWithAliasAndColumns) // this is another deep dark twisted set of inheritances
+                {}
+                else if ( tableReference is OdbcQualifiedJoinTableReference odbcQualifiedJoinTableReference 
+                || tableReference is AdHocTableReference adHocTableReference //TableReferenceWithAlias
+                || tableReference is BuiltInFunctionTableReference builtInFunctionTableReference //TableReferenceWithAlias
+                || tableReference is FullTextTableReference fullTextTableReference //TableReferenceWithAlias
+                || tableReference is GlobalFunctionTableReference globalFunctionTableReference //TableReferenceWithAlias
+                || tableReference is InternalOpenRowset internalOpenRowset //TableReferenceWithAlias
+                || tableReference is OpenJsonTableReference openJsonTableReference //TableReferenceWithAlias
+                || tableReference is OpenRowsetTableReference openRowsetTableReference //TableReferenceWithAlias
+                || tableReference is OpenXmlTableReference openXmlTableReference //TableReferenceWithAlias
+                || tableReference is PivotedTableReference pivotedTableReference //TableReferenceWithAlias
+                || tableReference is SemanticTableReference semanticTableReference //TableReferenceWithAlias
+                || tableReference is UnpivotedTableReference unpivotedTableReference //TableReferenceWithAlias
+                || tableReference is VariableTableReference variableTableReference //TableReferenceWithAlias
+                ) {}
+
+            }
+            return values;
+        }
     }
 }
 

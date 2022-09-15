@@ -37,10 +37,7 @@ namespace Cheburashka
         public IList<TSqlFragment> SqlFragments() { return DroppedTempTableNames.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(DropTableStatement node)
         {
-            DroppedTempTableNames.AddRange(
-            node.Objects.Where(n => n.BaseIdentifier.Value.StartsWith("#") 
-                                 && !n.BaseIdentifier.Value.StartsWith("##"))
-                        .Select(n => n.BaseIdentifier));
+            DroppedTempTableNames.AddRange(node.Objects.Where(n =>  n.IsLocalTempTableName()).Select(n => n.BaseIdentifier));
         }
     }
 }

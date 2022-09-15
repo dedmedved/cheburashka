@@ -45,22 +45,70 @@ namespace Cheburashka
             }
         }
         //overrides where we don't want to pick up temp table references or visit dependent clauses
-        public override void ExplicitVisit(CreateTableStatement _) { }
-        public override void ExplicitVisit(AlterTableAddTableElementStatement _) { }
-        public override void ExplicitVisit(AlterTableAlterColumnStatement _) { }
-        public override void ExplicitVisit(AlterTableAlterIndexStatement _) { }
-        public override void ExplicitVisit(AlterTableAlterPartitionStatement _) { }
-        public override void ExplicitVisit(AlterTableChangeTrackingModificationStatement _) { }
-        public override void ExplicitVisit(AlterTableConstraintModificationStatement _) { }
-        public override void ExplicitVisit(AlterTableDropTableElementStatement _) { }
-        public override void ExplicitVisit(AlterTableFileTableNamespaceStatement _) { }
-        public override void ExplicitVisit(AlterTableRebuildStatement _) { }
-        public override void ExplicitVisit(AlterTableSetStatement _) { }
-        public override void ExplicitVisit(AlterTableSwitchStatement _) { }
-        public override void ExplicitVisit(AlterTableTriggerModificationStatement _) { }
-        public override void ExplicitVisit(CreateIndexStatement _) { }
-        public override void ExplicitVisit(AlterIndexStatement _) { }
-        public override void ExplicitVisit(DropIndexStatement _) { }
+        public override void ExplicitVisit(CreateTableStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableAddTableElementStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableAlterColumnStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableAlterIndexStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableAlterPartitionStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableChangeTrackingModificationStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableConstraintModificationStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableDropTableElementStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableFileTableNamespaceStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableRebuildStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableSetStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableSwitchStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterTableTriggerModificationStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(CreateIndexStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(AlterIndexStatement _)
+        {
+            // Method intentionally left empty.
+        }
+        public override void ExplicitVisit(DropIndexStatement _)
+        {
+            // Method intentionally left empty.
+        }
 
 
 

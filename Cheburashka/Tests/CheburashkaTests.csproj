@@ -323,10 +323,40 @@
     <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\AvoidExplicitCollateInDefinitionRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\ProcWithAlterTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\ProcWithCreateTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\ProcWithExplicitCollate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\ProcWithTableDefinitions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\TableA.sql">
+    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateInDefinitionRule\View1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\AvoidExplicitCollateOnModelTablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\ProcWithAlterTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\ProcWithCreateTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\ProcWithExplicitCollate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\Table1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidExplicitCollateOnModelTablesRule\View1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidGotoRule\AvoidGotoRule-Baseline.txt">
@@ -473,6 +503,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidOnePartNamesRule\ViewWithOnePartTableNameInSelect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidProcessingHintsRule\AvoidProcessingHintsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidProcessingHintsRule\ProcWithaVarietyOfTableHints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidProcessingHintsRule\ProcWithSimpleVarietyOfJoinsAndHints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidProcessingHintsRule\ProcWithaVarietyOfJoinsAndHints.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidProcessingHintsRule\Table1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidRaiseErrorOutsideTryCatchRule\AvoidRaiseErrorOutsideTryCatchRule-Baseline.txt">
@@ -885,6 +930,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidUsingNonLocalTempTableRule\ProcCreateTempTables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyTempTableRule\AvoidWriteOnlyTempTableRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyTempTableRule\ProcWithVariousPathologicalUpdateStatements.sql" />
+    <Content Include="TestScripts\AvoidWriteOnlyTempTableRule\ProcWithWriteOnlyTempTable.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt">
@@ -1342,7 +1394,22 @@
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedAssignments.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedMultiExpression.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedSearchExpressions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithInnerChainedJoins.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithChainedJoins.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithIfAndWhileWithBrackets.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithBracketedJoinExpressions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithDoubledBrackets.sql">
@@ -1496,6 +1563,9 @@
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_With_ClusteredColumnStoreIndex.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceClusteredIndexRule\EnforceClusteredIndexRule_Table_With_ClusteredIndex_DefinedOutOfLine.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1506,6 +1576,27 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceColumnPrefixRule\EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\EnforceDatabaseCollationOnTempTablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithAlterNonTempTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithCreateNonTempTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithSelectIntoNonTempTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithSelectIntoTempTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithAlterTempTableStatement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\EnforceDatabaseCollationOnTempTablesRule\ProcWithCreateTempTableStatement.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithIncompatibleCoveringIndexes_NotSubSettable.sql">
@@ -2225,6 +2316,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferExplicitNullInColumnDefinitionRule\ProcWithTableDefinitions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\PreferSelfAssignmentOperatorsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\ProcWithSelfAssignments.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\TableA.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferThrowToRaiserrorRule\PreferThrowToRaiserrorRule-Baseline.txt">
