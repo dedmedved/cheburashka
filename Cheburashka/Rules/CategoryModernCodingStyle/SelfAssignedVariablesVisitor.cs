@@ -39,27 +39,39 @@ namespace Cheburashka
         public IList<TSqlFragment> SqlFragments() { return AssignmentSetClauses.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            if (node.AssignmentKind == AssignmentKind.Equals
-                && node.NewValue is BinaryExpression binaryExpression)
-            {
-                if (HasCommutativeOperator(binaryExpression) == true)
-                {
-                    if (  ( node.Variable is not null && assignmentVariableMatchesFirstOrSecondExpressionElement(node, binaryExpression)) 
-                        // This needs all kinds of checks to ensure the column is really the same on both sides
-                        || (node.Column is not null && assignmentColumnMatchesFirstOrSecondExpressionElement(node, binaryExpression))
-                        )
-                    {
-                        AssignmentSetClauses.Add(node);
-                    }
+            if (node.AssignmentKind == AssignmentKind.Equals) {
+                bool hasBinaryExpression = false;
+                BinaryExpression expr = null;
+                if ( node.NewValue is BinaryExpression){
+                    hasBinaryExpression = true;
+                    expr = node.NewValue as BinaryExpression;
                 }
-                else if (HasCommutativeOperator(binaryExpression) == false)
+
+                if (node.NewValue is ParenthesisExpression) {
+                    hasBinaryExpression = UnwrapParathesisExpression(node.NewValue, out BinaryExpression expr2);
+                    expr = expr2;
+                }
+                if (hasBinaryExpression)
                 {
-                    if (  ( node.Variable is not null && assignmentVariableMatchesFirstExpressionElement(node, binaryExpression))
-                        // This needs all kinds of checks to ensure the column is really the same on both sides
-                         || (node.Column is not null && assignmentColumnMatchesFirstExpressionElement(node, binaryExpression))
-                       )
+                    if (HasCommutativeOperator(expr) == true)
                     {
-                        AssignmentSetClauses.Add(node);
+                        if (  ( node.Variable is not null && assignmentVariableMatchesFirstOrSecondExpressionElement(node, expr)) 
+                            // This needs all kinds of checks to ensure the column is really the same on both sides
+                            || (node.Column is not null && assignmentColumnMatchesFirstOrSecondExpressionElement(node, expr))
+                            )
+                        {
+                            AssignmentSetClauses.Add(node);
+                        }
+                    }
+                    else if (HasCommutativeOperator(expr) == false)
+                    {
+                        if (  ( node.Variable is not null && assignmentVariableMatchesFirstExpressionElement(node, expr))
+                            // This needs all kinds of checks to ensure the column is really the same on both sides
+                             || (node.Column is not null && assignmentColumnMatchesFirstExpressionElement(node, expr))
+                           )
+                        {
+                            AssignmentSetClauses.Add(node);
+                        }
                     }
                 }
             }
@@ -98,41 +110,73 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(SetVariableStatement node)
         {
-            if (node.AssignmentKind == AssignmentKind.Equals
-                && node.Expression is BinaryExpression binaryExpression 
-                && node.Variable is not null
-                )
-            {
-                if (HasCommutativeOperator(binaryExpression) == false
-                    && binaryExpression.FirstExpression is VariableReference variableReference
-                    && variableReference.SQLModel_StringCompareEqual(node.Variable)
-                    )
-                {
-                    AssignmentSetClauses.Add(node.Variable);
+            if (node.AssignmentKind == AssignmentKind.Equals) {
+                bool hasBinaryExpression = false;
+                BinaryExpression expr = null;
+                if ( node.Expression is BinaryExpression){
+                    hasBinaryExpression = true;
+                    expr = node.Expression as BinaryExpression;
                 }
-                else if (HasCommutativeOperator(binaryExpression) == true                   
-                    && ((binaryExpression.FirstExpression is VariableReference variableReference1
-                          && variableReference1.SQLModel_StringCompareEqual(node.Variable)
-                          )
-                       || (binaryExpression.SecondExpression is VariableReference variableReference2
-                          && variableReference2.SQLModel_StringCompareEqual(node.Variable)
-                          )
-                       )
-                    )
+
+                if (node.Expression is ParenthesisExpression) {
+                    hasBinaryExpression = UnwrapParathesisExpression(node.Expression, out BinaryExpression expr2);
+                    expr = expr2;
+                }
+                if (hasBinaryExpression)
                 {
-                    AssignmentSetClauses.Add(node.Variable);
+                    if (HasCommutativeOperator(expr) == false
+                        && expr.FirstExpression is VariableReference variableReference
+                        && variableReference.SQLModel_StringCompareEqual(node.Variable)
+                        )
+                    {
+                        AssignmentSetClauses.Add(node.Variable);
+                    }
+                    else if (HasCommutativeOperator(expr) == true                   
+                        && ((expr.FirstExpression is VariableReference variableReference1
+                              && variableReference1.SQLModel_StringCompareEqual(node.Variable)
+                              )
+                           || (expr.SecondExpression is VariableReference variableReference2
+                              && variableReference2.SQLModel_StringCompareEqual(node.Variable)
+                              )
+                           )
+                        )
+                    {
+                        AssignmentSetClauses.Add(node.Variable);
+                    }
                 }
             }
         }
 
+        private static bool UnwrapParathesisExpression( ScalarExpression expr, out BinaryExpression binaryExpression)
+        {
+            bool foundbinaryExpression;
+            if ( expr is BinaryExpression binaryExpression2) {
+                binaryExpression = binaryExpression2;
+                return true;
+            }
+            else if ( expr is ParenthesisExpression parenthesisExpression) {
+                foundbinaryExpression = UnwrapParathesisExpression( parenthesisExpression.Expression, out BinaryExpression binaryExpression3);
+                binaryExpression = binaryExpression3;
+            }
+            else {
+                binaryExpression = null;
+                foundbinaryExpression = false;
+            }
+            return foundbinaryExpression;
+        }
+
         private static bool? HasCommutativeOperator(BinaryExpression binaryExpression)
         {
-            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Add || binaryExpression.BinaryExpressionType is BinaryExpressionType.Multiply )
+            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Add || binaryExpression.BinaryExpressionType is BinaryExpressionType.Multiply 
+             || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseAnd  || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseOr 
+             || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseXor 
+            )
                 return true;
-            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Subtract || binaryExpression.BinaryExpressionType is BinaryExpressionType.Divide )
+            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Subtract || binaryExpression.BinaryExpressionType is BinaryExpressionType.Divide 
+             || binaryExpression.BinaryExpressionType is BinaryExpressionType.Modulo
+            )
                 return false;
             return null;
         }
     }
 }
-

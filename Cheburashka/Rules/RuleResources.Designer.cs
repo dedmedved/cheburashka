@@ -1231,6 +1231,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select top 1 Col ... order by Col was found in {0}..
+        /// </summary>
+        internal static string PreferMinMax_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferMinMax_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefer using MIN and MAX to Select top 1 Col ... order by Col. Aggregate functions MIN() and MAX() are more efficent..
+        /// </summary>
+        internal static string PreferMinMax_RuleName {
+            get {
+                return ResourceManager.GetString("PreferMinMax_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Self-assignment operator eg+= can be used here {0}..
         /// </summary>
         internal static string PreferSelfAssignmentOperators_ProblemDescription {
