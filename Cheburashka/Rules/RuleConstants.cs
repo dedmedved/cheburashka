@@ -113,6 +113,7 @@ namespace Cheburashka
         public const string EnforceDatabaseCollationOnTempTablesRuleId                  = "Cheburashka.DM0069";
 
         public const string AvoidProcessingHintsRuleId                                  = "Cheburashka.DM0070";
+        public const string PreferMinMaxRuleId                                          = "Cheburashka.DM0071";
 
         public const string AvoidUnusedVariablesRuleName                                = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                      = "AvoidUnusedVariables_ProblemDescription";
@@ -313,6 +314,11 @@ namespace Cheburashka
         public const string AvoidProcessingHintsRuleName                                            = "AvoidProcessingHints_RuleName";
         public const string AvoidProcessingHintsProblemDescription                                  = "AvoidProcessingHints_ProblemDescription";
 
+        public const string PreferMinMaxRuleName                                                    = "PreferMinMax_RuleName";
+        public const string PreferMinMaxProblemDescription                                          = "PreferMinMax_ProblemDescription";
+
+
+
         /// <summary>
         /// The design category (should not be localized)
         /// </summary>
@@ -331,7 +337,7 @@ namespace Cheburashka
         //public const string CategoryBatch                       = "CategoryBatch";
         //public const string CategoryOnline                      = "CategoryOnline";
         //public const string CategoryDatabaseSettings            = "CategoryDatabaseSettings";
-        //public const string CategoryEfficiency                  = "CategoryEfficiency";
+        public const string CategoryEfficiency                    = "Code.Efficiency.Code";
         //public const string CategoryStyle                       = "CategoryStyle";
         //public const string CategoryTemporaryTables             = "CategoryTemporaryTables";
         //public const string CategoryControlAndErrorHandling     = "CategoryControlAndErrorHandling";

@@ -507,6 +507,12 @@
   <data name="PreferExplicitNullInColumnDefinition_RuleName" xml:space="preserve">
     <value>Always specify the nullability of columns when defining tables.</value>
   </data>
+  <data name="PreferMinMax_ProblemDescription" xml:space="preserve">
+    <value>Select top 1 Col ... order by Col was found in {0}.</value>
+  </data>
+  <data name="PreferMinMax_RuleName" xml:space="preserve">
+    <value>Prefer using MIN and MAX to Select top 1 Col ... order by Col. Aggregate functions MIN() and MAX() are more efficent.</value>
+  </data>
   <data name="PreferSelfAssignmentOperators_ProblemDescription" xml:space="preserve">
     <value>Self-assignment operator eg+= can be used here {0}.</value>
   </data>

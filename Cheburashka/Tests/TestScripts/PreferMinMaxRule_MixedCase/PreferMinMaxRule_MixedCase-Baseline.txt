@@ -1,0 +1,27 @@
+Problem description: Select top 1 Col ... order by Col was found in [dbo].[ProcWithSelectTop1].
+FullID: Cheburashka.DM0071
+Severity: Warning
+Model element: dbo.ProcWithSelectTop1
+Script file: ProcWithSelectTop1.sql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Select top 1 Col ... order by Col was found in [dbo].[ProcWithSelectTop1].
+FullID: Cheburashka.DM0071
+Severity: Warning
+Model element: dbo.ProcWithSelectTop1
+Script file: ProcWithSelectTop1.sql
+Start line: 8
+Start column: 9
+========end of problem========
+
+Problem description: Select top 1 Col ... order by Col was found in [dbo].[ProcWithSelectTop1].
+FullID: Cheburashka.DM0071
+Severity: Warning
+Model element: dbo.ProcWithSelectTop1
+Script file: ProcWithSelectTop1.sql
+Start line: 13
+Start column: 1
+========end of problem========
+

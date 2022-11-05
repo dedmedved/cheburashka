@@ -1608,6 +1608,9 @@
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithClusteredIndexAndSimilarCoveringIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndexButIsColumnStore.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\EnforceIndexKeyColumnSeparationRule\EnforceIndexKeyColumnSeparationRule_Table_WithOneIndexARealSubsetOfOtherIndex.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2318,7 +2321,31 @@
     <Content Include="TestScripts\PreferExplicitNullInColumnDefinitionRule\ProcWithTableDefinitions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\PreferMinMaxRule_MixedCase\PreferMinMaxRule_MixedCase-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferMinMaxRule_MixedCase\ProcWithSelectTop1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferMinMaxRule_MixedCase\TableA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferMinMaxRule\PreferMinMaxRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferMinMaxRule\ProcWithSelectTop1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferMinMaxRule\TableA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\PreferSelfAssignmentOperatorsRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\ProcWithComplexSelfAssignments.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\ProcWithBracketedSelfAssignments.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\PreferSelfAssignmentOperatorsRule\ProcWithSelfAssignments.sql">
