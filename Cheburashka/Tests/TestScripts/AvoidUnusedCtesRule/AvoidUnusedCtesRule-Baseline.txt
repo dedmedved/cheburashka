@@ -1,0 +1,63 @@
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 12
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 18
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 25
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 33
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 41
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 47
+Start column: 3
+========end of problem========
+
+Problem description: Unused CTE found in [dbo].[ProcWithUnUsedCtes].
+FullID: Cheburashka.DM0072
+Severity: Warning
+Model element: dbo.ProcWithUnUsedCtes
+Script file: ProcWithUnUsedCtes.tsql
+Start line: 57
+Start column: 3
+========end of problem========
+

@@ -106,8 +106,7 @@ namespace Cheburashka
 
                 List<string> clusteringIndexColumns = new();
 
-                TSqlObject clusteredObject; // create dummy tsqlobject
-                var    tableIsClustered = ExtractClusteredDetails(pks,PrimaryKeyConstraint.Clustered,PrimaryKeyConstraint.Columns,out clusteredObject, ref clusteringIndexColumns);
+                var    tableIsClustered = ExtractClusteredDetails(pks,PrimaryKeyConstraint.Clustered,PrimaryKeyConstraint.Columns,out var clusteredObject, ref clusteringIndexColumns);
                 if (!tableIsClustered) 
                     tableIsClustered = ExtractClusteredDetails(indexes,Index.Clustered,Index.Columns, out clusteredObject, ref clusteringIndexColumns);
                 if (!tableIsClustered) 
@@ -238,19 +237,20 @@ namespace Cheburashka
             {
                 return true;
             }
-            else if (theseKeysColumns.Count < theOtherKeysColumns.Count
+
+            if (theseKeysColumns.Count < theOtherKeysColumns.Count
                 //everything returned was a match
                 && allPos.Count == matchedPos.Count
                 //there was a match
                 && matchedPos.Count > 0
                 //everything matched matched matched in the first n columns
                 && matchedPos.Count - 1 == matchedPos.Max()
-                )
+               )
             {
                 return true;
             }
 
-            return foundIndexThatMatchesAKey;
+            return false;
         }
     }
 }

@@ -2,7 +2,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: DatabaseTriggerWithDropIndex
-Script file: DatabaseTriggerWithDropIndex.sql
+Script file: DatabaseTriggerWithDropIndex.tsql
 Start line: 14
 Start column: 20
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAddColumn_proc
-Script file: ProcedureWithAddColumn.sql
+Script file: ProcedureWithAddColumn.tsql
 Start line: 10
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAddColumn_proc
-Script file: ProcedureWithAddColumn.sql
+Script file: ProcedureWithAddColumn.tsql
 Start line: 11
 Start column: 1
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterColumn_proc
-Script file: ProcedureWithAlterColumn.sql
+Script file: ProcedureWithAlterColumn.tsql
 Start line: 10
 Start column: 1
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterColumn_proc
-Script file: ProcedureWithAlterColumn.sql
+Script file: ProcedureWithAlterColumn.tsql
 Start line: 11
 Start column: 1
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterConstraints_proc
-Script file: ProcedureWithAlterConstraints.sql
+Script file: ProcedureWithAlterConstraints.tsql
 Start line: 19
 Start column: 1
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterIndex
-Script file: ProcedureWithAlterIndex.sql
+Script file: ProcedureWithAlterIndex.tsql
 Start line: 11
 Start column: 9
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterIndex
-Script file: ProcedureWithAlterIndex.sql
+Script file: ProcedureWithAlterIndex.tsql
 Start line: 12
 Start column: 9
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithAlterIndex
-Script file: ProcedureWithAlterIndex.sql
+Script file: ProcedureWithAlterIndex.tsql
 Start line: 13
 Start column: 9
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithCreateIndex
-Script file: ProcedureWithCreateIndex.sql
+Script file: ProcedureWithCreateIndex.tsql
 Start line: 10
 Start column: 9
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithCreateIndex
-Script file: ProcedureWithCreateIndex.sql
+Script file: ProcedureWithCreateIndex.tsql
 Start line: 11
 Start column: 9
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropConstraints_proc
-Script file: ProcedureWithDropConstraints.sql
+Script file: ProcedureWithDropConstraints.tsql
 Start line: 19
 Start column: 1
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropConstraints_proc
-Script file: ProcedureWithDropConstraints.sql
+Script file: ProcedureWithDropConstraints.tsql
 Start line: 20
 Start column: 1
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropConstraints_proc
-Script file: ProcedureWithDropConstraints.sql
+Script file: ProcedureWithDropConstraints.tsql
 Start line: 21
 Start column: 1
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropIndex
-Script file: ProcedureWithDropIndex.sql
+Script file: ProcedureWithDropIndex.tsql
 Start line: 13
 Start column: 20
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropIndex
-Script file: ProcedureWithDropIndex.sql
+Script file: ProcedureWithDropIndex.tsql
 Start line: 14
 Start column: 20
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropTable
-Script file: ProcedureWithDropTable.sql
+Script file: ProcedureWithDropTable.tsql
 Start line: 13
 Start column: 9
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropTables
-Script file: ProcedureWithDropTables.sql
+Script file: ProcedureWithDropTables.tsql
 Start line: 15
 Start column: 9
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.ProcedureWithDropTables
-Script file: ProcedureWithDropTables.sql
+Script file: ProcedureWithDropTables.tsql
 Start line: 15
 Start column: 9
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Permanent, statically defined table, constraint or index is
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.TableTriggerWithDropIndex
-Script file: TableTriggerWithDropIndex.sql
+Script file: TableTriggerWithDropIndex.tsql
 Start line: 14
 Start column: 20
 ========end of problem========

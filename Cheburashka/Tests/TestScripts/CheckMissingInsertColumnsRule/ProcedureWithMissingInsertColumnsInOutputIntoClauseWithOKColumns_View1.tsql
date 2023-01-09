@@ -1,0 +1,6 @@
+CREATE proc dbo.ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns_View1
+AS
+insert into View1  (a,b) 
+output inserted.a,inserted.b into View1  (a,b)
+values (1,2);
+go

@@ -2,7 +2,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithAlterTa
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithAlterTableStatement
-Script file: ProcWithAlterTableStatement.sql
+Script file: ProcWithAlterTableStatement.tsql
 Start line: 5
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithCreateT
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithCreateTableStatement
-Script file: ProcWithCreateTableStatement.sql
+Script file: ProcWithCreateTableStatement.tsql
 Start line: 4
 Start column: 21
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithExplici
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithExplicitCollate
-Script file: ProcWithExplicitCollate.sql
+Script file: ProcWithExplicitCollate.tsql
 Start line: 4
 Start column: 28
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDe
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
-Script file: ProcWithTableDefinitions.sql
+Script file: ProcWithTableDefinitions.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDe
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
-Script file: ProcWithTableDefinitions.sql
+Script file: ProcWithTableDefinitions.tsql
 Start line: 12
 Start column: 9
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[ProcWithTableDe
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.ProcWithTableDefinitions
-Script file: ProcWithTableDefinitions.sql
+Script file: ProcWithTableDefinitions.tsql
 Start line: 18
 Start column: 9
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[Table1].
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.Table1
-Script file: Table1.sql
+Script file: Table1.tsql
 Start line: 1
 Start column: 23
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Explicit COLLATE expression given in [dbo].[View1].
 FullID: Cheburashka.DM0021
 Severity: Warning
 Model element: dbo.View1
-Script file: View1.sql
+Script file: View1.tsql
 Start line: 3
 Start column: 8
 ========end of problem========

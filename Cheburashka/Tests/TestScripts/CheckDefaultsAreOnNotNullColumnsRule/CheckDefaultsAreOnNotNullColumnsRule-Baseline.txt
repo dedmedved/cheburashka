@@ -2,7 +2,7 @@ Problem description: Default found on nullable column in [dbo].[CheckDefaultsAre
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.CheckDefaultsAreOnNotNullColumnsRule_Table
-Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.sql
+Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.tsql
 Start line: 3
 Start column: 9
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Default found on nullable column in [dbo].[CheckDefaultsAre
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.CheckDefaultsAreOnNotNullColumnsRule_Table
-Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.sql
+Script file: CheckDefaultsAreOnNotNullColumnsRule_Table.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 5
 Start column: 9
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 8
 Start column: 9
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 12
 Start column: 9
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 15
 Start column: 9
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 19
 Start column: 9
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Default found on nullable column in [dbo].[Proc_ForCheckDef
 FullID: Cheburashka.DM0040
 Severity: Warning
 Model element: dbo.Proc_ForCheckDefaultsAreOnNotNullColumnsRule
-Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.sql
+Script file: Proc_ForCheckDefaultsAreOnNotNullColumnsRule.tsql
 Start line: 22
 Start column: 9
 ========end of problem========

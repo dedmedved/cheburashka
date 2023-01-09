@@ -1,0 +1,7 @@
+CREATE proc dbo.ProcedureWithMissingInsertColumnsIntoTableVariable_NULL
+AS
+declare @Table1 table( a int not null, b int not null);
+insert into @Table1 (a) values (1)
+insert into @Table1 (a) select a from @Table1
+;
+go

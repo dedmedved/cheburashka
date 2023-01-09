@@ -2,7 +2,7 @@ Problem description: Code found without Try/Catch in [DatabaseTriggerWithOutTryC
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: DatabaseTriggerWithOutTryCatch
-Script file: DatabaseTriggerWithoutTryCatch.sql
+Script file: DatabaseTriggerWithoutTryCatch.tsql
 Start line: 1
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Code found without Try/Catch in [dbo].[ProcSelectInsideIfBe
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: dbo.ProcSelectInsideIfBeginWithoutTryCatch
-Script file: ProcSelectInsideIfBeginWithoutTryCatch.sql
+Script file: ProcSelectInsideIfBeginWithoutTryCatch.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Code found without Try/Catch in [dbo].[ProcSelectIntoWithou
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: dbo.ProcSelectIntoWithoutTryCatch
-Script file: ProcSelectIntoWithoutTryCatch.sql
+Script file: ProcSelectIntoWithoutTryCatch.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Code found without Try/Catch in [dbo].[ProcSelectX2OnlyWith
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: dbo.ProcSelectX2OnlyWithoutTryCatch
-Script file: ProcSelectX2OnlyWithoutTryCatch.sql
+Script file: ProcSelectX2OnlyWithoutTryCatch.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Code found without Try/Catch in [dbo].[ProcWithOutTryCatch]
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: dbo.ProcWithOutTryCatch
-Script file: ProcWithoutTryCatch.sql
+Script file: ProcWithoutTryCatch.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Code found without Try/Catch in [ServerTriggerWithOutTryCat
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: ServerTriggerWithOutTryCatch
-Script file: ServerTriggerWithoutTryCatch.sql
+Script file: ServerTriggerWithoutTryCatch.tsql
 Start line: 1
 Start column: 1
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Code found without Try/Catch in [dbo].[TableTriggerWithOutT
 FullID: Cheburashka.DM0028
 Severity: Warning
 Model element: dbo.TableTriggerWithOutTryCatch
-Script file: TableTriggerWithoutTryCatch.sql
+Script file: TableTriggerWithoutTryCatch.tsql
 Start line: 1
 Start column: 1
 ========end of problem========

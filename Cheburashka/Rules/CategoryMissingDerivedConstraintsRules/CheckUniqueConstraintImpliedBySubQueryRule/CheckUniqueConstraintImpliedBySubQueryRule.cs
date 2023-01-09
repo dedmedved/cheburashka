@@ -107,6 +107,9 @@ namespace Cheburashka
 
                     ColumnDetails lhMatchedColumnDetails = new();
                     ColumnDetails rhMatchedColumnDetails = new();
+                    
+// put this in                    
+
 
                     // TODO work out how to handle 3-part/4-part table names provided
                     /* a match occurs when
@@ -194,26 +197,23 @@ namespace Cheburashka
                             return false;
 
                         if (NestedNotCount % 2 == 1)
-                        {
                             return false;
-                        }
-
-                        var validExpr = ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.FirstExpression, allColumns, ref tableColumns);
-                        if (validExpr)
-                        {
-                            return ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.SecondExpression, allColumns, ref tableColumns);
-                        }
-
-                        return false;
-
+                        //var validExpr = ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.FirstExpression, allColumns, ref tableColumns);
+                        //if (validExpr)
+                        //{
+                        //    return ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.SecondExpression, allColumns, ref tableColumns);
+                        //}
+                        return ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.FirstExpression, allColumns, ref tableColumns)
+                            && ProcessCondition(NestedNotCount, tableName, tableAlias, booleanBinaryExpression.SecondExpression, allColumns, ref tableColumns);
                     }
             }
             return false;
         }
 
         //todo unify and simplify some of this code
-        private static bool MatchToSingleTargetColumn(Identifier tableAlias, List<ColumnDetails> allColumns, IReadOnlyList<Identifier> colRef, ref ColumnDetails match)
+        private static bool MatchToSingleTargetColumn(Identifier tableAlias, IEnumerable<ColumnDetails> allColumns, IReadOnlyList<Identifier> colRef, ref ColumnDetails match)
         {
+
             var singleMatch = false ;
             var schemaRef = colRef.Count == 3
                     ? colRef[0]
@@ -333,9 +333,16 @@ namespace Cheburashka
 
         private static bool SingleMatch(IEnumerable<ColumnDetails> allColumns, string colNameToMatch, out ColumnDetails match)
         {
+            //var xmatch = false;
+            //foreach (var column in allColumns)
+            //{
+            //    if (SqlRuleUtils.DoColumnReferencesMatch(node.Column.MultiPartIdentifier, column.MultiPartIdentifier))
+            //    {
+
+            //    }
+            //}
             match = allColumns.FirstOrDefault(n => n.Name.SQLModel_StringCompareEqual(colNameToMatch));
-            var singleMatch = match.Name is not null;
-            return singleMatch;
+            return match.Name is not null;
         }
 
         public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
@@ -404,7 +411,7 @@ namespace Cheburashka
                         var columns = tbl.GetReferenced().Where(x => x.ObjectType == ModelSchema.Column).ToList();
                         //var columnTypes = columns.Select( n => n.GetReferenced(Column.DataType).FirstOrDefault().Name).ToList();
                         //var columnNulls = columns.Select( n => n.GetProperty(Column.Nullable)).ToList();
-                        var columnSpecifications = columns.Select( n => new ColumnDetails { Name = n.Name.Parts.Last(), DataType = n.GetReferenced(Column.DataType).FirstOrDefault()?.Name, Nullable = (bool)n.GetProperty(Column.Nullable)}).ToList();
+                        var columnSpecifications = columns.ConvertAll( n => new ColumnDetails { Name = n.Name.Parts.Last(), DataType = n.GetReferenced(Column.DataType).FirstOrDefault()?.Name, Nullable = (bool)n.GetProperty(Column.Nullable)});
 
                         var condition = query.WhereClause.SearchCondition;
 
@@ -415,7 +422,7 @@ namespace Cheburashka
                         //if there are no column refs its not a problem here - but another rule could pick this up.
 
                         List<ColumnDetails> tableColumns      = new();
-                        List<ColumnReferenceExpression> otherTableColumns = new();
+                        //List<ColumnReferenceExpression> otherTableColumns = new();
 
                         var validClause = ProcessCondition(0, tableName, alias, condition, columnSpecifications, ref tableColumns);
                         var distinctColumnNames = tableColumns.Select(n => n.Name).Distinct().ToList();

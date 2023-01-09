@@ -1,0 +1,342 @@
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithOKColumns
+Script file: ProcedureWithInsertFromMergeWithOKColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithOKColumns
+Script file: ProcedureWithInsertFromMergeWithOKColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithOKColumns
+Script file: ProcedureWithInsertFromMergeWithOKColumns.tsql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithInsertFromMergeWithOKColumns
+Script file: ProcedureWithInsertFromMergeWithOKColumns.tsql
+Start line: 7
+Start column: 9
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumns_NULL
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTableVariable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsTableVariable_NULL.tsql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTableVariable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsTableVariable_NULL.tsql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTableVariable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsTableVariable_NULL.tsql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTableVariable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsTableVariable_NULL.tsql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTempTable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsTempTable_NULL.tsql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTempTable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsTempTable_NULL.tsql
+Start line: 11
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTempTable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsTempTable_NULL.tsql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsTempTable_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsTempTable_NULL.tsql
+Start line: 12
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithMissingMergeInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingMergeInsertColumns_NULL
+Script file: ProcedureWithMissingMergeInsertColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithMissingMergeInsertColumns_NULL].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithMissingMergeInsertColumns_NULL
+Script file: ProcedureWithMissingMergeInsertColumns_NULL.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithOKInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKInsertColumns
+Script file: ProcedureWithOKInsertColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithOKInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKInsertColumns
+Script file: ProcedureWithOKInsertColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithOKInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKInsertColumns
+Script file: ProcedureWithOKInsertColumns.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithOKInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKInsertColumns
+Script file: ProcedureWithOKInsertColumns.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithOKMergeInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKMergeInsertColumns
+Script file: ProcedureWithOKMergeInsertColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithOKMergeInsertColumns].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKMergeInsertColumns
+Script file: ProcedureWithOKMergeInsertColumns.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column c missing from insert list in [dbo].[ProcedureWithOKMergeInsertColumnsOnTemporalTable].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKMergeInsertColumnsOnTemporalTable
+Script file: ProcedureWithOKMergeInsertColumnsOnTemporalTable.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+
+Problem description: Nullable, non-defaultable column f missing from insert list in [dbo].[ProcedureWithOKMergeInsertColumnsOnTemporalTable].
+FullID: Cheburashka.DM0074
+Severity: Warning
+Model element: dbo.ProcedureWithOKMergeInsertColumnsOnTemporalTable
+Script file: ProcedureWithOKMergeInsertColumnsOnTemporalTable.tsql
+Start line: 3
+Start column: 1
+========end of problem========
+

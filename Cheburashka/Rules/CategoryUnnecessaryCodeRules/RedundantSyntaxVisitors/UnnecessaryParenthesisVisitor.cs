@@ -86,6 +86,14 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        public override void ExplicitVisit(CreateViewStatement node)
+        {
+            if (node.SelectStatement.QueryExpression is QueryParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node.SelectStatement.QueryExpression);
+            }
+            node.AcceptChildren(this);
+        }
         public override void ExplicitVisit(IfStatement node)
         {
             if (node.Predicate is BooleanParenthesisExpression)

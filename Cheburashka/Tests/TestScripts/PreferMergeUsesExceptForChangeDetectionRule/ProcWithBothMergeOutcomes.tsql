@@ -1,0 +1,28 @@
+CREATE PROCEDURE ProcWithBothMergeOutcomes
+AS 
+BEGIN
+merge into TableA trg
+using (select * from TableA ) as src
+on trg.a = src.a
+when matched and trg.b != src.b
+then update
+set trg.a=src.a
+;
+
+merge into TableA trg
+using (select * from TableA ) as src
+on trg.a = src.a
+when matched and exists (select * from ( select src.a except select trg.a) z )
+then update
+set trg.a=src.a
+;
+
+merge into TableA trg
+using (select * from TableA ) as src
+on trg.a = src.a
+when not matched by target
+then insert values (src.a)
+;
+
+
+END

@@ -349,6 +349,24 @@ namespace Cheburashka {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unused CTE found in {0}..
+        /// </summary>
+        internal static string AvoidUnusedCtes_ProblemDescription {
+            get {
+                return ResourceManager.GetString("AvoidUnusedCtes_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid unused code.  This includes CTEs..
+        /// </summary>
+        internal static string AvoidUnusedCtes_RuleName {
+            get {
+                return ResourceManager.GetString("AvoidUnusedCtes_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unreferenced label found in {0}..
         /// </summary>
         internal static string AvoidUnusedLabels_ProblemDescription {
@@ -601,7 +619,25 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mandatory column missing from insert list in {0}..
+        ///   Looks up a localized string similar to Defaultable or NULLable column {0} missing from insert list in {1}..
+        /// </summary>
+        internal static string CheckMissingDefaultableInsertColumns_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckMissingDefaultableInsertColumns_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns should be populated without relying on NULL or default values in Insert operations..
+        /// </summary>
+        internal static string CheckMissingDefaultableInsertColumns_RuleName {
+            get {
+                return ResourceManager.GetString("CheckMissingDefaultableInsertColumns_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mandatory column {0} missing from insert list in {1}..
         /// </summary>
         internal static string CheckMissingInsertColumns_ProblemDescription {
             get {
@@ -610,11 +646,29 @@ namespace Cheburashka {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Columns without a default or other system supplied value need a value specifying in Inserts..
+        ///   Looks up a localized string similar to Columns without a default or other system supplied value need a value specifying in Insert operations..
         /// </summary>
         internal static string CheckMissingInsertColumns_RuleName {
             get {
                 return ResourceManager.GetString("CheckMissingInsertColumns_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nullable, non-defaultable column {0} missing from insert list in {1}..
+        /// </summary>
+        internal static string CheckMissingNullableInsertColumns_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckMissingNullableInsertColumns_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns without a system generated or defined default value should have a value specifying in Insert operations..
+        /// </summary>
+        internal static string CheckMissingNullableInsertColumns_RuleName {
+            get {
+                return ResourceManager.GetString("CheckMissingNullableInsertColumns_RuleName", resourceCulture);
             }
         }
         
@@ -723,6 +777,24 @@ namespace Cheburashka {
         internal static string CheckUniqueConstraintImpliedBySubQuery_RuleName {
             get {
                 return ResourceManager.GetString("CheckUniqueConstraintImpliedBySubQuery_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-query implies a unique filtered index which is not present, here {0}..
+        /// </summary>
+        internal static string CheckUniqueFilteredIndexImpliedBySubQuery_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CheckUniqueFilteredIndexImpliedBySubQuery_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single table sub-queries with and-ed equality filters with other conditions imply a unique filtered index on the source data..
+        /// </summary>
+        internal static string CheckUniqueFilteredIndexImpliedBySubQuery_RuleName {
+            get {
+                return ResourceManager.GetString("CheckUniqueFilteredIndexImpliedBySubQuery_RuleName", resourceCulture);
             }
         }
         
@@ -1227,6 +1299,24 @@ namespace Cheburashka {
         internal static string PreferExplicitNullInColumnDefinition_RuleName {
             get {
                 return ResourceManager.GetString("PreferExplicitNullInColumnDefinition_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefer to use SELECT ... EXCEPT SELECT ... to detect row differences in MERGE statements..
+        /// </summary>
+        internal static string PreferMergeUsesExceptForChangeDetection_ProblemDescription {
+            get {
+                return ResourceManager.GetString("PreferMergeUsesExceptForChangeDetection_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge WHEN MATCHED doesn&apos;t use EXCEPT to detect differences in {0}..
+        /// </summary>
+        internal static string PreferMergeUsesExceptForChangeDetection_RuleName {
+            get {
+                return ResourceManager.GetString("PreferMergeUsesExceptForChangeDetection_RuleName", resourceCulture);
             }
         }
         

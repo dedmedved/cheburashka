@@ -137,12 +137,14 @@ namespace Cheburashka
                         foundKeyThatMatchesACluster = true;
                     }
                     // no clustered pk but a pk does exist and a clustered something exists check it
+                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                     else if (primaryKeyExists && (clusteredindexExists || clusteredUniqueConstraintExists))
                     {
                         bool match = false;
                         {
                             List<string> sortedLeadingEdgeIndexColumns = new();
 
+                            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                             if (clusteredindexExists || clusteredUniqueConstraintExists)
                             {
                                 TSqlObject clusteredindex = clusteredindexExists ? clusteredindexes[0] : uniqueClusterConstraints[0];
@@ -182,17 +184,20 @@ namespace Cheburashka
                         if (foreignkeyconstraints.Count > 0)
                         {
                             bool match = false;
+                            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                             if (clusteredindexExists || clusteredUniqueConstraintExists || clusteredPrimaryKeyExists)
                             {
                                 List<string> sortedLeadingEdgeIndexColumns = new();
 
                                 {
                                     ModelRelationshipClass modelRelationshipClass = (clusteredindexExists) ? Index.ColumnsRelationship.RelationshipClass
+                                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                                     : (clusteredUniqueConstraintExists) ? UniqueConstraint.ColumnsRelationship.RelationshipClass
                                     : (clusteredPrimaryKeyExists) ? PrimaryKeyConstraint.ColumnsRelationship.RelationshipClass
                                     : null
                                     ;
                                     TSqlObject idxOrConstraint = (clusteredindexExists) ? clusteredindexes[0]
+                                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                                     : (clusteredUniqueConstraintExists) ? uniqueClusterConstraints[0]
                                     : (clusteredPrimaryKeyExists) ? clusteredpks[0]
                                     : null

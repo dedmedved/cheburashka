@@ -2,7 +2,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList
-Script file: ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList.sql
+Script file: ProcWithExplicitInsertColumnSelectListFromDMLWithoutColumnList.tsql
 Start line: 6
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList
-Script file: ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList.sql
+Script file: ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList
-Script file: ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList.sql
+Script file: ProcWithInsertWithoutExplicitColumnListFromMergeWithoutExplicitInsertColumnSelectList.tsql
 Start line: 9
 Start column: 6
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithMergeWithoutExplicitInsertColumnSelectList
-Script file: ProcWithMergeWithoutExplicitInsertColumnSelectList.sql
+Script file: ProcWithMergeWithoutExplicitInsertColumnSelectList.tsql
 Start line: 8
 Start column: 6
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithoutAnyExplicitInsertColumnInInsertFromDML
-Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql
+Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithoutAnyExplicitInsertColumnInInsertFromDML
-Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.sql
+Script file: ProcWithoutAnyExplicitInsertColumnInInsertFromDML.tsql
 Start line: 6
 Start column: 1
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithoutExplicitInsertColumnSelectList
-Script file: ProcWithoutExplicitInsertColumnSelectList.sql
+Script file: ProcWithoutExplicitInsertColumnSelectList.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithoutExplicitInsertColumnSelectListFromDML
-Script file: ProcWithoutExplicitInsertColumnSelectListFromDML.sql
+Script file: ProcWithoutExplicitInsertColumnSelectListFromDML.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Insert statement or clause without column list found in [db
 FullID: Cheburashka.DM0051
 Severity: Warning
 Model element: dbo.ProcWithoutExplicitInsertColumnValuesList
-Script file: ProcWithoutExplicitInsertColumnValuesList.sql
+Script file: ProcWithoutExplicitInsertColumnValuesList.tsql
 Start line: 4
 Start column: 1
 ========end of problem========

@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: DatabaseTriggerWithUninitialisedVariable
-Script file: DatabaseTriggerWithUninitialisedVariable.sql
+Script file: DatabaseTriggerWithUninitialisedVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Uninitialised variable found in [dbo].[ProcWithUninitialise
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: dbo.ProcWithUninitialisedVariable
-Script file: ProcWithUninitialisedVariable.sql
+Script file: ProcWithUninitialisedVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Uninitialised variable found in [dbo].[ProcWithVariableThat
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: dbo.ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters
-Script file: ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.sql
+Script file: ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Uninitialised variable found in [dbo].[ScalarValuedFunction
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: dbo.ScalarValuedFunctionWithUninitialisedVariable
-Script file: ScalarValuedFunctionWithUninitialisedVariable.sql
+Script file: ScalarValuedFunctionWithUninitialisedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Uninitialised variable found in [ServerTriggerWithUninitial
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: ServerTriggerWithUninitialisedVariable
-Script file: ServerDdlTriggerWithUninitialisedVariable.sql
+Script file: ServerDdlTriggerWithUninitialisedVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Uninitialised variable found in [dbo].[TableTriggerWithUnin
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: dbo.TableTriggerWithUninitialisedVariable
-Script file: TableTriggerWithUninitialisedVariable.sql
+Script file: TableTriggerWithUninitialisedVariable.tsql
 Start line: 4
 Start column: 9
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Uninitialised variable found in [dbo].[TableValuedFunctionW
 FullID: Cheburashka.DM0001
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithUninitialisedVariable
-Script file: TableValuedFunctionWithUninitialisedVariable.sql
+Script file: TableValuedFunctionWithUninitialisedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========

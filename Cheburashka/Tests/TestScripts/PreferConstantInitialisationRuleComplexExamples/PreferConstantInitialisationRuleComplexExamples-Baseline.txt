@@ -2,7 +2,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter
-Script file: ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter.sql
+Script file: ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter.tsql
 Start line: 7
 Start column: 5
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter
-Script file: ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter.sql
+Script file: ProcWithSingleVariableSetToChainOfInitialisationsFromChainOfVariablesInitialisedFromParameter.tsql
 Start line: 9
 Start column: 5
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter
-Script file: ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter.sql
+Script file: ProcWithSingleVariableSetToChainOfVariablesInitialisedFromParameter.tsql
 Start line: 7
 Start column: 5
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToInitialisedVariable
-Script file: ProcWithSingleVariableSetToInitialisedVariable.sql
+Script file: ProcWithSingleVariableSetToInitialisedVariable.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToVariableInitialisedFromParameter
-Script file: ProcWithSingleVariableSetToVariableInitialisedFromParameter.sql
+Script file: ProcWithSingleVariableSetToVariableInitialisedFromParameter.tsql
 Start line: 6
 Start column: 5
 ========end of problem========

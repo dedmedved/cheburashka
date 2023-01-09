@@ -2,7 +2,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithBracketedSelfAssignments
-Script file: ProcWithBracketedSelfAssignments.sql
+Script file: ProcWithBracketedSelfAssignments.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithBracketedSelfAssignments
-Script file: ProcWithBracketedSelfAssignments.sql
+Script file: ProcWithBracketedSelfAssignments.tsql
 Start line: 7
 Start column: 3
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithBracketedSelfAssignments
-Script file: ProcWithBracketedSelfAssignments.sql
+Script file: ProcWithBracketedSelfAssignments.tsql
 Start line: 9
 Start column: 5
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithBracketedSelfAssignments
-Script file: ProcWithBracketedSelfAssignments.sql
+Script file: ProcWithBracketedSelfAssignments.tsql
 Start line: 13
 Start column: 3
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithComplexSelfAssignments
-Script file: ProcWithComplexSelfAssignments.sql
+Script file: ProcWithComplexSelfAssignments.tsql
 Start line: 9
 Start column: 5
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithComplexSelfAssignments
-Script file: ProcWithComplexSelfAssignments.sql
+Script file: ProcWithComplexSelfAssignments.tsql
 Start line: 10
 Start column: 5
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 7
 Start column: 3
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 9
 Start column: 5
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 11
 Start column: 5
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 14
 Start column: 5
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 17
 Start column: 5
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 18
 Start column: 3
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 23
 Start column: 5
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 24
 Start column: 3
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 29
 Start column: 5
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 30
 Start column: 3
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 35
 Start column: 5
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 36
 Start column: 3
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 37
 Start column: 3
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 38
 Start column: 3
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 41
 Start column: 5
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 42
 Start column: 3
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 43
 Start column: 3
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 44
 Start column: 3
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 47
 Start column: 5
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 48
 Start column: 3
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 49
 Start column: 3
 ========end of problem========
@@ -254,8 +254,35 @@ Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcW
 FullID: Cheburashka.DM0067
 Severity: Warning
 Model element: dbo.ProcWithSelfAssignments
-Script file: ProcWithSelfAssignments.sql
+Script file: ProcWithSelfAssignments.tsql
 Start line: 50
 Start column: 3
+========end of problem========
+
+Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcWithSelfAssignments].
+FullID: Cheburashka.DM0067
+Severity: Warning
+Model element: dbo.ProcWithSelfAssignments
+Script file: ProcWithSelfAssignments.tsql
+Start line: 55
+Start column: 5
+========end of problem========
+
+Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcWithSelfAssignments].
+FullID: Cheburashka.DM0067
+Severity: Warning
+Model element: dbo.ProcWithSelfAssignments
+Script file: ProcWithSelfAssignments.tsql
+Start line: 56
+Start column: 5
+========end of problem========
+
+Problem description: Self-assignment operator eg+= can be used here [dbo].[ProcWithSelfAssignments].
+FullID: Cheburashka.DM0067
+Severity: Warning
+Model element: dbo.ProcWithSelfAssignments
+Script file: ProcWithSelfAssignments.tsql
+Start line: 58
+Start column: 5
 ========end of problem========
 

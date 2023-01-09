@@ -1,53 +1,89 @@
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
-Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.sql
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
 Start line: 3
 Start column: 1
 ========end of problem========
 
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithInsertFromMergeWithMissingColumns_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithInsertFromMergeWithMissingColumns_NULL
-Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.sql
+Script file: ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql
 Start line: 7
 Start column: 9
 ========end of problem========
 
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithMissingInsertColumns_NULL
-Script file: ProcedureWithMissingInsertColumns_NULL.sql
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
 Start line: 3
 Start column: 1
 ========end of problem========
 
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumns_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithMissingInsertColumns_NULL
-Script file: ProcedureWithMissingInsertColumns_NULL.sql
+Script file: ProcedureWithMissingInsertColumns_NULL.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
 
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL
-Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.sql
+Script file: ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql
 Start line: 4
 Start column: 1
 ========end of problem========
 
-Problem description: Mandatory column missing from insert list in [dbo].[ProcedureWithMissingMergeInsertColumns_NULL].
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsIntoTableVariable_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsIntoTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsIntoTableVariable_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsIntoTableVariable_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsIntoTableVariable_NULL
+Script file: ProcedureWithMissingInsertColumnsIntoTableVariable_NULL.tsql
+Start line: 5
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsIntoTempTable_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsIntoTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsIntoTempTable_NULL.tsql
+Start line: 4
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingInsertColumnsIntoTempTable_NULL].
+FullID: Cheburashka.DM0061
+Severity: Warning
+Model element: dbo.ProcedureWithMissingInsertColumnsIntoTempTable_NULL
+Script file: ProcedureWithMissingInsertColumnsIntoTempTable_NULL.tsql
+Start line: 5
+Start column: 1
+========end of problem========
+
+Problem description: Mandatory column b missing from insert list in [dbo].[ProcedureWithMissingMergeInsertColumns_NULL].
 FullID: Cheburashka.DM0061
 Severity: Warning
 Model element: dbo.ProcedureWithMissingMergeInsertColumns_NULL
-Script file: ProcedureWithMissingMergeInsertColumns_NULL.sql
+Script file: ProcedureWithMissingMergeInsertColumns_NULL.tsql
 Start line: 3
 Start column: 1
 ========end of problem========

@@ -2,7 +2,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[FunctionWi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.FunctionWithSingleVariableSetToIntLiteral
-Script file: FunctionWithSingleVariableSetToIntLiteral.sql
+Script file: FunctionWithSingleVariableSetToIntLiteral.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[FunctionWi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.FunctionWithSingleVariableSetToIntParameter
-Script file: FunctionWithSingleVariableSetToIntParameter.sql
+Script file: FunctionWithSingleVariableSetToIntParameter.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSelectSetToIntLiteral
-Script file: ProcWithSingleVariableSelectSetToIntLiteral.sql
+Script file: ProcWithSingleVariableSelectSetToIntLiteral.tsql
 Start line: 5
 Start column: 12
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToDateFunction
-Script file: ProcWithSingleVariableSetToDateFunction.sql
+Script file: ProcWithSingleVariableSetToDateFunction.tsql
 Start line: 5
 Start column: 5
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToDateLiteral
-Script file: ProcWithSingleVariableSetToDateLiteral.sql
+Script file: ProcWithSingleVariableSetToDateLiteral.tsql
 Start line: 5
 Start column: 5
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToInitialisedInt
-Script file: ProcWithSingleVariableSetToInitialisedInt.sql
+Script file: ProcWithSingleVariableSetToInitialisedInt.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToIntExpression
-Script file: ProcWithSingleVariableSetToIntExpression.sql
+Script file: ProcWithSingleVariableSetToIntExpression.tsql
 Start line: 5
 Start column: 4
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToIntLiteral
-Script file: ProcWithSingleVariableSetToIntLiteral.sql
+Script file: ProcWithSingleVariableSetToIntLiteral.tsql
 Start line: 5
 Start column: 5
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToIntParameter
-Script file: ProcWithSingleVariableSetToIntParameter.sql
+Script file: ProcWithSingleVariableSetToIntParameter.tsql
 Start line: 5
 Start column: 5
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToSecondSetInt
-Script file: ProcWithSingleVariableSetToSecondSetInt.sql
+Script file: ProcWithSingleVariableSetToSecondSetInt.tsql
 Start line: 6
 Start column: 5
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[ProcWithSi
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.ProcWithSingleVariableSetToSecondSetInt
-Script file: ProcWithSingleVariableSetToSecondSetInt.sql
+Script file: ProcWithSingleVariableSetToSecondSetInt.tsql
 Start line: 7
 Start column: 5
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Constant set but not by an initialiser in [dbo].[TriggerWit
 FullID: Cheburashka.DM0049
 Severity: Warning
 Model element: dbo.TriggerWithSingleVariableSetToIntLiteral
-Script file: TriggerWithSingleVariableSetToIntLiteral.sql
+Script file: TriggerWithSingleVariableSetToIntLiteral.tsql
 Start line: 7
 Start column: 5
 ========end of problem========

@@ -2,7 +2,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 10
 Start column: 54
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 10
 Start column: 61
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 12
 Start column: 15
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 12
 Start column: 26
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 13
 Start column: 15
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Data Source found without an alias in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 13
 Start column: 27
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLD
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLDeleteProc
-Script file: InsertFromDMLDeleteProc.sql
+Script file: InsertFromDMLDeleteProc.tsql
 Start line: 23
 Start column: 17
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLD
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLDeleteProc
-Script file: InsertFromDMLDeleteProc.sql
+Script file: InsertFromDMLDeleteProc.tsql
 Start line: 24
 Start column: 17
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLD
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLDeleteProc
-Script file: InsertFromDMLDeleteProc.sql
+Script file: InsertFromDMLDeleteProc.tsql
 Start line: 30
 Start column: 13
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLD
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLDeleteProc
-Script file: InsertFromDMLDeleteProc.sql
+Script file: InsertFromDMLDeleteProc.tsql
 Start line: 31
 Start column: 13
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 27
 Start column: 14
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 28
 Start column: 14
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 36
 Start column: 10
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 37
 Start column: 10
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 9
 Start column: 15
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 10
 Start column: 15
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 25
 Start column: 15
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 26
 Start column: 15
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 35
 Start column: 15
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 36
 Start column: 15
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 27
 Start column: 17
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 28
 Start column: 17
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 36
 Start column: 13
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Data Source found without an alias in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 37
 Start column: 13
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 16
 Start column: 17
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 24
 Start column: 32
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 25
 Start column: 17
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 48
 Start column: 32
 ========end of problem========
@@ -254,7 +254,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 67
 Start column: 17
 ========end of problem========
@@ -263,7 +263,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 68
 Start column: 38
 ========end of problem========
@@ -272,7 +272,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 74
 Start column: 17
 ========end of problem========
@@ -281,7 +281,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 75
 Start column: 41
 ========end of problem========
@@ -290,7 +290,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 94
 Start column: 17
 ========end of problem========
@@ -299,7 +299,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 98
 Start column: 17
 ========end of problem========
@@ -308,7 +308,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 106
 Start column: 32
 ========end of problem========
@@ -317,7 +317,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 107
 Start column: 17
 ========end of problem========
@@ -326,7 +326,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 110
 Start column: 32
 ========end of problem========
@@ -335,7 +335,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 111
 Start column: 17
 ========end of problem========
@@ -344,7 +344,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 145
 Start column: 32
 ========end of problem========
@@ -353,7 +353,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 151
 Start column: 32
 ========end of problem========
@@ -362,7 +362,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 176
 Start column: 17
 ========end of problem========
@@ -371,7 +371,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 177
 Start column: 38
 ========end of problem========
@@ -380,7 +380,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 180
 Start column: 17
 ========end of problem========
@@ -389,7 +389,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 181
 Start column: 38
 ========end of problem========
@@ -398,7 +398,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 187
 Start column: 17
 ========end of problem========
@@ -407,7 +407,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 188
 Start column: 41
 ========end of problem========
@@ -416,7 +416,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 191
 Start column: 17
 ========end of problem========
@@ -425,7 +425,7 @@ Problem description: Data Source found without an alias in [dbo].[onelevelinline
 FullID: Cheburashka.DM0047
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 192
 Start column: 41
 ========end of problem========

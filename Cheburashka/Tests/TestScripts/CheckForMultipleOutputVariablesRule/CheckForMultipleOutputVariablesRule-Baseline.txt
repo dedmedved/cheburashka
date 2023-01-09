@@ -2,7 +2,7 @@ Problem description: Same variable used in different output positions in procedu
 FullID: Cheburashka.DM0053
 Severity: Warning
 Model element: dbo.ProcWith2OutputVariablesAssignedToSameVariable
-Script file: ProcWith2OutputVariablesAssignedToSameVariable.sql
+Script file: ProcWith2OutputVariablesAssignedToSameVariable.tsql
 Start line: 6
 Start column: 66
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Same variable used in different output positions in procedu
 FullID: Cheburashka.DM0053
 Severity: Warning
 Model element: dbo.ProcWith2OutputVariablesAssignedToSameVariable
-Script file: ProcWith2OutputVariablesAssignedToSameVariable.sql
+Script file: ProcWith2OutputVariablesAssignedToSameVariable.tsql
 Start line: 6
 Start column: 85
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Same variable used in different output positions in procedu
 FullID: Cheburashka.DM0053
 Severity: Warning
 Model element: dbo.ProcWithOutputVariableAndReturnValueAssignedToSameVariable
-Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.sql
+Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.tsql
 Start line: 6
 Start column: 6
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Same variable used in different output positions in procedu
 FullID: Cheburashka.DM0053
 Severity: Warning
 Model element: dbo.ProcWithOutputVariableAndReturnValueAssignedToSameVariable
-Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.sql
+Script file: ProcWithOutputVariableAndReturnValueAssignedToSameVariable.tsql
 Start line: 6
 Start column: 78
 ========end of problem========

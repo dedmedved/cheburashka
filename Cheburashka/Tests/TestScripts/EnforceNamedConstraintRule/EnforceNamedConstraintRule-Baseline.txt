@@ -2,7 +2,7 @@ Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRu
 FullID: Cheburashka.DM0022
 Severity: Warning
 Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
-Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.tsql
 Start line: 2
 Start column: 15
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRu
 FullID: Cheburashka.DM0022
 Severity: Warning
 Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
-Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.tsql
 Start line: 3
 Start column: 15
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRu
 FullID: Cheburashka.DM0022
 Severity: Warning
 Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
-Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.tsql
 Start line: 4
 Start column: 15
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRu
 FullID: Cheburashka.DM0022
 Severity: Warning
 Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
-Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.tsql
 Start line: 5
 Start column: 15
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Unnamed constraint found in [dbo].[EnforceNamedConstraintRu
 FullID: Cheburashka.DM0022
 Severity: Warning
 Model element: dbo.EnforceNamedConstraintRule_Table_Without_Constraint_Names
-Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.sql
+Script file: EnforceNamedConstraintRule_Table_Without_Constraint_Names.tsql
 Start line: 6
 Start column: 15
 ========end of problem========

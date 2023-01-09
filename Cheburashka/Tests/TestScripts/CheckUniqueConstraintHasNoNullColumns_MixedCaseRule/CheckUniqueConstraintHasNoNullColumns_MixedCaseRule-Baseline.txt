@@ -2,7 +2,7 @@ Problem description: Unique constraint found with nullable columns in [dbo].[Che
 FullID: Cheburashka.DM0018
 Severity: Warning
 Model element: dbo.CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column
-Script file: CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column.sql
+Script file: CheckUniqueConstraintHasNoNullColumnsRule_Table_With_Null_Column.tsql
 Start line: 6
 Start column: 98
 ========end of problem========

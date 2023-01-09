@@ -2,7 +2,7 @@ Problem description: Unattached BEGIN/END block found in [DatabaseTriggerWithBeg
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: DatabaseTriggerWithBeginInsideTry
-Script file: DatabaseTriggerWithBeginInsideTry.sql
+Script file: DatabaseTriggerWithBeginInsideTry.tsql
 Start line: 10
 Start column: 5
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[DMLTriggerWithBe
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.DMLTriggerWithBeginInsideTry
-Script file: DMLTriggerWithBeginInsideTry.sql
+Script file: DMLTriggerWithBeginInsideTry.tsql
 Start line: 11
 Start column: 5
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[ProcWithBeginIns
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithBeginInsideTry
-Script file: ProcWithBeginInsideTry.sql
+Script file: ProcWithBeginInsideTry.tsql
 Start line: 8
 Start column: 5
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[ProcWithNestedBe
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithNestedBeginEnd
-Script file: ProcWithNestedBeginEnd.sql
+Script file: ProcWithNestedBeginEnd.tsql
 Start line: 5
 Start column: 1
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[ProcWithNestedBe
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithNestedBeginEndAtomic
-Script file: ProcWithNestedBeginEndAtomic.sql
+Script file: ProcWithNestedBeginEndAtomic.tsql
 Start line: 6
 Start column: 1
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[ProcWithRandomly
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithRandomlyIntroducedBeginEnd
-Script file: ProcWithRandomlyIntroducedBeginEnd.sql
+Script file: ProcWithRandomlyIntroducedBeginEnd.tsql
 Start line: 7
 Start column: 5
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[ScalarFunctionWi
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ScalarFunctionWithBeginInsideTry
-Script file: ScalarFunctionWithBeginInsideTry.sql
+Script file: ScalarFunctionWithBeginInsideTry.tsql
 Start line: 8
 Start column: 5
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Unattached BEGIN/END block found in [ServerTriggerWithBegin
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: ServerTriggerWithBeginInsideTry
-Script file: ServerTriggerWithBeginInsideTry.sql
+Script file: ServerTriggerWithBeginInsideTry.tsql
 Start line: 9
 Start column: 5
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Unattached BEGIN/END block found in [dbo].[TableValuedFunct
 FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithBeginInsideTry
-Script file: TableValuedFunctionWithBeginInsideTry.sql
+Script file: TableValuedFunctionWithBeginInsideTry.tsql
 Start line: 8
 Start column: 5
 ========end of problem========

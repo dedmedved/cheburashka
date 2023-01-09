@@ -46,7 +46,8 @@ namespace Cheburashka.Tests
         private const string Output = "Output";
         private const string Baseline = "Baseline";
         private const string DacpacBaseline = "DacpacBaseline";
-        private const string SqlExt = ".sql";
+        private const string SqlExt1 = ".sql";
+        private const string SqlExt2 = ".tsql";
 
         /// <summary>
         /// Creates a new base-lined test. The input files and baseline file will be loaded from
@@ -110,11 +111,16 @@ namespace Cheburashka.Tests
             // Load all files ending in ".sql". Note that due to strange Win32 behavior we need to double check the
             // file name actually ends in ".sql" since suffixes like ".sqlOther" would also be included in the results
             var di = new DirectoryInfo(ScriptsFolder);
-            var scriptFilepaths = from file in di.GetFiles("*" + SqlExt)
-                                  where SqlExt.Equals(file.Extension, StringComparison.OrdinalIgnoreCase)
+            var scriptFilepaths = from file in di.GetFiles("*" + SqlExt1)
+                                  where SqlExt1.Equals(file.Extension, StringComparison.OrdinalIgnoreCase)
                                   select file.FullName;
+            var scriptFilepaths2 = from file in di.GetFiles("*" + SqlExt2)
+                                  where SqlExt2.Equals(file.Extension, StringComparison.OrdinalIgnoreCase)
+                                  select file.FullName;
+            List<string>allScriptFilepaths = scriptFilepaths.ToList(); 
+            allScriptFilepaths.AddRange(scriptFilepaths2);
 
-            foreach(string scriptFile in scriptFilepaths)
+            foreach (string scriptFile in allScriptFilepaths)
             {
                 try
                 {

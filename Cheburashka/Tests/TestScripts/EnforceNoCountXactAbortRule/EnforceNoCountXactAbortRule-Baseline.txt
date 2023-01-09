@@ -2,7 +2,7 @@ Problem description: Set NoCount On/Xact_Abort On not found at start of code in 
 FullID: Cheburashka.DM0060
 Severity: Warning
 Model element: dbo.EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_Invalid
-Script file: EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_Invalid.sql
+Script file: EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_Invalid.tsql
 Start line: 1
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Set NoCount On/Xact_Abort On not found at start of code in 
 FullID: Cheburashka.DM0060
 Severity: Warning
 Model element: dbo.EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_InvalidFirstStatement
-Script file: EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_InvalidFirstStatement.sql
+Script file: EnforceNoCountXactAbortRule_SimpleProc_NonEmpty_InvalidFirstStatement.tsql
 Start line: 1
 Start column: 1
 ========end of problem========

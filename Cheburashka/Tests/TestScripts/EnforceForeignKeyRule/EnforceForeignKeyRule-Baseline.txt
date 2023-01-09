@@ -2,7 +2,7 @@ Problem description: Table with no Foreign Key relationships was found in [dbo].
 FullID: Cheburashka.DM0033
 Severity: Warning
 Model element: dbo.EnforceForeignKeyRule_Table_Without_FK
-Script file: EnforceForeignKeyRule_Table_Without_FK.sql
+Script file: EnforceForeignKeyRule_Table_Without_FK.tsql
 Start line: 1
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Table with no Foreign Key relationships was found in [dbo].
 FullID: Cheburashka.DM0033
 Severity: Warning
 Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_Child
-Script file: EnforceForeignKeyRule_Table_Without_FK.sql
+Script file: EnforceForeignKeyRule_Table_Without_FK.tsql
 Start line: 5
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Table with no Foreign Key relationships was found in [dbo].
 FullID: Cheburashka.DM0033
 Severity: Warning
 Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_No_Schema
-Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.sql
+Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.tsql
 Start line: 1
 Start column: 1
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Table with no Foreign Key relationships was found in [dbo].
 FullID: Cheburashka.DM0033
 Severity: Warning
 Model element: dbo.EnforceForeignKeyRule_Table_Without_FK_No_Schema_Child
-Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.sql
+Script file: EnforceForeignKeyRule_Table_Without_FK_No_Schema.tsql
 Start line: 5
 Start column: 1
 ========end of problem========

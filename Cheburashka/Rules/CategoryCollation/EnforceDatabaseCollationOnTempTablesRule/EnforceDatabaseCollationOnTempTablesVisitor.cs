@@ -57,22 +57,20 @@ namespace Cheburashka
         }
         public override void ExplicitVisit(ColumnDefinition node)
         {
-            {
             if ( ( node.Collation is null 
-               && node.DataType is SqlDataTypeReference sqlDataTypeReference
-               && (sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Char
-                    ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NChar
-                    ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NText
-                    ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NVarChar
-                    ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Text
-                    ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.VarChar
-                  )
-            )
-            || (node.Collation is not null && !string.Equals(node.Collation.Value, "database_default", System.StringComparison.OrdinalIgnoreCase))
-            )
+                   && node.DataType is SqlDataTypeReference sqlDataTypeReference
+                   && (sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Char
+                       ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NChar
+                       ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NText
+                       ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.NVarChar
+                       ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.Text
+                       ||sqlDataTypeReference.SqlDataTypeOption == SqlDataTypeOption.VarChar
+                   )
+                 )
+                 || (node.Collation is not null && !string.Equals(node.Collation.Value, "database_default", System.StringComparison.OrdinalIgnoreCase))
+               )
             {
-                    Objects.Add(node.ColumnIdentifier);
-                }
+                Objects.Add(node.ColumnIdentifier);
             }
             node.AcceptChildren(this);
         }

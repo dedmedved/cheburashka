@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: DatabaseTriggerWithUnusedVariable
-Script file: DatabaseTriggerWithUnusedVariable.sql
+Script file: DatabaseTriggerWithUnusedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unused Variable found in [dbo].[ProcWithUnusedVariable].
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: dbo.ProcWithUnusedVariable
-Script file: ProcWithUnusedVariable.sql
+Script file: ProcWithUnusedVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unused Variable found in [dbo].[ScalarValuedFunctionWithUnu
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: dbo.ScalarValuedFunctionWithUnusedVariable
-Script file: ScalarValuedFunctionWithUnusedVariable.sql
+Script file: ScalarValuedFunctionWithUnusedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unused Variable found in [ServerTriggerWithUnusedVariable].
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: ServerTriggerWithUnusedVariable
-Script file: ServerDdlTriggerWithUnusedVariable.sql
+Script file: ServerDdlTriggerWithUnusedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Unused Variable found in [dbo].[TableTriggerWithUnusedVaria
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: dbo.TableTriggerWithUnusedVariable
-Script file: TableTriggerWithUnusedVariable.sql
+Script file: TableTriggerWithUnusedVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Unused Variable found in [dbo].[TableValuedFunctionWithUnus
 FullID: Cheburashka.DM0002
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithUnusedVariable
-Script file: TableValuedFunctionWithUnusedVariable.sql
+Script file: TableValuedFunctionWithUnusedVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========

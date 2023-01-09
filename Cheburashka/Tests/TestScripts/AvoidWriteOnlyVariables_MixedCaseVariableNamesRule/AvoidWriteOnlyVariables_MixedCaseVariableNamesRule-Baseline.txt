@@ -2,7 +2,7 @@ Problem description: Write-only Variable found in [DatabaseTriggerWithWriteOnlyV
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: DatabaseTriggerWithWriteOnlyVariable
-Script file: DatabaseTriggerWithWriteOnlyVariable.sql
+Script file: DatabaseTriggerWithWriteOnlyVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain_ProcWithCh
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain_ProcWithCh
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 7
 Start column: 6
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain_ProcWithCh
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 8
 Start column: 6
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain_ProcWithCh
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 9
 Start column: 6
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 7
 Start column: 6
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 8
 Start column: 6
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 9
 Start column: 6
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 10
 Start column: 6
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 11
 Start column: 6
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Write-only Variable found in [dbo].[L_circ_Chain2_ProcWithC
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables
-Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: L_circ_Chain2_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 12
 Start column: 6
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Write-only Variable found in [dbo].[LChain_ProcWithChainedP
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.LChain_ProcWithChainedParameterWriteOnlyVariables
-Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Write-only Variable found in [dbo].[LChain_ProcWithChainedP
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.LChain_ProcWithChainedParameterWriteOnlyVariables
-Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 7
 Start column: 6
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Write-only Variable found in [dbo].[LChain_ProcWithChainedP
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.LChain_ProcWithChainedParameterWriteOnlyVariables
-Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 8
 Start column: 6
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Write-only Variable found in [dbo].[LChain_ProcWithChainedP
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.LChain_ProcWithChainedParameterWriteOnlyVariables
-Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: LChain_ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 9
 Start column: 6
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithChainedParamete
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithChainedParameterWriteOnlyVariables
-Script file: ProcWithChainedParameterWriteOnlyVariables.sql
+Script file: ProcWithChainedParameterWriteOnlyVariables.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithChainedWriteOnl
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithChainedWriteOnlyVariables
-Script file: ProcWithChainedWriteOnlyVariables.sql
+Script file: ProcWithChainedWriteOnlyVariables.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithChainedWriteOnl
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithChainedWriteOnlyVariables
-Script file: ProcWithChainedWriteOnlyVariables.sql
+Script file: ProcWithChainedWriteOnlyVariables.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithCircularlyRefer
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithCircularlyReferencedWriteOnlyVariables
-Script file: ProcWithCircularlyReferencedWriteOnlyVariables.sql
+Script file: ProcWithCircularlyReferencedWriteOnlyVariables.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithCircularlyRefer
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithCircularlyReferencedWriteOnlyVariables
-Script file: ProcWithCircularlyReferencedWriteOnlyVariables.sql
+Script file: ProcWithCircularlyReferencedWriteOnlyVariables.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithUseOfInterimCha
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithUseOfInterimChainedWriteOnlyVariables
-Script file: ProcWithUseOfInterimChainedWriteOnlyVariables.sql
+Script file: ProcWithUseOfInterimChainedWriteOnlyVariables.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariable
-Script file: ProcWithWriteOnlyVariable.sql
+Script file: ProcWithWriteOnlyVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByAssignmentSet
-Script file: ProcWithWriteOnlyVariableSetByAssignmentSet.sql
+Script file: ProcWithWriteOnlyVariableSetByAssignmentSet.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByBeginDialog
-Script file: ProcWithWriteOnlyVariableSetByBeginDialog.sql
+Script file: ProcWithWriteOnlyVariableSetByBeginDialog.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByExecute
-Script file: ProcWithWriteOnlyVariableSetByExecute.sql
+Script file: ProcWithWriteOnlyVariableSetByExecute.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByExecuteParameter
-Script file: ProcWithWriteOnlyVariableSetByExecuteParameter.sql
+Script file: ProcWithWriteOnlyVariableSetByExecuteParameter.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters
-Script file: ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.sql
+Script file: ProcWithWriteOnlyVariableSetByExecuteParameterNotUsingNamedParameters.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -254,7 +254,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByFetchFromCursor
-Script file: ProcWithWriteOnlyVariableSetByFetchFromCursor.sql
+Script file: ProcWithWriteOnlyVariableSetByFetchFromCursor.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -263,7 +263,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByInsertExecute
-Script file: ProcWithWriteOnlyVariableSetByInsertExecute.sql
+Script file: ProcWithWriteOnlyVariableSetByInsertExecute.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -272,7 +272,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetByReceive
-Script file: ProcWithWriteOnlyVariableSetByReceive.sql
+Script file: ProcWithWriteOnlyVariableSetByReceive.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -281,7 +281,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetBySelect
-Script file: ProcWithWriteOnlyVariableSetBySelect.sql
+Script file: ProcWithWriteOnlyVariableSetBySelect.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -290,7 +290,7 @@ Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariab
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter
-Script file: ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.sql
+Script file: ProcWithWriteOnlyVariableSetBySp_ExecuteSQLParameter.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -299,7 +299,7 @@ Problem description: Write-only Variable found in [dbo].[ScalarValuedFunctionWit
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.ScalarValuedFunctionWithWriteOnlyVariable
-Script file: ScalarValuedFunctionWithWriteOnlyVariable.sql
+Script file: ScalarValuedFunctionWithWriteOnlyVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -308,7 +308,7 @@ Problem description: Write-only Variable found in [ServerTriggerWithWriteOnlyVar
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: ServerTriggerWithWriteOnlyVariable
-Script file: ServerDdlTriggerWithWriteOnlyVariable.sql
+Script file: ServerDdlTriggerWithWriteOnlyVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -317,7 +317,7 @@ Problem description: Write-only Variable found in [dbo].[TableTriggerWithWriteOn
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.TableTriggerWithWriteOnlyVariable
-Script file: TableTriggerWithWriteOnlyVariable.sql
+Script file: TableTriggerWithWriteOnlyVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -326,7 +326,7 @@ Problem description: Write-only Variable found in [dbo].[TableValuedFunctionWith
 FullID: Cheburashka.DM0003
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithWriteOnlyVariable
-Script file: TableValuedFunctionWithWriteOnlyVariable.sql
+Script file: TableValuedFunctionWithWriteOnlyVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========

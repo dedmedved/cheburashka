@@ -1,0 +1,9 @@
+create table  dbo.Table8
+(       a int not null
+,       b int 
+)
+go
+
+CREATE view dbo.ViewWithBracketsAroundSelectStatement
+AS  ( SELECT 1 as a FROM dbo.Table8 WHERE 1=1)
+go

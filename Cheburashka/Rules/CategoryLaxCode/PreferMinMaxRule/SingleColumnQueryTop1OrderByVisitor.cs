@@ -38,38 +38,35 @@ namespace Cheburashka
             List<QuerySpecification> querySpecifications = new();
             SqlGatherQuery.GetQuery(node, ref querySpecifications);
             if (querySpecifications.Count == 1      //rule out intersect/union/except - it gets too hard to handle top 1 inside a union etc
-                && querySpecifications[0] is { } query
-                //&& SqlCheck.HasExactlyOneFromClauseTableSource(query)
-                && query.ForClause is null 
-                //&& query.FromClause.TableReferences[0] is TableReferenceWithAlias table
-                && query.GroupByClause is null
-                && query.TopRowFilter is not null
-                && query.TopRowFilter is TopRowFilter topRowFilter
-                && !topRowFilter.Percent
-                && topRowFilter.Expression is IntegerLiteral integerLiteral
-                && integerLiteral.Value == "1"
+                && querySpecifications[0] is { ForClause: null, GroupByClause: null, TopRowFilter: { Percent: false } topRowFilter } query 
                 && query.SelectElements.Count == 1 
-                && query.OrderByClause is not null
-                && query.OrderByClause is OrderByClause orderByClause
-                && orderByClause.OrderByElements.Count == 1
+                && query.OrderByClause is not null 
+                && query.OrderByClause is { } orderByClause 
+                && orderByClause.OrderByElements.Count == 1 
                 && query.SelectElements[0] is SelectScalarExpression selectScalarExpression
-
-                //&& sqlmodel orderByClause.OrderByElements[0].Expression == selectScalarExpression.Expression
                 )
 
             {
-                var selcol = new ColumnUtil(selectScalarExpression);
-                var ordcol = new ColumnUtil(orderByClause.OrderByElements[0].Expression);
-                if (selcol.ExpressionElements.SequenceEqual(ordcol.ExpressionElements, SqlComparer.Comparer)
-                   || ( orderByClause.OrderByElements[0].Expression is IntegerLiteral integerLiteral2
-                      && integerLiteral2.Value == "1"
-                      )
-                )
-                {
-                    SingleColumnQueryTop1OrderQueries.Add(node);
+                IntegerLiteral topNCountValue;
+                if (topRowFilter.Expression is IntegerLiteral integerLiteral) {
+                    topNCountValue = integerLiteral;
+                }
+                else if (SQLFragmentExtensions.ExtractFromParenthesisExpression(topRowFilter.Expression, out topNCountValue)) { }
+                if (topNCountValue?.Value == "1" ){
+                    SQLFragmentExtensions.ExtractFromParenthesisExpression(selectScalarExpression.Expression, out var unwrappedSelCol);
+                    SQLFragmentExtensions.ExtractFromParenthesisExpression(orderByClause.OrderByElements[0].Expression, out var unwrappedOrdCol);
+                    var selcol = new SQLFragmentAsList(unwrappedSelCol);
+                    var ordcol = new SQLFragmentAsList(unwrappedOrdCol);
+                    
+                    if (selcol.Elements.SequenceEqual(ordcol.Elements, SqlComparer.Comparer)
+                        || orderByClause.OrderByElements[0].Expression is IntegerLiteral { Value: "1" })
+                    {
+                        SingleColumnQueryTop1OrderQueries.Add(node);
+                    }
                 }
             }
             node.AcceptChildren(this);
         }
+
     }
 }

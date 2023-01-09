@@ -32,7 +32,7 @@ namespace Cheburashka
         private const int CacheRefreshIntervalSeconds = 15;
 
         private static DateTime                 _lastConstraintsAndIndexesCacheRefresh = DateTime.Now.AddSeconds(-(CacheRefreshIntervalSeconds+10)) ;
-        private static readonly DateTime        LastInsertColumnCacheRefresh;
+        //private static readonly DateTime        LastInsertColumnCacheRefresh;
         private static SqlServerVersion?        _modelVersion ;
 
         //public static bool AllowClusterOnPrimaryKey = true;        // these used to be settable via a config file - we aren't re-introducing that just yet
@@ -40,16 +40,17 @@ namespace Cheburashka
 
         //private static IEnumerable<TSqlObject>  _builtinDataTypes;
 
-        private static readonly IEnumerable<TSqlObject>              Ts;
-        private static readonly IEnumerable<TSqlObject>              Vs;
+        //private static readonly IEnumerable<TSqlObject>              Ts;
+        //private static readonly IEnumerable<TSqlObject>              Vs;
 
-        private static readonly IEnumerable<TSqlObject>              Tables;
-        private static readonly IEnumerable<TSqlObject>              Views;
+        //private static readonly IEnumerable<TSqlObject>              Tables;
+        //private static readonly IEnumerable<TSqlObject>              Views;
 
         private static readonly Dictionary<string, List<TSqlObject>> TablesColumnsCache;
 
         private static IList<TSqlObject>              _proceduresCache;
         private static IList<TSqlObject>              _tablesCache;
+        private static IList<TSqlObject>              _viewsCache;
         private static IList<TSqlObject>              _indexesCache;
         private static IList<TSqlObject>              _primaryKeyConstraints;
         private static IList<TSqlObject>              _foreignKeyConstraints;
@@ -74,6 +75,7 @@ namespace Cheburashka
             {
                 IList<TSqlObject> prcs = model.GetObjects(DacQueryScopes.UserDefined, Procedure.TypeClass).ToList();
                 IList<TSqlObject> tbls = model.GetObjects(DacQueryScopes.UserDefined, Table.TypeClass).ToList();
+                IList<TSqlObject>  vws = model.GetObjects(DacQueryScopes.UserDefined, View.TypeClass).ToList();
                 IList<TSqlObject> idxs = model.GetObjects(DacQueryScopes.UserDefined, Index.TypeClass).ToList();
                 IList<TSqlObject> pkcs = model.GetObjects(DacQueryScopes.UserDefined, PrimaryKeyConstraint.TypeClass).ToList();
                 IList<TSqlObject> fkcs = model.GetObjects(DacQueryScopes.UserDefined, ForeignKeyConstraint.TypeClass).ToList();
@@ -85,6 +87,7 @@ namespace Cheburashka
 
                 _proceduresCache        = prcs ;
                 _tablesCache            = tbls ;
+                _viewsCache             = vws ;
                 _indexesCache           = idxs ;
                 _primaryKeyConstraints  = pkcs ;
                 _foreignKeyConstraints  = fkcs ;
@@ -114,6 +117,7 @@ namespace Cheburashka
 
         public static IList<TSqlObject> GetProcedures => _proceduresCache;
         public static IList<TSqlObject> GetTables => _tablesCache;
+        public static IList<TSqlObject> GetViews => _viewsCache;
         public static IList<TSqlObject> GetIndexes => _indexesCache;
         public static IList<TSqlObject> GetPrimaryKeys => _primaryKeyConstraints;
         public static IList<TSqlObject> GetForeignKeys => _foreignKeyConstraints;

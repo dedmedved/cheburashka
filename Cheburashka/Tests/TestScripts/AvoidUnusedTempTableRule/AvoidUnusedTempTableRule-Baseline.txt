@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0062
 Severity: Warning
 Model element: DatabaseTriggerWithUnusedTempTable
-Script file: DatabaseTriggerWithUnusedTempTableRule.sql
+Script file: DatabaseTriggerWithUnusedTempTableRule.tsql
 Start line: 6
 Start column: 18
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Temp table created but not used locally in [dbo].[ProcWithU
 FullID: Cheburashka.DM0062
 Severity: Warning
 Model element: dbo.ProcWithUnusedTempTable
-Script file: ProcWithUnusedTempTable.sql
+Script file: ProcWithUnusedTempTable.tsql
 Start line: 5
 Start column: 18
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Temp table created but not used locally in [dbo].[ProcWithU
 FullID: Cheburashka.DM0062
 Severity: Warning
 Model element: dbo.ProcWithUnusedTempTableCreatedBySelectInto
-Script file: ProcWithUnusedTempTableCreatedBySelectInto.sql
+Script file: ProcWithUnusedTempTableCreatedBySelectInto.tsql
 Start line: 5
 Start column: 19
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Temp table created but not used locally in [ServerTriggerWi
 FullID: Cheburashka.DM0062
 Severity: Warning
 Model element: ServerTriggerWithUnusedTableVariable
-Script file: ServerDdlTriggerWithUnusedTempTable.sql
+Script file: ServerDdlTriggerWithUnusedTempTable.tsql
 Start line: 6
 Start column: 18
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Temp table created but not used locally in [dbo].[TableTrig
 FullID: Cheburashka.DM0062
 Severity: Warning
 Model element: dbo.TableTriggerWithUnusedTableVariable
-Script file: TableTriggerWithUnusedTempTable.sql
+Script file: TableTriggerWithUnusedTempTable.tsql
 Start line: 5
 Start column: 18
 ========end of problem========

@@ -1,0 +1,14 @@
+CREATE proc dbo.ProcedureWithMissingInsertColumnsTempTable_NULL
+AS
+create table #Table1 
+(       a int not null
+,		b int not null
+,       c int
+,       d as a+b
+,       e int not null default 0
+,       f int null
+)
+insert into #Table1 (a) values (1)
+insert into #Table1 (a) select a from #Table1
+;
+go

@@ -2,7 +2,7 @@ Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserro
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserror
-Script file: ProcWithRaiserror.sql
+Script file: ProcWithRaiserror.tsql
 Start line: 7
 Start column: 9
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserro
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow
-Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow.sql
+Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlow.tsql
 Start line: 8
 Start column: 9
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserro
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation
-Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation.sql
+Script file: ProcWithRaiserrorWithLevel10EmbeddedInAVarButWithComplexDataFlowIncludingInitialisation.tsql
 Start line: 8
 Start column: 9
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserro
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVar
-Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVar.sql
+Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVar.tsql
 Start line: 7
 Start column: 9
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Raiserror found instead of Throw in [dbo].[ProcWithRaiserro
 FullID: Cheburashka.DM0048
 Severity: Warning
 Model element: dbo.ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow
-Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow.sql
+Script file: ProcWithRaiserrorWithLevel11EmbeddedInAVarButWithComplexDataFlow.tsql
 Start line: 8
 Start column: 9
 ========end of problem========

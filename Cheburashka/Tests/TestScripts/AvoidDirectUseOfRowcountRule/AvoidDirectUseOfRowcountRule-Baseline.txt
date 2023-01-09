@@ -2,7 +2,7 @@ Problem description: @@rowcount and/or @@error was used directly in [DatabaseTri
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: DatabaseTriggerWithDirectUseOfRowcount
-Script file: DatabaseTriggerWithDirectUseOfRowcount.sql
+Script file: DatabaseTriggerWithDirectUseOfRowcount.tsql
 Start line: 6
 Start column: 10
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: @@rowcount and/or @@error was used directly in [DatabaseTri
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: DatabaseTriggerWithDirectUseOfRowcount
-Script file: DatabaseTriggerWithDirectUseOfRowcount.sql
+Script file: DatabaseTriggerWithDirectUseOfRowcount.tsql
 Start line: 7
 Start column: 10
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[ProcW
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.ProcWithDirectUseOfRowcount
-Script file: ProcWithDirectUseOfRowcount.sql
+Script file: ProcWithDirectUseOfRowcount.tsql
 Start line: 5
 Start column: 10
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[ProcW
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.ProcWithDirectUseOfRowcount
-Script file: ProcWithDirectUseOfRowcount.sql
+Script file: ProcWithDirectUseOfRowcount.tsql
 Start line: 6
 Start column: 10
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Scala
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.ScalarFunctionWithDirectUseOfRowcount
-Script file: ScalarFunctionWithDirectUseOfRowcount.sql
+Script file: ScalarFunctionWithDirectUseOfRowcount.tsql
 Start line: 10
 Start column: 6
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Scala
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.ScalarFunctionWithDirectUseOfRowcount
-Script file: ScalarFunctionWithDirectUseOfRowcount.sql
+Script file: ScalarFunctionWithDirectUseOfRowcount.tsql
 Start line: 11
 Start column: 6
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: @@rowcount and/or @@error was used directly in [ServerTrigg
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: ServerTriggerWithDirectUseOfRowcount
-Script file: ServerTriggerWithDirectUseOfRowcount.sql
+Script file: ServerTriggerWithDirectUseOfRowcount.tsql
 Start line: 6
 Start column: 10
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: @@rowcount and/or @@error was used directly in [ServerTrigg
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: ServerTriggerWithDirectUseOfRowcount
-Script file: ServerTriggerWithDirectUseOfRowcount.sql
+Script file: ServerTriggerWithDirectUseOfRowcount.tsql
 Start line: 7
 Start column: 10
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Table
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.TableTriggerWithDirectUseOfRowcount
-Script file: TableTriggerWithDirectUseOfRowcount.sql
+Script file: TableTriggerWithDirectUseOfRowcount.tsql
 Start line: 5
 Start column: 10
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Table
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.TableTriggerWithDirectUseOfRowcount
-Script file: TableTriggerWithDirectUseOfRowcount.sql
+Script file: TableTriggerWithDirectUseOfRowcount.tsql
 Start line: 6
 Start column: 10
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Table
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithDirectUseOfRowcount
-Script file: TableValuedFunctionWithDirectUseOfRowcount.sql
+Script file: TableValuedFunctionWithDirectUseOfRowcount.tsql
 Start line: 14
 Start column: 14
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: @@rowcount and/or @@error was used directly in [dbo].[Table
 FullID: Cheburashka.DM0024
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithDirectUseOfRowcount
-Script file: TableValuedFunctionWithDirectUseOfRowcount.sql
+Script file: TableValuedFunctionWithDirectUseOfRowcount.tsql
 Start line: 14
 Start column: 31
 ========end of problem========

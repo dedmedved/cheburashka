@@ -2,7 +2,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 13
 Start column: 37
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 13
 Start column: 39
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 19
 Start column: 27
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 19
 Start column: 49
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 19
 Start column: 51
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 25
 Start column: 27
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 25
 Start column: 49
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Column name found without a prefix in [dbo].[DMLTargetAndOu
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.DMLTargetAndOutputInto_proc
-Script file: DMLTargetAndOutputInto_proc.sql
+Script file: DMLTargetAndOutputInto_proc.tsql
 Start line: 25
 Start column: 51
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_InlineFunctionWithAggregateFunctions
-Script file: EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.sql
+Script file: EnforceColumnPrefix_InlineFunctionWithAggregateFunctions.tsql
 Start line: 7
 Start column: 17
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_MultiTableSubQuery_Inside_FromLess_Select_Expression
-Script file: EnforceColumnPrefix_Proc_MultiTableSubQuery_Inside_FromLess_Select_Expression.sql
+Script file: EnforceColumnPrefix_Proc_MultiTableSubQuery_Inside_FromLess_Select_Expression.tsql
 Start line: 4
 Start column: 49
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SingleSourceSQL_With_DisAllowedContexts
-Script file: EnforceColumnPrefix_Proc_SingleSourceSQL_With_DisAllowedContexts.sql
+Script file: EnforceColumnPrefix_Proc_SingleSourceSQL_With_DisAllowedContexts.tsql
 Start line: 18
 Start column: 21
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists
-Script file: EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists.sql
+Script file: EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists.tsql
 Start line: 10
 Start column: 12
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists
-Script file: EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists.sql
+Script file: EnforceColumnPrefix_Proc_SubqueryWithAggregateFunctionAndExists.tsql
 Start line: 11
 Start column: 11
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists
-Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.sql
+Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.tsql
 Start line: 7
 Start column: 19
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists
-Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.sql
+Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.tsql
 Start line: 10
 Start column: 12
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists
-Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.sql
+Script file: EnforceColumnPrefix_Proc_SubqueryWithOutAggregateFunctionAndExists.tsql
 Start line: 11
 Start column: 11
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_Proc_TwoSourceSQL_With_DisAllowedContexts
-Script file: EnforceColumnPrefix_Proc_TwoSourceSQL_With_DisAllowedContexts.sql
+Script file: EnforceColumnPrefix_Proc_TwoSourceSQL_With_DisAllowedContexts.tsql
 Start line: 27
 Start column: 21
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Column name found without a prefix in [dbo].[EnforceColumnP
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.EnforceColumnPrefix_View_Selecting_From_Two_Tables
-Script file: EnforceColumnPrefix_View_Selecting_From_Two_Tables.sql
+Script file: EnforceColumnPrefix_View_Selecting_From_Two_Tables.tsql
 Start line: 3
 Start column: 8
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 25
 Start column: 16
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 26
 Start column: 17
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 34
 Start column: 12
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLI
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLInsertProc
-Script file: InsertFromDMLInsertProc.sql
+Script file: InsertFromDMLInsertProc.tsql
 Start line: 35
 Start column: 13
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 11
 Start column: 12
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 11
 Start column: 17
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 27
 Start column: 12
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 27
 Start column: 17
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 29
 Start column: 18
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 30
 Start column: 18
 ========end of problem========
@@ -254,7 +254,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 37
 Start column: 12
 ========end of problem========
@@ -263,7 +263,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 37
 Start column: 17
 ========end of problem========
@@ -272,7 +272,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 39
 Start column: 18
 ========end of problem========
@@ -281,7 +281,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProc
-Script file: InsertFromDMLMergeProc.sql
+Script file: InsertFromDMLMergeProc.tsql
 Start line: 40
 Start column: 18
 ========end of problem========
@@ -290,7 +290,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 11
 Start column: 12
 ========end of problem========
@@ -299,7 +299,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 11
 Start column: 17
 ========end of problem========
@@ -308,7 +308,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 27
 Start column: 12
 ========end of problem========
@@ -317,7 +317,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 27
 Start column: 17
 ========end of problem========
@@ -326,7 +326,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 29
 Start column: 18
 ========end of problem========
@@ -335,7 +335,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 30
 Start column: 18
 ========end of problem========
@@ -344,7 +344,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 37
 Start column: 12
 ========end of problem========
@@ -353,7 +353,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 37
 Start column: 17
 ========end of problem========
@@ -362,7 +362,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 39
 Start column: 18
 ========end of problem========
@@ -371,7 +371,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLM
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLMergeProcWithAliases
-Script file: InsertFromDMLMergeProcWithAliases.sql
+Script file: InsertFromDMLMergeProcWithAliases.tsql
 Start line: 40
 Start column: 18
 ========end of problem========
@@ -380,7 +380,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 23
 Start column: 18
 ========end of problem========
@@ -389,7 +389,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 24
 Start column: 18
 ========end of problem========
@@ -398,7 +398,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 32
 Start column: 14
 ========end of problem========
@@ -407,7 +407,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProc
-Script file: InsertFromDMLUpdateProc.sql
+Script file: InsertFromDMLUpdateProc.tsql
 Start line: 33
 Start column: 14
 ========end of problem========
@@ -416,7 +416,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProcWithAliases
-Script file: InsertFromDMLUpdateProcWithAliases.sql
+Script file: InsertFromDMLUpdateProcWithAliases.tsql
 Start line: 24
 Start column: 18
 ========end of problem========
@@ -425,7 +425,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProcWithAliases
-Script file: InsertFromDMLUpdateProcWithAliases.sql
+Script file: InsertFromDMLUpdateProcWithAliases.tsql
 Start line: 25
 Start column: 18
 ========end of problem========
@@ -434,7 +434,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProcWithAliases
-Script file: InsertFromDMLUpdateProcWithAliases.sql
+Script file: InsertFromDMLUpdateProcWithAliases.tsql
 Start line: 33
 Start column: 14
 ========end of problem========
@@ -443,7 +443,7 @@ Problem description: Column name found without a prefix in [dbo].[InsertFromDMLU
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.InsertFromDMLUpdateProcWithAliases
-Script file: InsertFromDMLUpdateProcWithAliases.sql
+Script file: InsertFromDMLUpdateProcWithAliases.tsql
 Start line: 34
 Start column: 14
 ========end of problem========
@@ -452,7 +452,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 24
 Start column: 25
 ========end of problem========
@@ -461,7 +461,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 48
 Start column: 25
 ========end of problem========
@@ -470,7 +470,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 68
 Start column: 31
 ========end of problem========
@@ -479,7 +479,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 75
 Start column: 34
 ========end of problem========
@@ -488,7 +488,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 106
 Start column: 25
 ========end of problem========
@@ -497,7 +497,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 110
 Start column: 25
 ========end of problem========
@@ -506,7 +506,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 145
 Start column: 25
 ========end of problem========
@@ -515,7 +515,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 151
 Start column: 25
 ========end of problem========
@@ -524,7 +524,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 177
 Start column: 31
 ========end of problem========
@@ -533,7 +533,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 181
 Start column: 31
 ========end of problem========
@@ -542,7 +542,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 188
 Start column: 34
 ========end of problem========
@@ -551,7 +551,7 @@ Problem description: Column name found without a prefix in [dbo].[onelevelinline
 FullID: Cheburashka.DM0046
 Severity: Warning
 Model element: dbo.onelevelinlinequerieswithsubqueries
-Script file: onelevelinlinequerieswithsubqueries_proc.sql
+Script file: onelevelinlinequerieswithsubqueries_proc.tsql
 Start line: 192
 Start column: 34
 ========end of problem========

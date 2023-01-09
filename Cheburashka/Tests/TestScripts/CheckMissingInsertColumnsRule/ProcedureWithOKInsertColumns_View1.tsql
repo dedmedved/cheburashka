@@ -1,0 +1,5 @@
+CREATE proc dbo.ProcedureWithOKInsertColumns_View1
+AS
+insert into View1  (a,b) select a,b from View1 ;
+insert into View1  (a,b) values (1,2);
+
