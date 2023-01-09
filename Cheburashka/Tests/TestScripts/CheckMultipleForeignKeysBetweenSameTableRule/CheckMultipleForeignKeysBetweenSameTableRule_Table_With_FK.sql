@@ -1,8 +1,0 @@
-﻿CREATE TABLE dbo.CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK (a INT
-, CONSTRAINT PK_CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK primary KEY (a)
-) ;
-GO
-create table CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK_Child (a int
-, constraint FK_CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK foreign key (a) references CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK (a)
-)
-go

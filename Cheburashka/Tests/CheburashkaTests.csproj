@@ -2483,6 +2483,29 @@
     <Content Include="TestScripts\CheckMissingNullableInsertColumnsRule\ProcedureWithMissingInsertColumnsTempTable_NULL.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithInsertFromMergeWithMissingColumns_NULL_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithInsertFromMergeWithOKColumns_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithMissingInsertColumns_NULL_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithMissingMergeInsertColumns_NULL_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithOKInsertColumns_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\ProcedureWithOKMergeInsertColumns_View1.tsql" />
+    <None Include="TestScripts\CheckMissingInsertColumnsRule\View1.tsql" />
+    <None Include="TestScripts\unknown\file" />
+    <None Include="TestScripts\unknown\ProcedureWithInsertFromMergeWithMissingColumns_NULL.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithInsertFromMergeWithOKColumns.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithMissingInsertColumnsInOutputIntoClauseWithOKColumns.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithMissingInsertColumnsInOutputIntoClause_NULL.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithMissingInsertColumns_NULL.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithMissingMergeInsertColumns_NULL.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithOKInsertColumns.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithOKMergeInsertColumns.tsql" />
+    <None Include="TestScripts\unknown\ProcedureWithOKMergeInsertColumnsOnTemporalTable.tsql" />
+    <None Include="TestScripts\unknown\ProcWithBothMergeOutcomes.tsql" />
+    <None Include="TestScripts\unknown\Table1.tsql" />
+    <None Include="TestScripts\unknown\Table1Temporal.tsql" />
+    <None Include="TestScripts\unknown\TableA.tsql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestScripts\_startup\_startup-Baseline.txt">

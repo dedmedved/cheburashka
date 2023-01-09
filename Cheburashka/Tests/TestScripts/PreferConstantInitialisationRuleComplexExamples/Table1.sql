@@ -1,3 +1,0 @@
-CREATE TABLE Table1 ( a INT);
-GO
-

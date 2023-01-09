@@ -1,9 +1,0 @@
-Problem description: Prefer to use SELECT ... EXCEPT SELECT ... to detect row differences in MERGE statements.
-FullID: Cheburashka.DM0075
-Severity: Warning
-Model element: dbo.ProcWithBothMergeOutcomes
-Script file: ProcWithBothMergeOutcomes.tsql
-Start line: 4
-Start column: 1
-========end of problem========
-
