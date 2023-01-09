@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: DatabaseTriggerWithOnePartTableNameInSelect
-Script file: DatabaseTriggerWithOnePartTableNameInSelect.sql
+Script file: DatabaseTriggerWithOnePartTableNameInSelect.tsql
 Start line: 5
 Start column: 19
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
-Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.tsql
 Start line: 4
 Start column: 8
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
-Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.tsql
 Start line: 5
 Start column: 8
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesObjectIdEtcWithOnePartObjectName
-Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.sql
+Script file: ProcThatUsesObjectIdEtcWithOnePartObjectName.tsql
 Start line: 6
 Start column: 8
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 5
 Start column: 6
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 6
 Start column: 6
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 7
 Start column: 6
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 8
 Start column: 6
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 9
 Start column: 6
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 10
 Start column: 6
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 11
 Start column: 6
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 12
 Start column: 6
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 13
 Start column: 6
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 14
 Start column: 6
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 15
 Start column: 6
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 16
 Start column: 6
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 17
 Start column: 6
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 18
 Start column: 6
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcThatU
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcThatUsesSystemSPCallWithOnePartObjectName
-Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.sql
+Script file: ProcThatUsesSystemSPCallWithOnePartObjectName.tsql
 Start line: 19
 Start column: 6
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcWithO
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcWithOnePartProcedureNameInDefinition
-Script file: ProcWithOnePartProcedureNameInDefinition.sql
+Script file: ProcWithOnePartProcedureNameInDefinition.tsql
 Start line: 2
 Start column: 18
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Schema object with no schema name found in [dbo].[ProcWithO
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ProcWithOnePartTableNameInSelect
-Script file: ProcWithOnePartTableNameInSelect.sql
+Script file: ProcWithOnePartTableNameInSelect.tsql
 Start line: 5
 Start column: 19
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Schema object with no schema name found in [dbo].[ScalarFun
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ScalarFunctionWithOnePartTableNameInSelect
-Script file: ScalarFunctionWithOnePartTableNameInSelect.sql
+Script file: ScalarFunctionWithOnePartTableNameInSelect.tsql
 Start line: 7
 Start column: 24
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Schema object with no schema name found in [ServerDdlTrigge
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: ServerDdlTriggerWithOnePartNameInSelect
-Script file: ServerDdlTriggerWithOnePartNameInSelect.sql
+Script file: ServerDdlTriggerWithOnePartNameInSelect.tsql
 Start line: 5
 Start column: 19
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Schema object with no schema name found in [dbo].[Table4].[
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.Table4.t4_ix1
-Script file: Table4WithOnePartNameBasedIndex.sql
+Script file: Table4WithOnePartNameBasedIndex.tsql
 Start line: 4
 Start column: 4
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Schema object with no schema name found in [dbo].[TableTrig
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.TableTriggerWithOnePartNameInSelect
-Script file: TableTriggerWithOnePartNameInSelect.sql
+Script file: TableTriggerWithOnePartNameInSelect.tsql
 Start line: 4
 Start column: 19
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Schema object with no schema name found in [dbo].[TableTrig
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.TableTriggerWithOnePartTriggerNameAndTableName
-Script file: TableTriggerWithOnePartTriggerNameAndTableName.sql
+Script file: TableTriggerWithOnePartTriggerNameAndTableName.tsql
 Start line: 1
 Start column: 16
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Schema object with no schema name found in [dbo].[TableTrig
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.TableTriggerWithOnePartTriggerNameAndTableName
-Script file: TableTriggerWithOnePartTriggerNameAndTableName.sql
+Script file: TableTriggerWithOnePartTriggerNameAndTableName.tsql
 Start line: 1
 Start column: 68
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Schema object with no schema name found in [dbo].[TableValu
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithOnePartTableNameInSelect
-Script file: TableValuedFunctionWithOnePartTableNameInSelect.sql
+Script file: TableValuedFunctionWithOnePartTableNameInSelect.tsql
 Start line: 7
 Start column: 20
 ========end of problem========
@@ -254,7 +254,7 @@ Problem description: Schema object with no schema name found in [dbo].[ViewWithO
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ViewWithOnePartTableNameInDefinition
-Script file: ViewWithOnePartTableNameInDefinition.sql
+Script file: ViewWithOnePartTableNameInDefinition.tsql
 Start line: 2
 Start column: 13
 ========end of problem========
@@ -263,7 +263,7 @@ Problem description: Schema object with no schema name found in [dbo].[ViewWithO
 FullID: Cheburashka.DM0029
 Severity: Warning
 Model element: dbo.ViewWithOnePartTableNameInSelect
-Script file: ViewWithOnePartTableNameInSelect.sql
+Script file: ViewWithOnePartTableNameInSelect.tsql
 Start line: 4
 Start column: 15
 ========end of problem========

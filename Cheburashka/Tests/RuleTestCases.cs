@@ -2755,14 +2755,14 @@ namespace Cheburashka.Tests
                 TestContext,
                 nameof(CheckMissingInsertColumnsRule),
                 new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
-                SqlServerVersion.Sql100);
+                SqlServerVersion.Sql130);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(CheckMissingInsertColumnsRule.RuleId);
         }
         /// <summary>
         /// <para>
-        /// This test uses input scripts saved in the "TestScripts\CheckMissingInsertColumnsRule" folder and compares the
-        /// results to the "CheckMissingInsertColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// This test uses input scripts saved in the "TestScripts\AvoidUnusedTempTableRule" folder and compares the
+        /// results to the "AvoidUnusedTempTableRule-Baseline.txt file in that directory. If you wanted to add extra test cases
         /// just add in new sql files and run the test. The failure message will include links to the output file - if all
         /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
         /// </para>
@@ -2980,13 +2980,13 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void PreferMinMaxRule_CI_AI()
+        public void PreferMinMaxRule_CS_AI()
         {
             using var test = new BaselinedRuleTest(
                 TestContext,
                 //nameof(PreferMinMaxRule),
                 "PreferMinMaxRule_MixedCase",
-                new TSqlModelOptions { Collation = "Latin1_General_CS_AS" },
+                new TSqlModelOptions { Collation = "Latin1_General_CS_AI" },
                 SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(PreferMinMaxRule.RuleId);
@@ -3004,15 +3004,109 @@ namespace Cheburashka.Tests
         /// </para>
         /// </summary>
         [TestMethod]
-        public void PreferMinMaxRule_CS_AI()
+        public void PreferMinMaxRule_CI_AI()
         {
             using var test = new BaselinedRuleTest(
                 TestContext,
                 nameof(PreferMinMaxRule),
-                new TSqlModelOptions { Collation = "Latin1_General_CI_AS" },
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
                 SqlServerVersion.Sql90);
             // Since this test verifies results against a baseline file, we don't need to do any extra verification
             test.RunTest(PreferMinMaxRule.RuleId);
+        }
+
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\AvoidUnusedCtesRule" folder and compares the
+        /// results to the "AvoidUnusedCtesRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void AvoidUnusedCtesRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(AvoidUnusedCtesRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql120);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(AvoidUnusedCtesRule.RuleId);
+        }
+        
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\CheckMissingDefaultableInsertColumnsRule" folder and compares the
+        /// results to the "CheckMissingDefaultableInsertColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void CheckMissingDefaultableInsertColumnsRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(CheckMissingDefaultableInsertColumnsRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql130);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(CheckMissingDefaultableInsertColumnsRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\CheckMissingNullableInsertColumnsRule" folder and compares the
+        /// results to the "CheckMissingNullableInsertColumnsRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void CheckMissingNullableInsertColumnsRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(CheckMissingNullableInsertColumnsRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql130);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(CheckMissingNullableInsertColumnsRule.RuleId);
+        }
+        /// <summary>
+        /// <para>
+        /// This test uses input scripts saved in the "TestScripts\PreferMergeUsesExceptForChangeDetectionRule" folder and compares the
+        /// results to the "PreferMergeUsesExceptForChangeDetectionRule-Baseline.txt file in that directory. If you wanted to add extra test cases
+        /// just add in new sql files and run the test. The failure message will include links to the output file - if all
+        /// the problems look correct there, then you can simply copy its contents into the baseline file and rerun the test.
+        /// </para>
+        /// <para>
+        /// This is a standard approach used inside the team and is very useful for testing rules since all you need is a tiny
+        /// amount of test code and some good examples that show where your rule should/should not highlight a problem.
+        /// </para>
+        /// </summary>
+        [TestMethod]
+        public void PreferMergeUsesExceptForChangeDetectionRule_CI_AI()
+        {
+            using var test = new BaselinedRuleTest(
+                TestContext,
+                nameof(PreferMergeUsesExceptForChangeDetectionRule),
+                new TSqlModelOptions { Collation = "Latin1_General_CI_AI" },
+                SqlServerVersion.Sql100);
+            // Since this test verifies results against a baseline file, we don't need to do any extra verification
+            test.RunTest(PreferMergeUsesExceptForChangeDetectionRule.RuleId);
         }
     }
 }

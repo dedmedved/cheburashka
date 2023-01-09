@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 8
 Start column: 21
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 10
 Start column: 21
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 12
 Start column: 22
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 14
 Start column: 21
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 16
 Start column: 20
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 18
 Start column: 20
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 25
 Start column: 20
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 32
 Start column: 21
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfJoinsAndHi
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfJoinsAndHints
-Script file: ProcWithaVarietyOfJoinsAndHints.sql
+Script file: ProcWithaVarietyOfJoinsAndHints.tsql
 Start line: 33
 Start column: 37
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfTableHints
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfTableHints
-Script file: ProcWithaVarietyOfTableHints.sql
+Script file: ProcWithaVarietyOfTableHints.tsql
 Start line: 5
 Start column: 25
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfTableHints
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfTableHints
-Script file: ProcWithaVarietyOfTableHints.sql
+Script file: ProcWithaVarietyOfTableHints.tsql
 Start line: 6
 Start column: 20
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithaVarietyOfTableHints
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithaVarietyOfTableHints
-Script file: ProcWithaVarietyOfTableHints.sql
+Script file: ProcWithaVarietyOfTableHints.tsql
 Start line: 8
 Start column: 26
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithSimpleVarietyOfJoins
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithSimpleVarietyOfJoinsAndHints
-Script file: ProcWithSimpleVarietyOfJoinsAndHints.sql
+Script file: ProcWithSimpleVarietyOfJoinsAndHints.tsql
 Start line: 6
 Start column: 20
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithSimpleVarietyOfJoins
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithSimpleVarietyOfJoinsAndHints
-Script file: ProcWithSimpleVarietyOfJoinsAndHints.sql
+Script file: ProcWithSimpleVarietyOfJoinsAndHints.tsql
 Start line: 13
 Start column: 21
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: SQL query hint found in [dbo].[ProcWithSimpleVarietyOfJoins
 FullID: Cheburashka.DM0070
 Severity: Warning
 Model element: dbo.ProcWithSimpleVarietyOfJoinsAndHints
-Script file: ProcWithSimpleVarietyOfJoinsAndHints.sql
+Script file: ProcWithSimpleVarietyOfJoinsAndHints.tsql
 Start line: 14
 Start column: 29
 ========end of problem========

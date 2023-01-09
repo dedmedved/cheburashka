@@ -2,7 +2,7 @@ Problem description: @@error global variable usage found in [dbo].[DatabaseScala
 FullID: Cheburashka.DM0041
 Severity: Warning
 Model element: dbo.DatabaseScalarFunction
-Script file: DatabaseScalarFunction.sql
+Script file: DatabaseScalarFunction.tsql
 Start line: 9
 Start column: 32
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: @@error global variable usage found in [dbo].[InlineFunctio
 FullID: Cheburashka.DM0041
 Severity: Warning
 Model element: dbo.InlineFunction
-Script file: InlineFunction.sql
+Script file: InlineFunction.tsql
 Start line: 10
 Start column: 6
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: @@error global variable usage found in [dbo].[ProcWithError
 FullID: Cheburashka.DM0041
 Severity: Warning
 Model element: dbo.ProcWithErrorNumber
-Script file: ProcWithErrorNumber.sql
+Script file: ProcWithErrorNumber.tsql
 Start line: 5
 Start column: 10
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: @@error global variable usage found in [ServerTrigger].
 FullID: Cheburashka.DM0041
 Severity: Warning
 Model element: ServerTrigger
-Script file: ServerTrigger.sql
+Script file: ServerTrigger.tsql
 Start line: 6
 Start column: 16
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: @@error global variable usage found in [dbo].[TableValuedFu
 FullID: Cheburashka.DM0041
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithErrorNumber
-Script file: TableValuedFunctionWithErrorNumber.sql
+Script file: TableValuedFunctionWithErrorNumber.tsql
 Start line: 13
 Start column: 11
 ========end of problem========

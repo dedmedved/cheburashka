@@ -2,7 +2,7 @@ Problem description: Unique, non-filtered index found with nullable columns in [
 FullID: Cheburashka.DM0017
 Severity: Warning
 Model element: dbo.CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column.ix_CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column
-Script file: CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column.sql
+Script file: CheckUniqueIndexHasNoNullColumnsRule_Table_With_Null_Column.tsql
 Start line: 9
 Start column: 154
 ========end of problem========

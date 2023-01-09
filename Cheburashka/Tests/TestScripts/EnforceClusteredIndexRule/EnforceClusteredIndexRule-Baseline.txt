@@ -2,7 +2,7 @@ Problem description: Table with heap structure was found in [dbo].[EnforceCluste
 FullID: Cheburashka.DM0012
 Severity: Warning
 Model element: dbo.EnforceClusteredIndexRule_Table_Without_ClusteredIndex
-Script file: EnforceClusteredIndexRule_Table_Without_ClusteredIndex.sql
+Script file: EnforceClusteredIndexRule_Table_Without_ClusteredIndex.tsql
 Start line: 1
 Start column: 1
 ========end of problem========

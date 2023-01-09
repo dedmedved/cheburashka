@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0065
 Severity: Warning
 Model element: dbo.ProcWithUnInitialisedTempTable
-Script file: ProcWithUnInitialisedTempTable.sql
+Script file: ProcWithUnInitialisedTempTable.tsql
 Start line: 5
 Start column: 18
 ========end of problem========

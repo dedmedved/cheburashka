@@ -2,7 +2,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_DatabaseTrigger
-Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.tsql
 Start line: 5
 Start column: 4
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_DatabaseTrigger
-Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.tsql
 Start line: 6
 Start column: 4
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_DatabaseTrigger
-Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.tsql
 Start line: 9
 Start column: 7
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_DatabaseTrigger
-Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DatabaseTrigger.tsql
 Start line: 10
 Start column: 7
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_DML_Trigger
-Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.tsql
 Start line: 5
 Start column: 4
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_DML_Trigger
-Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.tsql
 Start line: 6
 Start column: 4
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_DML_Trigger
-Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.tsql
 Start line: 9
 Start column: 7
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_DML_Trigger
-Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.sql
+Script file: CheckOpenTransactionCountCodeRule_DML_Trigger.tsql
 Start line: 10
 Start column: 7
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
-Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Script file: CheckOpenTransactionCountCodeRule_Function.tsql
 Start line: 6
 Start column: 4
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
-Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Script file: CheckOpenTransactionCountCodeRule_Function.tsql
 Start line: 7
 Start column: 4
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
-Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Script file: CheckOpenTransactionCountCodeRule_Function.tsql
 Start line: 10
 Start column: 7
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Function
-Script file: CheckOpenTransactionCountCodeRule_Function.sql
+Script file: CheckOpenTransactionCountCodeRule_Function.tsql
 Start line: 11
 Start column: 7
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
-Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Script file: CheckOpenTransactionCountCodeRule_Proc.tsql
 Start line: 4
 Start column: 4
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
-Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Script file: CheckOpenTransactionCountCodeRule_Proc.tsql
 Start line: 5
 Start column: 4
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
-Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Script file: CheckOpenTransactionCountCodeRule_Proc.tsql
 Start line: 8
 Start column: 7
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_Proc
-Script file: CheckOpenTransactionCountCodeRule_Proc.sql
+Script file: CheckOpenTransactionCountCodeRule_Proc.tsql
 Start line: 9
 Start column: 7
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_ServerTrigger
-Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.tsql
 Start line: 4
 Start column: 4
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_ServerTrigger
-Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.tsql
 Start line: 5
 Start column: 4
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_ServerTrigger
-Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.tsql
 Start line: 8
 Start column: 7
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: CheckOpenTransactionCountCodeRule_ServerTrigger
-Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.sql
+Script file: CheckOpenTransactionCountCodeRule_ServerTrigger.tsql
 Start line: 9
 Start column: 7
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_TableValuedFunction
-Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.sql
+Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.tsql
 Start line: 7
 Start column: 8
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_TableValuedFunction
-Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.sql
+Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.tsql
 Start line: 8
 Start column: 8
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_TableValuedFunction
-Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.sql
+Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.tsql
 Start line: 11
 Start column: 11
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Code found checking @@trancount but not xact_state() or vic
 FullID: Cheburashka.DM0045
 Severity: Warning
 Model element: dbo.CheckOpenTransactionCountCodeRule_TableValuedFunction
-Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.sql
+Script file: CheckOpenTransactionCountCodeRule_TableValuedFunction.tsql
 Start line: 12
 Start column: 11
 ========end of problem========

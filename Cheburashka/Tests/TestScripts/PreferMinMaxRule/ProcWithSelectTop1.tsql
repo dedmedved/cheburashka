@@ -1,0 +1,24 @@
+CREATE PROCEDURE ProcWithSelectTop1
+AS 
+BEGIN
+select top 1 b from TableA order by B;
+select top 10 b from TableA order by B;
+select top 1 percent b from TableA order by B;
+select top 1 b from TableA order by C;
+select (select top 1 b from TableA order by B);
+select (select top 10 b from TableA order by B);
+select (select top 1 percent b from TableA order by B);
+select (select top 1 b from TableA order by C);
+
+select top 1 b from TableA order by 1;
+select top (1) b from TableA order by 1;
+
+select top 1 (b) b from TableA order by B;
+
+declare @a int ;
+set @a = 1;
+
+select top (@a) (b) b from TableA order by B;  --amybe at some point we need to fix this
+
+
+END

@@ -2,7 +2,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.PK_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.PK_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex_ConstraintAdded_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex_ConstraintAdded.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedPrimaryKeyAndIndex_ConstraintAdded.tsql
 Start line: 12
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.UN_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex.tsql
 Start line: 6
 Start column: 9
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.UN_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex_ConstraintAdded_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex_ConstraintAdded.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueConstraintAndIndex_ConstraintAdded.tsql
 Start line: 12
 Start column: 1
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithAnIncludedUniqueIndex.tsql
 Start line: 11
 Start column: 1
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.tsql
 Start line: 9
 Start column: 1
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Unique constraint or index found where another unique const
 FullID: Cheburashka.DM0019
 Severity: Warning
 Model element: dbo.CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a
-Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Script file: CheckUniqueKeysAreNotDuplicatedRule_Table_WithTwoIdenticalExceptForOrderingIndexes.tsql
 Start line: 11
 Start column: 1
 ========end of problem========

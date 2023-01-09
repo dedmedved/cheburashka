@@ -2,7 +2,7 @@ Problem description: Instead-of Trigger found on a table rather than a view in [
 FullID: Cheburashka.DM0052
 Severity: Warning
 Model element: dbo.trg_1
-Script file: Table1WithInsteadOfTrigger.sql
+Script file: Table1WithInsteadOfTrigger.tsql
 Start line: 3
 Start column: 1
 ========end of problem========

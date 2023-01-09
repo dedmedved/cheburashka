@@ -21,13 +21,9 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
-using ColumnType = Microsoft.SqlServer.TransactSql.ScriptDom.ColumnType;
-
 
 namespace Cheburashka
 {

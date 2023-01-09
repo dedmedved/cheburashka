@@ -20,7 +20,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
@@ -32,7 +31,7 @@ namespace Cheburashka
     /// <summary>
     /// <para>
     /// This is a SQL rule which returns a warning message 
-    /// whenever there is a schema object referred to without the schema name.
+    /// whenever there is an insert that omits mandatory columns
     /// </para>
     /// <para>
     /// Note that this uses a Localized export attribute, and hence the rule name and description will be
@@ -55,7 +54,7 @@ namespace Cheburashka
         /// </para>
         /// <para>
         /// For this rule, it will be 
-        /// shown as "DM0061: Columns without a default or other system supplied value need a value specifying in Inserts."
+        /// shown as "DM0061: Columns without a default or other system supplied value need a value specifying in Insert operations."
         /// </para>
         /// </summary>
         public const string RuleId = RuleConstants.CheckMissingInsertColumnsRuleId;
@@ -88,20 +87,29 @@ namespace Cheburashka
             try
             {
                 var allTables = DmvSettings.GetTables;
-                // todo handle temp tables, table vars, external,3-part name tables
-
+                var allViews = DmvSettings.GetViews;
+                // todo handle external,3-part name tables, views
+                var allTempTables =  DmTableDetailsVisitor.Visit(sqlFragment, new TempTableDefinitionVisitor());
+                var allVariableTables =  DmTableDetailsVisitor.Visit(sqlFragment, new TableVariableDefinitionVisitor());
                 var InsertMergeFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new MergeSpecificationVisitor()).Cast<MergeSpecification>().ToList();
                 var InsertFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new InsertSpecificationVisitor()).Cast<InsertSpecification>().ToList();
                 var OutputIntoFragments = DmTSqlFragmentVisitor.Visit(sqlFragment, new OutputIntoClauseVisitor()).Cast<OutputIntoClause >().ToList();
 
-                var problemInserts = new List<TSqlFragment>();
+                var problemInserts = new List<(TSqlFragment,string)>();
 
                 foreach (var fragment in InsertFragments)
                 {
                     var insertcolumns = fragment.Columns.ToList();
-                    if (fragment.Target is NamedTableReference table && table.IsLocalObject())
+                    if (fragment.Target is VariableTableReference variableTableReference )
                     {
-                        FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        FindMissingMandatoryColumns(variableTableReference, allVariableTables, insertcolumns, problemInserts, fragment);
+                    }
+                    else if (fragment.Target is NamedTableReference table) {
+                        if (table.IsAnyTempTableName() )
+                            FindMissingMandatoryColumns(table, allTempTables, insertcolumns, problemInserts, fragment);
+                        else if ( table.IsLocalObject() )
+                            FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        //FindMissingMandatoryColumns(table, allViews, insertcolumns, problemInserts, fragment); // works but doesn't work
                     }
                 }
                 foreach (var fragment in InsertMergeFragments)
@@ -109,17 +117,31 @@ namespace Cheburashka
                     var insertFragment = fragment.ActionClauses.Where(n => n.Action is InsertMergeAction).Select(n => n.Action).FirstOrDefault() as InsertMergeAction;
                     var insertcolumns = insertFragment?.Columns.ToList();
                     // todo need to handle other types somehow
-                    if (insertFragment is not null && fragment.Target is NamedTableReference table && table.IsLocalObject())
+                    if (insertFragment is not null && fragment.Target is VariableTableReference variableTableReference )
                     {
-                        FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        FindMissingMandatoryColumns(variableTableReference, allVariableTables, insertcolumns, problemInserts, fragment);
+                    }
+                    else if (insertFragment is not null && fragment.Target is NamedTableReference table) {
+                        if (table.IsAnyTempTableName() )
+                            FindMissingMandatoryColumns(table, allTempTables, insertcolumns, problemInserts, fragment);
+                        else if ( table.IsLocalObject() )
+                            FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        //FindMissingMandatoryColumns(table, allViews, insertcolumns, problemInserts, fragment); // works but doesn't work
                     }
                 }
                 foreach (var fragment in OutputIntoFragments)
                 {
                     var insertcolumns = fragment.IntoTableColumns.ToList();
-                    if (fragment.IntoTable is NamedTableReference table && table.IsLocalObject())
+                    if (fragment.IntoTable is VariableTableReference variableTableReference )
                     {
-                        FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        FindMissingMandatoryColumns(variableTableReference, allVariableTables, insertcolumns, problemInserts, fragment);
+                    }
+                    else if (fragment.IntoTable is NamedTableReference table) {
+                        if (table.IsAnyTempTableName() )
+                            FindMissingMandatoryColumns(table, allTempTables, insertcolumns, problemInserts, fragment);
+                        else if ( table.IsLocalObject() )
+                            FindMissingMandatoryColumns(table, allTables, insertcolumns, problemInserts, fragment);
+                        //FindMissingMandatoryColumns(table, allViews, insertcolumns, problemInserts, fragment); // works but doesn't work
                     }
                 }
 
@@ -132,7 +154,79 @@ namespace Cheburashka
             return problems;
             }
 
-        private static void FindMissingMandatoryColumns(NamedTableReference table, IEnumerable<TSqlObject> allTables, IReadOnlyCollection<ColumnReferenceExpression> insertcolumns, ICollection<TSqlFragment> problemInserts, TSqlFragment fragment)
+        private static void FindMissingMandatoryColumns(VariableTableReference table, IEnumerable<TableDetails> allTables, IReadOnlyCollection<ColumnReferenceExpression> insertcolumns, ICollection<(TSqlFragment,string)> problemInserts, TSqlFragment fragment)
+        {
+            var objectName = table.Variable.Name ;
+
+            // Match table in query to a table in the model
+            // for now stick to tables in the current database ............
+            // TODO - allow tables across the board
+            var objs = allTables.Where(n => n.TableName.SQLModel_StringCompareEqual(objectName)).Select(n => n).ToList();
+            if (objs.Count == 0) return;
+
+            var tbl = objs[0];
+            var columns = tbl.TableDefinition.ColumnDefinitions;
+            var mandatoryColumns = columns.Where(c => !(c.ComputedColumnExpression      is not null                                     ||   
+                                                        c.IdentityOptions               is not null                                     ||
+                                                        c.Constraints.Any( n => n is NullableConstraintDefinition x && x.Nullable)      ||
+                                                        c.GeneratedAlways               is not null                                     ||
+                                                        c.Constraints.Any( n => n is DefaultConstraintDefinition)                       
+                )
+            ).Select(n => new ColumnDetails
+            {   Name = n.ColumnIdentifier.Value,
+                DataType = new ObjectIdentifier(n.DataType.Name.BaseIdentifier.Value),
+                Nullable = n.Constraints.Any( n => n is NullableConstraintDefinition x && x.Nullable)
+            }).ToList();
+
+            var problems = mandatoryColumns.Where(c => !insertcolumns.Any(ic =>
+                c.Name.SQLModel_StringCompareEqual(ic.MultiPartIdentifier.Identifiers.Last()
+                    .Value))).ToList().ConvertAll(n => (fragment, n.Name));
+
+            if (problems.Count > 0)
+            {
+                foreach ( var p in problems)
+                {
+                    problemInserts.Add(p);
+                }
+            }
+        }
+        private static void FindMissingMandatoryColumns(NamedTableReference table, IEnumerable<TableDetails> allTables, IReadOnlyCollection<ColumnReferenceExpression> insertcolumns, ICollection<(TSqlFragment,string)> problemInserts, TSqlFragment fragment)
+        {
+            var objectName = table.SchemaObject.BaseIdentifier.Value;
+
+            // Match table in query to a table in the model
+            // for now stick to tables in the current database ............
+            // TODO - allow tables across the board
+            var objs = allTables.Where(n => n.TableName.SQLModel_StringCompareEqual(objectName)).Select(n => n).ToList();
+            if (objs.Count == 0) return;
+
+            var tbl = objs[0];
+            var columns = tbl.TableDefinition.ColumnDefinitions;
+            var mandatoryColumns = columns.Where(c => !(c.ComputedColumnExpression      is not null                                     ||   
+                                                        c.IdentityOptions               is not null                                     ||
+                                                        c.Constraints.Any( n => n is NullableConstraintDefinition x && x.Nullable)      ||
+                                                        c.GeneratedAlways               is not null                                     ||
+                                                        c.Constraints.Any( n => n is DefaultConstraintDefinition)                       
+                )
+            ).Select(n => new ColumnDetails
+            {   Name = n.ColumnIdentifier.Value,
+                DataType = new ObjectIdentifier(n.DataType.Name.BaseIdentifier.Value),
+                Nullable = n.Constraints.Any( n => n is NullableConstraintDefinition x && x.Nullable)
+            }).ToList();
+
+            var problems = mandatoryColumns.Where(c => !insertcolumns.Any(ic =>
+                c.Name.SQLModel_StringCompareEqual(ic.MultiPartIdentifier.Identifiers.Last()
+                    .Value))).ToList().ConvertAll(n => (fragment, n.Name));
+
+            if (problems.Count > 0)
+            {
+                foreach ( var p in problems)
+                {
+                    problemInserts.Add(p);
+                }
+            }
+        }
+        private static void FindMissingMandatoryColumns(NamedTableReference table, IEnumerable<TSqlObject> allTables, IReadOnlyCollection<ColumnReferenceExpression> insertcolumns, ICollection<(TSqlFragment,string)> problemInserts, TSqlFragment fragment)
         {
             var objectSchema = table.SchemaObject.SchemaIdentifier?.Value ?? "dbo";
             var objectName = table.SchemaObject.BaseIdentifier.Value;
@@ -151,10 +245,12 @@ namespace Cheburashka
 
             var tbl = objs[0];
             var columns = tbl.GetReferenced().Where(x => x.ObjectType == ModelSchema.Column).ToList();
-            var mandatoryColumns = columns.Where(c => !(c.GetProperty(Column.Expression) is not null ||
-                                                        (bool)c.GetProperty(Column.IsIdentity)       ||
-                                                        (bool)c.GetProperty(Column.IsPseudoColumn)   ||
-                                                        (bool)c.GetProperty(Column.Nullable)         ||
+            var mandatoryColumns = columns.Where(c => !(c.GetProperty(Column.Expression) is not null                                                                ||
+                                                        (bool)c.GetProperty(Column.IsIdentity) /* unless identity insert is on */                                   ||
+                                                        (bool)c.GetProperty(Column.IsIdentityNotForReplication)                                                     ||
+                                                        (bool)c.GetProperty(Column.IsPseudoColumn)                                                                  ||
+                                                        (bool)c.GetProperty(Column.Nullable)                                                                        ||
+                                                        (ColumnGeneratedAlwaysType)c.GetProperty(Column.GeneratedAlwaysType) != ColumnGeneratedAlwaysType.None      ||
                                                         c.GetReferencingRelationshipInstances(DefaultConstraint.TargetColumn).Any()
                 )
             ).Select(n => new ColumnDetails
@@ -163,13 +259,17 @@ namespace Cheburashka
                 Nullable = (bool)n.GetProperty(Column.Nullable)
             }).ToList();
 
-            var probExists = mandatoryColumns.Where(c => !insertcolumns.Any(ic =>
+            var problems = mandatoryColumns.Where(c => !insertcolumns.Any(ic =>
                 c.Name.SQLModel_StringCompareEqual(ic.MultiPartIdentifier.Identifiers.Last()
-                    .Value))).ToList().Count > 0;
+                    .Value))).ToList().ConvertAll(n => (fragment,n.Name));
 
-            if (probExists)
-                problemInserts.Add(fragment);
-
+            if (problems.Count > 0)
+            {
+                foreach ( var p in problems)
+                {
+                    problemInserts.Add(p);
+                }
+            }
         }
     }
 }

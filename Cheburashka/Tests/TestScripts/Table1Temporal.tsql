@@ -1,0 +1,13 @@
+﻿create table dbo.Table1Temporal 
+(       a int not null
+,       b int not null
+,       c int
+,       e int not null default 0
+,       f int null
+,       SysStartTime                                datetime2    GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
+,       SysEndTime                                  datetime2    GENERATED ALWAYS AS ROW END HIDDEN NOT NULL
+,       PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime)
+,		primary key (a)
+)
+WITH    (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.Table1Temporal_History, DATA_CONSISTENCY_CHECK = ON));
+go

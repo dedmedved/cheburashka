@@ -2,12 +2,12 @@
 
 namespace Cheburashka
 {
-public struct ColumnDetails {
+    public struct ColumnDetails {
         public string Name;
         public ObjectIdentifier DataType;
         public bool Nullable;
         public object Expression;
         //public int Length;
         //public int Precision;
-}
+    }
 }

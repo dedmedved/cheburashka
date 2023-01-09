@@ -343,13 +343,27 @@ namespace Cheburashka
         //    return bFoundClusteredIndex;
         //}
 
-    public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, IList<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
+        public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, IList<TSqlFragment> issues, RuleDescriptor ruleDescriptor)
         {
             foreach (TSqlFragment issue in issues)
             {
                 SqlRuleProblem problem =
                     new(
                         string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, elementName)
+                        , modelElement
+                        , issue);
+
+                //RuleUtils.UpdateProblemPosition(modelElement, problem, ((Identifier) objects[key]));
+                problems.Add(problem);
+            }
+        }
+        public static void UpdateProblems(List<SqlRuleProblem> problems, TSqlObject modelElement, string elementName, IList<(TSqlFragment, string)> issues, RuleDescriptor ruleDescriptor)
+        {
+            foreach ((TSqlFragment issue, string description) in issues)
+            {
+                SqlRuleProblem problem =
+                    new(
+                        string.Format(CultureInfo.CurrentCulture, ruleDescriptor.DisplayDescription, description, elementName)
                         , modelElement
                         , issue);
 

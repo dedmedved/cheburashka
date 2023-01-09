@@ -2,7 +2,7 @@ Problem description: Stored Procedure found without Return as the final executab
 FullID: Cheburashka.DM0027
 Severity: Warning
 Model element: dbo.ProcWithBeginWithReturnInIfStatementBlock
-Script file: InMemoryProcWithBeginWithReturnInIfStatementBlock.sql
+Script file: InMemoryProcWithBeginWithReturnInIfStatementBlock.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Stored Procedure found without Return as the final executab
 FullID: Cheburashka.DM0027
 Severity: Warning
 Model element: dbo.ProcWithNestedBeginWithReturnInWrongPlace
-Script file: InMemoryProcWithNestedBeginWithReturnInWrongPlace.sql
+Script file: InMemoryProcWithNestedBeginWithReturnInWrongPlace.tsql
 Start line: 2
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Stored Procedure found without Return as the final executab
 FullID: Cheburashka.DM0027
 Severity: Warning
 Model element: dbo.ProcWithOutReturn
-Script file: InMemoryProcWithoutReturn.sql
+Script file: InMemoryProcWithoutReturn.tsql
 Start line: 2
 Start column: 1
 ========end of problem========

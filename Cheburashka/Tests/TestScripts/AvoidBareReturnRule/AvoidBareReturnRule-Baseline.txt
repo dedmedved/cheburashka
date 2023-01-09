@@ -2,7 +2,7 @@ Problem description: RETURN statement without return value was found in [dbo].[P
 FullID: Cheburashka.DM0023
 Severity: Warning
 Model element: dbo.ProcWithBareReturn
-Script file: ProcWithBareReturn.sql
+Script file: ProcWithBareReturn.tsql
 Start line: 5
 Start column: 3
 ========end of problem========

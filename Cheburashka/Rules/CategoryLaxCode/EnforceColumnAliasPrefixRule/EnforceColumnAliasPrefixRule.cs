@@ -21,7 +21,6 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
@@ -245,13 +244,13 @@ namespace Cheburashka
                 RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
                 RuleUtils.UpdateProblems(!ignoreThisColumnHere, problems, modelElement, elementName, unaliasedColumn, ruleDescriptor);
             }
-            }
-            catch (System.Exception e) {
+        }
+        catch (System.Exception e) {
    
-            }
-            finally {}
+        }
+        finally {}
 
-            return problems;
+        return problems;
         }
     }
 }

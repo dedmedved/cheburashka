@@ -2,7 +2,7 @@ Problem description: Non-core SP is called without checking the return status in
 FullID: Cheburashka.DM0026
 Severity: Warning
 Model element: DatabaseTriggerWithOutCaptureOfSPReturnStatus
-Script file: DatabaseTriggerWithoutCaptureOfSPReturnStatus.sql
+Script file: DatabaseTriggerWithoutCaptureOfSPReturnStatus.tsql
 Start line: 6
 Start column: 7
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Non-core SP is called without checking the return status in
 FullID: Cheburashka.DM0026
 Severity: Warning
 Model element: dbo.ProcWithOutCaptureOfSPReturnStatus
-Script file: ProcWithoutCaptureOfSPReturnStatus.sql
+Script file: ProcWithoutCaptureOfSPReturnStatus.tsql
 Start line: 5
 Start column: 7
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Non-core SP is called without checking the return status in
 FullID: Cheburashka.DM0026
 Severity: Warning
 Model element: ServerTriggerWithOutCaptureOfSPReturnStatus
-Script file: ServerTriggerWithoutCaptureOfSPReturnStatus.sql
+Script file: ServerTriggerWithoutCaptureOfSPReturnStatus.tsql
 Start line: 6
 Start column: 7
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Non-core SP is called without checking the return status in
 FullID: Cheburashka.DM0026
 Severity: Warning
 Model element: dbo.TableTriggerWithOutCaptureOfSPReturnStatus
-Script file: TableTriggerWithoutCaptureOfSPReturnStatus.sql
+Script file: TableTriggerWithoutCaptureOfSPReturnStatus.tsql
 Start line: 5
 Start column: 7
 ========end of problem========

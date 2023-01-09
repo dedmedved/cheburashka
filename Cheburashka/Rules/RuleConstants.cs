@@ -106,7 +106,7 @@ namespace Cheburashka
         public const string AvoidDroppingTempTableRuleId                                = "Cheburashka.DM0064";
         public const string AvoidReadOnlyTempTableRuleId                                = "Cheburashka.DM0065";
         
-       // public const string AvoidWriteOnlyTempTableRuleId                               = "Cheburashka.DM0066";
+        public const string CheckMissingDefaultableInsertColumnsRuleId                  = "Cheburashka.DM0066";
 
         public const string PreferSelfAssignmentOperatorsRuleId                         = "Cheburashka.DM0067";
         public const string AvoidExplicitCollateOnModelTablesRuleId                     = "Cheburashka.DM0068";
@@ -114,6 +114,15 @@ namespace Cheburashka
 
         public const string AvoidProcessingHintsRuleId                                  = "Cheburashka.DM0070";
         public const string PreferMinMaxRuleId                                          = "Cheburashka.DM0071";
+
+        public const string AvoidUnusedCtesRuleId                                       = "Cheburashka.DM0072";
+        public const string CheckUniqueFilteredIndexImpliedBySubQueryRuleId             = "Cheburashka.DM0073";
+
+        public const string CheckMissingNullableInsertColumnsRuleId                     = "Cheburashka.DM0074";
+        public const string PreferMergeUsesExceptForChangeDetectionRuleId               = "Cheburashka.DM0075";
+
+        public const string AvoidDMLAgainstNonTableObjectsRuleId                        = "Cheburashka.DM0076";
+        
 
         public const string AvoidUnusedVariablesRuleName                                = "AvoidUnusedVariables_RuleName";
         public const string AvoidUnusedVariablesProblemDescription                      = "AvoidUnusedVariables_ProblemDescription";
@@ -157,8 +166,8 @@ namespace Cheburashka
         public const string CheckUniqueKeysAreNotDuplicatedRuleName                        = "CheckUniqueKeysAreNotDuplicated_RuleName";
         public const string CheckUniqueKeysAreNotDuplicatedProblemDescription              = "CheckUniqueKeysAreNotDuplicated_ProblemDescription";
 
-        public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleName             = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
-        public const string CheckClusteredKeyColumnsNotIncludedInIndexProblemDescription   = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
+        //public const string CheckClusteredKeyColumnsNotIncludedInIndexRuleName             = "CheckClusteredKeyColumnsNotIncludedInIndex_RuleName";
+        //public const string CheckClusteredKeyColumnsNotIncludedInIndexProblemDescription   = "CheckClusteredKeyColumnsNotIncludedInIndex_ProblemDescription";
 
         public const string EnforceNamedConstraintRuleName                                 = "EnforceNamedConstraint_RuleName";
         public const string EnforceNamedConstraintProblemDescription                       = "EnforceNamedConstraint_ProblemDescription";
@@ -298,14 +307,14 @@ namespace Cheburashka
         public const string AvoidReadOnlyTempTableRuleName                                          = "AvoidReadOnlyTempTable_RuleName";
         public const string AvoidReadOnlyTempTableProblemDescription                                = "AvoidReadOnlyTempTable_ProblemDescription";
 
-       // public const string AvoidWriteOnlyTempTableRuleName                                         = "AvoidWriteOnlyTempTable_RuleName";
-      //  public const string AvoidWriteOnlyTempTableProblemDescription                               = "AvoidWriteOnlyTempTable_ProblemDescription";
+        public const string CheckMissingDefaultableInsertColumnsRuleName                            = "CheckMissingDefaultableInsertColumns_RuleName";
+        public const string CheckMissingDefaultableInsertColumnsProblemDescription                  = "CheckMissingDefaultableInsertColumns_ProblemDescription";
 
         public const string PreferSelfAssignmentOperatorsRuleName                                   = "PreferSelfAssignmentOperators_RuleName";
         public const string PreferSelfAssignmentOperatorsProblemDescription                         = "PreferSelfAssignmentOperators_ProblemDescription";
 
-        public const string AvoidExplicitCollateRuleName                                            = "AvoidExplicitCollate_RuleName";
-        public const string AvoidExplicitCollateProblemDescription                                  = "AvoidExplicitCollate_ProblemDescription";
+        //public const string AvoidExplicitCollateRuleName                                            = "AvoidExplicitCollate_RuleName";
+        //public const string AvoidExplicitCollateProblemDescription                                  = "AvoidExplicitCollate_ProblemDescription";
         public const string AvoidExplicitCollateOnModelTablesRuleName                               = "AvoidExplicitCollateOnModelTables_RuleName";
         public const string AvoidExplicitCollateOnModelTablesProblemDescription                     = "AvoidExplicitCollateOnModelTables_ProblemDescription";
         public const string EnforceDatabaseCollationOnTempTablesRuleName                            = "EnforceDatabaseCollationOnTempTables_RuleName";
@@ -317,7 +326,20 @@ namespace Cheburashka
         public const string PreferMinMaxRuleName                                                    = "PreferMinMax_RuleName";
         public const string PreferMinMaxProblemDescription                                          = "PreferMinMax_ProblemDescription";
 
+        public const string AvoidUnusedCtesRuleName                                                 = "AvoidUnusedCtes_RuleName";
+        public const string AvoidUnusedCtesProblemDescription                                       = "AvoidUnusedCtes_ProblemDescription";
 
+        public const string CheckUniqueFilteredIndexImpliedBySubQueryRuleName                       = "CheckUniqueFilteredIndexImpliedBySubQuery_RuleName";
+        public const string CheckUniqueFilteredIndexImpliedBySubQueryProblemDescription             = "CheckUniqueFilteredIndexImpliedBySubQuery_ProblemDescription";
+
+        public const string CheckMissingNullableInsertColumnsRuleName                               = "CheckMissingNullableInsertColumns_RuleName";
+        public const string CheckMissingNullableInsertColumnsProblemDescription                     = "CheckMissingNullableInsertColumns_ProblemDescription";
+
+        public const string PreferMergeUsesExceptForChangeDetectionRuleName                         = "PreferMergeUsesExceptForChangeDetection_RuleName";
+        public const string PreferMergeUsesExceptForChangeDetectionProblemDescription               = "PreferMergeUsesExceptForChangeDetection_ProblemDescription";
+
+        public const string AvoidDMLAgainstNonTableObjectsRuleName                                  = "AvoidDMLAgainstNonTableObjects_RuleName";
+        public const string AvoidDMLAgainstNonTableObjectsProblemDescription                        = "AvoidDMLAgainstNonTableObjects_ProblemDescription";
 
         /// <summary>
         /// The design category (should not be localized)

@@ -1,0 +1,11 @@
+CREATE proc dbo.ProcedureWithMissingMergeInsertColumns_NULL_View1
+AS
+merge into
+View1  trg
+using (select 1 as a, 1 as b, 1 as c) src
+on src.a = trg.a
+when not matched by target
+then insert (a) values (src.a)
+;
+
+go

@@ -2,7 +2,7 @@ Problem description: Unreferenced label found in [dbo].[DatabaseScalarFunction].
 FullID: Cheburashka.DM0042
 Severity: Warning
 Model element: dbo.DatabaseScalarFunction
-Script file: DatabaseScalarFunction.sql
+Script file: DatabaseScalarFunction.tsql
 Start line: 12
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unreferenced label found in [dbo].[ProcWithUnUsedLabel].
 FullID: Cheburashka.DM0042
 Severity: Warning
 Model element: dbo.ProcWithUnUsedLabel
-Script file: ProcWithUnUsedLabel.sql
+Script file: ProcWithUnUsedLabel.tsql
 Start line: 7
 Start column: 1
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unreferenced label found in [ServerTrigger].
 FullID: Cheburashka.DM0042
 Severity: Warning
 Model element: ServerTrigger
-Script file: ServerTrigger.sql
+Script file: ServerTrigger.tsql
 Start line: 9
 Start column: 1
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unreferenced label found in [dbo].[TableValuedFunctionWithU
 FullID: Cheburashka.DM0042
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithUnUSedLabel
-Script file: TableValuedFunctionWithUnUsedLabel.sql
+Script file: TableValuedFunctionWithUnUsedLabel.tsql
 Start line: 17
 Start column: 1
 ========end of problem========

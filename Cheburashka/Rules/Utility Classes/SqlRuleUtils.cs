@@ -455,6 +455,23 @@ namespace Cheburashka
             }
             return false;
         }
+        public static bool DoColumnReferencesMatch(MultiPartIdentifier ref1 , MultiPartIdentifier ref2)
+        {
+            var e1 = new SQLFragmentAsList(ref1);
+            var e2 = new SQLFragmentAsList(ref2);
+            //last column name must match
+            //and either - one of the two has a prefix (and the other doesn't - whic is OK as the non-prefixed ref must be unambigous in context)
+            //or both are prefixed in which case - all prefix elements must match. (for now)
+            return ref1.Identifiers.Last().SQLModel_StringCompareEqual(ref2.Identifiers.Last())
+                   && ((ref1.Identifiers.Count == 1 && ref2.Identifiers.Count == 1)
+                       || (ref1.Identifiers.Count == 1 && ref2.Identifiers.Count > 1)
+                       || (ref1.Identifiers.Count > 1 && ref2.Identifiers.Count == 1)
+                       // this kind of subsumes non-prefixed columns as a special case
+                       || (ref1.Identifiers.Count == ref2.Identifiers.Count
+                           && e1.Elements.SequenceEqual(e2.Elements, SqlComparer.Comparer)
+                       )
+                   );
+        }
     }
     public static class TempTableExtensions
     {
@@ -467,6 +484,55 @@ namespace Cheburashka
         {
             return  obj.SchemaObject.BaseIdentifier.Value.StartsWith("#")
             && !obj.SchemaObject.BaseIdentifier.Value.StartsWith("##");
+        }
+        public static bool IsGlobalTempTableName(this SchemaObjectName obj)
+        {
+            return  obj.BaseIdentifier.Value.StartsWith("##");
+        }
+        public static bool IsGlobalTempTableName(this NamedTableReference obj)
+        {
+            return  obj.SchemaObject.BaseIdentifier.Value.StartsWith("##");
+        }
+        public static bool IsAnyTempTableName(this SchemaObjectName obj)
+        {
+            return  obj.BaseIdentifier.Value.StartsWith("#");
+        }
+        public static bool IsAnyTempTableName(this NamedTableReference obj)
+        {
+            return  obj.SchemaObject.BaseIdentifier.Value.StartsWith("#");
+        }
+        public static bool IsTableVariableName(this SchemaObjectName obj)
+        {
+            return  obj.BaseIdentifier.Value.StartsWith("@");
+        }
+        public static bool IsTableVariableName(this NamedTableReference obj)
+        {
+            return  obj.SchemaObject.BaseIdentifier.Value.StartsWith("@");
+        }
+    }
+
+    public static class SQLFragmentExtensions
+    {
+        public static bool ExtractFromParenthesisExpression(ScalarExpression se, out ScalarExpression outse)
+        {
+            while (se is ParenthesisExpression pe)
+            {
+                se = pe.Expression;
+            }
+            outse = se;
+            return true;
+        }
+        public static bool ExtractFromParenthesisExpression<T>(ScalarExpression se, out T outse)
+        {
+            while (se is ParenthesisExpression pe)
+            {
+                se = pe.Expression;
+            }
+
+            outse = default;
+            if (se is not T outse2) return false;
+            outse = outse2;
+            return true;
         }
     }
 }

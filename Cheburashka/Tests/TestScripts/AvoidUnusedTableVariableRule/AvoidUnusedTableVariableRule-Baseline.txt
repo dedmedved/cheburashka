@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: DatabaseTriggerWithUnusedTableVariable
-Script file: DatabaseTriggerWithUnusedTableVariable.sql
+Script file: DatabaseTriggerWithUnusedTableVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Unused Table Variable found in [dbo].[ProcWithUnusedTableVa
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: dbo.ProcWithUnusedTableVariable
-Script file: ProcWithUnusedTableVariable.sql
+Script file: ProcWithUnusedTableVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Unused Table Variable found in [dbo].[ScalarValuedFunctionW
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: dbo.ScalarValuedFunctionWithUnusedTableVariable
-Script file: ScalarValuedFunctionWithUnusedTableVariable.sql
+Script file: ScalarValuedFunctionWithUnusedTableVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Unused Table Variable found in [ServerTriggerWithUnusedTabl
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: ServerTriggerWithUnusedTableVariable
-Script file: ServerDdlTriggerWithUnusedTableVariable.sql
+Script file: ServerDdlTriggerWithUnusedTableVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Unused Table Variable found in [dbo].[TableTriggerWithUnuse
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: dbo.TableTriggerWithUnusedTableVariable
-Script file: TableTriggerWithUnusedTableVariable.sql
+Script file: TableTriggerWithUnusedTableVariable.tsql
 Start line: 5
 Start column: 13
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Unused Table Variable found in [dbo].[TableValuedFunctionWi
 FullID: Cheburashka.DM0004
 Severity: Warning
 Model element: dbo.TableValuedFunctionWithUnusedTableVariable
-Script file: TableValuedFunctionWithUnusedTableVariable.sql
+Script file: TableValuedFunctionWithUnusedTableVariable.tsql
 Start line: 6
 Start column: 13
 ========end of problem========

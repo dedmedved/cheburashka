@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0068
 Severity: Warning
 Model element: dbo.ProcWithAlterTableStatement
-Script file: ProcWithAlterTableStatement.sql
+Script file: ProcWithAlterTableStatement.tsql
 Start line: 5
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Explicit COLLATE expression found in table definition in [d
 FullID: Cheburashka.DM0068
 Severity: Warning
 Model element: dbo.ProcWithCreateTableStatement
-Script file: ProcWithCreateTableStatement.sql
+Script file: ProcWithCreateTableStatement.tsql
 Start line: 4
 Start column: 21
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Explicit COLLATE expression found in table definition in [d
 FullID: Cheburashka.DM0068
 Severity: Warning
 Model element: dbo.Table1
-Script file: Table1.sql
+Script file: Table1.tsql
 Start line: 1
 Start column: 23
 ========end of problem========

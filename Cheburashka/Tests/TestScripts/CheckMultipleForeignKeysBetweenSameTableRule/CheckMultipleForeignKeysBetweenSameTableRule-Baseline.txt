@@ -2,7 +2,7 @@ Problem description: Table with multiple Foreign Key relationships to the same P
 FullID: Cheburashka.DM0035
 Severity: Warning
 Model element: dbo.FK_CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK_1
-Script file: CheckMultipleForeignKeysBetweenSameTableRule_Table_With_2_FK.sql
+Script file: CheckMultipleForeignKeysBetweenSameTableRule_Table_With_2_FK.tsql
 Start line: 6
 Start column: 3
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Table with multiple Foreign Key relationships to the same P
 FullID: Cheburashka.DM0035
 Severity: Warning
 Model element: dbo.FK_CheckMultipleForeignKeysBetweenSameTablesRule_Table_With_FK_2
-Script file: CheckMultipleForeignKeysBetweenSameTableRule_Table_With_2_FK.sql
+Script file: CheckMultipleForeignKeysBetweenSameTableRule_Table_With_2_FK.tsql
 Start line: 7
 Start column: 3
 ========end of problem========

@@ -213,6 +213,12 @@
   <data name="AvoidUninitialisedVariables_RuleName" xml:space="preserve">
     <value>Variables whose value is never set will be null.</value>
   </data>
+  <data name="AvoidUnusedCtes_ProblemDescription" xml:space="preserve">
+    <value>Unused CTE found in {0}.</value>
+  </data>
+  <data name="AvoidUnusedCtes_RuleName" xml:space="preserve">
+    <value>Avoid unused code.  This includes CTEs.</value>
+  </data>
   <data name="AvoidUnusedLabels_ProblemDescription" xml:space="preserve">
     <value>Unreferenced label found in {0}.</value>
   </data>
@@ -297,11 +303,23 @@
   <data name="CheckForMultipleOutputVariables_RuleName" xml:space="preserve">
     <value>Don't use the same variable to receive multiple output or return values in a stored procedure call.</value>
   </data>
+  <data name="CheckMissingDefaultableInsertColumns_ProblemDescription" xml:space="preserve">
+    <value>Defaultable or NULLable column {0} missing from insert list in {1}.</value>
+  </data>
+  <data name="CheckMissingDefaultableInsertColumns_RuleName" xml:space="preserve">
+    <value>Columns should be populated without relying on NULL or default values in Insert operations.</value>
+  </data>
   <data name="CheckMissingInsertColumns_ProblemDescription" xml:space="preserve">
-    <value>Mandatory column missing from insert list in {0}.</value>
+    <value>Mandatory column {0} missing from insert list in {1}.</value>
   </data>
   <data name="CheckMissingInsertColumns_RuleName" xml:space="preserve">
-    <value>Columns without a default or other system supplied value need a value specifying in Inserts.</value>
+    <value>Columns without a default or other system supplied value need a value specifying in Insert operations.</value>
+  </data>
+  <data name="CheckMissingNullableInsertColumns_ProblemDescription" xml:space="preserve">
+    <value>Nullable, non-defaultable column {0} missing from insert list in {1}.</value>
+  </data>
+  <data name="CheckMissingNullableInsertColumns_RuleName" xml:space="preserve">
+    <value>Columns without a system generated or defined default value should have a value specifying in Insert operations.</value>
   </data>
   <data name="CheckMultipleForeignKeysBetweenTheSameTable_ProblemDescription" xml:space="preserve">
     <value>Table with multiple Foreign Key relationships to the same Parent Table was found in {0}.</value>
@@ -338,6 +356,12 @@
   </data>
   <data name="CheckUniqueConstraintImpliedBySubQuery_RuleName" xml:space="preserve">
     <value>Single table sub-queries with and-ed equality filters imply a unique constraint on the source data.</value>
+  </data>
+  <data name="CheckUniqueFilteredIndexImpliedBySubQuery_ProblemDescription" xml:space="preserve">
+    <value>Sub-query implies a unique filtered index which is not present, here {0}.</value>
+  </data>
+  <data name="CheckUniqueFilteredIndexImpliedBySubQuery_RuleName" xml:space="preserve">
+    <value>Single table sub-queries with and-ed equality filters with other conditions imply a unique filtered index on the source data.</value>
   </data>
   <data name="CheckUniqueIndexHasNoNullColumns_ProblemDescription" xml:space="preserve">
     <value>Unique, non-filtered index found with nullable columns in {0}.  You should probably make the columns non-nullable, or make the index filtered to exclude nulls.</value>
@@ -506,6 +530,12 @@
   </data>
   <data name="PreferExplicitNullInColumnDefinition_RuleName" xml:space="preserve">
     <value>Always specify the nullability of columns when defining tables.</value>
+  </data>
+  <data name="PreferMergeUsesExceptForChangeDetection_ProblemDescription" xml:space="preserve">
+    <value>Prefer to use SELECT ... EXCEPT SELECT ... to detect row differences in MERGE statements.</value>
+  </data>
+  <data name="PreferMergeUsesExceptForChangeDetection_RuleName" xml:space="preserve">
+    <value>Merge WHEN MATCHED doesn't use EXCEPT to detect differences in {0}.</value>
   </data>
   <data name="PreferMinMax_ProblemDescription" xml:space="preserve">
     <value>Select top 1 Col ... order by Col was found in {0}.</value>

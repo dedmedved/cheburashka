@@ -2,7 +2,7 @@ Problem description: Index with a key that is just a subset or permutation of an
 FullID: Cheburashka.DM0016
 Severity: Warning
 Model element: dbo.EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_a_b
-Script file: EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Script file: EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.tsql
 Start line: 9
 Start column: 1
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Index with a key that is just a subset or permutation of an
 FullID: Cheburashka.DM0016
 Severity: Warning
 Model element: dbo.EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.ix_EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes_b_a
-Script file: EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.sql
+Script file: EnforceIndexKeyColumnSeparationRule_Table_WithTwoIdenticalExceptForOrderingIndexes.tsql
 Start line: 11
 Start column: 1
 ========end of problem========

@@ -36,38 +36,43 @@ namespace Cheburashka
         }
 
         public List<TSqlFragment> AssignmentSetClauses { get; }
-        public IList<TSqlFragment> SqlFragments() { return AssignmentSetClauses.Cast<TSqlFragment>().ToList(); }
+        public IList<TSqlFragment> SqlFragments() { return AssignmentSetClauses.ToList(); }
+
         public override void ExplicitVisit(AssignmentSetClause node)
         {
-            if (node.AssignmentKind == AssignmentKind.Equals) {
+            if (node.AssignmentKind == AssignmentKind.Equals)
+            {
                 bool hasBinaryExpression = false;
                 BinaryExpression expr = null;
-                if ( node.NewValue is BinaryExpression){
+                if (node.NewValue is BinaryExpression value)
+                {
                     hasBinaryExpression = true;
-                    expr = node.NewValue as BinaryExpression;
+                    expr = value;
                 }
 
-                if (node.NewValue is ParenthesisExpression) {
-                    hasBinaryExpression = UnwrapParathesisExpression(node.NewValue, out BinaryExpression expr2);
+                if (node.NewValue is ParenthesisExpression)
+                {
+                    hasBinaryExpression = SQLFragmentExtensions.ExtractFromParenthesisExpression(node.NewValue, out BinaryExpression expr2);
                     expr = expr2;
                 }
+
                 if (hasBinaryExpression)
                 {
                     if (HasCommutativeOperator(expr) == true)
                     {
-                        if (  ( node.Variable is not null && assignmentVariableMatchesFirstOrSecondExpressionElement(node, expr)) 
+                        if ((node.Variable is not null && assignmentVariableMatchesFirstOrSecondExpressionElement(node, expr))
                             // This needs all kinds of checks to ensure the column is really the same on both sides
                             || (node.Column is not null && assignmentColumnMatchesFirstOrSecondExpressionElement(node, expr))
-                            )
+                           )
                         {
                             AssignmentSetClauses.Add(node);
                         }
                     }
                     else if (HasCommutativeOperator(expr) == false)
                     {
-                        if (  ( node.Variable is not null && assignmentVariableMatchesFirstExpressionElement(node, expr))
+                        if ((node.Variable is not null && assignmentVariableMatchesFirstExpressionElement(node, expr))
                             // This needs all kinds of checks to ensure the column is really the same on both sides
-                             || (node.Column is not null && assignmentColumnMatchesFirstExpressionElement(node, expr))
+                            || (node.Column is not null && assignmentColumnMatchesFirstExpressionElement(node, expr))
                            )
                         {
                             AssignmentSetClauses.Add(node);
@@ -79,63 +84,81 @@ namespace Cheburashka
             static bool assignmentVariableMatchesFirstOrSecondExpressionElement(AssignmentSetClause node, BinaryExpression binaryExpression)
             {
                 return (binaryExpression.FirstExpression is VariableReference variableReference1
-                                             && variableReference1.SQLModel_StringCompareEqual(node.Variable)
-                                             )
-                                           || (binaryExpression.SecondExpression is VariableReference variableReference2
-                                             && variableReference2.SQLModel_StringCompareEqual(node.Variable)
-                                             );
+                        && variableReference1.SQLModel_StringCompareEqual(node.Variable)
+                       )
+                       || (binaryExpression.SecondExpression is VariableReference variableReference2
+                           && variableReference2.SQLModel_StringCompareEqual(node.Variable)
+                       );
             }
+
             static bool assignmentVariableMatchesFirstExpressionElement(AssignmentSetClause node, BinaryExpression binaryExpression)
             {
                 return binaryExpression.FirstExpression is VariableReference variableReference1
-                                             && variableReference1.SQLModel_StringCompareEqual(node.Variable)
-                                             ;
+                       && variableReference1.SQLModel_StringCompareEqual(node.Variable)
+                    ;
             }
 
             static bool assignmentColumnMatchesFirstOrSecondExpressionElement(AssignmentSetClause node, BinaryExpression binaryExpression)
             {
-                return (binaryExpression.FirstExpression is ColumnReferenceExpression columnReferenceExpression1
-                                            && node.Column.MultiPartIdentifier.Identifiers.Last().SQLModel_StringCompareEqual(columnReferenceExpression1.MultiPartIdentifier.Identifiers.Last())
-                                              )
-                                           || (binaryExpression.SecondExpression is ColumnReferenceExpression columnReferenceExpression2
-                                               && node.Column.MultiPartIdentifier.Identifiers.Last().SQLModel_StringCompareEqual(columnReferenceExpression2.MultiPartIdentifier.Identifiers.Last()))
-                                             ;
+                if (binaryExpression.FirstExpression is ColumnReferenceExpression columnReferenceExpression1)
+                {
+                    return AssignmentColumnMatchesFirstOrSecondExpressionElement(node, columnReferenceExpression1);
+                }
+                if (binaryExpression.SecondExpression is ColumnReferenceExpression columnReferenceExpression2)
+                {
+                    return AssignmentColumnMatchesFirstOrSecondExpressionElement(node, columnReferenceExpression2);
+                }
+                return false;
+
             }
-            static bool assignmentColumnMatchesFirstExpressionElement(AssignmentSetClause node, BinaryExpression binaryExpression)
+
+            static bool assignmentColumnMatchesFirstExpressionElement(AssignmentSetClause node,
+                BinaryExpression binaryExpression)
             {
-                return binaryExpression.FirstExpression is ColumnReferenceExpression columnReferenceExpression1
-                                            && node.Column.MultiPartIdentifier.Identifiers.Last().SQLModel_StringCompareEqual(columnReferenceExpression1.MultiPartIdentifier.Identifiers.Last())
-                                             ;
+                if (binaryExpression.FirstExpression is ColumnReferenceExpression columnReferenceExpression1)
+                {
+                    return AssignmentColumnMatchesFirstOrSecondExpressionElement(node, columnReferenceExpression1);
+                }
+                return false;
             }
         }
+
+        private static bool AssignmentColumnMatchesFirstOrSecondExpressionElement(AssignmentSetClause node, ColumnReferenceExpression columnReferenceExpression2)
+        {
+            return SqlRuleUtils.DoColumnReferencesMatch(node.Column.MultiPartIdentifier, columnReferenceExpression2.MultiPartIdentifier);
+        }
+
+
+
         public override void ExplicitVisit(SetVariableStatement node)
         {
             if (node.AssignmentKind == AssignmentKind.Equals) {
-                bool hasBinaryExpression = false;
+                var hasBinaryExpression = false;
                 BinaryExpression expr = null;
-                if ( node.Expression is BinaryExpression){
+                if ( node.Expression is BinaryExpression expression){
                     hasBinaryExpression = true;
-                    expr = node.Expression as BinaryExpression;
+                    expr = expression;
                 }
 
                 if (node.Expression is ParenthesisExpression) {
-                    hasBinaryExpression = UnwrapParathesisExpression(node.Expression, out BinaryExpression expr2);
+
+                    hasBinaryExpression = SQLFragmentExtensions.ExtractFromParenthesisExpression(node.Expression, out BinaryExpression expr2);
                     expr = expr2;
                 }
                 if (hasBinaryExpression)
                 {
                     if (HasCommutativeOperator(expr) == false
-                        && expr.FirstExpression is VariableReference variableReference
+                        && expr?.FirstExpression is VariableReference variableReference
                         && variableReference.SQLModel_StringCompareEqual(node.Variable)
                         )
                     {
                         AssignmentSetClauses.Add(node.Variable);
                     }
                     else if (HasCommutativeOperator(expr) == true                   
-                        && ((expr.FirstExpression is VariableReference variableReference1
+                        && ((expr?.FirstExpression is VariableReference variableReference1
                               && variableReference1.SQLModel_StringCompareEqual(node.Variable)
                               )
-                           || (expr.SecondExpression is VariableReference variableReference2
+                           || (expr?.SecondExpression is VariableReference variableReference2
                               && variableReference2.SQLModel_StringCompareEqual(node.Variable)
                               )
                            )
@@ -147,36 +170,14 @@ namespace Cheburashka
             }
         }
 
-        private static bool UnwrapParathesisExpression( ScalarExpression expr, out BinaryExpression binaryExpression)
-        {
-            bool foundbinaryExpression;
-            if ( expr is BinaryExpression binaryExpression2) {
-                binaryExpression = binaryExpression2;
-                return true;
-            }
-            else if ( expr is ParenthesisExpression parenthesisExpression) {
-                foundbinaryExpression = UnwrapParathesisExpression( parenthesisExpression.Expression, out BinaryExpression binaryExpression3);
-                binaryExpression = binaryExpression3;
-            }
-            else {
-                binaryExpression = null;
-                foundbinaryExpression = false;
-            }
-            return foundbinaryExpression;
-        }
-
         private static bool? HasCommutativeOperator(BinaryExpression binaryExpression)
         {
-            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Add || binaryExpression.BinaryExpressionType is BinaryExpressionType.Multiply 
-             || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseAnd  || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseOr 
-             || binaryExpression.BinaryExpressionType is BinaryExpressionType.BitwiseXor 
-            )
-                return true;
-            if (binaryExpression.BinaryExpressionType is BinaryExpressionType.Subtract || binaryExpression.BinaryExpressionType is BinaryExpressionType.Divide 
-             || binaryExpression.BinaryExpressionType is BinaryExpressionType.Modulo
-            )
-                return false;
-            return null;
+            return binaryExpression.BinaryExpressionType switch
+            {
+                BinaryExpressionType.Add or BinaryExpressionType.Multiply or BinaryExpressionType.BitwiseAnd or BinaryExpressionType.BitwiseOr or BinaryExpressionType.BitwiseXor => true,
+                BinaryExpressionType.Subtract or BinaryExpressionType.Divide or BinaryExpressionType.Modulo => false,
+                _ => null,
+            };
         }
     }
 }

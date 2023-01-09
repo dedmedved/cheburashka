@@ -2,7 +2,7 @@
 FullID: Cheburashka.DM0031
 Severity: Warning
 Model element: dbo.add_a_column
-Script file: script.sql
+Script file: script.tsql
 Start line: 10337
 Start column: 1
 ========end of problem========

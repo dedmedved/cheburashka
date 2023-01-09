@@ -2,7 +2,7 @@ Problem description: Raiserror found outside TRY/CATCH block in [dbo].[ProcRaise
 FullID: Cheburashka.DM0050
 Severity: Warning
 Model element: dbo.ProcRaiseErrorOutsideTryCatchErrorLevel16
-Script file: ProcRaiseErrorOutsideTryCatchErrorLevel16.sql
+Script file: ProcRaiseErrorOutsideTryCatchErrorLevel16.tsql
 Start line: 10
 Start column: 5
 ========end of problem========

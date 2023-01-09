@@ -36,17 +36,13 @@ namespace Cheburashka
         public IList<TSqlFragment> SqlFragments() { return ExecuteSpecifications.Cast<TSqlFragment>().ToList(); }
         public override void ExplicitVisit(ExecuteSpecification node)
         {
-            if (string.IsNullOrEmpty(node.Variable?.Name))
+            if (string.IsNullOrEmpty(node.Variable?.Name) && node.ExecutableEntity is ExecutableProcedureReference { ProcedureReference: { } } reference)
             {
-                if (node.ExecutableEntity is ExecutableProcedureReference reference &&
-                   reference.ProcedureReference is not null)
+                TSqlFragment pr = reference.ProcedureReference;
+                string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
+                if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
                 {
-                   TSqlFragment pr = reference.ProcedureReference;
-                   string spName = pr.ScriptTokenStream[pr.LastTokenIndex].Text;
-                    if (!SqlRuleUtils.IgnoreTheReturnValueOf(spName))
-                    {
-                       ExecuteSpecifications.Add(node);
-                    }
+                    ExecuteSpecifications.Add(node);
                 }
             }
         }

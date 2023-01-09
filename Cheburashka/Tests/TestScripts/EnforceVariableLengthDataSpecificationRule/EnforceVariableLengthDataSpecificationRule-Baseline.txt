@@ -2,7 +2,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 15
 Start column: 34
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 16
 Start column: 34
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 17
 Start column: 34
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 18
 Start column: 34
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 19
 Start column: 34
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 20
 Start column: 34
 ========end of problem========
@@ -56,7 +56,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 21
 Start column: 34
 ========end of problem========
@@ -65,7 +65,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 22
 Start column: 34
 ========end of problem========
@@ -74,7 +74,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoCastSpecified.tsql
 Start line: 23
 Start column: 34
 ========end of problem========
@@ -83,7 +83,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 15
 Start column: 20
 ========end of problem========
@@ -92,7 +92,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 16
 Start column: 20
 ========end of problem========
@@ -101,7 +101,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 17
 Start column: 20
 ========end of problem========
@@ -110,7 +110,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 18
 Start column: 20
 ========end of problem========
@@ -119,7 +119,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 19
 Start column: 20
 ========end of problem========
@@ -128,7 +128,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 20
 Start column: 20
 ========end of problem========
@@ -137,7 +137,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 21
 Start column: 20
 ========end of problem========
@@ -146,7 +146,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 22
 Start column: 20
 ========end of problem========
@@ -155,7 +155,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoConvertSpecified.tsql
 Start line: 23
 Start column: 20
 ========end of problem========
@@ -164,7 +164,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 15
 Start column: 38
 ========end of problem========
@@ -173,7 +173,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 16
 Start column: 38
 ========end of problem========
@@ -182,7 +182,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 17
 Start column: 38
 ========end of problem========
@@ -191,7 +191,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 18
 Start column: 38
 ========end of problem========
@@ -200,7 +200,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 19
 Start column: 38
 ========end of problem========
@@ -209,7 +209,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 20
 Start column: 38
 ========end of problem========
@@ -218,7 +218,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 21
 Start column: 38
 ========end of problem========
@@ -227,7 +227,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 22
 Start column: 38
 ========end of problem========
@@ -236,7 +236,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoTryCastSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryCastSpecified.tsql
 Start line: 23
 Start column: 38
 ========end of problem========
@@ -245,7 +245,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 15
 Start column: 16
 ========end of problem========
@@ -254,7 +254,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 16
 Start column: 16
 ========end of problem========
@@ -263,7 +263,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 17
 Start column: 16
 ========end of problem========
@@ -272,7 +272,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 18
 Start column: 16
 ========end of problem========
@@ -281,7 +281,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 19
 Start column: 16
 ========end of problem========
@@ -290,7 +290,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 20
 Start column: 16
 ========end of problem========
@@ -299,7 +299,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 21
 Start column: 16
 ========end of problem========
@@ -308,7 +308,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 22
 Start column: 16
 ========end of problem========
@@ -317,7 +317,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithAllVariableTypesSpecifiedNoConvertSpecified
-Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.sql
+Script file: ProcWithAllVariableTypesSpecifiedNoTryConvertSpecified.tsql
 Start line: 23
 Start column: 16
 ========end of problem========
@@ -326,7 +326,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 5
 Start column: 29
 ========end of problem========
@@ -335,7 +335,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 6
 Start column: 29
 ========end of problem========
@@ -344,7 +344,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 7
 Start column: 29
 ========end of problem========
@@ -353,7 +353,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 8
 Start column: 29
 ========end of problem========
@@ -362,7 +362,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 9
 Start column: 29
 ========end of problem========
@@ -371,7 +371,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 10
 Start column: 29
 ========end of problem========
@@ -380,7 +380,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 11
 Start column: 29
 ========end of problem========
@@ -389,7 +389,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 12
 Start column: 29
 ========end of problem========
@@ -398,7 +398,7 @@ Problem description: Variable length datatype found with no length specification
 FullID: Cheburashka.DM0039
 Severity: Warning
 Model element: dbo.ProcWithNoVariableTypesSpecified
-Script file: ProcWithNoVariableTypesSpecified.sql
+Script file: ProcWithNoVariableTypesSpecified.tsql
 Start line: 13
 Start column: 29
 ========end of problem========

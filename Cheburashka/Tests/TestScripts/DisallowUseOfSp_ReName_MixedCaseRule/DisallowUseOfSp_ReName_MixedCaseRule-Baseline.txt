@@ -2,7 +2,7 @@ Problem description: An object is being renamed in [DatabaseTriggerWithSp_ReName
 FullID: Cheburashka.DM0032
 Severity: Warning
 Model element: DatabaseTriggerWithSp_ReName
-Script file: DatabaseTriggerWithSp_ReName.sql
+Script file: DatabaseTriggerWithSp_ReName.tsql
 Start line: 5
 Start column: 3
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: An object is being renamed in [dbo].[ProcWithSp_ReName].  T
 FullID: Cheburashka.DM0032
 Severity: Warning
 Model element: dbo.ProcWithSp_ReName
-Script file: ProcWithSp_ReName.sql
+Script file: ProcWithSp_ReName.tsql
 Start line: 5
 Start column: 3
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: An object is being renamed in [ServerTriggerWithSp_ReName].
 FullID: Cheburashka.DM0032
 Severity: Warning
 Model element: ServerTriggerWithSp_ReName
-Script file: ServerTriggerWithSp_ReName.sql
+Script file: ServerTriggerWithSp_ReName.tsql
 Start line: 6
 Start column: 3
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: An object is being renamed in [dbo].[TableTriggerWithSp_ReN
 FullID: Cheburashka.DM0032
 Severity: Warning
 Model element: dbo.TableTriggerWithSp_ReName
-Script file: TableTriggerWithSp_ReName.sql
+Script file: TableTriggerWithSp_ReName.tsql
 Start line: 7
 Start column: 3
 ========end of problem========

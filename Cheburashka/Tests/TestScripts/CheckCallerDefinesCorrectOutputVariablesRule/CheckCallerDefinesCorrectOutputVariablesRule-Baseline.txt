@@ -2,7 +2,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithAllParametersNotOK_CalledbyMix
-Script file: ProcWithAllParametersNotOK_CalledbyMix.sql
+Script file: ProcWithAllParametersNotOK_CalledbyMix.tsql
 Start line: 9
 Start column: 72
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithAllParametersNotOK_CalledbyMix
-Script file: ProcWithAllParametersNotOK_CalledbyMix.sql
+Script file: ProcWithAllParametersNotOK_CalledbyMix.tsql
 Start line: 9
 Start column: 84
 ========end of problem========
@@ -20,7 +20,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithAllParametersNotOK_CalledbyPosition
-Script file: ProcWithAllParametersNotOK_CalledbyPosition.sql
+Script file: ProcWithAllParametersNotOK_CalledbyPosition.tsql
 Start line: 7
 Start column: 56
 ========end of problem========
@@ -29,7 +29,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithAllParametersNotOK_CalledbyPosition
-Script file: ProcWithAllParametersNotOK_CalledbyPosition.sql
+Script file: ProcWithAllParametersNotOK_CalledbyPosition.tsql
 Start line: 7
 Start column: 61
 ========end of problem========
@@ -38,7 +38,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithLastParametersNotOK
-Script file: ProcWithLastParametersNotOK.sql
+Script file: ProcWithLastParametersNotOK.tsql
 Start line: 7
 Start column: 59
 ========end of problem========
@@ -47,7 +47,7 @@ Problem description: Non-output variable found in an output parameter position i
 FullID: Cheburashka.DM0054
 Severity: Warning
 Model element: dbo.ProcWithNoLastParameterNotOK
-Script file: ProcWithNoLastParameterNotOK.sql
+Script file: ProcWithNoLastParameterNotOK.tsql
 Start line: 7
 Start column: 1
 ========end of problem========

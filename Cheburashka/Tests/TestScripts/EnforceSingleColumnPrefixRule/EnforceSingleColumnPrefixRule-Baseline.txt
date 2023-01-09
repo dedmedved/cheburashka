@@ -2,7 +2,7 @@ Problem description: Multi-element column prefix found in [dbo].[EnforceSingleCo
 FullID: Cheburashka.DM0055
 Severity: Warning
 Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable
-Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.sql
+Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.tsql
 Start line: 4
 Start column: 9
 ========end of problem========
@@ -11,7 +11,7 @@ Problem description: Multi-element column prefix found in [dbo].[EnforceSingleCo
 FullID: Cheburashka.DM0055
 Severity: Warning
 Model element: dbo.EnforceSingleColumnPrefix_Proc_UpdatingTable
-Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.sql
+Script file: EnforceSingleColumnPrefix_Proc_UpdatingTable.tsql
 Start line: 4
 Start column: 27
 ========end of problem========
