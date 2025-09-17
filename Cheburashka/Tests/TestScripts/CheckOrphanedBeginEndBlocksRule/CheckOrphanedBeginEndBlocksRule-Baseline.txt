@@ -3,7 +3,7 @@ FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: DatabaseTriggerWithBeginInsideTry
 Script file: DatabaseTriggerWithBeginInsideTry.tsql
-Start line: 10
+Start line: 9
 Start column: 5
 ========end of problem========
 
@@ -21,7 +21,7 @@ FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithBeginInsideTry
 Script file: ProcWithBeginInsideTry.tsql
-Start line: 8
+Start line: 7
 Start column: 5
 ========end of problem========
 
@@ -48,7 +48,7 @@ FullID: Cheburashka.DM0037
 Severity: Warning
 Model element: dbo.ProcWithRandomlyIntroducedBeginEnd
 Script file: ProcWithRandomlyIntroducedBeginEnd.tsql
-Start line: 7
+Start line: 6
 Start column: 5
 ========end of problem========
 
