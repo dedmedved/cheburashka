@@ -1,4 +1,3 @@
-
 CREATE PROCEDURE dbo.ProcWithNoBadBegins
 AS 
 BEGIN

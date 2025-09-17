@@ -1,0 +1,3 @@
+CREATE PROCEDURE dbo.ProcWithReturn as
+; 
+go
