@@ -20,6 +20,9 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
+      
+    - name: Install vstest.console
+      run: dotnet tool install --global Microsoft.TestPlatform
 
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
