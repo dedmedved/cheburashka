@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="TestScripts\AvoidWriteOnlyVariablesRule\sp_executesql.tsql" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
   </ItemGroup>
@@ -320,6 +323,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\AvoidWriteOnlyVariablesRule-Baseline.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.tsql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\sp_executesql.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule\AvoidWriteOnlyVariables_MixedCaseVariableNamesRule-Baseline.txt">
@@ -1239,7 +1248,7 @@
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithUseOfInterimChainedWriteOnlyVariables.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.tsql">
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsWrittenToByExecuteParameter.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithWriteOnlyVariable.tsql">
