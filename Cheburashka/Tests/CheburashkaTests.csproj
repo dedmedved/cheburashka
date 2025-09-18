@@ -44,6 +44,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="TestScripts\AvoidWriteOnlyVariablesRule\Services.tsql" />
     <None Remove="TestScripts\AvoidWriteOnlyVariablesRule\sp_executesql.tsql" />
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +327,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\ProcWithVariableThatIsNotWrittenToByExecuteParameterNotUsingNamedParameters.tsql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\Services.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\AvoidWriteOnlyVariablesRule\sp_executesql.tsql">
