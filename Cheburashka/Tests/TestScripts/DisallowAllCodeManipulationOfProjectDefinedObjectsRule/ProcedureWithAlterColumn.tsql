@@ -9,10 +9,10 @@ as
 begin
 alter table  dbo.ProcedureWithAlterColumn_Table alter COLUMN b CHAR(1) NOT null;        --error this is in the model can't change
 alter table  ProcedureWithAlterColumn_Table alter COLUMN b CHAR(1) NOT null;            --error no schema given default to dbo
-
-ALTER table  dbo.non_declared_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
-
-alter table  #temp_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
+-- model wont build with this
+--ALTER table  dbo.non_declared_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
+-- model wont build with this
+--alter table  #temp_table ADD newcolumn INT;      -- shouldn't raise an error - this table isn't in the model
 
 end;
 go

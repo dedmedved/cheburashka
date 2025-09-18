@@ -22,7 +22,7 @@ declare  @Binary            BINARY
 ,        @DateTimeOffset    DateTimeOffset      
 ,        @Int               INT
 ,        @Money             MONEY
-,        @None              None
+
 ,        @Real              REAL
 ,        @SmallDateTime     SMALLDATETIME
 ,        @SmallInt          SMALLINT
