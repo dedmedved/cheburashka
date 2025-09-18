@@ -21,8 +21,8 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
       
-    - name: Install VSTest.Console
-      uses: microsoft/vstest-action@main
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1.3
 
 
     - name: Restore NuGet packages
