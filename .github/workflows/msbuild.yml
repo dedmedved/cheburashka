@@ -24,6 +24,10 @@ jobs:
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.3
 
+      # obsolete to update
+    - name: Install VSTest platform
+      run: choco install microsoft-testplatform --version=14.0.23107.0
+
 
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
