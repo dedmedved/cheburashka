@@ -36,14 +36,14 @@ jobs:
       #run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
       run: dotnet test Cheburashka.sln --configuration Release --logger "trx"
     
-    - name: Test-Utility
-      working-directory: ${{env.GITHUB_WORKSPACE}}
+    #- name: Test-Utility
+      #working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       #run: dotnet test UtilityTests\UtilityTests.csproj  --configuration Debug --logger "console;verbosity=detailed"
 
-    - name: Test-MainCode
-      working-directory: ${{env.GITHUB_WORKSPACE}}
+    #- name: Test-MainCode
+     # working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       #run: dotnet test Cheburashka\Tests\CheburashkaTests.csproj  --configuration Debug --logger "console;verbosity=detailed"
