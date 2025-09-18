@@ -20,3 +20,5 @@ Microsoft.SqlServer.DacFx.x64.130.3450.1
 /.cr/personal/Editor/IntelliRush.xml
 /.cr/personal/FavoritesList/List.xml
 *.dbmdl
+/Cheburashka/Rules/Cheburashka.csproj.user
+/Cheburashka/Tests/CheburashkaTests.csproj.user
