@@ -22,7 +22,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
       
     - name: Install VSTest.Console
-      uses: microsoft/vstest-action@v1
+      uses: microsoft/vstest-action@main
 
 
     - name: Restore NuGet packages
