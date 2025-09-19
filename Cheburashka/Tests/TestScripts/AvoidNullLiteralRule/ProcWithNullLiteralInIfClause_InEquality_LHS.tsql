@@ -4,6 +4,6 @@ begin
 	declare @a int = null;
 	if @a <> null begin
 		SELECT a
-		FROM dbo.table1
+		FROM dbo.Table1
 	end ;
 end

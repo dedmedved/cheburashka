@@ -1,0 +1,56 @@
+-- 1. Create message types
+CREATE MESSAGE TYPE ExpenseRequestMessage
+VALIDATION = NONE;   -- could be XML if you want validation
+go
+
+CREATE MESSAGE TYPE ExpenseResponseMessage
+VALIDATION = NONE;
+go
+
+-- 2. Create contract
+CREATE CONTRACT [//Adventure-Works.com/Expenses/ExpenseSubmission]
+(
+    ExpenseRequestMessage SENT BY INITIATOR,    -- Client sends request
+    ExpenseResponseMessage SENT BY TARGET       -- Server can respond
+);
+go
+
+-- 3. Create queues
+CREATE QUEUE ExpenseClientQueue;
+go
+CREATE QUEUE ExpensesQueue;
+go
+
+-- 4. Create services
+CREATE SERVICE [//Adventure-Works.com/ExpenseClient]
+ON QUEUE ExpenseClientQueue
+-- Client can initiate conversations on any contract; typically you tie to target contract
+;
+go
+
+CREATE SERVICE [//Adventure-Works.com/Expenses]
+ON QUEUE ExpensesQueue
+([//Adventure-Works.com/Expenses/ExpenseSubmission]);  -- this contract defines allowed message types
+go
+
+-- 1. Create a message type
+CREATE MESSAGE TYPE [JobMessage]
+    VALIDATION = NONE;
+go
+
+-- 2. Create a contract
+CREATE CONTRACT [JobContract]
+(
+    [JobMessage] SENT BY INITIATOR
+);
+go
+
+-- 3. Create the queue
+CREATE QUEUE dbo.JobQueue;
+go
+
+-- 4. Create the service
+CREATE SERVICE [JobService]
+    ON QUEUE dbo.JobQueue
+    ([JobContract]);
+go

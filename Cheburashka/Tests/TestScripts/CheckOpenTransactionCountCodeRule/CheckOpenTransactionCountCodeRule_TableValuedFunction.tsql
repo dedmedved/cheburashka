@@ -14,7 +14,7 @@ BEGIN
 
     insert  into @X
     SELECT a
-    FROM dbo.table1
+    FROM dbo.Table1
     WHERE a = null
     return 
 end

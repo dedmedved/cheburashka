@@ -5,7 +5,7 @@ as
 BEGIN
     DECLARE @x int
     SELECT @x = a
-    FROM dbo.table1
+    FROM dbo.Table1
     WHERE a = null
     return @x
 end

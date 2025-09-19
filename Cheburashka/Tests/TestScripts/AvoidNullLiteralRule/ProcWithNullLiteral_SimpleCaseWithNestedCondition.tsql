@@ -5,7 +5,7 @@ as
 BEGIN
 DECLARE @b INT = 2
     SELECT a
-    FROM dbo.table1
+    FROM dbo.Table1
     WHERE case a  when 1 then 'one'
 	              when 2 then 'two'
 				  when case @b   when 1 then 9

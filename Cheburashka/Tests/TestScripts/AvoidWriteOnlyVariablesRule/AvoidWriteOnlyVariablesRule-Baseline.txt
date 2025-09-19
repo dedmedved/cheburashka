@@ -196,6 +196,15 @@ Start line: 6
 Start column: 9
 ========end of problem========
 
+Problem description: Write-only Variable found in [dbo].[ProcWithVariableThatIsWrittenToByExecuteParameter].
+FullID: Cheburashka.DM0003
+Severity: Warning
+Model element: dbo.ProcWithVariableThatIsWrittenToByExecuteParameter
+Script file: ProcWithVariableThatIsWrittenToByExecuteParameter.tsql
+Start line: 5
+Start column: 13
+========end of problem========
+
 Problem description: Write-only Variable found in [dbo].[ProcWithWriteOnlyVariable].
 FullID: Cheburashka.DM0003
 Severity: Warning
