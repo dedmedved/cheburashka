@@ -52,27 +52,16 @@ jobs:
         # Prefix the list here with "+" to use these queries and those in the config file.
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    #- name: Autobuild
-    #  uses: github/codeql-action/autobuild@v3
+    name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # any version installed on Windows runner
 
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 https://git.io/JvXDl
+      - name: Restore dependencies
+        run: nuget restore Cheburashka.sln
 
-    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-    #    and modify them (or add more) to build your code if your project
-    #    uses a compiled language
+      - name: Build solution
+        run: msbuild Cheburashka.sln /p:Configuration=Release
 
-    #- run: |
-    #   make bootstrap
-    #   make release
-    #- name: Build
-    #  working-directory: ${{env.GITHUB_WORKSPACE}}
-    #  run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
-
-    - name: Build solution
-      run: dotnet build ${{env.SOLUTION_FILE_PATH}} --configuration Release
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
