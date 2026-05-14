@@ -42,6 +42,15 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        public override void ExplicitVisit(SelectScalarExpression node)
+        {
+            if (node.Expression is ParenthesisExpression
+                )
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.AcceptChildren(this);
+        }
         public override void ExplicitVisit(BooleanParenthesisExpression node)
         {
             if (node.Expression is ExistsPredicate

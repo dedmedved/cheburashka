@@ -396,6 +396,9 @@
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\CheckUnnecessaryBracketsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithBracketsAroundColumnExpressions.tsql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\DisallowAllCodeManipulationOfProjectDefinedObjectsRule\DisallowAllCodeManipulationOfProjectDefinedObjectsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
