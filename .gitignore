@@ -22,3 +22,4 @@ Microsoft.SqlServer.DacFx.x64.130.3450.1
 *.dbmdl
 /Cheburashka/Rules/Cheburashka.csproj.user
 /Cheburashka/Tests/CheburashkaTests.csproj.user
+/Cheburashka/Tests/TestResults/Deploy_mark.buckle 2026-05-14 15_52_14/In/CheckUnnecessaryBracketsRule

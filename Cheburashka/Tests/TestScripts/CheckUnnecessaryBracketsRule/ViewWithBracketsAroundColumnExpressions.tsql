@@ -1,0 +1,13 @@
+create table  dbo.Table9
+(       a int not null
+,       b int 
+)
+go
+
+CREATE view dbo.ViewWithBracketsAroundColumnExpressions
+AS  
+SELECT (max(a)) as a 
+, (min(b)) as b
+FROM dbo.Table9
+WHERE 1=1
+go
