@@ -396,6 +396,9 @@
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\CheckUnnecessaryBracketsRule-Baseline.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedAssignments.tsql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ViewWithBracketsAroundColumnExpressions.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1544,9 +1547,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\DatabaseTriggerWithDoubledBrackets.tsql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedAssignments.tsql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestScripts\CheckUnnecessaryBracketsRule\ProcedureWithBracketedMultiExpression.tsql">

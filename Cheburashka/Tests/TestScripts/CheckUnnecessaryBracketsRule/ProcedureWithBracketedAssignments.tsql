@@ -1,6 +1,6 @@
 create table  dbo.Table6
 (       a int not null
-,       b int 
+,       b int default ((1))		-- problem
 )
 go
 create index IX_TABLE6_01 on dbo.Table6 (b)
@@ -11,15 +11,15 @@ AS
 DECLARE @a int = 1
 set @a = 1
 
-DECLARE @a1 int = (1)
-set @a1 = (1)
+DECLARE @a1 int = (1)	-- problem
+set @a1 = (1)			-- problem
 
-DECLARE @a2 int = ((1))
-set @a2 = ((1))
+DECLARE @a2 int = ((1))	-- problem
+set @a2 = ((1))			-- problem
 
-select @a2 = ((1))
+select @a2 = ((1))		-- problem
 
 update dbo.Table6
-set a=(a)
+set a=(a)				-- problem
 
 go

@@ -97,6 +97,15 @@ Start line: 22
 Start column: 40
 ========end of problem========
 
+Problem description: Unnecessary brackets found in [dbo].[Table6].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.Table6
+Script file: ProcedureWithBracketedAssignments.tsql
+Start line: 3
+Start column: 23
+========end of problem========
+
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedAssignments].
 FullID: Cheburashka.DM0038
 Severity: Warning
