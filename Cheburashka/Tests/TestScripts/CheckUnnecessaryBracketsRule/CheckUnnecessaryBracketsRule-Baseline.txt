@@ -160,6 +160,33 @@ Start line: 23
 Start column: 7
 ========end of problem========
 
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedGroupBy].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedGroupBy
+Script file: ProcedureWithBracketedGroupBy.tsql
+Start line: 5
+Start column: 4
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedGroupBy].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedGroupBy
+Script file: ProcedureWithBracketedGroupBy.tsql
+Start line: 9
+Start column: 3
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedGroupBy].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithBracketedGroupBy
+Script file: ProcedureWithBracketedGroupBy.tsql
+Start line: 11
+Start column: 4
+========end of problem========
+
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedMultiExpression].
 FullID: Cheburashka.DM0038
 Severity: Warning
@@ -383,6 +410,24 @@ Model element: dbo.ProcedureWithChainedJoins
 Script file: ProcedureWithChainedJoins.tsql
 Start line: 7
 Start column: 27
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithChainedJoins].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithChainedJoins
+Script file: ProcedureWithChainedJoins.tsql
+Start line: 8
+Start column: 10
+========end of problem========
+
+Problem description: Unnecessary brackets found in [dbo].[ProcedureWithChainedJoins].
+FullID: Cheburashka.DM0038
+Severity: Warning
+Model element: dbo.ProcedureWithChainedJoins
+Script file: ProcedureWithChainedJoins.tsql
+Start line: 9
+Start column: 2
 ========end of problem========
 
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithDoubledBrackets].

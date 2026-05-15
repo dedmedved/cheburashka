@@ -1,0 +1,12 @@
+CREATE proc dbo.ProcedureWithBracketedGroupBy
+AS
+SELECT	a
+,		b+1
+,		(b+2)
+,		count(*) c
+from dbo.Table6
+group by 
+		(a)
+,		b+1
+,		((b+2))
+go
