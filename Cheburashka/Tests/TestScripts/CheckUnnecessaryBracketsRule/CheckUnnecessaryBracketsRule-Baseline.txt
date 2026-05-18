@@ -381,8 +381,8 @@ FullID: Cheburashka.DM0038
 Severity: Warning
 Model element: dbo.ProcedureWithBracketedSearchExpressions
 Script file: ProcedureWithBracketedSearchExpressions.tsql
-Start line: 16
-Start column: 32
+Start line: 17
+Start column: 5
 ========end of problem========
 
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithBracketedSearchExpressions].
@@ -390,8 +390,8 @@ FullID: Cheburashka.DM0038
 Severity: Warning
 Model element: dbo.ProcedureWithBracketedSearchExpressions
 Script file: ProcedureWithBracketedSearchExpressions.tsql
-Start line: 18
-Start column: 18
+Start line: 22
+Start column: 5
 ========end of problem========
 
 Problem description: Unnecessary brackets found in [dbo].[ProcedureWithChainedJoins].
