@@ -13,8 +13,14 @@ while (1=1 and 0=1)
 merge into Table5 t
 using Table5 s
 on (t.a=s.a and t.a=s.a)
-when not matched by target and (t.a=s.a and t.a=s.a)
+when not matched by target 
+and (t.a=s.a and t.a=s.a
+or  (t.a!=s.a and t.a=s.a)
+)
 then insert (a,b)values (s.a,s.b)
-when matched and (t.a=s.a and t.a=s.a)
+when matched 
+and (t.a=s.a and t.a=s.a
+or  (t.a!=s.a and t.a=s.a)
+)
 then update set t.a=s.b
 ;

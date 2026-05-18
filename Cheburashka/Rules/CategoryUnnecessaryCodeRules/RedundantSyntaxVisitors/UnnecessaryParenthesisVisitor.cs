@@ -159,6 +159,23 @@ namespace Cheburashka
             }
             node.AcceptChildren(this);
         }
+        public override void ExplicitVisit(ExpressionWithSortOrder node)
+        {
+            if (node.Expression is ParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.Expression.AcceptChildren(this);
+        }
+        public override void ExplicitVisit(ExpressionGroupingSpecification node)
+        {
+            if (node.Expression is ParenthesisExpression)
+            {
+                UnnecessaryBrackets.Add(node);
+            }
+            node.Expression.AcceptChildren(this);
+        }
+        
         public override void ExplicitVisit(ScalarSubquery node)
         {
             if (node.QueryExpression is QueryParenthesisExpression)

@@ -54,7 +54,7 @@ namespace Cheburashka
 
         public CheckUnnecessaryBracketsRule()
         {
-            SupportedElementTypes = SqlRuleUtils.GetCodeAndViewContainingClasses();
+            SupportedElementTypes = SqlRuleUtils.GetExpressionContainingClasses();
         }
 
         /// <summary>
